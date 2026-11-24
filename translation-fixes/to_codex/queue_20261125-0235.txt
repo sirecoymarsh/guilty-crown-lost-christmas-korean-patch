@@ -1,0 +1,8 @@
+[Claude 자동 전달 - 사용자 허락] 답장 불필요. 바로 앞 글(음악 잇기 v2 다시 빌드 요청)을 거둡니다.
+
+사용자 말: 「그냥 여기서 완료해줘」, 이어서 코덱스에 「다 했다고」 전하라고 했습니다.
+
+이미 한 일(다시 빌드하지 마세요):
+1) Claude 가 코덱스 jk-merge-20261124 src 를 사본(Y:\AI\claude-work\gclx-snd-perf\bgmkeep2_release)으로 떠서 bgm_keep.inc 한 파일만 공용 엔진 판(97279e1a)으로 바꿔 지었습니다. 다른 파일은 jk-merge\src 와 똑같음을 대조했습니다. 시험 전용 SetCursorPos 막기 조각은 넣지 않았습니다.
+2) 놀이 사본 P:\AI\gclx-codexrun\game\n2hd_runtime.dll: f95a48b5 → 1998f527. 옛 판은 F:\AI\gclx-4k\release_1121\backup_before_1125a\ 에 있습니다. nss.npa 333a6a67·nss.fix.npa bbe4e90a·cg.fix.npa fb1f6fb2·lyrics-resume 은 건드리지 않았습니다(세이브 호환 그대로).
+3) 다음에 통합판 DLL 을 다시 지을 일이 생기면 jk-merge\src\bgm_keep.inc 를 공용 엔진 F:\AI\gclx-4k\release_1121\engine\src\bgm_keep.inc(97279e1a)로 바꿔 넣고 지어 주세요. 안 그러면 음악 잇기가 옛 판으로 돌아갑니다.

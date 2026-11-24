@@ -1,0 +1,4012 @@
+[
+ {
+  "name": "sys\\backlog\\exitボタン-001.png",
+  "hex": "7379735c6261636b6c6f675c65786974837b835e83932d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 66
+ },
+ {
+  "name": "sys\\backlog\\exitボタン-002.png",
+  "hex": "7379735c6261636b6c6f675c65786974837b835e83932d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 66
+ },
+ {
+  "name": "sys\\backlog\\exitボタン-003.png",
+  "hex": "7379735c6261636b6c6f675c65786974837b835e83932d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 66
+ },
+ {
+  "name": "sys\\backlog\\背景画像.png",
+  "hex": "7379735c6261636b6c6f675c94778c6989e6919c2e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_backlog.nss"
+  ],
+  "dir_refs": 66
+ },
+ {
+  "name": "sys\\config\\back-001.png",
+  "hex": "7379735c636f6e6669675c6261636b2d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\back-002.png",
+  "hex": "7379735c636f6e6669675c6261636b2d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\back-003.png",
+  "hex": "7379735c636f6e6669675c6261636b2d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\exit-001.png",
+  "hex": "7379735c636f6e6669675c657869742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\exit-002.png",
+  "hex": "7379735c636f6e6669675c657869742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\exit-003.png",
+  "hex": "7379735c636f6e6669675c657869742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\next-001.png",
+  "hex": "7379735c636f6e6669675c6e6578742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\next-002.png",
+  "hex": "7379735c636f6e6669675c6e6578742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\next-003.png",
+  "hex": "7379735c636f6e6669675c6e6578742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\コンフィグ背景.png",
+  "hex": "7379735c636f6e6669675c8352839383748342834f94778c692e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\コンフィグ背景page-01.png",
+  "hex": "7379735c636f6e6669675c8352839383748342834f94778c69706167652d30312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\その他.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c82bb82cc91bc2e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\キャロル.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c834c8383838d838b2e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\スクルージ.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c8358834e838b815b83572e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\パスト.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c8370835883672e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\プレゼント.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c8376838c835b839383672e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\ユウ.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c838683452e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\恙神涯.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c9c99905f8a552e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\桜満春夏.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c8df7969e8f7489c42e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\桜満玄周.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c8df7969e8cba8efc2e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\桜満真名.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c8df7969e905e96bc2e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\桜満集.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c8df7969e8f572e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\背景.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c94778c692e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\config\\ボイス選択data\\茎道修一郎.png",
+  "hex": "7379735c636f6e6669675c837b83438358914991f0646174615c8c7393b98f4388ea98592e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\dialog\\no-001.png",
+  "hex": "7379735c6469616c6f675c6e6f2d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "function_dialog.nss"
+  ],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\dialog\\no-002.png",
+  "hex": "7379735c6469616c6f675c6e6f2d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "function_dialog.nss"
+  ],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\dialog\\yes-001.png",
+  "hex": "7379735c6469616c6f675c7965732d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "function_dialog.nss"
+  ],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\dialog\\yes-002.png",
+  "hex": "7379735c6469616c6f675c7965732d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "function_dialog.nss"
+  ],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\dialog\\このデータから再開しますか？.png",
+  "hex": "7379735c6469616c6f675c82b182cc8366815b835e82a982e78dc48a4a82b582dc82b782a981482e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\dialog\\このデータを上書きしますか？.png",
+  "hex": "7379735c6469616c6f675c82b182cc8366815b835e82f08fe38f9182ab82b582dc82b782a981482e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\dialog\\ゲームを終了しますか？.png",
+  "hex": "7379735c6469616c6f675c8351815b838082f08f4997b982b582dc82b782a981482e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\dialog\\タイトル画面へ戻りますか？.png",
+  "hex": "7379735c6469616c6f675c835e83438367838b89e696ca82d696df82e882dc82b782a981482e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\dialog\\全ての項目を初期設定に戻しますか？.png",
+  "hex": "7379735c6469616c6f675c915382c482cc8d8096da82f08f898afa90dd92e882c996df82b582dc82b782a981482e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 40
+ },
+ {
+  "name": "sys\\extra\\cglib\\back-001.png",
+  "hex": "7379735c65787472615c63676c69625c6261636b2d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\back-002.png",
+  "hex": "7379735c65787472615c63676c69625c6261636b2d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\back-003.png",
+  "hex": "7379735c65787472615c63676c69625c6261636b2d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\exit-001.png",
+  "hex": "7379735c65787472615c63676c69625c657869742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss",
+   "kr_sound.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\exit-002.png",
+  "hex": "7379735c65787472615c63676c69625c657869742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss",
+   "kr_sound.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\exit-003.png",
+  "hex": "7379735c65787472615c63676c69625c657869742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss",
+   "kr_sound.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\next-001.png",
+  "hex": "7379735c65787472615c63676c69625c6e6578742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\next-002.png",
+  "hex": "7379735c65787472615c63676c69625c6e6578742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\next-003.png",
+  "hex": "7379735c65787472615c63676c69625c6e6578742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "extra_cglib.nss"
+  ],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no001.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no002.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no003.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no004.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030342e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no005.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030352e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no006.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030362e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no007.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030372e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no008.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030382e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no009.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3030392e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\no010.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f3031302e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\extra\\cglib\\none.png",
+  "hex": "7379735c65787472615c63676c69625c6e6f6e652e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 29
+ },
+ {
+  "name": "sys\\menu\\auto-001.png",
+  "hex": "7379735c6d656e755c6175746f2d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\auto-002.png",
+  "hex": "7379735c6d656e755c6175746f2d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\auto-003.png",
+  "hex": "7379735c6d656e755c6175746f2d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\back log-001.png",
+  "hex": "7379735c6d656e755c6261636b206c6f672d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\back log-002.png",
+  "hex": "7379735c6d656e755c6261636b206c6f672d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\back log-003.png",
+  "hex": "7379735c6d656e755c6261636b206c6f672d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\back to title-001.png",
+  "hex": "7379735c6d656e755c6261636b20746f207469746c652d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\back to title-002.png",
+  "hex": "7379735c6d656e755c6261636b20746f207469746c652d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\back to title-003.png",
+  "hex": "7379735c6d656e755c6261636b20746f207469746c652d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\cancel-001.png",
+  "hex": "7379735c6d656e755c63616e63656c2d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\cancel-002.png",
+  "hex": "7379735c6d656e755c63616e63656c2d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\cancel-003.png",
+  "hex": "7379735c6d656e755c63616e63656c2d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\config-001.png",
+  "hex": "7379735c6d656e755c636f6e6669672d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\config-002.png",
+  "hex": "7379735c6d656e755c636f6e6669672d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\config-003.png",
+  "hex": "7379735c6d656e755c636f6e6669672d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\delete message-001.png",
+  "hex": "7379735c6d656e755c64656c657465206d6573736167652d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\delete message-002.png",
+  "hex": "7379735c6d656e755c64656c657465206d6573736167652d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\delete message-003.png",
+  "hex": "7379735c6d656e755c64656c657465206d6573736167652d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\game exit-001.png",
+  "hex": "7379735c6d656e755c67616d6520657869742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\game exit-002.png",
+  "hex": "7379735c6d656e755c67616d6520657869742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\game exit-003.png",
+  "hex": "7379735c6d656e755c67616d6520657869742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\info\\auto.png",
+  "hex": "7379735c6d656e755c696e666f5c6175746f2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\auto_unclick.png",
+  "hex": "7379735c6d656e755c696e666f5c6175746f5f756e636c69636b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\back log.png",
+  "hex": "7379735c6d656e755c696e666f5c6261636b206c6f672e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\back to title.png",
+  "hex": "7379735c6d656e755c696e666f5c6261636b20746f207469746c652e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\cancel.png",
+  "hex": "7379735c6d656e755c696e666f5c63616e63656c2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\config.png",
+  "hex": "7379735c6d656e755c696e666f5c636f6e6669672e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\delete message.png",
+  "hex": "7379735c6d656e755c696e666f5c64656c657465206d6573736167652e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\delete message_unclick.png",
+  "hex": "7379735c6d656e755c696e666f5c64656c657465206d6573736167655f756e636c69636b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\game exit.png",
+  "hex": "7379735c6d656e755c696e666f5c67616d6520657869742e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\load.png",
+  "hex": "7379735c6d656e755c696e666f5c6c6f61642e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\menu.png",
+  "hex": "7379735c6d656e755c696e666f5c6d656e752e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\save.png",
+  "hex": "7379735c6d656e755c696e666f5c736176652e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\skip.png",
+  "hex": "7379735c6d656e755c696e666f5c736b69702e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\info\\skip_unclick.png",
+  "hex": "7379735c6d656e755c696e666f5c736b69705f756e636c69636b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 108
+ },
+ {
+  "name": "sys\\menu\\load-001.png",
+  "hex": "7379735c6d656e755c6c6f61642d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\load-002.png",
+  "hex": "7379735c6d656e755c6c6f61642d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\load-003.png",
+  "hex": "7379735c6d656e755c6c6f61642d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\save-001.png",
+  "hex": "7379735c6d656e755c736176652d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\save-002.png",
+  "hex": "7379735c6d656e755c736176652d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\save-003.png",
+  "hex": "7379735c6d656e755c736176652d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\save-004.png",
+  "hex": "7379735c6d656e755c736176652d3030342e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\skip-001.png",
+  "hex": "7379735c6d656e755c736b69702d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\skip-002.png",
+  "hex": "7379735c6d656e755c736b69702d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\skip-003.png",
+  "hex": "7379735c6d656e755c736b69702d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\phase\\1\\タイトル.png",
+  "hex": "7379735c70686173655c315c835e83438367838b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\1\\英字.png",
+  "hex": "7379735c70686173655c315c89708e9a2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\2\\タイトル.png",
+  "hex": "7379735c70686173655c325c835e83438367838b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\2\\英字.png",
+  "hex": "7379735c70686173655c325c89708e9a2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\3\\タイトル.png",
+  "hex": "7379735c70686173655c335c835e83438367838b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\3\\英字.png",
+  "hex": "7379735c70686173655c335c89708e9a2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\4\\タイトル.png",
+  "hex": "7379735c70686173655c345c835e83438367838b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\4\\英字.png",
+  "hex": "7379735c70686173655c345c89708e9a2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\5\\タイトル.png",
+  "hex": "7379735c70686173655c355c835e83438367838b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\5\\英字.png",
+  "hex": "7379735c70686173655c355c89708e9a2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\6\\タイトル.png",
+  "hex": "7379735c70686173655c365c835e83438367838b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\6\\英字.png",
+  "hex": "7379735c70686173655c365c89708e9a2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\7\\タイトル.png",
+  "hex": "7379735c70686173655c375c835e83438367838b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\7\\英字.png",
+  "hex": "7379735c70686173655c375c89708e9a2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\phase\\フェイズ.png",
+  "hex": "7379735c70686173655c83748346834383592e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "function_lc_toho.nss",
+   "kr_scenario.nss"
+  ],
+  "dir_refs": 24
+ },
+ {
+  "name": "sys\\save\\back-001.png",
+  "hex": "7379735c736176655c6261636b2d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\back-002.png",
+  "hex": "7379735c736176655c6261636b2d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\back-003.png",
+  "hex": "7379735c736176655c6261636b2d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\blank.png",
+  "hex": "7379735c736176655c626c616e6b2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\exit-001.png",
+  "hex": "7379735c736176655c657869742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\exit-002.png",
+  "hex": "7379735c736176655c657869742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\exit-003.png",
+  "hex": "7379735c736176655c657869742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\new.png",
+  "hex": "7379735c736176655c6e65772e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\next-001.png",
+  "hex": "7379735c736176655c6e6578742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\next-002.png",
+  "hex": "7379735c736176655c6e6578742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\next-003.png",
+  "hex": "7379735c736176655c6e6578742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\page-001.png",
+  "hex": "7379735c736176655c706167652d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\page-002.png",
+  "hex": "7379735c736176655c706167652d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\page-003.png",
+  "hex": "7379735c736176655c706167652d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\save\\page-004.png",
+  "hex": "7379735c736176655c706167652d3030342e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "sys_load.nss",
+   "sys_save.nss"
+  ],
+  "dir_refs": 212
+ },
+ {
+  "name": "sys\\title\\attention.jpg",
+  "hex": "7379735c7469746c655c617474656e74696f6e2e6a7067",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\caution.jpg",
+  "hex": "7379735c7469746c655c63617574696f6e2e6a7067",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\cgl-001.png",
+  "hex": "7379735c7469746c655c63676c2d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\cgl-002.png",
+  "hex": "7379735c7469746c655c63676c2d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\cgl-003.png",
+  "hex": "7379735c7469746c655c63676c2d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\config-001.png",
+  "hex": "7379735c7469746c655c636f6e6669672d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\config-002.png",
+  "hex": "7379735c7469746c655c636f6e6669672d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\config-003.png",
+  "hex": "7379735c7469746c655c636f6e6669672d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\exit-001.png",
+  "hex": "7379735c7469746c655c657869742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\exit-002.png",
+  "hex": "7379735c7469746c655c657869742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\exit-003.png",
+  "hex": "7379735c7469746c655c657869742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\gclx-logo.png",
+  "hex": "7379735c7469746c655c67636c782d6c6f676f2e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\liner-001.png",
+  "hex": "7379735c7469746c655c6c696e65722d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\liner-002.png",
+  "hex": "7379735c7469746c655c6c696e65722d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\liner-003.png",
+  "hex": "7379735c7469746c655c6c696e65722d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\load-001.png",
+  "hex": "7379735c7469746c655c6c6f61642d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\load-002.png",
+  "hex": "7379735c7469746c655c6c6f61642d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\load-003.png",
+  "hex": "7379735c7469746c655c6c6f61642d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\logo.png",
+  "hex": "7379735c7469746c655c6c6f676f2e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\logo白ボカシ影.png",
+  "hex": "7379735c7469746c655c6c6f676f9492837b834a835689652e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\nitroplus.jpg",
+  "hex": "7379735c7469746c655c6e6974726f706c75732e6a7067",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss",
+   "lx0010.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\nitroplus.png",
+  "hex": "7379735c7469746c655c6e6974726f706c75732e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\start-001.png",
+  "hex": "7379735c7469746c655c73746172742d3030312e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\start-002.png",
+  "hex": "7379735c7469746c655c73746172742d3030322e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\start-003.png",
+  "hex": "7379735c7469746c655c73746172742d3030332e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\コピーライト.png",
+  "hex": "7379735c7469746c655c83528373815b8389834383672e706e67",
+  "kind": "changed",
+  "literal_in": [
+   "0_boot.nss"
+  ],
+  "dir_refs": 51
+ },
+ {
+  "name": "sys\\title\\予告編info00.png",
+  "hex": "7379735c7469746c655c975c8d9095d2696e666f30302e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\title\\予告編info00a.png",
+  "hex": "7379735c7469746c655c975c8d9095d2696e666f3030612e706e67",
+  "kind": "changed",
+  "literal_in": [],
+  "dir_refs": 0
+ },
+ {
+  "name": "sys\\ed\\kr_bad_000.png",
+  "hex": "7379735c65645c6b725f6261645f3030302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_001.png",
+  "hex": "7379735c65645c6b725f6261645f3030312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_002.png",
+  "hex": "7379735c65645c6b725f6261645f3030322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_003.png",
+  "hex": "7379735c65645c6b725f6261645f3030332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_004.png",
+  "hex": "7379735c65645c6b725f6261645f3030342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_005.png",
+  "hex": "7379735c65645c6b725f6261645f3030352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_006.png",
+  "hex": "7379735c65645c6b725f6261645f3030362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_007.png",
+  "hex": "7379735c65645c6b725f6261645f3030372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_008.png",
+  "hex": "7379735c65645c6b725f6261645f3030382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_009.png",
+  "hex": "7379735c65645c6b725f6261645f3030392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_010.png",
+  "hex": "7379735c65645c6b725f6261645f3031302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_011.png",
+  "hex": "7379735c65645c6b725f6261645f3031312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_012.png",
+  "hex": "7379735c65645c6b725f6261645f3031322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_013.png",
+  "hex": "7379735c65645c6b725f6261645f3031332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_014.png",
+  "hex": "7379735c65645c6b725f6261645f3031342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_015.png",
+  "hex": "7379735c65645c6b725f6261645f3031352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_016.png",
+  "hex": "7379735c65645c6b725f6261645f3031362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_017.png",
+  "hex": "7379735c65645c6b725f6261645f3031372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_018.png",
+  "hex": "7379735c65645c6b725f6261645f3031382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_019.png",
+  "hex": "7379735c65645c6b725f6261645f3031392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_020.png",
+  "hex": "7379735c65645c6b725f6261645f3032302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_021.png",
+  "hex": "7379735c65645c6b725f6261645f3032312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_022.png",
+  "hex": "7379735c65645c6b725f6261645f3032322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_023.png",
+  "hex": "7379735c65645c6b725f6261645f3032332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_024.png",
+  "hex": "7379735c65645c6b725f6261645f3032342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_025.png",
+  "hex": "7379735c65645c6b725f6261645f3032352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_026.png",
+  "hex": "7379735c65645c6b725f6261645f3032362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_027.png",
+  "hex": "7379735c65645c6b725f6261645f3032372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_028.png",
+  "hex": "7379735c65645c6b725f6261645f3032382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_029.png",
+  "hex": "7379735c65645c6b725f6261645f3032392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_030.png",
+  "hex": "7379735c65645c6b725f6261645f3033302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_031.png",
+  "hex": "7379735c65645c6b725f6261645f3033312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_032.png",
+  "hex": "7379735c65645c6b725f6261645f3033322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_033.png",
+  "hex": "7379735c65645c6b725f6261645f3033332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_034.png",
+  "hex": "7379735c65645c6b725f6261645f3033342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_035.png",
+  "hex": "7379735c65645c6b725f6261645f3033352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_036.png",
+  "hex": "7379735c65645c6b725f6261645f3033362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_037.png",
+  "hex": "7379735c65645c6b725f6261645f3033372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_038.png",
+  "hex": "7379735c65645c6b725f6261645f3033382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_039.png",
+  "hex": "7379735c65645c6b725f6261645f3033392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_040.png",
+  "hex": "7379735c65645c6b725f6261645f3034302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_042.png",
+  "hex": "7379735c65645c6b725f6261645f3034322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_043.png",
+  "hex": "7379735c65645c6b725f6261645f3034332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_044.png",
+  "hex": "7379735c65645c6b725f6261645f3034342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_045.png",
+  "hex": "7379735c65645c6b725f6261645f3034352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_046.png",
+  "hex": "7379735c65645c6b725f6261645f3034362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_047.png",
+  "hex": "7379735c65645c6b725f6261645f3034372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_048.png",
+  "hex": "7379735c65645c6b725f6261645f3034382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_049.png",
+  "hex": "7379735c65645c6b725f6261645f3034392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_050.png",
+  "hex": "7379735c65645c6b725f6261645f3035302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_051.png",
+  "hex": "7379735c65645c6b725f6261645f3035312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_052.png",
+  "hex": "7379735c65645c6b725f6261645f3035322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_053.png",
+  "hex": "7379735c65645c6b725f6261645f3035332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_054.png",
+  "hex": "7379735c65645c6b725f6261645f3035342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_055.png",
+  "hex": "7379735c65645c6b725f6261645f3035352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_056.png",
+  "hex": "7379735c65645c6b725f6261645f3035362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_057.png",
+  "hex": "7379735c65645c6b725f6261645f3035372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_058.png",
+  "hex": "7379735c65645c6b725f6261645f3035382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_059.png",
+  "hex": "7379735c65645c6b725f6261645f3035392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_060.png",
+  "hex": "7379735c65645c6b725f6261645f3036302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_061.png",
+  "hex": "7379735c65645c6b725f6261645f3036312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_062.png",
+  "hex": "7379735c65645c6b725f6261645f3036322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_063.png",
+  "hex": "7379735c65645c6b725f6261645f3036332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_064.png",
+  "hex": "7379735c65645c6b725f6261645f3036342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_065.png",
+  "hex": "7379735c65645c6b725f6261645f3036352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_066.png",
+  "hex": "7379735c65645c6b725f6261645f3036362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_067.png",
+  "hex": "7379735c65645c6b725f6261645f3036372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_068.png",
+  "hex": "7379735c65645c6b725f6261645f3036382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_069.png",
+  "hex": "7379735c65645c6b725f6261645f3036392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_070.png",
+  "hex": "7379735c65645c6b725f6261645f3037302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_071.png",
+  "hex": "7379735c65645c6b725f6261645f3037312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_072.png",
+  "hex": "7379735c65645c6b725f6261645f3037322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_073.png",
+  "hex": "7379735c65645c6b725f6261645f3037332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_074.png",
+  "hex": "7379735c65645c6b725f6261645f3037342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_075.png",
+  "hex": "7379735c65645c6b725f6261645f3037352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_076.png",
+  "hex": "7379735c65645c6b725f6261645f3037362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_077.png",
+  "hex": "7379735c65645c6b725f6261645f3037372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_078.png",
+  "hex": "7379735c65645c6b725f6261645f3037382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_079.png",
+  "hex": "7379735c65645c6b725f6261645f3037392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_080.png",
+  "hex": "7379735c65645c6b725f6261645f3038302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_081.png",
+  "hex": "7379735c65645c6b725f6261645f3038312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_082.png",
+  "hex": "7379735c65645c6b725f6261645f3038322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_083.png",
+  "hex": "7379735c65645c6b725f6261645f3038332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_084.png",
+  "hex": "7379735c65645c6b725f6261645f3038342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_085.png",
+  "hex": "7379735c65645c6b725f6261645f3038352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_086.png",
+  "hex": "7379735c65645c6b725f6261645f3038362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_087.png",
+  "hex": "7379735c65645c6b725f6261645f3038372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_088.png",
+  "hex": "7379735c65645c6b725f6261645f3038382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_089.png",
+  "hex": "7379735c65645c6b725f6261645f3038392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_090.png",
+  "hex": "7379735c65645c6b725f6261645f3039302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_091.png",
+  "hex": "7379735c65645c6b725f6261645f3039312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_092.png",
+  "hex": "7379735c65645c6b725f6261645f3039322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_093.png",
+  "hex": "7379735c65645c6b725f6261645f3039332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_094.png",
+  "hex": "7379735c65645c6b725f6261645f3039342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_095.png",
+  "hex": "7379735c65645c6b725f6261645f3039352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_096.png",
+  "hex": "7379735c65645c6b725f6261645f3039362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_097.png",
+  "hex": "7379735c65645c6b725f6261645f3039372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_098.png",
+  "hex": "7379735c65645c6b725f6261645f3039382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_099.png",
+  "hex": "7379735c65645c6b725f6261645f3039392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_100.png",
+  "hex": "7379735c65645c6b725f6261645f3130302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_101.png",
+  "hex": "7379735c65645c6b725f6261645f3130312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_102.png",
+  "hex": "7379735c65645c6b725f6261645f3130322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_103.png",
+  "hex": "7379735c65645c6b725f6261645f3130332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_104.png",
+  "hex": "7379735c65645c6b725f6261645f3130342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_105.png",
+  "hex": "7379735c65645c6b725f6261645f3130352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_106.png",
+  "hex": "7379735c65645c6b725f6261645f3130362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_107.png",
+  "hex": "7379735c65645c6b725f6261645f3130372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_108.png",
+  "hex": "7379735c65645c6b725f6261645f3130382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_109.png",
+  "hex": "7379735c65645c6b725f6261645f3130392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_110.png",
+  "hex": "7379735c65645c6b725f6261645f3131302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_111.png",
+  "hex": "7379735c65645c6b725f6261645f3131312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_112.png",
+  "hex": "7379735c65645c6b725f6261645f3131322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_113.png",
+  "hex": "7379735c65645c6b725f6261645f3131332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_114.png",
+  "hex": "7379735c65645c6b725f6261645f3131342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_115.png",
+  "hex": "7379735c65645c6b725f6261645f3131352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_116.png",
+  "hex": "7379735c65645c6b725f6261645f3131362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_117.png",
+  "hex": "7379735c65645c6b725f6261645f3131372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_118.png",
+  "hex": "7379735c65645c6b725f6261645f3131382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_119.png",
+  "hex": "7379735c65645c6b725f6261645f3131392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_120.png",
+  "hex": "7379735c65645c6b725f6261645f3132302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_121.png",
+  "hex": "7379735c65645c6b725f6261645f3132312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_122.png",
+  "hex": "7379735c65645c6b725f6261645f3132322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_123.png",
+  "hex": "7379735c65645c6b725f6261645f3132332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_124.png",
+  "hex": "7379735c65645c6b725f6261645f3132342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_125.png",
+  "hex": "7379735c65645c6b725f6261645f3132352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_126.png",
+  "hex": "7379735c65645c6b725f6261645f3132362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_127.png",
+  "hex": "7379735c65645c6b725f6261645f3132372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_128.png",
+  "hex": "7379735c65645c6b725f6261645f3132382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_129.png",
+  "hex": "7379735c65645c6b725f6261645f3132392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_130.png",
+  "hex": "7379735c65645c6b725f6261645f3133302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_131.png",
+  "hex": "7379735c65645c6b725f6261645f3133312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_132.png",
+  "hex": "7379735c65645c6b725f6261645f3133322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_133.png",
+  "hex": "7379735c65645c6b725f6261645f3133332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_134.png",
+  "hex": "7379735c65645c6b725f6261645f3133342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_135.png",
+  "hex": "7379735c65645c6b725f6261645f3133352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_136.png",
+  "hex": "7379735c65645c6b725f6261645f3133362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_137.png",
+  "hex": "7379735c65645c6b725f6261645f3133372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_138.png",
+  "hex": "7379735c65645c6b725f6261645f3133382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_139.png",
+  "hex": "7379735c65645c6b725f6261645f3133392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_140.png",
+  "hex": "7379735c65645c6b725f6261645f3134302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_141.png",
+  "hex": "7379735c65645c6b725f6261645f3134312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_142.png",
+  "hex": "7379735c65645c6b725f6261645f3134322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_143.png",
+  "hex": "7379735c65645c6b725f6261645f3134332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_144.png",
+  "hex": "7379735c65645c6b725f6261645f3134342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_145.png",
+  "hex": "7379735c65645c6b725f6261645f3134352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_146.png",
+  "hex": "7379735c65645c6b725f6261645f3134362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_147.png",
+  "hex": "7379735c65645c6b725f6261645f3134372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_148.png",
+  "hex": "7379735c65645c6b725f6261645f3134382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_149.png",
+  "hex": "7379735c65645c6b725f6261645f3134392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_150.png",
+  "hex": "7379735c65645c6b725f6261645f3135302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_151.png",
+  "hex": "7379735c65645c6b725f6261645f3135312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_152.png",
+  "hex": "7379735c65645c6b725f6261645f3135322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_153.png",
+  "hex": "7379735c65645c6b725f6261645f3135332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_154.png",
+  "hex": "7379735c65645c6b725f6261645f3135342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_155.png",
+  "hex": "7379735c65645c6b725f6261645f3135352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_156.png",
+  "hex": "7379735c65645c6b725f6261645f3135362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_157.png",
+  "hex": "7379735c65645c6b725f6261645f3135372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_158.png",
+  "hex": "7379735c65645c6b725f6261645f3135382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_159.png",
+  "hex": "7379735c65645c6b725f6261645f3135392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_160.png",
+  "hex": "7379735c65645c6b725f6261645f3136302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_161.png",
+  "hex": "7379735c65645c6b725f6261645f3136312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_162.png",
+  "hex": "7379735c65645c6b725f6261645f3136322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_163.png",
+  "hex": "7379735c65645c6b725f6261645f3136332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_164.png",
+  "hex": "7379735c65645c6b725f6261645f3136342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_165.png",
+  "hex": "7379735c65645c6b725f6261645f3136352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_166.png",
+  "hex": "7379735c65645c6b725f6261645f3136362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_167.png",
+  "hex": "7379735c65645c6b725f6261645f3136372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_168.png",
+  "hex": "7379735c65645c6b725f6261645f3136382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_169.png",
+  "hex": "7379735c65645c6b725f6261645f3136392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_170.png",
+  "hex": "7379735c65645c6b725f6261645f3137302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_171.png",
+  "hex": "7379735c65645c6b725f6261645f3137312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_172.png",
+  "hex": "7379735c65645c6b725f6261645f3137322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_173.png",
+  "hex": "7379735c65645c6b725f6261645f3137332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_174.png",
+  "hex": "7379735c65645c6b725f6261645f3137342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_175.png",
+  "hex": "7379735c65645c6b725f6261645f3137352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_176.png",
+  "hex": "7379735c65645c6b725f6261645f3137362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_177.png",
+  "hex": "7379735c65645c6b725f6261645f3137372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_178.png",
+  "hex": "7379735c65645c6b725f6261645f3137382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_179.png",
+  "hex": "7379735c65645c6b725f6261645f3137392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_180.png",
+  "hex": "7379735c65645c6b725f6261645f3138302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_181.png",
+  "hex": "7379735c65645c6b725f6261645f3138312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_182.png",
+  "hex": "7379735c65645c6b725f6261645f3138322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_183.png",
+  "hex": "7379735c65645c6b725f6261645f3138332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_184.png",
+  "hex": "7379735c65645c6b725f6261645f3138342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_bad_plate.png",
+  "hex": "7379735c65645c6b725f6261645f706c6174652e706e67",
+  "kind": "added",
+  "literal_in": [
+   "function.nss"
+  ],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_000.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_001.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_002.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_003.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_004.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_005.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_006.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_007.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_008.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_009.png",
+  "hex": "7379735c65645c6b725f676f6f645f3030392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_010.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_011.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_012.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_013.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_014.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_015.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_016.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_017.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_018.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_019.png",
+  "hex": "7379735c65645c6b725f676f6f645f3031392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_020.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_021.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_022.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_023.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_024.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_025.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_026.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_027.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_028.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_029.png",
+  "hex": "7379735c65645c6b725f676f6f645f3032392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_030.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_031.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_032.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_033.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_034.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_035.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_036.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_037.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_038.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_039.png",
+  "hex": "7379735c65645c6b725f676f6f645f3033392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_040.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_042.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_043.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_044.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_045.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_046.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_047.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_048.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_049.png",
+  "hex": "7379735c65645c6b725f676f6f645f3034392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_050.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_051.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_052.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_053.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_054.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_055.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_056.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_057.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_058.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_059.png",
+  "hex": "7379735c65645c6b725f676f6f645f3035392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_060.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_061.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_062.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_063.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_064.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_065.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_066.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_067.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_068.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_069.png",
+  "hex": "7379735c65645c6b725f676f6f645f3036392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_070.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_071.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_072.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_073.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_074.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_075.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_076.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_077.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_078.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_079.png",
+  "hex": "7379735c65645c6b725f676f6f645f3037392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_080.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_081.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_082.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_083.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_084.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_085.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_086.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_087.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_088.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_089.png",
+  "hex": "7379735c65645c6b725f676f6f645f3038392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_090.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_091.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_092.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_093.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_094.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_095.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_096.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_097.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_098.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_099.png",
+  "hex": "7379735c65645c6b725f676f6f645f3039392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_100.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_101.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_102.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_103.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_104.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_105.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_106.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_107.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_108.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_109.png",
+  "hex": "7379735c65645c6b725f676f6f645f3130392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_110.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_111.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_112.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_113.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_114.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_115.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_116.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_117.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_118.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_119.png",
+  "hex": "7379735c65645c6b725f676f6f645f3131392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_120.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_121.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_122.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_123.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_124.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_125.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_126.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_127.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_128.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_129.png",
+  "hex": "7379735c65645c6b725f676f6f645f3132392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_130.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_131.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_132.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_133.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_134.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_135.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_136.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_137.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_138.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_139.png",
+  "hex": "7379735c65645c6b725f676f6f645f3133392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_140.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_141.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_142.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_143.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_144.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_145.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_146.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_147.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_148.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_149.png",
+  "hex": "7379735c65645c6b725f676f6f645f3134392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_150.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_151.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_152.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_153.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_154.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_155.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_156.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_157.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_158.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_159.png",
+  "hex": "7379735c65645c6b725f676f6f645f3135392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_160.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_161.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_162.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_163.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_164.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_165.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_166.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_167.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_168.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_169.png",
+  "hex": "7379735c65645c6b725f676f6f645f3136392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_170.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_171.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_172.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_173.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_174.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_175.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137352e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_176.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137362e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_177.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137372e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_178.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137382e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_179.png",
+  "hex": "7379735c65645c6b725f676f6f645f3137392e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_180.png",
+  "hex": "7379735c65645c6b725f676f6f645f3138302e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_181.png",
+  "hex": "7379735c65645c6b725f676f6f645f3138312e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_182.png",
+  "hex": "7379735c65645c6b725f676f6f645f3138322e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_183.png",
+  "hex": "7379735c65645c6b725f676f6f645f3138332e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_184.png",
+  "hex": "7379735c65645c6b725f676f6f645f3138342e706e67",
+  "kind": "added",
+  "literal_in": [],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\ed\\kr_good_plate.png",
+  "hex": "7379735c65645c6b725f676f6f645f706c6174652e706e67",
+  "kind": "added",
+  "literal_in": [
+   "function.nss"
+  ],
+  "dir_refs": 204
+ },
+ {
+  "name": "sys\\phase\\kr_gc_eyecatch_plate.png",
+  "hex": "7379735c70686173655c6b725f67635f65796563617463685f706c6174652e706e67",
+  "kind": "added",
+  "literal_in": [
+   "lx0109.nss",
+   "lx0300.nss",
+   "lx0500.nss"
+  ],
+  "dir_refs": 24
+ },
+ {
+  "name": "sys\\phase\\kr_gc_eyecatch_text.png",
+  "hex": "7379735c70686173655c6b725f67635f65796563617463685f746578742e706e67",
+  "kind": "added",
+  "literal_in": [
+   "lx0109.nss",
+   "lx0300.nss",
+   "lx0500.nss"
+  ],
+  "dir_refs": 24
+ },
+ {
+  "name": "sys\\menu\\ko_hit_auto.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f6175746f2e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_back_log.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f6261636b5f6c6f672e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_back_to_title.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f6261636b5f746f5f7469746c652e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_cancel.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f63616e63656c2e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_config.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f636f6e6669672e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_delete_message.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f64656c6574655f6d6573736167652e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_game_exit.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f67616d655f657869742e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_load.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f6c6f61642e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_save.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f736176652e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\menu\\ko_hit_skip.png",
+  "hex": "7379735c6d656e755c6b6f5f6869745f736b69702e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_menu.nss"
+  ],
+  "dir_refs": 210
+ },
+ {
+  "name": "sys\\config\\ko_hit_back.png",
+  "hex": "7379735c636f6e6669675c6b6f5f6869745f6261636b2e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\ko_hit_exit.png",
+  "hex": "7379735c636f6e6669675c6b6f5f6869745f657869742e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ },
+ {
+  "name": "sys\\config\\ko_hit_next.png",
+  "hex": "7379735c636f6e6669675c6b6f5f6869745f6e6578742e706e67",
+  "kind": "added",
+  "literal_in": [
+   "sys_config.nss"
+  ],
+  "dir_refs": 137
+ }
+]

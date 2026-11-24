@@ -1,0 +1,615 @@
+// Claude 11-02: 시나리오 열람. 원작 CG 감상(extra_cglib.nss) 화면 틀을 빌린 단계별 장면 차트. 읽은 장면만 열리고,
+// 「여기서 보기」는 그 장면 본문만 재생한 뒤 이 화면으로 돌아온다(저장·불러오기·선택지로 돌아가기는 막음, 대화 기록 점프 지점은 4K 엔진이 $KR_REPLAY 로 쉼).
+// 이 엔진의 대본은 함수에 식을 바로 넘기면 인자가 밀린다(원작처럼 값을 먼저 변수에 담아 넘긴다). 변수는 함수 밖과 같은 판이라 함수마다 앞머리를 달리 쓴다.
+// 0+0 은 "00" 글자가 되고, 처음 받은 값이 글자인 변수는 그 뒤로 숫자를 넣어도 글자로 남는다. 글자 첨자는 연관 배열 열쇠로 읽혀
+// 빈 값이 나온다(카드가 「00」·검은 그림, 읽은 장면도 잠김). 그래서 첨자로 쓰는 변수는 처음에 숫자(-1)를 넣어 둔다(11-02 숨긴 시험).
+#include "nss/function.nss"
+#include "nss/function_move.nss"
+#include "nss/function_select.nss"
+
+chapter main
+{
+	$SYSTEM_menu_lock = true;
+	$SYSTEM_backlog_lock = true;
+	$kli_n=-1;$kli_base=-1;$kmp_n=-1;$kst_m=-1;$kd_n=-1;$kd_ph=-1;$kd_pg=-1;$ko_n=-1;$kp_n=-1;$kpk_i=-1;$KS_SEL=-1;$KS_PAGE=-1;
+	KsData();
+	KsMaxPage();
+	$KS_PAGE=$KS_MAXP;
+	$KS_SEL=-1;
+	$KS_ARM=false;
+	$KS_NEEDMAX=false;
+	KsBgm();
+	$KS_RUN=true;
+	while($KS_RUN){
+		if($KS_SEL>=0){KsDetail();}
+		else{KsList();}
+	}
+	CreateColor("kz_black",31000,0,0,1024,576,BLACK);
+	Fade("kz_black",0,0,null,true);
+	Fade("kz_black",300,1000,null,true);
+	SetVolume("@ks_bgm", 1000, 0, NULL);
+	Wait(1000);
+	Delete("*");
+}
+
+//■ 열람 화면 음악: 타이틀 음악
+function KsBgm()
+{
+	CreateBGM("ks_bgm","lxbgm06");
+	SoundPlay("@ks_bgm",1000,1000,true);
+}
+
+//■ 읽음: 장면을 끝까지 본 기록(원작 이야기 루프의 $AllRead 와 같은 Conquest) 또는 검수용 모두 열기.
+//   $KS_SEEN = 실제로 읽음(결말 제목은 이것일 때만), $KS_OPEN = 열 수 있음
+// Conquest 는 원작처럼 변수에 받는다. if(Conquest(...)) 로 바로 쓰면 그 뒤 함수 호출에서 넘긴 변수가 깨진다(11-02 숨긴 시험).
+function KsIsOpen($ko_n)
+{
+	$KS_OPEN=false;
+	$KS_SEEN=false;
+	$ko_s=$KS_FILE[$ko_n];
+	$ko_f="nss/"+$ko_s;
+	$ko_r=Conquest($ko_f,$ko_s,null);
+	if($ko_r){$KS_SEEN=true;$KS_OPEN=true;}
+	if(#KS_ALLOPEN){$KS_OPEN=true;}
+}
+
+//■ 넘겨 볼 수 있는 마지막 단계: 열린 장면이 있는 가장 뒤 단계. 하나도 없으면 1.
+function KsMaxPage()
+{
+	$KS_MAXP=1;
+	$kmp_p=1;
+	while($kmp_p<=$KS_NPAGE){
+		$kmp_j=0;
+		$kmp_c=$KS_PC[$kmp_p];
+		while($kmp_j<$kmp_c){
+			$kmp_n=$KS_PS[$kmp_p]+$kmp_j;
+			KsIsOpen($kmp_n);
+			if($KS_OPEN){$KS_MAXP=$kmp_p;}
+			$kmp_j++;
+		}
+		$kmp_p++;
+	}
+}
+
+//■ 화면 바꿀 때 지금 화면을 덮개로
+function KsCover()
+{
+	Delete("ks_cover");
+	CreateTexture("ks_cover",30000,0,0,SCREEN);
+}
+
+function KsSounds()
+{
+	CreateSound("ks_se_ok",SE,"sound/se/SE_긘긚긡��_긄긌긚긣깋_뙂믦.ogg");
+	CreateSound("ks_se_end",SE,"sound/se/SE_긘긚긡��_긄긌긚긣깋_뢎뿹.ogg");
+	SetAlias("ks_se_ok","ks_se_ok");
+	SetAlias("ks_se_end","ks_se_end");
+}
+
+//■ 원작 감상 화면의 이전·다음·닫기 단추(4배 그림을 25%로)
+function KsBtn($kb_nm,$kb_x,$kb_y,$kb_img)
+{
+	$kb_hit=$kb_nm+"/MouseUsual/hit";
+	$kb_u=$kb_nm+"/MouseUsual/img";
+	$kb_o=$kb_nm+"/MouseOver/img";
+	$kb_c=$kb_nm+"/MouseClick/img";
+	$kb_f1="cg/sys/extra/cglib/"+$kb_img+"-001.png";
+	$kb_f2="cg/sys/extra/cglib/"+$kb_img+"-002.png";
+	$kb_f3="cg/sys/extra/cglib/"+$kb_img+"-003.png";
+	CreateChoice($kb_nm);
+	CreateTexture($kb_hit,0,$kb_x,$kb_y,"cg/sys/extra/cglib/hit02.png");
+	CreateTexture($kb_u,2020,$kb_x,$kb_y,$kb_f1);
+	SetVertex($kb_u,0,0);
+	Zoom($kb_u,0,250,250,null,false);
+	Request($kb_u,Smoothing);
+	CreateTexture($kb_o,2021,$kb_x,$kb_y,$kb_f2);
+	SetVertex($kb_o,0,0);
+	Zoom($kb_o,0,250,250,null,false);
+	Request($kb_o,Smoothing);
+	CreateTexture($kb_c,2021,$kb_x,$kb_y,$kb_f3);
+	SetVertex($kb_c,0,0);
+	Zoom($kb_c,0,250,250,null,false);
+	Request($kb_c,Smoothing);
+}
+
+function KsText($kt_nm,$kt_p,$kt_x,$kt_y,$kt_w,$kt_h,$kt_t)
+{
+	CreateText($kt_nm,$kt_p,$kt_x,$kt_y,$kt_w,$kt_h,$kt_t);
+	Request($kt_nm,NoLog);
+	Request($kt_nm,PushText);
+}
+
+function KsPageLabel($kl_t)
+{
+	SetFont("Noto Sans KR", 15, 8A8A8A, E6E6E6, 500, RIGHTDOWN);
+	KsText("ks_label",2022,18,546,420,34,$kl_t);
+}
+
+function KsClear()
+{
+	Delete("ks_l*");
+	Delete("ks_d*");
+	Delete("KS_*");
+	Delete("ks_c0*");
+	Delete("ks_c1*");
+}
+
+//■ 단계 쪽(목록)
+function KsList()
+{
+	if($KS_NEEDMAX){
+		$KS_NEEDMAX=false;
+		KsMaxPage();
+		if($KS_PAGE>$KS_MAXP){$KS_PAGE=$KS_MAXP;}
+	}
+	KsCover();
+	KsClear();
+	KsSounds();
+	CreateTexture("ks_lbg",2001,0,0,"cg/sys/extra/cglib/봶똧.png");
+	KsBtn("KS_BACK",732,542,"back");
+	KsBtn("KS_NEXT",831,542,"next");
+	KsBtn("KS_EXIT",924,542,"exit");
+	KsAllBtn();
+	$kli_lbl=$KS_LBL[$KS_PAGE];
+	// 원작 CG 감상과 같은 위아래 은빛 띠(쪽 번호 「N쪽」 이 그려져 있다)
+	$kli_bar=String("cg/sys/extra/cglib/no%03d.png",$KS_PAGE);
+	CreateTexture("ks_lbar",2015,0,0,$kli_bar);
+	SetVertex("ks_lbar",0,0);
+	Zoom("ks_lbar",0,250,250,null,false);
+	Request("ks_lbar",Smoothing);
+	$kli_cnt=$KS_PC[$KS_PAGE];
+	$kli_base=$KS_PS[$KS_PAGE];
+	$kli_i=0;
+	while($kli_i<20){
+		$kli_nx=$kli_i%5;
+		$kli_x=($kli_nx*200)+16;
+		$kli_ny=Integer($kli_i/5);
+		$kli_y=($kli_ny*124)+36;
+		if($kli_i<$kli_cnt){
+			$kli_n=$kli_base+$kli_i;
+			KsIsOpen($kli_n);
+			if($KS_OPEN){
+				$kli_cn=String("ks_c%02d",$kli_i);
+				$kli_hit=$kli_cn+"/MouseUsual/hit";
+				$kli_ov=$kli_cn+"/MouseOver/img";
+				$kli_ck=$kli_cn+"/MouseClick/img";
+				$kli_th=String("ks_lth%02d",$kli_i);
+				$kli_bd=String("ks_lbd%02d",$kli_i);
+				$kli_tt=String("ks_ltt%02d",$kli_i);
+				$kli_file=$KS_TH[$kli_n];
+				$kli_k=$KS_K[$kli_n];
+				$kli_txt=String("%02d  ",$kli_k);
+				$kli_ttl=$KS_TT[$kli_n];
+				$kli_en=$KS_EN[$kli_n];
+				if($kli_en!=""){if(!$KS_SEEN){$kli_ttl=$kli_en;}}
+				$kli_txt=$kli_txt+$kli_ttl;
+				$kli_by=$kli_y+80;
+				$kli_tx=$kli_x+7;
+				$kli_ty=$kli_y+83;
+				CreateChoice($kli_cn);
+				SetAlias($kli_cn,$kli_cn);
+				CreateColor($kli_hit,2010,$kli_x,$kli_y,192,108,0x000000);
+				Request($kli_hit,Erase);
+				CreateTexture($kli_th,2010,$kli_x,$kli_y,$kli_file);
+				CreateColor($kli_bd,2011,$kli_x,$kli_by,192,28,0x000000);
+				Fade($kli_bd,0,650,null,false);
+				SetFont("Noto Sans KR", 15, FFFFFF, 000000, 500, RIGHTDOWN);
+				KsText($kli_tt,2012,$kli_tx,$kli_ty,184,24,$kli_txt);
+				// Phase 첫 장면 칸: 왼쪽 위 꼬리표 「Phase NN」(이름은 상세 화면 윗줄에)
+				$kli_tag=$KS_PTAG[$kli_n];
+				if($kli_tag!=""){
+					$kli_pb=String("ks_lpb%02d",$kli_i);
+					$kli_pt=String("ks_lpt%02d",$kli_i);
+					$kli_px=$kli_x+6;
+					$kli_py=$kli_y+1;
+					CreateColor($kli_pb,2011,$kli_x,$kli_y,74,24,0x000000);
+					Fade($kli_pb,0,700,null,false);
+					SetFont("Noto Sans KR", 13, 8BE9D7, 000000, 600, RIGHTDOWN);
+					KsText($kli_pt,2012,$kli_px,$kli_py,70,22,$kli_tag);
+				}
+				CreateTexture($kli_ov,2013,$kli_x,$kli_y,"cg/sys/extra/cglib/멗묖긇�[�\깑.png");
+				CreateTexture($kli_ck,2013,$kli_x,$kli_y,"cg/sys/extra/cglib/멗묖긇�[�\깑.png");
+			}else{
+				$kli_lk=String("ks_llk%02d",$kli_i);
+				CreateTexture($kli_lk,2010,$kli_x,$kli_y,"nss/kr_scn_lock.png");
+				SetVertex($kli_lk,0,0);
+				Zoom($kli_lk,0,250,250,null,false);
+				Request($kli_lk,Smoothing);
+			}
+		}
+		$kli_i++;
+	}
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+	Fade("ks_cover",250,0,null,true);
+	Delete("ks_cover");
+	$SYSTEM_r_button_down=false;
+	$SYSTEM_mousewheel_down=false;
+	$SYSTEM_mousewheel_up=false;
+	$KS_LOOP=true;
+	while($KS_LOOP){
+		select{
+			if($SYSTEM_r_button_down){$SYSTEM_r_button_down=false;$KS_LOOP=false;$KS_RUN=false;break;}
+			// Claude 11-24: 휠 아래 = 다음 쪽, 위 = 이전 쪽(사용자 「회상에서 휠을 굴리면 페이지 이동하게 해줘」)
+			if($SYSTEM_mousewheel_down){$SYSTEM_mousewheel_down=false;Request("@ks_se_ok",Play);$KS_ARM=false;KsPageStep(1);break;}
+			if($SYSTEM_mousewheel_up){$SYSTEM_mousewheel_up=false;Request("@ks_se_ok",Play);$KS_ARM=false;KsPageStep(-1);break;}
+			case @ks_c00{KsPick(0);}
+			case @ks_c01{KsPick(1);}
+			case @ks_c02{KsPick(2);}
+			case @ks_c03{KsPick(3);}
+			case @ks_c04{KsPick(4);}
+			case @ks_c05{KsPick(5);}
+			case @ks_c06{KsPick(6);}
+			case @ks_c07{KsPick(7);}
+			case @ks_c08{KsPick(8);}
+			case @ks_c09{KsPick(9);}
+			case @ks_c10{KsPick(10);}
+			case @ks_c11{KsPick(11);}
+			case @ks_c12{KsPick(12);}
+			case @ks_c13{KsPick(13);}
+			case @ks_c14{KsPick(14);}
+			case @ks_c15{KsPick(15);}
+			case @ks_c16{KsPick(16);}
+			case @ks_c17{KsPick(17);}
+			case @ks_c18{KsPick(18);}
+			case @ks_c19{KsPick(19);}
+			case KS_NEXT{Request("@ks_se_ok",Play);$KS_ARM=false;KsPageStep(1);}
+			case KS_BACK{Request("@ks_se_ok",Play);$KS_ARM=false;KsPageStep(-1);}
+			case KS_ALL{Request("@ks_se_ok",Play);KsAllToggle();}
+			case KS_EXIT{Request("@ks_se_end",Play);$KS_LOOP=false;$KS_RUN=false;}
+		}
+	}
+}
+
+//■ 검수용: 안 읽은 장면까지 모두 열기(두 번 눌러야 켜진다 - 이야기 내용이 드러나므로) / 원래대로(한 번)
+function KsAllBtn()
+{
+	CreateChoice("KS_ALL");
+	CreateColor("KS_ALL/MouseUsual/hit",2020,440,544,280,30,0x000000);
+	Request("KS_ALL/MouseUsual/hit",Erase);
+	CreateColor("KS_ALL/MouseOver/img",2021,440,544,280,30,0xF2F2F2);
+	CreateColor("KS_ALL/MouseClick/img",2021,440,544,280,30,0x58B6A4);
+	$kab_t="검수: 안 읽은 장면도 열기";
+	if($KS_ARM){$kab_t="한 번 더 누르면 모두 엽니다";}
+	if(#KS_ALLOPEN){$kab_t="검수: 원래대로(읽은 장면만)";}
+	SetFont("Noto Sans KR", 14, 7A7A7A, E6E6E6, 500, RIGHTDOWN);
+	if($KS_ARM){SetFont("Noto Sans KR", 14, A03030, E6E6E6, 600, RIGHTDOWN);}
+	if(#KS_ALLOPEN){SetFont("Noto Sans KR", 14, 1F6F62, E6E6E6, 600, RIGHTDOWN);}
+	KsText("ks_lall",2022,448,547,280,34,$kab_t);
+}
+
+function KsAllToggle()
+{
+	if(#KS_ALLOPEN){#KS_ALLOPEN=false;$KS_ARM=false;}
+	else if($KS_ARM){#KS_ALLOPEN=true;$KS_ARM=false;}
+	else{$KS_ARM=true;}
+	$KS_NEEDMAX=true;
+	$KS_LOOP=false;
+}
+
+function KsPageStep($kps_d)
+{
+	$KS_PAGE=$KS_PAGE+$kps_d;
+	if($KS_PAGE>$KS_MAXP){$KS_PAGE=1;}
+	if($KS_PAGE<1){$KS_PAGE=$KS_MAXP;}
+	$KS_LOOP=false;
+}
+
+function KsPick($kpk_i)
+{
+	Request("@ks_se_ok",Play);
+	$KS_SEL=$KS_PS[$KS_PAGE]+$kpk_i;
+	$KS_LOOP=false;
+}
+
+//■ 열린 앞·뒤 장면(단계를 넘어서도)
+function KsStep($kst_d)
+{
+	$kst_m=$KS_SEL+$kst_d;
+	$kst_go=true;
+	while($kst_go){
+		if($kst_m<0){$kst_go=false;}
+		else if($kst_m>=$KS_N){$kst_go=false;}
+		else{
+			KsIsOpen($kst_m);
+			if($KS_OPEN){$KS_SEL=$kst_m;$KS_PAGE=$KS_PG[$kst_m];$kst_go=false;}
+			else{$kst_m=$kst_m+$kst_d;}
+		}
+	}
+}
+
+//■ 장면 상세: 큰 CG + 단계·차례 + 제목 + 「여기서 보기」, 아래 줄 = 이전 장면 / 다음 장면 / 목록
+function KsDetail()
+{
+	$kd_n=$KS_SEL;
+	$KS_PAGE=$KS_PG[$kd_n];
+	$kd_cg=$KS_CG[$kd_n];
+	$kd_tt=$KS_TT[$kd_n];
+	KsIsOpen($kd_n);
+	$kd_en=$KS_EN[$kd_n];
+	$kd_sum=$KS_SUM[$kd_n];
+	if($kd_en!=""){if(!$KS_SEEN){$kd_tt=$kd_en;$kd_sum="";}}
+	$kd_ph=$KS_PH[$kd_n];
+	$kd_k=$KS_K[$kd_n];
+	$kd_pos=$KS_POS[$kd_n];
+	$kd_pg=$KS_PG[$kd_n];
+	$kd_lbl=$KS_LBL[$kd_pg];
+	$kd_phl=$KS_PHL[$kd_n];
+	KsCover();
+	KsClear();
+	KsSounds();
+	CreateColor("ks_dbg",2001,0,0,1024,576,0x000000);
+	CreateTexture("ks_dbar",2015,0,0,"nss/kr_bars.png");
+	SetVertex("ks_dbar",0,0);
+	Zoom("ks_dbar",0,250,250,null,false);
+	Request("ks_dbar",Smoothing);
+	CreateColor("ks_dfr",2003,22,58,644,364,0x3A3A3A);
+	CreateColor("ks_dfi",2004,24,60,640,360,0x000000);
+	$kd_file=$KS_FILE[$kd_n];
+	KsCgPlace();
+	// 원작 단계 표지(function_lc_toho PhaseSet)의 그림을 그대로: 「단계」 위, 숫자 아래, 청록 58B6A4
+	CreateTexture("ks_dpf",2012,692,50,"cg/sys/phase/긲긃귽긛.png");
+	SetVertex("ks_dpf",0,0);
+	Zoom("ks_dpf",0,250,250,null,false);
+	Request("ks_dpf",Smoothing);
+	$kd_num=String("cg/sys/phase/%d/릶럻.png",$kd_ph);
+	CreateTexture("ks_dpn",2012,692,72,$kd_num);
+	SetFont("Noto Sans KR", 17, 8BE9D7, 000000, 600, RIGHTDOWN);
+	KsText("ks_dphl",2012,786,88,232,30,$kd_phl);
+	CreateTexture("ks_dpl",2012,692,134,"cg/sys/phase/멄괦.png");
+	SetVertex("ks_dpl",0,0);
+	Zoom("ks_dpl",0,316,1000,null,false);
+	SetFont("Noto Sans KR", 15, 8A8A8A, 000000, 500, RIGHTDOWN);
+	KsText("ks_dpos",2012,694,166,320,30,$kd_pos);
+	SetFont("Noto Sans KR", 26, FFFFFF, 000000, 600, RIGHTDOWN);
+	KsText("ks_dttl",2012,694,194,310,120,$kd_tt);
+	// 장면 요약: 제목과 「재생」 사이(11-24; 검수용으로만 열린 결말은 보이지 않음)
+	if($kd_sum!=""){
+		SetFont("Noto Sans KR", 14, C8C8C8, 000000, 500, RIGHTDOWN);
+		KsText("ks_dsum",2012,694,244,312,130,$kd_sum);
+	}
+	// 「여기서 보기」: 선택지 안에는 그림만 둔다(글자 물체는 선택지 아래에 두면 안 그려졌다) - 상자 색으로 올림·누름을 보인다
+	CreateChoice("KS_PLAY");
+	CreateColor("KS_PLAY/MouseUsual/hit",2010,694,380,312,46,0x000000);
+	Request("KS_PLAY/MouseUsual/hit",Erase);
+	CreateColor("KS_PLAY/MouseUsual/img",2010,694,380,312,46,0x2E2E2E);
+	CreateColor("ks_dpbi",2011,697,382,297,42,0x0B0B0B);
+	CreateColor("ks_dpbr",2011,996,380,10,46,0x262626);
+	CreateColor("KS_PLAY/MouseOver/img",2012,697,382,297,42,0x163A36);
+	CreateColor("KS_PLAY/MouseClick/img",2012,697,382,297,42,0x2A6F63);
+	SetFont("Noto Sans KR", 20, DADADA, 000000, 600, RIGHTDOWN);
+	KsText("ks_dplay",2014,716,388,270,40,"▶  재생");
+	SetFont("Noto Sans KR", 14, 7A7A7A, 000000, 500, RIGHTDOWN);
+	KsText("ks_dnote",2012,694,436,320,48,"끝까지 보면 이 화면으로 돌아옵니다&.");
+	KsBtn("KS_BACK",732,542,"back");
+	KsBtn("KS_NEXT",831,542,"next");
+	KsBtn("KS_EXIT",924,542,"exit");
+	KsPageLabel($kd_lbl);
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+	Fade("ks_cover",250,0,null,true);
+	Delete("ks_cover");
+	$SYSTEM_r_button_down=false;
+	$KS_LOOP=true;
+	while($KS_LOOP){
+		select{
+			if($SYSTEM_r_button_down){$SYSTEM_r_button_down=false;$KS_SEL=-1;$KS_LOOP=false;break;}
+			case KS_PLAY{Request("@ks_se_ok",Play);KsPlay($kd_n);$KS_LOOP=false;}
+			case KS_BACK{Request("@ks_se_ok",Play);KsStep(-1);$KS_LOOP=false;}
+			case KS_NEXT{Request("@ks_se_ok",Play);KsStep(1);$KS_LOOP=false;}
+			case KS_EXIT{Request("@ks_se_end",Play);$KS_SEL=-1;$KS_LOOP=false;}
+		}
+	}
+}
+
+//■ 한 장면 재생: 이야기 루프(0_boot_開始スクリプト SelectStoryMode)의 준비만 하고 장면 본문(scene X)을 부른다.
+//   변수는 지우지 않는다(ClearScore 없음) - 열람 상태를 들고 돌아오기 위해.
+function KsPlay($kp_n)
+{
+	$kp_also=$KS_ALSO[$kp_n];
+	// 결말 장면은 글자 속도(#SYSTEM_text_speed=800)·글자 간격을 바꾸고, 엔딩 롤은 다 봤다는 표시(#ClearRoll00/01)를 남긴다 - 다시 보기는 그대로 되돌린다
+	$kp_ts=#SYSTEM_text_speed;
+	$kp_ti=$SYSTEM_text_interval;
+	$kp_r0=#ClearRoll00;
+	$kp_r1=#ClearRoll01;
+	CreateColor("kz_black",31000,0,0,1024,576,BLACK);
+	Fade("kz_black",0,0,null,true);
+	Fade("kz_black",400,1000,null,true);
+	KrLyStopFor("@*");SetVolume("@*", 400, 0, NULL);
+	Wait(400);
+	Delete("*");
+	ClearBacklog();
+	$BOX_Init = true;
+	$BGM_Init = true;
+	$Logo = true;
+	$GameStart = 1;
+	$PLACE_title = false;
+	$SYSTEM_menu_lock=false;
+	$SYSTEM_save_lock=true;
+	$SYSTEM_load_lock=true;
+	$SYSTEM_backselect_lock=true;
+	$SYSTEM_title_lock=false;
+	$SYSTEM_skip_lock=false;
+	$SYSTEM_text_erase_lock=false;
+	$SYSTEM_backlog_lock=false;
+	$SYSTEM_twitter_lock=false;
+	$SYSTEM_super_lock=false;
+	$LOCAL_extra_lock=true;
+	$SYSTEM_skip=false;
+	#SYSTEM_skip_express=false;
+	$SYSTEM_text_auto=false;
+	$SYSTEM_text_auto_lock=false;
+	$SYSTEM_text_erase=false;
+	$SYSTEM_text_waitkey=true;
+	$GOOD_MAN_POINT=0;
+	Array(     $FLAG_OF_STORY,false,     false,           false,     false,         false,                   0);
+	AssocArray($FLAG_OF_STORY,"벀궛귣갏","렔빁귩롦귟뽣궥","됶뺳궥귡","뙷뢂귩룙궚귡","긌긿깓깑궻롨귩뿣궠궶궋","맯궖귡");
+	StArray();
+	CreateWindow("EFWIN", 20000, 0, 0, 1024, 576, false);
+	SetAlias("EFWIN", "EFWIN");
+	Request("EFWIN", Lock);
+	CreateName("GLOBAL_PROCESS");
+	SetAlias("GLOBAL_PROCESS","GLOBAL_PROCESS");
+	Request("GLOBAL_PROCESS",Lock);
+	$KR_REPLAY=true;
+	$GameName=$KS_FILE[$kp_n];
+	$ConGameName="nss/"+$GameName;
+	$GameName2=$GameName+"_MAIN";
+	$AllRead=true;
+	$ks_call="nss/"+$GameName+"->"+$GameName;
+	call_scene $ks_call;
+	if($kp_also!=""){
+		$GameName=$kp_also;
+		$ConGameName="nss/"+$GameName;
+		$GameName2=$GameName+"_MAIN";
+		$ks_call="nss/"+$GameName+"->"+$GameName;
+		call_scene $ks_call;
+	}
+	$KR_REPLAY=false;
+	#SYSTEM_text_speed=$kp_ts;
+	$SYSTEM_text_interval=$kp_ti;
+	$SYSTEM_text_waitkey=true;
+	#ClearRoll00=$kp_r0;
+	#ClearRoll01=$kp_r1;
+	TextBoxDelete(0);
+	KrLyStopFor("@*");SetVolume("@*", 500, 0, NULL);
+	Wait(500);
+	Request("EFWIN", UnLock);
+	Request("GLOBAL_PROCESS", UnLock);
+	Delete("*");
+	ClearBacklog();
+	$SYSTEM_skip=false;
+	#SYSTEM_skip_express=false;
+	$SYSTEM_text_auto=false;
+	$SYSTEM_menu_lock=true;
+	$SYSTEM_backlog_lock=true;
+	$SYSTEM_save_lock=false;
+	$SYSTEM_load_lock=false;
+	$SYSTEM_backselect_lock=false;
+	$GameName=false;
+	CreateColor("kz_black",31000,0,0,1024,576,BLACK);
+	KsCover();
+	Delete("kz_black");
+	KsBgm();
+}
+
+function KsData()
+{
+	$KS_FILE=null;Array($KS_FILE);DeleteArray($KS_FILE);
+	$KS_TH=null;Array($KS_TH);DeleteArray($KS_TH);
+	$KS_CG=null;Array($KS_CG);DeleteArray($KS_CG);
+	$KS_TT=null;Array($KS_TT);DeleteArray($KS_TT);
+	$KS_PH=null;Array($KS_PH);DeleteArray($KS_PH);
+	$KS_K=null;Array($KS_K);DeleteArray($KS_K);
+	$KS_ALSO=null;Array($KS_ALSO);DeleteArray($KS_ALSO);
+	$KS_PS=null;Array($KS_PS);DeleteArray($KS_PS);
+	$KS_PC=null;Array($KS_PC);DeleteArray($KS_PC);
+	$KS_POS=null;Array($KS_POS);DeleteArray($KS_POS);
+	$KS_LBL=null;Array($KS_LBL);DeleteArray($KS_LBL);
+	$KS_EN=null;Array($KS_EN);DeleteArray($KS_EN);
+	$KS_PG=null;Array($KS_PG);DeleteArray($KS_PG);
+	$KS_PTAG=null;Array($KS_PTAG);DeleteArray($KS_PTAG);
+	$KS_PHL=null;Array($KS_PHL);DeleteArray($KS_PHL);
+	$KS_SUM=null;Array($KS_SUM);DeleteArray($KS_SUM);
+	$KS_FILE[0]="lx0010.nss";$KS_TH[0]="cg/sys/extra/thum/ev/ev0106긵깒�[깛긣뙅뤋뢿_뢿궻귒.jpg";$KS_CG[0]="cg/ev/ev0106긵깒�[깛긣뙅뤋뢿_뢿궻귒.jpg";$KS_TT[0]="불타는 롯폰기의 성야";$KS_PH[0]=1;$KS_K[0]=1;$KS_ALSO[0]="";$KS_POS[0]="1번째 장면";$KS_EN[0]="";$KS_PG[0]=1;$KS_PTAG[0]="phase 01";$KS_PHL[0]="전장의 메리 크리스마스";$KS_SUM[0]="2029년 12월 24일&, 정체 모를 흰 군대가 감염자를 쓸어버리는 롯폰기에서 사신 같은 남자가 맨손으로 병사들을 쓰러뜨린다&. 여자의 형상을 한 그것과 강철의 거대한 짐승에게 막힌 남자를 향해 누군가 뛰어내리며 스크루지라고 부른다&.";
+	$KS_FILE[1]="lx0101.nss";$KS_TH[1]="cg/sys/extra/thum/ev/ev0201�`벆뙟땰덒_봶똧.jpg";$KS_CG[1]="cg/ev/ev0201�`벆뙟땰덒_봶똧.jpg";$KS_TT[1]="기억을 잃고 깨어나다";$KS_PH[1]=2;$KS_K[1]=2;$KS_ALSO[1]="";$KS_POS[1]="2번째 장면";$KS_EN[1]="";$KS_PG[1]=1;$KS_PTAG[1]="phase 02";$KS_PHL[1]="크리스마스의 악몽";$KS_SUM[1]="처분을 앞둔 실험 도중 피험체 1843이 눈을 뜨지만&, 자기 이름조차 기억하지 못한다&. 오른손에 붙잡힌 사람은 금속 결정으로 변해 가고&, 총을 겨누는 자들을 남자는 사람을 넘어선 몸놀림으로 뛰어넘는다&.";
+	$KS_FILE[2]="lx0101_01.nss";$KS_TH[2]="cg/sys/extra/thum/bg/bg002003_5_믅쁇2.jpg";$KS_CG[2]="cg/bg/bg002003_5_믅쁇2.jpg";$KS_TT[2]="눈앞에서 사라진 실험체";$KS_PH[2]=2;$KS_K[2]=3;$KS_ALSO[2]="";$KS_POS[2]="3번째 장면";$KS_EN[2]="";$KS_PG[2]=1;$KS_PTAG[2]="";$KS_PHL[2]="크리스마스의 악몽";$KS_SUM[2]="실험체가 눈앞에서 감쪽같이 사라지자&, 남은 자들은 저런 괴물을 밖으로 내보내선 안 된다며 보는 즉시 쏘라고 외친다&.";
+	$KS_FILE[3]="lx0101_02.nss";$KS_TH[3]="cg/sys/extra/thum/bg/bg002002_5_믅쁇1r.jpg";$KS_CG[3]="cg/bg/bg002002_5_믅쁇1r.jpg";$KS_TT[3]="돌아서서 모두 죽이다";$KS_PH[3]=2;$KS_K[3]=4;$KS_ALSO[3]="";$KS_POS[3]="4번째 장면";$KS_EN[3]="";$KS_PG[3]=1;$KS_PTAG[3]="";$KS_PHL[3]="크리스마스의 악몽";$KS_SUM[3]="돌아선 남자가 남은 자들을 맨손으로 처참하게 죽인다&. 흥분이 가라앉자 피바다가 된 주위와 또다시 금속으로 변해 가는 사람을 보며&, 사람을 넘어선 자기 힘에 겁을 먹는다&.";
+	$KS_FILE[4]="lx0102.nss";$KS_TH[4]="cg/sys/extra/thum/ev/ev0201�`벆뙟땰덒.jpg";$KS_CG[4]="cg/ev/ev0201�`벆뙟땰덒.jpg";$KS_TT[4]="캐롤이 불러 준 이름";$KS_PH[4]=2;$KS_K[4]=5;$KS_ALSO[4]="";$KS_POS[4]="5번째 장면";$KS_EN[4]="";$KS_PG[4]=1;$KS_PTAG[4]="";$KS_PHL[4]="크리스마스의 악몽";$KS_SUM[4]="붙잡은 연구자가 결정으로 변하자&, 남자는 자기 오른손이 닿은 탓임을 짐작한다&. 남자를 아는 듯한 소녀 캐롤은 두통에 시달리는 남자를 끌어안아 달래고&, 오른손으로 사람을 만지지 말라고 이른 뒤 함께 도망치자고 한다&.";
+	$KS_FILE[5]="lx0103.nss";$KS_TH[5]="cg/sys/extra/thum/bg/bg002002_5_믅쁇1r.jpg";$KS_CG[5]="cg/bg/bg002002_5_믅쁇1r.jpg";$KS_TT[5]="아포칼립스 바이러스";$KS_PH[5]=2;$KS_K[5]=6;$KS_ALSO[5]="";$KS_POS[5]="6번째 장면";$KS_EN[5]="";$KS_PG[5]=1;$KS_PTAG[5]="";$KS_PHL[5]="크리스마스의 악몽";$KS_SUM[5]="캐롤은 사람이 금속으로 변하는 병이 7년 전 떨어진 운석에서 비롯되었고&, 스크루지는 그 바이러스를 연구하는 이곳의 실험체라고 알려 준다&. 스스로를 병원체라 여기는 스크루지에게 캐롤은 오른손에 깃든 것이 그리 만만하지 않다고 한다&.";
+	$KS_FILE[6]="lx0104a.nss";$KS_TH[6]="cg/sys/extra/thum/ev/ev0207긚긏깑�[긙밮덁긙긿깛긵.jpg";$KS_CG[6]="cg/ev/ev0207긚긏깑�[긙밮덁긙긿깛긵.jpg";$KS_TT[6]="죽여 버리자는 캐롤";$KS_PH[6]=2;$KS_K[6]=7;$KS_ALSO[6]="";$KS_POS[6]="7번째 장면";$KS_EN[6]="";$KS_PG[6]=1;$KS_PTAG[6]="";$KS_PHL[6]="크리스마스의 악몽";$KS_SUM[6]="앞길을 막은 경비병들을 두고 캐롤이 몰살해 버리자고 하자&, 스크루지는 총을 든 상대를 이길 리 없다며 머뭇거린다&. 스스로를 속이지 말라는 말에 싸움에 나선 스크루지는 압도적인 힘으로 병사들을 짓밟는다&.";
+	$KS_FILE[7]="lx0104a_01.nss";$KS_TH[7]="cg/sys/extra/thum/bg/bg002004_5_긒�[긣멟.jpg";$KS_CG[7]="cg/bg/bg002004_5_긒�[긣멟.jpg";$KS_TT[7]="제 힘에 겁먹다";$KS_PH[7]=2;$KS_K[7]=8;$KS_ALSO[7]="";$KS_POS[7]="8번째 장면";$KS_EN[7]="";$KS_PG[7]=1;$KS_PTAG[7]="";$KS_PHL[7]="크리스마스의 악몽";$KS_SUM[7]="스크루지는 텅 빈 자신을 집어삼킬 듯한 힘에 겁을 먹으면서도&, 폭력을 향한 갈망에 끌려 노예처럼 죽이기를 멈추지 못한다&. 캐롤은 기가 약하다면서도 그 힘이 있는 한 스크루지는 임금님이라고 말한다&.";
+	$KS_FILE[8]="lx0104a_02.nss";$KS_TH[8]="cg/sys/extra/thum/bg/bg002004_5_긒�[긣멟.jpg";$KS_CG[8]="cg/bg/bg002004_5_긒�[긣멟.jpg";$KS_TT[8]="폭력에 취해 웃다";$KS_PH[8]=2;$KS_K[8]=9;$KS_ALSO[8]="";$KS_POS[8]="9번째 장면";$KS_EN[8]="";$KS_PG[8]=1;$KS_PTAG[8]="";$KS_PHL[8]="크리스마스의 악몽";$KS_SUM[8]="스크루지는 이 힘이야말로 자신이라며&, 자신을 괴물로 만든 자들을 왕처럼 짓밟는다&. 웃음을 참지 못하고 폭소를 터뜨리는 스크루지를 보며&, 캐롤은 참으로 훌륭한 폭군답다고 반긴다&.";
+	$KS_FILE[9]="lx0104b.nss";$KS_TH[9]="cg/sys/extra/thum/bg/bg002004_5_긒�[긣멟.jpg";$KS_CG[9]="cg/bg/bg002004_5_긒�[긣멟.jpg";$KS_TT[9]="죽이자는 스크루지";$KS_PH[9]=2;$KS_K[9]=10;$KS_ALSO[9]="";$KS_POS[9]="10번째 장면";$KS_EN[9]="";$KS_PG[9]=1;$KS_PTAG[9]="";$KS_PHL[9]="크리스마스의 악몽";$KS_SUM[9]="피해서 갈 수 없다면 답은 하나라며 스크루지가 먼저 죽이자고 나선다&. 캐롤은 위험한 남자라 멋지다며 장난스럽게 맞장구치고&, 몰려온 경비병들과 싸움이 벌어진다&.";
+	$KS_FILE[10]="lx0105.nss";$KS_TH[10]="cg/sys/extra/thum/bg/bg002002_5_믅쁇1.jpg";$KS_CG[10]="cg/bg/bg002002_5_믅쁇1.jpg";$KS_TT[10]="가짜 왕을 지켜보는 눈";$KS_PH[10]=2;$KS_K[10]=11;$KS_ALSO[10]="";$KS_POS[10]="11번째 장면";$KS_EN[10]="";$KS_PG[10]=1;$KS_PTAG[10]="";$KS_PHL[10]="크리스마스의 악몽";$KS_SUM[10]="게이트 쪽과 연락이 끊긴 병사들이 처참한 현장을 보고 대체 무엇이 도망친 것이냐며 술렁인다&. 한편 누군가는 실패작인 줄 알았던 스크루지가 이브에게 도움이 될지도 모른다며&, 가짜 왕의 이야기에 꽃을 더해 주겠다고 한다&.";
+	$KS_FILE[11]="lx0106.nss";$KS_TH[11]="cg/sys/extra/thum/ev/ev0210긚긏깑�[긙긌긿깓깑�_긞긘깄.jpg";$KS_CG[11]="cg/ev/ev0210긚긏깑�[긙긌긿깓깑�_긞긘깄.jpg";$KS_TT[11]="엔드레이브와 왕의 능력";$KS_PH[11]=2;$KS_K[11]=12;$KS_ALSO[11]="";$KS_POS[11]="12번째 장면";$KS_EN[11]="";$KS_PG[11]=1;$KS_PTAG[11]="";$KS_PHL[11]="크리스마스의 악몽";$KS_SUM[11]="캐롤을 안고 출구로 내달리던 스크루지 앞을 원격 조종 로봇 엔드레이브가 가로막는다&. 움직임을 그대로 쫓아오는 엔드레이브에 몰리자 캐롤은 스크루지의 오른손을 자기 가슴으로 이끌고&, 쏟아지는 빛 속에서 스크루지의 손에 검이 쥐어진다&.";
+	$KS_FILE[12]="lx0107.nss";$KS_TH[12]="cg/sys/extra/thum/bg/bg002003_5_믅쁇2.jpg";$KS_CG[12]="cg/bg/bg002003_5_믅쁇2.jpg";$KS_TT[12]="부서진 인형에 우는 아이";$KS_PH[12]=2;$KS_K[12]=13;$KS_ALSO[12]="";$KS_POS[12]="13번째 장면";$KS_EN[12]="";$KS_PG[12]=1;$KS_PTAG[12]="";$KS_PHL[12]="크리스마스의 악몽";$KS_SUM[12]="지켜보던 누군가는 영혼의 물질화에 성공한 스크루지를 뜻밖의 수확이라 부르며 가짜 왕에게 더한 시련을 주려 한다&. 인형이 부서졌다며 우는 아이를 누군가 새 장난감이 있다며 달래고&, 곧 스크루지를 만나러 가겠다는 말이 이어진다&.";
+	$KS_FILE[13]="lx0108.nss";$KS_TH[13]="cg/sys/extra/thum/ev/ev0101긚긏깑�[긙깞긅귽긤롦귟궬궢.jpg";$KS_CG[13]="cg/ev/ev0101긚긏깑�[긙깞긅귽긤롦귟궬궢.jpg";$KS_TT[13]="크레이터를 내려다보며";$KS_PH[13]=2;$KS_K[13]=14;$KS_ALSO[13]="";$KS_POS[13]="14번째 장면";$KS_EN[13]="";$KS_PG[13]=1;$KS_PTAG[13]="";$KS_PHL[13]="크리스마스의 악몽";$KS_SUM[13]="연구소를 빠져나온 두 사람은 고지대에서 운석이 떨어진 크레이터를 내려다본다&. 오른손에 닿고도 왜 무사하냐는 스크루지의 물음에 캐롤은 자신이 스크루지의 무기라고 답하고&, 자신을 써서 무엇을 얻고 싶으냐고 묻는다&.";
+	$KS_FILE[14]="lx0108_01.nss";$KS_TH[14]="cg/sys/extra/thum/ev/ev0101긚긏깑�[긙깞긅귽긤롦귟궬궢.jpg";$KS_CG[14]="cg/ev/ev0101긚긏깑�[긙깞긅귽긤롦귟궬궢.jpg";$KS_TT[14]="자신을 되찾기 위해";$KS_PH[14]=2;$KS_K[14]=15;$KS_ALSO[14]="";$KS_POS[14]="15번째 장면";$KS_EN[14]="";$KS_PG[14]=1;$KS_PTAG[14]="";$KS_PHL[14]="크리스마스의 악몽";$KS_SUM[14]="자신을 되찾고 싶다는 스크루지의 바람을 캐롤은 당연하다며 받아들이고&, 그 바람을 잊지 않는 한 스크루지만의 무기가 되겠다고 약속한다&.";
+	$KS_FILE[15]="lx0108_02.nss";$KS_TH[15]="cg/sys/extra/thum/ev/ev0101긚긏깑�[긙깞긅귽긤롦귟궬궢.jpg";$KS_CG[15]="cg/ev/ev0101긚긏깑�[긙깞긅귽긤롦귟궬궢.jpg";$KS_TT[15]="녀석들에게 본때를";$KS_PH[15]=2;$KS_K[15]=16;$KS_ALSO[15]="";$KS_POS[15]="16번째 장면";$KS_EN[15]="";$KS_PG[15]=1;$KS_PTAG[15]="";$KS_PHL[15]="크리스마스의 악몽";$KS_SUM[15]="스크루지의 증오를 캐롤은 정당하다며 받아들이고&, 녀석들을 함께 해치우자고 부추긴다&. 그 증오를 잊지 않는 한 스크루지만의 무기가 되겠다고 약속한다&.";
+	$KS_FILE[16]="lx0109.nss";$KS_TH[16]="cg/sys/extra/thum/ev/ev0211뾠궖긘깄긂궫궭.jpg";$KS_CG[16]="cg/ev/ev0211뾠궖긘깄긂궫궭.jpg";$KS_TT[16]="바다에서 온 트리톤";$KS_PH[16]=2;$KS_K[16]=17;$KS_ALSO[16]="";$KS_POS[16]="17번째 장면";$KS_EN[16]="";$KS_PG[16]=1;$KS_PTAG[16]="";$KS_PHL[16]="크리스마스의 악몽";$KS_SUM[16]="혼란을 틈타 케이도라는 과학자의 양성소에서 아이 하나가 달아났다는 보고가 들어오지만&, 보고를 받은 쪽은 내버려 두라고 한다&. 한편 누군가가 이름을 대지 못하는 아이에게 바다에서 왔다며 트리톤이라는 이름을 붙여 준다&.";
+	$KS_FILE[17]="lx0201.nss";$KS_TH[17]="cg/sys/extra/thum/ev/ev0301긚긏깑�[긙긌긿깓깑둢뺖궖.jpg";$KS_CG[17]="cg/ev/ev0301긚긏깑�[긙긌긿깓깑둢뺖궖.jpg";$KS_TT[17]="크리스마스 거리를 걷다";$KS_PH[17]=3;$KS_K[17]=18;$KS_ALSO[17]="";$KS_POS[17]="18번째 장면";$KS_EN[17]="";$KS_PG[17]=1;$KS_PTAG[17]="phase 03";$KS_PHL[17]="우리는 천사가 아니다";$KS_SUM[17]="탈출한 지 몇 달이 지난 12월&, 스크루지와 캐롤은 크리스마스 단장을 한 거리를 걷는다&. 캐롤은 세피라 게노믹스를 악의 비밀 결사라 부르며 들떠 있지만&, 기억이 돌아오지 않은 스크루지는 텅 빈 채로 「친구」를 만나러 간다&.";
+	$KS_FILE[18]="lx0202.nss";$KS_TH[18]="cg/sys/extra/thum/ev/ev0201�`벆뙟땰덒.jpg";$KS_CG[18]="cg/ev/ev0201�`벆뙟땰덒.jpg";$KS_TT[18]="다아트를 캐묻는 밤";$KS_PH[18]=3;$KS_K[18]=19;$KS_ALSO[18]="";$KS_POS[18]="19번째 장면";$KS_EN[18]="";$KS_PG[18]=1;$KS_PTAG[18]="";$KS_PHL[18]="우리는 천사가 아니다";$KS_SUM[18]="몇 달째 세피라 게노믹스와 줄이 닿은 자들을 캐고 다니던 스크루지가&, 그 연구 시설에 있던 연구자를 숙직하는 밤에 찾아간다&. 세피라 게노믹스의 본체인 다아트에 대해 말하라며 이를 뽑아 가며 몰아붙이지만&, 연구자는 입을 열지 않는다&.";
+	$KS_FILE[19]="lx0203a.nss";$KS_TH[19]="cg/sys/extra/thum/bg/bg003001_1_뙟땰렭.jpg";$KS_CG[19]="cg/bg/bg003001_1_뙟땰렭.jpg";$KS_TT[19]="악수하자는 협박";$KS_PH[19]=3;$KS_K[19]=20;$KS_ALSO[19]="";$KS_POS[19]="20번째 장면";$KS_EN[19]="";$KS_PG[19]=1;$KS_PTAG[19]="";$KS_PHL[19]="우리는 천사가 아니다";$KS_SUM[19]="오른손으로 악수나 하자는 스크루지의 위협에&, 연구자는 다아트가 아포칼립스 바이러스로 인류를 진화시키려 하며 실험체들은 신인류의 모조품이라고 털어놓는다&. 그리고 더 잘 아는 사람으로 텐노즈 대학의 오우마 쿠로스 교수를 댄다&.";
+	$KS_FILE[20]="lx0203b.nss";$KS_TH[20]="cg/sys/extra/thum/bg/bg003001_1_뙟땰렭.jpg";$KS_CG[20]="cg/bg/bg003001_1_뙟땰렭.jpg";$KS_TT[20]="볼펜 꽂기 파티 게임";$KS_PH[20]=3;$KS_K[20]=21;$KS_ALSO[20]="";$KS_POS[20]="21번째 장면";$KS_EN[20]="";$KS_PG[20]=2;$KS_PTAG[20]="";$KS_PHL[20]="우리는 천사가 아니다";$KS_SUM[20]="스크루지가 파티 게임이라며 볼펜으로 연구자의 귀를 찌르고 다음은 눈이라고 위협한다&. 연구자는 다아트가 아포칼립스 바이러스로 인류를 진화시키려 하며 실험체들은 신인류의 모조품이라고 털어놓고&, 텐노즈 대학의 오우마 쿠로스 교수를 댄다&.";
+	$KS_FILE[21]="lx0204a.nss";$KS_TH[21]="cg/sys/extra/thum/ev/ev0302긆�[긣귽깛긜긏긣봨됹.jpg";$KS_CG[21]="cg/ev/ev0302긆�[긣귽깛긜긏긣봨됹.jpg";$KS_TT[21]="살려 주자 날아든 총탄";$KS_PH[21]=3;$KS_K[21]=22;$KS_ALSO[21]="";$KS_POS[21]="22번째 장면";$KS_EN[21]="";$KS_PG[21]=2;$KS_PTAG[21]="";$KS_PHL[21]="우리는 천사가 아니다";$KS_SUM[21]="스크루지가 연구자를 놓아주자마자 어디선가 총탄이 날아든다&. 쏜 것은 프로그램으로 움직이는 오토 인섹트로&, 캐롤은 배신자를 처리하려는 다아트의 짓이 아니냐고 한다&. 스크루지는 다음 사냥감으로 오우마 쿠로스를 정한다&.";
+	$KS_FILE[22]="lx0204b.nss";$KS_TH[22]="cg/sys/extra/thum/ev/ev0303긆�[긣귽깛긜긏긣듒럨.jpg";$KS_CG[22]="cg/ev/ev0303긆�[긣귽깛긜긏긣듒럨.jpg";$KS_TT[22]="용서 없는 답례";$KS_PH[22]=3;$KS_K[22]=23;$KS_ALSO[22]="";$KS_POS[22]="23번째 장면";$KS_EN[22]="";$KS_PG[22]=2;$KS_PTAG[22]="";$KS_PHL[22]="우리는 천사가 아니다";$KS_SUM[22]="스크루지는 고맙다며 답례로 연구자를 죽이고&, 너희를 용서할 줄 알았느냐고 내뱉는다&. 캐롤은 죽어 버렸다며 가볍게 넘기고&, 스크루지는 다음 사냥감으로 오우마 쿠로스를 정한다&.";
+	$KS_FILE[23]="lx0205.nss";$KS_TH[23]="cg/sys/extra/thum/ev/ev0307긌긿깓깑긆깛긗긹긞긤.jpg";$KS_CG[23]="cg/ev/ev0307긌긿깓깑긆깛긗긹긞긤.jpg";$KS_TT[23]="환지통과 캐롤의 품";$KS_PH[23]=3;$KS_K[23]=24;$KS_ALSO[23]="";$KS_POS[23]="24번째 장면";$KS_EN[23]="";$KS_PG[23]=2;$KS_PTAG[23]="";$KS_PHL[23]="우리는 천사가 아니다";$KS_SUM[23]="밤마다 환지통에 시달리던 스크루지를 캐롤이 깨운다&. 시설에서의 과거를 캐묻지 못하는 것이 기억을 되찾기가 두려워서일지도 모른다는 속마음을 캐롤은 꿰뚫어 보고 스크루지를 끌어안는다&. 두 사람은 오우마 쿠로스를 만나러 나선다&.";
+	$KS_FILE[24]="lx0206.nss";$KS_TH[24]="cg/sys/extra/thum/ev/ev0304긏깓긚봶뭷.jpg";$KS_CG[24]="cg/ev/ev0304긏깓긚봶뭷.jpg";$KS_TT[24]="신세대의 이브";$KS_PH[24]=3;$KS_K[24]=25;$KS_ALSO[24]="";$KS_POS[24]="25번째 장면";$KS_EN[24]="";$KS_PG[24]=2;$KS_PTAG[24]="";$KS_PHL[24]="우리는 천사가 아니다";$KS_SUM[24]="캐롤이 예쁘다고 한 여자는 오우마 쿠로스의 아내 사에코로&, 캔서화로 숨졌다고 한다&. 쿠로스는 7년 전 오오시마에서 시작의 돌을 찾은 딸 오우마 마나를 신세대의 이브라 부른다&. 앞의 선택에 따라 보이드 게놈 이야기를 먼저 듣기도 한다&.";
+	$KS_FILE[25]="lx0207.nss";$KS_TH[25]="cg/sys/extra/thum/bg/bg003002_3_밮돞뢊묈둾둖듡.jpg";$KS_CG[25]="cg/bg/bg003002_3_밮돞뢊묈둾둖듡.jpg";$KS_TT[25]="오우마 쿠로스의 부탁";$KS_PH[25]=3;$KS_K[25]=26;$KS_ALSO[25]="";$KS_POS[25]="26번째 장면";$KS_EN[25]="";$KS_PG[25]=2;$KS_PTAG[25]="";$KS_PHL[25]="우리는 천사가 아니다";$KS_SUM[25]="오우마 쿠로스는 딸을 아포칼립스 바이러스의 저주에서 풀어 주고 싶다며 스크루지의 몸을 조사하게 해 달라고 부탁한다&. 오른손 치료와 기억 회복도 바랄 수 있다며 답은 나중에 해도 된다고 하고&, 캐롤은 중대한 선택이라며 놀린다&.";
+	$KS_FILE[26]="lx0300.nss";$KS_TH[26]="cg/sys/extra/thum/bg/bg004001_1_떝됵볙븫.jpg";$KS_CG[26]="cg/bg/bg004001_1_떝됵볙븫.jpg";$KS_TT[26]="늦는 아빠를 기다리며";$KS_PH[26]=4;$KS_K[26]=27;$KS_ALSO[26]="";$KS_POS[26]="27번째 장면";$KS_EN[26]="";$KS_PG[26]=2;$KS_PTAG[26]="phase 04";$KS_PHL[26]="산타가 죽이러 온다";$KS_SUM[26]="아빠가 늦어지자 소녀는 슈와 함께 기다리겠다며 하루카 씨에게 아빠 마중을 부탁한다&. 또 약속을 잊고 연구에 빠져 있을 거라는 말에 하루카 씨는 소녀에게 뒤를 맡기고 마중을 나가기로 한다&.";
+	$KS_FILE[27]="lx0301.nss";$KS_TH[27]="cg/sys/extra/thum/ev/ev0206긚긏깑�[긙뢣�@긄깛긤깒귽깞똼봨.jpg";$KS_CG[27]="cg/ev/ev0206긚긏깑�[긙뢣�@긄깛긤깒귽깞똼봨.jpg";$KS_TT[27]="대낮의 매복과 나팔총";$KS_PH[27]=4;$KS_K[27]=28;$KS_ALSO[27]="";$KS_POS[27]="28번째 장면";$KS_EN[27]="";$KS_PG[27]=2;$KS_PTAG[27]="";$KS_PHL[27]="산타가 죽이러 온다";$KS_SUM[27]="대낮의 도쿄에서 세피라 게노믹스의 사병이 덮치고&, 스크루지는 맞은 자의 몸에서 못이 터지는 나팔총으로 맞선다&. 보이드는 7세 이하에게만 있다던 쿠로스의 말이 떠오르는 사이 나팔총이 엔드레이브에 부서지자&, 캐롤에게서 새 보이드를 꺼낸다&.";
+	$KS_FILE[28]="lx0302.nss";$KS_TH[28]="cg/sys/extra/thum/ev/ev0304긏깓긚봶뭷.jpg";$KS_CG[28]="cg/ev/ev0304긏깓긚봶뭷.jpg";$KS_TT[28]="다아트가 초조한 까닭";$KS_PH[28]=4;$KS_K[28]=29;$KS_ALSO[28]="";$KS_POS[28]="29번째 장면";$KS_EN[28]="";$KS_PG[28]=2;$KS_PTAG[28]="";$KS_PHL[28]="산타가 죽이러 온다";$KS_SUM[28]="소란을 뒤로하고 달아나며&, 스크루지와 캐롤은 사람이 붐비는 크리스마스 도심에 엔드레이브까지 내보낸 까닭을 따져 본다&. 스크루지는 오우마 마나의 아버지 오우마 쿠로스가 모든 일의 중심이라 보고&, 캐롤은 결국 어떻게 할 셈이냐고 묻는다&.";
+	$KS_FILE[29]="lx0302_01.nss";$KS_TH[29]="cg/sys/extra/thum/ev/ev0304긏깓긚봶뭷.jpg";$KS_CG[29]="cg/ev/ev0304긏깓긚봶뭷.jpg";$KS_TT[29]="오우마 쿠로스를 구하러";$KS_PH[29]=4;$KS_K[29]=30;$KS_ALSO[29]="";$KS_POS[29]="30번째 장면";$KS_EN[29]="";$KS_PG[29]=2;$KS_PTAG[29]="";$KS_PHL[29]="산타가 죽이러 온다";$KS_SUM[29]="스크루지는 오우마 쿠로스의 연구가 가장 큰 단서라며&, 다아트보다 먼저 오우마 쿠로스를 확보하기로 한다&. 놈들이 강경하게 나온 이상 지체할 틈이 없다고 보고&, 일이 점점 달아오른다는 캐롤의 말에 맞장구친다&.";
+	$KS_FILE[30]="lx0302_02.nss";$KS_TH[30]="cg/sys/extra/thum/ev/ev0304긏깓긚봶뭷.jpg";$KS_CG[30]="cg/ev/ev0304긏깓긚봶뭷.jpg";$KS_TT[30]="오우마 마나를 죽인다";$KS_PH[30]=4;$KS_K[30]=31;$KS_ALSO[30]="";$KS_POS[30]="31번째 장면";$KS_EN[30]="";$KS_PG[30]=2;$KS_PTAG[30]="";$KS_PHL[30]="산타가 죽이러 온다";$KS_SUM[30]="스크루지는 구세주가 될 수 있다던 캐롤의 말을 꺼내며&, 생명의 진화를 노리는 다아트의 음모를 부수려 오우마 마나를 죽이기로 한다&. 오우마 쿠로스에게서 마나가 있는 곳을 알아내려고 캐롤을 안고 텐노즈 대학으로 달린다&.";
+	$KS_FILE[31]="lx0303.nss";$KS_TH[31]="cg/sys/extra/thum/ev/ev9000긚긏깑�[긙뭶뭤붍뾭긌긿깓깑.jpg";$KS_CG[31]="cg/ev/ev9000긚긏깑�[긙뭶뭤붍뾭긌긿깓깑.jpg";$KS_TT[31]="오우마 쿠로스의 죽음";$KS_PH[31]=4;$KS_K[31]=32;$KS_ALSO[31]="";$KS_POS[31]="32번째 장면";$KS_EN[31]="";$KS_PG[31]=2;$KS_PTAG[31]="";$KS_PHL[31]="산타가 죽이러 온다";$KS_SUM[31]="서둘러 달려간 스크루지와 캐롤은 이미 숨진 오우마 쿠로스를 발견한다&. 범인으로 보이는 중년 남자를 쫓던 스크루지 앞을 난데없는 AP 결정 벽이 가로막고&, 웃음소리와 함께 크리스마스의 정령이라 자칭하는 자가 나타난다&.";
+	$KS_FILE[32]="lx0304.nss";$KS_TH[32]="cg/sys/extra/thum/ev/ev0205뢣�@긄깛긤깒귽깞뱋뤾.jpg";$KS_CG[32]="cg/ev/ev0205뢣�@긄깛긤깒귽깞뱋뤾.jpg";$KS_TT[32]="정령 프레젠트와 패스트";$KS_PH[32]=4;$KS_K[32]=33;$KS_ALSO[32]="";$KS_POS[32]="33번째 장면";$KS_EN[32]="";$KS_PG[32]=2;$KS_PTAG[32]="";$KS_PHL[32]="산타가 죽이러 온다";$KS_SUM[32]="정령을 자칭한 여자는 캐롤이 아는 강화 게놈 실험체 프레젠트로&, 아포칼립스 바이러스를 다뤄 AP 결정을 만드는 다아트의 자객이다&. 이어 패스트가 모는 군용 엔드레이브까지 덮쳐 오고&, 보이드를 꺼내려던 순간 모두가 섬뜩한 한기에 얼어붙는다&.";
+	$KS_FILE[33]="lx0401.nss";$KS_TH[33]="cg/sys/extra/thum/bg/bg004006_1_밮돞뢊묈둾몈뚆멟.jpg";$KS_CG[33]="cg/bg/bg004006_1_밮돞뢊묈둾몈뚆멟.jpg";$KS_TT[33]="교회에서 넘치는 빛";$KS_PH[33]=4;$KS_K[33]=34;$KS_ALSO[33]="";$KS_POS[33]="34번째 장면";$KS_EN[33]="";$KS_PG[33]=2;$KS_PTAG[33]="";$KS_PHL[33]="산타가 죽이러 온다";$KS_SUM[33]="기이한 울부짖음에 패스트의 엔드레이브가 미친 듯 날뛰고&, 스크루지는 캐롤을 데리고 빠져나온다&. 캐롤이 가리킨 교회에서는 빛이 넘쳐흐르고&, 이브인 오우마 마나가 묵시록을 일으키려 한다는 말에 스크루지의 오른손이 타는 듯 아파 온다&.";
+	$KS_FILE[34]="lx0402a_00.nss";$KS_TH[34]="cg/sys/extra/thum/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_CG[34]="cg/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_TT[34]="캐롤만 도망치라고";$KS_PH[34]=4;$KS_K[34]=35;$KS_ALSO[34]="";$KS_POS[34]="35번째 장면";$KS_EN[34]="";$KS_PG[34]=2;$KS_PTAG[34]="";$KS_PHL[34]="산타가 죽이러 온다";$KS_SUM[34]="교회의 빛을 앞에 두고&, 스크루지는 함께가 아니라 캐롤 혼자 가능한 한 멀리 도망치라고 외친다&. 캐롤은 스크루지는 어쩔 거냐고 되묻는다&.";
+	$KS_FILE[35]="lx0402a_01.nss";$KS_TH[35]="cg/sys/extra/thum/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_CG[35]="cg/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_TT[35]="마나를 막으러 교회로";$KS_PH[35]=4;$KS_K[35]=36;$KS_ALSO[35]="";$KS_POS[35]="36번째 장면";$KS_EN[35]="";$KS_PG[35]=2;$KS_PTAG[35]="";$KS_PHL[35]="산타가 죽이러 온다";$KS_SUM[35]="스크루지는 어떻게 해야 할지 모르면서도 고민할 틈이 없다며&, 오우마 마나를 막겠다는 생각 하나로 교회까지 가장 짧은 길로 달린다&.";
+	$KS_FILE[36]="lx0402a_02.nss";$KS_TH[36]="cg/sys/extra/thum/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_CG[36]="cg/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_TT[36]="말없이 마나를 죽이러";$KS_PH[36]=4;$KS_K[36]=37;$KS_ALSO[36]="";$KS_POS[36]="37번째 장면";$KS_EN[36]="";$KS_PG[36]=2;$KS_PTAG[36]="";$KS_PHL[36]="산타가 죽이러 온다";$KS_SUM[36]="스크루지는 캐롤에게 대답하지 않고 달려 나간다&. 고민해 봐야 소용없고 할 일도 변하지 않았다며&, 오우마 마나를 죽이기로 마음을 굳힌다&.";
+	$KS_FILE[37]="lx0402a_10.nss";$KS_TH[37]="cg/sys/extra/thum/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_CG[37]="cg/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_TT[37]="도망칠 곳 없는 세상";$KS_PH[37]=4;$KS_K[37]=38;$KS_ALSO[37]="";$KS_POS[37]="38번째 장면";$KS_EN[37]="";$KS_PG[37]=2;$KS_PTAG[37]="";$KS_PHL[37]="산타가 죽이러 온다";$KS_SUM[37]="홀로 남은 캐롤은 도망치라고 해도 이 세상 어디에도 도망칠 곳은 없다고 중얼거린다&.";
+	$KS_FILE[38]="lx0402b_00.nss";$KS_TH[38]="cg/sys/extra/thum/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_CG[38]="cg/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_TT[38]="둘이서 도망치자고";$KS_PH[38]=4;$KS_K[38]=39;$KS_ALSO[38]="";$KS_POS[38]="39번째 장면";$KS_EN[38]="";$KS_PG[38]=2;$KS_PTAG[38]="";$KS_PHL[38]="산타가 죽이러 온다";$KS_SUM[38]="스크루지는 저런 것에 휘말릴 수 없다며 캐롤에게 함께 도망치자고 한다&. 캐롤은 정말로 묵시록이 시작되면 도망칠 곳은 어디에도 없다고 답하고&, 스크루지는 그럼 어쩌란 말이냐고 소리친다&.";
+	$KS_FILE[39]="lx0402b_01.nss";$KS_TH[39]="cg/sys/extra/thum/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_CG[39]="cg/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_TT[39]="이브를 막아야 한다";$KS_PH[39]=4;$KS_K[39]=40;$KS_ALSO[39]="";$KS_POS[39]="40번째 장면";$KS_EN[39]="";$KS_PG[39]=2;$KS_PTAG[39]="";$KS_PHL[39]="산타가 죽이러 온다";$KS_SUM[39]="캐롤이 이브를 막아야 한다고 하자&, 스크루지는 폭풍우 치는 바다로 나가는 기분으로 교회 안에 뛰어들기로 한다&. 혼자 가려는 스크루지를 캐롤이 말리지만&, 스크루지는 자기가 어떻게든 할 테니 멀리 도망치라고 한다&.";
+	$KS_FILE[40]="lx0402b_02.nss";$KS_TH[40]="cg/sys/extra/thum/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_CG[40]="cg/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_TT[40]="할 일은 바뀌지 않았다";$KS_PH[40]=4;$KS_K[40]=41;$KS_ALSO[40]="";$KS_POS[40]="41번째 장면";$KS_EN[40]="";$KS_PG[40]=3;$KS_PTAG[40]="";$KS_PHL[40]="산타가 죽이러 온다";$KS_SUM[40]="캐롤은 할 일은 바뀌지 않았다며 스크루지가 직접 했던 말을 일깨운다&. 스크루지는 이브를 막으려면 오우마 마나를 죽여야 한다고 마음을 다잡고&, 혼자 가지 말라는 캐롤에게 멀리 도망치라고 한다&.";
+	$KS_FILE[41]="lx0402b_10.nss";$KS_TH[41]="cg/sys/extra/thum/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_CG[41]="cg/bg/bg003002_1_밮돞뢊묈둾둖듡.jpg";$KS_TT[41]="멸망해도 좋을 세상";$KS_PH[41]=4;$KS_K[41]=42;$KS_ALSO[41]="";$KS_POS[41]="42번째 장면";$KS_EN[41]="";$KS_PG[41]=3;$KS_PTAG[41]="";$KS_PHL[41]="산타가 죽이러 온다";$KS_SUM[41]="총알처럼 달려간 스크루지를 보낸 캐롤은 저걸 꼭 막아야 하느냐고 혼잣말을 한다&. 세상 따윈 차라리 멸망해 버려도 좋겠다는 생각이 조금은 들지 않느냐고 묻는다&.";
+	$KS_FILE[42]="lx0403.nss";$KS_TH[42]="cg/sys/extra/thum/bg/bg004013_1_떝됵둖듡_쀑깓깛긐.jpg";$KS_CG[42]="cg/bg/bg004013_1_떝됵둖듡_쀑깓깛긐.jpg";$KS_TT[42]="교회 안의 오우마 마나";$KS_PH[42]=4;$KS_K[42]=43;$KS_ALSO[42]="";$KS_POS[42]="43번째 장면";$KS_EN[42]="";$KS_PG[42]=3;$KS_PTAG[42]="";$KS_PHL[42]="산타가 죽이러 온다";$KS_SUM[42]="교회 안에서 스크루지는 남동생 슈에게 미안하다며 우는 오우마 마나를 찾아낸다&. 이브를 지키려는 듯 덤벼드는 패스트의 엔드레이브를 가까스로 따돌리지만&, 오우마 마나는 「내가 내가 아니게 돼」라고 외친다&.";
+	$KS_FILE[43]="lx0500.nss";$KS_TH[43]="cg/sys/extra/thum/ev/ev0590긚긏깑�[긙긊귽럨�_.jpg";$KS_CG[43]="cg/ev/ev0590긚긏깑�[긙긊귽럨�_.jpg";$KS_TT[43]="코트 차림의 남자";$KS_PH[43]=5;$KS_K[43]=44;$KS_ALSO[43]="";$KS_POS[43]="44번째 장면";$KS_EN[43]="";$KS_PG[43]=3;$KS_PTAG[43]="phase 05";$KS_PHL[43]="그렘린";$KS_SUM[43]="교회의 빛에 삼켜졌던 슈의 친구가 정신을 차리고&, 코트 차림의 남자에게서 「도태되고 싶지 않다면&, 싸워라」라는 말을 듣는다&. 훗날 아이는 남자의 말을 되새기며 장의사라는 이름의 뜻을 밝히고&, 그날로 어린 시절이 끝났다고 돌아본다&.";
+	$KS_FILE[44]="lx0501.nss";$KS_TH[44]="cg/sys/extra/thum/ev/ev0502긘깄긂귩붮궎긲깋귽긘깄�}깛.jpg";$KS_CG[44]="cg/ev/ev0502긘깄긂귩붮궎긲깋귽긘깄�}깛.jpg";$KS_TT[44]="롯폰기에 울리는 노래";$KS_PH[44]=5;$KS_K[44]=45;$KS_ALSO[44]="";$KS_POS[44]="45번째 장면";$KS_EN[44]="";$KS_PG[44]=3;$KS_PTAG[44]="";$KS_PHL[44]="그렘린";$KS_SUM[44]="스크루지는 반사적으로 감싸 준 아이와 오우마 마나의 남동생 곁에서&, 아이들을 막아선 듯한 자리에 결정이 된 패스트의 엔드레이브를 본다&. 불타는 롯폰기를 둘러보던 중&, 부서져 사라진 줄 알았던 오우마 마나의 노랫소리가 들려온다&.";
+	$KS_FILE[45]="lx0501_01.nss";$KS_TH[45]="cg/sys/extra/thum/bg/bg005001_3_쁇뭤뿞.jpg";$KS_CG[45]="cg/bg/bg005001_3_쁇뭤뿞.jpg";$KS_TT[45]="캐롤을 찾아 나서다";$KS_PH[45]=5;$KS_K[45]=46;$KS_ALSO[45]="";$KS_POS[45]="46번째 장면";$KS_EN[45]="";$KS_PG[45]=3;$KS_PTAG[45]="";$KS_PHL[45]="그렘린";$KS_SUM[45]="스크루지는 걱정도 되고 보이드의 힘도 필요하다며 캐롤부터 찾기로 한다&. 서두르던 중 노랫소리와는 다른&, 귀에 익은 총성 같은 소리가 들려온다&.";
+	$KS_FILE[46]="lx0501_02.nss";$KS_TH[46]="cg/sys/extra/thum/bg/bg005001_3_쁇뭤뿞.jpg";$KS_CG[46]="cg/bg/bg005001_3_쁇뭤뿞.jpg";$KS_TT[46]="노래부터 멈추려다";$KS_PH[46]=5;$KS_K[46]=47;$KS_ALSO[46]="";$KS_POS[46]="47번째 장면";$KS_EN[46]="";$KS_PG[46]=3;$KS_PTAG[46]="";$KS_PHL[46]="그렘린";$KS_SUM[46]="스크루지는 노래가 울리는 곳으로 곧장 가려다가&, 보이드가 필요하리라 보고 캐롤과 먼저 만나야 할지 망설인다&. 그때 노랫소리와는 다른 총성 같은 소리가 들려온다&.";
+	$KS_FILE[47]="lx0502.nss";$KS_TH[47]="cg/sys/extra/thum/bg/bg001011_3_쁛�{뽜둢빥귒1뺯됹.jpg";$KS_CG[47]="cg/bg/bg001011_3_쁛�{뽜둢빥귒1뺯됹.jpg";$KS_TT[47]="생존자는 없다";$KS_PH[47]=5;$KS_K[47]=48;$KS_ALSO[47]="";$KS_POS[47]="48번째 장면";$KS_EN[47]="";$KS_PG[47]=3;$KS_PTAG[47]="";$KS_PHL[47]="그렘린";$KS_SUM[47]="다아트의 병사들이 롯폰기에 살아남은 사람은 없다는 말을 주고받으며 거리를 통째로 처분하려 나선다&. 지켜보던 스크루지는 병사들의 발치에 아이와 어머니가 포개져 죽어 있는 광경에 구역질을 느낀다&.";
+	$KS_FILE[48]="lx0502_01.nss";$KS_TH[48]="cg/sys/extra/thum/bg/bg001012_3_쁛�{뽜둢빥귒2뺯됹.jpg";$KS_CG[48]="cg/bg/bg001012_3_쁛�{뽜둢빥귒2뺯됹.jpg";$KS_TT[48]="생존자는 여기 있다";$KS_PH[48]=5;$KS_K[48]=49;$KS_ALSO[48]="";$KS_POS[48]="49번째 장면";$KS_EN[48]="";$KS_PG[48]=3;$KS_PTAG[48]="";$KS_PHL[48]="그렘린";$KS_SUM[48]="스크루지는 생존자가 없다던 병사들 자신이 아직 살아 있지 않느냐고 비꼰다&. 어른이라면 제 말에 책임을 져야 한다며&, 스스로 병사들에게 싸움을 걸기로 한다&.";
+	$KS_FILE[49]="lx0502_02.nss";$KS_TH[49]="cg/sys/extra/thum/bg/bg001012_3_쁛�{뽜둢빥귒2뺯됹.jpg";$KS_CG[49]="cg/bg/bg001012_3_쁛�{뽜둢빥귒2뺯됹.jpg";$KS_TT[49]="지나치려다 들키다";$KS_PH[49]=5;$KS_K[49]=50;$KS_ALSO[49]="";$KS_POS[49]="50번째 장면";$KS_EN[49]="";$KS_PG[49]=3;$KS_PTAG[49]="";$KS_PHL[49]="그렘린";$KS_SUM[49]="스크루지는 병사들을 쓰레기처럼 치워 버릴까 잠시 망설이다가&, 시간은 되돌릴 수 없다며 갈 길을 서두르기로 한다&. 하지만 병사들에게 들키자&, 가끔은 거리 청소도 나쁘지 않다며 맞서기로 한다&.";
+	$KS_FILE[50]="lx0502_10.nss";$KS_TH[50]="cg/sys/extra/thum/ev/ev9003�_�@긣빜먰벉붍뾭_봶똧.jpg";$KS_CG[50]="cg/ev/ev9003�_�@긣빜먰벉붍뾭_봶똧.jpg";$KS_TT[50]="병사들을 쓸어버리다";$KS_PH[50]=5;$KS_K[50]=51;$KS_ALSO[50]="";$KS_POS[50]="51번째 장면";$KS_EN[50]="";$KS_PG[50]=3;$KS_PTAG[50]="";$KS_PHL[50]="그렘린";$KS_SUM[50]="스크루지는 똑바로 날아오는 총알 사이를 파고들어 병사들을 하나씩 쓰러뜨린다&. 겁에 질려 흐트러진 무리 한복판에 뛰어든 스크루지는&, 적은 한 명뿐이라는 외침에 곧 외친 병사 혼자 남게 될 거라고 속으로 받아친다&.";
+	$KS_FILE[51]="lx0503.nss";$KS_TH[51]="cg/sys/extra/thum/ev/ev_긵깒�[깛긣뤟궋.jpg";$KS_CG[51]="cg/ev/ev_긵깒�[깛긣뤟궋.jpg";$KS_TT[51]="다시 나타난 프레젠트";$KS_PH[51]=5;$KS_K[51]=52;$KS_ALSO[51]="";$KS_POS[51]="52번째 장면";$KS_EN[51]="";$KS_PG[51]=3;$KS_PTAG[51]="";$KS_PHL[51]="그렘린";$KS_SUM[51]="병사들을 쓸어버리는 스크루지에게 넋을 잃은 프레젠트가 손길 한 번으로 병사들을 캔서화시키며 다시 나타난다&. 결정 방패와 파편 회오리에 밀린 스크루지가 거리를 벌려 달아나자&, 프레젠트는 찾아온 꼬마 아가씨와 함께 놀기로 한다&.";
+	$KS_FILE[52]="lx0504.nss";$KS_TH[52]="cg/sys/extra/thum/ev/ev0518긄긢깛갋긹긹딁귺긞긵.jpg";$KS_CG[52]="cg/ev/ev0518긄긢깛갋긹긹딁귺긞긵.jpg";$KS_TT[52]="새 인형 에덴 베베";$KS_PH[52]=5;$KS_K[52]=53;$KS_ALSO[52]="";$KS_POS[52]="53번째 장면";$KS_EN[52]="";$KS_PG[52]=3;$KS_PTAG[52]="";$KS_PHL[52]="그렘린";$KS_SUM[52]="겁에 질린 패스트가 더 강한 인형을 바라자&, 보이지 않던 거대한 엔드레이브가 홀연히 나타나 총격을 퍼붓는다&. 프레젠트에게도 따라잡혀 앞뒤가 막힌 스크루지는&, 제 허무를 채울 반쪽이 여기 있다고 확신하며 하늘을 올려다본다&.";
+	$KS_FILE[53]="lx0505_00.nss";$KS_TH[53]="cg/sys/extra/thum/bg/bg001011_3_쁛�{뽜둢빥귒1뺯됹.jpg";$KS_CG[53]="cg/bg/bg001011_3_쁛�{뽜둢빥귒1뺯됹.jpg";$KS_TT[53]="잘못 끼운 단추";$KS_PH[53]=5;$KS_K[53]=54;$KS_ALSO[53]="";$KS_POS[53]="54번째 장면";$KS_EN[53]="";$KS_PG[53]=3;$KS_PTAG[53]="";$KS_PHL[53]="그렘린";$KS_SUM[53]="캐롤은 세계가 끝나려는 것이 남녀의 사랑싸움 같은 사소한 엇갈림 탓이라 여기며&, 아담을 그리며 우는 이브를 떠올린다&. 살아남으려 싸우는 스크루지조차 길가의 돌에 걸려 넘어져 죽을지 모른다고 생각한다&.";
+	$KS_FILE[54]="lx0505_01.nss";$KS_TH[54]="cg/sys/extra/thum/bg/bg001016_3_뛼뫊벞쁇뺯됹.jpg";$KS_CG[54]="cg/bg/bg001016_3_뛼뫊벞쁇뺯됹.jpg";$KS_TT[54]="되찾은 것이 돌멩이라면";$KS_PH[54]=5;$KS_K[54]=55;$KS_ALSO[54]="";$KS_POS[54]="55번째 장면";$KS_EN[54]="";$KS_PG[54]=3;$KS_PTAG[54]="";$KS_PHL[54]="그렘린";$KS_SUM[54]="캐롤은 자신을 되찾으려 싸우는 스크루지를 떠올리며&, 끝내 손에 쥔 것이 보잘것없는 것이라면 어쩔 거냐고 속으로 묻는다&. 스크루지도 결국 부서져 버리는 게 아니냐는 물음이 이어진다&.";
+	$KS_FILE[55]="lx0505_02.nss";$KS_TH[55]="cg/sys/extra/thum/bg/bg001016_3_뛼뫊벞쁇뺯됹.jpg";$KS_CG[55]="cg/bg/bg001016_3_뛼뫊벞쁇뺯됹.jpg";$KS_TT[55]="증오 끝에 기다리는 허무";$KS_PH[55]=5;$KS_K[55]=56;$KS_ALSO[55]="";$KS_POS[55]="56번째 장면";$KS_EN[55]="";$KS_PG[55]=3;$KS_PTAG[55]="";$KS_PHL[55]="그렘린";$KS_SUM[55]="캐롤은 자신을 궁지로 몬 자들에게 복수를 맹세한 스크루지를 떠올리며&, 증오를 다 쏟은 뒤에 남을 빈자리를 견딜 수 있겠느냐고 속으로 묻는다&. 스크루지도 결국 부서져 버리는 게 아니냐는 물음이 이어진다&.";
+	$KS_FILE[56]="lx0505_10.nss";$KS_TH[56]="cg/sys/extra/thum/bg/bg001016_3_뛼뫊벞쁇뺯됹.jpg";$KS_CG[56]="cg/bg/bg001016_3_뛼뫊벞쁇뺯됹.jpg";$KS_TT[56]="무기가 되겠다는 캐롤";$KS_PH[56]=5;$KS_K[56]=57;$KS_ALSO[56]="";$KS_POS[56]="57번째 장면";$KS_EN[56]="";$KS_PG[56]=3;$KS_PTAG[56]="";$KS_PHL[56]="그렘린";$KS_SUM[56]="캐롤이 스크루지를 부르며&, 이 싸움을 멈추지 않는 한 자신은 무기라고 말한다&. 「날 써」라는 말에 스크루지는 속죄인지 응보인지 모를 마음으로 캐롤의 가슴에 손을 뻗는다&.";
+	$KS_FILE[57]="lx0506.nss";$KS_TH[57]="cg/sys/extra/thum/ev/ev0508긚긏깑�[긙깞긅귽긤븧딇긆깋긣깏긆�\궑.jpg";$KS_CG[57]="cg/ev/ev0508긚긏깑�[긙깞긅귽긤븧딇긆깋긣깏긆�\궑.jpg";$KS_TT[57]="아귀와 거대 엔드레이브";$KS_PH[57]=5;$KS_K[57]=58;$KS_ALSO[57]="";$KS_POS[57]="58번째 장면";$KS_EN[57]="";$KS_PG[57]=3;$KS_PTAG[57]="";$KS_PHL[57]="그렘린";$KS_SUM[57]="캐롤에게서 꺼낸 보이드는 몸에 관이 돋은 갓난아기들로&, 프레젠트의 결정 폭풍과 불꽃&, 포탄까지 먹어 치운다&. 스크루지는 모습을 감추는 엔드레이브와 바이크 전차에 쫓기다 머리 위로 내려앉는 거체에 깔릴 처지가 된다&.";
+	$KS_FILE[58]="lx0507.nss";$KS_TH[58]="cg/sys/extra/thum/ev/ev0108긄긢깛갋긹긹뼽띒뱋뤾.jpg";$KS_CG[58]="cg/ev/ev0108긄긢깛갋긹긹뼽띒뱋뤾.jpg";$KS_TT[58]="지휘 차량 속 관짝";$KS_PH[58]=5;$KS_K[58]=59;$KS_ALSO[58]="";$KS_POS[58]="59번째 장면";$KS_EN[58]="";$KS_PG[58]=3;$KS_PTAG[58]="";$KS_PHL[58]="그렘린";$KS_SUM[58]="아스팔트를 파먹어 빠져나온 스크루지는 엔드레이브가 원격 조종된다는 말에 지휘 차량을 찾아낸다&. 호위기를 던져 트레일러 안으로 뛰어든 스크루지는 관 같은 캡슐 속에서 캔서화한 패스트를 발견한다&.";
+	$KS_FILE[59]="lx0507_01.nss";$KS_TH[59]="cg/sys/extra/thum/ev/ev0108긄긢깛갋긹긹뼽띒뱋뤾.jpg";$KS_CG[59]="cg/ev/ev0108긄긢깛갋긹긹뼽띒뱋뤾.jpg";$KS_TT[59]="망설임 없는 오른손";$KS_PH[59]=5;$KS_K[59]=60;$KS_ALSO[59]="";$KS_POS[59]="60번째 장면";$KS_EN[59]="";$KS_PG[59]=3;$KS_PTAG[59]="";$KS_PHL[59]="그렘린";$KS_SUM[59]="패스트를 죽이기로 고른 갈래다&. 스크루지가 캡슐을 부수고 오른손을 대자 패스트는 순식간에 결정이 되어 먼지로 부서지고&, 캐롤이 재는 재로 흙은 흙으로라고 읊는다&.";
+	$KS_FILE[60]="lx0507_02.nss";$KS_TH[60]="cg/sys/extra/thum/ev/ev0520럚딐롎긓깛긡긥볙븫긬긚긣긓긞긏긯긞긣.jpg";$KS_CG[60]="cg/ev/ev0520럚딐롎긓깛긡긥볙븫긬긚긣긓긞긏긯긞긣.jpg";$KS_TT[60]="망설이다 뽑은 전극";$KS_PH[60]=5;$KS_K[60]=61;$KS_ALSO[60]="";$KS_POS[60]="61번째 장면";$KS_EN[60]="";$KS_PG[60]=4;$KS_PTAG[60]="";$KS_PHL[60]="그렘린";$KS_SUM[60]="무언가 마음에 걸린다고 고른 갈래다&. 어른의 몸인 패스트가 왜 갓난아기 보이드에 동요했는지 고민하던 스크루지는 캡슐을 깨고 전극을 뽑는다&. 패스트는 먼지가 되고 캐롤이 잘 자라고 인사한다&.";
+	$KS_FILE[61]="lx0507_10.nss";$KS_TH[61]="cg/sys/extra/thum/ev/ev0508긄긢깛갋귊귊믠�~.jpg";$KS_CG[61]="cg/ev/ev0508긄긢깛갋귊귊믠�~.jpg";$KS_TT[61]="되살아난 거대한 짐승";$KS_PH[61]=5;$KS_K[61]=62;$KS_ALSO[61]="";$KS_POS[61]="62번째 장면";$KS_EN[61]="";$KS_PG[61]=4;$KS_PTAG[61]="";$KS_PHL[61]="그렘린";$KS_SUM[61]="트레일러 바로 옆에서 멈춘 거대 엔드레이브에 갑자기 AP 결정이 번지며 기체가 다시 움직인다&. 캐롤은 인격 자체가 결정이 되었다고 놀라고&, 스크루지는 기체 안에서 보이드에 가까운 힘을 느낀다&.";
+	$KS_FILE[62]="lx0508.nss";$KS_TH[62]="cg/sys/extra/thum/ev/ev9004긚긏깑�[긙긫긞긏긚긡긞긵붍뾭긌긿깓깑.jpg";$KS_CG[62]="cg/ev/ev9004긚긏깑�[긙긫긞긏긚긡긞긵붍뾭긌긿깓깑.jpg";$KS_TT[62]="고스트와 프레젠트";$KS_PH[62]=5;$KS_K[62]=63;$KS_ALSO[62]="";$KS_POS[62]="63번째 장면";$KS_EN[62]="";$KS_PG[62]=4;$KS_PTAG[62]="";$KS_PHL[62]="그렘린";$KS_SUM[62]="캐롤은 엔드레이브에 남은 것이 패스트의 의식을 베낀 잔류 사념이라고 설명한다&. 스크루지는 캐롤을 안고 노래가 울리는 빌딩으로 달리며 무시무시한 공격을 겨우 피하지만&, 그 순간 프레젠트가 나타난다&.";
+	$KS_FILE[63]="lx0509.nss";$KS_TH[63]="cg/sys/extra/thum/ev/ev0525긚긏깑�[긙깞긅귽긤븧딇맲�[븓.jpg";$KS_CG[63]="cg/ev/ev0525긚긏깑�[긙깞긅귽긤븧딇맲�[븓.jpg";$KS_TT[63]="은빛 폭풍과 성해포";$KS_PH[63]=6;$KS_K[63]=64;$KS_ALSO[63]="";$KS_POS[63]="64번째 장면";$KS_EN[63]="";$KS_PG[63]=4;$KS_PTAG[63]="phase 06";$KS_PHL[63]="다이 하드";$KS_SUM[63]="프레젠트의 은빛 폭풍이 두 사람을 삼키고&, 프레젠트는 너무 심했나 하며 실망한다&. 그때 피를 흘리는 보이드 성해포를 두른 스크루지와 캐롤이 나타나 프레젠트에게 상처를 입힌다&. 이브의 노래는 점점 높아진다&.";
+	$KS_FILE[64]="lx0510.nss";$KS_TH[64]="cg/sys/extra/thum/ev/ev9003�_�@긣빜먰벉붍뾭_봶똧.jpg";$KS_CG[64]="cg/ev/ev9003�_�@긣빜먰벉붍뾭_봶똧.jpg";$KS_TT[64]="병사들까지 휘말린 난전";$KS_PH[64]=6;$KS_K[64]=65;$KS_ALSO[64]="";$KS_POS[64]="65번째 장면";$KS_EN[64]="";$KS_PG[64]=4;$KS_PTAG[64]="";$KS_PHL[64]="다이 하드";$KS_SUM[64]="이브를 확보하러 온 다아트 병사들이 도망친 스크루지와 마주치고&, 그 자리에 엔드레이브까지 덮쳐 병사들이 휘말린다&. 패스트의 외침 속에 한계에 몰린 스크루지에게 캐롤이 자신을 쓰라고 외친다&.";
+	$KS_FILE[65]="lx0510_01.nss";$KS_TH[65]="cg/sys/extra/thum/bg/bg005006_3_쁛�{뽜긭깑긛멟.jpg";$KS_CG[65]="cg/bg/bg005006_3_쁛�{뽜긭깑긛멟.jpg";$KS_TT[65]="날 믿으라는 캐롤";$KS_PH[65]=6;$KS_K[65]=66;$KS_ALSO[65]="";$KS_POS[65]="66번째 장면";$KS_EN[65]="";$KS_PG[65]=4;$KS_PTAG[65]="";$KS_PHL[65]="다이 하드";$KS_SUM[65]="캐롤의 손을 놓지 않고 세게 붙잡는 쪽을 고른 갈래다&. 무리하겠다는 스크루지에게 캐롤은 자신을 믿으라며 이제 스크루지의 것이라고 하고&, 스크루지는 캐롤을 내 황금이라 부르며 힘을 청한다&.";
+	$KS_FILE[66]="lx0510_02.nss";$KS_TH[66]="cg/sys/extra/thum/bg/bg005006_3_쁛�{뽜긭깑긛멟.jpg";$KS_CG[66]="cg/bg/bg005006_3_쁛�{뽜긭깑긛멟.jpg";$KS_TT[66]="부숴 달라는 캐롤";$KS_PH[66]=6;$KS_K[66]=67;$KS_ALSO[66]="";$KS_POS[66]="67번째 장면";$KS_EN[66]="";$KS_PG[66]=4;$KS_PTAG[66]="";$KS_PHL[66]="다이 하드";$KS_SUM[66]="부서질 만큼 엉망진창으로 만드는 쪽을 고른 갈래다&. 거칠게 나가겠다는 스크루지에게 캐롤은 자신을 빼앗아 부숴 달라고 하고&, 스크루지는 엉망진창으로 만들어 주겠다고 답한다&.";
+	$KS_FILE[67]="lx0510_10.nss";$KS_TH[67]="cg/sys/extra/thum/ev/ev0523긄긢깛갋귊귊긌긿깛긖�[돸뽖믁.jpg";$KS_CG[67]="cg/ev/ev0523긄긢깛갋귊귊긌긿깛긖�[돸뽖믁.jpg";$KS_TT[67]="천사의 고리와 톱";$KS_PH[67]=6;$KS_K[67]=68;$KS_ALSO[67]="";$KS_POS[67]="68번째 장면";$KS_EN[67]="";$KS_PG[67]=4;$KS_PTAG[67]="";$KS_PHL[67]="다이 하드";$KS_SUM[67]="새로 꺼낸 보이드는 빛의 고리로&, 끝없이 늘어나며 거대 엔드레이브의 장갑을 베어 낸다&. 고리가 불길에 녹자 스크루지는 덜 여문 보이드를 캐롤에게서 억지로 끌어내고&, 비뚤어진 톱이 된 칼날로 기체를 썰어 간다&.";
+	$KS_FILE[68]="lx0511_00.nss";$KS_TH[68]="cg/sys/extra/thum/ev/ev0528긚긏깑�[긙깞긅귽긤븧딇떂_b.jpg";$KS_CG[68]="cg/ev/ev0528긚긏깑�[긙깞긅귽긤븧딇떂_b.jpg";$KS_TT[68]="떨어지며 뻗은 오른손";$KS_PH[68]=6;$KS_K[68]=69;$KS_ALSO[68]="";$KS_POS[68]="69번째 장면";$KS_EN[68]="";$KS_PG[68]=4;$KS_PTAG[68]="";$KS_PHL[68]="다이 하드";$KS_SUM[68]="톱에 썰린 엔드레이브가 비명과 함께 끊어진 목소리를 흘리고&, 스크루지와 캐롤은 함께 떨어진다&. 떨어지며 손을 뻗는 스크루지를&, 보이드를 너무 많이 꺼내 창백해진 캐롤의 몸이 거부한다&.";
+	$KS_FILE[69]="lx0511_01.nss";$KS_TH[69]="cg/sys/extra/thum/ev/ev0528긚긏깑�[긙깞긅귽긤븧딇떂_b.jpg";$KS_CG[69]="cg/ev/ev0528긚긏깑�[긙깞긅귽긤븧딇떂_b.jpg";$KS_TT[69]="괜찮다는 캐롤";$KS_PH[69]=6;$KS_K[69]=70;$KS_ALSO[69]="";$KS_POS[69]="70번째 장면";$KS_EN[69]="";$KS_PG[69]=4;$KS_PTAG[69]="";$KS_PHL[69]="다이 하드";$KS_SUM[69]="앞에서 캐롤의 손을 놓지 않은 갈래다&. 스크루지가 이름을 부르자 캐롤은 괜찮다며 스크루지에게 오라고 한다&.";
+	$KS_FILE[70]="lx0511_02.nss";$KS_TH[70]="cg/sys/extra/thum/ev/ev0528긚긏깑�[긙깞긅귽긤븧딇떂_b.jpg";$KS_CG[70]="cg/ev/ev0528긚긏깑�[긙깞긅귽긤븧딇떂_b.jpg";$KS_TT[70]="박살내자는 캐롤";$KS_PH[70]=6;$KS_K[70]=71;$KS_ALSO[70]="";$KS_POS[70]="71번째 장면";$KS_EN[70]="";$KS_PG[70]=4;$KS_PTAG[70]="";$KS_PHL[70]="다이 하드";$KS_SUM[70]="앞에서 엉망진창으로 만드는 쪽을 고른 갈래다&. 스크루지가 이름을 외치자 캐롤은 좋다며 저 녀석을 박살내 주자고 답한다&.";
+	$KS_FILE[71]="lx0511_10.nss";$KS_TH[71]="cg/sys/extra/thum/ev/ev0536긚긏깑�[긙긌긿깓깑븧딇롦귟뢯궢쁀뫏.jpg";$KS_CG[71]="cg/ev/ev0536긚긏깑�[긙긌긿깓깑븧딇롦귟뢯궢쁀뫏.jpg";$KS_TT[71]="성창 롱기누스의 일격";$KS_PH[71]=6;$KS_K[71]=72;$KS_ALSO[71]="";$KS_POS[71]="72번째 장면";$KS_EN[71]="";$KS_PG[71]=4;$KS_PTAG[71]="";$KS_PHL[71]="다이 하드";$KS_SUM[71]="스크루지는 캐롤에게서 썩은 진흙 같은 성창을 꺼내&, 오른손이 좀먹히는 고통을 참고 온 힘으로 던진다&. 창이 거대한 짐승을 꿰뚫고 썩혀 가는 가운데&, 기체에 남은 패스트의 목소리가 마나를 부른다&.";
+	$KS_FILE[72]="lx0600.nss";$KS_TH[72]="cg/sys/extra/thum/bg/bg002011_2_둇뺃멣똧.jpg";$KS_CG[72]="cg/bg/bg002011_2_둇뺃멣똧.jpg";$KS_TT[72]="슈가 없는 세계";$KS_PH[72]=7;$KS_K[72]=73;$KS_ALSO[72]="";$KS_POS[72]="73번째 장면";$KS_EN[72]="";$KS_PG[72]=4;$KS_PTAG[72]="phase 07";$KS_PHL[72]="멋진 인생!";$KS_SUM[72]="오우마 마나가 비밀 장소에서 슈와 함께 본 석양과 바다를 떠올린다&. 소중한 것을 모두 잃고 슈마저 곁에 없는 지금&, 탁한 하늘 아래에서 모든 것을 텅 비워 끝내기로 마음먹는다&.";
+	$KS_FILE[73]="lx0601.nss";$KS_TH[73]="cg/sys/extra/thum/ev/ev0608�}긥뙅뤋돸.jpg";$KS_CG[73]="cg/ev/ev0608�}긥뙅뤋돸.jpg";$KS_TT[73]="마나의 노래와 결정의 검";$KS_PH[73]=7;$KS_K[73]=74;$KS_ALSO[73]="";$KS_POS[73]="74번째 장면";$KS_EN[73]="";$KS_PG[73]=4;$KS_PTAG[73]="";$KS_PHL[73]="멋진 인생!";$KS_SUM[73]="스크루지가 빌딩 위에서 노래하는 오우마 마나를 부수지만&, 마나는 다른 곳에 다시 나타난다&. 살아 있던 프레젠트가 결정의 검으로 덤벼들고&, 싸우는 사이 중력이 커져 빌딩이 무너지며 스크루지와 캐롤은 검은 심연으로 떨어진다&.";
+	$KS_FILE[74]="lx0602.nss";$KS_TH[74]="cg/sys/extra/thum/ev/ev0603긵깒�[깛긣�\쀍롦귟궞귒.jpg";$KS_CG[74]="cg/ev/ev0603긵깒�[깛긣�\쀍롦귟궞귒.jpg";$KS_TT[74]="하나 되자는 프레젠트";$KS_PH[74]=7;$KS_K[74]=75;$KS_ALSO[74]="";$KS_POS[74]="75번째 장면";$KS_EN[74]="";$KS_PG[74]=4;$KS_PTAG[74]="";$KS_PHL[74]="멋진 인생!";$KS_SUM[74]="코퀴토스에서 깨어난 스크루지는 AP 결정에 묶여 있고&, 가운데에는 오우마 마나가 잠든 채 노래한다&. 캔서와 하나가 된 몸을 드러낸 프레젠트가 스크루지를 삼키려 할 때&, 결박이 깨지고 캐롤이 황금을 거두라고 말한다&.";
+	$KS_FILE[75]="lx0602_02.nss";$KS_TH[75]="cg/sys/extra/thum/ev/ev0603긵깒�[깛긣�\쀍롦귟궞귒.jpg";$KS_CG[75]="cg/ev/ev0603긵깒�[깛긣�\쀍롦귟궞귒.jpg";$KS_TT[75]="무의미하다는 한마디";$KS_PH[75]=7;$KS_K[75]=76;$KS_ALSO[75]="";$KS_POS[75]="76번째 장면";$KS_EN[75]="";$KS_PG[75]=4;$KS_PTAG[75]="";$KS_PHL[75]="멋진 인생!";$KS_SUM[75]="황금을 거두지 않겠다고 고른 갈래다&. 캐롤이 「무의미해」라고 한마디 할 뿐이다&.";
+	$KS_FILE[76]="lx0602_10.nss";$KS_TH[76]="cg/sys/extra/thum/ev/ev0606긚긏깑�[긙깞긅귽긤맲봳.jpg";$KS_CG[76]="cg/ev/ev0606긚긏깑�[긙깞긅귽긤맲봳.jpg";$KS_TT[76]="선택받지 못한 프레젠트";$KS_PH[76]=7;$KS_K[76]=77;$KS_ALSO[76]="";$KS_POS[76]="77번째 장면";$KS_EN[76]="";$KS_PG[76]=4;$KS_PTAG[76]="";$KS_PHL[76]="멋진 인생!";$KS_SUM[76]="캐롤이 잔과 살을 내미는 성찬의 말을 읊는 사이&, 스크루지의 머릿속에서 날벌레가 웅성거리고 프레젠트가 비명을 지른다&. 이번에야말로라며 말을 잇지 못하는 프레젠트에게 캐롤은 무의미하다고 잘라 말한다&.";
+	$KS_FILE[77]="lx0603.nss";$KS_TH[77]="cg/sys/extra/thum/ev/ev0604귽긃긞긣갋긣귾�[갋긇��뱋뤾.jpg";$KS_CG[77]="cg/ev/ev0604귽긃긞긣갋긣귾�[갋긇��뱋뤾.jpg";$KS_TT[77]="옛 투 컴의 정체";$KS_PH[77]=7;$KS_K[77]=78;$KS_ALSO[77]="";$KS_POS[77]="78번째 장면";$KS_EN[77]="";$KS_PG[77]=4;$KS_PTAG[77]="";$KS_PHL[77]="멋진 인생!";$KS_SUM[77]="배신자가 벌을 받는 코퀴토스에서 스크루지는 캐롤이 옛 투 컴이었냐고 따진다&. 캐롤은 아니라며&, 스크루지가 몇 번이고 꺼내 부숴 온 갓난아기들&, 두 사람의 아기가 바로 마지막 정령이라고 말한다&.";
+	$KS_FILE[78]="lx0604_11.nss";$KS_TH[78]="cg/sys/extra/thum/ev/ev0604귽긃긞긣갋긣귾�[갋긇��뱋뤾.jpg";$KS_CG[78]="cg/ev/ev0604귽긃긞긣갋긣귾�[갋긇��뱋뤾.jpg";$KS_TT[78]="모두 무의미한 선택";$KS_PH[78]=7;$KS_K[78]=79;$KS_ALSO[78]="";$KS_POS[78]="79번째 장면";$KS_EN[78]="";$KS_PG[78]=4;$KS_PTAG[78]="";$KS_PHL[78]="멋진 인생!";$KS_SUM[78]="살겠다고 고른 갈래다&. 「너의 선택은 모두 무의미하다」는 한 줄만 떠오른다&.";
+	$KS_FILE[79]="lx0604_20.nss";$KS_TH[79]="cg/sys/extra/thum/ev/ev0536긚긏깑�[긙긌긿깓깑븧딇롦귟뢯궢쁀뫏.jpg";$KS_CG[79]="cg/ev/ev0536긚긏깑�[긙긌긿깓깑븧딇롦귟뢯궢쁀뫏.jpg";$KS_TT[79]="텅 빈 캐롤의 대답";$KS_PH[79]=7;$KS_K[79]=80;$KS_ALSO[79]="";$KS_POS[79]="80번째 장면";$KS_EN[79]="";$KS_PG[79]=4;$KS_PTAG[79]="";$KS_PHL[79]="멋진 인생!";$KS_SUM[79]="캐롤은 다아트의 실험으로 캔서화된 자궁 속 아이들이 태어나지도 죽지도 못한다고 밝힌다&. 그 아이들의 보이드를 써 온 스크루지가 복수를 각오하고 무엇을 바라냐고 묻자&, 캐롤은 아무것도 바라지 않는다며 이제 결판을 내자고 한다&.";
+	$KS_FILE[80]="lx0605a.nss";$KS_TH[80]="cg/sys/extra/thum/ev/ev0703띍뚣궻깞긅귽긤_긲깑.jpg";$KS_CG[80]="cg/ev/ev0703띍뚣궻깞긅귽긤_긲깑.jpg";$KS_TT[80]="메리 크리스마스";$KS_PH[80]=7;$KS_K[80]=81;$KS_ALSO[80]="lx0605a_90ed.nss";$KS_POS[80]="81번째 장면 · 결말 1";$KS_EN[80]="결말 1";$KS_PG[80]=5;$KS_PTAG[80]="";$KS_PHL[80]="멋진 인생!";$KS_SUM[80]="속죄를 고른 결말이다&. 캐롤은 마지막엔 좋은 일을 하자며 세계를 구하자고 하고&, 가시관 같던 보이드는 꽃으로 피어난다&. 캐롤의 메리 크리스마스에 스크루지는 구원받은 듯한 마음으로 일그러진 미소를 지어 답한다&.";
+	$KS_FILE[81]="lx0605b.nss";$KS_TH[81]="cg/sys/extra/thum/ev/ev0703띍뚣궻깞긅귽긤_긫긞긤_smile.jpg";$KS_CG[81]="cg/ev/ev0703띍뚣궻깞긅귽긤_긫긞긤_smile.jpg";$KS_TT[81]="우리에게 어울리는 왕관";$KS_PH[81]=7;$KS_K[81]=82;$KS_ALSO[81]="lx0605b_90ed.nss";$KS_POS[81]="82번째 장면 · 결말 2";$KS_EN[81]="결말 2";$KS_PG[81]=5;$KS_PTAG[81]="";$KS_PHL[81]="멋진 인생!";$KS_SUM[81]="응보를 고른 결말이다&. 캐롤은 늘 그랬듯 썩은 세계를 박살내자고 하고&, 스크루지는 마지막 보이드인 가시관을 두 사람에게 어울리는 죄의 왕관으로 받아든다&. 이브가 멈춘 뒤&, 스크루지를 가짜 왕이라 부르던 목소리가 다음번을 기약한다&.";
+	$KS_PS[1]=0;$KS_PC[1]=20;$KS_LBL[1]="회상 · 1 / 5쪽";
+	$KS_PS[2]=20;$KS_PC[2]=20;$KS_LBL[2]="회상 · 2 / 5쪽";
+	$KS_PS[3]=40;$KS_PC[3]=20;$KS_LBL[3]="회상 · 3 / 5쪽";
+	$KS_PS[4]=60;$KS_PC[4]=20;$KS_LBL[4]="회상 · 4 / 5쪽";
+	$KS_PS[5]=80;$KS_PC[5]=2;$KS_LBL[5]="회상 · 5 / 5쪽";
+	$KS_NPAGE=5;$KS_N=82;
+}
+function KsCgPlace()
+{
+	if($kd_file=="lx0108.nss"){CreateTexture("ks_dcg",2005,87,60,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,502,502,null,false);}
+	else if($kd_file=="lx0108_01.nss"){CreateTexture("ks_dcg",2005,87,60,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,502,502,null,false);}
+	else if($kd_file=="lx0108_02.nss"){CreateTexture("ks_dcg",2005,87,60,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,502,502,null,false);}
+	else if($kd_file=="lx0403.nss"){CreateTexture("ks_dcg",2005,25,170,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,244,244,null,false);}
+	else if($kd_file=="lx0503.nss"){CreateTexture("ks_dcg",2005,153,60,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,313,313,null,false);}
+	else if($kd_file=="lx0510_01.nss"){CreateTexture("ks_dcg",2005,190,60,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,300,300,null,false);}
+	else if($kd_file=="lx0510_02.nss"){CreateTexture("ks_dcg",2005,190,60,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,300,300,null,false);}
+	else if($kd_file=="lx0605a.nss"){CreateTexture("ks_dcg",2005,182,60,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,316,316,null,false);}
+	else{CreateTexture("ks_dcg",2005,24,60,$kd_cg);SetVertex("ks_dcg",0,0);Zoom("ks_dcg",0,625,625,null,false);}
+	Request("ks_dcg",Smoothing);
+}

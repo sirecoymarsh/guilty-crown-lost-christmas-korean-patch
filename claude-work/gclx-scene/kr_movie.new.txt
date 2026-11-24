@@ -1,0 +1,697 @@
+// Claude 11-23: 영상 감상(사용자 「영상 감상. 오프닝, 중간 영상, 아이캐치를 타이틀에서 다시 봐」). 원작에는 영상 감상이 없다.
+// 사운드 화면(kr_sound.nss)과 같은 틀: 원작 환경 설정 줄 꼴 바탕(kr_mov_bg.png) + 원작 감상 화면 은빛 띠(kr_bars.png) + 원작 닫기 단추.
+// 열림 = 원작이 켜는 깃발(#mvOPplay · #lx0201_mv01) 또는 그 장면을 끝까지 읽음(Conquest) 또는 회상 「모두 열기」(#KS_ALLOPEN).
+// 함수에 식·인자를 넘기지 않는다(이 엔진은 인자가 밀린다 - n2system 대본 함정). 재생은 원작 명령 그대로, 4K 판은 DLL 이 이름으로 바꿔 끼움.
+#include "nss/function.nss"
+#include "nss/function_move.nss"
+#include "nss/function_select.nss"
+
+chapter main
+{
+	$SYSTEM_menu_lock = true;
+	$SYSTEM_backlog_lock = true;
+	KrLyStopFor("@*");SetVolume("@*", 500, 0, NULL);
+	Wait(500);
+	KmCalc();
+	// 11-24 「연출」 쪽(stage_room.py)
+	$KM_TAB=0;$KMS_PAGE=1;$KMS_SEL=-1;$kml_n=-1;$kml_i=-1;$kml_base=-1;$kso_n=-1;$kpi=-1;
+	KmStageData();
+	KmStageMax();
+	$KM_RUN=true;
+	while($KM_RUN){
+		if($KM_TAB==1){KmStageList();}else{KmList();}
+	}
+	CreateColor("kz_black",31000,0,0,1024,576,BLACK);
+	Fade("kz_black",0,0,null,true);
+	Fade("kz_black",300,1000,null,true);
+	Wait(300);
+	Delete("*");
+}
+
+function KmCover()
+{
+	Delete("km_cover");
+	CreateTexture("km_cover",30000,0,0,SCREEN);
+}
+
+function KmSounds()
+{
+	CreateSound("km_se_ok",SE,"sound/se/SE_긘긚긡��_긄긌긚긣깋_뙂믦.ogg");
+	CreateSound("km_se_end",SE,"sound/se/SE_긘긚긡��_긄긌긚긣깋_뢎뿹.ogg");
+	SetAlias("km_se_ok","km_se_ok");
+	SetAlias("km_se_end","km_se_end");
+}
+
+function KmText($mt_nm,$mt_p,$mt_x,$mt_y,$mt_w,$mt_h,$mt_t)
+{
+	CreateText($mt_nm,$mt_p,$mt_x,$mt_y,$mt_w,$mt_h,$mt_t);
+	Request($mt_nm,NoLog);
+	Request($mt_nm,PushText);
+}
+
+function KmClear()
+{
+	Delete("kmsc*");
+	Delete("km_l*");
+	Delete("km_r*");
+	Delete("KM_*");
+}
+
+//■ 보기 전: 검게 덮고 목록을 지운다
+function KmBegin()
+{
+	CreateColor("km_black",30500,0,0,1024,576,BLACK);
+	Fade("km_black",0,0,null,true);
+	Fade("km_black",300,1000,null,true);
+	KmClear();
+	Delete("km_cover");
+}
+
+//■ 영상 하나: 끝나거나 클릭·키를 누르면 끝(원작 lx9999 의 다시 볼 때와 같은 WaitKey)
+function KmWaitMovie()
+{
+	$km_t=DurationTime("km_mv");
+	WaitKey($km_t);
+	Fade("km_mv",300,0,null,true);
+	Delete("km_mv");
+}
+
+//■ 아이캐치: lx0109 의 연출 덩어리 그대로(검은 화면을 바탕으로 찍고 시작)
+function KmEyecatch()
+{
+	Delete("km_black");
+//걳뎶뢯갌귺귽긌긿긞�`
+//=====================================================
+//$SYSTEM_menu_lock=true;
+	MenuLock(true);
+	PrintBG("뤵봶똧괦", 30000);
+
+		//믦�`궥귡귖궻
+		CreateColor("륡괦", 150, 0, 0, 1024, 100, BLACK);
+		SetAlias("륡괦", "륡괦");
+		CreateColor("륡괧", 150, 0, 476, 1024, 100, BLACK);
+		SetAlias("륡괧", "륡괧");
+		Fade("륡*", 0, 0, null, true);
+		//CreateTextureSP("둋봶똧", 100, Center, Middle, "cg/bg/bg004001_1_떝됵볙븫.jpg");
+
+	CreateTextureEX("뤵봶똧괧", 30001, 0, 0, "cg/sys/phase/kr_gc_eyecatch_plate.png");
+	CreateTexture("뤵봶똧괧/KRLogo", 30002, 0, 0, "cg/sys/phase/kr_gc_eyecatch_text.png");
+	SetVertex("뤵봶똧괧/KRLogo", 0, 0);
+	Zoom("뤵봶똧괧/KRLogo", 0, 250, 250, null, false);
+	Request("뤵봶똧괧/KRLogo", Smoothing);
+	Fade("뤵봶똧괧/KRLogo", 0, 0, null, false);
+	SetShade("뤵봶똧괧", MEDIUM);
+
+	CreatePlainSP("뤵봶똧괨", 10000);
+	Zoom("뤵봶똧괨", 0, 1020, 1020, Dxl2, true);
+
+	CreateColorEX("둋륡괦", 30001, WHITE);
+	Request("둋륡괦", AddRender);
+
+	CreateColorEX("둋륡괧", 30001, BLACK);
+
+
+	//걳뱆뺖갌굍괺
+	CreateSE("SE91","se귺귽긌긿긞�`__럶롎_01_L");
+	CreateSE("SE92","se귺귽긌긿긞�`__럶롎_02_L");
+	CreateSE("SE93","se귺귽긌긿긞�`__럶롎_03");
+	CreateSE("SE94","se귺귽긌긿긞�`__럶롎_04_L");
+	CreateSE("SE95","se귺귽긌긿긞�`__럶롎_05");
+	CreateSE("SE96","se귺귽긌긿긞�`__럶롎_06");
+	CreateSE("SE97","se귺귽긌긿긞�`__럶롎_07");
+
+	MusicStart("SE91",0,1000,0,1000,null,true);
+	MusicStart("SE92",0,1000,0,1000,null,true);
+	MusicStart("SE93",0,1000,0,1000,null,false);
+	MusicStart("SE94",0,500,0,1000,null,false);
+
+	CreateMovie("���[긮�[괦", 30000, 0, 0, false, false, "dx/GC_eyecatch_E.ngs");
+	Wait(2500);
+
+	Zoom("뤵봶똧괧", 600, 1020, 1020, Dxl1, false);
+	Zoom("뤵봶똧괧/KRLogo", 600, 255, 255, Dxl1, false);
+	Move("뤵봶똧괧/KRLogo", 600, -10, -6, Dxl1, false);
+	Fade("뤵봶똧괧", 300, 1000, null, true);
+
+	Fade("뤵봶똧괦", 0, 0, null, false);
+	Fade("���[긮�[괦", 0, 0, null, false);
+
+	SetVolumeEX("SE91", 100, 0, null);
+	SetVolumeEX("SE92", 100, 0, null);
+	SetVolumeEX("SE93", 100, 0, null);
+	MusicStart("SE94",100,1200,0,500,null,true);
+	MusicStart("SE95",0,1000,0,1000,null,false);
+
+	Fade("둋륡괦", 50, 500, null, true);
+
+	Fade("둋륡괦", 200, 0, null, false);
+	Zoom("뤵봶똧괧", 0, 2000, 2000, Dxl1, false);
+	Zoom("뤵봶똧괧/KRLogo", 0, 500, 500, Dxl1, false);
+	Move("뤵봶똧괧/KRLogo", 0, -512, -288, null, false);
+	Move("뤵봶똧괧", 0, @200, @100, Axl1, true);
+	BezierMove("뤵봶똧괧", 300, (@0,@0){@3,@2}{@-1,@-1}(@0,@3){@-2,@1}{@1,@-1}(@0,@2){@-1,@-1}{@3,@1}(@0,@-2){@-1,@-1}{@1,@3}(@0,@0), null, false);
+	Wait(200);
+
+	MusicStart("SE96",0,1000,0,1000,null,false);
+
+	Move("뤵봶똧괧", 0, @-400, @-200, Axl1, true);
+	BezierMove("뤵봶똧괧", 300, (@0,@0){@-8,@-7}{@5,@5}(@5,@8), null, false);
+	Wait(100);
+
+	Fade("둋륡괧", 200, 1000, null, true);
+
+
+	FadeDelete("뤵봶똧괧", 0, null, true);
+
+	SetVolumeEX("SE94", 200, 0, null);
+
+	Fade("둋륡괧", 200, 0, null, false);
+	Zoom("뤵봶똧괨", 200, 1000, 1000, Dxl1, true);
+
+	Delete("둋륡*");
+	Delete("뤵봶똧*");
+	Delete("���[긮�[괦");
+
+	MenuLock(false);
+
+//$SYSTEM_menu_lock=false;
+
+}
+
+//■ 목록: 칸 다섯(11-24 썸네일 - 원작 CG 감상 꼴, 위 셋·아래 둘), 아래 줄 = 영상 · 닫기
+function KmList()
+{
+	KmCover();
+	Delete("km_black");
+	KmClear();
+	KmSounds();
+	CreateTexture("km_lbg",2001,0,0,"nss/kr_mov_bg2.png");
+	SetVertex("km_lbg",0,0);
+	Zoom("km_lbg",0,250,250,null,false);
+	Request("km_lbg",Smoothing);
+	CreateTexture("km_lbar",2015,0,0,"nss/kr_bars.png");
+	SetVertex("km_lbar",0,0);
+	Zoom("km_lbar",0,250,250,null,false);
+	Request("km_lbar",Smoothing);
+	CreateChoice("KM_EXIT");
+	CreateTexture("KM_EXIT/MouseUsual/hit",0,924,542,"cg/sys/extra/cglib/hit02.png");
+	CreateTexture("KM_EXIT/MouseUsual/img",2020,924,542,"cg/sys/extra/cglib/exit-001.png");
+	SetVertex("KM_EXIT/MouseUsual/img",0,0);
+	Zoom("KM_EXIT/MouseUsual/img",0,250,250,null,false);
+	Request("KM_EXIT/MouseUsual/img",Smoothing);
+	CreateTexture("KM_EXIT/MouseOver/img",2021,924,542,"cg/sys/extra/cglib/exit-002.png");
+	SetVertex("KM_EXIT/MouseOver/img",0,0);
+	Zoom("KM_EXIT/MouseOver/img",0,250,250,null,false);
+	Request("KM_EXIT/MouseOver/img",Smoothing);
+	CreateTexture("KM_EXIT/MouseClick/img",2021,924,542,"cg/sys/extra/cglib/exit-003.png");
+	SetVertex("KM_EXIT/MouseClick/img",0,0);
+	Zoom("KM_EXIT/MouseClick/img",0,250,250,null,false);
+	Request("KM_EXIT/MouseClick/img",Smoothing);
+	KmTabs();   // 11-24 아래 띠 「영상 · 연출」
+	if($KM_OK1){
+		CreateChoice("km_r01");
+		CreateColor("km_r01/MouseUsual/hit",2010,32,82,304,171,0x000000);
+		Request("km_r01/MouseUsual/hit",Erase);
+		CreateTexture("km_lth01",2010,32,82,"nss/kr_mth01.jpg");
+		SetVertex("km_lth01",0,0);
+		Zoom("km_lth01",0,250,250,null,false);
+		Request("km_lth01",Smoothing);
+		CreateColor("km_lbd01",2011,32,221,304,32,0x000000);
+		Fade("km_lbd01",0,650,null,false);
+		SetFont("Noto Sans KR", 17, FFFFFF, 000000, 500, RIGHTDOWN);
+		KmText("km_lt01",2012,44,224,280,26,"01  오프닝");
+		CreateTexture("km_r01/MouseOver/img",2013,32,82,"nss/kr_mov_cur.png");
+		SetVertex("km_r01/MouseOver/img",0,0);
+		Zoom("km_r01/MouseOver/img",0,250,250,null,false);
+		Request("km_r01/MouseOver/img",Smoothing);
+		CreateTexture("km_r01/MouseClick/img",2013,32,82,"nss/kr_mov_cur.png");
+		SetVertex("km_r01/MouseClick/img",0,0);
+		Zoom("km_r01/MouseClick/img",0,250,250,null,false);
+		Request("km_r01/MouseClick/img",Smoothing);
+	}else{
+		SetFont("Noto Sans KR", 16, 5A5A5A, 000000, 500, RIGHTDOWN);
+		KmText("km_lt01",2012,108,181,200,26,"아직 보지 않은 영상");
+	}
+	if($KM_OK2){
+		CreateChoice("km_r02");
+		CreateColor("km_r02/MouseUsual/hit",2010,360,82,304,171,0x000000);
+		Request("km_r02/MouseUsual/hit",Erase);
+		CreateTexture("km_lth02",2010,360,82,"nss/kr_mth02.jpg");
+		SetVertex("km_lth02",0,0);
+		Zoom("km_lth02",0,250,250,null,false);
+		Request("km_lth02",Smoothing);
+		CreateColor("km_lbd02",2011,360,221,304,32,0x000000);
+		Fade("km_lbd02",0,650,null,false);
+		SetFont("Noto Sans KR", 17, FFFFFF, 000000, 500, RIGHTDOWN);
+		KmText("km_lt02",2012,372,224,280,26,"02  1장 · 엔드레이브 격파");
+		CreateTexture("km_r02/MouseOver/img",2013,360,82,"nss/kr_mov_cur.png");
+		SetVertex("km_r02/MouseOver/img",0,0);
+		Zoom("km_r02/MouseOver/img",0,250,250,null,false);
+		Request("km_r02/MouseOver/img",Smoothing);
+		CreateTexture("km_r02/MouseClick/img",2013,360,82,"nss/kr_mov_cur.png");
+		SetVertex("km_r02/MouseClick/img",0,0);
+		Zoom("km_r02/MouseClick/img",0,250,250,null,false);
+		Request("km_r02/MouseClick/img",Smoothing);
+	}else{
+		SetFont("Noto Sans KR", 16, 5A5A5A, 000000, 500, RIGHTDOWN);
+		KmText("km_lt02",2012,436,181,200,26,"아직 보지 않은 영상");
+	}
+	if($KM_OK3){
+		CreateChoice("km_r03");
+		CreateColor("km_r03/MouseUsual/hit",2010,688,82,304,171,0x000000);
+		Request("km_r03/MouseUsual/hit",Erase);
+		CreateTexture("km_lth03",2010,688,82,"nss/kr_mth03.jpg");
+		SetVertex("km_lth03",0,0);
+		Zoom("km_lth03",0,250,250,null,false);
+		Request("km_lth03",Smoothing);
+		CreateColor("km_lbd03",2011,688,221,304,32,0x000000);
+		Fade("km_lbd03",0,650,null,false);
+		SetFont("Noto Sans KR", 17, FFFFFF, 000000, 500, RIGHTDOWN);
+		KmText("km_lt03",2012,700,224,280,26,"03  아이캐치");
+		CreateTexture("km_r03/MouseOver/img",2013,688,82,"nss/kr_mov_cur.png");
+		SetVertex("km_r03/MouseOver/img",0,0);
+		Zoom("km_r03/MouseOver/img",0,250,250,null,false);
+		Request("km_r03/MouseOver/img",Smoothing);
+		CreateTexture("km_r03/MouseClick/img",2013,688,82,"nss/kr_mov_cur.png");
+		SetVertex("km_r03/MouseClick/img",0,0);
+		Zoom("km_r03/MouseClick/img",0,250,250,null,false);
+		Request("km_r03/MouseClick/img",Smoothing);
+	}else{
+		SetFont("Noto Sans KR", 16, 5A5A5A, 000000, 500, RIGHTDOWN);
+		KmText("km_lt03",2012,764,181,200,26,"아직 보지 않은 영상");
+	}
+	if($KM_OK4){
+		CreateChoice("km_r04");
+		CreateColor("km_r04/MouseUsual/hit",2010,196,301,304,171,0x000000);
+		Request("km_r04/MouseUsual/hit",Erase);
+		CreateTexture("km_lth04",2010,196,301,"nss/kr_mth04.jpg");
+		SetVertex("km_lth04",0,0);
+		Zoom("km_lth04",0,250,250,null,false);
+		Request("km_lth04",Smoothing);
+		CreateColor("km_lbd04",2011,196,440,304,32,0x000000);
+		Fade("km_lbd04",0,650,null,false);
+		SetFont("Noto Sans KR", 17, FFFFFF, 000000, 500, RIGHTDOWN);
+		KmText("km_lt04",2012,208,443,280,26,"04  2장 · 세피라 게노믹스");
+		CreateTexture("km_r04/MouseOver/img",2013,196,301,"nss/kr_mov_cur.png");
+		SetVertex("km_r04/MouseOver/img",0,0);
+		Zoom("km_r04/MouseOver/img",0,250,250,null,false);
+		Request("km_r04/MouseOver/img",Smoothing);
+		CreateTexture("km_r04/MouseClick/img",2013,196,301,"nss/kr_mov_cur.png");
+		SetVertex("km_r04/MouseClick/img",0,0);
+		Zoom("km_r04/MouseClick/img",0,250,250,null,false);
+		Request("km_r04/MouseClick/img",Smoothing);
+	}else{
+		SetFont("Noto Sans KR", 16, 5A5A5A, 000000, 500, RIGHTDOWN);
+		KmText("km_lt04",2012,272,400,200,26,"아직 보지 않은 영상");
+	}
+	if($KM_OK5){
+		CreateChoice("km_r05");
+		CreateColor("km_r05/MouseUsual/hit",2010,524,301,304,171,0x000000);
+		Request("km_r05/MouseUsual/hit",Erase);
+		CreateTexture("km_lth05",2010,524,301,"nss/kr_mth05.jpg");
+		SetVertex("km_lth05",0,0);
+		Zoom("km_lth05",0,250,250,null,false);
+		Request("km_lth05",Smoothing);
+		CreateColor("km_lbd05",2011,524,440,304,32,0x000000);
+		Fade("km_lbd05",0,650,null,false);
+		SetFont("Noto Sans KR", 17, FFFFFF, 000000, 500, RIGHTDOWN);
+		KmText("km_lt05",2012,536,443,280,26,"05  5장 · 불길 속 질주");
+		CreateTexture("km_r05/MouseOver/img",2013,524,301,"nss/kr_mov_cur.png");
+		SetVertex("km_r05/MouseOver/img",0,0);
+		Zoom("km_r05/MouseOver/img",0,250,250,null,false);
+		Request("km_r05/MouseOver/img",Smoothing);
+		CreateTexture("km_r05/MouseClick/img",2013,524,301,"nss/kr_mov_cur.png");
+		SetVertex("km_r05/MouseClick/img",0,0);
+		Zoom("km_r05/MouseClick/img",0,250,250,null,false);
+		Request("km_r05/MouseClick/img",Smoothing);
+	}else{
+		SetFont("Noto Sans KR", 16, 5A5A5A, 000000, 500, RIGHTDOWN);
+		KmText("km_lt05",2012,600,400,200,26,"아직 보지 않은 영상");
+	}
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+	Fade("km_cover",200,0,null,true);
+	Delete("km_cover");
+	$SYSTEM_r_button_down=false;
+	$KM_LOOP=true;
+	while($KM_LOOP){
+		select{
+			if($SYSTEM_r_button_down){$SYSTEM_r_button_down=false;$KM_LOOP=false;$KM_RUN=false;break;}
+			case km_r01{Request("@km_se_ok",Play);KmBegin();CreateMovie("km_mv",31000,center,middle,false,false,"dx/mv_op.ngs");KmWaitMovie();$KM_LOOP=false;}
+			case km_r02{Request("@km_se_ok",Play);KmBegin();CreateMovie("km_mv",31000,center,middle,false,false,"dx/mvbattle0106.ngs");KmWaitMovie();$KM_LOOP=false;}
+			case km_r03{Request("@km_se_ok",Play);KmBegin();KmEyecatch();$KM_LOOP=false;}
+			case km_r04{Request("@km_se_ok",Play);KmBegin();CreateMovie("km_mv",31000,center,middle,false,false,"dx/mv_lx0201.ngs");KmWaitMovie();$KM_LOOP=false;}
+			case km_r05{Request("@km_se_ok",Play);KmBegin();CreateMovie("km_mv",31000,center,middle,false,false,"dx/mv_bikeend.ngs");KmWaitMovie();$KM_LOOP=false;}
+			case KM_TAB1{Request("@km_se_ok",Play);$KM_TAB=1;$KM_LOOP=false;}
+			case KM_EXIT{Request("@km_se_end",Play);$KM_LOOP=false;$KM_RUN=false;}
+		}
+	}
+}
+
+//■ 열림
+function KmCalc()
+{
+	$KM_OK1=false;if(#KS_ALLOPEN){$KM_OK1=true;}
+	if(#mvOPplay){$KM_OK1=true;}
+	$KM_OK2=false;if(#KS_ALLOPEN){$KM_OK2=true;}
+	// 11-24 1장 전투 영상(lx0106 끝): 원작 MovieSkipPlay 가 #lx0106_mv01 을 켠다
+	if(#lx0106_mv01){$KM_OK2=true;}
+	if(!$KM_OK2){$kc_r=Conquest("nss/lx0106.nss","lx0106.nss",null);if($kc_r){$KM_OK2=true;}}
+	$KM_OK4=false;if(#KS_ALLOPEN){$KM_OK4=true;}
+	if(#lx0201_mv01){$KM_OK4=true;}
+	$KM_OK3=false;if(#KS_ALLOPEN){$KM_OK3=true;}
+	if($KM_OK4){$KM_OK3=true;}
+	if(!$KM_OK3){$kc_r=Conquest("nss/lx0109.nss","lx0109.nss",null);if($kc_r){$KM_OK3=true;}}
+	if(!$KM_OK3){$kc_r=Conquest("nss/lx0300.nss","lx0300.nss",null);if($kc_r){$KM_OK3=true;}}
+	if(!$KM_OK3){$kc_r=Conquest("nss/lx0500.nss","lx0500.nss",null);if($kc_r){$KM_OK3=true;}}
+	$KM_OK5=false;if(#KS_ALLOPEN){$KM_OK5=true;}
+	// 11-24 5장 영상(lx0506): 원작 MovieSkipPlay 가 #lx0506_mv00 을 켠다
+	if(#lx0506_mv00){$KM_OK5=true;}
+	if(!$KM_OK5){$kc_r=Conquest("nss/lx0506.nss","lx0506.nss",null);if($kc_r){$KM_OK5=true;}}
+}
+
+//■ 연출(Claude 11-24): 대본 속 CG 연출 다시 보기 - 회상과 같은 원작 CG 감상 꼴. 장면을 끝까지 읽어야 열린다.
+function KmTabs()
+{
+	CreateChoice("KM_TAB0");
+	CreateColor("KM_TAB0/MouseUsual/hit",2020,10,544,52,30,0x000000);
+	Request("KM_TAB0/MouseUsual/hit",Erase);
+	CreateColor("KM_TAB0/MouseOver/img",2021,10,544,52,30,0xF2F2F2);
+	CreateColor("KM_TAB0/MouseClick/img",2021,10,544,52,30,0x58B6A4);
+	CreateChoice("KM_TAB1");
+	CreateColor("KM_TAB1/MouseUsual/hit",2020,64,544,52,30,0x000000);
+	Request("KM_TAB1/MouseUsual/hit",Erase);
+	CreateColor("KM_TAB1/MouseOver/img",2021,64,544,52,30,0xF2F2F2);
+	CreateColor("KM_TAB1/MouseClick/img",2021,64,544,52,30,0x58B6A4);
+	if($KM_TAB==1){SetFont("Noto Sans KR", 15, 8A8A8A, E6E6E6, 500, RIGHTDOWN);}else{SetFont("Noto Sans KR", 15, 2A2A2A, E6E6E6, 700, RIGHTDOWN);}
+	KmText("km_ltab0",2022,18,546,60,34,"영상");
+	if($KM_TAB==1){SetFont("Noto Sans KR", 15, 2A2A2A, E6E6E6, 700, RIGHTDOWN);}else{SetFont("Noto Sans KR", 15, 8A8A8A, E6E6E6, 500, RIGHTDOWN);}
+	KmText("km_ltab1",2022,72,546,60,34,"연출");
+}
+
+function KmBtn($kmb_nm,$kmb_x,$kmb_y,$kmb_img)
+{
+	$kmb_hit=$kmb_nm+"/MouseUsual/hit";
+	$kmb_u=$kmb_nm+"/MouseUsual/img";
+	$kmb_o=$kmb_nm+"/MouseOver/img";
+	$kmb_c=$kmb_nm+"/MouseClick/img";
+	$kmb_f1="cg/sys/extra/cglib/"+$kmb_img+"-001.png";
+	$kmb_f2="cg/sys/extra/cglib/"+$kmb_img+"-002.png";
+	$kmb_f3="cg/sys/extra/cglib/"+$kmb_img+"-003.png";
+	CreateChoice($kmb_nm);
+	CreateTexture($kmb_hit,0,$kmb_x,$kmb_y,"cg/sys/extra/cglib/hit02.png");
+	CreateTexture($kmb_u,2020,$kmb_x,$kmb_y,$kmb_f1);
+	SetVertex($kmb_u,0,0);
+	Zoom($kmb_u,0,250,250,null,false);
+	Request($kmb_u,Smoothing);
+	CreateTexture($kmb_o,2021,$kmb_x,$kmb_y,$kmb_f2);
+	SetVertex($kmb_o,0,0);
+	Zoom($kmb_o,0,250,250,null,false);
+	Request($kmb_o,Smoothing);
+	CreateTexture($kmb_c,2021,$kmb_x,$kmb_y,$kmb_f3);
+	SetVertex($kmb_c,0,0);
+	Zoom($kmb_c,0,250,250,null,false);
+	Request($kmb_c,Smoothing);
+}
+
+function KmStageOpen()
+{
+	$KMS_OPEN=false;
+	$kso_s=$KMS_SC[$kso_n];
+	$kso_f="nss/"+$kso_s;
+	$kso_r=Conquest($kso_f,$kso_s,null);
+	if($kso_r){$KMS_OPEN=true;}
+	if(#KS_ALLOPEN){$KMS_OPEN=true;}
+}
+
+function KmStageMax()
+{
+	$KMS_MAXP=1;
+	$kso_n=0;
+	while($kso_n<$KMS_N){
+		KmStageOpen();
+		if($KMS_OPEN){$KMS_MAXP=Integer($kso_n/20)+1;}
+		$kso_n++;
+	}
+}
+
+function KmStagePage($kmp_d)
+{
+	$KMS_PAGE=$KMS_PAGE+$kmp_d;
+	if($KMS_PAGE>$KMS_MAXP){$KMS_PAGE=1;}
+	if($KMS_PAGE<1){$KMS_PAGE=$KMS_MAXP;}
+	$KM_LOOP=false;
+}
+
+function KmStageList()
+{
+	KmCover();
+	Delete("km_black");
+	KmClear();
+	KmSounds();
+	if($KMS_PAGE>$KMS_MAXP){$KMS_PAGE=$KMS_MAXP;}
+	CreateTexture("km_lbg",2001,0,0,"cg/sys/extra/cglib/봶똧.png");
+	KmBtn("KM_SBACK",732,542,"back");
+	KmBtn("KM_SNEXT",831,542,"next");
+	KmBtn("KM_EXIT",924,542,"exit");
+	$kml_bar=String("cg/sys/extra/cglib/no%03d.png",$KMS_PAGE);
+	CreateTexture("km_lbar",2015,0,0,$kml_bar);
+	SetVertex("km_lbar",0,0);
+	Zoom("km_lbar",0,250,250,null,false);
+	Request("km_lbar",Smoothing);
+	KmTabs();
+	$kml_base=($KMS_PAGE-1)*20;
+	$kml_i=0;
+	while($kml_i<20){
+		$kml_n=$kml_base+$kml_i;
+		if($kml_n<$KMS_N){
+			$kml_nx=$kml_i%5;
+			$kml_x=($kml_nx*200)+16;
+			$kml_ny=Integer($kml_i/5);
+			$kml_y=($kml_ny*124)+36;
+			$kso_n=$kml_n;
+			KmStageOpen();
+			if($KMS_OPEN){
+				$kml_cn=String("kmsc%02d",$kml_i);
+				$kml_hit=$kml_cn+"/MouseUsual/hit";
+				$kml_ov=$kml_cn+"/MouseOver/img";
+				$kml_ck=$kml_cn+"/MouseClick/img";
+				$kml_th=String("km_lsth%02d",$kml_i);
+				$kml_bd=String("km_lsbd%02d",$kml_i);
+				$kml_tt=String("km_lstt%02d",$kml_i);
+				$kml_file=$KMS_TH[$kml_n];
+				$kml_k=$kml_n+1;
+				$kml_txt=String("%02d  ",$kml_k);
+				$kml_ttl=$KMS_TT[$kml_n];
+				$kml_txt=$kml_txt+$kml_ttl;
+				$kml_by=$kml_y+80;
+				$kml_tx=$kml_x+7;
+				$kml_ty=$kml_y+83;
+				CreateChoice($kml_cn);
+				SetAlias($kml_cn,$kml_cn);
+				CreateColor($kml_hit,2010,$kml_x,$kml_y,192,108,0x000000);
+				Request($kml_hit,Erase);
+				CreateTexture($kml_th,2010,$kml_x,$kml_y,$kml_file);
+				CreateColor($kml_bd,2011,$kml_x,$kml_by,192,28,0x000000);
+				Fade($kml_bd,0,650,null,false);
+				SetFont("Noto Sans KR", 15, FFFFFF, 000000, 500, RIGHTDOWN);
+				KmText($kml_tt,2012,$kml_tx,$kml_ty,184,24,$kml_txt);
+				CreateTexture($kml_ov,2013,$kml_x,$kml_y,"cg/sys/extra/cglib/멗묖긇�[�\깑.png");
+				CreateTexture($kml_ck,2013,$kml_x,$kml_y,"cg/sys/extra/cglib/멗묖긇�[�\깑.png");
+			}else{
+				$kml_lk=String("km_lslk%02d",$kml_i);
+				CreateTexture($kml_lk,2010,$kml_x,$kml_y,"nss/kr_scn_lock.png");
+				SetVertex($kml_lk,0,0);
+				Zoom($kml_lk,0,250,250,null,false);
+				Request($kml_lk,Smoothing);
+			}
+		}
+		$kml_i++;
+	}
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+	Fade("km_cover",250,0,null,true);
+	Delete("km_cover");
+	$SYSTEM_r_button_down=false;
+	$SYSTEM_mousewheel_down=false;
+	$SYSTEM_mousewheel_up=false;
+	$KM_LOOP=true;
+	while($KM_LOOP){
+		select{
+			if($SYSTEM_r_button_down){$SYSTEM_r_button_down=false;$KM_LOOP=false;$KM_RUN=false;break;}
+			if($SYSTEM_mousewheel_down){$SYSTEM_mousewheel_down=false;Request("@km_se_ok",Play);KmStagePage(1);break;}
+			if($SYSTEM_mousewheel_up){$SYSTEM_mousewheel_up=false;Request("@km_se_ok",Play);KmStagePage(-1);break;}
+			case @kmsc00{KmStagePick(0);}
+			case @kmsc01{KmStagePick(1);}
+			case @kmsc02{KmStagePick(2);}
+			case @kmsc03{KmStagePick(3);}
+			case @kmsc04{KmStagePick(4);}
+			case @kmsc05{KmStagePick(5);}
+			case @kmsc06{KmStagePick(6);}
+			case @kmsc07{KmStagePick(7);}
+			case @kmsc08{KmStagePick(8);}
+			case @kmsc09{KmStagePick(9);}
+			case @kmsc10{KmStagePick(10);}
+			case @kmsc11{KmStagePick(11);}
+			case @kmsc12{KmStagePick(12);}
+			case @kmsc13{KmStagePick(13);}
+			case @kmsc14{KmStagePick(14);}
+			case @kmsc15{KmStagePick(15);}
+			case @kmsc16{KmStagePick(16);}
+			case @kmsc17{KmStagePick(17);}
+			case @kmsc18{KmStagePick(18);}
+			case @kmsc19{KmStagePick(19);}
+			case KM_SNEXT{Request("@km_se_ok",Play);KmStagePage(1);}
+			case KM_SBACK{Request("@km_se_ok",Play);KmStagePage(-1);}
+			case KM_TAB0{Request("@km_se_ok",Play);$KM_TAB=0;$KM_LOOP=false;}
+			case KM_EXIT{Request("@km_se_end",Play);$KM_LOOP=false;$KM_RUN=false;}
+		}
+	}
+}
+
+function KmStagePick($kpi)
+{
+	Request("@km_se_ok",Play);
+	$KMS_SEL=(($KMS_PAGE-1)*20)+$kpi;
+	KmStagePlay();
+	$KM_LOOP=false;
+}
+
+//■ 연출 하나 재생: 회상 재생(KsPlay)과 같은 준비로 kr_spNN.nss 를 부른다. 앞부분을 덮는 검은 판 kz_spv 는 그 모듈이 걷는다.
+function KmStagePlay()
+{
+	$kp_ts=#SYSTEM_text_speed;
+	$kp_ti=$SYSTEM_text_interval;
+	$kp_r0=#ClearRoll00;
+	$kp_r1=#ClearRoll01;
+	CreateColor("kz_black",31000,0,0,1024,576,BLACK);
+	Fade("kz_black",0,0,null,true);
+	Fade("kz_black",400,1000,null,true);
+	KrLyStopFor("@*");SetVolume("@*", 400, 0, NULL);
+	Wait(400);
+	Delete("*");
+	ClearBacklog();
+	$BOX_Init = true;
+	$BGM_Init = true;
+	$Logo = true;
+	$GameStart = 1;
+	$PLACE_title = false;
+	$SYSTEM_menu_lock=false;
+	$SYSTEM_save_lock=true;
+	$SYSTEM_load_lock=true;
+	$SYSTEM_backselect_lock=true;
+	$SYSTEM_title_lock=false;
+	$SYSTEM_skip_lock=false;
+	$SYSTEM_text_erase_lock=false;
+	$SYSTEM_backlog_lock=false;
+	$SYSTEM_twitter_lock=false;
+	$SYSTEM_super_lock=false;
+	$LOCAL_extra_lock=true;
+	$SYSTEM_skip=false;
+	#SYSTEM_skip_express=false;
+	$SYSTEM_text_auto=false;
+	$SYSTEM_text_auto_lock=false;
+	$SYSTEM_text_erase=false;
+	$SYSTEM_text_waitkey=true;
+	CreateWindow("EFWIN", 20000, 0, 0, 1024, 576, false);
+	SetAlias("EFWIN", "EFWIN");
+	Request("EFWIN", Lock);
+	CreateName("GLOBAL_PROCESS");
+	SetAlias("GLOBAL_PROCESS","GLOBAL_PROCESS");
+	Request("GLOBAL_PROCESS",Lock);
+	CreateColor("kz_spv",31000,0,0,1024,576,BLACK);
+	$KR_REPLAY=true;
+	$GameName=$KMS_SC[$KMS_SEL];
+	$ConGameName="nss/"+$GameName;
+	$GameName2=$GameName+"_MAIN";
+	$AllRead=true;
+	$kms_m=$KMS_MOD[$KMS_SEL];
+	$ks_call="nss/"+$kms_m+"->"+$kms_m;
+	call_scene $ks_call;
+	$KR_REPLAY=false;
+	#SYSTEM_text_speed=$kp_ts;
+	$SYSTEM_text_interval=$kp_ti;
+	$SYSTEM_text_waitkey=true;
+	#ClearRoll00=$kp_r0;
+	#ClearRoll01=$kp_r1;
+	TextBoxDelete(0);
+	CreateColor("kz_black",31000,0,0,1024,576,BLACK);
+	Fade("kz_black",0,0,null,true);
+	Fade("kz_black",500,1000,null,true);
+	KrLyStopFor("@*");SetVolume("@*", 500, 0, NULL);
+	Wait(500);
+	Request("EFWIN", UnLock);
+	Request("GLOBAL_PROCESS", UnLock);
+	Delete("*");
+	ClearBacklog();
+	$SYSTEM_skip=false;
+	#SYSTEM_skip_express=false;
+	$SYSTEM_text_auto=false;
+	$SYSTEM_menu_lock=true;
+	$SYSTEM_backlog_lock=true;
+	$SYSTEM_save_lock=false;
+	$SYSTEM_load_lock=false;
+	$SYSTEM_backselect_lock=false;
+	$GameName=false;
+	CreateColor("kz_black",31000,0,0,1024,576,BLACK);
+	KmCover();
+	Delete("kz_black");
+}
+
+function KmStageData()
+{
+	$KMS_MOD=null;Array($KMS_MOD);DeleteArray($KMS_MOD);
+	$KMS_SC=null;Array($KMS_SC);DeleteArray($KMS_SC);
+	$KMS_TT=null;Array($KMS_TT);DeleteArray($KMS_TT);
+	$KMS_TH=null;Array($KMS_TH);DeleteArray($KMS_TH);
+	$KMS_MOD[0]="kr_sp01.nss";$KMS_SC[0]="lx0010.nss";$KMS_TT[0]="불타는 롯폰기";$KMS_TH[0]="cg/sys/extra/thum/bg/bg001016_3_뛼뫊벞쁇뺯됹.jpg";
+	$KMS_MOD[1]="kr_sp02.nss";$KMS_SC[1]="lx0010.nss";$KMS_TT[1]="프레젠트의 회오리";$KMS_TH[1]="cg/sys/extra/thum/ev/ev0107긵깒�[깛긣뿳뒱뛘똼.jpg";
+	$KMS_MOD[2]="kr_sp03.nss";$KMS_SC[2]="lx0010.nss";$KMS_TT[2]="에덴 베베의 추격";$KMS_TH[2]="cg/sys/extra/thum/ev/ev9001긚긏깑�[긙긙긿깛긵붍뾭.jpg";
+	$KMS_MOD[3]="kr_sp04.nss";$KMS_SC[3]="lx0010.nss";$KMS_TT[3]="미사일과 결정 공격";$KMS_TH[3]="cg/sys/extra/thum/ev/ev0111긌긿깓깑뷅귂�~귟.jpg";
+	$KMS_MOD[4]="kr_sp05.nss";$KMS_SC[4]="lx0010.nss";$KMS_TT[4]="보이드 결정";$KMS_TH[4]="cg/sys/extra/thum/ev/ev0101긚긏깑�[긙깞긅귽긤롦귟궬궢.jpg";
+	$KMS_MOD[5]="kr_sp06.nss";$KMS_SC[5]="lx0103.nss";$KMS_TT[5]="게이트 잠입";$KMS_TH[5]="cg/sys/extra/thum/bg/bg002004_5_긒�[긣멟.jpg";
+	$KMS_MOD[6]="kr_sp07.nss";$KMS_SC[6]="lx0106.nss";$KMS_TT[6]="총구를 피하다";$KMS_TH[6]="cg/sys/extra/thum/ev/ev0209뢣�@긄깛긤깒귽깞뢤똼.jpg";
+	$KMS_MOD[7]="kr_sp08.nss";$KMS_SC[7]="lx0106.nss";$KMS_TT[7]="검을 꺼내다";$KMS_TH[7]="cg/sys/extra/thum/ev/ev0102긚긏깑�[긙깞긅귽긤뙅뤋똣궛.jpg";
+	$KMS_MOD[8]="kr_sp09.nss";$KMS_SC[8]="lx0106.nss";$KMS_TT[8]="엔드레이브 격파";$KMS_TH[8]="cg/sys/extra/thum/ev/ev0206긚긏깑�[긙뢣�@긄깛긤깒귽깞똼봨.jpg";
+	$KMS_MOD[9]="kr_sp10.nss";$KMS_SC[9]="lx0204b.nss";$KMS_TT[9]="연구원의 캔서화";$KMS_TH[9]="cg/sys/extra/thum/bg/bg003001_1_뙟땰렭.jpg";
+	$KMS_MOD[10]="kr_sp11.nss";$KMS_SC[10]="lx0301.nss";$KMS_TT[10]="저격수의 조준경";$KMS_TH[10]="cg/sys/extra/thum/ev/ev0413쉎쇯뢤.jpg";
+	$KMS_MOD[11]="kr_sp12.nss";$KMS_SC[11]="lx0301.nss";$KMS_TT[11]="나팔총 돌격";$KMS_TH[11]="cg/sys/extra/thum/ev/ev9000긚긏깑�[긙뭶뭤붍뾭.jpg";
+	$KMS_MOD[12]="kr_sp13.nss";$KMS_SC[12]="lx0301.nss";$KMS_TT[12]="레일건 일격";$KMS_TH[12]="cg/sys/extra/thum/ev/ev0102긚긏깑�[긙깞긅귽긤뙅뤋똣궛.jpg";
+	$KMS_MOD[13]="kr_sp14.nss";$KMS_SC[13]="lx0303.nss";$KMS_TT[13]="케이도 추격";$KMS_TH[13]="cg/sys/extra/thum/ev/ev0412뙷뢂롅랤.jpg";
+	$KMS_MOD[14]="kr_sp15.nss";$KMS_SC[14]="lx0403.nss";$KMS_TT[14]="패스트 추격전";$KMS_TH[14]="cg/sys/extra/thum/ev/ev9004긚긏깑�[긙긫긞긏긚긡긞긵붍뾭.jpg";
+	$KMS_MOD[15]="kr_sp16.nss";$KMS_SC[15]="lx0403.nss";$KMS_TT[15]="빛에 삼켜지다";$KMS_TH[15]="cg/sys/extra/thum/ev/ev0414�}긥띝궚귡.jpg";
+	$KMS_MOD[16]="kr_sp17.nss";$KMS_SC[16]="lx0501.nss";$KMS_TT[16]="아비규환의 롯폰기";$KMS_TH[16]="cg/sys/extra/thum/bg/bg003016_3_쁛�{뽜멣똧뺯됹.jpg";
+	$KMS_MOD[17]="kr_sp18.nss";$KMS_SC[17]="lx0503.nss";$KMS_TT[17]="회오리 속으로";$KMS_TH[17]="cg/sys/extra/thum/ev/ev0107긵깒�[깛긣뿳뒱뛘똼.jpg";
+	$KMS_MOD[18]="kr_sp19.nss";$KMS_SC[18]="lx0504.nss";$KMS_TT[18]="에덴 베베 기동";$KMS_TH[18]="cg/sys/extra/thum/ev/ev0518긄긢깛갋긹긹딁귺긞긵.jpg";
+	$KMS_MOD[19]="kr_sp20.nss";$KMS_SC[19]="lx0504.nss";$KMS_TT[19]="위장 추격";$KMS_TH[19]="cg/sys/extra/thum/ev/ev0108긄긢깛갋긹긹뼽띒뱋뤾.jpg";
+	$KMS_MOD[20]="kr_sp21.nss";$KMS_SC[20]="lx0505_00.nss";$KMS_TT[20]="협공을 피하다";$KMS_TH[20]="cg/sys/extra/thum/ev/ev9003�_�@긣빜먰벉붍뾭.jpg";
+	$KMS_MOD[21]="kr_sp22.nss";$KMS_SC[21]="lx0505_10.nss";$KMS_TT[21]="보이드 꺼내기";$KMS_TH[21]="cg/sys/extra/thum/ev/ev0102긚긏깑�[긙깞긅귽긤뙅뤋똣궛.jpg";
+	$KMS_MOD[22]="kr_sp23.nss";$KMS_SC[22]="lx0506.nss";$KMS_TT[22]="패스트의 목소리";$KMS_TH[22]="cg/sys/extra/thum/ev/ev0508긚긏깑�[긙깞긅귽긤븧딇긆깋긣깏긆�\궑.jpg";
+	$KMS_MOD[23]="kr_sp24.nss";$KMS_SC[23]="lx0506.nss";$KMS_TT[23]="골목 질주";$KMS_TH[23]="cg/sys/extra/thum/ev/ev0210긚긏깑�[긙긌긿깓깑�_긞긘깄�]뷏됊깞긅귽긤.jpg";
+	$KMS_MOD[24]="kr_sp25.nss";$KMS_SC[24]="lx0506.nss";$KMS_TT[24]="잔해 사이로";$KMS_TH[24]="cg/sys/extra/thum/ev/ev9000긚긏깑�[긙뭶뭤붍뾭긆깋긣깏긆.jpg";
+	$KMS_MOD[25]="kr_sp26.nss";$KMS_SC[25]="lx0506.nss";$KMS_TT[25]="벽을 달리다";$KMS_TH[25]="cg/sys/extra/thum/ev/ev0508긚긏깑�[긙깞긅귽긤븧딇긆깋긣깏긆�\궑_a.jpg";
+	$KMS_MOD[26]="kr_sp27.nss";$KMS_SC[26]="lx0506.nss";$KMS_TT[26]="등에 올라타다";$KMS_TH[26]="cg/sys/extra/thum/ev/ev0508긚긏깑�[긙깞긅귽긤븧딇긆깋긣깏긆�\궑_a.jpg";
+	$KMS_MOD[27]="kr_sp28.nss";$KMS_SC[27]="lx0507.nss";$KMS_TT[27]="바이크형 던지기";$KMS_TH[27]="cg/sys/extra/thum/ev/ev0210긚긏깑�[긙긌긿깓깑�_긞긘깄_a.jpg";
+	$KMS_MOD[28]="kr_sp29.nss";$KMS_SC[28]="lx0507_10.nss";$KMS_TT[28]="보이드 포";$KMS_TH[28]="cg/sys/extra/thum/bg/bg001015_3_뛼뫊벞쁇뛼됉돷뺯됹.jpg";
+	$KMS_MOD[29]="kr_sp30.nss";$KMS_SC[29]="lx0508.nss";$KMS_TT[29]="보이드 미사일 폭풍";$KMS_TH[29]="cg/sys/extra/thum/ev/ev0531긄긢깛갋긹긹긌긿깛긖�[돸�~긖귽깑롅뢯��뷈.jpg";
+	$KMS_MOD[30]="kr_sp31.nss";$KMS_SC[30]="lx0509.nss";$KMS_TT[30]="피의 비";$KMS_TH[30]="cg/sys/extra/thum/ev/ev0525긚긏깑�[긙깞긅귽긤븧딇맲�[븓.jpg";
+	$KMS_MOD[31]="kr_sp32.nss";$KMS_SC[31]="lx0509.nss";$KMS_TT[31]="성해포 잘라내기";$KMS_TH[31]="cg/sys/extra/thum/ev/ev0525긚긏깑�[긙깞긅귽긤븧딇맲�[븓.jpg";
+	$KMS_MOD[32]="kr_sp33.nss";$KMS_SC[32]="lx0509.nss";$KMS_TT[32]="미사일을 피하다";$KMS_TH[32]="cg/sys/extra/thum/ev/ev0531긄긢깛갋긹긹긌긿깛긖�[돸�~긖귽깑롅뢯��뷈.jpg";
+	$KMS_MOD[33]="kr_sp34.nss";$KMS_SC[33]="lx0510.nss";$KMS_TT[33]="정면 충돌";$KMS_TH[33]="cg/sys/extra/thum/ev/ev0525긚긏깑�[긙깞긅귽긤븧딇맲�[븓.jpg";
+	$KMS_MOD[34]="kr_sp35.nss";$KMS_SC[34]="lx0510_10.nss";$KMS_TT[34]="보이드 난무";$KMS_TH[34]="cg/sys/extra/thum/ev/ev0536긚긏깑�[긙긌긿깓깑븧딇롦귟뢯궢쁀뫏.jpg";
+	$KMS_MOD[35]="kr_sp36.nss";$KMS_SC[35]="lx0510_10.nss";$KMS_TT[35]="천사의 고리 요격";$KMS_TH[35]="cg/sys/extra/thum/bg/bg005002_3_쁇뭤뿞긮깑�|됹.jpg";
+	$KMS_MOD[36]="kr_sp37.nss";$KMS_SC[36]="lx0510_10.nss";$KMS_TT[36]="불길 속의 빛";$KMS_TH[36]="cg/sys/extra/thum/ev/ev0510긄긢깛갋긹긹떢뿉됌뎷뺳롅_a.jpg";
+	$KMS_MOD[37]="kr_sp38.nss";$KMS_SC[37]="lx0511_00.nss";$KMS_TT[37]="마지막 결착";$KMS_TH[37]="cg/sys/extra/thum/ev/ev0528긚긏깑�[긙깞긅귽긤븧딇떂.jpg";
+	$KMS_MOD[38]="kr_sp39.nss";$KMS_SC[38]="lx0511_10.nss";$KMS_TT[38]="벼락 같은 창";$KMS_TH[38]="cg/sys/extra/thum/ev/ev0536긚긏깑�[긙긌긿깓깑븧딇롦귟뢯궢쁀뫏.jpg";
+	$KMS_MOD[39]="kr_sp40.nss";$KMS_SC[39]="lx0601.nss";$KMS_TT[39]="결정검과 결정화";$KMS_TH[39]="cg/sys/extra/thum/ev/ev0607긵깒�[깛긣뙅뤋뙐�\궑.jpg";
+	$KMS_MOD[40]="kr_sp41.nss";$KMS_SC[40]="lx0601.nss";$KMS_TT[40]="마나 결정화";$KMS_TH[40]="cg/sys/extra/thum/bg/bg006002_3_쁛�{뽜긭깑긛돫뤵.jpg";
+	$KMS_MOD[41]="kr_sp42.nss";$KMS_SC[41]="lx0601.nss";$KMS_TT[41]="롯폰기 소멸";$KMS_TH[41]="cg/sys/extra/thum/bg/bg006004_3_쁛�{뽜긭깑긛돫뤵뺯됹.jpg";
+	$KMS_MOD[42]="kr_sp43.nss";$KMS_SC[42]="lx0602.nss";$KMS_TT[42]="이엣 투 컴";$KMS_TH[42]="cg/sys/extra/thum/ev/ev0604귽긃긞긣갋긣귾�[갋긇��뱋뤾.jpg";
+	$KMS_MOD[43]="kr_sp44.nss";$KMS_SC[43]="lx0602_10.nss";$KMS_TT[43]="아바돈";$KMS_TH[43]="cg/sys/extra/thum/ev/ev0606긚긏깑�[긙깞긅귽긤맲봳.jpg";
+	$KMS_MOD[44]="kr_sp45.nss";$KMS_SC[44]="lx0603.nss";$KMS_TT[44]="부서지는 보이드들";$KMS_TH[44]="cg/sys/extra/thum/ev/ev0413쉎쇯뢤.jpg";
+	$KMS_MOD[45]="kr_sp46.nss";$KMS_SC[45]="lx0604_11.nss";$KMS_TT[45]="결말 연출 1";$KMS_TH[45]="cg/sys/extra/thum/bg/bg900000_1_뗴붍뾭.jpg";
+	$KMS_MOD[46]="kr_sp47.nss";$KMS_SC[46]="lx0604_12.nss";$KMS_TT[46]="결말 연출 2";$KMS_TH[46]="cg/sys/extra/thum/bg/bg900000_1_뗴붍뾭.jpg";
+	$KMS_MOD[47]="kr_sp48.nss";$KMS_SC[47]="lx0605a.nss";$KMS_TT[47]="마지막 보이드 1";$KMS_TH[47]="cg/sys/extra/thum/ev/ev0604귽긃긞긣갋긣귾�[갋긇��뱋뤾_smile뚿둎궚.jpg";
+	$KMS_MOD[48]="kr_sp49.nss";$KMS_SC[48]="lx0605b.nss";$KMS_TT[48]="마지막 보이드 2";$KMS_TH[48]="cg/sys/extra/thum/ev/ev0604귽긃긞긣갋긣귾�[갋긇��뱋뤾_smile뚿둎궚.jpg";
+	$KMS_N=49;
+}

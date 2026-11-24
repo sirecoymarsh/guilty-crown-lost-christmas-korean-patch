@@ -1,0 +1,83 @@
+NSS_HEAD = '''
+//★ 곡 제목 풀이(Claude 11-24, 사용자 「원작에서 저게 무슨 의미가 있는지 해석을 하단 하얀 바에 플로팅으로 띄워줘」):
+// 열린 곡 줄에 커서를 올리면 아래 흰 띠 왼쪽(「사운드」 자리)에 제목 뜻이 떠오른다. 줄 자리: 왼쪽 x26~502·오른쪽 x524~1000,
+// y=58+44k 높이 26. select 안이 아니라 따로 도는 프로세스(곡 단추 누름을 막지 않게).
+// 11-24 사용자 「사운드 모드 반응이 굉장히 느린데?」 - 커서를 옮길 때마다 글이나 그림을 새로 만들면 곡이 나오는 동안 1~2초씩 멈췄다
+// (프로세스 둘이 같이 만들 때 가장 심함). 그래서 막대 갱신도 이 프로세스가 같이 돌리고, 풀이 그림(kr_hint_*.png)은 목록을 그릴 때
+// 이 프로세스가 한 번 다 만들어 숨겨 두었다가 커서를 옮기면 보이기·숨기기만 한다(본 대본이 만든 그림은 프로세스에서 못 건드려
+// 「사운드」 그림도 여기서 만든다).
+function KuHintRow()
+{
+	$KUH_R=-1;$KUH_SH=0;$KUH_ON=true;
+'''
+
+NSS_LOOP = '''	if($KUH_PA==1){$KUH_PA=0;$khPN="ku_lhprocB";}else{$KUH_PA=1;$khPN="ku_lhprocA";}
+	CreateProcess($khPN,150,0,0,"KuHintLoop");
+	Request($khPN,Start);
+}
+
+function KuHintLoop()
+{
+	KuHintMake();
+	while($KUH_ON){
+		KuHintTick();
+		if($KUS_ON){KuSeekTick();}
+		Wait(16);
+	}
+}
+
+function KuHintTick()
+{
+	$khX=-1;$khY=-1;
+	CursorPosition($khX,$khY);
+	$khR=0;
+	if($khY>=58&&$khY<498){
+		$khD=$khY-58;$khQ=$khD/44;$khK=Integer($khQ);$khM=$khK*44;$khO=$khD-$khM;
+		if($khO<26){
+			if($khX>=26&&$khX<502){$khR=$khK+1;}
+			if($khX>=524&&$khX<1000){$khR=$khK+11;}
+		}
+	}
+	if($khR>19){$khR=0;}
+	if($khR!=$KUH_R){
+		$KUH_R=$khR;
+		$khN=0;
+'''
+
+NSS_TAIL = '''		if($khN!=$KUH_SH){
+			KuHintShow();
+			KuHintHide();
+			$KUH_SH=$khN;
+		}
+	}
+}
+'''
+
+
+def nss() -> str:
+    """KuHintRow(목록을 그릴 때 한 번) · KuHintLoop(프로세스: KuHintMake 뒤 KuHintTick·KuSeekTick) · KuHintShow/Hide."""
+    gates, pick, make, show, hide = [], [], [], [], []
+    tex = lambda nm, f: (f'CreateTexture("{nm}",2022,{X},{Y},{f});SetVertex("{nm}",0,0);'
+                         f'Zoom("{nm}",0,250,250,null,false);Request("{nm}",Smoothing);')
+    make.append('\t' + tex('ku_lh00', '"nss/kr_hint_00.png"') + '\n')
+    show.append('\tif($khN==0){Fade("ku_lh00",0,1000,null,false);}\n')
+    hide.append('\tif($KUH_SH==0){Fade("ku_lh00",0,0,null,false);}\n')
+    for n, base, gate in HINTS:
+        nm = f'ku_lh{n:02d}'
+        if gate:
+            sc = gate[0]
+            gates.append(f'\t$KUH_G{n}=false;if(#KS_ALLOPEN){{$KUH_G{n}=true;}}\n'
+                         f'\tif(!$KUH_G{n}){{$kc_r=Conquest("nss/{sc}.nss","{sc}.nss",null);if($kc_r){{$KUH_G{n}=true;}}}}\n')
+            make.append(f'\tif($KU_OK{n}){{$khF="nss/kr_hint_{n:02d}.png";if($KUH_G{n}){{$khF="nss/kr_hint_{n:02d}g.png";}}'
+                        + tex(nm, '$khF') + f'Fade("{nm}",0,0,null,false);}}\n')
+        else:
+            make.append(f'\tif($KU_OK{n}){{' + tex(nm, f'"nss/kr_hint_{n:02d}.png"') + f'Fade("{nm}",0,0,null,false);}}\n')
+        pick.append(f'\t\tif($khR=={n}){{if($KU_OK{n}){{$khN={n};}}}}\n')
+        show.append(f'\tif($khN=={n}){{Fade("{nm}",0,1000,null,false);}}\n')
+        hide.append(f'\tif($KUH_SH=={n}){{Fade("{nm}",0,0,null,false);}}\n')
+    funcs = ('\n// 목록을 그릴 때 한 번: 「사운드」와 열린 곡의 풀이 그림을 모두 만들어 둔다(풀이는 숨김)\nfunction KuHintMake()\n{\n' + ''.join(make) + '}\n'
+             + '\n// 새로 보일 그림($khN)을 먼저 보이고, 앞 그림($KUH_SH)을 숨긴다(빈 띠가 한 번도 안 찍히게)\nfunction KuHintShow()\n{\n' + ''.join(show) + '}\n'
+             + '\nfunction KuHintHide()\n{\n' + ''.join(hide) + '}\n')
+    return NSS_HEAD + ''.join(gates) + NSS_LOOP + ''.join(pick) + NSS_TAIL + funcs
+
+

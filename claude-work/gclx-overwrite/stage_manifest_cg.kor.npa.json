@@ -1,0 +1,21 @@
+{
+ "GUILTY CROWN LOST XMAS.exe": "95e0c73f576b80406e121050e4478ea32e56eb25ef9ea32caad514153ef82cd6",
+ "nss.npa": "53de61c86d404ff06e59405aca1279ba00e152e8d8b82359ba6b7971ba1f7d85",
+ "system.npa": "3d6b18730469274e480bf22f840c8df9f73bf8f9355ca666f4924707d1cee6b2",
+ "cg.kor.npa": "8dfb8174def47910b09d3213ab8d77a7405fdb5abe02170b0621e3b96db18282",
+ "n2hd_runtime.dll": "ae5246e8833d391f79225370eaa2005f7918796f312371765cb3fcc959069c6d",
+ "version.dll": "8253741973663859e57bfd9a2596f9197a6d16a53349e66453c1a728988bbb6c",
+ "Korean4K.exe": "938fb746b4baa74471041b73a5ef0ac4cfc3815a07525559faf921fd4aff8132",
+ "dx/mv_op.ngs": "d09cb39240d7f750da671190a1875a67105c545fe1aeab0c168a7d2ed4617868",
+ "dx/GC_eyecatch_E.ngs": "6b9d9e521f6a5068ae8ae6dd870c063a0b2a3ca41e06a39f0b0fa69fe97e74c9",
+ "dx/mv_lx0201.ngs": "7e3b9fa3f0d5f65679a3d61f0516e602a5e75d089b0969c56972079b6700ee49",
+ "fonts/NotoSansKR-VF.ttf": "018174e8cdd366aff67c8d366c7dc806a7babbe7f2819fc23b00d59f7b8353d0",
+ "fonts/NotoSerifKR-VF.ttf": "88bb5b81bccef54628e030c269fa803b0f4935e58b347ad1ee21ca8829540a33",
+ "fonts/OFL-notosanskr.txt": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+ "fonts/OFL-notoserifkr.txt": "5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6",
+ "licenses/brotli-LICENSE.txt": "60ae0f13e76cc2eaaa108677eefa4ce16b647f6bbe8cf0a1ac9429d82eca7248",
+ "licenses/highway-LICENSE-BSD3.txt": "eb6b5137e54a0e756eb6d5a937fc482c6f3f1dfa27fd59134dd13d3ad448e2ec",
+ "licenses/highway-LICENSE.txt": "5ad8c213095c573921d7388edf93f6a9f54490b8ebf3b165ae8ef1947cf70846",
+ "licenses/libjxl-LICENSE.txt": "8405932022a556380c2d8c272eff154a923feb197233f348ce5f7334fb0a5ede",
+ "licenses/skcms-LICENSE.txt": "5fad7f1a5143034fc76c976e9d34694663764808df7b777943048674a4c87ff1"
+}

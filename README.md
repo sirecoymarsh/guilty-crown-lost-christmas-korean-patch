@@ -15,4 +15,5 @@
 | `translation-fixes/` | `P:\AI\gclx-fix` |
 | `translation-final-20261117/` | `P:\AI\Codex\projects\guilty-crown-lost-christmas-ui-opening\outputs\third-reading-codex-review-20261117` |
 | `song-timing-20261123/` | `P:\AI\Codex\projects\gclx-song-20261123` |
+| `claude-work/gclx-*/` | `Y:\AI\claude-work\gclx-*` (movie·overwrite·phase·qol·recall-crash·scene·snd-perf·testrun) — 대본 덤프(*.nss*.txt)는 뺌 |
 | `qol-notes/` | `P:\AI\gclx-qol` |
