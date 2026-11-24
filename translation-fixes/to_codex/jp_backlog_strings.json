@@ -1,0 +1,531 @@
+{
+  "source_npa": "P:\\AI\\Codex\\projects\\migrated-from-c\\codex-workspaces\\2026-10-23\\f-down-guilty-crown-lost-christmas\\outputs\\korean-integrated-candidate\\game\\nss.npa",
+  "source_sha256": "7fe601870945506139eef1aa3dbe99a4220188c00f98a5042678a96d99de55bf",
+  "count": 65,
+  "by_kind": {
+    "SetBacklog": 52,
+    "$SYSTEM_last_text": 13
+  },
+  "rows": [
+    {
+      "file": "function.nss",
+      "line": 410,
+      "kind": "SetBacklog",
+      "source_ja": "　",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　\",null,null);"
+    },
+    {
+      "file": "function.nss",
+      "line": 412,
+      "kind": "SetBacklog",
+      "source_ja": "　",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　\",null,null);"
+    },
+    {
+      "file": "function.nss",
+      "line": 428,
+      "kind": "SetBacklog",
+      "source_ja": "　",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　\",null,null);"
+    },
+    {
+      "file": "function_select.nss",
+      "line": 383,
+      "kind": "SetBacklog",
+      "source_ja": "　",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　\", \"null\", null);"
+    },
+    {
+      "file": "function_select.nss",
+      "line": 454,
+      "kind": "SetBacklog",
+      "source_ja": "　",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　\", \"null\", null);"
+    },
+    {
+      "file": "function_select.nss",
+      "line": 593,
+      "kind": "SetBacklog",
+      "source_ja": "　",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　\", \"null\", null);//★バクログ"
+    },
+    {
+      "file": "function_select.nss",
+      "line": 595,
+      "kind": "SetBacklog",
+      "source_ja": "　",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　\", \"null\", null);//★バクログ"
+    },
+    {
+      "file": "lx0010.nss",
+      "line": 1060,
+      "kind": "SetBacklog",
+      "source_ja": "2029年12月24日。",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"2029年12月24日。\", NULL, NULL);"
+    },
+    {
+      "file": "lx0010.nss",
+      "line": 1061,
+      "kind": "SetBacklog",
+      "source_ja": "六本木は地獄だった。",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"六本木は地獄だった。\", NULL, NULL);"
+    },
+    {
+      "file": "lx0010.nss",
+      "line": 1062,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "2029年12月24日。　六本木は地獄だった。",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"2029年12月24日。　六本木は地獄だった。\";"
+    },
+    {
+      "file": "lx0106.nss",
+      "line": 1266,
+      "kind": "SetBacklog",
+      "source_ja": "「内骨格型遠隔操縦式装甲車両……略してエンドレイヴ」",
+      "voice": "voice/LX01/0600220a02",
+      "line_cp932": "\tSetBacklog(\"「内骨格型遠隔操縦式装甲車両……略してエンドレイヴ」\",\"voice/LX01/0600220a02\",キャロル);"
+    },
+    {
+      "file": "lx0106.nss",
+      "line": 1267,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "「内骨格型遠隔操縦式装甲車両……略してエンドレイヴ」",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"「内骨格型遠隔操縦式装甲車両……略してエンドレイヴ」\";"
+    },
+    {
+      "file": "lx0109.nss",
+      "line": 371,
+      "kind": "SetBacklog",
+      "source_ja": "「ゲホ、ゲホ……！」",
+      "voice": "voice/LX01/0900080b03",
+      "line_cp932": "\tSetBacklog(\"「ゲホ、ゲホ……！」\", \"voice/LX01/0900080b03\", 幼ガイ);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 91,
+      "kind": "SetBacklog",
+      "source_ja": "「セフィラゲノミクス」",
+      "voice": "voice/LX02/0100010a02",
+      "line_cp932": "\tSetBacklog(\"「セフィラゲノミクス」\", \"voice/LX02/0100010a02\", キャロル);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 96,
+      "kind": "SetBacklog",
+      "source_ja": "「それが連中の名前か」",
+      "voice": "voice/LX02/0100020a01",
+      "line_cp932": "\tSetBacklog(\"「それが連中の名前か」\", \"voice/LX02/0100020a01\", スクルージ);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 101,
+      "kind": "SetBacklog",
+      "source_ja": "「製薬会社みたいなものだと思えばいいよ」",
+      "voice": "voice/LX02/0100030a02",
+      "line_cp932": "\tSetBacklog(\"「製薬会社みたいなものだと思えばいいよ」\", \"voice/LX02/0100030a02\", キャロル);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 106,
+      "kind": "SetBacklog",
+      "source_ja": "「表向きは、だろう？」",
+      "voice": "voice/LX02/0100040a01",
+      "line_cp932": "\tSetBacklog(\"「表向きは、だろう？」\", \"voice/LX02/0100040a01\", スクルージ);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 112,
+      "kind": "SetBacklog",
+      "source_ja": "「だがしかーし！",
+      "voice": "voice/LX02/0100050a02",
+      "line_cp932": "\tSetBacklog(\"「だがしかーし！\", \"voice/LX02/0100050a02\", キャロル);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 113,
+      "kind": "SetBacklog",
+      "source_ja": "　その実体は世界征服を企む悪の秘密結社なのだっ！」",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　その実体は世界征服を企む悪の秘密結社なのだっ！」\", NULL, NULL);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 118,
+      "kind": "SetBacklog",
+      "source_ja": "「アホか」",
+      "voice": "voice/LX02/0100060a01",
+      "line_cp932": "\tSetBacklog(\"「アホか」\", \"voice/LX02/0100060a01\", スクルージ);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 123,
+      "kind": "SetBacklog",
+      "source_ja": "「ノリが悪いなあ、改造人間一号」",
+      "voice": "voice/LX02/0100070a02",
+      "line_cp932": "\tSetBacklog(\"「ノリが悪いなあ、改造人間一号」\", \"voice/LX02/0100070a02\", キャロル);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 128,
+      "kind": "SetBacklog",
+      "source_ja": "「二号はお前か？」",
+      "voice": "voice/LX02/0100080a01",
+      "line_cp932": "\tSetBacklog(\"「二号はお前か？」\", \"voice/LX02/0100080a01\", スクルージ);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 133,
+      "kind": "SetBacklog",
+      "source_ja": "「技の一号！　力の二号！」",
+      "voice": "voice/LX02/0100090a02",
+      "line_cp932": "\tSetBacklog(\"「技の一号！　力の二号！」\", \"voice/LX02/0100090a02\", キャロル);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 138,
+      "kind": "SetBacklog",
+      "source_ja": "「……ミスキャストだろ、それ」",
+      "voice": "voice/LX02/0100100a01",
+      "line_cp932": "\tSetBacklog(\"「……ミスキャストだろ、それ」\", \"voice/LX02/0100100a01\", スクルージ);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 144,
+      "kind": "SetBacklog",
+      "source_ja": "「……わたしたちの他にもね。",
+      "voice": "voice/LX02/0100110a02",
+      "line_cp932": "\tSetBacklog(\"「……わたしたちの他にもね。\", \"voice/LX02/0100110a02\", キャロル);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 145,
+      "kind": "SetBacklog",
+      "source_ja": "　実験体の子はいたんだよ」",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　実験体の子はいたんだよ」\", NULL, NULL);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 152,
+      "kind": "SetBacklog",
+      "source_ja": "「……？」",
+      "voice": "voice/LX02/0100120a01",
+      "line_cp932": "\tSetBacklog(\"「……？」\", \"voice/LX02/0100120a01\", スクルージ);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 157,
+      "kind": "SetBacklog",
+      "source_ja": "「どうなっちゃったかは……あまり考えたくないよね」",
+      "voice": "voice/LX02/0100130a02",
+      "line_cp932": "\tSetBacklog(\"「どうなっちゃったかは……あまり考えたくないよね」\", \"voice/LX02/0100130a02\", キャロル);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 162,
+      "kind": "SetBacklog",
+      "source_ja": "「…………」",
+      "voice": "voice/LX02/0100140a01",
+      "line_cp932": "\tSetBacklog(\"「…………」\", \"voice/LX02/0100140a01\", スクルージ);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 168,
+      "kind": "SetBacklog",
+      "source_ja": "「さてさて、超人スクルージ。",
+      "voice": "voice/LX02/0100150a02",
+      "line_cp932": "\tSetBacklog(\"「さてさて、超人スクルージ。\", \"voice/LX02/0100150a02\", キャロル);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 169,
+      "kind": "SetBacklog",
+      "source_ja": "　そんな悪魔のような連中を相手にどう戦うのさ？」",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　そんな悪魔のような連中を相手にどう戦うのさ？」\", NULL, NULL);"
+    },
+    {
+      "file": "lx0201.nss",
+      "line": 176,
+      "kind": "SetBacklog",
+      "source_ja": "「そうだな……」",
+      "voice": "voice/LX02/0100160a01",
+      "line_cp932": "\tSetBacklog(\"「そうだな……」\", \"voice/LX02/0100160a01\", スクルージ);"
+    },
+    {
+      "file": "lx0301.nss",
+      "line": 318,
+      "kind": "SetBacklog",
+      "source_ja": "「ハァー……ハァー……ハァー……」",
+      "voice": "voice/LX03/0100080e12",
+      "line_cp932": "\tSetBacklog(\"「ハァー……ハァー……ハァー……」\", \"voice/LX03/0100080e12\", スナイパー);"
+    },
+    {
+      "file": "lx0301.nss",
+      "line": 356,
+      "kind": "SetBacklog",
+      "source_ja": "「――――――」",
+      "voice": "voice/LX03/0100090e12",
+      "line_cp932": "\tSetBacklog(\"「――――――」\", \"voice/LX03/0100090e12\", スナイパー);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 147,
+      "kind": "SetBacklog",
+      "source_ja": "《歓喜の声をあげよ！　喜び、踊れ！　この日々を誉め讃えよ！》",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"《歓喜の声をあげよ！　喜び、踊れ！　この日々を誉め讃えよ！》\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 148,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "《歓喜の声をあげよ！　喜び、踊れ！　この日々を誉め讃えよ！》",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"《歓喜の声をあげよ！　喜び、踊れ！　この日々を誉め讃えよ！》\";"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 526,
+      "kind": "SetBacklog",
+      "source_ja": "《どのようにあなたをお迎えすればよいのか？",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"《どのようにあなたをお迎えすればよいのか？\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 527,
+      "kind": "SetBacklog",
+      "source_ja": "　どのようにあなたにお会いすればよいのか？",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　どのようにあなたにお会いすればよいのか？\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 528,
+      "kind": "SetBacklog",
+      "source_ja": "　おお、遍く世界の望み。おお、我が魂の宝よ》",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　おお、遍く世界の望み。おお、我が魂の宝よ》\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 529,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "《どのようにあなたをお迎えすればよいのか？　どのようにあなたにお会いすればよいのか？　おお、遍く世界の望み。おお、我が魂の宝よ》",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"《どのようにあなたをお迎えすればよいのか？　どのようにあなたにお会いすればよいのか？　おお、遍く世界の望み。おお、我が魂の宝よ》\";"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 1971,
+      "kind": "SetBacklog",
+      "source_ja": "《顔を上げ、涙を拭え。お前の幸福は天まで届くだろう》",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"《顔を上げ、涙を拭え。お前の幸福は天まで届くだろう》\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 1972,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "《顔を上げ、涙を拭え。お前の幸福は天まで届くだろう》",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"《顔を上げ、涙を拭え。お前の幸福は天まで届くだろう》\";"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 2253,
+      "kind": "SetBacklog",
+      "source_ja": "《あなたが松明となって私を照らし、",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"《あなたが松明となって私を照らし、\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 2254,
+      "kind": "SetBacklog",
+      "source_ja": "　あなたを喜ばせる道を知らせ、お教えください》",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　あなたを喜ばせる道を知らせ、お教えください》\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 2255,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "《あなたが松明となって私を照らし、　あなたを喜ばせる道を知らせ、お教えください》",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"《あなたが松明となって私を照らし、　あなたを喜ばせる道を知らせ、お教えください》\";"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 4763,
+      "kind": "SetBacklog",
+      "source_ja": "《清潔でやわらかな寝床をつくりましょう。",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"《清潔でやわらかな寝床をつくりましょう。\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 4764,
+      "kind": "SetBacklog",
+      "source_ja": "　私の心の宮で眠っていただくために》",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　私の心の宮で眠っていただくために》\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 4765,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "《清潔でやわらかな寝床をつくりましょう。　私の心の宮で眠っていただくために》",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"《清潔でやわらかな寝床をつくりましょう。　私の心の宮で眠っていただくために》\";"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 6569,
+      "kind": "SetBacklog",
+      "source_ja": "《羊飼いたちよ、恐れるなかれ。御使いたちが告げている。",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"《羊飼いたちよ、恐れるなかれ。御使いたちが告げている。\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 6570,
+      "kind": "SetBacklog",
+      "source_ja": "　このか弱き幼子こそ、我らが慰めと喜び。",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　このか弱き幼子こそ、我らが慰めと喜び。\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 6571,
+      "kind": "SetBacklog",
+      "source_ja": "　ついにはサタンを降し、とこしえの平和をもたらすお方》",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"　ついにはサタンを降し、とこしえの平和をもたらすお方》\",null,null);"
+    },
+    {
+      "file": "lx0506.nss",
+      "line": 6572,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "《羊飼いたちよ、恐れるなかれ。御使いたちが告げている。　このか弱き幼子こそ、我らが慰めと喜び。　ついにはサタンを降し、とこしえの平和をもたらすお方》",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"《羊飼いたちよ、恐れるなかれ。御使いたちが告げている。　このか弱き幼子こそ、我らが慰めと喜び。　ついにはサタンを降し、とこしえの平和をもたらすお方》\";"
+    },
+    {
+      "file": "lx0508.nss",
+      "line": 1085,
+      "kind": "SetBacklog",
+      "source_ja": "「…………ッッッ！」",
+      "voice": "voice/LX05/0800160a01",
+      "line_cp932": "\tSetBacklog(\"「…………ッッッ！」\", \"voice/LX05/0800160a01\", スクルージ);"
+    },
+    {
+      "file": "lx0511_10.nss",
+      "line": 749,
+      "kind": "SetBacklog",
+      "source_ja": "《……どうか泣かないで》",
+      "voice": "voice/LX05/1100150a04",
+      "line_cp932": "\tSetBacklog(\"《……どうか泣かないで》\", \"voice/LX05/1100150a04\", パスト);"
+    },
+    {
+      "file": "lx0511_10.nss",
+      "line": 750,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "《……どうか泣かないで》",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"《……どうか泣かないで》\";"
+    },
+    {
+      "file": "lx0511_10.nss",
+      "line": 874,
+      "kind": "SetBacklog",
+      "source_ja": "《わたしの、たいせつな》",
+      "voice": "voice/LX05/1100170a04",
+      "line_cp932": "\tSetBacklog(\"《わたしの、たいせつな》\", \"voice/LX05/1100170a04\", パスト);"
+    },
+    {
+      "file": "lx0511_10.nss",
+      "line": 875,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "《わたしの、たいせつな》",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"《わたしの、たいせつな》\";"
+    },
+    {
+      "file": "lx0511_10.nss",
+      "line": 947,
+      "kind": "SetBacklog",
+      "source_ja": "「真名」",
+      "voice": "voice/LX05/1100190a04",
+      "line_cp932": "\tSetBacklog(\"「真名」\", \"voice/LX05/1100190a04\", パスト);"
+    },
+    {
+      "file": "lx0511_10.nss",
+      "line": 948,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "「真名」",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"「真名」\";"
+    },
+    {
+      "file": "lx0600.nss",
+      "line": 80,
+      "kind": "SetBacklog",
+      "source_ja": "「……集」",
+      "voice": "voice/LX06/0000010b05",
+      "line_cp932": "\tSetBacklog(\"「……集」\", \"voice/LX06/0000010b05\", マナ);"
+    },
+    {
+      "file": "lx0600.nss",
+      "line": 94,
+      "kind": "SetBacklog",
+      "source_ja": "「もういいわよ、集」",
+      "voice": "voice/LX06/0000020b05",
+      "line_cp932": "\tSetBacklog(\"「もういいわよ、集」\", \"voice/LX06/0000020b05\", マナ);"
+    },
+    {
+      "file": "lx0601.nss",
+      "line": 3447,
+      "kind": "SetBacklog",
+      "source_ja": "「e=mc^2」",
+      "voice": "voice/LX06/0100430a02",
+      "line_cp932": "\tSetBacklog(\"「e=mc^2」\", \"voice/LX06/0100430a02\", キャロル);"
+    },
+    {
+      "file": "lx0601.nss",
+      "line": 3448,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "「e=mc^2」",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"「e=mc^2」\";"
+    },
+    {
+      "file": "lx0602_10.nss",
+      "line": 588,
+      "kind": "SetBacklog",
+      "source_ja": "俺が、虫食まれてゆく。",
+      "voice": null,
+      "line_cp932": "\tSetBacklog(\"俺が、虫食まれてゆく。\", null, null);"
+    },
+    {
+      "file": "lx0602_10.nss",
+      "line": 589,
+      "kind": "$SYSTEM_last_text",
+      "source_ja": "俺が、虫食まれてゆく。",
+      "voice": null,
+      "line_cp932": "\t$SYSTEM_last_text=\"俺が、虫食まれてゆく。\";"
+    }
+  ]
+}

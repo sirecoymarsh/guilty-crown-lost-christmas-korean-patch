@@ -1,0 +1,197 @@
+{
+  "compare": {
+    "native": {
+      "new_file": "F:\\AI\\gclx-4k\\release_1121\\movie\\out\\mv_lx0201.ngs",
+      "installed_file": "P:\\AI\\gclx-codexrun\\game\\dx\\mv_lx0201.ngs",
+      "new_sha256": "bafb9e91b302dcabf2678b563f47d3d25451f6be8aa5b8207ce90ec8cb651c86",
+      "installed_sha256": "953f4ce234b6fcc0782564d2c7ade6c6b074b1bf758dd89ff295db2db1ca17ab",
+      "frames_new": 1858,
+      "frame_index_sequence_ok": true,
+      "pts_strictly_increasing": true,
+      "max_cfr_timing_error_s": 3.3333333959717493e-07,
+      "psnr_rows": 1858,
+      "decode_error_lines": [],
+      "changed_frames_count": 110,
+      "changed_range": [
+        622,
+        731
+      ],
+      "changed_frames_outside_cue07": 13,
+      "outside_ranges": [
+        [
+          719,
+          731
+        ]
+      ],
+      "outside_min_psnr_db": 60.83,
+      "cue07_frames_identical_to_installed": [],
+      "identical_frames_count": 1748
+    },
+    "4k": {
+      "new_file": "F:\\AI\\gclx-4k\\release_1121\\movie\\out\\mv_lx0201.mp4",
+      "installed_file": "P:\\AI\\gclx-codexrun\\game\\dx4k\\mv_lx0201.mp4",
+      "new_sha256": "d13059172faeca725a456f0ac3e1a9e3f3ebd48ba231739e5692a95eb1f17b1a",
+      "installed_sha256": "6d0c5019ad2c8bdabb408829e8693f40538bbec999bdca9bb3adfdbc7d2c5509",
+      "frames_new": 1858,
+      "frame_index_sequence_ok": true,
+      "pts_strictly_increasing": true,
+      "max_cfr_timing_error_s": 3.3333333959717493e-07,
+      "psnr_rows": 1858,
+      "decode_error_lines": [],
+      "changed_frames_count": 124,
+      "changed_range": [
+        616,
+        740
+      ],
+      "changed_frames_outside_cue07": 27,
+      "outside_ranges": [
+        [
+          616,
+          617
+        ],
+        [
+          619,
+          621
+        ],
+        [
+          719,
+          740
+        ]
+      ],
+      "outside_min_psnr_db": 56.1,
+      "cue07_frames_identical_to_installed": [],
+      "identical_frames_count": 1734
+    }
+  },
+  "audio_and_timestamps": {
+    "new_audio_sha256": "89cbe10085be52099e92bfce8fa42ffeda9e4f7b8e2f62bf5ab685e90322d9f2",
+    "installed_audio_sha256": "89cbe10085be52099e92bfce8fa42ffeda9e4f7b8e2f62bf5ab685e90322d9f2",
+    "audio_bytes": 2979072,
+    "audio_stream_identical": true,
+    "audio_packets": [
+      2586,
+      2586
+    ],
+    "audio_packet_pts_size_md5_identical": true,
+    "expected_codex_audio_sha256": "89cbe10085be52099e92bfce8fa42ffeda9e4f7b8e2f62bf5ab685e90322d9f2",
+    "video_packets": [
+      1858,
+      1858
+    ],
+    "video_packet_dts_pts_duration_identical": false
+  },
+  "frames": {
+    "native-new": {
+      "f0600_cue06_neighbour": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\native-new-f0600_cue06_neighbour.png",
+      "f0640_cue07_start": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\native-new-f0640_cue07_start.png",
+      "f0659_cue07_22.0s": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\native-new-f0659_cue07_22.0s.png",
+      "f0750_cue08_neighbour": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\native-new-f0750_cue08_neighbour.png"
+    },
+    "native-installed": {
+      "f0600_cue06_neighbour": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\native-installed-f0600_cue06_neighbour.png",
+      "f0640_cue07_start": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\native-installed-f0640_cue07_start.png",
+      "f0659_cue07_22.0s": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\native-installed-f0659_cue07_22.0s.png",
+      "f0750_cue08_neighbour": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\native-installed-f0750_cue08_neighbour.png"
+    },
+    "4k-new": {
+      "f0600_cue06_neighbour": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\4k-new-f0600_cue06_neighbour.png",
+      "f0640_cue07_start": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\4k-new-f0640_cue07_start.png",
+      "f0659_cue07_22.0s": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\4k-new-f0659_cue07_22.0s.png",
+      "f0750_cue08_neighbour": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\4k-new-f0750_cue08_neighbour.png"
+    },
+    "4k-installed": {
+      "f0600_cue06_neighbour": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\4k-installed-f0600_cue06_neighbour.png",
+      "f0640_cue07_start": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\4k-installed-f0640_cue07_start.png",
+      "f0659_cue07_22.0s": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\4k-installed-f0659_cue07_22.0s.png",
+      "f0750_cue08_neighbour": "F:\\AI\\gclx-4k\\release_1121\\movie\\verify\\frames\\4k-installed-f0750_cue08_neighbour.png"
+    }
+  },
+  "sample_frame_diffs": {
+    "native:f0659_cue07_22.0s": {
+      "identical": false,
+      "max_diff": 255,
+      "pixels_diff_gt8": 15536,
+      "bbox_diff_gt8": [
+        251,
+        511,
+        770,
+        554
+      ],
+      "mean_abs_diff": 2.990162037037037
+    },
+    "native:f0640_cue07_start": {
+      "identical": false,
+      "max_diff": 255,
+      "pixels_diff_gt8": 15568,
+      "bbox_diff_gt8": [
+        251,
+        320,
+        862,
+        554
+      ],
+      "mean_abs_diff": 3.1096123589409723
+    },
+    "native:f0750_cue08_neighbour": {
+      "identical": true,
+      "max_diff": 0,
+      "pixels_diff_gt8": 0,
+      "bbox_diff_gt8": null,
+      "mean_abs_diff": 0.0
+    },
+    "native:f0600_cue06_neighbour": {
+      "identical": true,
+      "max_diff": 0,
+      "pixels_diff_gt8": 0,
+      "bbox_diff_gt8": null,
+      "mean_abs_diff": 0.0
+    },
+    "4k:f0659_cue07_22.0s": {
+      "identical": false,
+      "max_diff": 255,
+      "pixels_diff_gt8": 170894,
+      "bbox_diff_gt8": [
+        946,
+        977,
+        3579,
+        2079
+      ],
+      "mean_abs_diff": 3.3170279546039096
+    },
+    "4k:f0640_cue07_start": {
+      "identical": false,
+      "max_diff": 253,
+      "pixels_diff_gt8": 170500,
+      "bbox_diff_gt8": [
+        946,
+        960,
+        3194,
+        2075
+      ],
+      "mean_abs_diff": 3.2718832786779837
+    },
+    "4k:f0750_cue08_neighbour": {
+      "identical": true,
+      "max_diff": 0,
+      "pixels_diff_gt8": 0,
+      "bbox_diff_gt8": null,
+      "mean_abs_diff": 0.0
+    },
+    "4k:f0600_cue06_neighbour": {
+      "identical": true,
+      "max_diff": 0,
+      "pixels_diff_gt8": 0,
+      "bbox_diff_gt8": null,
+      "mean_abs_diff": 0.0
+    }
+  },
+  "summary": {
+    "native_frames": 1858,
+    "4k_frames": 1858,
+    "progress_dup_drop": [
+      "drop_frames=0",
+      "speed=0.503x",
+      "progress=end"
+    ],
+    "audio_identical": true
+  }
+}

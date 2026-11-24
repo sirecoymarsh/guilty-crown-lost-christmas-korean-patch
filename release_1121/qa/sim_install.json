@@ -1,0 +1,28 @@
+{
+ "install": [
+  0,
+  "============================================================\r\n 길티 크라운 로스트 크리스마스 한국어 패치 1.0 설치\r\n============================================================\r\n\r\n[1/3] 실행 파일을 바꾸는 중...\r\n[2/3] 그림 묶음 cg.npa 를 바꾸는 중... 몇 분 걸리고 빈 공간이 2GB 이상 필요합니다.\r\n[3/3] 한국어 파일을 넣는 중...\r\n\r\n설치를 마쳤습니다.\r\n평소처럼 GUILTY CROWN LOST XMAS.exe 로 실행하면 됩니다.\r\n고화질 묶음은 이 폴더에 압축을 풀면 됩니다. 되돌리려면 한국어패치_제거.bat 을 실행하세요.\r\n계속하려면 아무 키나 누르십시오 . . . \r\n"
+ ],
+ "installed_match": {
+  "cg.npa": true,
+  "GUILTY CROWN LOST XMAS.exe": true,
+  "nss.npa": true,
+  "system.npa": true,
+  "n2hd_runtime.dll": true,
+  "version.dll": true,
+  "dx/mv_op.ngs": true,
+  "dx/mv_lx0201.ngs": true,
+  "dx/GC_eyecatch_E.ngs": true,
+  "fonts/NotoSansKR-VF.ttf": true
+ },
+ "stray_npa": [],
+ "tmp_left": [],
+ "uninstall": [
+  0,
+  "============================================================\r\n 길티 크라운 로스트 크리스마스 한국어 패치 제거\r\n============================================================\r\n\r\n한국어 패치와 고화질 묶음을 지우고 원래 게임으로 되돌릴까요 [Y,N]?Y\r\n[1/3] 그림 묶음 cg.npa 를 원래대로 되돌리는 중... 몇 분 걸립니다.\r\n[2/3] 보관해 둔 원본 파일을 되돌리는 중...\r\n[3/3] 패치가 더한 파일을 지우는 중...\r\n\r\n원래 게임으로 되돌렸습니다. 이제 KoreanPatch 폴더와 한국어패치 파일들은 지워도 됩니다.\r\n계속하려면 아무 키나 누르십시오 . . . \r\n"
+ ],
+ "restored_identical": true,
+ "restored_diff": [],
+ "extra_after_uninstall": [],
+ "orig_untouched": "0d49a9b36cdd"
+}

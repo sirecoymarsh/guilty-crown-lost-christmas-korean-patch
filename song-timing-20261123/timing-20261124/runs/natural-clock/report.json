@@ -1,0 +1,102 @@
+{
+ "run": "P:\\AI\\Codex\\projects\\gclx-song-20261123\\timing-20261124\\runs\\natural-clock",
+ "art_off": true,
+ "wmi_rc": "0",
+ "started": "08:44:54",
+ "events": [],
+ "t0_epoch": 1795477494.520065,
+ "window_rect": [
+  4136,
+  120,
+  5166,
+  725
+ ],
+ "primary_width": 4096,
+ "focus_returned": true,
+ "window_seconds": 2.1,
+ "audio_peak": {
+  "2": 0.0,
+  "3": 0.0,
+  "4": 0.0,
+  "5": 0.0,
+  "6": 0.092,
+  "7": 0.15,
+  "8": 0.105,
+  "9": 0.089,
+  "10": 0.11,
+  "11": 0.134,
+  "12": 0.1,
+  "13": 0.136,
+  "14": 0.125,
+  "15": 0.149,
+  "16": 0.177,
+  "17": 0.13,
+  "18": 0.153,
+  "19": 0.221,
+  "20": 0.162,
+  "21": 0.214,
+  "22": 0.222,
+  "23": 0.17,
+  "24": 0.158,
+  "25": 0.17,
+  "26": 0.223,
+  "27": 0.208,
+  "28": 0.202,
+  "29": 0.215,
+  "30": 0.188,
+  "31": 0.222,
+  "32": 0.222,
+  "33": 0.213,
+  "34": 0.217,
+  "35": 0.148,
+  "36": 0.222,
+  "37": 0.195,
+  "38": 0.222,
+  "39": 0.221,
+  "40": 0.219,
+  "41": 0.227,
+  "42": 0.207,
+  "43": 0.223,
+  "44": 0.216,
+  "45": 0.219,
+  "46": 0.222,
+  "47": 0.222,
+  "48": 0.222,
+  "49": 0.222
+ },
+ "_trace_size": 3401,
+ "_trace_t": 1795477544.1728184,
+ "stop_seen": 48.6,
+ "muted_at": [],
+ "windows_at_end": [
+  [
+   "N2System",
+   "길티 크라운 로스트 크리스마스 Ver.1.0",
+   true
+  ],
+  [
+   "IME",
+   "Default IME",
+   false
+  ],
+  [
+   "MSCTFIME UI",
+   "MSCTFIME UI",
+   false
+  ]
+ ],
+ "closed_by": "terminate",
+ "shots": 0,
+ "launcher_log": "test_mutex_isolated 51304\nstarted_pid 51304\n",
+ "fonts_log": "NotoSansCJKjp-Medium.otf added=2\nNotoSansKR-VF.ttf added=14\nNotoSerifKR-VF.ttf added=14\n",
+ "dialogs_closed": [
+  [
+   "08:44:55",
+   "main window was on screen at 1533,777 -> moved off"
+  ],
+  [
+   "08:44:56",
+   "main window was on screen at 3150,1380 -> moved off"
+  ]
+ ]
+}

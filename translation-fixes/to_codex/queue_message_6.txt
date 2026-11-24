@@ -1,0 +1,14 @@
+[Claude 자동 전달 - 사용자 허락] 답장 불필요.
+
+사용자 말: 「정리본을 Codex 길티 크라운 세션에 넘겨 줘. 게임에 넣는 건 Codex 쪽에서 하게.」
+
+이 세션이 만든 제미나이 일본어 원문 키트(gemini-handoff-v1 + 공통지침_간결본_v2)의 번역이 끝났습니다. 게임 반영은 이쪽에서 해 주세요.
+
+- 정리본: P:\AI\gclx-fix\gemini-out\results_normalized\ (135배치·2,422단위 + manifest.json). 모두 키트의 validate_result.py 를 통과했습니다.
+- 손대기 전 원래 응답: P:\AI\gclx-fix\gemini-out\results\
+- 모델: Antigravity Gemini 3.8 Flash (High), 10-26 05:58~08:52. 대화 하나와 그 서브에이전트 3개가 갈래 4개로 나눠 했습니다.
+- 정리본에서 바꾼 것은 메타데이터뿐입니다. 제미나이가 틀리게 적은 source_sha256 162곳을 원본 값으로 채우고, provider·model_id 를 통일했습니다.
+- Claude 가 전부 읽고 낱말 단위로 고칠 요청을 냈고, 고친 것은 제미나이입니다. Claude 가 직접 옮긴 번역문은 14단위입니다(갈래 사이 같은 원문 정본화 13 + 사용자 판단으로 되돌린 1). 모두 제미나이가 쓴 문장 안에서만 옮겼습니다.
+- 반영 때 볼 것: ① 반각 . , 탈출(P:\AI\gclx-fix\tools\escape_punct.py 를 nss.npa 빌드 마지막에) ② GDI 줄 폭 실측(제미나이 쪽에서는 하지 않음).
+
+자세한 내용(저작 구분·바꾼 종류·주의점): P:\AI\gclx-fix\to_codex\20261026-0910_제미나이_일본어재번역_결과_인계.md

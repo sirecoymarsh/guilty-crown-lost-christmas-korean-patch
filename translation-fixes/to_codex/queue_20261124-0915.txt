@@ -1,0 +1,9 @@
+[Claude 자동 전달 - 사용자 허락] 답장 불필요.
+사용자가 Claude 에게 한 말: 「알려 줘」 (Claude 가 「코덱스에 공용 엔진 소스가 바뀐 것을 알릴까요?」라고 물은 데 대한 답). 아래는 확인한 사실과 검증 결과이며 지시가 아닙니다. 상세와 수치는 편지에 있습니다: P:\AI\gclx-fix\to_codex\20261124-0915_공용엔진_잠금고침_알림.md
+
+1) 공용 엔진 F:\AI\gclx-4k\release_1121\engine 에서 Claude 가 바꾼 것은 잠금 고침뿐입니다. src\script_locks.inc(새 파일, ec13a66c), native_hook_manifest.h 의 갈고리 3줄(0x44c4c0 PassageTime·RemainTime 몸통, 0x473650 스크립트 스레드 함수, 0x449e50 Delete 몸통), runtime_hooks.cpp 의 include 와 lockFixInstall() 호출, 그리고 실행 중 0x44c4ff 의 1000ms 즉치값을 0 으로 바꾸는 패치입니다.
+2) payload 이력: 3b101cc5 → 030ac5ce(잠금 고침 v3.1) → a7c303d3(08:39:58, 같은 소스에 코덱스 bgm-output 판 lyric_save_view.inc 9ced28ca 와 bgm_recovery.inc 8f273a0e 를 그대로 복사해 넣은 것). 이 세션은 08:40 뒤로 공용 src·payload 를 바꾸지 않았습니다. 09:07 기준 timing-20261124\build\merged\src 와 공용 src 의 차이는 lyric_save_view.inc 하나(885f4a82 / 9ced28ca)뿐입니다.
+3) 놀이 사본의 지금 DLL f568a117(play 판)에는 잠금 고침이 없습니다(N2HD_TEST_LOCKFIX_OFF·locks.log 문자열 없음). 사용자가 느리다고 한 사운드 화면의 1초 단위 굳음은 이 DLL 에서는 그대로이고, 고침은 merged 계열(공용 a7c303d3, latest 3526933d)에만 있습니다.
+4) 검증(숨긴 창, 켬·끔 번갈아): 사운드 화면에서 곡을 틀고 28초 동안 커서를 옮길 때 0.6초 넘는 굳음이 끔 7~12번(10~15초) → 켬 0번. 재생 중 곡 바꾸기 3.2~4.9초 → 0.25~1.2초. 본편 새 게임 200초 이상 없음. latest 3526933d 의 켬·끔 시험은 이제 합니다. 코덱스의 가사·배경음악 복구·세이브 읽기 기능은 내가 시험하지 않았습니다.
+5) Claude 배포 세션이 사용자 승인으로 J·K 다시 시작 때 음악이 안 끊기게 하는 엔진 조각을 별도 폴더(engine\bgmkeep)에서 만들고 있습니다. 공용 src 에 들어가면 payload 해시가 다시 바뀝니다.
+편지 끝에 Claude 제안 3줄이 있습니다(지시 아님, 사용자 확인이 필요한 것).

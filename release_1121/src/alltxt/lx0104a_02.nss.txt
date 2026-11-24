@@ -1,0 +1,346 @@
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0104a_02.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0105.nss";//次、選択肢ファイル
+
+}
+
+
+scene lx0104a_02.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//――――――――――――――――――――――――――――――――――――――
+////////////////////////////////////////
+//←←笑っていた
+
+	PrintBG("上背景", 30000);
+
+
+	//定義--------------------------
+	CreateWindowEX("絵窓", 0, 0, 1024, 576, false);
+
+	CreateTextureSP("絵背景", 100, 0, 250, "cg/bg/bg002004_5_ゲート前.jpg");
+	CreateTextureSP("絵主人公", 200, -90, 440, "cg/ev/x/ev9003ダァト兵戦闘汎用_x01.png");
+	CreateTextureEX("絵主人公弐", 500, Center, Middle, "cg/bu/buスクルージ_戦闘_normal.png");
+//	CreateTextureSP("絵軌跡", 1500, -80, -250, "cg/ef/x/ef_crow01_x01.png");
+	CreateTextureSPmul("絵演血", 2000, 500, 100, "cg/ef/ef_blood01_01.png");
+	CreateTextureSPmul("絵演血弐", 2000, -250, -380, "cg/ef/ef_blood01_02.png");
+
+	CreateColorEX("bl01", 2000, "000000");
+
+	CreateTextureEX("絵窓/絵主人公", 3000, Center, 190, "cg/bu/buスクルージ_通常_smile1.png");
+	CreateTextureEX("絵窓/絵主人公弐", 3000, Center, 190, "cg/bu/buスクルージ_通常_smile2.png");
+	CreateColorEX("絵窓/絵色黒", 2000, "000000");
+
+
+
+	SetVertex("絵軌跡*", right, middle);
+	SetShade("絵背景", HEAVY);
+
+	Request("絵*", Smoothing);
+	Request("絵窓/絵*", Smoothing);
+
+
+	Zoom("絵背景", 0, 4000, 4000, null, true);
+	Zoom("絵指", 0, 1400, 1400, null, true);
+	Zoom("絵主人公", 0, 1800, 1800, null, true);
+	Zoom("絵窓/絵主人公*", 0, 3000, 3000, null, true);
+
+	Zoom("絵軌跡", 0, 1200, 1200, null, true);
+	Zoom("絵演血", 0, 1500, 1500, Axl3, true);
+	Zoom("絵演血弐", 0, 1500, 1200, Axl3, true);
+	Rotate("絵主人公", 0, @0, @0, @-15, null,true);
+	Rotate("絵軌跡*", 0, @0, @0, @-20, null,true);
+	Rotate("絵演血", 0, @50, @0, @180, null,true);
+	Rotate("絵演血弐", 0, @50, @0, @180, null,true);
+	Rotate("絵指", 0, @0, @0, @-20, null,true);
+
+	Move("絵主人公弐", 0, @-50, @50, Dxl1, true);
+
+	DrawTransition("絵窓/絵主人公*", 0, 0, 300, 100, null, "cg/data/slide_05_01_1.png", true);
+	DrawTransition("絵窓/絵色黒", 0, 0, 300, 100, null, "cg/data/slide_05_01_1.png", true);
+
+	CreateSE("SE00","se人体_血飛沫");
+	CreateSE("SE01","se人体_衝撃_転倒03複数");
+
+
+	//動作--------------------------
+	MusicStart("SE00",0,700,0,1000,null,false);
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Move("絵主人公", 500, @80, @60, Dxl1, false);
+	Move("絵背景", 500, @40, @30, Dxl1, false);
+	Zoom("絵演血*", 500, 1500, 2000, null, false);
+	Fade("絵演血*", 500, 0, Axl3, false);
+	Fade("絵主人公", 500, 0, Axl3, false);
+	FadeDelete("上背景", 300, null, true);
+	Move("絵主人公弐", 300, @50, @-50, Dxl1, false);
+	Fade("絵主人公弐", 300, 1000, Dxl1, true);
+
+	CreatePlainSP("絵板写", 5000);
+	CreatePlainSP("絵霞", 1000);
+	SetShade("絵霞", HEAVY);
+
+	Wait(200);
+
+	Fade("bl01", 0, 1000, null, true);
+	Fade("絵霞", 0, 1000, null, false);
+	Fade("絵窓/絵主人公", 0, 1000, null, true);
+	Fade("絵窓/絵色黒", 0, 1000, null, true);
+
+	FadeDelete("絵板写", 500, null, true);
+
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/04a00320a01">
+｡ｸ｡ｦ｡ｦﾅｰﾈｹ
+
+//（思わず残虐な笑みが漏れる）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+웃고 있었다&.
+폭력이라는 맛좋은 술에&, 흠뻑 취해 있었다&.
+
+이토록 텅 빈 나인데&, 이토록 강대한 힘으로 가득 차 있다&.
+
+이 힘이야말로 나다&. 나를 괴물로 만든 놈들을&, 괴물의 힘으로 <RUBY TEXT="퍽">유린</RUBY>해 줄 테다&.
+
+약해 빠진 너희에게는&, 그것에 저항할 방도가 없다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	Fade("絵窓/絵主人公弐", 300, 1000, null, true);
+
+	CreatePlainSP("絵板写", 5000);
+	Delete("絵窓*");
+	Delete("絵霞*");
+	Delete("bl*");
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/04a00330a01">
+｡ｸｾﾆﾇﾏ｡ｦ｡ｦ ﾇﾏﾇﾏﾇﾏ! ｾﾆﾇﾏﾇﾏﾇﾏﾇﾏ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0045]
+새어 나온 웃음은&, 이윽고 거침없는 폭소로 변해 간다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義----------------------
+	CreateMovieEX("絵動画", 3000, Center, Middle, true, true, "dx/mv0003集中線01_白.ngs");
+	CreateTextureEX("絵主人公走", 500, 245, 600, "cg/ev/x/ev9001スクルージジャンプ汎用_x01.png");
+	CreateTextureEX("絵爪効果", 4000, Center, Middle, "cg/ef/x/ef_crow01.jpg");
+	CreateTextureEXadd("絵爪効果上", 4100, Center, Middle, "cg/ef/x/ef_crow01.jpg");
+	CreateTextureEX("絵爪血", 5100, Center, Middle, "cg/ef/ef_blood02a.png");
+	CreateColorEX("絵色黒", 5000, "000000");
+
+	Zoom("絵爪血", 200, 1050, 1050, null, true);
+
+	SetVertex("絵爪血", 0, 576);
+	SetBlur("絵爪血", true, 3, 500, 50, false);
+
+	Request("絵*", Smoothing);
+
+//	Zoom("絵爪効果*", 0, 800, 800, null, true);
+	Zoom("絵動画", 0, 4000, 4000, null, true);
+	Zoom("絵主人公走", 0, 2000, 2000, null, true);
+	Rotate("絵主人公走", 0, @0, @0, @30, null,true);
+	Rotate("絵動画", 0, @0, @0, @180, null,true);
+	Rotate("絵爪効果*", 0, @0, @180, @-10, null,true);
+
+	CreateSE("SE00","se戦闘_動作_突進03");
+	CreateSE("SE01","se戦闘_動作_突進04");
+	MusicStart("SE00",0,700,0,1200,null,false);
+
+	//動作----------------------
+	FadeDelete("絵板写", 300, null, false);
+
+	Zoom("絵主人公弐", 500, 2000, 2000, Axl2, false);
+	Fade("絵主人公弐", 150, 0, Dxl3, false);
+
+	Fade("絵動画", 300, 300, Dxl1, false);
+	Zoom("絵主人公走", 250, 2500, 2500, Axl2, false);
+	Move("絵主人公走", 250, @-300, @250, Axl2, false);
+	Fade("絵主人公走", 100, 1000, Dxl1, true);
+
+	MusicStart("SE01",0,1000,0,1000,null,false);
+	Fade("絵主人公走", 100, 0, Dxl1, false);
+	FadeF("絵爪効果",150,1000,200,10,10,Dxl1, false);
+	FadeF("絵爪効果上",150,1000,200,10,10,Dxl3, true);
+	FadeDelete("絵爪効果上", 200, Axl3, true);
+
+
+	Delete("絵主*");
+	Delete("絵演血*");
+	Delete("絵動画");
+
+
+	CreateSE("SE01","se人体_血飛沫04");
+	MusicStart("SE01",0,800,0,1000,null,false);
+
+	Fade("絵色黒", 0, 1000, null, true);
+	Fade("絵爪血", 0, 1000, null, true);
+	Zoom("絵爪血", 200, 1200, 1200, Dxl2, false);
+	Shake("絵爪血", 500, 5, 2, 0, 0, 1000, null, false);
+
+	Delete("絵爪効果");
+
+	Wait(600);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+ｳｪｴﾂ ﾁﾗﾀﾎｴﾙ&.
+오로지 죽인다&.
+
+폭력이라는 절대적인 권능을 휘두르며&.
+ｿﾕﾃｳｷｳ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+	CreateSE("SE02","se人体_血飛沫");
+	MusicStart("SE02",0,800,0,1000,null,false);
+
+
+	Move("絵背景", 0, -1470, -130, null, true);
+	SetShade("絵背景", NULL);
+
+
+	Zoom("絵爪血", 1000, 3000, 3000, Axl1, false);
+	FadeDelete("絵爪血", 500, null, true);
+
+	Wait(500);
+
+	CreateSE("SE01L","se背景_ガヤ_戦場の風景01");
+	MusicStart("SE01L",0,400,0,1000,null,true);
+
+
+	FadeDelete("絵色黒", 1000, null, true);
+
+	Wait(200);
+
+
+	St("C",740, @0,@0,"buキャロル_通常_smile1");
+	FadeSt("C",300,true);
+
+
+//その様子を見守っているキャロルの視点
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/04a00340a02">
+「어머어머&, 스크루지도 참&. 저렇게 신이 나서는」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	St("C",740, @0,@0,"buキャロル_通常_smile3");
+	FadeSt("C",200,true);
+
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/04a00350a02">
+｡ｸｱﾗｷ｡&, ｳﾍ ﾀﾓｱﾝｴﾔ&. ﾈﾇｸ｢ﾇﾑ ﾆｺﾀﾌ ｴﾙ ｵﾆｳﾗ!｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	SetVolumeEX("@lx*", 2000, 0, null);
+	SetVolumeEX("SE*", 2000, 0, null);
+
+	//▽特殊ループ停止
+	SetVolume_Loop("@lx004a",2000,0,null);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1500, 1000, null, true);
+
+	Wait(1500);
+
+//→→LX0105
+
+
+}

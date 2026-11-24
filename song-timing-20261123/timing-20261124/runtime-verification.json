@@ -1,0 +1,53 @@
+{
+  "all_endings_passed": 10,
+  "lookup_cases_passed": 20,
+  "modern_display_samples": {
+    "story": 16,
+    "sound": 17
+  },
+  "legacy_display_samples": 31,
+  "earlier_decoder_lead_ms_range": [
+    905,
+    957
+  ],
+  "earlier_decoder_median_lead_ms": 934,
+  "no_seek_clock_calibration": [
+    {
+      "reference_s": 1.42,
+      "correlation": 0.949,
+      "decoder_lead_ms": 919
+    },
+    {
+      "reference_s": 9.43,
+      "correlation": 0.912,
+      "decoder_lead_ms": 915
+    },
+    {
+      "reference_s": 17.43,
+      "correlation": 0.887,
+      "decoder_lead_ms": 933
+    },
+    {
+      "reference_s": 25.43,
+      "correlation": 0.914,
+      "decoder_lead_ms": 915
+    },
+    {
+      "reference_s": 33.4,
+      "correlation": 0.806,
+      "decoder_lead_ms": 956
+    }
+  ],
+  "corrected_clock_median_per_song_range_ms": [
+    -24,
+    34
+  ],
+  "clear_relative_to_vocal_end_ms": [
+    66,
+    233
+  ],
+  "tested_builds": {
+    "ten_endings": "Claude merged engine and latest scenario",
+    "ordinary_play_and_saved_slot": "installed-equivalent engine and play scenario"
+  }
+}

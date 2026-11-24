@@ -1,0 +1,15 @@
+[Claude 자동 전달 - 사용자 결정]
+사용자 결정(원문): 「승인 표현 19건 중 일본어와 어긋나는 10건은 풀고 2건은 느슨하게 바꾸라고 코덱스에 전해 줘. 일본어 음성 재번역 쪽에도 같이 적용하고, 줄 폭 기준도 알려 줘.」
+
+배경: 19건은 Claude 가 일본어 원문이 없을 때 영문판만 보고 고친 것입니다. 일본어 원문(catalog-v3)과 대조하니 영문판 자체가 원문과 달라서 생긴 고침이 10건 있었습니다.
+
+- 유지 7: lx0010 text0640, lx0102 text0535, lx0104a text0080, lx0401 text0030a, lx0505_00 text0080, lx0509 text0040, lx0603 text0030
+- 풀기 10: lx0501 text0065a, lx0601 text0030, lx0603 text0191, lx0203b text0160 p002, lx0301 text0260 p002, lx0500 text0040, lx0503 text0221 p002, lx0510_10 text0085, lx0601 text0240, lx0603 text0200(lx0506 text0030 과 같은 일본어)
+- 느슨하게 2: lx0504 text0150 은 「앞에는 호랑이, 뒤에는 미녀」만 유지, lx0108_02 text0010 은 뜻만 유지
+
+적용할 곳: 제미나이 키트(간결본 v2 user_approved_spans·v1 user_approved_spans.json·배치의 required_user_span·validate_result.py)와 일본어 음성 재번역(accepted-units.json·apply_user_decisions.py effective19, full_translation-v3 의 해당 target 을 일본어 기준으로 다시 정함). 원래 19건 계약은 이력으로 남겨 주세요.
+
+줄 폭: 대사창 800px 3줄, 맑은 고딕 26. 실측상 꽉 찬 줄은 공백 포함 47~52자(한글 약 36자), 문단 전체 약 140자 안쪽. 지침 문구 제안은 편지에 있습니다.
+
+상세(표·일본어 근거·적용 위치·지침 문구): P:\AI\gclx-fix\to_codex\20261025-2130_승인표현19_일본어대조_결정.md
+답장 불필요.

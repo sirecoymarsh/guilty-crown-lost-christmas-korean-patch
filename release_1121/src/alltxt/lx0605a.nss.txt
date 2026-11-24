@@ -1,0 +1,785 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0605a.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0604イェット・トゥー・カム登場_smile母の笑み口開け=true;
+	#ev0703最後のヴォイド=true;
+	#ev0703最後のヴォイド_smile=true;
+	#ev0703最後のヴォイド_フル=true;
+	#ev0704クリスマスキャロル=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0605a_90ed.nss";
+
+}
+
+
+scene lx0605a.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+	PrintGO("上背景", 30000);
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	CreateColorEX("絵色１", 10000, WHITE);
+	CreateColorEX("絵色２", 2000, WHITE);
+
+//１
+	CreateTextureEX("絵イバラ１", 2600, -1139, -463, "cg/ev/x/ev0703最後のヴォイド_いばら.png");
+	CreateTextureEX("絵イバラ２", 2000, -1209, -485, "cg/ev/x/ev0703最後のヴォイド_いばら2.png");
+	CreateTextureEX("絵イバラ３", 2600, -1093, 31, "cg/ev/x/ev0703最後のヴォイド_いばらb.png");
+	CreateTextureEX("絵イバラ４", 2000, -613, 125, "cg/ev/x/ev0703最後のヴォイド_いばら2b.png");
+
+	CreateTextureEX("絵手１", 2500, 0, 0, "cg/ef/x/ef_hand01.png");
+
+	CreateTextureEX("絵マスク１", 3000, 0, 0, "cg/ef/x/ef_いばらマスク01.png");
+	SetVertex("絵マスク１", 0, 288);
+	Zoom("絵マスク１", 0, 5000, 1000, Dxl2, true);
+
+	CreateTextureEX("絵マスク２", 3000, 0, 0, "cg/ef/x/ef_いばらマスク01.png");
+	SetVertex("絵マスク２", 0, 288);
+	Zoom("絵マスク２", 0, 5000, 1000, Dxl2, true);
+
+//	CreateTextureEX("絵少女１", 3000, -411, -337, "cg/ev/x/ev0604イェット・トゥー・カム登場_smile口開け_x02.png");
+	CreateTextureEX("絵少女１", 3000, -411, -337, "cg/ev/x/ev0604イェット・トゥー・カム登場_xx_mother.png");
+	CreateTextureEX("絵少女２", 3000, -411, -337, "cg/ev/x/ev0604イェット・トゥー・カム登場_xx_close2.png");
+	CreateTextureEXadd("絵少女３", 3000, 178, 70, "cg/ef/ef_vd_light01.png");
+	Zoom("絵少女３", 0, 0, 0, Dxl2, true);
+
+//２
+	CreateTextureEX("絵いばら１", 2600, -1703, -1053, "cg/ev/x/ev0703最後のヴォイド_いばら.png");//左上
+	CreateTextureEX("絵いばら２", 2600, 1024, -1053, "cg/ev/x/ev0703最後のヴォイド_いばらb.png");//右上
+	CreateTextureEX("絵いばら３", 2600, 1024, 567, "cg/ev/x/ev0703最後のヴォイド_いばらc.png");//右下
+	CreateTextureEX("絵いばら４", 2600, -1703, 576, "cg/ev/x/ev0703最後のヴォイド_いばらd.png");//左下
+
+	CreateTextureEX("絵いばら５", 2500, 0, -933, "cg/ev/x/ev0703最後のヴォイド_いばら2.png");
+	CreateTextureEX("絵いばら６", 2500, -1000, 576, "cg/ev/x/ev0703最後のヴォイド_いばら2b.png");//
+	CreateTextureEX("絵いばら７", 2500, -933, 0, "cg/ev/x/ev0703最後のヴォイド_いばら2c.png");//
+	CreateTextureEX("絵いばら８", 2500, 1024, 0, "cg/ev/x/ev0703最後のヴォイド_いばら2d.png");//
+
+	CreateTextureEX("絵いばら９", 2400, 1024, 576, "cg/ef/ef_いばら.png");
+	CreateTextureEX("絵いばら０", 2400, -2000, -2000, "cg/ef/ef_いばらb.png");
+
+//３
+//	CreateTextureSP("絵イベント１", 2000, -587, -432, "cg/ev/x/ev0703最後のヴォイド_x01.jpg");
+//	CreateTextureSP("絵イベント０", 2000, -3072, -1213, "cg/ev/x/ev0703最後のヴォイド_x01.jpg");
+//	CreateTextureSP("絵イベント０", 2000, -454, 30, "cg/ev/x/ev0703最後のヴォイド_x01.jpg");
+	CreateTextureEX("絵イベント０", 2000, 0, 0, "cg/ev/x/ev0703最後のヴォイド_x01.jpg");
+	SetVertex("絵イベント０", 1022, 286);
+	Request("絵イベント０", Smoothing);
+//	Zoom("絵イベント０", 0, 2000, 2000, Dxl2, true);
+
+//	CreateTextureEX("絵イベント１", 2000, 0, 0, "cg/ev/l/ev0703最後のヴォイド_l.jpg");
+	CreateTextureEX("絵イベント１", 2800, -32, -127, "cg/ev/l/ev0703最後のヴォイド_smile_l.jpg");
+//	CreateTextureEX("絵イベント１", 2000, -745, -238, "cg/ev/l/ev0703最後のヴォイド_l.jpg");
+//	CreateTextureEX("絵イベント１", 2000, -745, -238, "cg/ev/l/ev0703最後のヴォイド_l.jpg");
+
+	CreateTextureEX("絵伊原１", 2800, 0, -147, "cg/ev/x/ev0703最後のヴォイド_いばら2b.png");
+	CreateTextureEX("絵伊原２", 2800, -1226, -268, "cg/ev/x/ev0703最後のヴォイド_いばら2.png");
+
+	CreateTextureEX("絵イベント２", 2900, 0, 0, "cg/ev/ev0703最後のヴォイド_smile.jpg");
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+	CreateTextureSP("絵背景１", 10, -20, -164, "cg/bg/m/bg006003_3_コキュートス空間_m.jpg");
+	CreateTextureSP("絵人物１", 2000, 183, -12, "cg/ev/l/ev0604イェット・トゥー・カム登場_smile母の笑み口開け_l.png");
+
+	FadeDelete("上背景", 500, null, true);
+
+//<continuation number="130">
+
+//←←償いを
+
+//吹き出すキャロル。
+
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00010a02">
+「이상해라&. 도대체 뭘 속죄하겠다는 건데?」
+
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00020a02">
+「하지만…… 그러게&. 마지막엔 좋은 일이라도 해 볼까?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	CreatePlainSP("上背景", 10000);
+
+	CreateTextureSP("絵背景１", 10, -527, -224, "cg/bg/l/bg006003_3_コキュートス空間_l.jpg");
+//	CreateTextureSP("絵人物１", 2000, 183, -12, "cg/ev/l/ev0604イェット・トゥー・カム登場_l.png");
+	CreateTextureSP("絵人物１", 2000, -206, -96, "cg/ev/x/ev0604イェット・トゥー・カム登場_xx_normal.png");
+	SetVertex("絵人物１", 692, 493);
+	Request("絵人物１", Smoothing);
+	Zoom("絵人物１", 0, 800, 800, Dxl2, true);
+
+	FadeDelete("上背景", 500, null, true);
+
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00030a02">
+｡ｸ｡ｪ｡ｪｼｼｰ雕ｦ ｱｸﾇﾏﾀﾚ&, ｽｺﾅｩｷ鄰ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	Wait(16);
+
+	SoundPlay("@lx012",0,1000,true);
+
+//ヴォイド空間が展開される。
+	CreatePlainSP("上背景", 10000);
+
+	CreateTextureSP("絵背景１", 10, -527, -224, "cg/bg/l/bg006003_3_コキュートス空間_l.jpg");
+	SetShade("絵背景１", MEDIUM);
+
+	CreateTextureSP("絵人物１", 1999, -206, -96, "cg/ev/x/ev0604イェット・トゥー・カム登場_smile口開け_x02.png");
+	CreateTextureEX("絵人物２", 1999, -206, -96, "cg/ev/x/ev0604イェット・トゥー・カム登場_xx_mother.png");
+	SetVertex("絵人物*", 692, 493);
+	Request("絵人物*", Smoothing);
+	Zoom("絵人物*", 0, 800, 800, Dxl2, true);
+
+
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00040a02">
+｡ｸｽｺﾅｩｷ鄰ｹ
+
+{	Fade("絵人物２", 200, 1000, Dxl2, false);
+	Fade("絵人物１", 200, 1000, Axl3, false);
+}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00050a02">
+「우릴 써」
+
+</PRE>
+	SetText();
+
+		//★徒歩：ＳＥ
+		CreateSE("SE11","seヴォイドエフェクト_l");
+		MusicStart("SE11",1000,500,0,1000,null,true);
+
+		CreateMovie("絵ムービー１", 100, Center, Middle, true, true, "dx/mvve01.ngs");
+		SetAlias("絵ムービー１", "絵ムービー１");
+		Zoom("絵ムービー１", 0, 2000, 2000, Dxl2, true);
+
+		FadeDelete("上背景", 1000, null, true);
+
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//ヴォイドを取り出すスクルージ。
+//キャロルの胸から無数の茨が溢れて、コキュートスに広がっていく。
+
+	MusicStart("SE11",2000,1200,0,1000,null,true);
+
+	Zoom("絵背景１", 2000, 1200, 1200, Axl2, false);
+	Zoom("絵人物*", 2000, 1500, 1500, Axl2, false);
+	Fade("絵色１", 2000, 1000, null, false);
+	WaitAction("絵色１", null);
+
+	Delete("絵人物*");
+	Delete("絵ムービー１");
+	Delete("絵背景*");
+
+
+//////////////////////////////////////////////////////////////////////
+	Fade("絵色２", 0, 1000, null, true);
+	Fade("絵少女１", 0, 500, null, true);
+	Fade("絵手１", 0, 1000, null, true);
+	Fade("絵マスク１", 0, 1000, null, true);
+	Fade("絵マスク２", 0, 1000, null, true);
+
+
+	Zoom("絵マスク１", 3000, 1000, 1000, Dxl2, false);
+	Zoom("絵マスク２", 3000, 2000, 1000, Dxl2, false);
+	Move("絵手１", 3000, @200, @0, Dxl1, false);
+
+	Shake("絵マスク２", 10000, 1, 0, 100, 0, 1000, Axl2, false);
+
+	Fade("絵少女１", 0, 500, null, false);
+//	Move("絵少女１", 8000, @0, @500, null, false);
+//	Move("絵少女２", 8000, @0, @500, null, false);
+	Move("絵少女１", 18400, @0, @920, null, false);
+	Move("絵少女２", 18400, @0, @920, null, false);
+	Move("絵少女３", 18400, @0, @920, null, false);
+
+	Fade("絵色１", 1000, 0, null, true);
+
+	//★徒歩：ＳＥ
+	CreateSE("SE00","seヴォイド取り出し01");
+	MusicStart("SE00",0,600,0,1000,null,false);
+	SetVolumeEX("SE11", 3000, 0, null);
+
+	Wait(4000);
+
+	Move("絵手１", 4000, @1000, @0, Axl1, false);
+	Fade("絵少女１", 500, 0, null, false);
+	Fade("絵少女２", 500, 500, null, false);
+
+	Wait(500);
+	Fade("絵少女３", 4000, 1000, null, false);
+	Zoom("絵少女３", 4000, 2000, 2000, Dxl2, false);
+
+	Move("絵イバラ１", 4000, 148, -3, Axl3, false);
+	Move("絵イバラ２", 4000, 197, -5, Axl3, false);
+	Move("絵イバラ３", 4000, 234, -384, Axl3, false);
+	Move("絵イバラ４", 4000, 137, -33, Axl3, false);
+
+	Fade("絵イバラ１", 500, 1000, null, false);
+	Wait(500);
+	Fade("絵イバラ２", 500, 1000, null, false);
+	Wait(500);
+	Fade("絵イバラ３", 500, 1000, null, false);
+	Wait(500);
+	Fade("絵イバラ４", 500, 1000, null, false);
+
+	Wait(1500);
+	Fade("絵色１", 1000, 1000, null, true);
+
+//	WaitKey();
+
+	Delete("絵イバラ*");
+	Delete("絵マスク１");
+	Delete("絵マスク２");
+	Delete("絵少女*");
+
+
+////////////////////////////////////////////////////////////////////////
+	//★徒歩：ＳＥ
+	CreateSE("SE01","seヴォイド茨の王冠01");
+	MusicStart("SE01",2000,500,0,1000,null,true);
+
+	CreateMovie("絵ムービー１", 4000, Center, Middle, true, true, "dx/mv_efvd04.ngs");
+	SetAlias("絵ムービー１", "絵ムービー１");
+
+	Wait(2000);
+
+	Fade("絵いばら*", 0, 1000, null, true);
+	Fade("絵色１", 1000, 0, null, true);
+
+	Wait(4000);
+
+	Move("絵いばら１", 1000, 290, 47, Dxl1, false);
+	Wait(100);
+	Move("絵いばら２", 1000, 149, -296, Dxl1, false);
+	Wait(100);
+	Move("絵いばら３", 1000, -530, -417, Dxl1, false);
+	Wait(100);
+	Move("絵いばら４", 1000, -829, 24, Dxl1, false);
+
+	Wait(100);
+	Move("絵いばら５", 1000, -598, -350, Dxl1, false);
+	Wait(100);
+	Move("絵いばら６", 1000, 16, -108, Dxl1, false);
+	Wait(100);
+	Move("絵いばら７", 1000, 244, -1501, Dxl1, false);
+	Wait(100);
+	Move("絵いばら８", 1000, 33, -1433, Dxl1, false);
+	Wait(100);
+	Move("絵いばら９", 1000, -495, -759, Dxl1, false);
+	Wait(100);
+	Move("絵いばら０", 1000, -382, -775, Dxl1, false);
+
+	WaitAction("絵いばら０", null);
+//	WaitKey();
+
+
+
+////////////////////////////////////////////////////////////////////////
+	Fade("絵イベント０", 0, 1000, null, true);
+
+	Fade("絵色１", 3000, 0, null, false);
+
+//	Move("絵イベント０", 4000, 0, 0, Dxl3, false);
+//	Move("絵イベント０", 4000, -422, -10, Dxl3, false);
+//	Move("絵イベント０", 4000, -429, 58, Dxl3, false);
+//	Move("絵イベント０", 3000, -1969, -717, Dxl1, false);
+
+//	Move("絵いばら０", 2000, 1024, 576, Axl3, false);
+	Move("絵いばら０", 3500, -482, -388, Dxl3, false);
+	Move("絵いばら９", 3500, -627, -1048, Dxl3, false);
+	Move("絵いばら８", 2000, @-1000, @0, Axl3, false);
+	Move("絵いばら７", 2000, @1000, @0, Axl3, false);
+	Move("絵いばら６", 2000, @0, @-1000, Axl3, false);
+	Move("絵いばら５", 2000, @0, @1000, Axl3, false);
+	Move("絵いばら４", 2000, 1024, -1053, Axl3, false);
+	Move("絵いばら３", 2000, -1703, -1053, Axl3, false);
+	Move("絵いばら２", 2000, -1703, 576, Axl3, false);
+	Move("絵いばら１", 2000, 1024, 567, Axl3, false);
+
+	Wait(1000);
+//	Move("絵イベント０", 3500, -1251, -421, Dxl3, false);
+	Move("絵イベント０", 2500, -1347, -462, Dxl3, false);
+//	Wait(1500);//////////////////////////////////////////
+	Wait(3500);
+//	WaitKey();
+
+	Move("絵伊原１", 13000, -926, @0, null, false);
+	Move("絵伊原２", 13000, -300, @0, null, false);
+	Move("絵イベント１", 13000, -600, -127, null, false);
+//	Move("絵イベント１", 10000, -714, -266, null, false);
+//	Move("絵イベント１", 10000, -492, -179, null, false);
+//	Move("絵イベント１", 10000, -164, -238, null, false);
+	Fade("絵イベント１", 1000, 1000, null, false);
+	Fade("絵伊原*", 1000, 1000, null, false);
+	Wait(10000);
+	Fade("絵イベント２", 2000, 1000, null, true);
+	Wait(2000);
+////////////////////////////////////////////////////////////////////////
+
+	Delete("絵いばら*");
+	Delete("絵伊原*");
+	Delete("絵イベント０");
+	Delete("絵イベント１");
+
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00060a02">
+「……가시네&. <RUBY TEXT="길티 크라운">가시관</RUBY>이라고 할까?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//茨の中心に、まばゆく暖かい光が生まれる。
+//何かが咲くような気配。
+
+
+
+////★鋼屋：コメントアウト
+
+//（ほんの少しだけ嬉しそうに）
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+//<PRE @box0>
+//[text0050]
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX06/05a00070a02">
+//「あ……いや。そっか」
+
+
+//</PRE>
+//	SetText();
+//	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//光が弾ける。
+//まるで大きな薔薇が咲いたように見える。
+
+	//★徒歩：ＳＥ
+	CreateSE("SE02","se擬音_光02");
+	CreateSE("SE03","se擬音_光04");
+
+	MusicStart("SE02",0,500,0,1200,null,false);
+	MusicStart("SE03",0,500,0,1200,null,false);
+
+	SetVolumeEX("SE01", 2000, 0, null);
+
+	CreateTextureEX("絵イベント３", 3000, 0, InBottom, "cg/ev/ev0703最後のヴォイド_フル.jpg");
+	Fade("絵イベント３", 1000, 1000, null, true);
+
+	Wait(1000);
+
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX06/05a00080a02">
+//「<RUBY TEXT="エンピレオ">凜と咲く花</RUBY>かあ」
+//★鋼屋：テキスト差し替え（ひとつずつずらす）
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00070a02">
+｡ｸｾﾆ｡ｦ｡ｦ ｾﾆｴﾏ&. ｱﾗｷｸｱｸｳｪ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//光がコキュートスを包み込む。
+//光の中に真名が、コキュートスが溶けてゆく。
+	//★徒歩：ＳＥ
+	CreateSE("SE21","se擬音_光01");
+	CreateSE("SE22","se擬音_光02");
+	CreateSE("SE23","seヴォイド汎用01");
+
+	CreateSE("SE31","se擬音_光04");
+	CreateSE("SE32","se擬音_光02");
+	CreateSE("SE33","seヴォイド汎用02");
+
+	CreateSE("SE41","seヴォイド結晶化_l");
+	MusicStart("SE41",3000,500,0,1000,null,true);
+
+	CreatePlainSP("上背景", 10000);
+	CreateColorEXadd("絵色１", 10000, WHITE);
+	CreateTextureSP("絵背景３", 3000, 0, 0, "cg/bg/bg006003_3_コキュートス空間.jpg");
+	FadeDelete("上背景", 500, null, true);
+
+	MusicStart("SE21",1000,700,0,1000,null,false);
+	MusicStart("SE22",1000,700,0,1000,null,false);
+	MusicStart("SE23",0,500,0,1000,null,false);
+
+	Fade("絵色１", 2000, 1000, null, true);
+
+	CreatePlainSP("上背景", 10000);
+	CreateColorEXadd("絵色１", 10000, WHITE);
+	CreateTextureSP("絵背景３", 3000, 0, 0, "cg/ev/ev0608マナ結晶化.jpg");
+	FadeDelete("上背景", 500, null, true);
+
+	MusicStart("SE31",1000,700,0,1000,null,false);
+	MusicStart("SE32",1000,700,0,1000,null,false);
+	MusicStart("SE23",0,500,0,1000,null,false);
+
+	SetVolumeEX("SE41", 3000, 0, null);
+
+	Fade("絵色１", 2000, 1000, null, true);
+
+	Delete("絵イベント１");
+	Delete("絵イベント２");
+	Delete("絵背景*");
+
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//★鋼屋：テキスト挿入（ひとつずつずらしている）
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00080a02">
+「<RUBY TEXT="엠피레오">의연히 피어난 꽃</RUBY>인가」
+
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00090a02">
+「뭐야…… 피어날 수 있잖아&. 맘만 먹으면 잘하는 애였네」
+
+</PRE>
+	SetText();
+
+	Move("絵イベント３", 20000, @0, 0, null, false);
+	Fade("絵色１", 1000, 0, null, false);
+	Wait(6000);
+
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//光がスクルージとキャロルをのみ込む。
+//ふたり寄り添う。
+
+	//★徒歩：ＳＥ
+	CreateSE("SE81","seヴォイド茨の王冠01");
+
+	CreateSE("SE82","se擬音_光01");
+	CreateSE("SE83","se擬音_光02");
+	CreateSE("SE84","se擬音_光04");
+	CreateSE("SE85","seヴォイド汎用01");
+	CreateSE("SE86","seヴォイド汎用02");
+
+	MusicStart("SE81",2000,1000,0,1000,null,true);
+	MusicStart("SE82",0,700,0,1000,null,false);
+	Wait(2000);
+	Fade("絵色１", 4000, 1000, null, false);
+
+	MusicStart("SE83",0,700,0,1000,null,false);
+	Wait(500);
+	MusicStart("SE84",0,700,0,1000,null,false);
+	Wait(500);
+	MusicStart("SE85",0,700,0,1000,null,false);
+	Wait(500);
+	MusicStart("SE86",0,700,0,1000,null,false);
+	Wait(3000);
+
+	WaitAction("絵色１", null);
+	Delete("絵ムービー１");
+
+	SetVolumeEX("@lx*", 3000, 0, null);
+	SetVolumeEX("SE*", 5000, 0, null);
+
+	Wait(8000);
+
+	Delete("絵イベント*");
+	Delete("絵背景*");
+
+
+//ふと気づいたように、キャロルがスクルージを見上げる。
+
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00100a02">
+「맞다! 중요한 말을 깜빡했어!」
+
+//{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/05a00110a01">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+	PreSetRoll(0);
+	$SYSTEM_text_interval = 128;
+	$SYSTEM_text_waitkey = false;
+	#SYSTEM_text_speed=800;//#LOCAL_text_speed
+
+	Wait(2000);
+
+//	CreateTextureSP("絵背景１", 2000, -1024, Middle, "cg/ev/l/ev0703最後のヴォイド_フル_l.jpg");
+//	CreateTextureSP("絵人物１", 2000, 311, 0, "cg/ev/x/ev0604イェット・トゥー・カム登場_x11_母の笑み口開け.png");
+	CreateTextureSP("絵人物１", 2000, 0, 0, "cg/ev/ev0704クリスマスキャロル.jpg");
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//	CreateTextureEX("絵背景１", 2000, Center, -200, "cg/ev/m/ev0703最後のヴォイド_フル_m.jpg");
+	CreateTextureEX("絵背景１", 2000, Center, -200, "cg/ev/ev0703最後のヴォイド_フル.jpg");
+	Request("絵背景１", Smoothing);
+	CreateColorEX("絵色２", 2000, WHITE);
+
+	CreateTextureEX("絵手１", 4000, 300, 520, "cg/ef/x/ef_hand07_停止.png");
+	CreateTextureEX("絵手２", 4000, 300, 520, "cg/ef/x/ef_hand07_停止b.png");
+	CreateTextureEXadd("絵手３", 4000, 300, 520, "cg/ef/x/ef_hand07_停止c.png");
+	CreateTextureEXadd("絵手４", 4000, 300, 520, "cg/ef/x/ef_hand07_停止d.png");
+	CreateTextureEXadd("絵手５", 4000, 300, 520, "cg/ef/x/ef_hand07_停止e.png");
+	Request("絵手*", Smoothing);
+//	SetVertex("絵手*", 347, 947);
+	SetVertex("絵手*", 347, 100);
+	Zoom("絵手*", 0, 2000, 2000, Dxl2, true);
+	Move("絵手*", 0, @0, @1000, Axl1, true);
+
+	CreateTextureEX("絵イベント１", 4001, -1000, 200, "cg/ev/ev0705オウマ・シュウ１０年後_スクルージ.png");
+	Rotate("絵イベント１", 0, @0, @0, 40, null, true);
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	SoundPlay("@lxsong01",0,1000,true);
+
+	Fade("絵色１", 2000, 0, null, true);
+
+//（最高の笑顔で）
+
+	//Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+//<PRE @box0>
+//[text0090]
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX06/05a00120a02">
+//「メリークリスマス！」
+
+//</PRE>
+//	SetText();
+//	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	PlayVOICE_ED("キャロル","LX06/05a00120a02",1500,3000);
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/05a00120a02" mode="off">
+｡ｸｸﾞｸｮ ﾅｩｸｮｽｺｸｶｽｺ!｡ｹ
+{StopVOICEED();}
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+//<PRE @box0>
+//[text0100]
+//――俺は。
+
+//なんだか、救われてしまったような気がして。
+//なんだか、ひどく泣きそうになってしまって。
+
+//引き攣ったような笑顔を、何とか浮かべて、答えるのだ。
+
+//</PRE>
+//	SetText();
+//	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0101]
+｡ｪ｡ｪｳｪｴﾂ&.
+{WaitKey(1500);}
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――――
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0102]
+어쩐지 구원받은 것만 같아서&.
+{Wait(1000);}
+어쩐지 금세라도 눈물이 쏟아질 것 같아서&.
+{WaitKey(1500);}
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――――
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0103]
+일그러진 입가에 간신히 미소를 지어 보이며 대답한다&.
+{WaitKey(2000);}
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//スクルージ、少しだけ泣き出しそうになって。
+//やはり笑顔で。
+
+//	CreatePlainSP("上背景", 10000);
+
+//	CreateTextureSP("絵背景１", 2000, 0, Middle, "cg/ev/l/ev0703最後のヴォイド_フル_l.jpg");
+//	CreateTextureSP("絵人物１", 2000, 319, -30, "cg/bu/buスクルージ_通常_smile3.png");
+
+//	FadeDelete("上背景", 1000, null, true);
+
+	Wait(1000);
+
+	//Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+//<PRE @box0>
+//[text0110]
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX06/05a00130a01">
+//「メリークリスマス」
+
+//</PRE>
+//	SetText();
+//	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(200);
+
+
+	PlayVOICE_ED("スクルージ","LX06/05a00130a01",2000,3000);
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/05a00130a01" mode="off">
+｡ｸｸﾞｸｮ ﾅｩｸｮｽｺｸｶｽｺ｡ｹ
+{StopVOICEED();}
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――――
+	TextBoxDelete(1200);
+
+	//Wait(1000);
+
+//光。
+//薔薇に向かって、右手を伸ばすスクルージ。
+
+//ＥＶ：薔薇に伸びる右手
+//	Fade("絵色１", 2000, 1000, null, true);
+
+//////////////////////////////////////////////////////////////////////////////////////
+	SetVolumeEX("@lxsong01", 4000, 1800, null);
+
+	Fade("絵手１", 0, 1000, null, false);
+//	Fade("絵色１", 500, 0, null, true);
+
+	Zoom("絵背景１", 15000, 2000, 2000, null, false);
+	Move("絵背景１", 5500, @0, 0, Dxl1, false);
+	Fade("絵背景１", 3000, 1000, null, true);
+
+	Wait(2500);
+
+	Move("絵手*", 4000, 173, -30, Dxl3, false);
+//	Zoom("絵手*", 500, 1200, 1200, Dxl1, true);
+//	Zoom("絵手*", 500, 1000, 1000, Dxl1, false);
+//	Move("絵手*", 500, 173, -30, Dxl1, true);
+
+		Zoom("絵手*", 7000, 800, 800, DxlAuto, false);
+//	Zoom("絵手*", 7000, 800, 800, null, false);
+
+	Fade("絵色２", 3000, 1000, null, false);
+	Fade("絵手２", 3000, 1000, null, false);
+	Fade("絵手３", 3000, 1000, null, true);
+	Fade("絵手４", 3000, 1000, null, true);
+//		Wait(2000);
+
+	Fade("絵手５", 1000, 1000, null, false);
+	Fade("絵色１", 4000, 1000, null, false);
+//////////////////////////////////////////////////////////////////////////////////////
+
+	Fade("絵イベント１", 0, 1000, null, true);
+
+//	SetVolumeEX("@lxsong01", 4000, 1800, null);
+//	Fade("絵色１", 1000, 0, null, false);
+
+	Zoom("絵イベント１", 1000, 500, 500, Dxl3, false);
+	Rotate("絵イベント１", 500, @0, @0, 0, Dxl2, false);
+	Move("絵イベント１", 4000, -439, -160, Dxl1, false);
+	Wait(1500);
+	Fade("絵色１", 2000, 1000, null, true);
+
+//	WaitKey();
+//	ClearFadeAll(1000, true);
+
+}
+
+

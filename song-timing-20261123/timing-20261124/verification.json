@@ -1,0 +1,121 @@
+{
+  "sound_and_cues": {
+    "lxbgm01": {
+      "cues": 37,
+      "changed": 15,
+      "later_ends": 6,
+      "last_sung_end": 240.1,
+      "track_length": 273.76,
+      "ogg_sha256": "4fbb4c14283c561910d78f11f441174fa06d133303659f0a07fdcdc01c0a2195"
+    },
+    "lxbgm04": {
+      "cues": 70,
+      "changed": 33,
+      "later_ends": 21,
+      "last_sung_end": 244.1,
+      "track_length": 256.04,
+      "ogg_sha256": "da7016b4fecc98f038b26a8e53f0d4eb778bc0fcd254dfd02a727229a73ad1c6"
+    },
+    "lxbgm05": {
+      "cues": 38,
+      "changed": 12,
+      "later_ends": 11,
+      "last_sung_end": 204.0,
+      "track_length": 228.573,
+      "ogg_sha256": "8aaf33f7e20f3d5c32ed442dff45d59232e62c55322a321291709f04c2118878"
+    },
+    "lxbgm12": {
+      "cues": 36,
+      "changed": 23,
+      "later_ends": 21,
+      "last_sung_end": 253.3,
+      "track_length": 274.48,
+      "ogg_sha256": "bde674d3af5512753112ec6e14842f052e647ed14076838a5afb1ae399d7fc64"
+    },
+    "lxbgm14": {
+      "cues": 27,
+      "changed": 21,
+      "later_ends": 15,
+      "last_sung_end": 224.6,
+      "track_length": 251.413,
+      "ogg_sha256": "f2575241b62eae6ef426ce1abea3b231a7d1820608beaae79221966c30ca3aca"
+    },
+    "lxbgm16": {
+      "cues": 38,
+      "changed": 24,
+      "later_ends": 19,
+      "last_sung_end": 194.5,
+      "track_length": 228.4,
+      "ogg_sha256": "bf083316bb83f2be5431be5df97aae3a666f43cf1991d8c0970c5f2c032c1f20"
+    },
+    "lxbgm18": {
+      "cues": 15,
+      "changed": 10,
+      "later_ends": 6,
+      "last_sung_end": 116.1,
+      "track_length": 155.587,
+      "ogg_sha256": "8d60df2b3dee8ffd6083eb78082269a73c6228f3860e57260a30e3621684c1b9"
+    },
+    "lxbgm19": {
+      "cues": 48,
+      "changed": 17,
+      "later_ends": 12,
+      "last_sung_end": 200.0,
+      "track_length": 252.387,
+      "ogg_sha256": "ab9e9cc345564ee56978b54aa6d389b459929082cf488057db8495ac853952ee"
+    },
+    "lxsong01": {
+      "cues": 30,
+      "changed": 20,
+      "later_ends": 17,
+      "last_sung_end": 203.0,
+      "track_length": 236.187,
+      "ogg_sha256": "748564f5e5d084ad490474f73659198156431b84eea6c79111d3d637257f344f"
+    },
+    "lxsong02": {
+      "cues": 27,
+      "changed": 9,
+      "later_ends": 5,
+      "last_sung_end": 207.0,
+      "track_length": 235.36,
+      "ogg_sha256": "fe81a9e0b6e1cb6f6f7925600e2dbd43b2fbd14295f36594cbd80494dd5e4eb0"
+    }
+  },
+  "save_views": {
+    "original-slot": {
+      "file_sha256": "2b9b15b1ee995ff80805381aac36b9cf91061ec588addc1ceed509b5cc3c33ee",
+      "view_sha256": "a0b100c42c9eafa4b2a7c24a1860cb479954964a24a42e59b2fd58f733b99d9d",
+      "checked_cues": 366,
+      "same_length": true,
+      "idempotent": true
+    },
+    "old-patch-slot": {
+      "file_sha256": "206613c77cad6f4585284aa9a63d146c35387c96aed921fb440f06f971a89ee3",
+      "view_sha256": "189bbc32d50f9c244a1cd73a1480be2c12c208111a016ffbaa890e1c560064a4",
+      "checked_cues": 366,
+      "same_length": true,
+      "idempotent": true
+    },
+    "previous-bgm-repair-view": {
+      "file_sha256": "77418ff38dd264f8068e77902aa80678124c71230dc627bda2529e1ce37de73f",
+      "view_sha256": "a0b100c42c9eafa4b2a7c24a1860cb479954964a24a42e59b2fd58f733b99d9d",
+      "checked_cues": 366,
+      "same_length": true,
+      "idempotent": true
+    },
+    "modern-crlf-slot": {
+      "file_sha256": "f1c964db44326f7e436d85408d4635d9d47366f347782425637f7be2ecfeea8b",
+      "view_sha256": "6c0daf6a0a70c406748f0e85b3575349ed3a6502fb839c618c153c1d373f4ee6",
+      "checked_cues": 366,
+      "same_length": true,
+      "idempotent": true
+    },
+    "modern-lf-fixture": {
+      "file_sha256": "def1b82c2d108705d620d5dd78020efe9870c80be05629ba22e579d120271665",
+      "view_sha256": "ace9e55bf45a5007a2eac1e191e8eb7cea4fe175230cd39c7fb3fb22baa7d811",
+      "checked_cues": 366,
+      "same_length": true,
+      "idempotent": true
+    }
+  }
+}

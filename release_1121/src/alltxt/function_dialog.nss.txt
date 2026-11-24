@@ -1,0 +1,452 @@
+
+
+
+//■ベースダイアログ
+function DialogBase($ダイアログ画像名)
+{
+
+//	CreateName("MSGWND");
+
+	//▲画像ロード
+
+	//■定義「背景」
+	if(!$InDialog){
+//		CreateColor("MSGWND/MSG_bak", 1010000, Center, Middle, 1024, 768, BLACK);
+	}
+
+	//■定義「選択肢」
+	$DialogNut="cg/sys/dialog/"+$ダイアログ画像名+".png";
+	CreateTexture("MSGWND/MSG_txt",1010000,230,168,$DialogNut);
+	if($ダイアログ画像名=="このデータから再開しますか？" || $ダイアログ画像名=="このデータを上書きしますか？" || $ダイアログ画像名=="ゲームを終了しますか？" || $ダイアログ画像名=="タイトル画面へ戻りますか？" || $ダイアログ画像名=="全ての項目を初期設定に戻しますか？"){
+	SetVertex("MSGWND/MSG_txt", 0, 0);
+	Zoom("MSGWND/MSG_txt", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_txt", Smoothing);
+	}
+	Request("MSGWND/MSG_txt", Smoothing);
+	//YES
+	CreateTexture("MSGWND/MSG_img_yes",1012000,230,168,"cg/sys/dialog/yes-001.png");
+	SetVertex("MSGWND/MSG_img_yes", 0, 0);
+	Zoom("MSGWND/MSG_img_yes", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_img_yes", Smoothing);
+	CreateChoice("MSGWND/MSG_yes");
+	CreateTexture("MSGWND/MSG_yes/MouseUsual/img",0,440,273,"cg/sys/dialog/YES_hit.png");
+	//CreateTexture("MSGWND/MSG_yes/MouseUsual/img2",1012000,400,398,"cg/sys/dialog/yes-001.png");
+	CreateTexture("MSGWND/MSG_yes/MouseOver/img",1012000,230,168,"cg/sys/dialog/yes-002.png");
+	SetVertex("MSGWND/MSG_yes/MouseOver/img", 0, 0);
+	Zoom("MSGWND/MSG_yes/MouseOver/img", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_yes/MouseOver/img", Smoothing);
+	CreateTexture("MSGWND/MSG_yes/MouseOver/img2",1012000,230,168,"cg/sys/dialog/YES-アンダーライン.png");
+	CreateTexture("MSGWND/MSG_yes/MouseClick/img",1012000,230,168,"cg/sys/dialog/yes-002.png");
+	SetVertex("MSGWND/MSG_yes/MouseClick/img", 0, 0);
+	Zoom("MSGWND/MSG_yes/MouseClick/img", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_yes/MouseClick/img", Smoothing);
+	CreateSound("MSGWND/MSG_yes/MouseClick/se", SE, "sound/se/SE_システム_ダイアログ_決定.ogg");
+	Request("MSGWND/MSG_yes/MouseUsual/img", Erase);
+	//NO
+	CreateTexture("MSGWND/MSG_img_no",1012000,230,168,"cg/sys/dialog/no-001.png");
+	SetVertex("MSGWND/MSG_img_no", 0, 0);
+	Zoom("MSGWND/MSG_img_no", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_img_no", Smoothing);
+	CreateChoice("MSGWND/MSG_no");
+	CreateTexture("MSGWND/MSG_no/MouseUsual/img",0,532,273,"cg/sys/dialog/NO_hit.png");
+	//CreateTexture("MSGWND/MSG_no/MouseUsual/img2",1012000,520,398,"cg/sys/dialog/no-001.png");
+	CreateTexture("MSGWND/MSG_no/MouseOver/img",1012000,230,168,"cg/sys/dialog/no-002.png");
+	SetVertex("MSGWND/MSG_no/MouseOver/img", 0, 0);
+	Zoom("MSGWND/MSG_no/MouseOver/img", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_no/MouseOver/img", Smoothing);
+	CreateTexture("MSGWND/MSG_no/MouseOver/img2",1012000,230,168,"cg/sys/dialog/NO-アンダーライン.png");
+	CreateTexture("MSGWND/MSG_no/MouseClick/img",1012000,230,168,"cg/sys/dialog/no-002.png");
+	SetVertex("MSGWND/MSG_no/MouseClick/img", 0, 0);
+	Zoom("MSGWND/MSG_no/MouseClick/img", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_no/MouseClick/img", Smoothing);
+	CreateSound("MSGWND/MSG_no/MouseClick/se", SE, "sound/se/SE_システム_ダイアログ_決定.ogg");
+	Request("MSGWND/MSG_no/MouseUsual/img", Erase);
+
+	CreateSound("MSGWND/se", SE, "sound/se/SE_システム_ダイアログ_表示.ogg");
+	
+	//▲セットフォーカス
+	SetNextFocus("MSGWND/MSG_yes/MouseUsual/img","MSGWND/MSG_no/MouseUsual/img",LEFT);
+	SetNextFocus("MSGWND/MSG_yes/MouseUsual/img","MSGWND/MSG_no/MouseUsual/img",RIGHT);
+	SetNextFocus("MSGWND/MSG_yes/MouseUsual/img","MSGWND/MSG_no/MouseUsual/img",DOWN);
+	SetNextFocus("MSGWND/MSG_yes/MouseUsual/img","MSGWND/MSG_no/MouseUsual/img",UP);
+	SetNextFocus("MSGWND/MSG_no/MouseUsual/img","MSGWND/MSG_yes/MouseUsual/img",LEFT);
+	SetNextFocus("MSGWND/MSG_no/MouseUsual/img","MSGWND/MSG_yes/MouseUsual/img",RIGHT);
+	SetNextFocus("MSGWND/MSG_no/MouseUsual/img","MSGWND/MSG_yes/MouseUsual/img",DOWN);
+	SetNextFocus("MSGWND/MSG_no/MouseUsual/img","MSGWND/MSG_yes/MouseUsual/img",UP);
+
+	//●最終準備
+	Fade("MSGWND/MSG_*",0,0,null,false);
+	Fade("MSGWND/MSG_*/*/*",0,0,null,false);
+
+	//★描画開始
+	Request("MSGWND/se",Play);
+	Fade("MSGWND/MSG_img_*",200,1000,null,false);
+	Fade("MSGWND/MSG_msg",200,1000,null,false);
+	Fade("MSGWND/MSG_txt",200,1000,null,false);
+	Fade("MSGWND/MSG_*/MouseUsual/*",200,1000,null,true);
+	//Fade("MSGWND/MSG_bak",150,800,null,false);
+
+	WaitAction("MSGWND/MSG_*",null);
+}
+
+//■確認のみ（瞬時に表示）
+function DialogBase2($ダイアログ画像名)
+{
+	//★ロック設置
+	LockVideo(true);
+
+//	CreateName("MSGWND");
+
+	//▲画像ロード
+
+	//■定義「背景」
+	if(!$InDialog&&!$save_check){
+//		CreateColor("MSGWND/MSG_bak", 1010000, Center, Middle, 1024, 768, BLACK);
+//		Fade("MSGWND/MSG_bak",0,0,null,false);
+	}
+	//■定義「選択肢」
+	//box
+	CreateTexture("MSGWND/MSG_msg",1010000,56,184,"cg/sys/dialog/ベース2.png");
+	Request("MSGWND/MSG_msg", Smoothing);
+
+	$DialogNut="cg/sys/dialog/"+$ダイアログ画像名+".png";
+	CreateTexture("MSGWND/MSG_txt2",1010000,293,248,$DialogNut);
+	if($ダイアログ画像名=="このデータから再開しますか？" || $ダイアログ画像名=="このデータを上書きしますか？" || $ダイアログ画像名=="ゲームを終了しますか？" || $ダイアログ画像名=="タイトル画面へ戻りますか？" || $ダイアログ画像名=="全ての項目を初期設定に戻しますか？"){
+	SetVertex("MSGWND/MSG_txt2", 0, 0);
+	Zoom("MSGWND/MSG_txt2", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_txt2", Smoothing);
+	}
+	Request("MSGWND/MSG_txt2", Smoothing);
+
+	//●最終準備
+	Fade("MSGWND/MSG_txt2",0,0,null,false);
+
+	//★描画開始
+	Fade("MSGWND/MSG_img_*",0,0,null,false);
+	Fade("MSGWND/MSG_msg",0,1000,null,false);
+	Fade("MSGWND/MSG_txt",0,0,null,false);
+	Fade("MSGWND/MSG_*/*/*",0,0,null,false);
+	//Fade("MSGWND/MSG_bak",0,800,null,false);
+	Fade("MSGWND/MSG_txt2",0,1000,null,false);
+
+	//★ロック設置
+	LockVideo(false);
+
+	WaitAction("MSGWND/MSG_*",null);
+
+	Delete("MSGWND/MSG_txt");
+	Delete("MSGWND/MSG_img_*");
+	Delete("MSGWND/*/*/*");
+}
+
+
+//■ベースダイアログ・確認のみ
+function DialogBase3($ダイアログ画像名)
+{
+//	CreateName("MSGWND");
+
+	//▲画像ロード
+
+	//■定義「背景」
+	if(!$InDialog&&!$save_check){
+//		CreateColor("MSGWND/MSG_bak", 1010000, Center, Middle, 1024, 768, BLACK);
+//		Fade("MSGWND/MSG_bak",0,0,null,false);
+	}
+	//■定義「選択肢」
+	//mask
+	CreateTexture("MSGWND/MSG_msg2",1010000,56,184,"cg/sys/dialog/マスク.png");
+	Request("MSGWND/MSG_msg2", Smoothing);
+	Zoom("MSGWND/MSG_msg2", 0, 0, 1000, null, false);
+	//box
+	CreateTexture("MSGWND/MSG_msg",1010000,56,184,"cg/sys/dialog/ベース2.png");
+	Request("MSGWND/MSG_msg", Smoothing);
+
+	$DialogNut="cg/sys/dialog/"+$ダイアログ画像名+".png";
+	CreateTexture("MSGWND/MSG_txt",1010000,293,248,$DialogNut);
+	if($ダイアログ画像名=="このデータから再開しますか？" || $ダイアログ画像名=="このデータを上書きしますか？" || $ダイアログ画像名=="ゲームを終了しますか？" || $ダイアログ画像名=="タイトル画面へ戻りますか？" || $ダイアログ画像名=="全ての項目を初期設定に戻しますか？"){
+	SetVertex("MSGWND/MSG_txt", 0, 0);
+	Zoom("MSGWND/MSG_txt", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_txt", Smoothing);
+	}
+	Request("MSGWND/MSG_txt", Smoothing);
+
+	//●最終準備
+	Fade("MSGWND/MSG_*",0,0,null,false);
+	Fade("MSGWND/MSG_*/*/*",0,0,null,true);
+
+	//★描画開始
+	Request("MSGWND/se", Play);
+
+	Fade("MSGWND/MSG_msg2",0,1000,null,true);
+	Zoom("MSGWND/MSG_msg2", 100, 1000, 1000, null, false);
+	Wait(100);
+
+	Fade("MSGWND/MSG_msg",200,1000,null,false);
+	Fade("MSGWND/MSG_txt",200,1000,null,true);
+	//Fade("MSGWND/MSG_bak",150,800,null,false);
+
+	Fade("MSGWND/MSG_msg2",0,0,null,false);
+
+	WaitAction("MSGWND/MSG_*",null);
+}
+
+
+//■確認のみ（特殊）
+function DialogBase4($ダイアログ画像名)
+{
+	//★ロック設置
+	LockVideo(true);
+
+//	CreateName("MSGWND");
+
+	//▲画像ロード
+
+	//■定義「背景」
+	if(!$InDialog&&!$save_check){
+//		CreateColor("MSGWND/MSG_bak", 1010000, Center, Middle, 1024, 768, BLACK);
+//		Fade("MSGWND/MSG_bak",0,0,null,false);
+	}
+	//■定義「選択肢」
+	//mask
+	CreateTexture("MSGWND/MSG_msg",1010000,56,184,"cg/sys/dialog/マスク.png");
+	Request("MSGWND/MSG_msg", Smoothing);
+	//box
+	CreateTexture("MSGWND/MSG_msg",1010000,56,184,"cg/sys/dialog/ベース2.png");
+	Request("MSGWND/MSG_msg", Smoothing);
+
+	$DialogNut="cg/sys/dialog/"+$ダイアログ画像名+".png";
+	CreateTexture("MSGWND/MSG_txt2",1010000,293,248,$DialogNut);
+	if($ダイアログ画像名=="このデータから再開しますか？" || $ダイアログ画像名=="このデータを上書きしますか？" || $ダイアログ画像名=="ゲームを終了しますか？" || $ダイアログ画像名=="タイトル画面へ戻りますか？" || $ダイアログ画像名=="全ての項目を初期設定に戻しますか？"){
+	SetVertex("MSGWND/MSG_txt2", 0, 0);
+	Zoom("MSGWND/MSG_txt2", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_txt2", Smoothing);
+	}
+	Request("MSGWND/MSG_txt2", Smoothing);
+
+	CreateSound("MSGWND/se", SE, "sound/se/SE_システム_セーブ_ロック警告.ogg");
+
+	//●最終準備
+	Fade("MSGWND/MSG_txt2",0,0,null,false);
+
+	//★描画開始
+	Request("MSGWND/se", Play);
+
+	Fade("MSGWND/MSG_img_*",0,0,null,false);
+	Fade("MSGWND/MSG_msg",0,1000,null,false);
+	Fade("MSGWND/MSG_txt",0,0,null,false);
+	Fade("MSGWND/MSG_*/*/*",0,0,null,false);
+	//Fade("MSGWND/MSG_bak",0,800,null,false);
+	Fade("MSGWND/MSG_txt2",0,1000,null,false);
+
+	//★ロック設置
+	LockVideo(false);
+
+	Shake("MSGWND/*/*/*", 200, 0, 10, 0, 0, 700, Dxl1, false);
+	Shake("MSGWND/*", 200, 0, 10, 0, 0, 700, Dxl1, false);
+
+	WaitAction("MSGWND/MSG_*",null);
+
+	Delete("MSGWND/MSG_txt");
+	Delete("MSGWND/MSG_img_*");
+	Delete("MSGWND/*/*/*");
+}
+
+//■YES/NO（特殊・一瞬表示）
+function DialogBase5($ダイアログ画像名)
+{
+	//★ロック設置
+	LockVideo(true);
+
+//	CreateName("MSGWND");
+
+	//▲画像ロード
+
+	//■定義「背景」
+	if(!$InDialog){
+//		CreateColor("MSGWND/MSG_bak", 1010000, Center, Middle, 1024, 768, BLACK);
+	}
+
+	//■定義「選択肢」
+	//box
+	CreateTexture("MSGWND/MSG_msg",1010000,56,184,"cg/sys/dialog/ベース.png");
+	Request("MSGWND/MSG_msg", Smoothing);
+
+	$DialogNut="cg/sys/dialog/"+$ダイアログ画像名+".png";
+	CreateTexture("MSGWND/MSG_txt",1010000,293,248,$DialogNut);
+	if($ダイアログ画像名=="このデータから再開しますか？" || $ダイアログ画像名=="このデータを上書きしますか？" || $ダイアログ画像名=="ゲームを終了しますか？" || $ダイアログ画像名=="タイトル画面へ戻りますか？" || $ダイアログ画像名=="全ての項目を初期設定に戻しますか？"){
+	SetVertex("MSGWND/MSG_txt", 0, 0);
+	Zoom("MSGWND/MSG_txt", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_txt", Smoothing);
+	}
+	Request("MSGWND/MSG_txt", Smoothing);
+	//YES
+//	CreateTexture("MSGWND/MSG_img_yes",1012000,330,297,"cg/sys/dialog/yes-001.png");
+	CreateChoice("MSGWND/MSG_yes");
+	CreateTexture("MSGWND/MSG_yes/MouseUsual/img",1012000,330,297,"cg/sys/dialog/yes-001.png");
+	SetVertex("MSGWND/MSG_yes/MouseUsual/img", 0, 0);
+	Zoom("MSGWND/MSG_yes/MouseUsual/img", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_yes/MouseUsual/img", Smoothing);
+	//CreateTexture("MSGWND/MSG_yes/MouseUsual/img2",1012000,330,297,"cg/sys/dialog/yes-001.png");
+	CreateTexture("MSGWND/MSG_yes/MouseOver/img",1012000,330,297,"cg/sys/dialog/yes-002.png");
+	SetVertex("MSGWND/MSG_yes/MouseOver/img", 0, 0);
+	Zoom("MSGWND/MSG_yes/MouseOver/img", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_yes/MouseOver/img", Smoothing);
+	CreateSound("MSGWND/MSG_yes/MouseOver/se", SE, "sound/se/SE_システム_ダイアログ_選択.ogg");
+	CreateTexture("MSGWND/MSG_yes/MouseClick/img",1012000,330,297,"cg/sys/dialog/yes-003.png");
+	Request("MSGWND/MSG_yes/MouseUsual/img", Erase);
+	//NO
+//	CreateTexture("MSGWND/MSG_img_no",1012000,501,297,"cg/sys/dialog/no-001.png");
+	CreateChoice("MSGWND/MSG_no");
+	CreateTexture("MSGWND/MSG_no/MouseUsual/img",1012000,501,297,"cg/sys/dialog/no-001.png");
+	SetVertex("MSGWND/MSG_no/MouseUsual/img", 0, 0);
+	Zoom("MSGWND/MSG_no/MouseUsual/img", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_no/MouseUsual/img", Smoothing);
+	//CreateTexture("MSGWND/MSG_no/MouseUsual/img2",1012000,501,297,"cg/sys/dialog/no-001.png");
+	CreateTexture("MSGWND/MSG_no/MouseOver/img",1012000,501,297,"cg/sys/dialog/no-002.png");
+	SetVertex("MSGWND/MSG_no/MouseOver/img", 0, 0);
+	Zoom("MSGWND/MSG_no/MouseOver/img", 0, 250, 250, null, false);
+	Request("MSGWND/MSG_no/MouseOver/img", Smoothing);
+	CreateSound("MSGWND/MSG_no/MouseOver/se", SE, "sound/se/SE_システム_ダイアログ_選択.ogg");
+	CreateTexture("MSGWND/MSG_no/MouseClick/img",1012000,501,297,"cg/sys/dialog/no-003.png");
+	Request("MSGWND/MSG_no/MouseUsual/img", Erase);
+
+	CreateSound("MSGWND/se", SE, "sound/se/SE_システム_ダイアログ_注意.ogg");
+	CreateSound("MSGWND/MSG_yes/se", SE, "sound/se/SE_システム_ダイアログ_はい.ogg");
+	CreateSound("MSGWND/MSG_no/se", SE, "sound/se/SE_システム_ダイアログ_いいえ.ogg");
+
+	//▲セットフォーカス
+	SetNextFocus("MSGWND/MSG_yes/MouseUsual/img","MSGWND/MSG_no/MouseUsual/img",LEFT);
+	SetNextFocus("MSGWND/MSG_yes/MouseUsual/img","MSGWND/MSG_no/MouseUsual/img",RIGHT);
+	SetNextFocus("MSGWND/MSG_yes/MouseUsual/img","MSGWND/MSG_no/MouseUsual/img",DOWN);
+	SetNextFocus("MSGWND/MSG_yes/MouseUsual/img","MSGWND/MSG_no/MouseUsual/img",UP);
+	SetNextFocus("MSGWND/MSG_no/MouseUsual/img","MSGWND/MSG_yes/MouseUsual/img",LEFT);
+	SetNextFocus("MSGWND/MSG_no/MouseUsual/img","MSGWND/MSG_yes/MouseUsual/img",RIGHT);
+	SetNextFocus("MSGWND/MSG_no/MouseUsual/img","MSGWND/MSG_yes/MouseUsual/img",DOWN);
+	SetNextFocus("MSGWND/MSG_no/MouseUsual/img","MSGWND/MSG_yes/MouseUsual/img",UP);
+
+	//●最終準備
+	Fade("MSGWND/MSG_*",0,0,null,false);
+	Fade("MSGWND/MSG_*/*/*",0,0,null,false);
+
+	//★描画開始
+	Request("MSGWND/se", Play);
+
+	Fade("MSGWND/MSG_img_*",0,1000,null,false);
+	Fade("MSGWND/MSG_msg",0,1000,null,false);
+	Fade("MSGWND/MSG_txt",0,1000,null,false);
+	Fade("MSGWND/MSG_*/MouseUsual/*",0,1000,null,true);
+	//Fade("MSGWND/MSG_bak",150,800,null,false);
+
+	//★ロック設置
+	LockVideo(false);
+
+	WaitAction("MSGWND/MSG_*",null);
+}
+
+
+//■終了演出
+function DialogEnd()
+{
+	Fade("MSGWND/MSG_*",200,0,null,false);
+	Fade("MSGWND/MSG_*/*/*",200,0,null,false);
+	WaitAction("MSGWND/MSG_*",null);
+
+	WaitPlay("MSGWND/*/se", null);
+
+	Delete("MSGWND");
+}
+
+function DialogEnd2()
+{
+	Fade("MSGWND/MSG_*",0,0,null,false);
+	Fade("MSGWND/MSG_*/*/*",0,0,null,false);
+	WaitAction("MSGWND/MSG_*",null);
+
+	WaitPlay("MSGWND/*/se", null);
+
+	Delete("MSGWND");
+}
+
+
+
+//■ダイアログツイッター
+function Dialogtwitter()
+{
+	if(!$SYSTEM_twitter_lock){
+		call_chapter nss/sys_twitter.nss;
+	}
+}
+
+//■ダイアログフルスクリーン
+function DialogFull()
+{
+	if(!#SYSTEM_window_full_lock){
+		#SYSTEM_window_full=!#SYSTEM_window_full;
+		#SYSTEM_window_full_lock=false;
+		Wait(300);
+		$SYSTEM_keydown_f=false;
+	}
+}
+
+//■ダイアログクローズ
+function DialogClose()
+{
+	DialogGo();
+
+	$InDialog=true;
+	if($Title_Config||$Title_Load){call_chapter nss/sys_close.nss->main2;}
+	else{call_chapter nss/sys_close.nss;}
+	$InDialog=false;
+
+	DialogReturn();
+}
+
+//■ダイアログタイトル
+function DialogTitle()
+{
+	DialogGo();
+
+	$InDialog=true;
+	call_chapter nss/sys_reset.nss;
+	$InDialog=false;
+
+	DialogReturn();
+}
+
+//■ダイアログバックセレクト
+function DialogBack()
+{
+	DialogGo();
+
+	$InDialog=true;
+	call_chapter nss/sys_backselect.nss;
+	$InDialog=false;
+
+	DialogReturn();
+}
+
+
+
+
+
+function DialogGo()
+{
+	//▽移行演出
+	Fade("MSGWND/MSG_*",200,0,null,false);
+	Fade("MSGWND/MSG_*/*/*",200,0,null,false);
+	WaitAction("MSGWND/MSG_*",null);
+}
+
+function DialogReturn()
+{
+	//▽戻り演出
+	Fade("MSGWND/MSG_img_yes",200,1000,null,false);
+	Fade("MSGWND/MSG_img_no",200,1000,null,false);
+	Fade("MSGWND/MSG_msg",200,1000,null,false);
+	Fade("MSGWND/MSG_txt",200,1000,null,false);
+	Fade("MSGWND/MSG_txt2",200,1000,null,false);
+	WaitAction("MSGWND/MSG_*",null);
+
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_buttondown_close=false;
+}

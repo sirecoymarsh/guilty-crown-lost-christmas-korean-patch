@@ -1,0 +1,366 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0502.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0502_00sl.nss";
+
+}
+
+
+scene lx0502.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintBG("上背景", 30000);
+
+//ＳＥ：アサルトライフルの銃声
+	CreateColorEXadd("絵フラッシュ白", 5000, "FFFFFF");
+
+
+	CreateEffectDropSP("dr01", 2000, 0, 0, 1024, 576, 10, 10, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	SetAlias("dr01","dr01");
+	Fade("dr01", 0, 1000, null, true);
+
+
+	CreateTextureSP("bg01", 100, Center, Middle, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	CreateTextureSP("ef01", 100, Center, Middle, "cg/bg/x/bg001001_3_六本木街並み1崩壊_x01.png");
+	DrawEffectSkip("ef01", 1000, "Ripple ", 0, 300, null);
+	Fade("ef01", 0, 500, null, true);
+
+	CreateSE("SE90L","se背景_ガヤ_建物炎上_L");
+	MusicStart("SE90L",3000,500,0,1000,null,true);
+
+	Wait(2000);
+
+	CreateSE("SE01","se戦闘_銃器_機関銃01");
+	CreateSE("SE02","se戦闘_銃器_機関銃01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	FadeDelete("上背景", 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	SetVolumeEX("SE01", 50, 0, null);
+
+	Wait(500);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 800, null, true);
+	Wait(16);
+	Fade("絵フラッシュ白", 0, 0, null, true);
+	Wait(16);
+
+
+	Delete("絵フラッシュ白");
+
+	Wait(500);
+
+
+	CreateColorEX("black", 4998, "000000");
+	CreateColorEX("red", 5000, "AA0000");
+	CreateTextureEX("blood01", 4999, Center, Middle, "cg/ef/ef_blood02.png");
+	SetVertex("blood01", 1024, 576);
+	CreateTextureEX("blood02", 4999, Center, Middle, "cg/ef/ef_blood02.png");
+	SetVertex("blood02", 1024, 576);
+	SetBlur("blood01", true, 3, 500, 50, false);
+
+	CreateSE("SE01","se人体_動作_瓦礫を押しのける");
+	CreateSE("SE02","se人体_血_出血");
+	MusicStart("SE01",0,500,0,1000,null,false);
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	Fade("red", 0, 1000, null, true);
+	Fade("black", 0, 1000, null, true);
+	Fade("blood01", 0, 1000, null, true);
+	Fade("blood02", 0, 500, null, true);
+	FadeDelete("red", 300, null, false);
+	Zoom("blood01", 300, 1100, 1100, Dxl2, false);
+	Zoom("blood02", 300, 1200, 1200, Dxl2, false);
+
+	CreateSE("SE21","se人体_衝撃_転倒02複数");
+
+
+	Zoom("blood01", 300, 2200, 2200, Axl2, false);
+	Zoom("blood02", 300, 2400, 2400, Axl2, false);
+	FadeDelete("blood*", 300, Axl3, true);
+
+	MusicStart("SE21",0,700,0,1000,null,false);
+
+	CreateColorEX("絵色黒", 10000, "000000");
+	Fade("絵色黒", 2000, 1000, null, true);
+
+	Delete("black");
+	Delete("ef01");
+
+	//定義-----------------------
+	CreateTextureEX("bg01", 100, Center, Middle, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	Request("bg01", Smoothing);
+	//SetShade("bg01", HEAVY);
+	CreateMovieEX("mv01", 3000, 853, 128, true, false, "dx/mvfire01.ngs");
+	Zoom("mv01", 0, 3000, 3000, null, true);
+	Request("mv01", AddRender);
+
+	St("R",3740, @0,@50,"stダァト兵_待機_normal");
+	St("L",3740, @0,@50,"stダァト兵_構え_normal");
+
+	CreateSE("SE01","se人体_足音_着地02");
+	CreateSE("SE02","se人体_足音_着地02");
+
+
+	//動作-----------------------
+	FadeDelete("絵色黒", 1000, null, false);
+
+	Move("mv01", 0, 900, @0, null, true);
+
+	Fade("smoke01", 1000, 800, null, false);
+	Fade("mv01", 1000, 600, null, false);
+
+	//Move("bg01", 700, @-50, @0, Dxl1, false);
+	Fade("bg01", 500, 1000, null, false);
+
+
+	FadeDelete("上背景", 1000, null, true);
+
+	Wait(1000);
+
+
+	MusicStart("SE01",0,500,0,900,null,false);
+	Move("@StNameR/R*", 600, @0, @-50, Dxl1, false);
+	FadeSt("R",400,false);
+
+	Wait(200);
+
+	MusicStart("SE02",0,500,0,800,null,false);
+	Move("@StNameL/L*", 600, @0, @-50, Dxl1, false);
+	FadeSt("L",400,true);
+
+	Wait(500);
+
+
+//◆◆六本木／夜
+
+//ここでLX0001と同じシーンに繋がる。
+
+//ダァト兵による市民の虐殺。
+//殺される人々。
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【ダァト兵Ａ】
+<voice name="다아트 병사 A" class="�_�@긣빜�`" src="voice/LX00/1000010e01">
+「<RUBY TEXT="올 클리어">제압 완료</RUBY>&. 전진한다」
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【ダァト兵Ｂ】
+<voice name="다아트 병사 B" class="�_�@긣빜괶" src="voice/LX00/1000020e02">
+「롯폰기는 바이러스로 괴멸했다&. 생존자는 없다&.
+｡｡ｹﾝｺｹﾇﾑｴﾙ&. <RUBY TEXT="｡､｡､｡､｡､｡､｡､">ｻﾁｸﾀﾚｴﾂ ｾﾙ</RUBY>｡ｹ
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【ダァト兵Ａ】
+<voice name="다아트 병사 A" class="�_�@긣빜�`" src="voice/LX00/1000030e01">
+｡ｸ<RUBY TEXT="ﾀｪﾄﾚ">ｾﾋｰﾚｴﾙ</RUBY>｡ｹ
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+////////////////////////////////////////
+
+//遠くからその光景を見ているスクルージ。
+
+
+	TextBoxDelete();
+
+	CreateSE("SE01","se人体_足音_歩く04L");
+	CreateSE("SE02","se人体_足音_歩く04L");
+	MusicStart("SE01",0,1200,0,1300,null,false);
+	MusicStart("SE02",0,1200,0,1600,null,false);
+
+
+	CreateColorEX("co01", 10000, "000000");
+	Fade("co01", 500, 1000, null, true);
+
+	DeleteAllSt(0,true);
+
+	SetVolumeEX("SE01", 3000, 0, null);
+	SetVolumeEX("SE02", 3000, 0, null);
+
+	CreateTextureSP("bg01", 5100, 0, -200, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	Rotate("bg01", 0, @0, 180, @0, null,true);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	SetShade("bg01", HEAVY);
+	CreateTextureSP("bg02", 5100, -205, 141, "cg/bg/x/bg005001_3_路地裏.jpg_x11_ogami.png");
+	Request("bg02", Smoothing);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+
+	Wait(1500);
+
+	FadeDelete("co01", 1000, null, false);
+	Move("bg01", 2000, 50, @0, Dxl1, false);
+	Move("bg02", 2000, -49, @0, Dxl1, true);
+
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0200040a01">
+｡ｸ｡ｪ｡ｪ｡ｪ｡ｪ｡ｪ｡ｪ｡ｹ
+
+//★★★
+{	DeleteFw();}
+――다아트의 병사 놈들이 움직이고 있다&.
+
+뭐&, 당연하겠지&.
+이브와 관련된 이 이상사태를 놈들이 방치할 리도 없다&.
+
+하지만 이젠 수단을 가릴 처지가 아닌 모양이다&. 병사 놈들의 대화로 미루어 보아&, 아무래도 롯폰기를 통째로 처분할 작정인가 보다&.
+
+감염을 막기 위해서인가&. 입막음까지 겸하려는 건지도 모른다&.
+
+……어느 쪽이든 구역질 나는 광경임에는 틀림없다&.
+
+뚱한 낯짝의 병사 놈들이&, 제 세상인 양 활개 치고 다니는 것도&.<K>
+놈들의 발치에서 꼬맹이와 그 어머니가 포개져 죽어 있는 것도&, 말이다&.
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//？？：地の文
+//ダァトが動いているのか。どういうつもりだ的。
+
+
+	TextBoxDelete();
+
+	SetVolumeEX("SE*", 500, 0, null);
+	Wait(500);
+
+//次々と輝く水晶の柱と化してゆく人間たち。それを撃ち殺す見慣れた制服。
+//いずれにせよ反吐がでる光景だ。
+//母子らしきのが倒れている
+
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//→→奴らの言葉を真実にする
+//→→かまっている暇はない
+
+////////////////////////////////////////
+
+
+//	ClearFadeAll(1000, true);
+
+}

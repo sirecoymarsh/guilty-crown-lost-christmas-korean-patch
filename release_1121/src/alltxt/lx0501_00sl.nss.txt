@@ -1,0 +1,86 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0501_00sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+
+}
+
+
+scene lx0501_00sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+
+	PrintBG("上背景", 25000);
+
+	CreatePlainEX("selpl01", 16000);
+	SetTone("selpl01", Monochrome);
+
+	CreateMovieEX("selmovie01", 21000, Center, Middle, true, true, "dx/mvselect01.ngs");
+	Request("selmovie01", SubRender);
+	Zoom("selmovie01", 0, 3500, 3500, null, true);
+	Fade("selmovie01", 0, 500, null, true);
+
+	FadeDelete("上背景", 500, null, false);
+	Fade("selpl01", 500, 1000, null, true);
+
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//→→キャロルを探す
+//→→歌の源に向かう
+
+////////////////////////////////////////
+
+	$select_fade=true;
+	SetChoice02("캐롤을 찾는다","노래의 근원으로 향한다");
+	WaitChoice02();
+	
+	if($SetChoiceSelect==0){		$GameName = "lx0501_01.nss";$lx0501_00sl選択肢=1;$GOOD_MAN_POINT=$GOOD_MAN_POINT+1;}
+	else if($SetChoiceSelect==1){	$GameName = "lx0501_02.nss";$lx0501_00sl選択肢=0;}
+
+//	ClearFadeAll(1000, true);
+
+}

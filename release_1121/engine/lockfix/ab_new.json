@@ -1,0 +1,120 @@
+[
+ {
+  "run": "lk_new_1off_074036",
+  "frames": 748,
+  "fps": 25.8,
+  "gaps_over_0_6": 3,
+  "gap_sum": 3.9,
+  "gaps": [
+   [
+    47.6,
+    1.18
+   ],
+   [
+    60.6,
+    1.44
+   ],
+   [
+    65.2,
+    1.3
+   ]
+  ],
+  "max_gap": 1.44,
+  "locks": {
+   "engine-waited": 3
+  },
+  "clicks": [
+   [
+    "40:440:392",
+    41.0
+   ],
+   [
+    "46:200:71",
+    47.1
+   ]
+  ],
+  "exited_early": null,
+  "dialogs": [],
+  "mode": "off"
+ },
+ {
+  "run": "lk_new_2on_074207",
+  "frames": 807,
+  "fps": 27.8,
+  "gaps_over_0_6": 0,
+  "gap_sum": 0,
+  "gaps": [],
+  "max_gap": 0.48,
+  "locks": {
+   "stepped-aside": 1
+  },
+  "clicks": [
+   [
+    "40:440:392",
+    41.1
+   ],
+   [
+    "46:200:71",
+    47.0
+   ]
+  ],
+  "exited_early": null,
+  "dialogs": [],
+  "mode": "on"
+ },
+ {
+  "run": "lk_new_3off_074338",
+  "frames": 715,
+  "fps": 24.7,
+  "gaps_over_0_6": 1,
+  "gap_sum": 1.2,
+  "gaps": [
+   [
+    47.5,
+    1.19
+   ]
+  ],
+  "max_gap": 1.19,
+  "locks": {
+   "engine-waited": 1
+  },
+  "clicks": [
+   [
+    "40:440:392",
+    40.9
+   ],
+   [
+    "46:200:71",
+    47.0
+   ]
+  ],
+  "exited_early": null,
+  "dialogs": [],
+  "mode": "off"
+ },
+ {
+  "run": "lk_new_4on_074509",
+  "frames": 703,
+  "fps": 24.2,
+  "gaps_over_0_6": 0,
+  "gap_sum": 0,
+  "gaps": [],
+  "max_gap": 0.39,
+  "locks": {
+   "stepped-aside": 1
+  },
+  "clicks": [
+   [
+    "40:440:392",
+    40.9
+   ],
+   [
+    "46:200:71",
+    47.1
+   ]
+  ],
+  "exited_early": null,
+  "dialogs": [],
+  "mode": "on"
+ }
+]

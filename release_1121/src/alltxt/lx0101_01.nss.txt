@@ -1,0 +1,196 @@
+
+
+//<continuation number="70">
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0101_01.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0102.nss";
+
+}
+
+
+scene lx0101_01.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+	PrintBG("上背景", 25000);
+
+////////////////////////////////////////
+//←←逃げろ！
+
+//警備兵視点
+
+//ＳＥ：爆音のようなダッシュ
+//揺れる廊下
+
+	//定義---------------------------
+	CreatePlainSP("selpl01", 25000);
+	CreateTextureSP("bg01", 100, center, middle, "cg/bg/bg002003_5_通路2.jpg");
+	Zoom("bg01", 0, 2000, 2000, null, true);
+
+	CreateTextureEX("ef01", 5000, center, middle, "cg/bg/l/bg002003_5_通路2_l.jpg");
+	Zoom("ef01", 0, 500, 500, null, true);
+	SetBlur("ef01", true, 1, 500, 50, false);
+
+	CreateTextureEX("ef02", 5000, center, middle, "cg/ef/x/ef_zoom01.jpg");
+
+	CreateSE("SE00","se戦闘_動作_突進04");
+	CreateSE("SE01","se戦闘_動作_突進03");
+	CreateSE("SE02","se戦闘_動作_突進02");
+	CreateSE("SE03","se戦闘_動作_突進04");
+
+	FadeDelete("上背景", 0, null, true);
+
+	//動作---------------------------
+	MusicStart("SE00",0,700,0,1100,null,false);
+	Zoom("selpl01", 300, 10000, 10000, Dxl2, false);
+	Zoom("bg01", 300, 1000, 1000, Dxl2, false);
+	FadeDelete("selpl01", 300, Axl1, true);
+
+
+
+
+	//動作---------------------------
+
+	MoveFTP1("@ef01",1000,20,15);
+	Fade("ef01", 100, 1000, null, false);
+	//Move("ef01", 500, 500, @-400, Axl3, false);
+	Zoom("ef01", 500, 1100, 1100, Axl3, false);
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Wait(300);
+
+	MusicStart("SE02",0,700,0,1300,null,false);
+	MusicStart("SE03",0,700,0,1000,null,false);
+	Shake("ef02", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ef02", 150, 1000, null, false);
+	Zoom("ef02", 300, 1200, 1200, Dxl2, true);
+	FadeDelete("ef01", 0, Axl1, false);
+
+
+	MoveFTP1stop();
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【警備兵Ｂ】
+<voice name="ｰ貅ｴ B" class="警備兵Ｂ" src="voice/LX01/0100430e17">
+｡ｸｹｹｾﾟ!?｡ｹ
+
+//目の前のスクルージがもの凄いスピードで逃げていく
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE04","se戦闘_動作_突進01");
+	MusicStart("SE04",0,700,0,1200,null,false);
+
+	Zoom("ef02", 150, 5000, 5000, Axl2, false);
+	FadeDelete("ef02", 150, Axl2, true);
+
+	Wait(600);
+
+	St("L",730, @50,@0,"buダァト兵_待機_normal");
+	St("R",730, @0,@50,"stダァト兵_構え2_normal");
+	FadeSt("R",200,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【警備兵Ｃ】
+<voice name="ｰ貅ｴ C" class="警備兵Ｃ" src="voice/LX01/0100440e18">
+「어? 어? 사라졌어?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	FadeSt("L",200,false);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020a]
+//【警備兵Ｂ】
+<voice name="ｰ貅ｴ B" class="警備兵Ｂ" src="voice/LX01/0100450e17">
+｡ｸﾅｫﾀﾏﾀﾌｴﾙ｡ｦ｡ｦ ﾅｫﾀﾏﾀﾌｾﾟ!
+｡｡ﾀ弡ｱ ｱｫｹｰﾀｻ ｹﾛﾀｸｷﾎ ｳｻｺｸｳﾂｴﾙｰ｣｡ｦ｡ｦ!｡ｹ
+
+//【警備兵Ａ】
+<voice name="ｰ貅ｴ A" class="警備兵Ａ" src="voice/LX01/0100460e16">
+「절대로 여기서 내보내지 마라!
+　발견 즉시 사살해라!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE01","se人体_足音_走る03");
+	CreateSE("SE02","se人体_足音_走る03");
+	CreateSE("SE03","se人体_足音_走る03");
+	MusicStart("SE01",0,700,0,1100,null,false);
+	MusicStart("SE02",0,700,0,900,null,false);
+	MusicStart("SE03",0,700,0,1000,null,false);
+
+	DeleteAllSt(200,true);
+
+	//おがみ：曲止め
+	SetVolumeEX("@lx*", 3000, 0, null);
+	Wait(1000);
+
+	ClearFadeAll(2000, true);
+
+	Wait(300);
+
+
+//→→LX0102
+
+
+}

@@ -1,0 +1,263 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0402a_01.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+
+
+
+
+
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0402a_10.nss";
+
+}
+
+
+scene lx0402a_01.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+
+//投げ込み対応
+if($PreGameName=="lx0402a_00.nss"){
+
+}else{
+
+//キャロルさよなら
+	CreateMovieEX("絵動画", 500, 480, -200, true, true, "dx/mv0003集中線01_黒.ngs");
+	CreateTextureSP("絵背景", 100, -200, Middle, "cg/bg/l/bg003002_1_天王洲大学外観_l.jpg");
+//	CreateTextureEX("絵立絵笑", 801, 268, -90, "cg/st/x/stキャロル_通常_smile1_x01.png");
+	CreateTextureSP("絵立絵", 800, 268, -90, "cg/st/x/stキャロル_通常_normal_x01.png");
+	CreateTextureEX("絵背景揺", 100, -200, Middle, "cg/bg/l/bg003002_1_天王洲大学外観_l.jpg");
+	CreateTextureEX("絵立絵揺", 800, 268, -90, "cg/st/x/stキャロル_通常_normal_x01.png");
+
+	Request("絵*", Smoothing);
+
+	Zoom("絵立絵*", 0, 840, 840, null, true);
+	Zoom("絵動画*", 0, 6000, 6000, null, true);
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+
+
+//スクルージカッコつけダッシュ
+	CreateMovieEX("絵動画弐", 5000, 0, -200, true, true, "dx/mv0003集中線01_黒.ngs");
+	CreateTextureEX("絵霞", 1000, -315, 432, "cg/bg/bg003002_1_天王洲大学外観.jpg");
+	CreateTextureEX("絵霞揺", 1001, -315, 432, "cg/bg/bg003002_1_天王洲大学外観.jpg");
+	CreateTextureEX("絵主人公", 2000, -380, -2000, "cg/ev/x/ev9000スクルージ着地汎用_x01.png");
+	CreateTextureEX("絵主人公揺", 2000, -380, -2000, "cg/ev/x/ev9000スクルージ着地汎用_x01.png");
+	CreateTextureSP("絵裾", 1500, -1000, -400, "cg/ef/x/ef_coat01.png");
+	Request("絵主人公*", Smoothing);
+	Request("絵霞*", Smoothing);
+	Request("絵裾", Smoothing);
+	SetVertex("絵主人公*", center, 0);
+	SetVertex("絵霞*", 0, bottom);
+	SetVertex("絵裾", right, 1500);
+	SetShade("絵霞*", HEAVY);
+	SetBlur("絵裾", true, 2, 300, 100, false);
+
+	Zoom("絵動画*", 0, 6000, 6000, null, true);
+	Zoom("絵主人公*", 0, 6200, 6200, null, true);
+	Zoom("絵霞*", 0, 750, 750, null, true);
+	Zoom("絵裾", 0, 0, 0, null, false);
+	Rotate("絵主人公*", 0, @0, @0, -14, null,true);
+	Rotate("絵霞*", 0, @0, @0, -10, null,true);
+	Rotate("絵裾", 0, @0, @0, 180, null,true);
+
+
+
+	Fade("絵動画", 0, 300, Axl3, false);
+	Rotate("絵背景*", 0, @0, @0, -20, Axl2,false);
+	Rotate("絵立絵*", 0, @0, @0, -20, Axl2,false);
+	Zoom("絵背景*", 0, 800, 800, Axl2, false);
+	Zoom("絵立絵*", 0, 200, 200, Axl2, false);
+	Fade("絵立絵揺", 0, 400, Axl3, false);
+	Fade("絵背景揺", 0, 400, Axl3, false);
+	Move("絵背景*", 0, -430, -315, Axl2, false);
+	Move("絵立絵*", 0, 477, -460, Axl1, true);
+
+
+
+//★★★ロック注意★★★
+	Request("@絵動画*", Lock);
+	Request("@絵背景*", Lock);
+	Request("@絵立絵*", Lock);
+	Request("@NutFTP*", Lock);
+	Request("@絵霞*", Lock);
+	Request("@絵主人公*", Lock);
+	Request("@絵裾*", Lock);
+//★★★ロック注意★★★
+}
+
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+
+	FadeDelete("上背景", 0, null, true);
+
+	CreateSE("SE01","se人体_動作_マント01");
+	CreateSE("SE02","se戦闘_攻撃_振る04");
+
+	MusicStart("SE01",0,1500,0,1000,null,false);
+	Rotate("@絵背景*", 400, @0, @0, 20, Dxl2,false);
+	Rotate("@絵立絵*", 400, @0, @0, 20, Dxl2,false);
+	Zoom("@絵背景*", 400, 700, 700, Dxl2, false);
+	Zoom("@絵立絵*", 400, 100, 100, Dxl2, false);
+	Move("@絵背景*", 400, -1160, -295, Dxl1, false);
+	Move("@絵動画", 400, 84, -68, Dxl1, false);
+	Move("@絵立絵*", 400, -450, -440, Dxl1, false);
+
+	Wait(50);
+
+	Zoom("@絵裾", 250, 1000, 1000, Dxl2, false);
+	Rotate("@絵裾", 248, @0, @0, 90, Axl1,false);
+	Wait(245);
+	Rotate("@絵裾", 500, @0, @0, 94, null,false);
+
+	Wait(400);
+
+	Fade("@絵霞揺", 0, 300, null, true);
+	Fade("@絵霞", 0, 1000, null, true);
+
+//★★★ロック解除★★★
+	Request("@絵動画", UnLock);
+	Request("@絵背景*", UnLock);
+	Request("@絵立絵*", UnLock);
+	Request("@NutFTP*", UnLock);
+//★★★ロック解除★★★
+
+
+	Delete("@絵立絵*");
+	Delete("@絵背景*");
+	MoveFTP1stop();
+	MoveFTP2stop();
+
+	Move("@絵裾", 200, -1000, -600, Dxl1, false);
+	Zoom("@絵裾", 250, 1500, 1500, Dxl2, false);
+	Fade("@絵裾", 200, 0, Axl3, false);
+	Move("@絵霞*", 250, -315, 132, Dxl3, false);
+	Zoom("@絵主人公*", 200, 2100, 2100, Dxl2, false);
+	Fade("@絵動画弐", 200, 300, Dxl2, false);
+	Fade("@絵主人公揺", 200, 400, Dxl1, false);
+	Fade("@絵主人公", 200, 1000, Dxl1, false);
+	Wait(150);
+	MusicStart("SE02",0,1000,0,1000,null,false);
+	Wait(50);
+
+
+	MoveFTP3("@絵霞揺",5000,5,10);
+	MoveFTP4("@絵主人公揺",5000,5,10);
+
+
+//←←玄周を助ける
+
+	Wait(200);
+
+
+//？？：地の文。考えてる暇はない的な。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0000a]
+//★★★
+
+어떻게 해야 할지는 모르겠다&. 하지만 고민하고 있을 때가 아니다&.
+
+교회까지 최단 거리로 내달린다&. 해야 할 일은 단 하나&.
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	CreatePlainSP("上板写", 7000);
+	SetVertex("上板写", 200, 0);
+	SetBlur("上板写", true, 1, 300, 100, false);
+
+	CreateSE("SE03","se戦闘_動作_突進03");
+
+
+//★★★ロック解除★★★
+	Request("@絵動画*", UnLock);
+	Request("@絵背景*", UnLock);
+	Request("@絵立絵*", UnLock);
+	Request("@NutFTP*", UnLock);
+	Request("@絵霞*", UnLock);
+	Request("@絵主人公*", UnLock);
+	Request("@絵裾*", UnLock);
+//★★★ロック解除★★★
+
+
+	MoveFTP3stop();
+	MoveFTP4stop();
+	Delete("@絵*");
+	CreateColorSP("絵色黒", 1000, "000000");
+
+	MusicStart("SE03",0,1000,0,1300,null,false);
+	Zoom("上板写", 250, 3000, 3000, Axl2, false);
+	DrawDelete("上板写", 200, 100, Axl3, "slide_03_01_0", true);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX04/02a00040a01">
+「――오우마 마나를 막는다!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+//	ClearFadeAll(1000, true);
+
+	Wait(1000);
+//	SetVolumeEX("@lx005", 2000, 0, null);
+	SetVolumeEX("@lx017", 2000, 0, null);
+	Wait(2000);
+
+//→→キャロル独り言a
+
+}

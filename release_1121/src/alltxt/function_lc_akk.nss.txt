@@ -1,0 +1,4243 @@
+$Revision: 1 $
+
+================================================================================
+.//エフェクト【汎用全般】
+================================================================================
+..▼デバッグ用=================================================
+=================================================
+...体力検査用
+=================================================
+function TestLHP()
+{
+	begin:
+	SetFont("Malgun Gothic", 18, FFFFFF, 000000, MEDIUM, RIGHTDOWN);
+	CreateText("DtLHP1", 15000, 50, 20, 700, 500, $現ノイズラストＨＰ);
+	//$現ノイズラストＨＰ=$今の表示する値;
+	while(1)
+	{
+		if($今の表示する値==$現ノイズラストＨＰ){
+		}else{
+		CreateText("DtLHP1", 15000, 50, 20, 700, 500, $現ノイズラストＨＰ);
+		//Request("DtLHP1", PushText);
+		//WaitAction("DtLHP1", null);
+		Wait(50);
+		$今の表示する値=$現ノイズラストＨＰ;
+		}
+	Wait(16);
+	}
+}
+function TestRHP()
+{
+	begin:
+	SetFont("Malgun Gothic", 18, FFFFFF, 000000, MEDIUM, RIGHTDOWN);
+	CreateText("DtRHP2", 15000, 900, 20, 700, 500, $現蒼葉ＨＰ);
+	while(1)
+	{
+		if($今の表示する値２==$現蒼葉ＨＰ){
+		}else{
+		CreateText("DtRHP2", 15000, 900, 20, 700, 500, $現蒼葉ＨＰ);
+		//Request("DtRHP2", PushText);
+		//WaitAction("DtRHP2", null);
+		Wait(50);
+		$今の表示する値２=$現蒼葉ＨＰ;
+		}
+	Wait(16);
+	}
+}
+
+..▼音関係=================================================
+
+=================================================
+...MusicStartSet
+=================================================
+function MusicStartSet($MusicStartName,$ボリウム,再生方向,再生スピード,テンポ,ループ設定)
+{
+
+	//Request($MusicStartName, Play);
+
+	SetFrequency($MusicStartName, 0, 再生スピード, NULL);
+	SetPan($MusicStartName, 0, 再生方向, NULL);
+	SetLoop($MusicStartName, ループ設定);
+
+	SetVolumeEX($MusicStartName, 0, $ボリウム, テンポ);
+
+	//Request($MusicStartName, Disused);
+}
+
+=================================================
+...CreateSoundAkk
+=================================================
+function CreateSoundAkk("ナット名",$音楽データ)
+{
+
+	CreateSound("ナット名", SE, $音楽データ);
+	SetVolume("ナット名", 0, 0, NULL);
+	SetAlias("ナット名", "ナット名");
+}
+
+=================================================
+...SoundKodama
+=================================================
+//なんとなく音のテンポを変えてループ再生する
+function SoundKodama($ProcNut,$ProcSENut)
+{
+	CreateProcessEX($ProcNut, "SoundKodamaAct");
+	Request($ProcNut, Start);
+}
+
+function SoundKodamaAct()
+{
+	while(1){
+	SetFrequency($ProcSENut, 3000, 800, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 600, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1000, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 800, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1200, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1000, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1400, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1200, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1600, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1200, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1800, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1200, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1400, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1000, AxlDxl);
+	Wait(3500);
+	SetFrequency($ProcSENut, 3000, 1200, AxlDxl);
+	Wait(3500);
+
+	}
+}
+
+..▼画面関係=================================================
+
+=================================================
+...BGPlainShake背景シェイク：仮想背景を生成し、アクション後削除
+=================================================
+function BGPlainShake(優先度, 時間, XStar, Ystar, XEnd, YEnd, 幅, テンポ, 待)
+{
+	CreatePlainSP("絵演背景自動生成振動", 優先度);
+	Shake("絵演背景自動生成振動", 時間, XStar, Ystar, XEnd, YEnd, 幅, テンポ, 待);
+	Request("絵演背景自動生成振動", Disused);
+}
+
+=================================================
+...CreateEffectDropSP
+=================================================
+function CreateEffectDropSP("ナット", 優先度, Ｘ座標, Ｙ座標, Ｘ範囲, Ｙ範囲, $EFDD, $EFDS, $EFDSW, $EFDRX, $EFDRY, $EFDRZ, $EFDData)
+{
+	$SYSTEM_effect_drop_image=$EFDData;
+	$SYSTEM_effect_drop_dencity=$EFDD;
+	$SYSTEM_effect_drop_speed=$EFDS;
+	$SYSTEM_effect_drop_swing=$EFDSW;
+	$SYSTEM_effect_drop_rotate_x=$EFDRX;
+	$SYSTEM_effect_drop_rotate_y=$EFDRY;
+	$SYSTEM_effect_drop_rotate_z=$EFDRZ;
+	CreateEffect(ナット, 優先度, Ｘ座標, Ｙ座標, Ｘ範囲, Ｙ範囲, "Drop");
+	SetAlias(ナット,ナット);
+}
+
+=================================================
+...CreateEffectDropEX
+=================================================
+function CreateEffectDropEX("ナット", 優先度, Ｘ座標, Ｙ座標, Ｘ範囲, Ｙ範囲, $EFDD, $EFDS, $EFDSW, $EFDRX, $EFDRY, $EFDRZ, $EFDData)
+{
+	$SYSTEM_effect_drop_image=$EFDData;
+	$SYSTEM_effect_drop_dencity=$EFDD;
+	$SYSTEM_effect_drop_speed=$EFDS;
+	$SYSTEM_effect_drop_swing=$EFDSW;
+	$SYSTEM_effect_drop_rotate_x=$EFDRX;
+	$SYSTEM_effect_drop_rotate_y=$EFDRY;
+	$SYSTEM_effect_drop_rotate_z=$EFDRZ;
+	CreateEffect(ナット, 優先度, Ｘ座標, Ｙ座標, Ｘ範囲, Ｙ範囲, "Drop");
+	SetAlias(ナット,ナット);
+	Fade(ナット, 0, 0, null, true);
+}
+
+=================================================
+...FlashQuick
+=================================================
+//紫電的なフラッシュのループ
+function FlashQuick($FlashQuickNut,$FlashQuickTNut)
+{
+	CreateProcessEX($FlashQuickNut, "FlashQuickAct");
+	Request($FlashQuickNut, Start);
+}
+
+function FlashQuickAct()
+{
+
+	begin:
+	$FlashQuickWT=60;
+	$FlashQuickWT2=30;
+	while(1)
+	{
+	Fade($FlashQuickTNut,0,200,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+
+	$FlashQuickRWT=Random(6)*60;
+	Wait($FlashQuickRWT);
+
+	Fade($FlashQuickTNut,0,230,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+	Wait($FlashQuickWT2);
+	Fade($FlashQuickTNut,0,230,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+
+	$FlashQuickRWT=Random(6)*60;
+	Wait($FlashQuickRWT);
+	$FlashQuickRWT=Random(6)*60;
+	Wait($FlashQuickRWT);
+
+
+	Fade($FlashQuickTNut,0,190,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+	Wait($FlashQuickWT2);
+	Fade($FlashQuickTNut,0,190,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+	Wait(100);
+	Fade($FlashQuickTNut,0,190,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+
+	$FlashQuickRWT=Random(6)*60;
+	Wait($FlashQuickRWT);
+
+	Fade($FlashQuickTNut,0,190,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+	Wait($FlashQuickWT2);
+	Fade($FlashQuickTNut,0,280,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+	Wait($FlashQuickWT2);
+	Fade($FlashQuickTNut,0,190,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+
+	$FlashQuickRWT=Random(6)*60;
+	Wait($FlashQuickRWT);
+	$FlashQuickRWT=Random(6)*60;
+	Wait($FlashQuickRWT);
+	$FlashQuickRWT=Random(6)*60;
+	Wait($FlashQuickRWT);
+	$FlashQuickRWT=Random(6)*60;
+	Wait($FlashQuickRWT);
+
+	Fade($FlashQuickTNut,0,190,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+	Wait($FlashQuickWT2);
+	Fade($FlashQuickTNut,0,190,null,true);
+	Wait($FlashQuickWT);
+	Fade($FlashQuickTNut,0,0,null,true);
+
+	}
+}
+
+function FlashQuickDelete($FQDeleteT,$FQDeleteF)
+{
+	Request($FlashQuickNut, Stop);
+	Fade($FlashQuickTNut, $FQDeleteT, $FQDeleteF, null, false);
+	Delete($FlashQuickNut);
+}
+
+=================================================
+...ColorFlashLoop
+=================================================
+function ColorFlashLoop($ColorFlashNut01,$Rhythm)
+{
+	CreateProcessEX("LProc_ColorFlash", ColorFlashLoopAct);
+	Request("LProc_ColorFlash", Start);
+}
+
+function ColorFlashLoopAct()
+{
+	begin:
+	while(1)
+	{
+	Fade($ColorFlashNut01, 0, 1000, null, true);
+	Wait($Rhythm);
+	Fade($ColorFlashNut01, 40, 0, null, true);
+	Wait($Rhythm);
+	}
+
+	Wait(16);
+
+}
+
+=================================================
+...WTFade//特定の時間待たせた後にフェード
+=================================================
+//WTFade("@ナット",待ち時間,描画時間,透過度,テンポ);
+function WTFade($WTFNut,$WTFWait,$WTFTime,$WTFAlpha,$WTFTempo)
+{
+	CreateProcessEX("ProcWTFade", "WTFadeAct");
+	Request("ProcWTFade", Start);
+	Request("ProcWTFade", Disused);
+}
+
+function WTFadeAct()
+{
+	Wait($WTFWait);
+	Fade($WTFNut, $WTFTime, $WTFAlpha, $WTFTempo, true);
+}
+
+
+..▼プロセス動作定義=================================================
+=================================================
+...SpiralSparc
+=================================================
+function SpiralSparc()
+{
+	begin:
+	while(1)
+	{
+
+	$Proc_dm0200_vs_02ActRR=Random(360);
+	$Proc_dm0200_vs_02ActRW=Random(6)+4;
+	$Proc_dm0200_vs_02ActRW2=Random(6);
+	$Proc_dm0200_vs_02ActRD=Random(100)+150;
+
+/*
+	SetFont("Malgun Gothic", 18, FFFFFF, 000000, MEDIUM, RIGHTDOWN);
+	CreateText("Dt1", 15000, 50, 20, 700, 500, $Proc_dm0200_vs_02ActRR);
+	CreateText("Dt2", 15000, 50, 40, 700, 500, $Proc_dm0200_vs_02ActRW);
+	CreateText("Dt3", 15000, 50, 60, 700, 500, $Proc_dm0200_vs_02ActRW2);
+	CreateText("Dt4", 15000, 50, 80, 700, 500, $Proc_dm0200_vs_02ActRD);
+*/
+
+	Rotate("@絵効果紫電", 200, @0, @0, $Proc_dm0200_vs_02ActRR, null,false);
+	Fade("@絵効果紫電", 0, 1000, null, true);
+	Wait($Proc_dm0200_vs_02ActRW);
+	Fade("@絵効果紫電", 0, 0, null, true);
+
+	Wait($Proc_dm0200_vs_02ActRW2);
+	DrawTransition("@絵効果紫電", 1, 0, $Proc_dm0200_vs_02ActRD, 300, null, "cg/data/circle_01_00_1.png", true);
+
+
+	}
+}
+
+=================================================
+...SpiralSparc2
+=================================================
+function SpiralSparc2()
+{
+	begin:
+	while(1)
+	{
+
+	$SpiralSparc2Nut="@絵効果紫電一";
+	Fade($SpiralSparc2Nut, 0, 1000, null, true);
+	Wait(10);
+	Fade($SpiralSparc2Nut, 5, 0, null, true);
+
+
+	$SpiralSparc2Nut="@絵効果紫電二";
+	Fade($SpiralSparc2Nut, 0, 1000, null, true);
+	Wait(10);
+	Fade($SpiralSparc2Nut, 5, 0, null, true);
+
+
+	$SpiralSparc2Nut="@絵効果紫電三";
+	Fade($SpiralSparc2Nut, 0, 1000, null, true);
+	Wait(10);
+	Fade($SpiralSparc2Nut, 5, 0, null, true);
+
+	}
+}
+=================================================
+...SpiralSparc3
+=================================================
+function SpiralSparc3($SpiralSparc3ProcNut,$SS3PNut01,$SS3PNut02,$SS3PNut03)
+{
+
+	CreateProcessEX($SpiralSparc3ProcNut, "SpiralSparc3Act");
+	Request($SpiralSparc3ProcNut, Start);
+
+}
+
+function SpiralSparc3Act()
+{
+	begin:
+	while(1)
+	{
+
+	Fade($SS3PNut01, 0, 1000, null, true);
+	Wait(10);
+	Fade($SS3PNut01, 5, 0, null, true);
+
+	$SS3RandomWait=Random(30);
+
+	Fade($SS3PNut02, 0, 1000, null, true);
+	Wait(10);
+	Fade($SS3PNut02, 5, 0, null, true);
+
+	$SS3RandomWait=Random(30);
+
+	Fade($SS3PNut03, 0, 1000, null, true);
+	Wait(10);
+	Fade($SS3PNut03, 5, 0, null, true);
+
+	$SS3RandomWait=Random(30);
+
+	}
+}
+
+..▼急変速アクション=================================================
+=================================================
+...ZoomHC：ズーム特殊テンポ
+=================================================
+function ZoomHC($HChangeMoveNut, $HCZTimeA, $HCZWait, $HCZTimeB, $ZoomX, $ZoomY, $テンポ)
+{
+	Zoom($HChangeMoveNut, $HCZTimeA, $ZoomX, $ZoomY, $テンポ, false);
+	Wait($HCZWait);
+	Zoom($HChangeMoveNut, $HCZTimeB, $ZoomX, $ZoomY, $テンポ, false);
+}
+=================================================
+.//エフェクト：立ち絵登場演出【テスト】
+=================================================
+..TestStCMoveFade
+function TestStCMoveFade($StCMoveFadeNut,$MoveSet)
+{
+	$MoveBeforeSet=$MoveSet*(-1);
+	$MoveBefore = "@" + $MoveBeforeSet;
+	Move($StCMoveFadeNut, 0, $MoveBefore, @0, null, true);
+
+	$MoveAfter = "@" + $MoveSet;
+	Move($StCMoveFadeNut, 300, $MoveAfter, @0, Dxl1, false);
+	Fade($StCMoveFadeNut, 300, 1000, AxlAuto, false);
+	Wait(384);
+}
+
+function TestStCMoveDelete($StCMoveDelNut,$MoveDelSet)
+{
+	//$MoveDelBeforeSet=$MoveDelSet*(-1);
+	//$MoveDelBefore = "@" + $MoveDelBeforeSet;
+	//Move($StCMoveDelNut, 0, $MoveDelBefore, @0, null, true);
+
+	$MoveDelAfter = "@" + $MoveDelSet;
+	Move($StCMoveDelNut, 300, $MoveDelAfter, @0, Dxl1, false);
+	Fade($StCMoveDelNut, 300, 0, Dxl3, false);
+	Request($StCMoveDelNut, Disused);
+}
+
+=================================================
+.//エフェクト：サブタイトル表示【テスト】
+=================================================
+..SubTitleGo
+function SubTitleGo($SubTitle)
+{
+
+	CreateProcess("SubTitleGo", 0, 0, 0, "SubTitleAct");
+	SetAlias("SubTitleGo","SubTitleGo");
+	Request("SubTitleGo", Start);
+	Request("SubTitleGo", Disused);
+
+}
+
+function SubTitleAct()
+{
+	CreateName("サブタイトル");
+	SetAlias("サブタイトル", "サブタイトル");
+
+	SetFont("Malgun Gothic", 40, FFFFFF, 000000, MEDIUM, RIGHTDOWN);
+	CreateText("サブタイトル/SubTitle", 20010, 630, 40, 1024, 200, $SubTitle);
+	Wait(32);
+	Move("サブタイトル/SubTitle", 0, @0, @20, null, true);
+	Fade("サブタイトル/SubTitle", 0, 0, null, true);
+
+	Fade("サブタイトル/SubTitle", 200, 1000, null, false);
+	Move("サブタイトル/SubTitle", 300, @0, @-20, DxlAuto, true);
+	Wait(2000);
+	Fade("サブタイトル/SubTitle", 500, 0, null, true);
+
+}
+
+======================================================================
+.//プロセス【アザナエル】
+======================================================================
+=================================================
+..RoadMove//バイク走行中の地面的な
+=================================================
+
+function RoadMove($RoadMove)
+{
+	CreateProcess("プロセス", 0, 0, 0, "RoadMoveAct");
+	Request("プロセス", Start);
+}
+
+function RoadMoveAct()
+{
+	$ActionTime = 200;
+	while(1)
+	{
+	Zoom($RoadMove, 0, 0, 0, null, true);
+	Wait(32);
+
+	$ATZ = $ActionTime*2;
+	Zoom($RoadMove, $ATZ, 1000, 1000, Axl3, false);
+	DrawTransition($RoadMove, $ActionTime, 0, 1000, 100, null, "cg/data/zzex_circle_01_00_0.png", false);
+	Wait($ActionTime);
+
+	DrawTransition($RoadMove, $ActionTime, 1000, 0, 100, null, "cg/data/zzex_circle_01_00_1.png", false);
+	Wait($ActionTime);
+
+
+	}
+}
+
+=================================================
+..YurActionSakIkariゆる絵アニメ沙紅羅憤怒
+=================================================
+function YurActionSakIkariSet()
+{
+	CreateMask("絵緩覆", 0, Center, Middle, "cg/yur/yurIF背景マスク.png", false);
+	SetAlias("絵緩覆","絵緩覆");
+	CreateTextureEX("絵緩覆/絵緩背景", 50, Center, Middle, "cg/yur/yurIF背景01.png");
+	CreateTextureEX("絵緩覆/絵緩絵一", 50, Center, Middle, "cg/yur/yur沙紅羅逆鱗a.png");
+	CreateTextureEX("絵緩覆/絵緩絵二", 50, Center, Middle, "cg/yur/yur沙紅羅逆鱗b.png");
+	CreateTextureEX("絵緩枠線", 51, Center, Middle, "cg/yur/yurIF枠.png");
+	CreateSE("絵緩SE01","se擬音_ギャグ_ぴょこ");
+	SetVolumeEX("絵緩SE01", 0, 700, null);
+}
+
+function YurActionSakIkari()
+{
+	CreateProcess("ProYur", 0, 0, 0, "YurActionSakIkariAct");
+	SetAlias("ProYur","ProYur");
+	Request("ProYur", Start);
+}
+
+function YurActionSakIkariAct()
+{
+	Fade("@絵緩覆", 0, 1000, null, true);
+	Fade("@絵緩覆/絵緩背景", 0, 1000, null, true);
+	Fade("@絵緩枠線", 0, 1000, null, true);
+	Wait(16);
+
+	while(1){
+	Fade("@絵緩覆/絵緩絵二", 0, 0, null, true);
+	Fade("@絵緩覆/絵緩絵一", 0, 1000, null, true);
+	Request("@絵緩SE01", Play);
+	Shake("@絵緩覆/絵緩絵一", 300, 0, 4, 0, 0, 500, null, true);
+	Wait(300);
+	Fade("@絵緩覆/絵緩絵一", 0, 0, null, true);
+	Fade("@絵緩覆/絵緩絵二", 0, 1000, null, true);
+	Request("@絵緩SE01", Play);
+	Shake("@絵緩覆/絵緩絵二", 300, 0, 12, 0, 0, 500, null, true);
+	Wait(300);
+	}
+}
+
+function YurActionSakIkariDelete()
+{
+	Request("@ProYur", Stop);
+	Delete("@絵緩*");
+	Delete("@ProYur");
+
+}
+
+=================================================
+..LcPro_b2120_Syokusyu
+=================================================
+function LcPro_b2120_Syokusyu($LcPro_b2120_SyokusyuA, $LcPro_b2120_SyokusyuB)
+{
+	CreateProcess("Pro", 0, 0, 0, "LcPro_b2120_SyokusyuAct");
+	SetAlias("Pro","Pro");
+	Request("Pro", Start);
+}
+
+function LcPro_b2120_SyokusyuAct()
+{
+	while(1)
+	{
+	Fade($LcPro_b2120_SyokusyuB, 1000, 1000, null, true);
+	Wait(1500);
+	Fade($LcPro_b2120_SyokusyuB, 1000, 0, null, true);
+	Wait(1500);
+	}
+}
+
+=================================================
+..LcPro_b2120chiaki_Gokou
+=================================================
+function LcPro_b2120chiaki_Gokou()
+{
+	CreateProcess("Pro", 0, 0, 0, "LcPro_b2120chiaki_GokouAct");
+	SetAlias("Pro","Pro");
+	Request("Pro", Start);
+}
+
+function LcPro_b2120chiaki_GokouAct()
+{
+	while(1)
+	{
+	Fade("@Ｃ/絵背景後光一", 0, 1000, null, true);
+	Wait(750);
+	Fade("@Ｃ/絵背景後光二", 0, 1000, null, true);
+	Wait(750);
+	Fade("@Ｃ/絵背景後光二", 0, 0 null, true);
+	}
+}
+
+=================================================
+..LcPro_aa2050sakura_huuri_hutari
+=================================================
+function LcPro_aa2050sakura_huuri_hutari()
+{
+	CreateProcess("Pro", 0, 0, 0, "LcPro_aa2050sakura_huuri_hutariAct");
+	SetAlias("Pro","Pro");
+	Request("Pro", Start);
+}
+
+function LcPro_aa2050sakura_huuri_hutariAct()
+{
+	Wait(1400);
+	Fade("@絵背景上", 300, 1000, null, false);
+	Move("@StNameL/L*", 300, @-1024, @0, AxlDxl, false);
+	Move("@絵背景", 300, -1024, @0, AxlDxl, false);
+	Move("@絵背景上", 300, -1024, @0, AxlDxl, true);
+	Move("@StNameR/R*", 200, @-512, @0, Dxl1, true);
+}
+
+=================================================
+..LcPro_aa2110huuri
+=================================================
+function LcPro_aa2110huuri()
+{
+	CreateProcess("Pro", 0, 0, 0, "LcPro_aa2110huuriAct");
+	SetAlias("Pro","Pro");
+	Request("Pro", Start);
+}
+
+function LcPro_aa2110huuriAct()
+{
+	Wait(4000);
+
+	$フウリ告白 = true;
+
+	SetFrequency("@SEP01", 0, 1000, NULL);
+	SetPan("@SEP01", 0, 0, NULL);
+	SetLoop("@SEP01", false);
+	SetVolume("@SEP01", 0, 500, null);
+	Request("@SEP01", "Play");
+	Request("@SEP01", Disused);
+
+}
+
+=================================================
+..LcPro_ab2133otanukisama
+=================================================
+function LcPro_ab2133otanukisama()
+{
+	CreateProcess("Pro", 0, 0, 0, "LcPro_ab2133otanukisamaAct");
+	SetAlias("Pro","Pro");
+	Request("Pro", Start);
+}
+
+function LcPro_ab2133otanukisamaAct()
+{
+	Wait(2500);
+	Move("@絵背景100_l", 0, 0, @0, null, true);
+	Zoom("@絵背景100_l", 500, 2500, 2500, Axl3, false);
+	Move("@絵背景100_l", 500, 950, @0, Axl3, false);
+	Fade("@絵背景100_l", 500, 1000, null, true);
+	Shake("@絵背景100_l", 300, 10, 10, 0, 0, 500, null, false);
+
+}
+
+
+=================================================
+..LcPro_b2115kurimantower
+=================================================
+function LcPro_b2115kurimantower()
+{
+	$KuriCount=0;
+	$ZoomCount=0;
+
+	$栗変数=1.5*3*3;
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, Center, Middle, "cg/obj/objクリマン.png");
+
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, 2000, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, -17, -9, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 608, 278, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 612, -7, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, -17, 280, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 294, -153, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 295, 422, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 128, 210, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 445, 65, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 133, -81, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 446, 346, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 135, 59, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+//	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, 450, 201, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+//	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, false);
+	Wait(150);
+
+
+	$KuriCount++;
+	$Kuri="絵クリマンタワー"+$KuriCount;
+	CreateTextureSP($Kuri, 100, Center, Middle, "cg/obj/objクリマン.png");
+	$KuriSe="SEkuri"+$KuriCount;
+	CreateSE($KuriSe,"se擬音_ギャグ_ドーン");
+	Zoom($Kuri, 0, 20000, 20000, null, true);
+
+//	$ZoomCount++;
+	$KuriZoomTime=2000-($ZoomCount*$栗変数*$栗変数);
+	Zoom($Kuri, $KuriZoomTime, 1000, 1000, Axl1, true);
+	MusicStart($KuriSe,0,700,0,1000,null,false);
+	Shake($Kuri, 300, 4, 0, 0, 0, 500, null, true);
+
+	CreatePlainSP("絵板写", 5000);
+	Request("絵板写", AddRender);
+	CreateSE("SE01","se擬音_ギャグ_爆発");
+	Wait(16);
+	Delete("絵クリマン*");
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Zoom("絵板写", 300, 1200, 1200, Dxl2, false);
+	Shake("絵板写", 500, 5, 15, 0, 0, 500, null, false);
+
+	FadeDelete("絵板写", 300, null, true);
+}
+
+=================================================
+..LcPro_b2050chiakiFlash
+=================================================
+function LcPro_b2050chiakiFlash($chiakiNut)
+{
+	CreateProcess("Pro", 0, 0, 0, "LcPro_b2050chiakiFlashAct");
+	SetAlias("Pro","Pro");
+	Request("Pro", Start);
+}
+
+function LcPro_b2050chiakiFlashAct()
+{
+	while(1){
+	Zoom($chiakiNut, 0, 1000, 1000, null, false);
+	Fade($chiakiNut, 500, 1000, null, true);
+
+	Zoom($chiakiNut, 1600, 1100, 1100, null, false);
+	Fade($chiakiNut, 1600, 0, null, true);
+	}
+
+}
+
+=================================================
+..LcPro_2020no-ko_erovoice
+=================================================
+function LcPro_2020no-ko_erovoice()
+{
+	CreateProcessEX("Pro", "LcPro_2020no-ko_erovoiceAct");
+	Request("Pro", Start);
+}
+
+function LcPro_2020no-ko_erovoiceAct()
+{
+	while(1){
+	Request("@ノーコプロセスボイス１", Play);
+	WaitPlay("@ノーコプロセスボイス１", null);
+
+	Request("@ノーコプロセスボイス２", Play);
+	WaitPlay("@ノーコプロセスボイス２", null);
+
+	Request("@ノーコプロセスボイス３", Play);
+	WaitPlay("@ノーコプロセスボイス３", null);
+
+	Request("@ノーコプロセスボイス４", Play);
+	WaitPlay("@ノーコプロセスボイス４", null);
+
+	Request("@ノーコプロセスボイス５", Play);
+	WaitPlay("@ノーコプロセスボイス５", null);
+
+	Request("@ノーコプロセスボイス６", Play);
+	WaitPlay("@ノーコプロセスボイス６", null);
+
+	Request("@ノーコプロセスボイス７", Play);
+	WaitPlay("@ノーコプロセスボイス７", null);
+
+	Request("@ノーコプロセスボイス８", Play);
+	WaitPlay("@ノーコプロセスボイス８", null);
+
+	Request("@ノーコプロセスボイス９", Play);
+	WaitPlay("@ノーコプロセスボイス９", null);
+
+	Request("@ノーコプロセスボイス１０", Play);
+	WaitPlay("@ノーコプロセスボイス１０", null);
+
+	Request("@ノーコプロセスボイス１１", Play);
+	WaitPlay("@ノーコプロセスボイス１１", null);
+	Wait(16);
+	}
+}
+
+function LcPro_2020no-ko_erovoiceSet($NPV_Vol)
+{
+	CreateVOICE("ノーコプロセスボイス１","20/200200150nko");
+	CreateVOICE("ノーコプロセスボイス２","20/200200160nko");
+	CreateVOICE("ノーコプロセスボイス３","20/200200170nko");
+	CreateVOICE("ノーコプロセスボイス４","20/200200180nko");
+	CreateVOICE("ノーコプロセスボイス５","20/200200190nko");
+	CreateVOICE("ノーコプロセスボイス６","20/200200200nko");
+	CreateVOICE("ノーコプロセスボイス７","20/200200210nko");
+	CreateVOICE("ノーコプロセスボイス８","20/200200220nko");
+	CreateVOICE("ノーコプロセスボイス９","20/200200230nko");
+	CreateVOICE("ノーコプロセスボイス１０","20/200200240nko");
+	CreateVOICE("ノーコプロセスボイス１１","20/200200250nko");
+	SetVolumeEX("ノーコプロセスボイス*", 0, $NPV_Vol, null);
+}
+
+======================================================================
+.//プロセス【鬼哭街】
+======================================================================
+=================================================
+..LP_0104vs01_ruiriAct
+=================================================
+function LP_0104vs01_ruiriAct()
+{
+	Wait($SETime);
+	Fade("@絵板写", 1500, 0, Dxl2, true);
+	Delete("@絵板写");
+}
+
+=================================================
+..LP0203_Puton
+=================================================
+//プートンムービーの自動フェード処理
+function LP0203_Puton()
+{
+	CreateProcessEX("LP0203_01", "LP0203_PutonAct");
+	Request("LP0203_01", Start);
+}
+
+function LP0203_PutonAct()
+{
+	begin:
+	$浦東説明終了処理開始時間 = DurationTime("@絵演動画")-600;
+
+	$浦東説明時間判定=true;
+	while($浦東説明時間判定)
+	{
+	$浦東説明進行時間取得=PassageTime("@絵演動画");
+
+		if($浦東説明終了処理開始時間<$浦東説明進行時間取得)
+		{
+		Fade("@絵演動画", 500, 0, null, true);
+		Delete("@絵演動画");
+		$浦東説明時間判定=false;
+		}
+	}
+}
+
+=================================================
+..LP0302_Chara
+=================================================
+//イーター博士のセリフの長さに合わせたキャラ演出マクロ
+function LP0302_Chara()
+{
+	CreateProcessEX("LP0302_01", "LP0302_CharaAct");
+	Request("LP0302_01", Start);
+}
+
+function LP0302_CharaAct()
+{
+	begin:
+
+	Fade("@LP0302_01Nut/絵演立絵雀", 200, 1000, null, true);
+	Wait(1100);
+	Fade("@LP0302_01Nut/絵演立絵雀", 200, 0, null, true);
+
+	Fade("@LP0302_01Nut/絵演立絵瓶", 200, 1000, null, true);
+	Wait(1000);
+	Fade("@LP0302_01Nut/絵演立絵瓶", 300, 0, null, true);
+
+	Wait(200);
+
+	Fade("@LP0302_01Nut/絵演立絵中", 200, 1000, null, true);
+	Wait(800);
+	Fade("@LP0302_01Nut/絵演立絵中", 300, 0, null, true);
+
+	Wait(200);
+
+	Fade("@LP0302_01Nut/絵演立絵院", 300, 1000, null, true);
+	Wait(1000);
+	Fade("@LP0302_01Nut/絵演立絵院", 300, 0, null, true);
+
+	Wait(2200);
+
+	Fade("@LP0302_01Nut/絵演立絵劉", 250, 1000, null, true);
+}
+
+function LP0302_CharaDelete()
+{
+	Request("LP0302_01", Stop);
+	Delete("@LP0302_01Nut");
+	Delete("LP0302_01");
+}
+
+=================================================
+..LP0507_Meimetsu
+=================================================
+//登攀朦朧演出用マクロ
+function LP0507_Meimetsu()
+{
+	CreateProcessEX("LP0507_01", "LP0507_MeimetsuAct");
+	Request("LP0507_01", Start);
+}
+
+function LP0507_MeimetsuAct()
+{
+	begin:
+	while(1){
+	$RandomFade=300+(Random(25)*10);
+	$RandomFadeT=500+(Random(10)*300);
+	Fade("@絵板写", $RandomFadeT, $RandomFade, null, true);
+	$RandomWait=Random(10)*100;
+	Wait($RandomWait);
+	$RandomFadeT=500+(Random(10)*300);
+	Fade("@絵板写", $RandomFadeT, 100, null, true);
+	$RandomWait=Random(10)*100;
+	Wait($RandomWait);
+	}
+}
+
+=================================================
+..LP0603vs_ImanoHaTsukiDa
+=================================================
+//…今のは六塵散魂無縫剣ではない…突きだ…
+function LP0603vs_ImanoHaTsukiDa()
+{
+	CreateProcessEX("LP0603vs_01", "LP0603vs_ImanoHaTsukiDaAct");
+	Request("LP0603vs_01", Start);
+}
+
+function LP0603vs_ImanoHaTsukiDaAct()
+{
+	begin:
+	Fade("@絵演効果空気壁", 0, 1000, null, true);
+	Zoom("@絵演効果空気壁", 50, 4200, 4200, Axl3, true);
+
+	Fade("@絵演効果空気壁", 1000, 0, null, false);
+	Zoom("@絵演効果空気壁", 3000, 4500, 4500, null, true);
+}
+
+=================================================
+..LP0411vs_Zetsugi
+=================================================
+function LP0411vs_Zetsugi()
+{
+	$奥義開眼=80;
+
+//ジャン戦回想演出
+	Fade("@絵演絶技演出一", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出二", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出三", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出四", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出五", 0, 1000, null, true);
+	Wait($奥義開眼);
+
+//チュウ戦回想演出
+	Fade("@絵演絶技演出六", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出七", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出八", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出九", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出十", 0, 1000, null, true);
+	Wait($奥義開眼);
+
+//ン戦回想演出
+	Fade("@絵演絶技演出十一", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出十二", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出十三", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出十四", 0, 1000, null, true);
+	Wait($奥義開眼);
+	Fade("@絵演絶技演出十五", 0, 1000, null, true);
+	Wait($奥義開眼);
+
+//開眼演出
+	Fade("@絵演絶技演出焉", 0, 1000, null, true);
+}
+
+
+=================================================
+..KengekiRandomSoundSet_TestVer//テスト版
+=================================================
+function KengekiRandomSoundSet_TestVer($剣戟セット)
+{
+
+	if($剣戟セット==b_刀の打ち合い){
+
+	CreateSound("KengekiSE01", SE, "sound/se/b_刀の打ち合い1.ogg");
+	SetAlias("KengekiSE01","KengekiSE01");
+//	CreateSound("KengekiSE02", SE, "sound/se/b_刀の打ち合い2.ogg");
+	CreateSound("KengekiSE02", SE, "sound/se/剣_042_鎌刀でいなす.ogg");
+	SetAlias("KengekiSE02","KengekiSE02");
+	CreateSound("KengekiSE03", SE, "sound/se/b_刀の打ち合い3.ogg");
+	SetAlias("KengekiSE03","KengekiSE03");
+//	CreateSound("KengekiSE04", SE, "sound/se/b_刀の打ち合い4.ogg");
+	CreateSound("KengekiSE04", SE, "sound/se/b_刀の打ち合い5.ogg");
+	SetAlias("KengekiSE04","KengekiSE04");
+	CreateSound("KengekiSE05", SE, "sound/se/b_刀の打ち合い5.ogg");
+	SetAlias("KengekiSE05","KengekiSE05");
+	CreateSound("KengekiSE06", SE, "sound/se/b_刀の打ち合い6.ogg");
+	SetAlias("KengekiSE06","KengekiSE06");
+	CreateSound("KengekiSE07", SE, "sound/se/b_刀の打ち合い7.ogg");
+	SetAlias("KengekiSE07","KengekiSE07");
+
+	CreateSound("KengekiSE11", SE, "sound/se/b_刀の打ち合い1.ogg");
+	SetAlias("KengekiSE11","KengekiSE11");
+	CreateSound("KengekiSE12", SE, "sound/se/b_刀の打ち合い2.ogg");
+	SetAlias("KengekiSE12","KengekiSE12");
+	CreateSound("KengekiSE13", SE, "sound/se/b_刀の打ち合い3.ogg");
+	SetAlias("KengekiSE13","KengekiSE13");
+//	CreateSound("KengekiSE14", SE, "sound/se/b_刀の打ち合い4.ogg");
+	CreateSound("KengekiSE14", SE, "sound/se/b_刀の打ち合い5.ogg");
+	SetAlias("KengekiSE14","KengekiSE14");
+	CreateSound("KengekiSE15", SE, "sound/se/b_刀の打ち合い5.ogg");
+	SetAlias("KengekiSE15","KengekiSE15");
+	CreateSound("KengekiSE16", SE, "sound/se/b_刀の打ち合い6.ogg");
+	SetAlias("KengekiSE16","KengekiSE16");
+	CreateSound("KengekiSE17", SE, "sound/se/b_刀の打ち合い7.ogg");
+	SetAlias("KengekiSE17","KengekiSE17");
+
+	}else if($剣戟セット==c_刀の打ち合い){
+
+	CreateSound("KengekiSE01", SE, "sound/se/c_刀の打ち合い1.ogg");
+	SetAlias("KengekiSE01","KengekiSE01");
+	CreateSound("KengekiSE02", SE, "sound/se/c_刀の打ち合い2.ogg");
+	SetAlias("KengekiSE02","KengekiSE02");
+	CreateSound("KengekiSE03", SE, "sound/se/c_刀の打ち合い3.ogg");
+	SetAlias("KengekiSE03","KengekiSE03");
+	CreateSound("KengekiSE04", SE, "sound/se/c_刀の打ち合い4.ogg");
+	SetAlias("KengekiSE04","KengekiSE04");
+	CreateSound("KengekiSE05", SE, "sound/se/c_刀の打ち合い5.ogg");
+	SetAlias("KengekiSE05","KengekiSE05");
+	CreateSound("KengekiSE06", SE, "sound/se/c_刀の打ち合い6.ogg");
+	SetAlias("KengekiSE06","KengekiSE06");
+	CreateSound("KengekiSE07", SE, "sound/se/c_刀の打ち合い7.ogg");
+	SetAlias("KengekiSE07","KengekiSE07");
+
+	CreateSound("KengekiSE11", SE, "sound/se/c_刀の打ち合い1.ogg");
+	SetAlias("KengekiSE11","KengekiSE11");
+	CreateSound("KengekiSE12", SE, "sound/se/c_刀の打ち合い2.ogg");
+	SetAlias("KengekiSE12","KengekiSE12");
+	CreateSound("KengekiSE13", SE, "sound/se/c_刀の打ち合い3.ogg");
+	SetAlias("KengekiSE13","KengekiSE13");
+	CreateSound("KengekiSE14", SE, "sound/se/c_刀の打ち合い4.ogg");
+	SetAlias("KengekiSE14","KengekiSE14");
+	CreateSound("KengekiSE15", SE, "sound/se/c_刀の打ち合い5.ogg");
+	SetAlias("KengekiSE15","KengekiSE15");
+	CreateSound("KengekiSE16", SE, "sound/se/c_刀の打ち合い6.ogg");
+	SetAlias("KengekiSE16","KengekiSE16");
+	CreateSound("KengekiSE17", SE, "sound/se/c_刀の打ち合い7.ogg");
+	SetAlias("KengekiSE17","KengekiSE17");
+
+	}else{
+
+	CreateSound("KengekiSE01", SE, "sound/se/a_刀の打ち合い1.ogg");
+	SetAlias("KengekiSE01","KengekiSE01");
+	CreateSound("KengekiSE02", SE, "sound/se/a_刀の打ち合い2.ogg");
+	SetAlias("KengekiSE02","KengekiSE02");
+	CreateSound("KengekiSE03", SE, "sound/se/a_刀の打ち合い3.ogg");
+	SetAlias("KengekiSE03","KengekiSE03");
+	CreateSound("KengekiSE04", SE, "sound/se/a_刀の打ち合い4.ogg");
+	SetAlias("KengekiSE04","KengekiSE04");
+	CreateSound("KengekiSE05", SE, "sound/se/a_刀の打ち合い5.ogg");
+	SetAlias("KengekiSE05","KengekiSE05");
+	CreateSound("KengekiSE06", SE, "sound/se/a_刀の打ち合い6.ogg");
+	SetAlias("KengekiSE06","KengekiSE06");
+	CreateSound("KengekiSE07", SE, "sound/se/a_刀の打ち合い7.ogg");
+	SetAlias("KengekiSE07","KengekiSE07");
+
+	CreateSound("KengekiSE11", SE, "sound/se/a_刀の打ち合い1.ogg");
+	SetAlias("KengekiSE11","KengekiSE11");
+	CreateSound("KengekiSE12", SE, "sound/se/a_刀の打ち合い2.ogg");
+	SetAlias("KengekiSE12","KengekiSE12");
+	CreateSound("KengekiSE13", SE, "sound/se/a_刀の打ち合い3.ogg");
+	SetAlias("KengekiSE13","KengekiSE13");
+	CreateSound("KengekiSE14", SE, "sound/se/a_刀の打ち合い4.ogg");
+	SetAlias("KengekiSE14","KengekiSE14");
+	CreateSound("KengekiSE15", SE, "sound/se/a_刀の打ち合い5.ogg");
+	SetAlias("KengekiSE15","KengekiSE15");
+	CreateSound("KengekiSE16", SE, "sound/se/a_刀の打ち合い6.ogg");
+	SetAlias("KengekiSE16","KengekiSE16");
+	CreateSound("KengekiSE17", SE, "sound/se/a_刀の打ち合い7.ogg");
+	SetAlias("KengekiSE17","KengekiSE17");
+
+	}
+
+	SetVolumeEX("@KengekiSE*", 0, 700, null);
+}
+
+=================================================
+..KengekiRandomSound_TestVer//テスト版
+=================================================
+function KengekiRandomSound_TestVer()
+{
+	CreateProcess("LPNut_KRS", 0, 0, 0, "KengekiRandomSoundAct_TestVer");
+	SetAlias("LPNut_KRS","LPNut_KRS");
+	Request("LPNut_KRS", Start);
+}
+
+function KengekiRandomSoundAct_TestVer()
+{
+	while(1){
+
+	if($kenngekiFirst==false){
+	$kenngeki=Random(6)+1;
+	$kenngekiFirst=true;
+	}else{
+	$kenngeki=Random(6)+8;
+	$kenngekiFirst=false;
+	}
+
+	if($kenngeki==1){
+	Request("@KengekiSE01", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE01")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==2){
+	Request("@KengekiSE02", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE02")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==3){
+	Request("@KengekiSE03", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE03")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==4){
+	Request("@KengekiSE04", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE04")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==5){
+	Request("@KengekiSE05", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE05")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==6){
+	Request("@KengekiSE06", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE06")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==7){
+	Request("@KengekiSE07", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE07")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==8){
+	Request("@KengekiSE11", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE11")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==9){
+	Request("@KengekiSE12", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE12")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==10){
+	Request("@KengekiSE13", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE13")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==11){
+	Request("@KengekiSE14", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE14")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==12){
+	Request("@KengekiSE15", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE15")/1-0+32;
+	Wait($SETime);
+	}else if($kenngeki==13){
+	Request("@KengekiSE16", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE16")/1-0+32;
+	Wait($SETime);
+	}else(){
+	Request("@KengekiSE17", Play);
+	$RandomWait=16+(Random(4)*3);
+	$SETime = RemainTime("@KengekiSE17")/1-0+32;
+	Wait($SETime);
+	}
+
+	}
+
+}
+
+=================================================
+..KengekiRandomSoundStop_TestVer//テスト版
+=================================================
+function KengekiRandomSoundStop_TestVer()
+{
+	Request("@LPNut_KRS", Stop);
+	Delete("@KengekiSE*");
+	Wait(16);
+	Delete("@LPNut_KRS");
+}
+
+======================================================================
+.//プロセス【ドラマダ】
+======================================================================
+=================================================
+..LProc_dm0100_vs_01Act
+=================================================
+function LProc_dm0100_vs_01Act()
+{
+	Request("@SEP011", Play);
+	Shake("@絵板写", 300, 4, 2, 0, 0, 1000, Dxl1, false);
+	Wait(1000);
+	Request("@SEP012", Play);
+	Shake("@絵板写", 300, -12, 6, 0, 0, 1000, Dxl1, false);
+	Wait(1800);
+	Request("@SEP013", Play);
+	Shake("@絵板写", 300, 12, 30, 0, 0, 1000, Dxl1, true);
+	Fade("@絵色黒", 0, 1000, null, true);
+	$LProc_dm0100_vs_01Act=true;
+}
+
+=================================================
+..LProc_dm0120_vs_01Act
+=================================================
+function LProc_dm0120_vs_01Act()
+{
+	Move("@絵背景二", 2000, @0, @60, Dxl2, false);
+
+	Move("@絵演単車*", 2000, @0, @60, Dxl2, false);
+	Fade("@絵演単車*", 800, 1000, null, false);
+
+	Move("@絵演背景", 2000, @0, @60, Dxl2, false);
+	Fade("@絵演背景", 800, 0, null, true);
+
+	Wait(1200);
+
+	CreateEffect("LProc_dm0120_vs_01ActEFP", 2000, 0, 0, 1024, 576, "Plain");
+	SetAlias("LProc_dm0120_vs_01ActEFP","LProc_dm0120_vs_01ActEFP");
+	Request("@LProc_dm0120_vs_01ActEFP", Passive);
+
+	SetShade("@絵背景二", SEMIHEAVY);
+	SetShade("@絵演単車*", null);
+	Wait(16);
+	Fade("@LProc_dm0120_vs_01ActEFP", 1000, 0, null, true);
+	Delete("@LProc_dm0120_vs_01ActEFP");
+	$LProc_dm0120_vs_01Act=true;
+}
+
+=================================================
+..Proc_dm0189_vs_01Act
+=================================================
+function Proc_dm0189_vs_01Act()
+{
+	Wait(1100);
+	Request("@SE01", Play);
+	Request("@SE02", Play);
+	Fade("@絵動画", 0, 1000, null, true);
+	Request("@絵動画", Play);
+	SetFrequency("@SE02", $SETime, 500, DxlAuto);
+	WaitPlay("@絵動画", null);
+	$Proc_dm0189_vs_01Act=true;
+}
+
+=================================================
+..Proc_dm0190_vs_01Act
+=================================================
+function Proc_dm0190_vs_01Act()
+{
+	Move("@絵効果サフ", 4000, @0, 0, DxlAuto, true);
+	Zoom("@絵効果サフ", 4000, 1000, 1000, null, true);
+	$Proc_dm0190_vs_01Act=true;
+}
+
+=================================================
+..Proc_dm0190_vs_01aAct
+=================================================
+function Proc_dm0190_vs_01aAct()
+{
+	Wait(0);
+	Fade("@絵窓二/覆二/絵色黒", 300, 1000, null, false);
+	Zoom("@絵窓二", 450, @0, 1000, Dxl2, true);
+	Fade("@絵窓二/絵演兎二", 0, 1000, null, true);
+	Wait(32);
+	Request("@SE_Proc_dm0190_vs_01aAct", Play);
+	Fade("@絵窓二/覆二/絵色黒", 300, 0, null, true);
+	Request("@絵窓二/覆二/絵色黒", Disused);
+}
+
+function Proc_dm0190_vs_01bAct()
+{
+	Wait(500);
+	Fade("@絵窓三/覆三/絵色黒", 300, 1000, null, false);
+	Zoom("@絵窓三", 450, @0, 1000, Dxl2, true);
+	Fade("@絵窓三/絵演兎三", 0, 1000, null, true);
+	Wait(32);
+	Request("@SE_Proc_dm0190_vs_01bAct", Play);
+	Fade("@絵窓三/覆三/絵色黒", 300, 0, null, true);
+	Request("@絵窓三/覆三/絵色黒", Disused);
+}
+
+function Proc_dm0190_vs_01cAct()
+{
+	Wait(150);
+	Fade("@絵窓四/覆四/絵色黒", 300, 1000, null, false);
+	Zoom("@絵窓四", 450, @0, 1000, Dxl2, true);
+	Fade("@絵窓四/絵演兎四", 0, 1000, null, true);
+	Wait(32);
+	Request("@SE_Proc_dm0190_vs_01cAct", Play);
+	Fade("@絵窓四/覆四/絵色黒", 300, 0, null, true);
+	Request("@絵窓四/覆四/絵色黒", Disused);
+}
+
+function Proc_dm0190_vs_01dAct()
+{
+	Wait(800);
+	Fade("@絵窓五/覆五/絵色黒", 300, 1000, null, false);
+	Zoom("@絵窓五", 450, @0, 1000, Dxl2, true);
+	Fade("@絵窓五/絵演兎五", 0, 1000, null, true);
+	Wait(32);
+	Request("@SE_Proc_dm0190_vs_01dAct", Play);
+	Fade("@絵窓五/覆五/絵色黒", 300, 0, null, true);
+	Request("@絵窓五/覆五/絵色黒", Disused);
+}
+
+=================================================
+..Proc_dm0190_vs_02Act
+=================================================
+function Proc_dm0190_vs_02Act()
+{
+	Wait(900);
+	Request("@SEProc_dm0190_vs_02Act", Play);
+	Move("@絵専二", 300, -985, -530, Dxl2, false);
+	Zoom("@絵専二", 300, 2000, 2000, Dxl2, true);
+	$Proc_dm0190_vs_02Act=true;
+}
+
+=================================================
+..Proc_dm0200_vs_01Act
+=================================================
+function Proc_dm0200_vs_01Act()
+{
+	while(1){
+	SetFrequency("@SEL01", 3000, 800, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 600, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1000, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 800, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1200, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1000, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1400, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1200, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1600, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1200, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1800, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1200, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1400, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1000, AxlDxl);
+	Wait(3500);
+	SetFrequency("@SEL01", 3000, 1200, AxlDxl);
+	Wait(3500);
+
+	}
+}
+
+=================================================
+..Proc_dm0200_vs_02Act
+=================================================
+function Proc_dm0200_vs_02Act()
+{
+	begin:
+	while(1)
+	{
+	MoveCamera("@Ｃ", 0, -1, -1, @0, null, true);
+	MoveCamera("@Ｃ", 0, 1, 1, @0, null, true);
+	MoveCamera("@Ｃ", 0, 1, -1, @0, null, true);
+	MoveCamera("@Ｃ", 0, -1, 1, @0, null, true);
+	}
+}
+
+=================================================
+..LProc_dm0710_scr_01Act
+=================================================
+function LProc_dm0710_scr_01Act()
+{
+	begin:
+	while(1)
+	{
+
+	DrawTransition("@絵演手動頭痛", 80, 0, 1000, 100, null, "cg/data/circle_01_00_0.png", false);
+	FadeFFR2("@絵演手動頭痛", 0,1000, 200, 0, 0, 50,null, false);
+	Wait(100);
+	Fade("@絵演手動頭痛", 200, 0, null, true);
+	Wait(1400);
+	}
+}
+
+=================================================
+..LProc_dm0725_vs_01Act
+=================================================
+function LProc_dm0725_vs_01Act()
+{
+//ムービーを擬似的にスローに
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+	Wait(6);
+	Request("@絵演動画", Resume);
+	Wait(6);
+
+	Request("@絵演動画", Pause);
+
+	Wait(1000);
+	Fade("@絵演動画", 3000, 0, null, true);
+	Delete("@絵演動画");
+
+	$LProc_dm0725_vs_01Act=true;
+}
+
+=================================================
+..LProc_dm0725_vs_02Act
+=================================================
+function LProc_dm0725_vs_02Act()
+{
+//映像東江の走査線っぽいもの
+	begin:
+	while(1){
+	Fade("@絵枠/絵演東江光線", 0, 500, null, true);
+	Move("@絵枠/絵演東江光線", 800, @0, -100, Axl1, true);
+	Wait(2000);
+	Fade("@絵枠/絵演東江光線", 0, 0, null, true);
+	Move("@絵枠/絵演東江光線", 0, @0, 576, null, true);
+	}
+}
+
+=================================================
+..Proc_dm1410_01Act
+=================================================
+function Proc_dm1410_01Act()
+{
+	Wait(1900);
+	Fade($Proc_dm1410_01ActNut01, 0, 500, null, true);
+	Delete("@絵専");
+	Request("@Proc_dm1410_01ActSE02", Play);
+	Shake($Proc_dm1410_01ActNut01, 300, 30, 20, 0, 0, 500, null, false);
+	Wait(200);
+	Fade($Proc_dm1410_01ActNut01, 300, 0, null, false);
+	Wait(100);
+	Request("@Proc_dm1410_01ActSE", Play);
+	WaitAction($Proc_dm1410_01ActNut01, null);
+	Delete($Proc_dm1410_01ActNut01);
+
+}
+
+=================================================
+..Proc_dm1420_01Act
+=================================================
+function Proc_dm1420_01Act()
+{
+	while(1)
+	{
+	Request("@Proc_dm1420_01ActSE01", Play);
+	Fade("@絵演血溜一", 300, 400, null, true);
+	Zoom("@絵演血溜五", 2500, @5, @5, null, false);
+	Wait(3000);
+	Request("@Proc_dm1420_01ActSE01", Play);
+	Fade("@絵演血溜二", 300, 400, null, true);
+	Zoom("@絵演血溜五", 2500, @5, @5, null, false);
+	Wait(3000);
+	Request("@Proc_dm1420_01ActSE01", Play);
+	Fade("@絵演血溜三", 300, 400, null, true);
+	Zoom("@絵演血溜五", 2500, @5, @5, null, false);
+	Wait(3000);
+	Request("@Proc_dm1420_01ActSE01", Play);
+	Fade("@絵演血溜四", 300, 400, null, true);
+	Zoom("@絵演血溜五", 2500, @5, @5, null, false);
+	Wait(3000);
+
+
+	Fade("@絵演血溜一", 10000, 0, null, false);
+	Fade("@絵演血溜二", 9000, 0, null, false);
+	Fade("@絵演血溜三", 8000, 0, null, false);
+	Fade("@絵演血溜四", 7000, 0, null, false);
+	Wait(5000);
+
+	}
+}
+
+=================================================
+..LMacr_dm1440scr_01
+=================================================
+function LMacr_dm1440scr_01($LMacr_dm1440scr_01Nut,$移動方向)
+{
+	Request("@LMSE01", Stop);
+	Position($LMacr_dm1440scr_01Nut, $x1, $y1);
+	Fade($LMacr_dm1440scr_01Nut, 2000, 1000, Dxl3, false);
+
+	Request("@LMSE01", Play);
+
+	if($移動方向=="8"){
+		BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@-10,@-350}{@10,@-300}($x1, $y1), AxlAuto, false);
+	}else if($移動方向=="2"){
+		BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@10,@350}{@-10,@300}($x1, $y1), AxlAuto, false);
+	}else if($移動方向=="4"){
+		BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@-450,@-10}{@-400,@10}($x1, $y1), AxlAuto, false);
+	}else if($移動方向=="6"){
+		BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@450,@10}{@400,@-10}($x1, $y1), AxlAuto, false);
+	}else if($移動方向=="7"){
+		BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@-500,@-200}{@-300,@-300}($x1, $y1), AxlAuto, false);
+	}else if($移動方向=="3"){
+		BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@500,@200}{@300,@300}($x1, $y1), AxlAuto, false);
+	}else if($移動方向=="1"){
+		BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@-500,@200}{@-300,@300}($x1, $y1), AxlAuto, false);
+	}else if($移動方向=="9"){
+		BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@300,@-200}{@500,@-300}($x1, $y1), AxlAuto, false);
+	}else{
+		//BezierMove($LMacr_dm1440scr_01Nut, 2000, ($x1, $y1){@400,@200}{@200,@300}($x1, $y1), AxlAuto, false);
+	}
+	DrawTransition($LMacr_dm1440scr_01Nut, 1500, 0, 1000, 100, null, "cg/data/effect_01_00_0.png", false);
+	Zoom($LMacr_dm1440scr_01Nut, 3000, 1000, 1000, null, false);
+	Wait(1000);
+	Fade($LMacr_dm1440scr_01Nut, 450, 0, null, false);
+	Zoom($LMacr_dm1440scr_01Nut, 500, 7500, 7500, Axl3, true);
+	Wait(300);
+}
+
+=================================================
+..LProc_dm1440scr_01
+=================================================
+function LProc_dm1440scr_01($LP01Nut)
+{
+	CreateProcessEX("Proc_dm1440scr_01", "LProc_dm1440scr_01Act");
+	Request("Proc_dm1440scr_01", Start);
+}
+
+function LProc_dm1440scr_01Act()
+{
+	Zoom($LP01Nut, 20000, 2000, 2000, null, false);
+	Wait(19800);
+	Zoom($LP01Nut, 1000, 7500, 7500, Axl2, true);
+}
+
+=================================================
+..LProc_dm1440scr_02Act
+=================================================
+function LProc_dm1440scr_02Act()
+{
+	begin:
+
+	Zoom("@絵枠*", 50000, 1000, 1000, null, false);
+	Request("@LPSE01", Play);
+
+	while(1){
+
+	Shake("@絵枠蒼葉縁/砂", 600000, 2, 30, 0, 0, 1000, null, false);
+	Shake("@絵枠竜峰縁/砂", 600000, 2, 30, 0, 0, 1000, null, false);
+
+	Request("@LPSE01", Resume);
+	Fade("@絵枠蒼葉縁/砂", 0, 1000, null, true);//蒼葉
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠蒼葉縁/砂", 0, 0, null, true);//蒼葉
+
+
+	Wait($LProc_dm1440scr_02ActWT);
+
+	Request("@LPSE01", Resume);
+	Fade("@絵枠竜峰縁/砂", 0, 1000, null, true);//竜峰
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠竜峰縁/砂", 0, 0, null, true);//竜峰
+	Wait(100);
+	Request("@LPSE01", Resume);
+	Fade("@絵枠蒼葉縁/砂", 0, 1000, null, true);//蒼葉
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠蒼葉縁/砂", 0, 0, null, true);//蒼葉
+
+
+	Wait($LProc_dm1440scr_02ActWT);
+
+
+	Request("@LPSE01", Resume);
+	Fade("@絵枠竜峰縁/砂", 0, 1000, null, true);//竜峰
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠竜峰縁/砂", 0, 0, null, true);//竜峰
+
+
+	Wait($LProc_dm1440scr_02ActWT);
+
+
+	Request("@LPSE01", Resume);
+	Fade("@絵枠蒼葉縁/砂", 0, 1000, null, true);//蒼葉
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠蒼葉縁/砂", 0, 0, null, true);//蒼葉
+	Wait(100);
+	Request("@LPSE01", Resume);
+	Fade("@絵枠竜峰縁/砂", 0, 1000, null, true);//竜峰
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠竜峰縁/砂", 0, 0, null, true);//竜峰
+
+
+	Wait($LProc_dm1440scr_02ActWT);
+
+
+	Request("@LPSE01", Resume);
+	Fade("@絵枠蒼葉縁/砂", 0, 1000, null, true);//蒼葉
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠蒼葉縁/砂", 0, 0, null, true);//蒼葉
+	Wait(10);
+	Request("@LPSE01", Resume);
+	Fade("@絵枠竜峰縁/砂", 0, 1000, null, true);//竜峰
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠竜峰縁/砂", 0, 0, null, true);//竜峰
+	Wait(10);
+	Request("@LPSE01", Resume);
+	Fade("@絵枠蒼葉縁/砂", 0, 1000, null, true);//蒼葉
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠蒼葉縁/砂", 0, 0, null, true);//蒼葉
+
+	Wait($LProc_dm1440scr_02ActWT);
+
+	Request("@LPSE01", Resume);
+	Fade("@絵枠竜峰縁/砂", 0, 1000, null, true);//竜峰
+	Wait(10);
+	Request("@LPSE01", Pause);
+	Fade("@絵枠竜峰縁/砂", 0, 0, null, true);//竜峰
+
+	Wait($LProc_dm1440scr_02ActWT);
+	}
+
+}
+
+=================================================
+..LProc_dm1440scr_02Act//暴露後の蒼葉が白蒼葉を自覚するシーン
+=================================================
+function LProc_dm1490_01aAct()
+{
+	begin:
+	while(1)
+	{
+	Fade("@絵黒蒼葉之影一", 0, 1000, null, true);
+	Fade("@絵黒蒼葉之影四", 0, 0, null, true);
+	Wait(16);
+	Fade("@絵黒蒼葉之影二", 0, 1000, null, true);
+	Fade("@絵黒蒼葉之影一", 0, 0, null, true);
+	Wait(16);
+	Fade("@絵黒蒼葉之影三", 0, 1000, null, true);
+	Fade("@絵黒蒼葉之影二", 0, 0, null, true);
+	Wait(16);
+	Fade("@絵黒蒼葉之影四", 0, 1000, null, true);
+	Fade("@絵黒蒼葉之影三", 0, 0, null, true);
+	Wait(16);
+	}
+}
+
+function LProc_dm1490_01b1Act()
+{
+	begin:
+	while(1)
+	{
+	Fade("@絵黒蒼葉之影零", 0, 1000, null, true);
+	Wait(16);
+	Fade("@絵黒蒼葉之影零", 0, 0, null, true);
+	Wait(16);
+	}
+}
+
+=================================================
+..Proc_dm2010_01Act
+=================================================
+function Proc_dm2010_01Act()
+{
+	Wait(1000);
+	Request("@SE01", Play);
+	Request("@SE01", Disused);
+	Request("@SE02", Play);
+	Request("@SE02", Disused);
+	Fade("@絵色白", 300, 1000, Axl3, true);
+	Wait(100);
+	Fade("@絵板写", 0, 1000, null, true);
+	DrawEffect("@絵板写", 5000, "Ripple", 500, 100, null);
+	Delete("@OnBG*");
+	Fade("@絵色白", 3000, 0, null, true);
+	Delete("@絵色白");
+	$Proc_dm2010_01Act=true;
+}
+
+=================================================
+..Procdm2020_vs_01Act
+=================================================
+function Procdm2020_vs_01Act()
+{
+	Wait(2000);
+	Move("@絵背景", 5000, @0, -288, Dxl3, false);
+	Zoom("@絵背景", 5000, 500, 500, Dxl3, false);
+	Fade("@絵色黒", 5000, 0, Dxl3, true);
+	Delete("@絵色黒");
+	Delete("@絵背景");
+	$Procdm2020_vs_01Act=true;
+}
+=================================================
+..Procdm2020_vs_02Act
+=================================================
+function Procdm2020_vs_02Act()
+{
+	Wait(200);
+	Request("@PSE01", Play);
+	Request("@PSE01", Disused);
+	Fade("@絵枠/絵背景", 0, 500, null, true);
+	DrawTransition("@絵枠/絵背景", 250, 0, 1000, 10, null, "cg/data/mosaic_01_00_0.png", true);
+	Wait(50);
+	DrawTransition("@絵枠/絵背景", 250, 1000, 0, 10, null, "cg/data/mosaic_01_00_1.png", true);
+	Delete("@絵枠");
+	$Procdm2020_vs_02Act=true;
+}
+=================================================
+..LProc_dm2170_01Act
+=================================================
+function LProc_dm2170_01Act()
+{
+	Wait(1800);
+	Request("@SE01", Play);
+	$LProc_dm2170_01Act=true;
+}
+
+=================================================
+..LProc_dm2390_vs_01Act
+=================================================
+function LProc_dm2390_vs_01Act()
+{
+	Wait(800);
+	Request("@SE01", Play);
+	Request("@SE01a", Play);
+	Request("@SE01", Disused);
+	Request("@SE01a", Disused);
+
+	Move("@絵演雑音殴愛三", 300, -780, @0, Dxl3, false);
+	Fade("@絵色白", 300, 1000, null, true);
+
+	Delete("@絵演雑音*");
+	Delete("@絵演打撃火花");
+	Delete("@絵ＥＶ");
+
+	Fade("@絵演背景", 0, 1000, null, true);
+	SetBlur("@絵演背景", true, 3, 500, 60, false);
+	Move("@絵演背景", 600, 0, @0, Dxl3, false);
+	Shake("@絵演背景", 600, 0, 8, 0, 0, 500, Dxl3, false);
+
+	Fade("@絵色白", 300, 0, null, true);
+	Delete("@絵色白");
+
+	Request("@SE01b", Play);
+	Request("@SE01b", Disused);
+
+	$LProc_dm2390_vs_01Act=true;
+}
+
+=================================================
+..Proc_dm2410scr_01
+=================================================
+function Proc_dm2410scr_01()
+{
+	CreateName("dm2410scr_01v");
+	SetAlias("dm2410scr_01v","dm2410scr_01v");
+
+	CreateSoundAkk("dm2410scr_01v/01","voice/dm24/1000031e04");//「ほんとにどうしてこんなことに……」
+	$SETime01 = RemainTime("dm2410scr_01v/01");
+	SoundEffect("dm2410scr_01v/01","Echo",100,50,80,160);
+	MusicStartSet("dm2410scr_01v/01",1500,-150,1000,null,false);
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～
+
+	CreateSoundAkk("dm2410scr_01v/02","voice/dm24/1000040e04");//「これならいっそ、一生外に出ない方があの子のためにもいいんじゃないかしら」
+	$SETime02 = RemainTime("dm2410scr_01v/02");
+	SoundEffect("dm2410scr_01v/02","Echo",100,50,80,160);
+	MusicStartSet("dm2410scr_01v/02",1500,-150,1000,null,false);
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～
+
+	CreateSoundAkk("dm2410scr_01v/03","voice/dm24/1000051e05");//「一族の面汚し、末代までの恥だからな」
+	$SETime03 = RemainTime("dm2410scr_01v/03");
+	SoundEffect("dm2410scr_01v/03","Echo",100,50,80,160);
+	MusicStartSet("dm2410scr_01v/03",1500,150,1000,null,false);
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～
+
+	CreateSoundAkk("dm2410scr_01v/04","voice/dm24/1000060e05");//「生まれてこない方が幸せだったのかも知れん」
+	$SETime04 = RemainTime("dm2410scr_01v/04");
+	SoundEffect("dm2410scr_01v/04","Echo",100,50,80,160);
+	MusicStartSet("dm2410scr_01v/04",1500,150,1000,null,false);
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～
+
+	CreateSoundAkk("dm2410scr_01v/05","voice/dm24/1000070e04");//「あなた、いくらなんでもそこまでは……」
+	$SETime05 = RemainTime("dm2410scr_01v/05");
+	SoundEffect("dm2410scr_01v/05","Echo",100,50,80,160);
+	MusicStartSet("dm2410scr_01v/05",1500,-150,1000,null,false);
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～
+
+	CreateSoundAkk("dm2410scr_01v/06","voice/dm24/1000080e05");//「お前だって外に出す気はないんだろう？」
+	$SETime06 = RemainTime("dm2410scr_01v/06");
+	SoundEffect("dm2410scr_01v/06","Echo",100,50,80,160);
+	MusicStartSet("dm2410scr_01v/06",1500,150,1000,null,false);
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～
+
+	CreateSoundAkk("dm2410scr_01v/07","voice/dm24/1000090e04");//「……それはそうだけど」
+	$SETime07 = RemainTime("dm2410scr_01v/07");
+	SoundEffect("dm2410scr_01v/07","Echo",100,50,80,160);
+	MusicStartSet("dm2410scr_01v/07",1500,-150,1000,null,false);
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～
+
+	CreateProcessEX("@dm2410scr_01v/処理親会話", "Proc_dm2410scr_01Act");
+	Request("@dm2410scr_01v/処理親会話", Start);
+}
+
+function Proc_dm2410scr_01Act()
+{
+
+	Request("@dm2410scr_01v/01", Play);
+	Wait($SETime01);
+	Request("@dm2410scr_01v/02", Play);
+	Wait($SETime02);
+	Request("@dm2410scr_01v/03", Play);
+	Wait($SETime03);
+	Request("@dm2410scr_01v/04", Play);
+	Wait($SETime04);
+	Request("@dm2410scr_01v/05", Play);
+	Wait($SETime05);
+	Request("@dm2410scr_01v/06", Play);
+	Wait($SETime06);
+	Request("@dm2410scr_01v/07", Play);
+	Wait($SETime07);
+}
+=================================================
+..Proc_dm2410scr_01Delete
+=================================================
+function Proc_dm2410scr_01Delete()
+{
+	SetVolumeEX("@dm2410scr_01v/0*", 450, 0, null);
+	CreateProcessEX("処理親会話削除", "Proc_dm2410scr_01DeleteAct");
+	Request("処理親会話削除", Start);
+	Request("処理親会話削除", Disused);
+}
+
+function Proc_dm2410scr_01DeleteAct()
+{
+	Request("@処理親会話", Stop);
+	Wait(450);
+	Delete("@dm2410scr_01v");
+}
+
+=================================================
+..Proc_dm2410scr_02Act
+=================================================
+//モノトーン人間の動きの制御
+function Proc_dm2410scr_02Act()
+{
+	begin:
+	while(1)
+	{
+	Request("@MONOSE01", Stop);
+	SetPan("@MONOSE01", 0, 0, null);
+	SetFrequency("@MONOSE01", 0, 1000, null);
+	Request("@MONOSE01", Play);
+	Fade("@絵白黒手乙", 0, 0, null, false);
+	Fade("@絵白黒手甲", 0, 1000, null, true);
+
+	Wait(800);
+
+	Request("@MONOSE01", Stop);
+	$MONOSTEP01=-1000+Random(2000);
+	SetPan("@MONOSE01", 0, $MONOSTEP01, null);
+	$MONOSTEP02=500+Random(1000);
+	SetFrequency("@MONOSE01", 0, $MONOSTEP02, null);
+	Request("@MONOSE01", Play);
+	Fade("@絵白黒手甲", 0, 0, null, false);
+	Fade("@絵白黒手乙", 0, 1000, null, true);
+
+	Wait(800);
+
+	Request("@MONOSE01", Stop);
+	$MONOSTEP01=-1000+Random(2000);
+	SetPan("@MONOSE01", 0, $MONOSTEP01, null);
+	$MONOSTEP02=500+Random(1000);
+	SetFrequency("@MONOSE01", 0, $MONOSTEP02, null);
+	Request("@MONOSE01", Play);
+	Fade("@絵白黒手乙", 0, 0, null, false);
+	Fade("@絵白黒手丙", 0, 1000, null, true);
+
+	Wait(800);
+
+	Request("@MONOSE01", Stop);
+	$MONOSTEP01=-1000+Random(2000);
+	SetPan("@MONOSE01", 0, $MONOSTEP01, null);
+	$MONOSTEP02=500+Random(1000);
+	SetFrequency("@MONOSE01", 0, $MONOSTEP02, null);
+	Request("@MONOSE01", Play);
+	Fade("@絵白黒手丙", 0, 0, null, false);
+	Fade("@絵白黒手乙", 0, 1000, null, true);
+
+	Wait(800);
+
+	}
+}
+
+=================================================
+..Proc_dm2410scr_03
+=================================================
+//ノイズの明滅制御
+function Proc_dm2410scr_03($Proc_dm2410scr_03Nut,$LP2410Target)
+{
+	CreateProcessEX($Proc_dm2410scr_03Nut, "Proc_dm2410scr_03Act");
+	Request($Proc_dm2410scr_03Nut, Start);
+}
+
+function Proc_dm2410scr_03Act()
+{
+	begin:
+	while(1){
+	$RandomFade=300+(Random(25)*10);
+	$RandomFadeT=500+(Random(10)*300);
+	Fade($LP2410Target, $RandomFadeT, $RandomFade, null, true);
+	$RandomWait=Random(10)*100;
+	Wait($RandomWait);
+	$RandomFadeT=500+(Random(10)*300);
+	Fade($LP2410Target, $RandomFadeT, 100, null, true);
+	$RandomWait=Random(10)*100;
+	Wait($RandomWait);
+	}
+}
+
+=================================================
+..Proc_dm2410scr_04Act
+=================================================
+function Proc_dm2410scr_04Act()
+{
+	Wait(1300);
+	Request("@SE01", Play);
+	Fade("@絵色白", 0, 1000, null, true);
+	Wait(30);
+	Fade("@絵色白", 70, 0, null, true);
+	Delete("絵色白");
+}
+
+=================================================
+..Proc_dm2430scr_01
+=================================================
+//反転画面をRandomで生成します
+function Proc_dm2430scr_01()
+{
+	CreateMask("覆二", 0, 0, 0, "cg/data/mosaic_01_00_0.png", false);
+	SetAlias("覆二","覆二");
+	Zoom("覆二", 0, 3160, 5560, null, true);//1580, 2780
+
+	CreateProcessEX("処理画面固定", "Proc_dm2430scr_01Act");
+	Request("処理画面固定", Start);
+}
+
+function Proc_dm2430scr_01Act()
+{
+	begin:
+	while(1)
+	{
+	$BugRW=Random(500)*10;
+	Wait($BugRW);
+	CreateEffect("@覆二/絵演停止画面", 25000, 0, 0, 1024, 576, "Plain");
+	SetAlias("@覆二/絵演停止画面","@覆/絵演停止画面");
+	Request("@覆二/絵演停止画面", Passive);
+	Rotate("@覆二/絵演停止画面", 0, @0, 180, 0, null,true);
+	Wait(3000);
+	Delete("@覆二/絵演停止画面");
+	Wait(2000);
+	}
+
+}
+
+=================================================
+..Proc_dm2430scr_02
+=================================================
+//画面を覆う黒い縁を生成します
+function Proc_dm2430scr_02()
+{
+	CreateMask("覆", 0, 0, 0, "cg/data/mosaic_01_00_0.png", false);
+	SetAlias("覆","覆");
+	Zoom("覆", 0, 3160, 5560, null, true);//1580, 2780
+	CreateColorEX("覆/絵色バグ黒", 25010, "000000");
+
+	CreateProcessEX("処理黒虫食", "Proc_dm2430scr_02Act");
+	Request("処理黒虫食", Start);
+}
+
+function Proc_dm2430scr_02Act()
+{
+	begin:
+	while(1)
+	{
+	Rotate("@覆", 0, @0, @0, 0, null,true);
+
+	Fade("@覆/絵色バグ黒", 0, 1000, null, true);
+	Wait(500);
+	Fade("@覆/絵色バグ黒", 0, 0, null, true);
+	Wait(500);
+
+	Fade("@覆/絵色バグ黒", 0, 1000, null, true);
+	Wait(500);
+	Fade("@覆/絵色バグ黒", 0, 0, null, true);
+	Wait(500);
+
+	Fade("@覆/絵色バグ黒", 0, 1000, null, true);
+	Wait(500);
+	Fade("@覆/絵色バグ黒", 0, 0, null, true);
+	Wait(500);
+
+	Fade("@覆/絵色バグ黒", 0, 1000, null, true);
+	Wait(500);
+	Fade("@覆/絵色バグ黒", 0, 0, null, true);
+	Wait(500);
+
+	$BugRR=Random(3)*90;
+	Rotate("@覆", 0, @0, @0, $BugRR, null,true);
+
+	Fade("@覆/絵色バグ黒", 0, 1000, null, true);
+	Wait(500);
+	Fade("@覆/絵色バグ黒", 0, 0, null, true);
+	Wait(500);
+
+	Fade("@覆/絵色バグ黒", 0, 1000, null, true);
+	Wait(500);
+	Fade("@覆/絵色バグ黒", 0, 0, null, true);
+	Wait(500);
+
+	Fade("@覆/絵色バグ黒", 0, 1000, null, true);
+	Wait(500);
+	Fade("@覆/絵色バグ黒", 0, 0, null, true);
+	Wait(500);
+
+	Fade("@覆/絵色バグ黒", 0, 1000, null, true);
+	Wait(500);
+	Fade("@覆/絵色バグ黒", 0, 0, null, true);
+	Wait(500);
+
+	}
+}
+
+=================================================
+..LProc_dm2480_01aAct//暴露後の蒼葉が白蒼葉を自覚するシーン
+=================================================
+function LProc_dm2480_01aAct()
+{
+	begin:
+	while(1)
+	{
+	Fade("@絵黒蒼葉之影一", 0, 1000, null, true);
+	Fade("@絵黒蒼葉之影四", 0, 0, null, true);
+	Wait(16);
+	Fade("@絵黒蒼葉之影二", 0, 1000, null, true);
+	Fade("@絵黒蒼葉之影一", 0, 0, null, true);
+	Wait(16);
+	Fade("@絵黒蒼葉之影三", 0, 1000, null, true);
+	Fade("@絵黒蒼葉之影二", 0, 0, null, true);
+	Wait(16);
+	Fade("@絵黒蒼葉之影四", 0, 1000, null, true);
+	Fade("@絵黒蒼葉之影三", 0, 0, null, true);
+	Wait(16);
+	}
+}
+
+function LProc_dm2480_01bAct()
+{
+	begin:
+	while(1)
+	{
+	Fade("@絵黒蒼葉之影零", 0, 1000, null, true);
+	Wait(16);
+	Fade("@絵黒蒼葉之影零", 0, 0, null, true);
+	Wait(16);
+	}
+}
+
+=================================================
+..Proc_dm2570_vs_01Act
+=================================================
+function Proc_dm2570_vs_01Act()
+{
+	Wait(2300);
+	Fade("@絵板写", 200, 0, null, true);
+	Delete("@絵板写");
+	$Proc_dm2570_vs_01Act=true;
+}
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+=================================================
+..Proc_dm2570_vs_02all
+=================================================
+function Proc_dm2570_vs_02all()
+{
+	CreateName("ウサギモドキ『崩』『壊』")
+	SetAlias("ウサギモドキ『崩』『壊』","ウサギモドキ『崩』『壊』");
+
+	CreateProcessEX("ウサギモドキ『崩』『壊』/プロセス２Ｌ", "Proc_dm2570_vs_02alAct");
+	CreateProcessEX("ウサギモドキ『崩』『壊』/プロセス２Ｒ", "Proc_dm2570_vs_02arAct");
+	CreateProcessEX("ウサギモドキ『崩』『壊』/プロセス３Ｌ", "Proc_dm2570_vs_02blAct");
+	CreateProcessEX("ウサギモドキ『崩』『壊』/プロセス３Ｒ", "Proc_dm2570_vs_02brAct");
+	CreateProcessEX("ウサギモドキ『崩』『壊』/プロセス４Ｌ", "Proc_dm2570_vs_02clAct");
+	CreateProcessEX("ウサギモドキ『崩』『壊』/プロセス４Ｒ", "Proc_dm2570_vs_02crAct");
+
+	Request("ウサギモドキ『崩』『壊』/プロセス２Ｌ", Start);
+	Request("ウサギモドキ『崩』『壊』/プロセス２Ｒ", Start);
+	Request("ウサギモドキ『崩』『壊』/プロセス３Ｌ", Start);
+	Request("ウサギモドキ『崩』『壊』/プロセス３Ｒ", Start);
+	Request("ウサギモドキ『崩』『壊』/プロセス４Ｌ", Start);
+	Request("ウサギモドキ『崩』『壊』/プロセス４Ｒ", Start);
+
+}
+
+function Proc_dm2570_vs_02alAct()
+{
+	begin:
+	while(1)
+	{
+	Rotate("@Ｃ/絵演兎突進二左光", 15000, @0, @0, 36000, null,true);
+	Rotate("@Ｃ/絵演兎突進二左光", 0, @0, @0, 0, null,true);
+	}
+}
+function Proc_dm2570_vs_02arAct()
+{
+	begin:
+	while(1)
+	{
+	Rotate("@Ｃ/絵演兎突進二右光", 15000, @0, @0, 36000, null,true);
+	Rotate("@Ｃ/絵演兎突進二右光", 0, @0, @0, 0, null,true);
+	}
+}
+function Proc_dm2570_vs_02blAct()
+{
+	begin:
+	while(1)
+	{
+	Rotate("@Ｃ/絵演兎突進三左光", 15000, @0, @0, 36000, null,true);
+	Rotate("@Ｃ/絵演兎突進三左光", 0, @0, @0, 0, null,true);
+	}
+}
+function Proc_dm2570_vs_02brAct()
+{
+	begin:
+	while(1)
+	{
+	Rotate("@Ｃ/絵演兎突進三右光", 15000, @0, @0, 36000, null,true);
+	Rotate("@Ｃ/絵演兎突進三右光", 0, @0, @0, 0, null,true);
+	}
+}
+
+function Proc_dm2570_vs_02clAct()
+{
+	begin:
+	while(1)
+	{
+	Rotate("@Ｃ/絵演兎突進四左光", 15000, @0, @0, 36000, null,true);
+	Rotate("@Ｃ/絵演兎突進四左光", 0, @0, @0, 0, null,true);
+	}
+}
+function Proc_dm2570_vs_02crAct()
+{
+	begin:
+	while(1)
+	{
+	Rotate("@Ｃ/絵演兎突進四右光", 15000, @0, @0, 36000, null,true);
+	Rotate("@Ｃ/絵演兎突進四右光", 0, @0, @0, 0, null,true);
+	}
+}
+
+//～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～
+
+function Proc_dm2570_vs_03alAct()
+{
+	Request("@SE02L", Play);
+	Zoom("@Ｃ/絵演兎突進二左光", 450, 2000, 2000, AxlDxl, false);
+	BezierMove("@Ｃ/絵演兎突進二左光", 450, (@0,@0){-80,240}{-10,300}(400,130), AxlDxl, false);
+	Wait(390);
+	Fade("@Ｃ/絵演兎突進一中光", 0, 180, null, false);
+	Fade("@Ｃ/絵演兎突進二左光", 300, 0, null, true);
+}
+function Proc_dm2570_vs_03arAct()
+{
+	Request("@SE02R", Play);
+	Zoom("@Ｃ/絵演兎突進二右光", 450, 3800, 3800, AxlDxl, false);
+	BezierMove("@Ｃ/絵演兎突進二右光", 450, (@0,@0){910,140}{910,210}(410,210), AxlDxl, false);
+	Wait(390);
+	Fade("@Ｃ/絵演兎突進一中光", 0, 360, null, false);
+	Fade("@Ｃ/絵演兎突進二右光", 300, 0, null, true);
+}
+
+
+function Proc_dm2570_vs_03blAct()
+{
+	Request("@SE03L", Play);
+	Zoom("@Ｃ/絵演兎突進三左光", 450, 3400, 3400, AxlDxl, false);
+	BezierMove("@Ｃ/絵演兎突進三左光", 450, (@0,@0){-50,40}{170,-50}(460,180), AxlDxl, false);
+	Wait(390);
+	Fade("@Ｃ/絵演兎突進一中光", 0, 540, null, false);
+	Fade("@Ｃ/絵演兎突進三左光", 300, 0, null, true);
+}
+function Proc_dm2570_vs_03brAct()
+{
+	Request("@SE03R", Play);
+	Zoom("@Ｃ/絵演兎突進三右光", 450, 5800, 5800, AxlDxl, false);
+	BezierMove("@Ｃ/絵演兎突進三右光", 450, (@0,@0){970,300}{910,210}(470,210), AxlDxl, false);
+	Wait(390);
+	Fade("@Ｃ/絵演兎突進一中光", 0, 700, null, false);
+	Fade("@Ｃ/絵演兎突進三右光", 300, 0, null, true);
+}
+
+
+function Proc_dm2570_vs_03clAct()
+{
+	Request("@SE04L", Play);
+	Zoom("@Ｃ/絵演兎突進四左光", 450, 5200, 5200, AxlDxl, false);
+	BezierMove("@Ｃ/絵演兎突進四左光", 450, (@0,@0){-20,400}{230,500}(480,210), AxlDxl, false);
+	Wait(390);
+	Fade("@Ｃ/絵演兎突進一中光", 0, 870, null, false);
+	Fade("@Ｃ/絵演兎突進四左光", 300, 0, null, true);
+}
+function Proc_dm2570_vs_03crAct()
+{
+	Request("@SE04R", Play);
+	Zoom("@Ｃ/絵演兎突進四右光", 450, 8000, 8000, AxlDxl, false);
+	BezierMove("@Ｃ/絵演兎突進四右光", 450, (@0,@0){720,-20}{600,-20}(500,240), AxlDxl, false);
+	Wait(390);
+	Fade("@Ｃ/絵演兎突進一中光", 0, 1000, null, false);
+	Fade("@Ｃ/絵演兎突進四右光", 300, 0, null, true);
+}
+
+=================================================
+..Proc_dm3630scr_01Act
+=================================================
+function Proc_dm3630scr_01Act()
+{
+	while(1)
+	{
+	Wait(2000);
+	$Proc_dm3630scr_01ActRandomT=Random(3)*2000;
+	Wait($Proc_dm3630scr_01ActRandomT);
+	Request("@SEL03", Play);
+	}
+}
+
+=================================================
+..Proc_dm3640scr_01Act
+=================================================
+function Proc_dm3640scr_01Act()
+{
+	Wait(1500);
+	Zoom("@絵ＥＶ", 500, 500, 500, null, false);
+	DrawTransition("@絵色黒", 500, 750, 0, 100, null, "cg/data/slide_05_00_0.png", true);
+	$Proc_dm3640scr_01Act=true;
+}
+
+=================================================
+..Proc_dm3640scr_02Act
+=================================================
+function Proc_dm3640scr_02Act()
+{
+	begin:
+	while(1)
+	{
+	$RandomFade=300+(Random(25)*10);
+	$RandomFadeT=500+(Random(10)*300);
+	Fade("@絵演背景朧", $RandomFadeT, $RandomFade, null, true);
+	$RandomWait=Random(10)*100;
+	Wait($RandomWait);
+	$RandomFadeT=500+(Random(10)*300);
+	Fade("@絵演背景朧", $RandomFadeT, 100, null, true);
+	$RandomWait=Random(10)*100;
+	Wait($RandomWait);
+
+	}
+}
+
+=================================================
+..Proc_dm5530scr_01Act
+=================================================
+function Proc_dm5530scr_01Act()
+{
+	begin:
+	while(1)
+	{
+	Request("@蒼葉", Play);
+	Wait($SETime01);
+	Request("@蓮", Play);
+	Wait($SETime02);
+
+	WaitPlay("@蒼葉", null);
+
+	}
+}
+=================================================
+..Proc_dm5590_vs_01Act
+=================================================
+function Proc_dm5590_vs_01Act()
+{
+	Move("@絵演背景", 4000, @0, -288, DxlAuto, true);
+	Zoom("@絵演背景", 4000, 500, 500, null, true);
+	$Proc_dm5590_vs_01Act=true;
+}
+=================================================
+..Proc_dm5590_vs_02Act
+=================================================
+function Proc_dm5590_vs_02Act()
+{
+
+	Request("@PSE02", Play);
+	Fade("@絵演蓮斬撃効果", 50, 1000, null, false);
+	DrawTransition("@絵演蓮斬撃効果", 100, 0, 1000, 100, null, "cg/data/slide_02_01_1.png", false);
+	Wait(300);
+	Fade("@絵演蓮斬撃効果", 300, 0, null, true);
+
+}
+
+=================================================
+..Proc_dm5590_vs_03
+=================================================
+function Proc_dm5590_vs_03()
+{
+	CreateProcessEX("Pr03a", "Proc_dm5590_vs_03aAct");
+	CreateProcessEX("Pr03b", "Proc_dm5590_vs_03bAct");
+	CreateProcessEX("Pr03c", "Proc_dm5590_vs_03cAct");
+	CreateProcessEX("Pr03d", "Proc_dm5590_vs_03dAct");
+	Request("Pr03a", Start);
+	Request("Pr03b", Start);
+	Request("Pr03c", Start);
+	Request("Pr03d", Start);
+}
+
+function Proc_dm5590_vs_03aAct()
+{
+	Request("@PSE31a1", Play);
+	SetBlur("@絵演卯水弱攻撃梵字球体壱", true, 2, 500, 80, false);
+	BezierMove("@絵演卯水弱攻撃梵字球体壱", 400, (@0,@0){1024,0}{1024,576}{0,576}(220,70), Axl1, false);
+	Zoom("@絵演卯水弱攻撃梵字球体壱", 400, 8000, 8000, null, true);
+	Delete("@絵演卯水弱攻撃梵字球体壱");
+}
+
+function Proc_dm5590_vs_03bAct()
+{
+	Request("@PSE31b1", Play);
+	SetBlur("@絵演卯水弱攻撃梵字球体弐", true, 2, 500, 80, false);
+	BezierMove("@絵演卯水弱攻撃梵字球体弐", 400, (@0,@0){1024,576}{0,576}{0,0}(470,60), Axl1, false);
+	Zoom("@絵演卯水弱攻撃梵字球体弐", 400, 8000, 8000, null, true);
+	Delete("@絵演卯水弱攻撃梵字球体弐");
+}
+
+function Proc_dm5590_vs_03cAct()
+{
+	Request("@PSE31c1", Play);
+	SetBlur("@絵演卯水弱攻撃梵字球体参", true, 2, 500, 80, false);
+	BezierMove("@絵演卯水弱攻撃梵字球体参", 400, (@0,@0){0,576}{0,0}{1024,0}(490,210), Axl1, false);
+	Zoom("@絵演卯水弱攻撃梵字球体参", 400, 8000, 8000, null, true);
+	Delete("@絵演卯水弱攻撃梵字球体参");
+}
+
+function Proc_dm5590_vs_03dAct()
+{
+	Request("@PSE31d1", Play);
+	SetBlur("@絵演卯水弱攻撃梵字球体四", true, 2, 500, 80, false);
+	BezierMove("@絵演卯水弱攻撃梵字球体四", 400, (@0,@0){0,0}{1024,0}{1024,576}(290,270), Axl1, false);
+	Zoom("@絵演卯水弱攻撃梵字球体四", 400, 8000, 8000, null, true);
+	Delete("@絵演卯水弱攻撃梵字球体四");
+}
+
+
+
+function Proc_dm5590_vs_04aAct()
+{
+	SetBlur("絵演卯水弱攻撃梵字球体四", true, 3, 500, 80, false);
+	Request("@PSE04a2", Play);
+	Move("@絵演卯水弱攻撃梵字球体四", 400, 670, 36, DxlAuto, false);
+	Wait(350);
+	Move("@絵演卯水弱攻撃梵字球体四", 2000, 590, 36, null, false);
+	Wait(800);
+	Request("@PSE04a1", Play);
+	Move("@絵演卯水弱攻撃梵字球体四", 200, 1770, 36, Axl3, true);
+}
+
+function Proc_dm5590_vs_04bAct()
+{
+	SetBlur("@絵演卯水弱攻撃梵字球体参", true, 3, 500, 80, false);
+	Request("@PSE04b2", Play);
+	Move("@絵演卯水弱攻撃梵字球体参", 400, 20, 144, DxlAuto, false);
+	Wait(350);
+	Move("@絵演卯水弱攻撃梵字球体参", 2000, 30, 144, null, false);
+	Wait(800);
+	Request("@PSE04b1", Play);
+	Move("@絵演卯水弱攻撃梵字球体参", 200, 1120, 144, Axl3, true);
+}
+
+function Proc_dm5590_vs_04cAct()
+{
+	SetBlur("@絵演卯水弱攻撃梵字球体弐", true, 3, 500, 80, false);
+	Request("@PSE04c2", Play);
+	Move("@絵演卯水弱攻撃梵字球体弐", 400, 510, 360, DxlAuto, false);
+	Wait(350);
+	Move("@絵演卯水弱攻撃梵字球体弐", 2000, 520, 360, null, false);
+	Wait(800);
+	Request("@PSE04c1", Play);
+	Move("@絵演卯水弱攻撃梵字球体弐", 200, 1610, 360, Axl3, true);
+}
+
+function Proc_dm5590_vs_04dAct()
+{
+	SetBlur("@絵演卯水弱攻撃梵字球体壱", true, 3, 500, 80, false);
+	Request("@PSE04d2", Play);
+	Move("@絵演卯水弱攻撃梵字球体壱", 2000, 330, @0, null, false);
+	Wait(800);
+	Request("@PSE04d1", Play);
+	Move("@絵演卯水弱攻撃梵字球体壱", 200, 1610, @0, Axl3, true);
+}
+
+=================================================
+..Proc_dm5590_vs_05Act
+=================================================
+function Proc_dm5590_vs_05Act()
+{
+	Wait(12000);
+	Fade("@絵演風景", 500, 1000, null, true);
+}
+
+=================================================
+..Proc_dm5590_vs_06Act
+=================================================
+function Proc_dm5590_vs_06Act()
+{
+	Position("@絵演卯水撃破蓮手雷", $P06x1, $P06y1);
+
+	begin:
+	while(1)
+	{
+	Move("@絵演卯水撃破蓮手雷", 0, $P06x1, $P06y1, null, true);
+	Fade("@絵演卯水撃破蓮手雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮手雷", 0, 0, null, true);
+
+	Wait(500);
+
+	Move("@絵演卯水撃破蓮手雷", 0, -30, 80, null, true);
+	Fade("@絵演卯水撃破蓮手雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮手雷", 0, 0, null, true);
+
+	Wait(200);
+
+	Move("@絵演卯水撃破蓮手雷", 0, 40, 120, null, true);
+	Fade("@絵演卯水撃破蓮手雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮手雷", 0, 0, null, true);
+
+	Wait(1000);
+	}
+}
+
+=================================================
+..Proc_dm5590_vs_07aAct
+=================================================
+function Proc_dm5590_vs_07aAct()
+{
+	begin:
+	while(1)
+	{
+	Fade("@絵演卯水撃破蓮刃雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮刃雷", 70, 0, null, true);
+
+	Wait(1000);
+
+	Fade("@絵演卯水撃破蓮刃雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮刃雷", 70, 0, null, true);
+	Wait(100);
+	Fade("@絵演卯水撃破蓮刃雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮刃雷", 70, 0, null, true);
+
+	Wait(1000);
+
+	Fade("@絵演卯水撃破蓮刃雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮刃雷", 70, 0, null, true);
+
+	Wait(1000);
+
+	Fade("@絵演卯水撃破蓮刃雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮刃雷", 70, 0, null, true);
+	Wait(100);
+	Fade("@絵演卯水撃破蓮刃雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮刃雷", 70, 0, null, true);
+	Wait(100);
+	Fade("@絵演卯水撃破蓮刃雷", 0, 1000, null, true);
+	Wait(10);
+	Fade("@絵演卯水撃破蓮刃雷", 70, 0, null, true);
+
+	Wait(1000);
+
+	}
+}
+
+=================================================
+..Proc_dm5590_vs_07bAct
+=================================================
+function Proc_dm5590_vs_07bAct()
+{
+	begin:
+	while(1)
+	{
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 0, 200, 50, null, "cg/data/slide_02_00_1.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 200, 0, 50, null, "cg/data/slide_02_00_0.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 200, 400, 50, null, "cg/data/slide_02_00_1.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 400, 200, 50, null, "cg/data/slide_02_00_0.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 400, 600, 50, null, "cg/data/slide_02_00_1.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 600, 400, 50, null, "cg/data/slide_02_00_0.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 600, 800, 50, null, "cg/data/slide_02_00_1.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 800, 600, 50, null, "cg/data/slide_02_00_0.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 800, 1000, 50, null, "cg/data/slide_02_00_1.png", true);
+	DrawTransition("@絵演卯水撃破蓮刃雷", 100, 1000, 0, 50, null, "cg/data/slide_02_00_0.png", true);
+	}
+}
+=================================================
+..CreateShockEffect_dm5590_vs
+=================================================
+function CreateShockEffect_dm5590_vs($衝撃番号,$衝撃優先度)
+{
+	$衝撃優先度=$衝撃優先度+1;
+
+	$shock打Nat001 = "絵shock打点001";
+	$shock打Nat002 = "絵shock打点002";
+	$shock打Nat003 = "絵shock打点003";
+	$shock打Nat004 = "絵shock打点004";
+	$shock打Nat005 = "絵shock打点005";
+	$shock打Nat006 = "絵shock打点006";
+	$shock打Nat007 = "絵shock打点007";
+	$shock打Nat008 = "絵shock打点008";
+	$shock打Nat009 = "絵shock打点009";
+
+	$shock打NatSA001 = "@絵shock打点001";
+	$shock打NatSA002 = "@絵shock打点002";
+	$shock打NatSA003 = "@絵shock打点003";
+	$shock打NatSA004 = "@絵shock打点004";
+	$shock打NatSA005 = "@絵shock打点005";
+	$shock打NatSA006 = "@絵shock打点006";
+	$shock打NatSA007 = "@絵shock打点007";
+	$shock打NatSA008 = "@絵shock打点008";
+	$shock打NatSA009 = "@絵shock打点009";
+
+	$shock波Nat001 = "絵shock波紋001";
+	$shock波Nat002 = "絵shock波紋002";
+	$shock波Nat003 = "絵shock波紋003";
+	$shock波Nat004 = "絵shock波紋004";
+	$shock波Nat005 = "絵shock波紋005";
+	$shock波Nat006 = "絵shock波紋006";
+	$shock波Nat007 = "絵shock波紋007";
+	$shock波Nat008 = "絵shock波紋008";
+	$shock波Nat009 = "絵shock波紋009";
+
+	$shock波NatSA001 = "@絵shock波紋001";
+	$shock波NatSA002 = "@絵shock波紋002";
+	$shock波NatSA003 = "@絵shock波紋003";
+	$shock波NatSA004 = "@絵shock波紋004";
+	$shock波NatSA005 = "@絵shock波紋005";
+	$shock波NatSA006 = "@絵shock波紋006";
+	$shock波NatSA007 = "@絵shock波紋007";
+	$shock波NatSA008 = "@絵shock波紋008";
+	$shock波NatSA009 = "@絵shock波紋009";
+
+	$衝撃process001 = "絵衝撃プロセス１";
+	$衝撃process002 = "絵衝撃プロセス２";
+	$衝撃process003 = "絵衝撃プロセス３";
+	$衝撃process004 = "絵衝撃プロセス４";
+	$衝撃process005 = "絵衝撃プロセス５";
+	$衝撃process006 = "絵衝撃プロセス６";
+	$衝撃process007 = "絵衝撃プロセス７";
+	$衝撃process008 = "絵衝撃プロセス８";
+	$衝撃process009 = "絵衝撃プロセス９";
+
+	Array($shock打点Nat,0,$shock打Nat001,$shock打Nat002,$shock打Nat003,$shock打Nat004,$shock打Nat005,$shock打Nat006,$shock打Nat007,$shock打Nat008,$shock打Nat009);
+
+	Array($shock打点NatSA,0,$shock打NatSA001,$shock打NatSA002,$shock打NatSA003,$shock打NatSA004,$shock打NatSA005,$shock打NatSA006,$shock打NatSA007,$shock打NatSA008,$shock打NatSA009);
+
+	Array($shock波紋Nat,0,$shock波Nat001,$shock波Nat002,$shock波Nat003,$shock波Nat004,$shock波Nat005,$shock波Nat006,$shock波Nat007,$shock波Nat008,$shock波Nat009);
+
+	Array($shock波紋NatSA,0,$shock波NatSA001,$shock波NatSA002,$shock波NatSA003,$shock波NatSA004,$shock波NatSA005,$shock波NatSA006,$shock波NatSA007,$shock波NatSA008,$shock波NatSA009);
+
+	Array($衝撃process,"0",$衝撃process001,$衝撃process002,$衝撃process003,$衝撃process004,$衝撃process005,$衝撃process006,$衝撃process007,$衝撃process008,$衝撃process009);
+
+	Array($衝撃func,"0","EffectShockProcess01","EffectShockProcess02","EffectShockProcess03","EffectShockProcess04","EffectShockProcess05","EffectShockProcess06","EffectShockProcess07","EffectShockProcess08","EffectShockProcess09");
+
+	$衝撃打点ファイル名 = "cg/ef/s/ef0008衝撃波02a_s.png";
+	$衝撃波紋ファイル名 = "cg/ef/s/ef0008衝撃波02b_s.png";
+
+	CreateTextureEX($shock打点Nat[$衝撃番号], $衝撃優先度, Center, Middle, $衝撃打点ファイル名);
+	//CreateTextureEXadd($shock打点Nat[$衝撃番号], $衝撃優先度, Center, Middle, $衝撃打点ファイル名);
+
+//嶋：注意！！
+	Request($shock打点Nat[$衝撃番号], Lock);
+
+	CreateTextureEX($shock波紋Nat[$衝撃番号], $衝撃優先度, Center, Middle, $衝撃波紋ファイル名);
+	//CreateTextureEXadd($shock波紋Nat[$衝撃番号], $衝撃優先度, Center, Middle, $衝撃波紋ファイル名);
+
+//嶋：注意！！
+	Request($shock波紋Nat[$衝撃番号], Lock);
+
+	CreateProcess($衝撃process[$衝撃番号], 150, 0, 0, $衝撃func[$衝撃番号]);
+	SetAlias($衝撃process[$衝撃番号],$衝撃process[$衝撃番号]);
+
+//嶋：注意！！
+	Request($衝撃process[$衝撃番号], Lock);
+
+	$shock打点Hor = ImageHorizon($shock打点Nat[$衝撃番号])/2;
+	$shock波紋Hor = ImageHorizon($shock波紋Nat[$衝撃番号])/2;
+
+	$shock打点Ver = ImageVertical($shock打点Nat[$衝撃番号])/2;
+	$shock波紋Ver = ImageVertical($shock波紋Nat[$衝撃番号])/2;
+
+
+}
+
+=================================================
+..RMScaningTest
+=================================================
+function RMScaningTest()
+{
+	CreateColorSP("絵色黒", 0, "000000");
+
+	CreateTextureSP("絵専", 100, Center, Middle, "cg/ev/ev341黒蒼葉、ミンクに抵抗.jpg");
+
+while(1){
+
+	RMScaningBG(0, 0, "cg/bg/bg201011_0_ライムパブリックフィールド.jpg");
+	Position("@絵専", $x1, $y1);
+	RMScaningTarget($x1, $y1, "cg/ev/ev341黒蒼葉、ミンクに抵抗.jpg");
+
+	$RandomX=255+Random(514);
+	$RandomY=217+Random(142);
+	RMScaning($RandomX, $RandomY, "蒼葉", $蒼葉ＨＰ, $蒼葉ＡＰ, $蒼葉ＤＰ);
+
+	WaitKey();
+
+	RMScaningClose();
+
+	WaitKey();
+	}
+}
+
+======================================================================
+.//プロセス【ギルティクラウンＬＸ】
+======================================================================
+
+=================================================
+..MissileMove
+=================================================
+//ミサイルの移動
+function MissileMove($MMNut,$MMT,$MMXS,$MMYS,Tempo,Wait)
+{
+	Position($MMNut, $MMX, $MMY);
+	$MMXPos2=$MMXS-$MMX;
+	$MMXPos=$MMXPos2;
+	$MMYPos2=$MMYS-$MMY-2000;
+	$MMYPos=$MMYPos2;
+
+	$MMSmokeNut=$MMNut+"/"+"_Smoke";
+	Fade($MMSmokeNut, 0, 1000, null, true);
+
+	$MMFTime=$MMT+1000;
+	Fade($MMSmokeNut, $MMFTime, 0, Axl3, false);
+	Move($MMNut, $MMT, @$MMXPos, @$MMYPos, Tempo, Wait);
+}
+
+=================================================
+..MissileMoveNF
+=================================================
+//バーニアを展開せずにミサイルの移動
+function MissileMoveNF($MMNut,$MMT,$MMXS,$MMYS,Tempo,Wait)
+{
+	Position($MMNut, $MMX, $MMY);
+	$MMXPos2=$MMXS-$MMX;
+	$MMXPos=$MMXPos2;
+	$MMYPos2=$MMYS-$MMY-2000;
+	$MMYPos=$MMYPos2;
+
+	$MMSmokeNut=$MMNut+"/"+"_Smoke";
+	//Fade($MMSmokeNut, 0, 1000, null, true);
+
+	$MMFTime=$MMT/3;
+	Fade($MMSmokeNut, $MMFTime, 0, Axl3, false);
+	Move($MMNut, $MMT, @$MMXPos, @$MMYPos, Tempo, Wait);
+}
+
+=================================================
+..MissileBezierMove
+=================================================
+//放物線を描いたミサイルの移動
+function MissileBezierMove($MMNut,$MMT,$MMX2S,$MMY2S,$MMX3S,$MMY3S,$MMXS,$MMYS,Tempo,Wait)
+{
+
+//最終的な到達点
+	Position($MMNut, $MMX, $MMY);
+	$MMXPos2=$MMXS-$MMX;
+	$MMXPos=$MMXPos2;
+	$MMYPos2=$MMYS-$MMY-2000;
+	$MMYPos=$MMYPos2;
+
+
+//２：経由点
+	Position($MMNut, $MMX2, $MMY2);
+	$MMX2Pos2=$MMX2S-$MMX2;
+	$MMX2Pos=$MMX2Pos2;
+	$MMY2Pos2=$MMY2S-$MMY2-2000;
+	$MMY2Pos=$MMY2Pos2;
+
+//３：経由点
+	Position($MMNut, $MMX3, $MMY3);
+	$MMX3Pos2=$MMX3S-$MMX3;
+	$MMX3Pos=$MMX3Pos2;
+	$MMY3Pos2=$MMY3S-$MMY3-2000;
+	$MMY3Pos=$MMY3Pos2;
+
+	$MMSmokeNut=$MMNut+"/"+"_Smoke";
+	Fade($MMSmokeNut, 0, 1000, null, true);
+
+	$MMFTime=$MMT+1000;
+	Fade($MMSmokeNut, $MMFTime, 0, Axl3, false);
+	//Move($MMNut, $MMT, $MMXPos, $MMYPos, Tempo, Wait);
+
+	BezierMove($MMNut, $MMT, (@0,@0){@$MMX2Pos,@$MMY2Pos}{@$MMX3Pos,@$MMY3Pos}(@$MMXPos,@$MMYPos), Tempo, Wait);
+}
+
+function MissileBezierMoveFF($MMNut,$MMT,$MMX2S,$MMY2S,$MMX3S,$MMY3S,$MMXS,$MMYS,Tempo,Wait)
+{
+
+//最終的な到達点
+	Position($MMNut, $MMX, $MMY);
+	$MMXPos2=$MMXS-$MMX;
+	$MMXPos=$MMXPos2;
+	$MMYPos2=$MMYS-$MMY-2000;
+	$MMYPos=$MMYPos2;
+
+
+//２：経由点
+	Position($MMNut, $MMX2, $MMY2);
+	$MMX2Pos2=$MMX2S-$MMX2;
+	$MMX2Pos=$MMX2Pos2;
+	$MMY2Pos2=$MMY2S-$MMY2-2000;
+	$MMY2Pos=$MMY2Pos2;
+
+//３：経由点
+	Position($MMNut, $MMX3, $MMY3);
+	$MMX3Pos2=$MMX3S-$MMX3;
+	$MMX3Pos=$MMX3Pos2;
+	$MMY3Pos2=$MMY3S-$MMY3-2000;
+	$MMY3Pos=$MMY3Pos2;
+
+	$MMSmokeNut=$MMNut+"/"+"_Smoke";
+	Fade($MMSmokeNut, 0, 1000, null, true);
+
+	$MMFTime=$MMT/2;
+	Fade($MMSmokeNut, $MMFTime, 0, Axl3, false);
+	//Move($MMNut, $MMT, $MMXPos, $MMYPos, Tempo, Wait);
+
+	BezierMove($MMNut, $MMT, (@0,@0){@$MMX2Pos,@$MMY2Pos}{@$MMX3Pos,@$MMY3Pos}(@$MMXPos,@$MMYPos), Tempo, Wait);
+}
+
+=================================================
+..MissileeRotate
+=================================================
+//ミサイルの回転
+function MissileeRotate($MMNut,$MRT,$MR,Tempo,Wait)
+{
+	$MMSmokeNut=$MMNut+"/"+"_Smoke";
+	Fade($MMSmokeNut, 0, 1000, null, true);
+
+	$MRTime=$MRT+1000;
+	Fade($MMSmokeNut, $MRTime, 0, Axl3, false);
+	Rotate($MMNut, $MRT, @0, @0, $MR, Tempo,Wait);
+}
+
+=================================================
+..MissileeRotateNF
+=================================================
+//バーニアを展開せずにミサイルの回転
+function MissileeRotateNF($MMNut,$MRT,$MR,Tempo,Wait)
+{
+	$MMSmokeNut=$MMNut+"/"+"_Smoke";
+	Fade($MMSmokeNut, 0, 0, null, true);
+
+	$MRTime=$MRT/3;
+	//Fade($MMSmokeNut, $MRTime, 0, Axl3, false);
+	Rotate($MMNut, $MRT, @0, @0, $MR, Tempo,Wait);
+}
+
+=================================================
+..OratorioshockW
+=================================================
+//オラトリオの歌声
+function OratorioShockW(プロセス,$OratorioShockWPri)
+{
+
+	CreateProcessEX("LPro01", "OratorioShockWActA");
+	CreateProcessEX("LPro02", "OratorioShockWActB");
+	Request("LPro*", Start);
+
+}
+
+function OratorioShockWActA()
+{
+
+	begin:
+
+
+
+	while(1){
+
+	CreateEffect("OratorioShockWPlainNut", $OratorioShockWPri, 0, 0, 1024, 576, "Plain");
+	Request("OratorioShockWPlainNut", Passive);
+	Fade("OratorioShockWPlainNut", 0, 600, null, true);
+	SetBlur("OratorioShockWPlainNut", true, 2, 300, 90, false);
+	Zoom("OratorioShockWPlainNut", 400, 1600, 1600, Dxl2, false);
+	Fade("OratorioShockWPlainNut", 400, 0, null, false);
+	Wait(400);
+
+	}
+
+}
+
+function OratorioShockWActB()
+{
+
+	begin:
+
+	CreateEffect("OratorioShockWPlainB01Nut", $OratorioShockWPri, 0, 0, 1024, 576, "Plain");
+	Request("OratorioShockWPlainB01Nut", Passive);
+	SetBlur("OratorioShockWPlainB01Nut", true, 3, 300, 90, false);
+
+	CreateEffect("OratorioShockWPlainB02Nut", $OratorioShockWPri, 0, 0, 1024, 576, "Plain");
+	Request("OratorioShockWPlainB02Nut", Passive);
+	SetBlur("OratorioShockWPlainB02Nut", true, 3, 300, 90, false);
+	Fade("OratorioShockWPlainB02Nut", 0, 0, null, true);
+
+	CreateEffect("OratorioShockWPlainB03Nut", $OratorioShockWPri, 0, 0, 1024, 576, "Plain");
+	Request("OratorioShockWPlainB03Nut", Passive);
+	SetBlur("OratorioShockWPlainB03Nut", true, 3, 300, 90, false);
+	Fade("OratorioShockWPlainB03Nut", 0, 0, null, true);
+
+	while(1){
+
+
+	Fade("OratorioShockWPlainB01Nut", 0, 600, null, true);
+	Zoom("OratorioShockWPlainB01Nut", 400, 1600, 1600, Dxl2, false);
+	Fade("OratorioShockWPlainB01Nut", 400, 0, null, false);
+	Wait(300);
+
+	Zoom("OratorioShockWPlainB03Nut", 0, 1000, 1000, null, true);
+	$OSWRandomX = Random(640)+128;
+	$OSWRandomY = Random(360)+72;
+	SetVertex("OratorioShockWPlainB03Nut", $OSWRandomX, $OSWRandomY);
+
+
+
+	Fade("OratorioShockWPlainB02Nut", 0, 600, null, true);
+	Zoom("OratorioShockWPlainB02Nut", 400, 1600, 1600, Dxl2, false);
+	Fade("OratorioShockWPlainB02Nut", 400, 0, null, false);
+	Wait(300);
+
+	Zoom("OratorioShockWPlainB01Nut", 0, 1000, 1000, null, true);
+	$OSWRandomX = Random(640)+128;
+	$OSWRandomY = Random(360)+72;
+	SetVertex("OratorioShockWPlainB01Nut", $OSWRandomX, $OSWRandomY);
+
+
+
+	Fade("OratorioShockWPlainB03Nut", 0, 600, null, true);
+	Zoom("OratorioShockWPlainB03Nut", 400, 1600, 1600, Dxl2, false);
+	Fade("OratorioShockWPlainB03Nut", 400, 0, null, false);
+	Wait(300);
+
+	Zoom("OratorioShockWPlainB02Nut", 0, 1000, 1000, null, true);
+	$OSWRandomX = Random(640)+128;
+	$OSWRandomY = Random(360)+72;
+	SetVertex("OratorioShockWPlainB02Nut", $OSWRandomX, $OSWRandomY);
+
+	}
+
+}
+
+=================================================
+..CamouflageWave//光学迷彩揺らぎ
+=================================================
+function CamouflageWave($プロセス,$CFWNut,$CFWTime)
+{
+
+	if($CamouflageWaveAct == true)
+	{
+
+	Request($プロセス, Stop);
+
+	DrawTransition($CFWNut, 0, 0, 0, 100, null, "cg/data/mosaic_01_00_0.png", true);
+	Fade($CFWNut, 0, 1000, null, true);
+
+	$CamouflageWaveAct = false;
+
+	}
+
+	CreateProcessEX($プロセス, "CamouflageWaveAct");
+	Request($プロセス, Start);
+	Request($プロセス, Disused);
+
+}
+
+function CamouflageWaveAct()
+{
+	$CamouflageWaveAct = true;
+	Fade($CFWNut, $CFWTime, 0, null, false);
+	DrawTransition($CFWNut, $CFWTime, 0, 1000, 100, DxlAxl, "cg/data/mosaic_01_00_0.png", true);
+
+	DrawTransition($CFWNut, 0, 0, 0, 100, null, "cg/data/mosaic_01_00_0.png", true);
+	Wait(24);
+	Fade($CFWNut, 0, 1000, null, true);
+	$CamouflageWaveAct = false;
+
+
+}
+
+=================================================
+..EndlessSmoke01//エデン・ベベ壁走行時に巻き上げる煙
+=================================================
+function EndlessSmoke01()
+{
+	$NNSNumber = 0;
+	$CountSet = 0;
+	$StartSpotCount = 0;
+
+	while(1)
+	{
+
+	if($NNSNumber>=10)
+	{
+		$NNSNumber = 0;
+	}
+
+	$NNSNumber ++;
+	$NNSSet = "NNSSet1" + "$NNSNumber";
+
+	CreateTexture($NNSSet, 4000, 1024, Middle, "cg/ef/ef_smoke01.png");
+	SetAlias($NNSSet,$NNSSet);
+
+	Position($NNSSet, $x1, $y1);
+
+	if($StartSpotCount==0){
+		Move($NNSSet, 0, @0, @288, null, true);
+	}else if($StartSpotCount==1){
+		Move($NNSSet, 0, @0, @144, null, true);
+	}else if($StartSpotCount==2){
+		Move($NNSSet, 0, @0, @-144, null, true);
+	}else if($StartSpotCount==3){
+		Move($NNSSet, 0, @0, @-288, null, true);
+	}else if($StartSpotCount==4){
+		Move($NNSSet, 0, @0, @-144, null, true);
+	}else if($StartSpotCount>=5){
+		Move($NNSSet, 0, @0, @144, null, true);
+		$StartSpotCount=0;
+	}
+
+	Zoom($NNSSet, 2000, 8000, 8000, null, false);
+	Request($NNSSet, Disused);
+
+	$NNSPosY01 = Random(600)-300;
+	$NNSPosY02 = Random(1200)-600;
+
+/*
+	SetFont("Malgun Gothic", 18, FFFFFF, 000000, MEDIUM, RIGHTDOWN);
+	CreateText("Dt1", 15000, 50, 20, 700, 500, $NNSPosY01);
+	CreateText("Dt2", 15000, 50, 40, 700, 500, $NNSPosY02);
+	Request("Dt1", PushText);
+	Request("Dt2", PushText);
+*/
+
+	$CountSet ++;
+
+	if($CountSet==2){
+		Rotate($NNSSet, 3000, @0, @0, 180, null,false);
+		BezierMove($NNSSet, 3000, (@0,@0){@-300,$NNSPosY01}{@-300,$NNSPosY02}(-2500,@-500), Dxl1, false);
+		$CountSet = 0;
+	}else{
+		Rotate($NNSSet, 3000, @0, @0, -180, null,false);
+		BezierMove($NNSSet, 3000, (@0,@0){@-300,$NNSPosY01}{@-300,$NNSPosY02}(-2500,@500), Dxl1, false);
+	}
+
+/*
+	CreateText("Dt3", 15000, 50, 60, 700, 500, $CountSet);
+	Request("Dt3", PushText);
+*/
+
+	Fade($NNSSet, 3000, 0, null, false);
+
+	Wait(24);
+
+/*
+	CreateText("Dt4", 15000, 50, 80, 700, 500, $StartSpotCount);
+	Request("Dt4", PushText);
+*/
+
+	$StartSpotCount++;
+
+	}
+}
+
+
+=================================================
+..EndlessSmoke02//エデン・ベベ壁走行時に巻き上げる煙
+=================================================
+function EndlessSmoke02()
+{
+	$NNSNumber2 = 0;
+	$CountSet2 = 0;
+	$StartSpotCount2 = 0;
+
+	while(1)
+	{
+
+	if($NNSNumber2>=10)
+	{
+		$NNSNumber2 = 0;
+	}
+
+	$NNSNumber2 ++;
+	$NNSSet2 = "NNSSet2" + "$NNSNumber2";
+
+	CreateTexture($NNSSet2, 4000, 1024, Middle, "cg/ef/ef_smoke01.png");
+	SetAlias($NNSSet2,$NNSSet2);
+
+	Position($NNSSet2, $x1, $y1);
+
+		Move($NNSSet2, 0, @0, @-144, null, true);
+		Move($NNSSet2, 0, @0, @144, null, true);
+
+
+	if($StartSpotCount2==0){
+		Move($NNSSet2, 0, @0, @-288, null, true);
+	}else if($StartSpotCount2==1){
+		Move($NNSSet2, 0, @0, @-144, null, true);
+	}else if($StartSpotCount2==2){
+
+	}else if($StartSpotCount2==3){
+		Move($NNSSet2, 0, @0, @144, null, true);
+	}else if($StartSpotCount2==4){
+		Move($NNSSet2, 0, @0, @288, null, true);
+	}else if($StartSpotCount2==5){
+		Move($NNSSet2, 0, @0, @144, null, true);
+	}else if($StartSpotCount2==6){
+
+	}else if($StartSpotCount2>=7){
+		Move($NNSSet2, 0, @0, @-144, null, true);
+		$StartSpotCount2=0;
+	}
+
+
+
+	Zoom($NNSSet2, 2000, 8000, 8000, null, false);
+	Request($NNSSet2, Disused);
+
+	$NNSPosY11 = Random(600)-300;
+	$NNSPosY12 = Random(1200)-600;
+
+/*
+	SetFont("Malgun Gothic", 18, FFFFFF, 000000, MEDIUM, RIGHTDOWN);
+	CreateText("Dt21", 15000, 150, 20, 700, 500, $NNSPosY11);
+	CreateText("Dt22", 15000, 150, 40, 700, 500, $NNSPosY12);
+	Request("Dt21", PushText);
+	Request("Dt22", PushText);
+*/
+
+	$CountSet2 ++;
+
+	if($CountSet2==2){
+		Rotate($NNSSet2, 1000, @0, @0, 180, null,false);
+		BezierMove($NNSSet2, 1500, (@0,@0){@-300,$NNSPosY11}{@-300,$NNSPosY12}(-2000,@-500), Dxl1, false);
+		$CountSet2 = 0;
+	}else{
+		Rotate($NNSSet2, 1000, @0, @0, -180, null,false);
+		BezierMove($NNSSet2, 1500, (@0,@0){@-300,$NNSPosY11}{@-300,$NNSPosY12}(-2000,@500), Dxl1, false);
+	}
+
+/*
+	CreateText("Dt23", 15000, 150, 60, 700, 500, $CountSet2);
+	Request("Dt23", PushText);
+*/
+
+	Fade($NNSSet2, 2000, 0, null, false);
+
+	Wait(24);
+
+/*
+	CreateText("Dt24", 15000, 150, 80, 700, 500, $StartSpotCount2);
+	Request("Dt24", PushText);
+*/
+
+	$StartSpotCount2++;
+
+	}
+}
+
+=================================================
+..PassSmoke
+=================================================
+//画面を移動しながら巻き上がる煙：定義
+//"ef_smoke02"と"ef_smoke08"のみ対応
+//カメラナット,煙の優先度,Ｘ座標＠指定,Ｙ座標＠指定,スケール,ファイル
+function CreatePassSmoke($CPSName,$CPSPri,$CPSX,$CPSY,$CPSZ,$CPSFil)
+{
+	$CPSCamNut = "$CPSName";
+	CreateCameraEX($CPSCamNut, 0, 0, 0);
+
+	$CPSTexNut = "@" + "$CPSName" + "/" + "絵演粉上煙";
+	CreateTextureEX($CPSTexNut, $CPSPri, 1024, 0, $CPSFil);
+	SetVertex($CPSTexNut, center, 480);
+
+	$CPSXSHalfcale = 0 - (ImageHorizon($CPSTexNut)/2);
+	Move($CPSTexNut, 0, $CPSXSHalfcale, -409, null, true);
+
+//	Position($CPSTexNut, $CPSXPOS, $CPSXPOS);
+	Move($CPSTexNut, 0, $CPSX, $CPSY, null, true);//指定した位置に移動
+
+	$CPSZSX = $CPSZ*0.6;
+	$CPSZSY = $CPSZ*0.02;
+	Zoom($CPSTexNut, 0, $CPSZS, $CPSZSY, null, true);//0.6
+	Fade($CPSTexNut, 0, 0, null, true);
+
+	$CPSCamPri = 1000 - $CPSPri;
+	MoveCamera($CPSCamNut, 0, @0, @0, $CPSCamPri, null, true);
+
+}
+
+//画面を移動しながら巻き上がる煙：再生
+//カメラナット,画面を横切る速度,移動先Ｘ座標＠指定,移動先Ｙ座標＠指定,スケール,テンポ
+function PassSmoke($PSNut,$PSTime,$PSXEd,$PSYEd,$PSZEd,$PSTen)
+{
+
+	$PSTexNut = "$PSNut" + "/" + "絵演粉上煙";
+	Fade($PSTexNut, 0, 1000, null, true);
+
+	$PSZSX = $PSZEd*0.4;
+	$PSZSY = $PSZEd*1.1;
+	Zoom($PSTexNut, 150, $PSZSX, $PSZSY, Dxl3, false);
+
+	Wait(30);
+	Shake($PSTexNut, 150, 8, 0, 0, 0, 1000, null, false);
+	MoveCamera($PSNut, $PSTime, $PSXEd, $PSYEd, @0, $PSTen, false);
+	Wait(100);
+
+	Zoom($PSTexNut, 1000, $PSZSX, $PSZSY, null, false);
+
+	$PSYDM = $PSZEd*0.03;
+	$PSYDMS = "@" + "$PSYDM";
+	Move($PSTexNut, 1800, @0, $PSYDMS, null, false);
+
+	Fade($PSTexNut, 300, 0, null, false);
+
+}
+
+//画面を移動しながら巻き上がる煙：再設置
+//カメラナット,開始Ｘ座標＠指定,開始Ｙ座標＠指定,スケール
+function ResetPassSmoke($RPSNut,$RPSX,$RPSY,$RPSZ)
+{
+	$RPSTexNut = "$RPSNut" + "/" + "絵演粉上煙";
+	$RPSXSHalfcale = 0 - (ImageHorizon($RPSTexNut)/2);
+	Move($RPSTexNut, 0, $RPSXSHalfcale, -409, null, true);
+	Move($RPSTexNut, 0, $RPSX, $RPSY, null, true);//指定した初期位置に移動
+
+	$RPSZSX = $RPSZ*0.6;
+	$RPSZSY = $RPSZ*0.02;
+	Zoom($RPSTexNut, 0, 600, 50, null, true);
+
+	MoveCamera($RPSNut, 0, 0, 0, @0, null, true);
+}
+
+function DeletePassSmoke($DPSNut)
+{
+	$DPSTexNut = "$DPSNut" + "/" + "絵演粉上煙";
+//	Delete($DPSTexNut);
+	Request($DPSTexNut, Disused);
+}
+
+=================================================
+..LProcAK_lx0010_01Act
+=================================================
+//画面の揺れと音のプロセス
+function LProcAK_lx0010_01Act()
+{
+
+	$QuakeAdd=4;
+
+	begin:
+
+	while(1){
+
+	Request("@SELPA01*", Stop);
+
+	Request("@SELPA011", Play);
+	Shake("@絵秋演振動背景", 300, 0, $QuakeAdd, 0, 0, 1000, Null, false);
+
+	Wait(1000);
+
+	Request("@SELPA012", Play);
+	Shake("@絵秋演振動背景", 300, 0, $QuakeAdd, 0, 0, 1000, Null, false);
+
+	Wait(500);
+
+	Request("@SELPA013", Play);
+	Shake("@絵秋演振動背景", 100, 0, $QuakeAdd, 0, 0, 1000, Null, false);
+
+	Wait(150);
+
+	Request("@SELPA014", Play);
+	Shake("@絵秋演振動背景", 150, 0, $QuakeAdd, 0, 0, 1000, Null, false);
+
+	Wait(500);
+
+	Request("@SELPA015", Play);
+	Shake("@絵秋演振動背景", 150, 0, $QuakeAdd, 0, 0, 1000, Dxl1, false);
+	WaitAction("@絵秋演振動背景", null);
+
+//ここまでで一区切り～～～～～～～～～～～～～～～～～～～～～～～～～
+
+	Request("@SELPA02*", Stop);
+
+	Request("@SELPA021", Play);
+	Shake("@絵秋演振動背景", 300, 0, $QuakeAdd, 0, 0, 1000, Null, false);
+
+	Wait(150);
+
+	Request("@SELPA022", Play);
+	Shake("@絵秋演振動背景", 300, 0, $QuakeAdd, 0, 0, 1000, Null, false);
+
+	Wait(150);
+
+	Request("@SELPA023", Play);
+	Shake("@絵秋演振動背景", 100, 0, $QuakeAdd, 0, 0, 1000, Null, false);
+
+	Wait(1000);
+
+	Request("@SELPA024", Play);
+	Shake("@絵秋演振動背景", 150, 0, $QuakeAdd, 0, 0, 1000, Null, false);
+
+	Wait(150);
+
+	Request("@SELPA025", Play);
+	Shake("@絵秋演振動背景", 150, 0, $QuakeAdd, 0, 0, 1000, Dxl1, false);
+
+	Wait(150);
+
+	Request("@SELPA026", Play);
+	Shake("@絵秋演振動背景", 150, 0, $QuakeAdd, 0, 0, 1000, Dxl1, true);
+
+
+//ここでループ時の音程違和感のランダム調整
+	$RandomFrequency01=800+(Random(8)*50);
+	SetFrequency("@SELPA01*", 0, $RandomFrequency01, null);
+	$RandomFrequency02=500+(Random(100)*5);
+	SetFrequency("@SELPA02*", 0, $RandomFrequency02, null);
+
+//振動値を徐々に増加
+	$QuakeAdd++;
+
+	if($QuakeAdd>=30){
+	$QuakeAdd=30;
+	}
+
+
+	}
+
+}
+
+=================================================
+..LProcAK_lx0010_02Act
+=================================================
+//ミサイルを連装っぽく再生させる
+function LProcAK_lx0010_02Act()
+{
+	Wait(200);
+	Request("@SELPA021", Play);
+	Wait(200);
+	Request("@SELPA022", Play);
+	Wait(200);
+	Request("@SELPA023", Play);
+	Wait(200);
+	Request("@SELPA024", Play);
+	Wait(2000);
+
+	Request("@SELPA02*", Disused);
+	SetPan("@SELPA024", 1000, 0, null);
+	SetVolume("@SELPA021", 1600, 0, null);
+	Wait(200);
+	SetVolume("@SELPA022", 1600, 0, null);
+	Wait(200);
+	SetVolume("@SELPA023", 1600, 0, null);
+	Wait(200);
+}
+
+=================================================
+..LProcAK_lx0010_03Act
+=================================================
+//ミサイルを連装っぽく再生させる
+function LProcAK_lx0010_03Act()
+{
+	Wait(1600);
+	Request("@SELPA11", Play);
+	Wait(600);
+	Request("@SELPA12", Play);
+	Wait(600);
+	Request("@SELPA13", Play);
+
+
+}
+
+=================================================
+..LProcAK_lx0500_01Act	//――故に葬儀社
+================================================
+function LProcAK_lx0500_01Act()
+{
+	//おがみ：調整しました
+
+	$sp=4800;
+	Move("@ev11", $sp, @0, -170, null, false);
+	Move("@ev12", $sp, @0, -1600, null, false);
+	Move("@ev13", $sp, @0, 330, null, true);
+
+	//Wait(4800);
+
+	$sp=300;
+	Move("@ev11", $sp, @0, 270, AxlDxl, false);
+	Move("@ev12", $sp, @0, -120, AxlDxl, false);
+	Move("@ev13", $sp, @0, 2100, AxlDxl, true);
+
+	//Wait(300);
+
+	$sp=10000;
+	$LProcAK_lx0500_01Act=true;
+	Move("@ev11", $sp, @0, 300, null, false);
+	Move("@ev12", $sp, @0, -50, null, false);
+	Move("@ev13", $sp, @0, 2300, null, true);
+
+	//Wait(16);
+
+	//Fade("@絵専", 500, 0, null, true);
+	//Delete("@絵専");
+}
+
+=================================================
+..LProcAK_lx0505_00Act	//キャロルスクロール
+=================================================
+function LProcAK_lx0505_00Act()
+{
+
+	MoveCamera("@Ｃ", 12000, 512, @0, @0, null, false);
+	Wait(12000);
+	$LProcAK_lx0505_00Act=true;
+
+}
+
+=================================================
+..LProcAK_lx0506_00Act	//「……武器、ねえ？」
+=================================================
+function LProcAK_lx0506_00Act()
+{
+
+	Wait(1300);
+	Fade("@絵板写", 300, 0, null, true);
+	Delete("@絵専");
+	$LProcAK_lx0506_00Act=true;
+
+}
+
+=================================================
+..LProcAK_lx0506_01Act	//「……ッッ」
+=================================================
+//ハウリングを受けるスクルージとキャロル
+function LProcAK_lx0506_01Act()
+{
+	$LProcAK_lx0506_01Act=true;
+
+	while(1){
+
+	Zoom("@絵板写", 3000, 1050, 1050, null, true);
+	Zoom("@絵板写", 3600000, 1050, 1050, null, true);
+
+	}
+
+	Wait(16);
+
+}
+
+=================================================
+..LProcAK_lx0506_02Act	//「……ッッ」
+=================================================
+//ハウリングを受けるスクルージとキャロル
+function LProcAK_lx0506_02Act()
+{
+	$LProcAK_lx0506_02Act=true;
+
+	while(1){
+
+	Zoom("@絵板写", 0, 1050, 1050, null, true);
+	Zoom("@絵板写", 3600000, 1050, 1050, null, true);
+
+	}
+
+	Wait(16);
+
+}
+
+=================================================
+..LProcAK_lx0506_03Act	//「光学迷彩だね」
+=================================================
+//光学迷彩時の光ノイズ
+function LProcAK_lx0506_03Act()
+{
+	Fade("@絵写機/絵演立天形/光沢", 0, 1000, null, true);
+	Wait(4);
+	Fade("@絵写機/絵演立天形/光沢", 16, 0, null, true);
+
+	Wait(4);
+
+	Fade("@絵写機/絵演立天形/光沢", 0, 1000, null, true);
+	Wait(4);
+	Fade("@絵写機/絵演立天形/光沢", 16, 0, null, true);
+
+	Wait(4);
+
+	Fade("@絵写機/絵演立天形/光沢", 0, 1000, null, true);
+	Wait(4);
+	DrawTransition("@絵写機/絵演立天形/光沢", 2000, 1000, 0, 100, null, "cg/data/slide_05_00_0.png", true);
+
+	$LProcAK_lx0506_03Act=true;
+
+}
+
+=================================================
+..LProcAK_lx0506_04Act	//「……ッ！」
+=================================================
+function LProcAK_lx0506_04Act()
+{
+	begin:
+	while(1)
+	{
+	FadeXE("@絵写機/絵演立酢尾",0,1000,400,4,8,null,true);
+	}
+	Wait(24);
+
+}
+
+=================================================
+..LProcAK_lx0506_05Act	//爆音とともに、ビルが倒壊する。瓦礫が雨霰と降り注ぐ。
+=================================================
+function LProcAK_lx0506_05Act()
+{
+
+	Request("@SE31a", Play);
+	Wait(500);
+	Request("@SE31b", Play);
+	Wait(1500);
+	Request("@SE31c", Play);
+	Wait(500);
+	Request("@SE31d", Play);
+	Wait(800);
+	Request("@SE31f", Play);
+	Wait(500);
+	Request("@SE31e", Play);
+
+}
+
+=================================================
+..LProcAK_lx0506_06Act	//「食事の時間だ！」
+=================================================
+function LProcAK_lx0506_06Act()
+{
+
+	Wait(100);
+
+	Move("@絵写機鼠/絵演人酢", 700, -560, @-8, Axl3, false);
+
+	Wait(550);
+
+	Zoom("@絵写機鼠/絵演土煙", 500, 2000, 3000, Dxl3, false);
+	Fade("@絵写機鼠/絵演土煙", 0, 1000, null, true);
+	Fade("@絵写機鼠/絵演土煙", 4000, 0, null, false);
+
+	Wait(50);
+
+	Request("@SE01a", Play);
+	SetPan("@SE01a", 800, 200, null);
+
+	Wait(100);
+
+	Fade("@絵写機鼠/絵演人酢", 0, 500, null, true);
+	Fade("@絵写機鼠/絵演人酢", 2000, 0, null, false);
+	Move("@絵写機鼠/絵演人酢", 8000, @-60, @0, null, false);
+
+	Wait(300);
+
+	Zoom("@絵写機鼠/絵演土煙", 4000, 3000, 4500, null, false);
+
+}
+
+=================================================
+..LProcAK_lx0506_07Act	//「食事の時間だ！」
+=================================================
+function LProcAK_lx0506_07Act()
+{
+	begin:
+	while(1)
+	{
+	Shake("@絵写機合間/絵演立酢尾", 300, 0, 2, 0, 0, 1000, null, false);
+	FadeXE("@絵写機合間/絵演立酢尾",0,1000,260,4,8,null,true);
+	}
+	Wait(24);
+
+}
+
+=================================================
+..LProcAK_lx0506_08Act	//「食事の時間だ！」
+=================================================
+//横走りするスクルージの回りを瓦礫が通り過ぎる①
+function LProcAK_lx0506_08Act()
+{
+	begin:
+
+	Wait(500);
+
+	while(1)
+	{
+	Request("@SE03af", Play);
+
+	$RandomCamY=-10+(Random(5)*12);
+
+	Fade("@絵演瓦礫前一", 0, 1000, null, true);
+	Move("@絵演瓦礫前一", 200, 1600, @0, null, false);
+
+	Wait(50);
+	MoveCamera("@絵写機合間", 300, 50, $RandomCamY, -130, Dxl3, false);//50,20,-130
+	Wait(150);
+
+	Fade("@絵演瓦礫前一", 0, 0, null, true);
+	Move("@絵演瓦礫前一", 0, -1600, @0, null, true);
+
+	$RRSet=-30+(Random(6)*10);
+	Rotate("絵演瓦礫前一", 0, @0, @0, $RRSet, null,true);
+
+	Wait(100);
+
+	$RandomW050608 = Random(10)*10;
+	Wait($RandomW050608);
+
+	//Request("@SE03af", Stop);
+
+	//SetFont("ＭＳ 明朝", 18, FFFFFF, 000000, MEDIUM, RIGHTDOWN);
+	//CreateText("Dt1", 15000, 50, 20, 700, 500, $RRSet);
+
+
+	}
+
+	Wait(24);
+}
+
+//横走りするスクルージの回りを瓦礫が通り過ぎる②
+function LProcAK_lx0506_09Act()
+{
+	begin:
+
+	while(1)
+	{
+	Request("@SE03ab", Play);
+
+	$RandomCamX=-200+(Random(4)*50);
+	$RandomCamZ=-130-(Random(13)*10);
+
+	Fade("@絵演瓦礫奥一", 0, 1000, null, true);
+	Move("@絵演瓦礫奥一", 600, 1600, @0, null, false);
+
+	Wait(300);
+	MoveCamera("@絵写機合間", 200, $RandomCamX, 20, $RandomCamZ, Dxl3, true);
+	Wait(300);
+
+	Fade("@絵演瓦礫奥一", 0, 0, null, true);
+
+	$RR2Set=-30+(Random(6)*10);
+	Rotate("絵演瓦礫前一", 0, @0, @0, $RR2Set, null,true);
+	Move("@絵演瓦礫奥一", 0, -1600, @0, null, true);
+
+	$RandomW050609 = Random(10)*20;
+	Wait($RandomW050609);//200
+
+	Request("@SE03ab", Stop);
+
+	}
+
+	Wait(24);
+}
+
+=================================================
+..LProcAK_lx0506_10aAct	//「グッ……やかましい！」
+=================================================
+//パストの音声を演出の裏で流す
+function LProcAK_lx0506_10aAct()
+{
+		Request("@vo15", Play);
+
+	Wait($lx0506_15);
+
+		Request("@vo16", Play);
+
+	Wait($lx0506_16);
+}
+
+=================================================
+..LProcAK_lx0506_10Act	//《イヤアアアアアアアアアアアアア！》
+=================================================
+function LProcAK_lx0506_10Act()
+{
+	Wait(1900);
+	CreateEffect("絵板発狂", 5000, 0, 0, 1024, 576, "Plain");
+	SetAlias("絵板発狂","絵板発狂");
+	Request("絵板発狂", Passive);
+	Delete("@絵秋機天写*");
+	Fade("絵板発狂", 300, 0, null, true);
+	Delete("絵板発狂");
+	$LProcAK_lx0506_10Act=true;
+
+}
+
+=================================================
+..LProcAK_lx050710_01aAct	//エデン・ベベヴォイド砲１
+=================================================
+function LProcAK_lx050710_01aAct()
+//エデン・ベベヴォイド砲、砲門に力が溜まる
+{
+	Fade("@絵写機砲/絵演機集中", 0, 1000, null, false);
+	Zoom("@絵写機砲/絵演機集中", 600, 2500, 2500, null, false);
+	Wait(550);
+	Zoom("@絵写機砲/絵演機集中", 200, 900, 900, null, false);
+	Wait(100);
+	Fade("@絵写機砲/絵演機集中", 100, 0, null, true);
+}
+
+=================================================
+..LProcAK_lx050710_01bAct	//エデン・ベベヴォイド砲２
+=================================================
+function LProcAK_lx050710_01bAct()
+//エデン・ベベヴォイド砲、陣発生
+{
+	Rotate("@絵写機砲/絵演機陣", 12000, @0, @0, 360, null,false);
+	Fade("@絵写機砲/絵演機陣", 600, 1000, null, false);
+	Zoom("@絵写機砲/絵演機陣", 300, 2000, 2000, Dxl1, false);
+	Wait(300);
+
+	Wait(1000);
+
+	Fade("@絵写機砲/絵演機陣", 600, 0, null, true);
+}
+
+=================================================
+..LProcAK_lx050710_01cAct	//エデン・ベベヴォイド砲３
+=================================================
+function LProcAK_lx050710_01cAct()
+//エデン・ベベヴォイド砲、ガイナ的なキラッ★
+{
+	Fade("@絵写機砲/絵演機発射前閃", 0, 1000, null, true);
+	Zoom("@絵写機砲/絵演機発射前閃", 100, 20000, 20000, null, false);
+	Rotate("@絵写機砲/絵演機発射前閃", 400, @0, @0, 1080, null,false);
+	Wait(180);
+	Fade("@絵写機砲/絵演機発射前閃", 100, 0, null, true);
+}
+
+=================================================
+..LProcAK_lx050710_01dAct	//エデン・ベベヴォイド砲４
+=================================================
+function LProcAK_lx050710_01dAct()
+//エデン・ベベヴォイド砲、発射前空気振動
+{
+	Fade("@絵写機砲/絵演機集中二", 0, 1000, null, true);
+	Zoom("@絵写機砲/絵演機集中二", 500, 6000, 6000, Dxl3, false);
+	Wait(300);
+	Fade("@絵写機砲/絵演機集中二", 200, 0, null, true);
+}
+
+=================================================
+..LProcAK_lx050710_01eAct	//エデン・ベベヴォイド砲５
+=================================================
+function LProcAK_lx050710_01eAct()
+//エデン・ベベヴォイド砲、発射
+{
+	DrawTransition("@絵写機砲/絵枠/照光", 0, 0, 300, 200, null, "cg/data/circle_06_00_0.png", true);
+	Fade("@絵写機砲/絵枠/照光", 0, 300, null, true);
+	Fade("@絵写機砲/絵枠/照光", 2000, 0, null, false);
+
+	Shake("@絵写機砲/絵演機砲", 600000, -2, 2, 0, 0, 1000, null, false);
+	Fade("@絵写機砲/絵演機砲", 0, 1000, null, true);
+	Zoom("@絵写機砲/絵演機砲", 100, 1000, 50, null, false);
+	Wait(80);
+	Zoom("@絵写機砲/絵演機砲", 100, 1000, 1000, Dxl3, true);
+}
+
+=================================================
+..LProcAK_lx050710_01fAct	//エデン・ベベヴォイド砲５
+=================================================
+function LProcAK_lx050710_01fAct()
+//エデン・ベベヴォイド砲、発射の際の空圧変化
+{
+	Fade("@絵写機砲/絵演機空圧", 0, 500, null, true);
+	Zoom("@絵写機砲/絵演機空圧", 200, 60000, 20000, Dxl1, false);
+	Wait(120);
+	Zoom("@絵写機砲/絵演機空圧", 4000, 60000, 20000, Dxl1, false);
+	Fade("@絵写機砲/絵演機空圧", 1000, 0, null, false);
+
+	Shake("@絵写機砲/絵演機砲", 300, 0, 4, 0, 0, 1000, null, true);
+}
+
+=================================================
+..LProcAK_lx050710_01gAct	//エデン・ベベヴォイド砲６
+=================================================
+function LProcAK_lx050710_01gAct()
+//エデン・ベベヴォイド砲、発射時に巻き上がる瓦礫
+{
+	Move("@絵写機砲/絵演機瓦礫一", 500, @120, @-500, Dxl3, false);
+	Wait(30);
+	Move("@絵写機砲/絵演機瓦礫二", 500, @120, @-550, Dxl3, false);
+	Wait(40);
+	Move("@絵写機砲/絵演機瓦礫三", 500, @120, @-600, Dxl3, false);
+	Wait(50);
+	Move("@絵写機砲/絵演機瓦礫四", 500, @120, @-700, Dxl3, false);
+	Wait(60);
+	Move("@絵写機砲/絵演機瓦礫五", 500, @120, @-800, Dxl3, true);
+}
+
+=================================================
+..LProcAK_lx0508_01Act	//「アアアアアアアアアアアアアアアアアア！」
+=================================================
+//パストの発狂に合わせてズーム値を変動
+function LProcAK_lx0508_01Act()
+{
+	$LProcAK_lx0508_01Act=true;
+
+	Wait(200);
+	Zoom("@絵板写", 400, 1050, 1050, null, true);
+	Wait(100);
+	Zoom("@絵板写", 300, 1150, 1150, null, true);
+	Wait(200);
+	Zoom("@絵板写", 900, 1300, 1300, null, true);
+	Wait(500);
+
+	while(1)
+	{
+	Zoom("@絵板写", 3000, 1200, 1200, null, true);
+	Zoom("@絵板写", 3600000, 1300, 1300, null, true);
+
+	}
+
+	Wait(16);
+
+}
+
+=================================================
+..LProcAK_lx0508_02aAct	//「しっかりつかまってろ！」
+=================================================
+function LProcAK_lx0508_02aAct()
+{
+	$LProcAK_lx0508_02aAct=true;
+
+	Zoom("@絵効果", 300, 1100, 1100, Axl1, true);
+
+	while(1)
+	{
+	Zoom("@絵効果", 3000, 1150, 1150, null, true);
+	Zoom("@絵効果", 3600000, 1110, 1110, null, true);
+
+	}
+
+	Wait(16);
+}
+
+=================================================
+..LProcAK_lx0508_02bAct	//「しっかりつかまってろ！」
+=================================================
+function LProcAK_lx0508_02bAct()
+{
+	$LProcAK_lx0508_02bAct=true;
+
+	Zoom("@絵効果", 300, 1300, 1300, Axl1, true);
+
+	while(1)
+	{
+	Zoom("@絵効果", 3000, 1350, 1350, null, true);
+	Zoom("@絵効果", 3600000, 1310, 1310, null, true);
+
+	}
+
+	Wait(16);
+}
+
+=================================================
+..LProcAK_lx0508_02cAct	//「しっかりつかまってろ！」
+=================================================
+function LProcAK_lx0508_02cAct()
+{
+	$LProcAK_lx0508_02cAct=true;
+
+	Zoom("@絵効果", 300, 1500, 1500, Axl1, true);
+
+	while(1)
+	{
+	Zoom("@絵効果", 3000, 1550, 1550, null, true);
+	Zoom("@絵効果", 3600000, 1510, 1510, null, true);
+
+	}
+
+	Wait(16);
+}
+
+=================================================
+..LProcAK_lx0508_03Act	//「しっかりつかまってろ！」
+=================================================
+function LProcAK_lx0508_03Act()
+{
+	$LProcAK_lx0508_03Act=true;
+
+	Zoom("@絵板写魁", 800, 1050, 1050, Axl1, true);
+
+	while(1)
+	{
+	Zoom("@絵板写魁", 3000, 1100, 1100, null, true);
+	Zoom("@絵板写魁", 3600000, 1050, 1050, null, true);
+
+	}
+
+	Wait(16);
+}
+
+=================================================
+..LProcAK_lx0508_04Act	//――凶暴な力の渦。
+=================================================
+function LProcAK_lx0508_04Act()
+{
+	$LProcAK_lx0508_04Act=true;
+
+
+	while(1)
+	{
+
+	CreateEffect("絵板竜巻", 1490, 0, 0, 1024, 576, "Plain");
+	SetAlias("絵板竜巻","絵板竜巻");
+	Request("絵板竜巻", Passive);
+	Fade("絵板竜巻", 0, 300, null, true);
+
+	Zoom("絵板竜巻", 300, 1200, 1200, Dxl1, false);
+	Shake("絵板竜巻", 300, 8, 4, 4, 8, 1000, null, false);
+
+	Wait(100);
+
+	Fade("絵板竜巻", 100, 0, null, true);
+	Delete("絵板竜巻");
+
+	}
+
+	Wait(16);
+}
+
+=================================================
+..LProcAK_lx0508_05Act	//「…………！」
+=================================================
+//ムービー再生時に少し裏で次の画面を生成する
+function LProcAK_lx0508_05Act()
+{
+
+	Wait(50);
+	Fade("@絵色白", 0, 1000, null, true);
+
+}
+
+=================================================
+..VacuumBullet	//オラトリオが銃弾を吸収する
+=================================================
+function VacuumBullet($VCNut)
+{
+	Request($VCNut, Stop);
+	Move($VCNut, 0, -300, -300, null, true);
+	$RAKR = (Random(12)*30);
+	Rotate($VCNut, 0, @0, @0, $RAKR, null,true);
+
+	$RAKXSet = 100+(Random(80)*10);
+	$RAKYSet = 50+(Random(40)*10);
+	$RAKX = "@" + "$RAKXSet";
+	$RAKY = "@" + "$RAKYSet";
+	Move($VCNut, 0, $RAKX, $RAKY, null, true);
+
+	Shake($VCNut, 200, 2, 4, 0, 0, 1000, null, false);
+
+	$RAKZ = 1000 + (Random(5)*100);
+	Zoom($VCNut, 200, $RAKZ, $RAKZ, Dxl2, false);
+	Fade($VCNut, 0, 1000, null, true);
+	Wait(50);
+	Move($VCNut, 200, 212, 12, Axl1, false);
+	Wait(50);
+	Fade($VCNut, 100, 0, null, false);
+}
+
+=================================================
+..VacuumOther	//オラトリオが指定したナットを吸収する
+=================================================
+function VacuumOther($VCONut)
+{
+	Request($VCONut, Stop);
+
+	$VCOXScH = 0-(ImageHorizon($VCONut)/2);
+	$VCOYScH = 0-(ImageVertical($VCONut)/2);
+	Move($VCONut, 0, $VCOXScH, $VCOYScH, null, true);
+
+	$RAKR = (Random(12)*30);
+	Rotate($VCONut, 0, @0, @0, $RAKR, null,true);
+
+	$RAKXSet = 100+(Random(80)*10);
+	$RAKYSet = 50+(Random(40)*10);
+	$RAKX = "@" + "$RAKXSet";
+	$RAKY = "@" + "$RAKYSet";
+	Move($VCONut, 0, $RAKX, $RAKY, null, true);
+
+	Shake($VCONut, 200, 2, 4, 0, 0, 1000, null, false);
+
+	$RAKZ = 1000 + (Random(5)*100);
+	Zoom($VCONut, 200, $RAKZ, $RAKZ, Dxl2, false);
+	Fade($VCONut, 0, 1000, null, true);
+	Wait(50);
+
+	$VCOXScC = $VCOXScH+512;
+	$VCOYScC = $VCOYScH+288;
+	Move($VCONut, 200, $VCOXScC, $VCOYScC, Axl1, false);
+
+	Wait(50);
+	Fade($VCONut, 100, 0, null, false);
+}
+
+=================================================
+..CreateMissile
+=================================================
+//ミサイルを生成
+function CreateMissile($MMNut,$MMPri,$CMXS,$CMYS,Zoom)
+{
+	//CreateText($MMNut, 0, 1024, 0, 4000, 4000, null);
+	CreateColor($MMNut, 0, 1024, 0, 60, 60, "000000");
+	Request($MMNut, AddRender);
+	SetAlias($MMNut,$MMNut);
+	SetVertex($MMNut, 0, middle);
+	Fade($MMNut, 0, 0, null, true);
+
+	$MMSmokeNut="@"+$MMNut+"/"+"_Smoke";
+	CreateTextureEXadd($MMSmokeNut, $MMPri, 1024, 0, "cg/ef/ef_Missile01Smoke.png");
+	SetBlur($MMSmokeNut, true, 3, 200, 200, false);
+	SetVertex($MMSmokeNut, 0, middle);
+	$YScale=0-(ImageVertical($MMSmokeNut)/2)+2000;
+	Move($MMSmokeNut, 0, 0, $YScale, null, true);
+
+	$MMBaseNut="@"+$MMNut+"/"+"_Base";
+	$MMPri=$MMPri+10;
+	CreateTextureEX($MMBaseNut, $MMPri, 1024, 0, "cg/ef/ef_Missile01.png");
+	SetVertex($MMBaseNut, 0, middle);
+	$YScale=0-(ImageVertical($MMBaseNut)/2)+2000;
+	Move($MMBaseNut, 0, 0, $YScale, null, true);
+
+	Zoom($MMNut, 0, Zoom, Zoom, null, true);
+	Move($MMNut, 0, @-1024, @-2000, null, true);//基本位置に設定
+
+	Position($MMNut, $CMX, $CMY);
+	$CMXPos2=$CMXS-$CMX;
+	$CMXPos=$CMXPos2;
+	$CMYPos2=$CMYS-$CMY-2000;
+	$CMYPos=$CMYPos2;
+	Move($MMNut, 0, @$CMXPos, @$CMYPos, null, true);//設定位置に移動
+
+	Fade($MMBaseNut, 0, 1000, null, true);
+	Fade($MMBaseNut, 0, 1000, null, true);
+
+}

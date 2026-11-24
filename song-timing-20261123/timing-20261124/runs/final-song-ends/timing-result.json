@@ -1,0 +1,250 @@
+{
+  "lxbgm01": {
+    "cue": 37,
+    "planned_end_ms": 240100,
+    "last_visible_ms": 239890,
+    "first_hidden_ms": 240389,
+    "peak_vs_source": [
+      {
+        "correlation": 0.959,
+        "reference_start": 235.93,
+        "cursor_minus_audio_at_update_ms": 942,
+        "sample_wall_ms": 12428383
+      },
+      {
+        "correlation": 0.89,
+        "reference_start": 235.91,
+        "cursor_minus_audio_at_update_ms": 961,
+        "sample_wall_ms": 12428383
+      },
+      {
+        "correlation": 0.975,
+        "reference_start": 239.56,
+        "cursor_minus_audio_at_update_ms": 948,
+        "sample_wall_ms": 12432002
+      }
+    ]
+  },
+  "lxbgm04": {
+    "cue": 107,
+    "planned_end_ms": 244100,
+    "last_visible_ms": 243890,
+    "first_hidden_ms": 244389,
+    "peak_vs_source": [
+      {
+        "correlation": 0.871,
+        "reference_start": 240.08,
+        "cursor_minus_audio_at_update_ms": 912,
+        "sample_wall_ms": 12437695
+      },
+      {
+        "correlation": 0.684,
+        "reference_start": 240.07,
+        "cursor_minus_audio_at_update_ms": 952,
+        "sample_wall_ms": 12437695
+      },
+      {
+        "correlation": 0.801,
+        "reference_start": 243.85,
+        "cursor_minus_audio_at_update_ms": 897,
+        "sample_wall_ms": 12441463
+      }
+    ]
+  },
+  "lxbgm05": {
+    "cue": 145,
+    "planned_end_ms": 204000,
+    "last_visible_ms": 203790,
+    "first_hidden_ms": 204289,
+    "peak_vs_source": [
+      {
+        "correlation": 0.553,
+        "reference_start": 199.84,
+        "cursor_minus_audio_at_update_ms": 934,
+        "sample_wall_ms": 12446930
+      },
+      {
+        "correlation": 0.587,
+        "reference_start": 203.45,
+        "cursor_minus_audio_at_update_ms": 959,
+        "sample_wall_ms": 12450549
+      }
+    ]
+  },
+  "lxbgm12": {
+    "cue": 181,
+    "planned_end_ms": 253300,
+    "last_visible_ms": 253090,
+    "first_hidden_ms": 253589,
+    "peak_vs_source": [
+      {
+        "correlation": 0.962,
+        "reference_start": 249.12,
+        "cursor_minus_audio_at_update_ms": 912,
+        "sample_wall_ms": 12456101
+      },
+      {
+        "correlation": 0.721,
+        "reference_start": 249.11,
+        "cursor_minus_audio_at_update_ms": 948,
+        "sample_wall_ms": 12456101
+      },
+      {
+        "correlation": 0.942,
+        "reference_start": 252.72,
+        "cursor_minus_audio_at_update_ms": 898,
+        "sample_wall_ms": 12459697
+      }
+    ]
+  },
+  "lxbgm14": {
+    "cue": 208,
+    "planned_end_ms": 224600,
+    "last_visible_ms": 224390,
+    "first_hidden_ms": 224889,
+    "peak_vs_source": [
+      {
+        "correlation": 0.872,
+        "reference_start": 220.32,
+        "cursor_minus_audio_at_update_ms": 921,
+        "sample_wall_ms": 12465164
+      },
+      {
+        "correlation": 0.413,
+        "reference_start": 220.5,
+        "cursor_minus_audio_at_update_ms": 711,
+        "sample_wall_ms": 12465164
+      },
+      {
+        "correlation": 0.861,
+        "reference_start": 223.96,
+        "cursor_minus_audio_at_update_ms": 921,
+        "sample_wall_ms": 12468799
+      }
+    ]
+  },
+  "lxbgm16": {
+    "cue": 246,
+    "planned_end_ms": 194500,
+    "last_visible_ms": 194290,
+    "first_hidden_ms": 194789,
+    "peak_vs_source": [
+      {
+        "correlation": 0.905,
+        "reference_start": 190.32,
+        "cursor_minus_audio_at_update_ms": 944,
+        "sample_wall_ms": 12474367
+      },
+      {
+        "correlation": 0.866,
+        "reference_start": 190.32,
+        "cursor_minus_audio_at_update_ms": 927,
+        "sample_wall_ms": 12474367
+      },
+      {
+        "correlation": 0.843,
+        "reference_start": 193.91,
+        "cursor_minus_audio_at_update_ms": 950,
+        "sample_wall_ms": 12477963
+      }
+    ]
+  },
+  "lxbgm18": {
+    "cue": 261,
+    "planned_end_ms": 116100,
+    "last_visible_ms": 115890,
+    "first_hidden_ms": 116389,
+    "peak_vs_source": [
+      {
+        "correlation": 0.768,
+        "reference_start": 111.84,
+        "cursor_minus_audio_at_update_ms": 905,
+        "sample_wall_ms": 12483430
+      },
+      {
+        "correlation": 0.395,
+        "reference_start": 111.85,
+        "cursor_minus_audio_at_update_ms": 895,
+        "sample_wall_ms": 12483430
+      },
+      {
+        "correlation": 0.978,
+        "reference_start": 115.5,
+        "cursor_minus_audio_at_update_ms": 913,
+        "sample_wall_ms": 12487096
+      }
+    ]
+  },
+  "lxbgm19": {
+    "cue": 309,
+    "planned_end_ms": 200000,
+    "last_visible_ms": 199790,
+    "first_hidden_ms": 200289,
+    "peak_vs_source": [
+      {
+        "correlation": 0.665,
+        "reference_start": 195.86,
+        "cursor_minus_audio_at_update_ms": 933,
+        "sample_wall_ms": 12492617
+      },
+      {
+        "correlation": 0.699,
+        "reference_start": 199.46,
+        "cursor_minus_audio_at_update_ms": 944,
+        "sample_wall_ms": 12496228
+      }
+    ]
+  },
+  "lxsong01": {
+    "cue": 339,
+    "planned_end_ms": 203000,
+    "last_visible_ms": 202790,
+    "first_hidden_ms": 203289,
+    "peak_vs_source": [
+      {
+        "correlation": 0.86,
+        "reference_start": 198.81,
+        "cursor_minus_audio_at_update_ms": 949,
+        "sample_wall_ms": 12501758
+      },
+      {
+        "correlation": 0.901,
+        "reference_start": 198.81,
+        "cursor_minus_audio_at_update_ms": 946,
+        "sample_wall_ms": 12501758
+      },
+      {
+        "correlation": 0.569,
+        "reference_start": 202.41,
+        "cursor_minus_audio_at_update_ms": 945,
+        "sample_wall_ms": 12505354
+      }
+    ]
+  },
+  "lxsong02": {
+    "cue": 366,
+    "planned_end_ms": 207000,
+    "last_visible_ms": 206790,
+    "first_hidden_ms": 207289,
+    "peak_vs_source": [
+      {
+        "correlation": 0.873,
+        "reference_start": 202.73,
+        "cursor_minus_audio_at_update_ms": 957,
+        "sample_wall_ms": 12510836
+      },
+      {
+        "correlation": 0.819,
+        "reference_start": 202.72,
+        "cursor_minus_audio_at_update_ms": 972,
+        "sample_wall_ms": 12510836
+      },
+      {
+        "correlation": 0.875,
+        "reference_start": 206.4,
+        "cursor_minus_audio_at_update_ms": 948,
+        "sample_wall_ms": 12514502
+      }
+    ]
+  }
+}

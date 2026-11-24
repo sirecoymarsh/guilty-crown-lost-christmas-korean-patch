@@ -1,0 +1,41 @@
+{
+  "status": "pass",
+  "baseline_nss_sha256": "53de61c86d404ff06e59405aca1279ba00e152e8d8b82359ba6b7971ba1f7d85",
+  "runtime_sha256": "c00681988fdef9c322a23cc57036751a081a98ce5bf793539afa00330c24026d",
+  "patch_sha256": "1d7e6ce8cee1c13770d50b886e723e7e3665edba7d9dc430a4db4ccddc8f62ae",
+  "changed_existing_entries": [
+    "0_boot.nss",
+    "function.nss",
+    "function_lx.nss",
+    "kr_scenario.nss",
+    "kr_sound.nss",
+    "kr_movie.nss"
+  ],
+  "unchanged_stored_entries": 155,
+  "added_entries": 367,
+  "cues": 366,
+  "vocal_tracks": 10,
+  "source_korean_font_missing_glyphs": 0,
+  "max_text_width_logical_px": 590.75,
+  "scenario_PRE_blocks_preserved": true,
+  "translator_model": "Codex internal",
+  "runtime_checks": [
+    "lyric-sound-direct: real sound screen; BIOS/ISOLATION/Where am I selections, stop, instrumental, exit",
+    "lyric-ingame: SoundPlay_Loop without @, loop seek/wrap, dialogue separation, locked scene transition, SetVolume_Loop and @lx* stop",
+    "lyric-all-vocals: final payload 10 tracks, representative long cues, both ending positions, Japanese fallback fixed"
+  ],
+  "reused_checks": [
+    "local STT source recovery and two-pass source crosschecks",
+    "independent cue timing and translation restraint review",
+    "latest renderer/scenario/media baseline proofs"
+  ],
+  "limits": [
+    "targeted controlled fixtures, not a full story replay",
+    "old embedded script saves have not been migrated",
+    "Where am I? unpublished outro ad-lib 206.8-214.3 seconds unresolved, not guessed"
+  ],
+  "observed_private_memory_mb": 797.5,
+  "observed_peak_working_set_mb": 953.0,
+  "installer_roundtrip": "pass; qa/installer-roundtrip.json",
+  "screenshots": "Original BMP captures converted to lossless PNG with decoded pixel hash checks. Final after-stop capture shot-035 in all-vocals was incomplete due to storage exhaustion and discarded; all 10 selected track captures remain verified."
+}

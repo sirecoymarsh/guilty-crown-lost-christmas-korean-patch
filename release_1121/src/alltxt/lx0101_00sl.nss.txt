@@ -1,0 +1,122 @@
+
+
+//<continuation number="70">
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0101_00sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	//$GameName = "lx0102.nss";
+
+}
+
+
+scene lx0101_00sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//	$SYSTEM_skip=false;
+//	$SYSTEM_menu_lock=true;
+
+//―――――――――――――――――――――――――――――――――――――――
+
+	PrintBG("上背景", 25000);
+
+	//OnBG(10,"bg102031_1_平凡前通り");
+	//FadeBG(0,true);
+	CreateSE("SE_sel_heart_l","se人体_心臓_鼓動01L");
+	CreateSE("SE_sel_ef","se人体_動作_跳躍03");
+	MusicStart("SE_sel_heart_l",2000,700,0,700,null,true);
+
+	CreateMovieEX("selmovie01", 29500, Center, Middle, true, true, "dx/mvselect01.ngs");
+	Request("selmovie01", SubRender);
+	Zoom("selmovie01", 0, 3500, 3500, null, true);
+
+	Delete("@selmovie10");
+
+	CreateEffectSP("pl01", 25000, 0, 0, 1024, 576, "Plain");
+	CreateEffectSP("pl02", 25000, 0, 0, 1024, 576, "Plain");
+	CreateEffectSP("pl03", 25000, 0, 0, 1024, 576, "Plain");
+	SetBlur("pl01", true, 4, 500, 50, false);
+	SetBlur("pl02", true, 4, 500, 50, false);
+	SetBlur("pl03", true, 4, 500, 50, false);
+
+	CreateSE("SE_vef01","seヴォイド汎用02");
+
+
+
+	//動作---------------------------------------------------
+	MusicStart("SE_sel_ef",0,1000,0,500,null,false);
+//	SetFrequency("SE_sel_ef", 1000, 3000, Axl1);
+
+	$blur_time=550;
+	Zoom("pl01", $blur_time, 1050, 1050, Axl2, false);
+	Zoom("pl02", $blur_time, 1150, 1150, Axl2, false);
+	Zoom("pl03", $blur_time, 1300, 1300, Axl2, false);
+
+	FadeDelete("上背景", 0, null, true);
+
+	Wait(500);
+
+	CreatePlainSP("selpl01", 25000);
+	Delete("pl*");
+	Fade("selmovie01", 1000, 500, null, false);
+
+//―――――――――――――――――――――――――――――――――――――――
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//逃げろ！
+//やられる前にやれ
+
+//lx0101_01
+//lx0101_02
+
+//■選択肢
+	$select_fade=true;
+	SetChoice02("도망쳐!","당하기 전에 해치워라");
+	WaitChoice02();
+	
+	if($SetChoiceSelect==0){		$GameName = "lx0101_01.nss";$lx0101_00sl選択肢=1;$FLAG_OF_STORY["逃げろ！"]=true;}
+	else if($SetChoiceSelect==1){	$GameName = "lx0101_02.nss";$lx0101_00sl選択肢=0;}
+
+	SetVolumeEX("SE*", 500, 0, null);
+	Wait(500);
+
+
+}

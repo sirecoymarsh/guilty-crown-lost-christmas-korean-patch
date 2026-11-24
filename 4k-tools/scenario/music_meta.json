@@ -1,0 +1,154 @@
+{
+ "bgm/lxbgm01.ogg": {
+  "bytes": 4403590,
+  "rate": 44100,
+  "seconds": 273.8,
+  "tags": [
+   "TITLE=lxbgm01"
+  ]
+ },
+ "bgm/lxbgm03.ogg": {
+  "bytes": 4676100,
+  "rate": 44100,
+  "seconds": 271.3,
+  "tags": [
+   "TITLE=lxbgm03"
+  ]
+ },
+ "bgm/lxbgm04.ogg": {
+  "bytes": 4091088,
+  "rate": 44100,
+  "seconds": 256.0,
+  "tags": [
+   "TITLE=lxbgm04"
+  ]
+ },
+ "bgm/lxbgm05.ogg": {
+  "bytes": 3733844,
+  "rate": 44100,
+  "seconds": 228.6,
+  "tags": [
+   "TITLE=lxbgm05"
+  ]
+ },
+ "bgm/lxbgm06.ogg": {
+  "bytes": 2079579,
+  "rate": 44100,
+  "seconds": 126.7,
+  "tags": [
+   "TITLE=lxbgm06"
+  ]
+ },
+ "bgm/lxbgm07.ogg": {
+  "bytes": 2058867,
+  "rate": 44100,
+  "seconds": 139.9,
+  "tags": [
+   "TITLE=lxbgm07"
+  ]
+ },
+ "bgm/lxbgm08.ogg": {
+  "bytes": 3474005,
+  "rate": 44100,
+  "seconds": 217.9,
+  "tags": [
+   "TITLE=lxbgm08"
+  ]
+ },
+ "bgm/lxbgm10.ogg": {
+  "bytes": 4219444,
+  "rate": 44100,
+  "seconds": 257.5,
+  "tags": [
+   "TITLE=lxbgm10"
+  ]
+ },
+ "bgm/lxbgm11.ogg": {
+  "bytes": 3966520,
+  "rate": 44100,
+  "seconds": 238.9,
+  "tags": [
+   "TITLE=lxbgm11"
+  ]
+ },
+ "bgm/lxbgm12.ogg": {
+  "bytes": 4631991,
+  "rate": 44100,
+  "seconds": 274.5,
+  "tags": [
+   "TITLE=lxbgm12"
+  ]
+ },
+ "bgm/lxbgm13.ogg": {
+  "bytes": 5239127,
+  "rate": 44100,
+  "seconds": 333.5,
+  "tags": [
+   "TITLE=lxbgm13"
+  ]
+ },
+ "bgm/lxbgm14.ogg": {
+  "bytes": 4026678,
+  "rate": 44100,
+  "seconds": 251.4,
+  "tags": [
+   "TITLE=lxbgm14"
+  ]
+ },
+ "bgm/lxbgm15.ogg": {
+  "bytes": 4625915,
+  "rate": 44100,
+  "seconds": 291.0,
+  "tags": [
+   "TITLE=lxbgm15"
+  ]
+ },
+ "bgm/lxbgm16.ogg": {
+  "bytes": 3547875,
+  "rate": 44100,
+  "seconds": 228.4,
+  "tags": [
+   "TITLE=lxbgm16"
+  ]
+ },
+ "bgm/lxbgm17.ogg": {
+  "bytes": 3170387,
+  "rate": 44100,
+  "seconds": 197.4,
+  "tags": [
+   "TITLE=lxbgm17"
+  ]
+ },
+ "bgm/lxbgm18.ogg": {
+  "bytes": 2263409,
+  "rate": 44100,
+  "seconds": 155.6,
+  "tags": [
+   "TITLE=lxbgm18"
+  ]
+ },
+ "bgm/lxbgm19.ogg": {
+  "bytes": 4168510,
+  "rate": 44100,
+  "seconds": 252.4,
+  "tags": [
+   "TITLE=lxbgm19"
+  ]
+ },
+ "bgm/lxsong01.ogg": {
+  "bytes": 3586350,
+  "rate": 44100,
+  "seconds": 236.2,
+  "tags": [
+   "TITLE=lxsong01"
+  ]
+ },
+ "bgm/lxsong02.ogg": {
+  "bytes": 3709358,
+  "rate": 44100,
+  "seconds": 235.4,
+  "tags": [
+   "TITLE=lxsong02"
+  ]
+ }
+}

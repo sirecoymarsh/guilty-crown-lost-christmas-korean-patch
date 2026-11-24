@@ -1,0 +1,467 @@
+//<continuation number="220">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0207.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0300.nss";
+}
+
+
+scene lx0207.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//―――――――――――――――――――――――――――――――――――――――
+//◆◆天王洲大学／夜
+
+//玄周との会話の帰り道
+//並木道のあたり？
+
+	PrintBG("上背景", 30000);
+
+
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg003002_3_天王洲大学外観.jpg");
+
+	CreateSE("SE01L","se自然_風_雰囲気01_L");
+	MusicStart("SE01L",2000,450,0,700,null,true);
+
+
+	FadeDelete("上背景", 1000, null, true);
+
+	Wait(500);
+
+	St("C",740, @0,@0,"stキャロル_通常_cry3");
+	FadeSt("C",200,true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0700010a02">
+｡ｸｹｺ~ｰ｡ ｾｻｳｭ ﾀﾌｾﾟｱ篩ｴｳﾗ｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0700020a01">
+｡ｸ｡ｦ｡ｦｱﾗｷｸｱｺ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	St("C",740, @0,@0,"stキャロル_通常_smile1");
+	FadeSt("C",200,true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0700030a02">
+｡ｸﾀﾚ&, ｱﾗｷｳ&.
+　어쩔래&, 스크루지?
+　오우마 쿠로스에게 협력할 거야?」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0700040a01">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//玄周との会話を回想するスクルージ。
+
+////////////////////////////////////////
+//以下、LX0206のつづき
+	SetVolumeEX("SE*", 1000, 0, null);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 500, 1000, null, true);
+	CreateColorEXadd("絵過去色", 2000, "FFFFFF");
+	Fade("絵過去色", 0, 150, null, true);
+	CreateTextureSPmul("ef01", 4900, Center, Middle, "cg/data/slide_05_00_0.png");
+
+	CreateTextureSP("絵背景", 100, -1007, -400, "cg/bg/l/bg003004_7_天王洲大学事務室_l.jpg");
+
+	St("C",740, @0,@70,"buクロス_通常_serious");
+	FadeSt("C",0,true);
+
+
+	FadeDelete("絵色黒", 500, null, true);
+
+
+//◆◆天王洲大学／玄周の研究室
+	Fw("fwクロス_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700050b01">
+「부탁하네! 자네의 몸을 조사하게 해 주지 않겠나?」
+
+{	Fw("fwクロス_通常_normal");
+	St("C",740, @0,@70,"buクロス_通常_normal");
+	FadeSt("C",200,true);}
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700060b01">
+「난 내 딸을 아포칼립스 바이러스의 저주에서 풀어 주고 싶네&. 그러려면 자네의 데이터가 필요하네」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0700070a01">
+「다아트 녀석들처럼 날 모르모트로 삼을 셈인가?」
+
+//（シニカルに。挑発的）
+
+{	Fw("fwクロス_通常_normal");
+	St("C",740, @0,@70,"buクロス_通常_sad");
+	FadeSt("C",200,true);}
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700080b01">
+「……부정은 하지 않겠네」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	Fw("fwクロス_通常_normal");
+	St("C",740, @0,@70,"buクロス_通常_normal");
+	FadeSt("C",200,true);
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700090b01">
+「하지만 자네의 보이드 게놈을 규명하면 그 힘을 안정시킬 방법을 찾을지도 모르네」
+
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700100b01">
+「그러면 그 오른손도 고칠 수 있을 걸세&. 기억이 돌아올 가능성도 있다고 보네」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0700110a01">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ
+
+//（思案）
+
+{	Fw("fwクロス_通常_normal");
+	St("C",740, @0,@70,"buクロス_通常_sad");
+	FadeSt("C",200,true);}
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700120b01">
+｡ｸｹｰｷﾐ ｴﾜｾﾒ ｼﾂ ｾﾗ&.
+｡｡ｱﾗｷｯｴﾏ ﾀﾚｳﾗﾀﾇ ｶ貘ｻ ﾁｸﾁﾟﾇﾏｰﾚｳﾗ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	Fw("fwクロス_通常_normal");
+	St("C",740, @0,@70,"buクロス_通常_smile");
+	FadeSt("C",200,true);
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700130b01">
+「당장 대답할 필요는 없네&. 마음이 내키면 언제든 날 찾아오게」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//スクルージの回想終わり
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1000, 1000, null, true);
+
+	DeleteSt("C", 0,true);
+	Delete("ef01");
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg003002_3_天王洲大学外観.jpg");
+	Delete("絵過去*");
+
+	FadeDelete("絵色黒", 1000, null, true);
+
+	CreateSE("SE01L","se自然_風_雰囲気01_L");
+	MusicStart("SE01L",2000,450,0,700,null,true);
+
+	Wait(300);
+
+	St("C",740, @0,@0,"stキャロル_通常_smile1");
+	FadeSt("C",200,true);
+
+////////////////////////////////////////
+//◆◆天王洲大学／夜
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0700140a02">
+｡ｸﾈﾄﾈﾄ&, ﾀﾌｹ｣ ﾁﾟｿ萇ﾑ ｼｱﾅﾃﾀｻ ﾇﾘｾﾟｰﾚｳﾗ~｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0700150a01">
+｡ｸ｡ｦ｡ｦｱﾗｷｱｰ｡?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	St("C",740, @0,@0,"stキャロル_通常_smile3");
+	FadeSt("C",200,true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0700160a02">
+「그야 인류 전체의 운명이 걸렸을지도 모르잖아?」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0700170a01">
+｡ｸｸｻﾀﾌ ｳﾊｹｫ ｰﾅﾃ｢ﾇﾏｱｺ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	St("C",740, @0,@0,"stキャロル_通常_cry3");
+	FadeSt("C",200,true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0700180a02">
+「그렇지 않아~」
+
+{	St("C",740, @0,@0,"stキャロル_通常_smile4");
+	FadeSt("C",200,true);}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0700190a02">
+「대단하네~&, 스크루지&.
+　너&, 임금님을 넘어 구세주가 돼 버릴지도 모르겠는데?」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0700200a01">
+「농담 마」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	DeleteSt("C", 200,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+내 앞가림만으로도 벅차다&. 누가 좋아서 세상 뒤치다꺼리까지 해야 한단 말인가&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Wait(300);
+
+	CreateTextureEX("bg01", 1000, 0, Middle, "cg/bg/l/bg001007_3_六本木公園_l.jpg");
+
+	Move("bg01", 60000, -1024, @0, null, false);
+
+	Fade("bg01", 1000, 1000, null, true);
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+｡ｦ｡ｦﾇﾏﾁｸ ﾄｳｷﾑﾀﾌ ﾇﾏｴﾂ ｸｻｵｵ ﾀﾏｸｮｰ｡ ﾀﾖｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+ｳｭ ｼｱﾅﾃﾇﾘｾﾟｸｸ ﾇﾑｴﾙ&.
+살아남아&, 목적을 이루기 위해서는&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0135]
+ﾇﾏﾁｸ ｱﾗｰﾇ ｴﾃ ﾀﾖｴﾂ ﾀﾏﾀﾌｴﾙ&.
+지금까지와 아무것도 다르지 않다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+우리는 언제나 삶과 죽음의 갈림길에 서 있다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	SetVolumeEX("SE*", 3000, 0, null);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1000, 1000, null, true);
+
+	Delete("bg01");
+	Wait(500);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+ｱﾗｷｸｴﾙ&.
+ｼｼｰ雍ﾂ ｴﾃ ｼｱﾅﾃﾀｻ ｰｭｿ萇ﾑｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	Wait(2500);
+
+////////////////////////////////////////
+//◆◆天王洲大学／玄周の研究室
+
+
+
+//スクルージたちが去った後。玄周ひとり真剣な顔で。
+
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg003004_7_天王洲大学事務室.jpg");
+
+	FadeDelete("絵色黒", 1000, null, true);
+
+	Wait(1000);
+
+	St("C",740, @0,@0,"stクロス_通常_normal");
+	FadeSt("C",200,true);
+
+	Wait(500);
+
+	Fw("fwクロス_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700210b01">
+｡ｸ｡ｦ｡ｦｴﾙｾﾆﾆｮﾀﾇ ﾀﾎﾃｼ ｽﾇﾇ霏ﾎｰ｡｡ｹ
+
+//（セリフ前に、ため息のアドリブ）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	Fw("fwクロス_通常_normal");
+	St("C",740, @0,@0,"stクロス_通常_sad");
+	FadeSt("C",200,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+//【玄周】
+<voice name="ﾄ昞ﾎｽｺ" class="玄周" src="voice/LX02/0700220b01">
+「위험한 짓은 하지 말아 다오…… 슈이치로」
+
+//（心の底から友人を案じている感じで）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateColorEX("絵色黒", 15000, "000000");
+	Fade("絵色黒", 2500, 1000, null, true);
+
+	Wait(2000);
+
+
+
+
+
+//→→LX_0300
+
+}

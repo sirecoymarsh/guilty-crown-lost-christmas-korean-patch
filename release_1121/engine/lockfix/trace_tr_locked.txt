@@ -1,0 +1,16 @@
+lk_tr_locked_074802
+     0.000s  s0 진입               
+     0.500s  s1 Wait(500) 뒤      +  500ms
+     0.922s  s2 KuCalc 뒤         +  422ms
+     0.922s  s3 KuList 시작        +    0ms
+     0.937s  s4 가림막·지우기 뒤        +   15ms
+     1.047s  s5 줄 만든 뒤           +  110ms
+     1.062s  s6 막대·풀이 준비 뒤       +   15ms
+     1.359s  s7 조작 가능            +  297ms
+     5.375s  s8 곡 누름(KuFade)     + 4016ms
+     5.703s  s9 SoundPlay 뒤      +  328ms
+     5.703s  s3 KuList 시작        +    0ms
+     5.734s  s4 가림막·지우기 뒤        +   31ms
+     5.797s  s5 줄 만든 뒤           +   63ms
+     5.812s  s6 막대·풀이 준비 뒤       +   15ms
+     6.094s  s7 조작 가능            +  282ms

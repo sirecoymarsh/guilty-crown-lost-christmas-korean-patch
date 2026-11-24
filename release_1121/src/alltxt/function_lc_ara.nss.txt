@@ -1,0 +1,4087 @@
+
+
+//――――――――――――――――――――――――――――――――――――――
+.//■ギルクラプロセス
+//――――――――――――――――――――――――――――――――――――――
+..//スクルージ立ち止まるマクロ
+
+...//生成
+function ArScroogeStop_Create($araStop_Nut,$araStop_pri,$backYposi,$ScroX,$Sczoom,$araScrooge_eye,$araSmoke_on,$araScrooge_back){
+
+
+//変数指定ナット名
+	$araDash_Nut = $araStop_Nut + "_dash";
+	$araBack_Nut = $araStop_Nut + "_back";
+	$araBackback_Nut = $araStop_Nut + "_backback";
+	$araSmoke_Nut = $araStop_Nut + "_smoke";
+	$araMovie_Nut = $araStop_Nut + "_movie";
+	$ara_Nut_All = "@" + $araStop_Nut + "*";
+	$araBack_All = "@" + $araBack_Nut + "*";
+
+//変数指定優先度
+	$araStop_pri2 = $araStop_pri + 1;
+	$araStop_pri_back = $araStop_pri - 5;//背景
+	$araStop_pri_backback = $araStop_pri_back + 1;//背景裏
+	$araStop_pri_smoke = $araStop_pri + 6;//煙
+	$araStop_pri_move = $araStop_pri + 5;//ムービー
+
+//変数指定ファイル名
+	$araScrooge_back_file =  "cg/bg/l/"+ $araScrooge_back + "_l.jpg";
+
+	if($araScrooge_eye == true){
+		CreateTextureEX($araDash_Nut, $araStop_pri2, Center, Middle, "cg/ev/x/ev9002スクルージダッシュ汎用_a_x01.png");
+	}else if($araScrooge_eye == false){
+		CreateTextureEX($araDash_Nut, $araStop_pri2, Center, Middle, "cg/ev/x/ev9002スクルージダッシュ汎用_x01.png");
+	}
+
+	CreateTextureEX($araStop_Nut, $araStop_pri, Center, 0, "cg/st/x/stスクルージ_戦闘_normal_x01.png");
+	CreateTextureEX($araBack_Nut, $araStop_pri_back, Center, Middle, $araScrooge_back_file);
+	CreateTextureEX($araBackback_Nut, $araStop_pri_backback, Center, Middle, $araScrooge_back_file);
+	CreateMovieEX($araMovie_Nut, $araStop_pri_move, Center, Middle, true, true, "dx/mv0003集中線04_黒.ngs");
+
+	if($araSmoke_on == true){
+	CreateTextureEX($araSmoke_Nut, $araStop_pri_smoke, Center, InBottom, "cg/ef/ef_smoke04.png");
+	}
+
+
+
+//変数背景指定初期位置
+	$backXposi = -(ImageHorizon($araBackback_Nut)-1024);
+	$backXposi2 = -(ImageHorizon($araBackback_Nut)-1024/8);
+
+
+	SetShade($araBackback_Nut, HEAVY);
+	Request($ara_Nut_All, Smoothing);
+
+	Zoom($araMovie_Nut, 0, 3000, 3000, null, true);
+	Move($araBack_All, 0, $backXposi, @$backYposi, null, true);
+
+
+	SetVertex($araStop_Nut, Center, Middle);
+	SetVertex($araDash_Nut, Left, Middle);
+
+
+	Zoom($araStop_Nut, 0, $Sczoom, $Sczoom, null, true);
+	Zoom($araDash_Nut, 0, $Sczoom, $Sczoom, null, true);
+
+
+//変数立ち絵指定終点位置
+
+	if($Sczoom == 1000){
+		$scrYposi = -(ImageVertical($araStop_Nut)/4)*$Sczoom/1000;
+		Move($araStop_Nut, 0, @0, @$scrYposi, null, true);
+	}else{
+		if($Sczoom <= 1500 && $Sczoom > 1300){
+			$scrYposi = -(ImageVertical($araStop_Nut)/4)*$Sczoom/1100;
+			$scrXposi = -(ImageHorizon($araStop_Nut)/10)*$Sczoom/800;
+			Move($araStop_Nut, 0, @$scrXposi, @$scrYposi, null, true);
+		}else if($Sczoom <= 1300 && $Sczoom > 1000){
+			$scrYposi = -(ImageVertical($araStop_Nut)/4)*$Sczoom/1100;
+			$scrXposi = -(ImageHorizon($araStop_Nut)/20)*$Sczoom/700;
+			Move($araStop_Nut, 0, @$scrXposi, @$scrYposi, null, true);
+		}else if($Sczoom < 1000 && $Sczoom >= 900){
+			$scrYposi = -(ImageVertical($araStop_Nut)/4)*$Sczoom/1000;
+			$scrXposi = (ImageHorizon($araStop_Nut)/20)*1000/$Sczoom;
+			Move($araStop_Nut, 0, @$scrXposi, @$scrYposi, null, true);
+		}else if($Sczoom < 900 && $Sczoom >= 700){
+			$scrYposi = -(ImageVertical($araStop_Nut)/5)*$Sczoom/1000;
+			$scrXposi = (ImageHorizon($araStop_Nut)/10)*1000/$Sczoom;
+			Move($araStop_Nut, 0, @$scrXposi, @$scrYposi, null, true);
+		}else if($Sczoom < 700 && $Sczoom >= 501){
+			$scrYposi = -(ImageVertical($araStop_Nut)/6)*$Sczoom/1200;
+			$scrXposi = (ImageHorizon($araStop_Nut)/9)*1000/$Sczoom;
+			Move($araStop_Nut, 0, @$scrXposi, @$scrYposi, null, true);
+		}else if($Sczoom < 501 && $Sczoom >= 480){
+			$scrYposi = 0;
+			$scrXposi = (ImageHorizon($araStop_Nut)/9)*1000/$Sczoom;
+			Move($araStop_Nut, 0, @$scrXposi, @$scrYposi, null, true);
+		}else if($Sczoom < 480){
+			Message("デバッグ用","そんなにちいさくてもいいのはおっぱいだけです",YESNOCANCE,EXCLAMATION);
+			Delete($ara_Nut_All);
+		}else{
+			Message("デバッグ用","そんなにおおきいのらめえ",YESNOCANCE,EXCLAMATION);
+			Delete($ara_Nut_All);
+		}
+	}
+
+
+
+	Move($araStop_Nut, 0, @$ScroX, @0, null, true);
+
+
+//変数ダッシュ絵指定終点位置
+	Position($araStop_Nut,$ScSPosiX,$ScSPosiY);
+	$ScDPosiX = $ScSPosiX + (ImageHorizon($araStop_Nut)*$Sczoom/3000);
+	$ScDPosiY = $ScSPosiY + (ImageVertical($araStop_Nut)*$Sczoom/5000);
+
+	Move($araDash_Nut, 0, $ScDPosiX, $ScDPosiY, null, true);
+
+
+//変数ダッシュ絵定始点位置
+	$ScDSetX = (ImageHorizon($araStop_Nut)*$Sczoom/1500));
+	$ScDSetY = -(ImageVertical($araStop_Nut)*$Sczoom/8000);
+	$ScDmoveX =-$ScDSetX;
+	$ScDmoveY =-$ScDSetY;
+
+
+	Move($araDash_Nut, 0, @$ScDSetX, @$ScDSetY, null, true);
+
+
+//煙用
+	$SmoPosiX = $ScSPosiX+40;
+	$Smozoom = $Sczoom + 300;
+	Zoom($araSmoke_Nut, 0, $Sczoom, 0, null, true);
+	Move($araSmoke_Nut, 0, $SmoPosiX, @0, null, true);
+	SetVertex($araSmoke_Nut, Right, bottom);
+
+	if($Sczoom <= 1000 &&$Sczoom>700){
+	$Smomove = $Sczoom/8;
+	Move($araSmoke_Nut, 0, @0, @$Smomove, null, true);
+	}if else($Sczoom<=700){
+	}else{
+		Delete($araSmoke_Nut);
+	}
+
+
+
+}
+
+...//動作
+function GoArScroogeStop(){
+
+
+
+	Fade($araMovie_Nut, 0, 1000, null, true);
+	Fade($araBack_Nut, 0, 1000, null, true);
+	Move($araBack_All, 700, $backXposi2, @0, Dxl3, false);
+	Fade($araMovie_Nut, 400, 0, Axl1, false);
+	Wait(200);
+	MusicStart("@SEマクロ01",0,700,0,1000,null,false);
+	Move($araDash_Nut, 250, @$ScDmoveX, @$ScDmoveY, Axl3, false);
+	Wait(100);
+	Fade($araDash_Nut, 50, 1000, null, false);
+	Wait(100);
+	Fade($araDash_Nut, 200, 0, Axl3, false);
+	Wait(100);
+	Move($araBack_All, 1500, @20, @0, Dxl3, false);
+	Fade($araBackback_Nut, 200, 1000, Axl3, false);
+	Move($araStop_Nut, 500, @-100, @-40, Dxl2, false);
+	Zoom($araSmoke_Nut, 200, $Sczoom, $Smozoom, Dxl3, false);
+	Fade($araSmoke_Nut, 150, 1000, null, false);
+	Fade($araStop_Nut, 150, 1000, null, false);
+	MusicStart("@SEマクロ02",0,700,0,1000,null,false);
+	Wait(100);
+	Zoom($araSmoke_Nut, 500, $Smozoom, $Sczoom, null, false);
+	Fade($araSmoke_Nut, 1000, 0, null, false);
+	Move($araStop_Nut, 1000, @3, @0, Dxl3, true);
+
+}
+
+
+
+..//破片集まりプロセス
+
+...//生成
+function BlockAra_Create(){
+
+	CreateTextureEXadd("絵破片", 1000, Center, Middle, "cg/ef/ef_結晶割れ01.png");
+	CreateTextureEXadd("絵破片弐", 1000, Center, Middle, "cg/ef/ef_結晶割れ02.png");
+	CreateTextureEXadd("絵破片参", 1000, Center, Middle, "cg/ef/ef_結晶割れ07.png");
+	CreateTextureEXadd("絵破片四", 1000, Center, Middle, "cg/ef/ef_結晶割れ04.png");
+	CreateTextureEXadd("絵破片五", 1000, Center, Middle, "cg/ef/ef_結晶割れ05.png");
+	CreateTextureEXadd("絵破片六", 1000, Center, Middle, "cg/ef/ef_結晶割れ01.png");
+
+	Request("絵破片*", Smoothing);
+
+	SetVertex("絵破片*", right, bottom);
+	SetVertex("絵破片六", right, top);
+
+	Rotate("絵破片四", 0, @0, @0, @-20, null,true);
+	Rotate("絵破片六", 0, @0, @0, @50, null,true);
+
+}
+
+
+function BlockAra_Start(){
+
+	CreateProcess("絵破片プロ", 150, 0, 0, "BlockAra_Move");
+	SetAlias("絵破片プロ","絵破片プロ");
+	Request("絵破片プロ", Start);
+
+}
+
+function BlockAra_Move(){
+
+	while(1){
+
+		Move("@絵破片", 0, 225, -270, null, true);
+		Move("@絵破片弐", 0, 300, 110, null, true);
+		Move("@絵破片参", 0, 770, 80, null, true);
+		Zoom("@絵破片", 0, 100, 100, null, true);
+		Zoom("@絵破片弐", 0, 100, 100, null, true);
+		Zoom("@絵破片参", 0, 100, 100, null, true);
+	
+	
+		Move("@絵破片", 1000, -30, -525, null, false);
+		Move("@絵破片弐", 1300, 30, -200, null, false);
+		Move("@絵破片参", 1600, 260, -230, null, false);
+		Zoom("@絵破片", 1000, 1000, 1000, null, false);
+		Zoom("@絵破片弐", 1300, 1000, 1000, null, false);
+		Zoom("@絵破片参", 1600, 1000, 1000, null, false);
+		Fade("@絵破片", 500, 1000, null, false);
+		Fade("@絵破片弐", 500, 1000, null, false);
+		Fade("@絵破片参", 500, 1000, null, true);
+	
+		Fade("@絵破片", 500, 0, Axl3, false);
+		Wait(300);
+		Fade("@絵破片弐", 400, 0, Dxl1, false);
+		Wait(200);
+		Fade("@絵破片参", 300, 0, Dxl1, false);
+	
+	
+		Move("@絵破片四", 0, 700, 110, null, true);
+		Move("@絵破片五", 0, 400, -230, null, true);
+		Move("@絵破片六", 0, 100, 700, null, true);
+		Zoom("@絵破片四", 0, 0, 0, null, true);
+		Zoom("@絵破片五", 0, 100, 100, null, true);
+		Zoom("@絵破片六", 0, 100, 100, null, true);
+	
+		Move("@絵破片六", 1200, 0, -200, null, false);
+		Move("@絵破片五", 1400, 0, -590, Dxl1, false);
+		Move("@絵破片四", 1500, 5, -600, null, false);
+		Zoom("@絵破片六", 1200, 1000, 1000, null, false);
+		Zoom("@絵破片五", 1400, 600, 600, Dxl1, false);
+		Zoom("@絵破片四", 1500, 900, 900, null, false);
+		Fade("@絵破片四", 500, 1000, null, false);
+		Fade("@絵破片五", 500, 1000, Dxl1, false);
+		Fade("@絵破片六", 500, 1000, null, true);
+	
+		Fade("@絵破片六", 500, 0, Axl3, false);
+		Wait(300);
+		Fade("@絵破片五", 400, 0, Dxl1, false);
+		Wait(100);
+		Fade("@絵破片四", 300, 0, null, false);
+
+
+	}
+
+
+}
+
+function BlockAra_Delete(){
+
+	Request("@絵破片プロ", Stop);
+	Wait(500);
+	FadeDelete("@絵破片*", 500, null, true);
+	Delete("@絵破片*");
+}
+
+
+
+..//ガンアサルト改造横向き
+
+...//その１生成
+function Gun_Assault01ara_Create($f_gun_assault1_nut,$f_gun_assault1_prio,$f_gun_assault1_x,$f_gun_assault1_y,$f_gun_assault1_rotplus,$f_gun_assault1_name){
+
+	$assault_time=16;
+	$f_gun_assault1_muzzle=32;
+	$f_gun_assault1_pronut=$f_gun_assault1_nut+"_pro";
+
+	CreateTextureEXadd($f_gun_assault1_nut, $f_gun_assault1_prio, $f_gun_assault1_x, $f_gun_assault1_y, $f_gun_assault1_name);
+	Rotate($f_gun_assault1_nut, 0, @0, @0, @0, null,true);
+	$f_gun_assault1_x=$f_gun_assault1_x-(ImageHorizon($f_gun_assault1_nut)/2);
+	$f_gun_assault1_y=$f_gun_assault1_y-(ImageVertical($f_gun_assault1_nut)/2);
+	Move($f_gun_assault1_nut, 0, $f_gun_assault1_x, $f_gun_assault1_y, null, true);
+
+
+	$f_gun_assault1_nut="@"+$f_gun_assault1_nut;
+
+	CreateProcessEX($f_gun_assault1_pronut, "Gun_Assault01ara_pro");
+
+
+}
+function Gun_Assault01ara_Start(){
+
+	Request($f_gun_assault1_pronut, Start);
+
+}
+
+function Gun_Assault01ara_pro(){
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Shake($f_gun_assault1_nut, 2000, 30, 15, 15, 30, 1000, null, false);
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+}
+
+...//その２生成（汎用性ほぼなし）
+function Gun_Assault02ara_Create($f_gun_assault2_nut,$f_gun_assault2_prio,$f_gun_assault2_x,$f_gun_assault2_y,$f_gun_assault2_rotplus,$f_gun_assault2_name){
+
+	$assault_time=16;
+	$f_gun_assault2_muzzle=32;
+	$f_gun_assault2_pronut=$f_gun_assault2_nut+"_pro";
+
+	CreateTextureEXadd($f_gun_assault2_nut, $f_gun_assault2_prio, $f_gun_assault2_x, $f_gun_assault2_y, $f_gun_assault2_name);
+	Rotate($f_gun_assault2_nut, 0, @0, @0, @0, null,true);
+	$f_gun_assault2_x=$f_gun_assault2_x-(ImageHorizon($f_gun_assault2_nut)/2);
+	$f_gun_assault2_y=$f_gun_assault2_y-(ImageVertical($f_gun_assault2_nut)/2);
+	Move($f_gun_assault2_nut, 0, $f_gun_assault2_x, $f_gun_assault2_y, null, true);
+
+
+	$f_gun_assault2_nut="@"+$f_gun_assault2_nut;
+
+	CreateProcessEX($f_gun_assault2_pronut, "Gun_Assault02ara_pro");
+
+
+}
+function Gun_Assault02ara_Start(){
+
+	Request($f_gun_assault2_pronut, Start);
+
+}
+
+function Gun_Assault02ara_pro(){
+
+
+	$f_gun_assault2_ran=Random(100);
+	if($f_gun_assault2_ran>50){
+		$f_gun_assault2_rot=Random(5)+$f_gun_assault2_rotplus;
+	}else{
+		$f_gun_assault2_rot=-(Random(5))+$f_gun_assault2_rotplus;}
+
+	Shake($f_gun_assault2_nut, 2000, 30, 15, 15, 30, 1000, null, false);
+	Rotate($f_gun_assault2_nut, 0, @0, @0, $f_gun_assault2_rot, null,false);
+	Fade($f_gun_assault2_nut, 0, 1000, null, false);
+	Wait($f_gun_assault2_muzzle);
+	Fade($f_gun_assault2_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault2_muzzle);
+
+	Wait($f_gun_assault2_muzzle);
+	Wait($f_gun_assault2_muzzle);
+
+/*
+	$f_gun_assault2_ran=Random(100);
+	if($f_gun_assault2_ran>50){
+		$f_gun_assault2_rot=Random(5)+$f_gun_assault2_rotplus;
+	}else{
+		$f_gun_assault2_rot=-(Random(5))+$f_gun_assault2_rotplus;}
+
+	Rotate($f_gun_assault2_nut, 0, @0, @0, $f_gun_assault2_rot, null,false);
+	Fade($f_gun_assault2_nut, 0, 1000, null, false);
+	Wait($f_gun_assault2_muzzle);
+	Fade($f_gun_assault2_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault2_muzzle);
+*/
+
+
+	$f_gun_assault2_ran=Random(100);
+	if($f_gun_assault2_ran>50){
+		$f_gun_assault2_rot=Random(5)+$f_gun_assault2_rotplus;
+	}else{
+		$f_gun_assault2_rot=-(Random(5))+$f_gun_assault2_rotplus;}
+
+	Rotate($f_gun_assault2_nut, 0, @0, @0, $f_gun_assault2_rot, null,false);
+	Fade($f_gun_assault2_nut, 0, 1000, null, false);
+	Wait($f_gun_assault2_muzzle);
+	Fade($f_gun_assault2_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault2_muzzle);
+
+
+	Wait($f_gun_assault2_muzzle);
+	Wait($f_gun_assault2_muzzle);
+
+/*
+	$f_gun_assault2_ran=Random(100);
+	if($f_gun_assault2_ran>50){
+		$f_gun_assault2_rot=Random(5)+$f_gun_assault2_rotplus;
+	}else{
+		$f_gun_assault2_rot=-(Random(5))+$f_gun_assault2_rotplus;}
+
+	Rotate($f_gun_assault2_nut, 0, @0, @0, $f_gun_assault2_rot, null,false);
+	Fade($f_gun_assault2_nut, 0, 1000, null, false);
+	Wait($f_gun_assault2_muzzle);
+	Fade($f_gun_assault2_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault2_muzzle);
+
+*/
+
+
+	$f_gun_assault2_ran=Random(100);
+	if($f_gun_assault2_ran>50){
+		$f_gun_assault2_rot=Random(5)+$f_gun_assault2_rotplus;
+	}else{
+		$f_gun_assault2_rot=-(Random(5))+$f_gun_assault2_rotplus;}
+
+	Rotate($f_gun_assault2_nut, 0, @0, @0, $f_gun_assault2_rot, null,false);
+	Fade($f_gun_assault2_nut, 0, 1000, null, false);
+	Wait($f_gun_assault2_muzzle);
+	Fade($f_gun_assault2_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault2_muzzle);
+
+}
+
+
+
+...//その１ロング生成（さらに汎用性零）
+function Gun_Assault01aral_Create($f_gun_assault1_nut,$f_gun_assault1_prio,$f_gun_assault1_x,$f_gun_assault1_y,$f_gun_assault1_rotplus,$f_gun_assault1_name){
+
+	$assault_time=16;
+	$f_gun_assault1_muzzle=32;
+	$f_gun_assault1_pronut=$f_gun_assault1_nut+"_pro";
+
+	CreateTextureEXadd($f_gun_assault1_nut, $f_gun_assault1_prio, $f_gun_assault1_x, $f_gun_assault1_y, $f_gun_assault1_name);
+	Rotate($f_gun_assault1_nut, 0, @0, @0, @0, null,true);
+	$f_gun_assault1_x=$f_gun_assault1_x-(ImageHorizon($f_gun_assault1_nut)/2);
+	$f_gun_assault1_y=$f_gun_assault1_y-(ImageVertical($f_gun_assault1_nut)/2);
+	Move($f_gun_assault1_nut, 0, $f_gun_assault1_x, $f_gun_assault1_y, null, true);
+
+
+	$f_gun_assault1_nut="@"+$f_gun_assault1_nut;
+
+	CreateProcessEX($f_gun_assault1_pronut, "Gun_Assault01aral_pro");
+
+
+}
+function Gun_Assault01aral_Start(){
+
+	Request($f_gun_assault1_pronut, Start);
+
+}
+
+function Gun_Assault01aral_pro(){
+
+
+	Wait(100);
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Shake($f_gun_assault1_nut, 2000, 30, 15, 15, 30, 1000, null, false);
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+	$f_gun_assault1_ran=Random(100);
+	if($f_gun_assault1_ran>50){
+		$f_gun_assault1_rot=Random(20)+$f_gun_assault1_rotplus;
+	}else{
+		$f_gun_assault1_rot=-(Random(20))+$f_gun_assault1_rotplus;}
+
+	Rotate($f_gun_assault1_nut, 0, @0, @0, $f_gun_assault1_rot, null,false);
+	Fade($f_gun_assault1_nut, 0, 1000, null, false);
+	Wait($f_gun_assault1_muzzle);
+	Fade($f_gun_assault1_nut, $assault_time, 0, null, false);
+	Wait($f_gun_assault1_muzzle);
+
+
+}
+
+
+..//ビカビカループ
+
+function Ara_Bika_loop($bika_name,$bika_prio,$bika_bright,$bika_scale,$bika_time,$bika_wait){
+
+	$bika_name_pro=$bika_name + "_pro";
+	$bika_name1=$bika_name + "1";
+	$bika_name2=$bika_name + "2";
+
+/*
+	CreateEffect($bika_name1, $bika_prio, -300, -300, 1324, 876, "Plain");
+	Request($bika_name1,Passive);
+	Fade($bika_name1, 0, 0, null, true);
+	SetAlias($bika_name1,$bika_name1);
+	Request($bika_name1, AddRender);
+
+	CreateEffect($bika_name2, $bika_prio, -300, -300, 1324, 876, "Plain");
+	Request($bika_name2,Passive);
+	Fade($bika_name2, 0, 0, null, true);
+	SetAlias($bika_name2,$bika_name2);
+	Request($bika_name2, AddRender);
+*/
+
+
+	CreatePlainEXadd($bika_name1, $bika_prio);
+	CreatePlainEXadd($bika_name2, $bika_prio);
+
+	SetVertex($bika_name1, right, bottom);
+	SetVertex($bika_name2, right, bottom);
+
+
+	CreateProcessEX($bika_name_pro, "Ara_Bikabika_loop_pro");
+
+}
+
+function Ara_Bikabika_loop_pro(){
+
+	$bika_name1_nut="@"+$bika_name1;
+	$bika_name2_nut="@"+$bika_name2;
+
+	while(1){
+
+	Zoom($bika_name2_nut, $bika_wait, 1000, 1000, Dxl2, false);
+	Fade($bika_name1_nut, $bika_wait, $bika_bright, Dxl3, false);
+	Zoom($bika_name1_nut, $bika_time, $bika_scale, $bika_scale, Axl1, false);
+	Wait($bika_wait);
+	Fade($bika_name1_nut, $bika_wait, 0, Axl3, false);
+	Zoom($bika_name1_nut, $bika_wait, 1000, 1000, Dxl2, false);
+	Fade($bika_name2_nut, $bika_wait, $bika_bright, Dxl3, false);
+	Zoom($bika_name2_nut, $bika_time, $bika_scale, $bika_scale, Axl1, false);
+	Wait($bika_wait);
+	Fade($bika_name2_nut, $bika_wait, 0, Axl3, false);
+
+	}
+
+}
+
+
+function Ara_Bika_loop_Start(){
+
+	Request($bika_name_pro, Start);
+
+}
+
+
+function Ara_Bika_loop_Stop(){
+
+	Request($bika_name_pro, Stop);
+	Delete($bika_name1_nut);
+	Delete($bika_name2_nut);
+	Delete($bika_name_pro);
+}
+
+
+
+
+
+
+
+
+
+
+..//斬撃改造マクロ
+function CreateSlash_ara($CSNut,$CSNutprio,$CSNutX,$CSNutY,$CSNutAn){
+
+
+	CreateTexture($CSNut, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	SetAlias($CSNut,$CSNut);
+	Fade($CSNut, 0, 0, null, true);
+
+	$XScaleHalf=ImageHorizon($CSNut)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNut, 0, $XDefaultPosSet, @0, null, true);
+
+	$CSNutX2="@"+$CSNutX;
+	$CSNutY2="@"+$CSNutY;
+	Move($CSNut, 0, $CSNutX, $CSNutY, null, true);
+	Request($CSNut, AddRender);
+
+	Zoom($CSNut, 0, 6000, 1000, null, true);
+
+
+
+	if($CSNutAn==1){
+		$CSNutAnS1=30;
+		Rotate($CSNut, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutAnS2=40;
+		Rotate($CSNut, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutAnS3=60;
+		Rotate($CSNut, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutAnS4=80;
+		Rotate($CSNut, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==-1){
+		$CSNutAnS5=-30;
+		Rotate($CSNut, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==-2){
+		$CSNutAnS6=-40;
+		Rotate($CSNut, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==-3){
+		$CSNutAnS7=-60;
+		Rotate($CSNut, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==-4){
+		$CSNutAnS8=-80;
+		Rotate($CSNut, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+
+}
+
+function GoSlash_ara($CSNut){
+
+	Fade($CSNut, 0, 1000, null, true);
+	Zoom($CSNut, 200, 3000, 0, Dxl1, false);
+
+	Request($CSNut, Disused);
+
+}
+
+
+
+function CreateRubble_Light_ara($rubble_cr_nut0,$rubble_cr_pri0,$rubble_x,$rubble_y,$rubble_cr_val,角度){
+
+
+	$rubble_cr_nut1 = $rubble_cr_nut0 + "_rub_a";
+	$rubble_cr_nut2 = $rubble_cr_nut0 + "_rub_b";
+	$rubble_cr_nut3 = $rubble_cr_nut0 + "_rub_c";
+
+	//$rubble_cr_val0 = $rubble_cr_val*800;
+	//$rubble_cr_val1 = $rubble_cr_val*1200;
+	//$rubble_cr_val2 = $rubble_cr_val*1000;
+
+	$rubble_cr_val0 = $rubble_cr_val*2.4;
+	$rubble_cr_val1 = $rubble_cr_val*1.2;
+	$rubble_cr_val2 = $rubble_cr_val*1;
+
+	$rubble_cr_pri1 = $rubble_cr_pri0+1;
+	$rubble_cr_pri2 = $rubble_cr_pri0+1;
+
+	$rubble_x1=$rubble_x-51;
+	$rubble_y1=$rubble_y-250;
+	CreateTextureEX($rubble_cr_nut3, $rubble_cr_pri0, $rubble_x1, $rubble_y1, "cg/ef/x/ef_smoke02_x01.png");
+	SetVertex($rubble_cr_nut3, 51, 245);
+	Zoom($rubble_cr_nut3, 0, 2000, 0, null, true);
+
+	$rubble_x1=$rubble_x-100;
+	$rubble_y1=$rubble_y-100;
+	CreateTextureEXmul($rubble_cr_nut0, $rubble_cr_pri0, $rubble_x1, $rubble_y1, "cg/ef/x/ef_smoke01_x01.png");
+	Zoom($rubble_cr_nut0, 0, $rubble_cr_val0, $rubble_cr_val0, null, true);
+	Rotate($rubble_cr_nut0, 0, @0, @0, 角度, null,true);
+
+
+	$rubble_x1=$rubble_x-150;
+	$rubble_y1=$rubble_y-80;
+	CreateTextureEXadd($rubble_cr_nut1, $rubble_cr_pri1, $rubble_x1, $rubble_y1, "cg/ef/x/ef_結晶割れ05_shima_x03.png");
+	Zoom($rubble_cr_nut1, 0, $rubble_cr_val1, $rubble_cr_val1, null, true);
+	Rotate($rubble_cr_nut1, 0, @0, @0, 角度, null,true);
+
+	$rubble_x1=$rubble_x-150;
+	$rubble_y1=$rubble_y-80;
+	CreateTextureEXadd($rubble_cr_nut2, $rubble_cr_pri2, $rubble_x1, $rubble_y1, "cg/ef/x/ef_voidrubble01_x90.png");
+	Zoom($rubble_cr_nut2, 0, $rubble_cr_val2, $rubble_cr_val2, null, true);
+	Rotate($rubble_cr_nut2, 0, @0, @0, 角度, null,true);
+
+
+}
+function GoRubble_Light_ara($rubble_mv_nut0,$rubble_mv_val){
+
+	$rubble_mv_nut1 = $rubble_mv_nut0+"_rub_a";
+	$rubble_mv_nut2 = $rubble_mv_nut0+"_rub_b";
+	$rubble_mv_nut3 = $rubble_mv_nut0+"_rub_c";
+	$rubble_rot_ran1 = Random(40)-20;
+	$rubble_rot_ran2 = Random(40)-20;
+
+
+	//$rubble_mv_val0 = $rubble_mv_val*1500;
+	//$rubble_mv_val1 = $rubble_mv_val*1400;
+	//$rubble_mv_val2 = $rubble_mv_val*1600;
+	//$rubble_mv_val2y = $rubble_mv_val*1200;
+	//$rubble_mv_val3 = $rubble_mv_val*1600;
+	//$rubble_mv_val3y = $rubble_mv_val*2500;
+
+	$rubble_mv_val0x = $rubble_mv_val*2.0;
+	$rubble_mv_val0y = $rubble_mv_val*3.5;
+	$rubble_mv_val1 = $rubble_mv_val*1.4;
+	$rubble_mv_val2 = $rubble_mv_val*1.6;
+	$rubble_mv_val2y = $rubble_mv_val*1.2;
+	$rubble_mv_val3 = $rubble_mv_val*3.2;
+	$rubble_mv_val3y = $rubble_mv_val*5.0;
+
+	Rotate($rubble_mv_nut1, 0, @0, @0, $rubble_rot_ran1, null,true);
+	Shake($rubble_mv_nut1, 500, 1, 1, 0, 0, 1000, null, false);
+	Rotate($rubble_mv_nut1, 500, @0, @0, $rubble_rot_ran2, Dxl1,false);
+	Fade($rubble_mv_nut1, 0, 1000, null, true);
+	BezierMove($rubble_mv_nut1, 600, (@0,@0){@0,@-80}{@0,@-150}(@0,@200),null,false);
+	Zoom($rubble_mv_nut1, 600, $rubble_mv_val1, $rubble_mv_val1, Dxl1, false);
+	Fade($rubble_mv_nut1, 400, 0, Axl2, false);
+
+	//Rotate($rubble_mv_nut2, 0, @0, @0, $rubble_rot_ran, Dxl1,true);
+	Fade($rubble_mv_nut2, 0, 1000, null, true);
+	BezierMove($rubble_mv_nut2, 400, (@0,@0){@0,@-80}{@0,@-150}(@0,@0),null,false);
+	//Move($rubble_mv_nut2, 400, @0, @-150, Dxl1, false);
+	DrawTransition($rubble_mv_nut2, 1000, 1000, 0, 200, null, "cg/data/effect_01_00_0.png", false);
+	Shake($rubble_mv_nut2, 1000, 3, 5, 0, 0, 1000, null, false);
+	Zoom($rubble_mv_nut2, 400, $rubble_mv_val2, $rubble_mv_val2y, null, false);
+	Fade($rubble_mv_nut2, 400, 0, Axl3, false);
+
+	Zoom($rubble_mv_nut0, 1000, $rubble_mv_val0x, $rubble_mv_val0y, Dxl3, false);
+	Fade($rubble_mv_nut0, 0, 600, null, true);
+	BezierMove($rubble_mv_nut0, 1000, (@0,@0){@0,@-80}{@0,@-150}(@0,@400),null,false);
+	//Move($rubble_mv_nut0, 1000, @0, @-100, Dxl1, false);
+	Rotate($rubble_mv_nut0, 1000, @0, @0, @0, null,false);
+	Fade($rubble_mv_nut0, 1000, 0, Axl3, false);
+
+	Fade($rubble_mv_nut3, 0, 1000, null, true);
+	Zoom($rubble_mv_nut3, 1000, $rubble_mv_val3, $rubble_mv_val3y, Dxl1, false);
+	Fade($rubble_mv_nut3, 1000, 0, Axl3, false);
+	Move($rubble_mv_nut3, 1000, @0, @-600, Dxl1, false);
+
+	Request($rubble_mv_nut0, Disused);
+	Request($rubble_mv_nut1, Disused);
+	Request($rubble_mv_nut2, Disused);
+
+}
+
+
+
+/*
+
+
+..//斬撃改造プロセス
+function CreateSlash_Pro_ara($CSNut,$CSNutprio){
+
+	$CSNut1= $CSNut + "1";
+	$CSNut2= $CSNut + "2";
+	$CSNut3= $CSNut + "3";
+	$CSNut4= $CSNut + "4";
+	$CSNut5= $CSNut + "5";
+
+
+	$CSNutPro1= "@" + $CSNut1;
+	$CSNutPro2= "@" + $CSNut2;
+	$CSNutPro3= "@" + $CSNut3;
+	$CSNutPro4= "@" + $CSNut4;
+	$CSNutPro5= "@" + $CSNut5;
+
+	$CSNut_Name = "pro_" + $CSNut;
+
+	CreateTexture($CSNut1, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	CreateTexture($CSNut2, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	CreateTexture($CSNut3, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	CreateTexture($CSNut4, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	CreateTexture($CSNut5, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+
+	SetAlias($CSNut1,$CSNut1);
+	SetAlias($CSNut2,$CSNut2);
+	SetAlias($CSNut3,$CSNut3);
+	SetAlias($CSNut4,$CSNut3);
+	SetAlias($CSNut5,$CSNut3);
+
+	Fade($CSNut1, 0, 0, null, true);
+	Fade($CSNut2, 0, 0, null, true);
+	Fade($CSNut3, 0, 0, null, true);
+	Fade($CSNut4, 0, 0, null, true);
+	Fade($CSNut5, 0, 0, null, true);
+
+
+	Request($CSNut1, AddRender);
+	Request($CSNut2, AddRender);
+	Request($CSNut3, AddRender);
+	Request($CSNut4, AddRender);
+	Request($CSNut5, AddRender);
+
+	Zoom($CSNut1, 0, 6000, 500, null, true);
+	Zoom($CSNut2, 0, 6000, 500, null, true);
+	Zoom($CSNut3, 0, 6000, 500, null, true);
+	Zoom($CSNut4, 0, 6000, 500, null, true);
+	Zoom($CSNut5, 0, 6000, 500, null, true);
+
+
+	CreateProcessEX($CSNut_Name, "GoSlash_Pro_ara");
+
+
+}
+
+
+
+function GoSlash_Pro_ara(){
+
+	while(1){
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = 1024-((Random(10)+1)*20);
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = 1024-(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = 1024-(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = 1024-(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+	Move($CSNutPro1, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro1, 0, 1000, null, true);
+	Zoom($CSNutPro1, 200, 3000, 0, Dxl1, false);
+
+
+	Wait(50);
+
+
+	$XScaleHalf=ImageHorizon($CSNutPro2)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro2, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro2, 0, 0, null, true);
+	Zoom($CSNutPro2, 0, 6000, 500, null, true);
+
+
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*40;
+		$CSNutY = (Random(10)+1)*30;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*40;
+		$CSNutY = (Random(10)+1)*30;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*40;
+		$CSNutY = (Random(10)+1)*30;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*40;
+		$CSNutY = (Random(10)+1)*30;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = -(Random(10)+1)*40;
+		$CSNutY = -(Random(10)+1)*30;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = -(Random(10)+1)*40;
+		$CSNutY = -(Random(10)+1)*30;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = -(Random(10)+1)*40;
+		$CSNutY = -(Random(10)+1)*30;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = -(Random(10)+1)*40;
+		$CSNutY = -(Random(10)+1)*30;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+
+	Move($CSNutPro2, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro2, 0, 1000, null, true);
+	Zoom($CSNutPro2, 200, 3000, 0, Dxl1, false);
+
+	Wait(50);
+
+	$XScaleHalf=ImageHorizon($CSNutPro3)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro3, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro3, 0, 0, null, true);
+	Zoom($CSNutPro3, 0, 6000, 500, null, true);
+
+
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+
+	Move($CSNutPro3, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro3, 0, 1000, null, true);
+	Zoom($CSNutPro3, 200, 3000, 0, Dxl1, false);
+
+	Wait(50);
+
+
+	$XScaleHalf=ImageHorizon($CSNutPro4)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro4, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro4, 0, 0, null, true);
+	Zoom($CSNutPro4, 0, 6000, 500, null, true);
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+
+	Move($CSNutPro4, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro4, 0, 1000, null, true);
+	Zoom($CSNutPro4, 200, 3000, 0, Dxl1, false);
+
+	Wait(50);
+
+
+	$XScaleHalf=ImageHorizon($CSNutPro5)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro5, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro5, 0, 0, null, true);
+	Zoom($CSNutPro5, 0, 6000, 500, null, true);
+
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+
+	Move($CSNutPro5, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro5, 0, 1000, null, true);
+	Zoom($CSNutPro5, 200, 3000, 0, Dxl1, false);
+
+	Wait(50);
+
+	$XScaleHalf=ImageHorizon($CSNutPro1)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro1, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro1, 0, 0, null, true);
+	Zoom($CSNutPro1, 0, 6000, 500, null, true);
+
+	}
+
+}
+
+function GoSlash_Start_ara(){
+
+	Request($CSNut_Name, Start);
+
+}
+
+function StopSlash_Pro_ara(){
+
+	Request($CSNut_Name, Stop);
+	Delete($CSNut_Name);
+	Delete($CSNutPro1);
+	Delete($CSNutPro2);
+	Delete($CSNutPro3);
+}
+
+
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+/*
+
+..//斬撃改造プロセス
+function CreateSlash_Pro_ara($CSNut,$CSNutprio){
+
+	$CSNut1= $CSNut + "1";
+	$CSNut2= $CSNut + "2";
+	$CSNut3= $CSNut + "3";
+	$CSNut4= $CSNut + "4";
+	$CSNut5= $CSNut + "5";
+
+
+	$CSNutPro1= "@" + $CSNut1;
+	$CSNutPro2= "@" + $CSNut2;
+	$CSNutPro3= "@" + $CSNut3;
+	$CSNutPro4= "@" + $CSNut4;
+	$CSNutPro5= "@" + $CSNut5;
+
+	$CSNut_Name = "pro_" + $CSNut;
+
+	CreateTexture($CSNut1, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	CreateTexture($CSNut2, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	CreateTexture($CSNut3, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	CreateTexture($CSNut4, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+	CreateTexture($CSNut5, $CSNutprio, 1024, OnTop, "cg/ef/ef_slash01.png");
+
+	SetAlias($CSNut1,$CSNut1);
+	SetAlias($CSNut2,$CSNut2);
+	SetAlias($CSNut3,$CSNut3);
+	SetAlias($CSNut4,$CSNut3);
+	SetAlias($CSNut5,$CSNut3);
+
+	Fade($CSNut1, 0, 0, null, true);
+	Fade($CSNut2, 0, 0, null, true);
+	Fade($CSNut3, 0, 0, null, true);
+	Fade($CSNut4, 0, 0, null, true);
+	Fade($CSNut5, 0, 0, null, true);
+
+
+	Request($CSNut1, AddRender);
+	Request($CSNut2, AddRender);
+	Request($CSNut3, AddRender);
+	Request($CSNut4, AddRender);
+	Request($CSNut5, AddRender);
+
+	Zoom($CSNut1, 0, 6000, 500, null, true);
+	Zoom($CSNut2, 0, 6000, 500, null, true);
+	Zoom($CSNut3, 0, 6000, 500, null, true);
+	Zoom($CSNut4, 0, 6000, 500, null, true);
+	Zoom($CSNut5, 0, 6000, 500, null, true);
+
+
+	CreateProcessEX($CSNut_Name, "GoSlash_Pro_ara");
+
+
+}
+
+
+
+function GoSlash_Pro_ara(){
+
+	while(1){
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = 1024-((Random(10)+1)*20);
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = 1024-(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = 1024-(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = 1024-(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro1, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+	Move($CSNutPro1, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro1, 0, 1000, null, true);
+	Zoom($CSNutPro1, 200, 3000, 0, Dxl1, false);
+
+
+	Wait(50);
+
+
+	$XScaleHalf=ImageHorizon($CSNutPro2)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro2, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro2, 0, 0, null, true);
+	Zoom($CSNutPro2, 0, 6000, 500, null, true);
+
+
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*40;
+		$CSNutY = (Random(10)+1)*30;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*40;
+		$CSNutY = (Random(10)+1)*30;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*40;
+		$CSNutY = (Random(10)+1)*30;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*40;
+		$CSNutY = (Random(10)+1)*30;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = -(Random(10)+1)*40;
+		$CSNutY = -(Random(10)+1)*30;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = -(Random(10)+1)*40;
+		$CSNutY = -(Random(10)+1)*30;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = -(Random(10)+1)*40;
+		$CSNutY = -(Random(10)+1)*30;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = -(Random(10)+1)*40;
+		$CSNutY = -(Random(10)+1)*30;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro2, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+
+	Move($CSNutPro2, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro2, 0, 1000, null, true);
+	Zoom($CSNutPro2, 200, 3000, 0, Dxl1, false);
+
+	Wait(50);
+
+	$XScaleHalf=ImageHorizon($CSNutPro3)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro3, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro3, 0, 0, null, true);
+	Zoom($CSNutPro3, 0, 6000, 500, null, true);
+
+
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro3, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+
+	Move($CSNutPro3, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro3, 0, 1000, null, true);
+	Zoom($CSNutPro3, 200, 3000, 0, Dxl1, false);
+
+	Wait(50);
+
+
+	$XScaleHalf=ImageHorizon($CSNutPro4)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro4, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro4, 0, 0, null, true);
+	Zoom($CSNutPro4, 0, 6000, 500, null, true);
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro4, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+
+	Move($CSNutPro4, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro4, 0, 1000, null, true);
+	Zoom($CSNutPro4, 200, 3000, 0, Dxl1, false);
+
+	Wait(50);
+
+
+	$XScaleHalf=ImageHorizon($CSNutPro5)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro5, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro5, 0, 0, null, true);
+	Zoom($CSNutPro5, 0, 6000, 500, null, true);
+
+
+	$CSNutAn = Random(8)+1;
+	$CSNutRn = (Random(8)+1)*10;
+
+	if($CSNutAn==1){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS1=30;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS1, null,true);
+	}else if($CSNutAn==2){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS2=40;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS2, null,true);
+	}else if($CSNutAn==3){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS3=60;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS3, null,true);
+	}else if($CSNutAn==4){
+		$CSNutX = (Random(10)+1)*20;
+		$CSNutY = (Random(10)+1)*10;
+		$CSNutAnS4=80;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS4, null,true);
+	}else if($CSNutAn==5){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS5=-30;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS5, null,true);
+	}else if($CSNutAn==6){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS6=-40;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS6, null,true);
+	}else if($CSNutAn==7){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS7=-60;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS7, null,true);
+	}else if($CSNutAn==8){
+		$CSNutX = -(Random(10)+1)*20;
+		$CSNutY = -(Random(10)+1)*10;
+		$CSNutAnS8=-80;
+		Rotate($CSNutPro5, 0, @0, @0, $CSNutAnS8, null,true);
+	}
+
+	$CSNutX2 = "@"+$CSNutX;
+	$CSNutY2 = "@"+$CSNutY;
+
+
+	Move($CSNutPro5, 0, $CSNutX, $CSNutY, null, true);
+
+	Fade($CSNutPro5, 0, 1000, null, true);
+	Zoom($CSNutPro5, 200, 3000, 0, Dxl1, false);
+
+	Wait(50);
+
+	$XScaleHalf=ImageHorizon($CSNutPro1)/2;
+	$XDefaultPosSet=0-$XScaleHalf;
+	Move($CSNutPro1, 0, $XDefaultPosSet, @0, null, true);
+	Fade($CSNutPro1, 0, 0, null, true);
+	Zoom($CSNutPro1, 0, 6000, 500, null, true);
+
+	}
+
+}
+
+function GoSlash_Start_ara(){
+
+	Request($CSNut_Name, Start);
+
+}
+
+function StopSlash_Pro_ara(){
+
+	Request($CSNut_Name, Stop);
+	Delete($CSNut_Name);
+	Delete($CSNutPro1);
+	Delete($CSNutPro2);
+	Delete($CSNutPro3);
+}
+
+*/
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+.//■ドラマダプロセス
+//――――――――――――――――――――――――――――――――――――――
+
+..//ファミコンテキスト処理マクロ
+...//テキストロード用
+function Fami_Text_Load(){
+
+//変数定義
+	$fami = 0;
+	$famiboxX = 352;
+	$famiboxY = 316;
+	$famiboxYD = 323;
+//ボックス・文字優先度
+	$fami_box_priority = 25000;
+	$fami_font_priority = 30000;
+
+
+
+
+//クリエイト用ファイル名配列
+Array($Dotfont_fami_file,"！","(C)","，","、","．","。","？","ー","「","」","▼","･ピリオド","…","０","１","２","３","４","５","６","７","８","９","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","ぁ","あ","アスタリスク","ぃ","い","ぅ","う","ぇ","え","ぉ","お","か","が","カーソル","き","ぎ","く","ぐ","け","げ","こ","ご","コロン","さ","ざ","し","じ","す","ず","せ","ぜ","そ","ぞ","た","だ","ち","ぢ","っ","つ","づ","て","で","と","ど","な","に","ぬ","ね","の","は","ば","ぱ","ひ","び","ぴ","ふ","ぶ","ぷ","へ","べ","ぺ","ほ","ぼ","ぽ","ま","み","む","め","も","ゃ","や","ゅ","ゆ","ょ","よ","ら","り","る","れ","ろ","わ","を","ん","空白");
+
+
+
+//ロード用ナット名配列
+Array($Dotfont_fami_nutL,"ファミコンフォント_！","ファミコンフォント_(C)","ファミコンフォント_，","ファミコンフォント_、","ファミコンフォント_．","ファミコンフォント_。","ファミコンフォント_？","ファミコンフォント_ー","ファミコンフォント_「","ファミコンフォント_」","ファミコンフォント_▼","ファミコンフォント_･ピリオド","ファミコンフォント_…","ファミコンフォント_０","ファミコンフォント_１","ファミコンフォント_２","ファミコンフォント_３","ファミコンフォント_４","ファミコンフォント_５","ファミコンフォント_６","ファミコンフォント_７","ファミコンフォント_８","ファミコンフォント_９","ファミコンフォント_A","ファミコンフォント_B","ファミコンフォント_C","ファミコンフォント_D","ファミコンフォント_E","ファミコンフォント_F","ファミコンフォント_G","ファミコンフォント_H","ファミコンフォント_I","ファミコンフォント_J","ファミコンフォント_K","ファミコンフォント_L","ファミコンフォント_M","ファミコンフォント_N","ファミコンフォント_O","ファミコンフォント_P","ファミコンフォント_Q","ファミコンフォント_R","ファミコンフォント_S","ファミコンフォント_T","ファミコンフォント_U","ファミコンフォント_V","ファミコンフォント_W","ファミコンフォント_X","ファミコンフォント_Y","ファミコンフォント_Z","ファミコンフォント_ぁ","ファミコンフォント_あ","ファミコンフォント_アスタリスク","ファミコンフォント_ぃ","ファミコンフォント_い","ファミコンフォント_ぅ","ファミコンフォント_う","ファミコンフォント_ぇ","ファミコンフォント_え","ファミコンフォント_ぉ","ファミコンフォント_お","ファミコンフォント_か","ファミコンフォント_が","ファミコンフォント_カーソル","ファミコンフォント_き","ファミコンフォント_ぎ","ファミコンフォント_く","ファミコンフォント_ぐ","ファミコンフォント_け","ファミコンフォント_げ","ファミコンフォント_こ","ファミコンフォント_ご","ファミコンフォント_コロン","ファミコンフォント_さ","ファミコンフォント_ざ","ファミコンフォント_し","ファミコンフォント_じ","ファミコンフォント_す","ファミコンフォント_ず","ファミコンフォント_せ","ファミコンフォント_ぜ","ファミコンフォント_そ","ファミコンフォント_ぞ","ファミコンフォント_た","ファミコンフォント_だ","ファミコンフォント_ち","ファミコンフォント_ぢ","ファミコンフォント_っ","ファミコンフォント_つ","ファミコンフォント_づ","ファミコンフォント_て","ファミコンフォント_で","ファミコンフォント_と","ファミコンフォント_ど","ファミコンフォント_な","ファミコンフォント_に","ファミコンフォント_ぬ","ファミコンフォント_ね","ファミコンフォント_の","ファミコンフォント_は","ファミコンフォント_ば","ファミコンフォント_ぱ","ファミコンフォント_ひ","ファミコンフォント_び","ファミコンフォント_ぴ","ファミコンフォント_ふ","ファミコンフォント_ぶ","ファミコンフォント_ぷ","ファミコンフォント_へ","ファミコンフォント_べ","ファミコンフォント_ぺ","ファミコンフォント_ほ","ファミコンフォント_ぼ","ファミコンフォント_ぽ","ファミコンフォント_ま","ファミコンフォント_み","ファミコンフォント_む","ファミコンフォント_め","ファミコンフォント_も","ファミコンフォント_ゃ","ファミコンフォント_や","ファミコンフォント_ゅ","ファミコンフォント_ゆ","ファミコンフォント_ょ","ファミコンフォント_よ","ファミコンフォント_ら","ファミコンフォント_り","ファミコンフォント_る","ファミコンフォント_れ","ファミコンフォント_ろ","ファミコンフォント_わ","ファミコンフォント_を","ファミコンフォント_ん","ファミコンフォント_空白");
+
+
+
+
+//フェード用ナット名配列
+Array($Dotfont_fami_nutF,"ファミコンフォント_！","ファミコンフォント_(C)","ファミコンフォント_，","ファミコンフォント_、","ファミコンフォント_．","ファミコンフォント_。","ファミコンフォント_？","ファミコンフォント_ー","ファミコンフォント_「","ファミコンフォント_」","ファミコンフォント_▼","ファミコンフォント_･ピリオド","ファミコンフォント_…","ファミコンフォント_０","ファミコンフォント_１","ファミコンフォント_２","ファミコンフォント_３","ファミコンフォント_４","ファミコンフォント_５","ファミコンフォント_６","ファミコンフォント_７","ファミコンフォント_８","ファミコンフォント_９","ファミコンフォント_A","ファミコンフォント_B","ファミコンフォント_C","ファミコンフォント_D","ファミコンフォント_E","ファミコンフォント_F","ファミコンフォント_G","ファミコンフォント_H","ファミコンフォント_I","ファミコンフォント_J","ファミコンフォント_K","ファミコンフォント_L","ファミコンフォント_M","ファミコンフォント_N","ファミコンフォント_O","ファミコンフォント_P","ファミコンフォント_Q","ファミコンフォント_R","ファミコンフォント_S","ファミコンフォント_T","ファミコンフォント_U","ファミコンフォント_V","ファミコンフォント_W","ファミコンフォント_X","ファミコンフォント_Y","ファミコンフォント_Z","ファミコンフォント_ぁ","ファミコンフォント_あ","ファミコンフォント_アスタリスク","ファミコンフォント_ぃ","ファミコンフォント_い","ファミコンフォント_ぅ","ファミコンフォント_う","ファミコンフォント_ぇ","ファミコンフォント_え","ファミコンフォント_ぉ","ファミコンフォント_お","ファミコンフォント_か","ファミコンフォント_が","ファミコンフォント_カーソル","ファミコンフォント_き","ファミコンフォント_ぎ","ファミコンフォント_く","ファミコンフォント_ぐ","ファミコンフォント_け","ファミコンフォント_げ","ファミコンフォント_こ","ファミコンフォント_ご","ファミコンフォント_コロン","ファミコンフォント_さ","ファミコンフォント_ざ","ファミコンフォント_し","ファミコンフォント_じ","ファミコンフォント_す","ファミコンフォント_ず","ファミコンフォント_せ","ファミコンフォント_ぜ","ファミコンフォント_そ","ファミコンフォント_ぞ","ファミコンフォント_た","ファミコンフォント_だ","ファミコンフォント_ち","ファミコンフォント_ぢ","ファミコンフォント_っ","ファミコンフォント_つ","ファミコンフォント_づ","ファミコンフォント_て","ファミコンフォント_で","ファミコンフォント_と","ファミコンフォント_ど","ファミコンフォント_な","ファミコンフォント_に","ファミコンフォント_ぬ","ファミコンフォント_ね","ファミコンフォント_の","ファミコンフォント_は","ファミコンフォント_ば","ファミコンフォント_ぱ","ファミコンフォント_ひ","ファミコンフォント_び","ファミコンフォント_ぴ","ファミコンフォント_ふ","ファミコンフォント_ぶ","ファミコンフォント_ぷ","ファミコンフォント_へ","ファミコンフォント_べ","ファミコンフォント_ぺ","ファミコンフォント_ほ","ファミコンフォント_ぼ","ファミコンフォント_ぽ","ファミコンフォント_ま","ファミコンフォント_み","ファミコンフォント_む","ファミコンフォント_め","ファミコンフォント_も","ファミコンフォント_ゃ","ファミコンフォント_や","ファミコンフォント_ゅ","ファミコンフォント_ゆ","ファミコンフォント_ょ","ファミコンフォント_よ","ファミコンフォント_ら","ファミコンフォント_り","ファミコンフォント_る","ファミコンフォント_れ","ファミコンフォント_ろ","ファミコンフォント_わ","ファミコンフォント_を","ファミコンフォント_ん","ファミコンフォント_空白");
+
+//フェード用ナット名連想配列
+AssocArray($Dotfont_fami_nutF,"！","(C)","，","、","．","。","？","ー","「","」","▼","･ピリオド","…","０","１","２","３","４","５","６","７","８","９","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","ぁ","あ","アスタリスク","ぃ","い","ぅ","う","ぇ","え","ぉ","お","か","が","カーソル","き","ぎ","く","ぐ","け","げ","こ","ご","コロン","さ","ざ","し","じ","す","ず","せ","ぜ","そ","ぞ","た","だ","ち","ぢ","っ","つ","づ","て","で","と","ど","な","に","ぬ","ね","の","は","ば","ぱ","ひ","び","ぴ","ふ","ぶ","ぷ","へ","べ","ぺ","ほ","ぼ","ぽ","ま","み","む","め","も","ゃ","や","ゅ","ゆ","ょ","よ","ら","り","る","れ","ろ","わ","を","ん","＿");
+
+
+	while($fami<133){
+
+		$Dotfont_fami_name = "cg/sys/ed/dot/mj_"+$Dotfont_fami_file[$fami]+".png";
+
+		//フォントファイルをロード
+		LoadImage($Dotfont_fami_nutL[$fami],$Dotfont_fami_name);
+		SetAlias($Dotfont_fami_nutL[$fami], $Dotfont_fami_nutL[$fami]);
+		$fami+=1;
+	}
+
+	LoadImage("ファミコンボックス","cg/sys/ed/dot/tb_1メイン_16x16.png");
+
+	CreateWindowEX("window_fami", $famiboxX, $famiboxYD, 320, 160, false);
+
+}
+
+
+
+
+...//テキスト表示その一前半
+function Fami_Text_Fade01F($表示行番号,$fami_fontspeed,$fami_fontfade,$１文字,$２文字,$３文字,$４文字,$５文字,$６文字,$７文字,$８文字){
+
+
+//設定項目
+//フォントスピード
+//	$fami_fontspeed = 10;
+//フォントの位置起点
+	$fami_Xposi = $famiboxX + 24;
+	$fami_Yposi = $famiboxY + 8;
+//フォントの幅設定
+	$fami_fontsize = 16;
+
+
+		Delete("@Pro_end");
+
+//ナット数カウント変数初期化
+//	$Nutcount_fami=1;
+
+//表示が四行目の時と場合分け
+	if($表示行番号==4){
+		$fami01_Yposi = $fami_Yposi+96;
+	}else if($表示行番号==3){
+		$fami01_Yposi = $fami_Yposi+64;
+	}else if($表示行番号==2){
+		$fami01_Yposi = $fami_Yposi+32;
+	}else{
+		$fami01_Yposi = $fami_Yposi;
+	}
+
+
+
+
+
+//１文字目
+	if($１文字==0){
+	}else{
+		//変数を一行目用へ
+		$fami01_Xposi = $fami_Xposi;
+
+
+		CreateTextureEX("window_fami/fami01moji01", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１文字]);
+		Fade("window_fami/fami01moji01", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//次の文字の為に変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+	
+//２文字目
+	if($２文字==0){
+	}else{
+	
+	
+		CreateTextureEX("window_fami/fami01moji02", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$２文字]);
+		Fade("window_fami/fami01moji02", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//次の文字の為に変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+
+//３文字目
+	if($３文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji03", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$３文字]);
+		Fade("window_fami/fami01moji03", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+
+	}
+
+//４文字目
+	if($４文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji04", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$４文字]);
+		Fade("window_fami/fami01moji04", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//５文字目
+	if($５文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji05", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$５文字]);
+		Fade("window_fami/fami01moji05", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//６文字目
+	if($６文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji06", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$６文字]);
+		Fade("window_fami/fami01moji06", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//７文字目
+	if($７文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji07", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$７文字]);
+		Fade("window_fami/fami01moji07", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//８文字目
+	if($８文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji08", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$８文字]);
+		Fade("window_fami/fami01moji08", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+}
+
+
+
+...//テキスト表示その一後半
+function Fami_Text_Fade01S($９文字,$１０文字,$１１文字,$１２文字,$１３文字,$１４文字,$１５文字,$１６文字,$１７文字){
+
+//９文字目
+	if($９文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji09", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$９文字]);
+		Fade("window_fami/fami01moji09", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//１０文字目
+	if($１０文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji10", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１０文字]);
+		Fade("window_fami/fami01moji10", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//１１文字目
+	if($１１文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji11", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１１文字]);
+		Fade("window_fami/fami01moji11", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//１２文字目
+	if($１２文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji12", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１２文字]);
+		Fade("window_fami/fami01moji12", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//１３文字目
+	if($１３文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji13", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１３文字]);
+		Fade("window_fami/fami01moji13", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//１４文字目
+	if($１４文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji14", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１４文字]);
+		Fade("window_fami/fami01moji14", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//１５文字目
+	if($１５文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji15", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１５文字]);
+		Fade("window_fami/fami01moji15", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//１６文字目
+	if($１６文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji16", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１６文字]);
+		Fade("window_fami/fami01moji16", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+//１７文字目
+	if($１７文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami01moji17", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, $Dotfont_fami_nutF[$１７文字]);
+		Fade("window_fami/fami01moji17", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami01_Xposi+=$fami_fontsize;
+	}
+}
+
+
+
+...//テキスト表示その二前半
+function Fami_Text_Fade02F($表示行番号,$１文字,$２文字,$３文字,$４文字,$５文字,$６文字,$７文字,$８文字){
+
+	//変数を二行目用へ
+	$fami02_Xposi = $fami_Xposi;
+
+		Delete("@Pro_end");
+
+//表示が四行目の時と場合分け
+	if($表示行番号==4){
+		$fami02_Yposi = $fami_Yposi + 96;
+	}else if($表示行番号==3){
+		$fami02_Yposi = $fami_Yposi+64;
+	}else{
+		$fami02_Yposi = $fami_Yposi +32;
+	}
+
+
+//１文字目
+	if($１文字==0){
+
+	}else{
+
+	
+		CreateTextureEX("window_fami/fami02moji01", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１文字]);
+		Fade("window_fami/fami02moji01", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//次の文字の為に変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+	
+//２文字目
+	if($２文字==0){
+	}else{
+	
+	
+		CreateTextureEX("window_fami/fami02moji02", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$２文字]);
+		Fade("window_fami/fami02moji02", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//次の文字の為に変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+
+//３文字目
+	if($３文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji03", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$３文字]);
+		Fade("window_fami/fami02moji03", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+
+	}
+
+//４文字目
+	if($４文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji04", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$４文字]);
+		Fade("window_fami/fami02moji04", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//５文字目
+	if($５文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji05", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$５文字]);
+		Fade("window_fami/fami02moji05", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//６文字目
+	if($６文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji06", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$６文字]);
+		Fade("window_fami/fami02moji06", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//７文字目
+	if($７文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji07", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$７文字]);
+		Fade("window_fami/fami02moji07", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//８文字目
+	if($８文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji08", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$８文字]);
+		Fade("window_fami/fami02moji08", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+
+}
+
+...//テキスト表示その二後半
+function Fami_Text_Fade02S($９文字,$１０文字,$１１文字,$１２文字,$１３文字,$１４文字,$１５文字,$１６文字,$１７文字){
+
+
+//９文字目
+	if($９文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji09", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$９文字]);
+		Fade("window_fami/fami02moji09", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//１０文字目
+	if($１０文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji10", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１０文字]);
+		Fade("window_fami/fami02moji10", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//１１文字目
+	if($１１文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji11", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１１文字]);
+		Fade("window_fami/fami02moji11", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//１２文字目
+	if($１２文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji12", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１２文字]);
+		Fade("window_fami/fami02moji12", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//１３文字目
+	if($１３文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji13", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１３文字]);
+		Fade("window_fami/fami02moji13", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//１４文字目
+	if($１４文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji14", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１４文字]);
+		Fade("window_fami/fami02moji14", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//１５文字目
+	if($１５文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji15", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１５文字]);
+		Fade("window_fami/fami02moji15", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//１６文字目
+	if($１６文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji16", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１６文字]);
+		Fade("window_fami/fami02moji16", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+//１７文字目
+	if($１７文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami02moji17", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, $Dotfont_fami_nutF[$１７文字]);
+		Fade("window_fami/fami02moji17", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami02_Xposi+=$fami_fontsize;
+	}
+}
+
+
+
+
+
+...//テキスト表示その三前半
+function Fami_Text_Fade03F($表示行番号,$１文字,$２文字,$３文字,$４文字,$５文字,$６文字,$７文字,$８文字){
+
+		//変数を三行目用へ
+		$fami03_Xposi = $fami_Xposi;
+
+//表示が四行目の時と場合分け
+	if($表示行番号==4){
+		Delete("@Pro_end");
+		$fami03_Yposi = $fami_Yposi + 96;
+	}else if($表示行番号==2){
+		$fami03_Yposi = $fami_Yposi + 32;
+	}else{
+		$fami03_Yposi = $fami_Yposi + 64;
+	}
+
+
+
+//１文字目
+	if($１文字==0){
+	}else{
+
+
+		CreateTextureEX("window_fami/fami03moji01", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１文字]);
+		Fade("window_fami/fami03moji01", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//次の文字の為に変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+	
+//２文字目
+	if($２文字==0){
+	}else{
+	
+	
+		CreateTextureEX("window_fami/fami03moji02", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$２文字]);
+		Fade("window_fami/fami03moji02", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//次の文字の為に変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+
+//３文字目
+	if($３文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji03", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$３文字]);
+		Fade("window_fami/fami03moji03", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+
+	}
+
+//４文字目
+	if($４文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji04", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$４文字]);
+		Fade("window_fami/fami03moji04", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//５文字目
+	if($５文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji05", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$５文字]);
+		Fade("window_fami/fami03moji05", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//６文字目
+	if($６文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji06", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$６文字]);
+		Fade("window_fami/fami03moji06", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//７文字目
+	if($７文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji07", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$７文字]);
+		Fade("window_fami/fami03moji07", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//８文字目
+	if($８文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji08", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$８文字]);
+		Fade("window_fami/fami03moji08", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+}
+
+...//テキスト表示その三後半
+function Fami_Text_Fade03S($９文字,$１０文字,$１１文字,$１２文字,$１３文字,$１４文字,$１５文字,$１６文字,$１７文字){
+
+
+//９文字目
+	if($９文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji09", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$９文字]);
+		Fade("window_fami/fami03moji09", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//１０文字目
+	if($１０文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji10", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１０文字]);
+		Fade("window_fami/fami03moji10", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//１１文字目
+	if($１１文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji11", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１１文字]);
+		Fade("window_fami/fami03moji11", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//１２文字目
+	if($１２文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji12", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１２文字]);
+		Fade("window_fami/fami03moji12", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//１３文字目
+	if($１３文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji13", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１３文字]);
+		Fade("window_fami/fami03moji13", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//１４文字目
+	if($１４文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji14", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１４文字]);
+		Fade("window_fami/fami03moji14", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//１５文字目
+	if($１５文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji15", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１５文字]);
+		Fade("window_fami/fami03moji15", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//１６文字目
+	if($１６文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji16", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１６文字]);
+		Fade("window_fami/fami03moji16", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+//１７文字目
+	if($１７文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami03moji17", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, $Dotfont_fami_nutF[$１７文字]);
+		Fade("window_fami/fami03moji17", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami03_Xposi+=$fami_fontsize;
+	}
+}
+
+
+
+
+
+...//テキスト表示その四前半
+function Fami_Text_Fade04F($表示行番号,$１文字,$２文字,$３文字,$４文字,$５文字,$６文字,$７文字,$８文字){
+
+
+	Delete("@Pro_end");
+	$fami04_Xposi = $fami_Xposi;
+
+	if($表示行番号==3){
+		$fami04_Yposi = $fami_Yposi+64;
+	}else if($表示行番号==2){
+		$fami04_Yposi = $fami_Yposi +32;
+	}else{
+		//変数を四行目用へ
+		$fami04_Yposi = $fami_Yposi + 96;
+	}
+
+
+//１文字目
+	if($１文字==0){
+	}else{
+
+		CreateTextureEX("window_fami/fami04moji01", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１文字]);
+		Fade("window_fami/fami04moji01", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//次の文字の為に変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+	
+//２文字目
+	if($２文字==0){
+	}else{
+	
+	
+		CreateTextureEX("window_fami/fami04moji02", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$２文字]);
+		Fade("window_fami/fami04moji02", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//次の文字の為に変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+
+//３文字目
+	if($３文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji03", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$３文字]);
+		Fade("window_fami/fami04moji03", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+
+	}
+
+//４文字目
+	if($４文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji04", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$４文字]);
+		Fade("window_fami/fami04moji04", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//５文字目
+	if($５文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji05", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$５文字]);
+		Fade("window_fami/fami04moji05", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//６文字目
+	if($６文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji06", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$６文字]);
+		Fade("window_fami/fami04moji06", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//７文字目
+	if($７文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji07", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$７文字]);
+		Fade("window_fami/fami04moji07", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//８文字目
+	if($８文字==0){
+
+
+
+
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji08", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$８文字]);
+		Fade("window_fami/fami04moji08", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+}
+
+...//テキスト表示その四後半
+function Fami_Text_Fade04S($９文字,$１０文字,$１１文字,$１２文字,$１３文字,$１４文字,$１５文字,$１６文字,$１７文字){
+
+
+//９文字目
+	if($９文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji09", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$９文字]);
+		Fade("window_fami/fami04moji09", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//１０文字目
+	if($１０文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji10", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１０文字]);
+		Fade("window_fami/fami04moji10", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//１１文字目
+	if($１１文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji11", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１１文字]);
+		Fade("window_fami/fami04moji11", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//１２文字目
+	if($１２文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji12", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１２文字]);
+		Fade("window_fami/fami04moji12", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//１３文字目
+	if($１３文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji13", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１３文字]);
+		Fade("window_fami/fami04moji13", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//１４文字目
+	if($１４文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji14", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１４文字]);
+		Fade("window_fami/fami04moji14", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//１５文字目
+	if($１５文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji15", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１５文字]);
+		Fade("window_fami/fami04moji15", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//１６文字目
+	if($１６文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji16", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１６文字]);
+		Fade("window_fami/fami04moji16", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+//１７文字目
+	if($１７文字==0){
+	}else{
+	
+		CreateTextureEX("window_fami/fami04moji17", $fami_font_priority, $fami04_Xposi, $fami04_Yposi, $Dotfont_fami_nutF[$１７文字]);
+		Fade("window_fami/fami04moji17", $fami_fontfade, 1000, null, true);
+		Wait($fami_fontspeed);
+
+		//変数を調整
+//		$Nutcount_fami+=1;
+		$fami04_Xposi+=$fami_fontsize;
+	}
+}
+
+
+...//テキストスクロール用
+function Fami_Text_Scroll($消去行){
+
+	$消去用 = "@window_fami/fami0"+$消去行+"*";
+	Move("@window_fami/fami0*", 400, @0, @-32, null, false);
+	Wait(200);
+	Delete("$消去用");
+	Wait(200);
+}
+
+
+
+...//テキスト終了場所プロセス
+function Fami_Text_End(){
+
+
+	$fami_end_posiX=$fami_Xposi+($fami_fontsize*8);
+	$fami_end_posiY = $fami_Yposi+96;
+
+	CreateTextureEX("fami_text_end", $fami_font_priority, $fami_end_posiX, $fami_end_posiY, "ファミコンフォント_▼");
+
+	CreateProcess("Pro_end", 0, 0, 0, "Fami_Text_End_Act");
+	SetAlias("Pro_end","Pro_end");
+	Request("Pro_end", Start);
+
+}
+
+function Fami_Text_End_Act(){
+
+	begin:
+
+	while(1){
+
+		Fade("@fami_text_end", 150, 1000, null, false);
+		Wait(300);
+		Fade("@fami_text_end", 150, 0, null, false);
+		Wait(300);
+	}
+
+
+}
+
+function Fami_Text_End_Delete(){
+		Request("@fami_text_end", UnLock);
+		Request("@Pro_end", UnLock);
+		Delete("@fami_text_end");
+		Delete("@Pro_end");
+}
+
+
+
+...//テキスト直打ちマクロ
+
+....//１つめ
+function jikauchi_moji01(){
+	//フォント設定
+	$fami_Xposi = $famiboxX + 24;
+	$fami_Yposi = $famiboxY + 8;
+	$fami_fontsize = 16;
+	$fami01_Xposi = $fami_Xposi;
+	$fami01_Yposi = $fami_Yposi;
+
+	CreateSE("SE01","se8bit_通常_会話");
+	SetVolumeEX("@SE01", 0, 700, null);
+
+
+	CreateTextureEX("famitextbox", $fami_box_priority, $famiboxX, $famiboxY, "ファミコンボックス");
+	Fade("@famitextbox", 100, 1000, null, true);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字01", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, "ファミコンフォント_…");
+	$fami01_Xposi+=$fami_fontsize;
+	Wait(1000);
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字02", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, "ファミコンフォント_…");
+	$fami01_Xposi+=$fami_fontsize;
+	Wait(1000);
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字03", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, "ファミコンフォント_…");
+	$fami01_Xposi+=$fami_fontsize;
+	Wait(1000);
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字04", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, "ファミコンフォント_…");
+	$fami01_Xposi+=$fami_fontsize;
+	Wait(1000);
+
+}
+
+....//２つめ
+function jikauchi_moji02(){
+
+//フォント設定
+	$fami_Xposi = $famiboxX + 24;
+	$fami_Yposi = $famiboxY + 8;
+	$fami_fontsize = 16;
+	$fami01_Xposi = $fami_Xposi;
+	$fami01_Yposi = $fami_Yposi;
+	$fami02_Xposi = $fami_Xposi;
+	$fami02_Yposi = $fami_Yposi +32;
+	$fami03_Xposi = $fami_Xposi;
+	$fami03_Yposi = $fami_Yposi + 64;
+
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字05", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, "ファミコンフォント_そ");
+	$fami01_Xposi+=$fami_fontsize;
+	Wait(500);
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字06", $fami_font_priority, $fami01_Xposi, $fami01_Yposi, "ファミコンフォント_う");
+	$fami01_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	CreateTextureSP("絵文字16", $fami_font_priority, $fami01_Xposi, $fami01_Xposi, "ファミコンフォント_空白");
+	$fami01_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字07", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_お");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字08", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_れ");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字09", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_た");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字10", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_ち");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字11", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_の");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	CreateTextureSP("絵文字12", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_空白");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字13", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_い");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字14", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_つ");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字15", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_も");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字16", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_と");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	CreateTextureSP("絵文字17", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_空白");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字18", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_か");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字19", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_わ");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字20", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_ら");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字21", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_な");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字22", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_い");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	CreateTextureSP("絵文字23", $fami_font_priority, $fami02_Xposi, $fami02_Yposi, "ファミコンフォント_空白");
+	$fami02_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字24", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_に");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字25", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_ち");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字26", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_じ");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字27", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_ょ");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字28", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_う");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字29", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_は");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	CreateTextureSP("絵文字30", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_空白");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字31", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_つ");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字32", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_づ");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字33", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_い");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字34", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_て");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	CreateTextureSP("絵文字35", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_空白");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字36", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_い");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+	Request("@SE01", Play);
+	CreateTextureSP("絵文字37", $fami_font_priority, $fami03_Xposi, $fami03_Yposi, "ファミコンフォント_く");
+	$fami03_Xposi+=$fami_fontsize;
+	Wait(500);
+
+
+}
+
+
+..//▼ファミコンドットキャラアニメーション足踏み
+...//生成
+function Dot_Cara_Set($優先度)
+{
+	$while=1;
+
+	while(5>$while){
+	//キャラ番号
+		if($while==1){
+			$キャラ = "蒼葉";
+			$キャラpro = "1蒼葉";
+		}else if($while==2){
+			$キャラ = "ノイズ";
+			$キャラpro = "3ノイズ";
+		}else if($while==3){
+			$キャラ = "蓮犬";
+			$キャラpro = "6蓮犬";
+		}else if($while==4){
+			$キャラ = "悪島";
+			$キャラpro = "8悪島";
+		}
+
+	
+	//マクロキャラ用変数
+		$マクロキャラ１正面 = "cg/sys/ed/dot/dm_" + $キャラpro + "_1正面01.png";
+		$マクロキャラ２正面 = "cg/sys/ed/dot/dm_" + $キャラpro + "_1正面02.png";
+		$マクロキャラ１後ろ = "cg/sys/ed/dot/dm_" + $キャラpro + "_2後ろ01.png";
+		$マクロキャラ２後ろ = "cg/sys/ed/dot/dm_" + $キャラpro + "_2後ろ02.png";
+		$マクロキャラ１左 = "cg/sys/ed/dot/dm_" + $キャラpro + "_3左01.png";
+		$マクロキャラ２左 = "cg/sys/ed/dot/dm_" + $キャラpro + "_3左02.png";
+		$マクロキャラ１右 = "cg/sys/ed/dot/dm_" + $キャラpro + "_4右01.png";
+		$マクロキャラ２右 = "cg/sys/ed/dot/dm_" + $キャラpro + "_4右02.png";
+	
+	
+	//優先度01・02
+		$優先度１ = $優先度++;
+		$優先度２ = $優先度;
+	
+	//プロセスナット名用変数
+		$プロナット名１ = "ファミキャラ01" + $キャラ + "下";
+		$プロナット名２ = "ファミキャラ02" + $キャラ + "下";
+		$プロナット名３ = "ファミキャラ01" + $キャラ + "上";
+		$プロナット名４ = "ファミキャラ02" + $キャラ + "上";
+		$プロナット名５ = "ファミキャラ01" + $キャラ + "左";
+		$プロナット名６ = "ファミキャラ02" + $キャラ + "左";
+		$プロナット名７ = "ファミキャラ01" + $キャラ + "右";
+		$プロナット名８ = "ファミキャラ02" + $キャラ + "右";
+	
+	//アクションプロセス用変数
+		$アクプロナット名１="@"+$プロナット名１;
+		$アクプロナット名２="@"+$プロナット名２;
+	
+	//生成
+		CreateTextureEX($プロナット名１, $優先度１, 16,16, $マクロキャラ１正面);
+		CreateTextureEX($プロナット名２, $優先度２, 16,16, $マクロキャラ２正面);
+		CreateTextureEX($プロナット名３, $優先度１, 16,16, $マクロキャラ１後ろ);
+		CreateTextureEX($プロナット名４, $優先度２, 16,16, $マクロキャラ２後ろ);
+		CreateTextureEX($プロナット名５, $優先度１, 16,16, $マクロキャラ１左);
+		CreateTextureEX($プロナット名６, $優先度２, 16,16, $マクロキャラ２左);
+		CreateTextureEX($プロナット名７, $優先度１, 16,16, $マクロキャラ１右);
+		CreateTextureEX($プロナット名８, $優先度２, 16,16, $マクロキャラ２右);
+
+		$while++;
+	}
+
+	Request("ファミキャラ*", Erase);
+
+	CreateProcess("Pro_walk", 0, 0, 0, "Dot_Cara_Act");
+	SetAlias("Pro_walk","Pro_walk");
+	Request("Pro_walk", Start);
+
+
+}
+...//process
+function Dot_Cara_Act(){
+
+	begin:
+
+	while(1){
+		Wait(200);
+		//★ロック設置
+		LockVideo(true);
+		Fade("@ファミキャラ01*", 0, 0, null, false);
+		Fade("@ファミキャラ02*", 0, 1000, null, false);
+		//★ロック設置
+		LockVideo(false);
+
+		Wait(400);
+
+		//★ロック設置
+		LockVideo(true);
+		Fade("@ファミキャラ02*", 0, 0, null, false);
+		Fade("@ファミキャラ01*", 0, 1000, null, false);
+		//★ロック設置
+		LockVideo(false);
+
+		Wait(200);
+}
+}
+
+...//キャラ位置ファンクション
+function Dot_Cara_Fade($キャラ名,$向き,$横,$縦){
+
+
+	$表示１ = "ファミキャラ01" + $キャラ名 + $向き;
+	$表示２ = "ファミキャラ02" + $キャラ名 + $向き;
+	$消去１ = "ファミキャラ01" + $キャラ名 + "*";
+	$消去２ = "ファミキャラ02" + $キャラ名 + "*";
+
+	Position($表示１,$MPosiX,$MPosiY);
+
+	$移動量X = $MPosiX + ($横*32);
+	$移動量Y = $MPosiY + ($縦*32);
+
+	Move($消去１, 0, $移動量X, $移動量Y, null, false);
+	Move($消去２, 0, $移動量X, $移動量Y, null, true);
+
+	Wait(200);
+
+	Request($消去１, Erase);
+	Request($消去２, Erase);
+	Request($表示１, Enter);
+	Request($表示２, Enter);
+
+
+}
+
+...//キャラ表示ファンクション
+function Dot_Cara_FadeM($キャラ名,$向き){
+
+	$表示１ = "ファミキャラ01" + $キャラ名 + $向き;
+	$表示２ = "ファミキャラ02" + $キャラ名 + $向き;
+	$消去１ = "ファミキャラ01" + $キャラ名 + "*";
+	$消去２ = "ファミキャラ02" + $キャラ名 + "*";
+
+	Request($消去１, Erase);
+	Request($消去２, Erase);
+	Request($表示１, Enter);
+	Request($表示２, Enter);
+
+}
+
+...//キャラムーブファンクション
+function Dot_Cara_Move($キャラムーブ,$移動方向,$移動マス量,$移動待ち){
+
+	$MposiX = 0;
+	$MposiY = 0;
+
+
+	$時間 = 300;
+	$移動時間 = $時間*$移動マス量;
+
+
+
+	if($移動待ち==true){
+		$移動時間猶予 = $時間*$移動マス量+20;
+	}else{
+		$移動時間猶予 = $移動待ち;
+	}
+
+	$キャラムーブナット１ = "@ファミキャラ01"+$キャラムーブ+"*";
+	$キャラムーブナット２ = "@ファミキャラ02"+$キャラムーブ+"*";
+
+	$キャラムーブ認識用 = "@ファミキャラ01"+$キャラムーブ +"下";
+
+
+
+	if($移動方向=="右"){
+		Dot_Cara_FadeM($キャラムーブ,"右");
+		Position($キャラムーブ認識用,$MPosiX,$MPosiY);
+		$移動量X = $MPosiX + ($移動マス量*32);
+		$移動量Y = $MPosiY;
+	}else if($移動方向=="下"){
+		Dot_Cara_FadeM($キャラムーブ,"下");
+		Position($キャラムーブ認識用,$MPosiX,$MPosiY);
+		$移動量X = $MPosiX;
+		$移動量Y = $MPosiY + ($移動マス量*32);
+	}else if($移動方向=="左"){
+		Dot_Cara_FadeM($キャラムーブ,"左");
+		Position($キャラムーブ認識用,$MPosiX,$MPosiY);
+		$移動量X = $MPosiX - ($移動マス量*32);
+		$移動量Y = $MPosiY;
+	}else if($移動方向=="上"){
+		Dot_Cara_FadeM($キャラムーブ,"上");
+		Position($キャラムーブ認識用,$MPosiX,$MPosiY);
+		$移動量X = $MPosiX;
+		$移動量Y = $MPosiY - ($移動マス量*32);
+	}
+
+
+	if($移動待ち == true){
+	Move($キャラムーブナット１, $移動時間, $移動量X, $移動量Y, null, false);
+	Move($キャラムーブナット２, $移動時間, $移動量X, $移動量Y, null, true);
+	}else{
+	Move($キャラムーブナット１, $移動時間, $移動量X, $移動量Y, null, false);
+	Move($キャラムーブナット２, $移動時間, $移動量X, $移動量Y, null, false);
+	Wait($移動時間猶予);
+	}
+
+
+//	Wait(300);
+}
+
+
+..//▼ステップ用
+
+function StepStep_ara($ムーブプロセス名,$ズーム素材名)
+{
+
+	$ズーム素材名S="@"+$ズーム素材名;
+	CreateProcess($ムーブプロセス名, 150, 0, 0, "StepZoomMove_ara");
+	Request($ムーブプロセス名, Start);
+	SetAlias($ムーブプロセス名,$ムーブプロセス名);
+
+}
+
+function StepZoomMove_ara(){
+
+	Zoom("$ズーム素材名S", 150, 1300, 1300, Dxl1, false);
+	Fade("$ズーム素材名S", 100, 1000, null, true);
+	Wait(50);
+	Zoom("$ズーム素材名S", 150, 600, 600, Dxl1, false);
+	Fade("$ズーム素材名S", 100, 0, null, true);
+
+	Wait(50);
+	Zoom("$ズーム素材名S", 150, 1000, 1000, Dxl1, false);
+	Fade("$ズーム素材名S", 100, 1000, null, true);
+	Wait(30);
+	Zoom("$ズーム素材名S", 150, 800, 800, Dxl1, false);
+	Fade("$ズーム素材名S", 100, 0, null, true);
+
+
+}
+
+
+..//▼dm0540.nss用SEプロセス
+
+function dm0540_seprocess(){
+
+	CreateSE("SEPro01","se人体_動作_衣擦れ09");
+	CreateSE("SEPro02","se人体_動作_引きずる01");
+	SetVolumeEX("@SEPro01", 0, 750, null);
+	SetVolumeEX("@SEPro02", 0, 400, null);
+	SetFrequency("@SEPro01", 0, 700, Dxl3);
+
+	CreateProcess("dm0540_SE", 150, 0, 0, "dm0540_process");
+	SetAlias("dm0540_SE","dm0540_SE");
+	Request("dm0540_SE", Start);
+
+}
+
+
+function dm0540_process(){
+
+
+	begin:
+	while(1){
+		SetVolume("@SEPro01", 0, 375, null);
+		SetVolume("@SEPro02", 0, 200, null);
+		Request("@SEPro01", Play);
+		Request("@SEPro02", Play);
+
+
+		Wait(600);
+		SetVolume("@SEPro0*", 200, 1, null);
+		Wait(950);
+		Request("@SEPro01", Stop);
+		Request("@SEPro02", Stop);
+
+		}
+}
+
+
+function dm0540_delete(){
+
+	SetVolumeEX("@SEPro0*", 0, 0, null);
+	Delete("@dm0540_SE");
+	Delete("@SEPro01");
+
+}
+
+
+
+..//▼dm0620.nss用音声プロセス
+
+function dm0620_seprocess(){
+
+
+
+	$dm0620_01="dm06/2000710a03";
+	$dm0620_02="dm06/2000720a04";
+	$dm0620_03="dm06/2000730a02";
+	$dm0620_04="dm06/2000740a05";
+	$dm0620_05="dm06/2000750a03";
+	$dm0620_06="dm06/2000760a02";
+	$dm0620_07="dm06/2000770a04";
+
+
+	CreateVOICEEX("V01_01",$dm0620_01,"ノイズ");
+	CreateVOICEEX("V02_01",$dm0620_02,"クリア");
+	CreateVOICEEX("V03_01",$dm0620_03,"紅雀");
+	CreateVOICEEX("V04_01",$dm0620_04,"ミンク");
+	CreateVOICEEX("V05_01",$dm0620_05,"ノイズ");
+	CreateVOICEEX("V06_01",$dm0620_06,"紅雀");
+	CreateVOICEEX("V07_01",$dm0620_07,"クリア");
+
+	$dm0620_V01 = RemainTime("V01_01");
+	$dm0620_V02 = RemainTime("V02_01");
+	$dm0620_V03 = RemainTime("V03_01");
+	$dm0620_V04 = RemainTime("V04_01");
+	$dm0620_V05 = RemainTime("V05_01");
+	$dm0620_V06 = RemainTime("V06_01");
+	$dm0620_V07 = RemainTime("V07_01");
+
+	$dm0620_ボリューム調整_01=450;
+
+	SetVolume("V01_01", 0, $dm0620_ボリューム調整_01, NULL);
+	SetVolume("V02_01", 0, $dm0620_ボリューム調整_01, NULL);
+	SetVolume("V03_01", 0, $dm0620_ボリューム調整_01, NULL);
+	SetVolume("V04_01", 0, $dm0620_ボリューム調整_01, NULL);
+	SetVolume("V05_01", 0, $dm0620_ボリューム調整_01, NULL);
+	SetVolume("V06_01", 0, $dm0620_ボリューム調整_01, NULL);
+	SetVolume("V07_01", 0, $dm0620_ボリューム調整_01, NULL);
+
+
+	CreateProcess("dm0620_VOICE", 150, 0, 0, "dm0620_process");
+	SetAlias("dm0620_VOICE","dm0620_VOICE");
+	Request("dm0620_VOICE", Start);
+
+}
+
+
+
+function dm0620_process(){
+
+	begin:
+
+		Request("@V01_01",Play);
+		Wait($dm0620_V01);
+		Wait(100);
+		Request("@V02_01",Play);
+		Wait($dm0620_V02);
+		Wait(100);
+		Request("@V03_01",Play);
+		Wait($dm0620_V03);
+		Wait(100);
+		Request("@V04_01",Play);
+		Wait($dm0620_V04);
+		Wait(100);
+		Request("@V05_01",Play);
+		Wait($dm0620_V05);
+		Wait(100);
+		Request("@V06_01",Play);
+		Wait($dm0620_V06);
+		Wait(100);
+		Request("@V07_01",Play);
+		Wait($dm0620_V07);
+		Wait(100);
+
+}
+
+function dm0620_sedelete(){
+
+	Delete("@V01_01");
+	Delete("@V02_01");
+	Delete("@V03_01");
+	Delete("@V04_01");
+	Delete("@V05_01");
+	Delete("@V06_01");
+	Delete("@V07_01");
+	Delete("@dm0620_VOICE");
+
+}
+
+..//▼dm0810.nss用ディレイフェードプロセス
+
+function dm0620_delay_pro(){
+
+	CreateTextureEX("絵立絵参", 720, Center, Middle, "cg/fu/x/fuタエ_通常_shock_x02.png");
+
+	CreateProcess("プロフェード", 150, 0, 0, "dm0620_delayfade");
+	SetAlias("プロフェード","プロフェード");
+	Request("プロフェード", Start);
+}
+
+function dm0620_delayfade(){
+
+	Wait(4000);
+	Fade("@絵立絵参", 200, 1000, null, true);
+}
+
+..//▼dm5220.nss用TVプロセス
+
+function dm5220_TV_pro($sen_priority,$senfile){
+
+
+	if($senfile==1){
+		$senhikari="cg/ev/evf05洗脳にかかる旧人民区.jpg";
+		$senfutsu="cg/ev/evf05洗脳にかかる旧人民区_ライト無し.jpg";
+	
+	}else if($senfile==2){
+		$senhikari="cg/ev/evf06洗脳にかかる旧人民区a.jpg";
+		$senfutsu="cg/ev/evf06洗脳にかかる旧人民区a_ライト無し.jpg";
+	
+	}else if($senfile==3){
+		$senhikari="cg/ev/m/evf05洗脳にかかる旧人民区_m.jpg";
+		$senfutsu="cg/ev/m/evf05洗脳にかかる旧人民区_ライト無し_m.jpg";
+	
+	}else if($senfile==4){
+		$senhikari="cg/ev/m/evf06洗脳にかかる旧人民区a_m.jpg";
+		$senfutsu="cg/ev/m/evf06洗脳にかかる旧人民区a_ライト無し_m.jpg";
+	
+	}else if($senfile==5){
+		$senhikari="cg/ev/l/evf05洗脳にかかる旧人民区_l.jpg";
+		$senfutsu="cg/ev/l/evf05洗脳にかかる旧人民区_ライト無し_l.jpg";
+	
+	}else if($senfile==6){
+		$senhikari="cg/ev/l/evf06洗脳にかかる旧人民区a_l.jpg";
+		$senfutsu="cg/ev/l/evf06洗脳にかかる旧人民区a_ライト無し_l.jpg";
+
+	}else{
+		$senhikari="cg/ev/ev010卯水.jpg";
+		$senfutsu="cg/ev/ev010卯水a.jpg";
+	}
+
+
+
+	$sen_priority1 = $sen_priority+1;
+	$sen_priority2 = $sen_priority;
+	$sen_priority3 = $sen_priority1+1;
+
+
+	CreateTextureEX("Prosennou1", $sen_priority1, Center, Middle, $senhikari);
+	CreateTextureSP("Prosennou2", $sen_priority2, Center, Middle, $senfutsu);
+	CreateTextureEX("Prosennou3", $sen_priority3, Center, Middle, $senhikari);
+
+
+	CreateProcess("プロフェード", 150, 0, 0, "dm5220_TV_fade");
+	SetAlias("プロフェード","プロフェード");
+	Request("プロフェード", Start);
+
+
+}
+
+
+
+function dm5220_TV_fade(){
+
+	begin:
+
+
+	while(1){
+	
+		$Ran1 = Random(50)*5;
+		$Ran2 = Random(20)*10;
+		$Ran3 = Random(8)*50;
+		$Ran4 = Random(100)*5;
+		$Ran5 = Random(10)*10;
+		$Ran6 = Random(6)*50;
+	
+		$RanFade1 = $Ran1+$Ran2+$Ran3;
+		$RanFade2 = $Ran4+$Ran5+$Ran6;
+
+		$Ranwait1 = $Ran4+$Ran6;
+		$Ranwait2 = $Ran6+$Ran3;
+
+
+		Fade("@Prosennou1", $RanFade1, 1000, null, true);
+
+		Wait($Ranwait1);
+
+		Fade("@Prosennou3", $RanFade1, 500, null, true);
+
+		Fade("@Prosennou1", $RanFade2, 0, null, true);
+
+		Wait($Ranwait2);
+
+		Fade("@Prosennou3", $RanFade1, 0, null, false);
+
+
+	}
+}
+...//二枚目
+
+function dm5220_TV_pro2($sen_priority,$senfile){
+
+
+	if($senfile==1){
+	
+		$senhikari="cg/ev/evf05洗脳にかかる旧人民区.jpg";
+		$senfutsu="cg/ev/evf05洗脳にかかる旧人民区_ライト無し.jpg";
+	
+	}else if($senfile==2){
+	
+		$senhikari="cg/ev/evf06洗脳にかかる旧人民区a.jpg";
+		$senfutsu="cg/ev/evf06洗脳にかかる旧人民区a_ライト無し.jpg";
+	
+	}else if($senfile==3){
+	
+		$senhikari="cg/ev/m/evf05洗脳にかかる旧人民区_m.jpg";
+		$senfutsu="cg/ev/m/evf05洗脳にかかる旧人民区_ライト無し_m.jpg";
+	
+	
+	}else if($senfile==4){
+	
+		$senhikari="cg/ev/m/evf06洗脳にかかる旧人民区a_m.jpg";
+		$senfutsu="cg/ev/m/evf06洗脳にかかる旧人民区a_ライト無し_m.jpg";
+	
+	
+	}else if($senfile==5){
+	
+		$senhikari="cg/ev/l/evf05洗脳にかかる旧人民区_l.jpg";
+		$senfutsu="cg/ev/l/evf05洗脳にかかる旧人民区_ライト無し_l.jpg";
+	
+	}else if($senfile==6){
+	
+		$senhikari="cg/ev/l/evf06洗脳にかかる旧人民区a_l.jpg";
+		$senfutsu="cg/ev/l/evf06洗脳にかかる旧人民区a_ライト無し_l.jpg";
+	
+	
+	}else{
+	
+		$senhikari="cg/ev/ev010卯水.jpg";
+		$senfutsu="cg/ev/ev010卯水a.jpg";
+	
+	}
+
+
+
+	$sen_priority1 = $sen_priority+1;
+	$sen_priority2 = $sen_priority;
+	$sen_priority3 = $sen_priority1+1;
+
+
+	CreateTextureEX("ⅡProsennou1", $sen_priority1, Center, Middle, $senhikari);
+	CreateTextureSP("ⅡProsennou2", $sen_priority2, Center, Middle, $senfutsu);
+	CreateTextureEX("ⅡProsennou3", $sen_priority3, Center, Middle, $senhikari);
+
+
+	CreateProcess("プロフェード２", 150, 0, 0, "dm5220_TV_fade2");
+	SetAlias("プロフェード２","プロフェード２");
+	Request("プロフェード２", Start);
+
+
+}
+
+
+
+function dm5220_TV_fade2(){
+
+	begin:
+
+
+	while(1){
+	
+		$Ran1 = Random(50)*5;
+		$Ran2 = Random(20)*10;
+		$Ran3 = Random(8)*50;
+		$Ran4 = Random(100)*5;
+		$Ran5 = Random(10)*10;
+		$Ran6 = Random(6)*50;
+	
+		$RanFade1 = $Ran1+$Ran2+$Ran3;
+		$RanFade2 = $Ran4+$Ran5+$Ran6;
+
+		$Ranwait1 = $Ran4+$Ran6;
+		$Ranwait2 = $Ran6+$Ran3;
+
+
+		Fade("@ⅡProsennou1", $RanFade1, 1000, null, true);
+
+		Wait($Ranwait1);
+
+		Fade("@ⅡProsennou3", $RanFade1, 500, null, true);
+
+		Fade("@ⅡProsennou1", $RanFade2, 0, null, true);
+
+		Wait($Ranwait2);
+
+		Fade("@ⅡProsennou3", $RanFade1, 0, null, false);
+
+
+	}
+}
+
+...//三枚目
+
+function dm5220_TV_pro3($sen_priority,$senfile){
+
+
+	if($senfile==1){
+	
+		$senhikari="cg/ev/evf05洗脳にかかる旧人民区.jpg";
+		$senfutsu="cg/ev/evf05洗脳にかかる旧人民区_ライト無し.jpg";
+	
+	}else if($senfile==2){
+	
+		$senhikari="cg/ev/evf06洗脳にかかる旧人民区a.jpg";
+		$senfutsu="cg/ev/evf06洗脳にかかる旧人民区a_ライト無し.jpg";
+	
+	}else if($senfile==3){
+	
+		$senhikari="cg/ev/m/evf05洗脳にかかる旧人民区_m.jpg";
+		$senfutsu="cg/ev/m/evf05洗脳にかかる旧人民区_ライト無し_m.jpg";
+	
+	
+	}else if($senfile==4){
+	
+		$senhikari="cg/ev/m/evf06洗脳にかかる旧人民区a_m.jpg";
+		$senfutsu="cg/ev/m/evf06洗脳にかかる旧人民区a_ライト無し_m.jpg";
+	
+	
+	}else if($senfile==5){
+	
+		$senhikari="cg/ev/l/evf05洗脳にかかる旧人民区_l.jpg";
+		$senfutsu="cg/ev/l/evf05洗脳にかかる旧人民区_ライト無し_l.jpg";
+	
+	}else if($senfile==6){
+	
+		$senhikari="cg/ev/l/evf06洗脳にかかる旧人民区a_l.jpg";
+		$senfutsu="cg/ev/l/evf06洗脳にかかる旧人民区a_ライト無し_l.jpg";
+	
+	
+	}else{
+	
+		$senhikari="cg/ev/ev010卯水.jpg";
+		$senfutsu="cg/ev/ev010卯水a.jpg";
+	
+	}
+
+
+
+	$sen_priority1 = $sen_priority+1;
+	$sen_priority2 = $sen_priority;
+	$sen_priority3 = $sen_priority1+1;
+
+
+	CreateTextureEX("ⅢProsennou1", $sen_priority1, Center, Middle, $senhikari);
+	CreateTextureSP("ⅢProsennou2", $sen_priority2, Center, Middle, $senfutsu);
+	CreateTextureEX("ⅢProsennou3", $sen_priority3, Center, Middle, $senhikari);
+
+
+	CreateProcess("プロフェード３", 150, 0, 0, "dm5220_TV_fade3");
+	SetAlias("プロフェード３","プロフェード３");
+	Request("プロフェード３", Start);
+
+
+}
+
+
+
+function dm5220_TV_fade3(){
+
+	begin:
+
+
+	while(1){
+	
+		$Ran1 = Random(50)*5;
+		$Ran2 = Random(20)*10;
+		$Ran3 = Random(8)*50;
+		$Ran4 = Random(100)*5;
+		$Ran5 = Random(10)*10;
+		$Ran6 = Random(6)*50;
+	
+		$RanFade1 = $Ran1+$Ran2+$Ran3;
+		$RanFade2 = $Ran4+$Ran5+$Ran6;
+
+		$Ranwait1 = $Ran4+$Ran6;
+		$Ranwait2 = $Ran6+$Ran3;
+
+
+		Fade("@ⅢProsennou1", $RanFade1, 1000, null, true);
+
+		Wait($Ranwait1);
+
+		Fade("@ⅢProsennou3", $RanFade1, 500, null, true);
+
+		Fade("@ⅢProsennou1", $RanFade2, 0, null, true);
+
+		Wait($Ranwait2);
+
+		Fade("@ⅢProsennou3", $RanFade1, 0, null, false);
+
+
+	}
+}
+
+
+.//dm4130.nss用キラキラプロセス
+
+function Kirakirakirakira_Set($優先度, $時間１, $時間２, $画像１, $画像２, $画像３){
+
+	//変数定義
+	$kirakira_time1 = $時間１ + (Random(50)*5);
+	$kirakira_time2 = $時間２ + (Random(80)*10);
+	$kirakira_time3 = $時間１ - (Random(50)*5);
+	$kirakira_time4 = $時間２ - (Random(50)*7);
+	$kirakira_time5 = $kirakira_time1 + $kirakira_time3 - (Random(50)*5);
+	$kirakira_time6 = $kirakira_time2 + $kirakira_time4 - (Random(60)*5);
+
+
+	CreateTextureEX("絵プロ背景", $優先度, Center, -100, $画像１);
+	CreateTextureEX("絵プロ背景弐", $優先度, Center, -100, $画像１);
+	CreateTextureEXadd("絵プロ背景参", $優先度, 0, -288, $画像２);
+	CreateTextureEXadd("絵プロ背景四", $優先度, InRight, -100, $画像３);
+
+	Rotate("絵プロ背景弐", 0, @0, @180, @0, null,true);
+	Move("絵プロ背景四", 0, -420, @0, null, true);
+
+
+}
+
+
+function Kirakirakirakira_Fade(){
+
+	CreateProcess("プロキラキラ", 150, 0, 0, "Kirakirakira_pro");
+	SetAlias("プロキラキラ","プロキラキラ");
+	Request("プロキラキラ", Start);
+
+}
+
+function Kirakirakira_pro(){
+
+	begin:
+
+	while(1){
+
+	Move("@絵プロ背景", 5000, @0, 0, null, false);
+	Fade("@絵プロ背景", $kirakira_time1, 1000, Dxl1, false);
+
+	Wait($kirakira_time5);
+
+//覇：座標戻し３
+	Move("@絵プロ背景弐", 0, @0, -100, null, true);
+	Fade("@絵プロ背景", $kirakira_time2, 0, null, false);
+
+	Wait($kirakira_time3);
+
+	Move("@絵プロ背景参", 5000, @0, -188, null, false);
+	Fade("@絵プロ背景参", $kirakira_time1, 1000, Dxl1, false);
+
+	Wait($kirakira_time6);
+
+//覇：座標戻し４
+	Move("@絵プロ背景四", 0, @0, -100, null, true);
+	Fade("@絵プロ背景参", $kirakira_time2, 0, null, false);
+
+	Wait($kirakira_time4);
+
+	Move("@絵プロ背景弐", 5000, @0, 0, null, false);
+	Fade("@絵プロ背景弐", $kirakira_time1, 1000, Dxl1, false);
+
+	Wait($kirakira_time5);
+
+//覇：座標戻し１
+	Move("@絵プロ背景", 0, @0, -100, null, true);
+	Fade("@絵プロ背景弐", $kirakira_time2, 0, null, false);
+
+	Wait($kirakira_time3);
+
+	Move("@絵プロ背景四", 5000, @0, 0, null, false);
+	Fade("@絵プロ背景四", $kirakira_time1, 1000, Dxl1, false);
+
+	Wait($kirakira_time6);
+
+//覇：座標戻し２
+	Move("@絵プロ背景参", 0, @0, -288, null, true);
+	Fade("@絵プロ背景四", $kirakira_time2, 0, null, false);
+
+	Wait($kirakira_time4);
+
+}
+
+}
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+.//■鬼哭街プロセス
+//――――――――――――――――――――――――――――――――――――――
+
+..//▼デカキャラをムーブしてクロスフェード
+...//●上へ
+
+function ZoomMoveY_big_ara("$ムーブプロセス名", $M量１, $M量２, $M時間, "$マクロ絵背景", "$マクロキャラ１", "$マクロキャラ２")
+{
+
+	$マクロ絵背景C = "cg/bg/" + "$マクロ絵背景" + ".jpg";
+	$マクロキャラC１ = "cg/st/l/" + "$マクロキャラ１" + ".png";
+	$マクロキャラC２ = "cg/st/l/" + "$マクロキャラ２" + ".png";
+
+	CreateTextureEX("プロ絵背景", 1000, Center, Middle, "$マクロ絵背景C");
+	SetAlias("プロ絵背景","プロ絵背景");
+	SetShade("プロ絵背景", MEDIUM);
+	Zoom("プロ絵背景", 0, 3000, 3000, null, true);
+
+	CreateTextureEX("プロキャラ１", 1200, Center, Middle, "$マクロキャラC１");
+	CreateTextureEX("プロキャラ２", 1200, Center, Middle, "$マクロキャラC２");
+	SetAlias("プロキャラ１","プロキャラ１");
+	SetAlias("プロキャラ２","プロキャラ２");
+
+	CreateProcess("$ムーブプロセス名", 150, 0, 0, "Move_Fade_araY");
+	Request("$ムーブプロセス名", Start);
+	SetAlias("$ムーブプロセス名","$ムーブプロセス名");
+
+}
+
+...//process
+function Move_Fade_araY(){
+	begin:
+
+	Move("@プロ絵背景", $M時間, @0, @$M量１, null, false);
+	Move("@プロキャラ１", $M時間, @0, @$M量２, null, false);
+	Move("@プロキャラ２", $M時間, @0, @$M量２, null, false);
+
+	Fade("@プロ絵背景", $M時間, 1000, null, false);
+	Fade("@プロキャラ１", $M時間, 1000, null, false);
+	
+	WaitMove("@プロキャラ１", null);
+	
+	Fade("@プロキャラ２", 100, 1000, null, true);
+
+}
+
+...//●横へ
+
+function ZoomMoveX_big_ara("$ムーブプロセス名", $M量１, $M量２, $M時間, "$マクロ絵背景", "$マクロキャラ１", "$マクロキャラ２"){
+
+	$マクロ絵背景C = "cg/bg/" + "$マクロ絵背景" + ".jpg";
+	$マクロキャラC１ = "cg/st/l/" + "$マクロキャラ１" + ".png";
+	$マクロキャラC２ = "cg/st/l/" + "$マクロキャラ２" + ".png";
+
+	$M量３ = -$M量２ - 100;
+
+	CreateTextureEX("プロ絵背景", 1000, InLeft, InTop, "$マクロ絵背景C");
+	SetAlias("プロ絵背景","プロ絵背景");
+	SetShade("プロ絵背景", MEDIUM);
+	Zoom("プロ絵背景", 0, 3000, 3000, null, true);
+
+	CreateTextureEX("プロキャラ１", 1200, Center, InTop, "$マクロキャラC１");
+	CreateTextureEX("プロキャラ２", 1200, Center, InTop, "$マクロキャラC２");
+	SetAlias("プロキャラ１","プロキャラ１");
+	SetAlias("プロキャラ２","プロキャラ２");
+
+	CreateProcess("$ムーブプロセス名", 150, 0, 0, "Move_Fade_araX");
+	Request("$ムーブプロセス名", Start);
+	SetAlias("$ムーブプロセス名","$ムーブプロセス名");
+
+}
+
+...//process
+function Move_Fade_araX(){
+	begin:
+
+	Move("@プロキャラ１", 0, @$M量３, @0, null, true);
+	Move("@プロキャラ２", 0, @$M量３, @0, null, true);
+
+	Move("@プロ絵背景", $M時間, @$M量１, @0, null, false);
+	Move("@プロキャラ１", $M時間, @$M量２, @0, null, false);
+	Move("@プロキャラ２", $M時間, @$M量２, @0, null, false);
+
+	Fade("@プロ絵背景", $M時間, 1000, null, false);
+	Fade("@プロキャラ１", $M時間, 1000, null, false);
+	
+	WaitMove("@プロキャラ１", null);
+	
+	Fade("@プロキャラ２", 100, 1000, null, true);
+
+}
+
+..//▼シェードかけた背景をきょろきょろ
+
+function MoveBG_ara("$ムーブプロセス名", $M座標X１, $M座標Y１, $M座標X２, $M座標Y２, $M時間, "$マクロ絵背景１"){
+
+//素材定義区間
+	$マクロ絵背景C１ = "cg/bg/" + "$マクロ絵背景１" + ".jpg";
+
+	
+	$M時間F = ($M時間)/6;
+	$M動作量X１ = -($M座標X１ + $M座標X２)/2;
+	$M動作量X２ = -$M動作量X１;
+
+	$M動作量Y = -($M座標Y１ + $M座標Y２)/2;
+	CreateColorEX("プロ黒幕", 1000, "black");
+	CreateTextureEX("プロ絵背景１", 2500, InLeft, InTop, "$マクロ絵背景C１");
+	SetShade("プロ絵背景１", MEDIUM);
+	SetAlias("プロ絵背景１","プロ絵背景１");
+	SetVertex("プロ絵背景１", $M座標X１, $M座標Y１);
+	Zoom("プロ絵背景１", 0, 2000, 2000, null, true);
+
+	CreateTextureEX("プロ絵背景２", 2500, InLeft, InTop, "$マクロ絵背景C１");
+	SetAlias("プロ絵背景２","プロ絵背景２");
+	SetShade("プロ絵背景２", MEDIUM);
+	SetVertex("プロ絵背景２", $M座標X２, $M座標Y２);
+	Zoom("プロ絵背景２", 0, 2000, 2000, null, true);
+//プロセス定義区間
+	CreateProcess("$ムーブプロセス名", 150, 0, 0, "MoveFadeBG_ara");
+	SetAlias("$ムーブプロセス名","$ムーブプロセス名");
+	Request("$ムーブプロセス名", Start);
+
+}
+
+...//process
+function MoveFadeBG_ara(){
+
+	begin:
+
+	Fade("@プロ絵背景１", $M時間F, 1000, null, false);
+	Move("@プロ絵背景１", $M時間, $M動作量X１, $M動作量Y, Dxl3, false);
+
+	Wait($M時間F);
+	Fade("@プロ黒幕", 0, 1000, null, true);
+
+	Fade("@プロ絵背景１", $M時間F, 0, null, true);
+
+	Fade("@プロ絵背景２", $M時間F, 1000, null, false);
+	Move("@プロ絵背景２", $M時間, $M動作量X２, $M動作量Y, Dxl3, false);
+
+//	Wait($M時間F);
+
+//	Fade("@プロ絵背景２", $M時間F, 0, null, true);
+
+}
+..//▼タオロー動きテスト
+
+function yattsuke_test(){
+
+	begin:
+
+	Move("動作用１", 10000, @-500, @0, null, false);
+	Move("動作用２", 10000, @-480, @0, null, false);
+	Move("動作用３", 10000, @-480, @0, null, false);
+	
+	Fade("動作用２", 1000, 1000, Dxl3, false);
+	Fade("動作用３", 1000, 1000, Dxl3, false);
+	Fade("動作用１", 1000, 1000, Dxl3, false);
+	Wait(100);
+	FadeDelete("動作用２", 2500, Axl1, false);
+	Wait(100);
+	FadeDelete("動作用３", 2500, Axl1, true);
+}
+
+..//▼複数人足音
+
+function Ashioto_ara(){
+
+	EffectSE("SE01","SE_04_足音07",600,-100,1300,1);
+	EffectSE("SE02","SE_04_足音07",650,100,1100,0);
+	EffectSE("SE03","SE_04_足音07",400,-100,1150,0);
+	EffectSE("SE04","SE_04_足音07",500,100,1100,0);
+	EffectSE("SE05","SE_04_足音07",600,0,1200,1);
+
+	SetStream("@SE05", 1000);
+	SetStream("@SE03", 1000);
+	begin:
+	Request("@SE05", Play);
+	Wait(100);
+	Request("@SE01", Play);
+	Wait(100);
+	Request("@SE02", Play);
+	Wait(100);
+	Request("@SE03", Play);
+	Wait(150);
+	Request("@SE04", Play);
+	Request("@SE*", Disused);
+
+}
+
+
+

@@ -1,0 +1,64 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0604_10bgm.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0604_10sl.nss";
+
+	$lx0604_10bgm=true;
+}
+
+
+scene lx0604_10bgm.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+	$FLAG_OF_STORY["生きる"]=10;
+//―――――――――――――――――――――――――――――――――――――――
+	//★特殊ループＢＧＭセット
+	CreateBGM_Loop("lx018a");
+	//▽特殊ループ再生
+	SoundPlay_Loop("lx018a",0,1000,true);
+
+	Wait(4000);
+
+//	ClearFadeAll(1000, true);
+
+}
+

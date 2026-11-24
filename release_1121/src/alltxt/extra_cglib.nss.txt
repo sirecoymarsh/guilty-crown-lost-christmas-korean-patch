@@ -1,0 +1,1012 @@
+//=============================================================================//
+//■ＣＧライブラリ■
+//=============================================================================//
+#include "nss/function.nss"
+//#include "nss/function_init.nss"
+
+chapter main
+{
+	//★タイトルの状態
+	$SYSTEM_menu_lock = true;$SYSTEM_backlog_lock=true;
+
+//$cgo=(Substr($CG_ARY[2][0],0,2)=="ev");//Count($CG_ARY);//Count($CG_ARY[2]);//
+//CreateText("ナット名0", 2000,0,0, auto,auto,"$cgo=<VALUE name=$cgo>");
+//WaitKey();return;
+	CreateTexture("cg_video",20000,center,middle,SCREEN);
+	SetAlias("cg_video","fade_black");
+	Wait(1);
+	SetCGary();
+	Delete("@TITLE_絵Snow");
+
+	//▼徒歩追加////////////////////////
+	if(!#ExtraBGMnum){
+		#ExtraBGMnum=4;
+		#ExtraBGMname=$TitleBGM;
+	}
+	SetVolume("@m*", 1000, 0, NULL);
+	SetVolume("@uta*", 1000, 0, NULL);
+	if(#ExtraBGMnum!=99){SoundPlay(#ExtraBGMname,1000,700,true);}
+	////////////////////////////////////
+
+	CreateSound("cgエキストラ_決定",SE,"sound/se/SE_システム_エキストラ_決定.ogg");
+	CreateSound("cgエキストラ_終了",SE,"sound/se/SE_システム_エキストラ_終了.ogg");
+	$CHR_NUM=1;
+	while($CHR_NUM>0)
+	{
+		//背景、ボタン画像、サムネイル用設定
+		SetBtnCGImgs();
+		//選択待ち
+		CGSelect();
+	}
+	Request("cgエキストラ_終了",Play);
+
+	//▼徒歩追加////////////////////////
+	//★ＢＧＭプレイ
+	SetVolume("@m*", 1000, 0, NULL);
+	SetVolume("@uta*", 1000, 0, NULL);
+	SoundPlay($TitleBGM,0,700,true);
+	////////////////////////////////////
+
+	//Fade("cg*",300,0,null,false);
+	//Fade("CG*/*/*",300,0,null,false);
+	//Fade("CG*",300,0,null,true);
+	//Request("@TITLE_絵Snow",Resume);
+	Fade("@fade_black",300,1000,null,true);
+
+	Delete("CG*");
+	Delete("cg*");
+
+}
+//ボタン画像配置
+function SetBtnCGImgs()
+{
+	//ボタンサウンド
+	$BTN_SE_NUT_NAME="@sys_se_yn";
+	//背景とBACKボタン
+	SetBase();
+
+	$CG_PAGE=1;
+	//改頁
+	ChgPage(false);
+
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+	select{Fade("@fade_black",300,0,null,true);break;}
+}
+//背景とBACKボタン
+function SetBase()
+{
+	CreateTexture("CG_BG",2001,0,0,"cg/sys/extra/cglib/背景.png");
+
+	//ＥＸＩＴ//210x40
+	$X_EXIT=924;
+	$Y_EXIT=542;
+	CreateChoice("CG_EXIT");
+	CreateTexture("CG_EXIT/MouseUsual/hit",0,$X_EXIT,$Y_EXIT,"cg/sys/extra/cglib/hit02.png");
+	CreateTexture("CG_EXIT/MouseUsual/img", 2010, $X_EXIT, $Y_EXIT, "cg/sys/extra/cglib/exit-001.png");
+	SetVertex("CG_EXIT/MouseUsual/img", 0, 0);
+	Zoom("CG_EXIT/MouseUsual/img", 0, 250, 250, null, false);
+	Request("CG_EXIT/MouseUsual/img", Smoothing);
+	CreateTexture("CG_EXIT/MouseOver/img", 2011, $X_EXIT, $Y_EXIT, "cg/sys/extra/cglib/exit-002.png");
+	SetVertex("CG_EXIT/MouseOver/img", 0, 0);
+	Zoom("CG_EXIT/MouseOver/img", 0, 250, 250, null, false);
+	Request("CG_EXIT/MouseOver/img", Smoothing);
+	CreateTexture("CG_EXIT/MouseClick/img", 2011, $X_EXIT, $Y_EXIT, "cg/sys/extra/cglib/exit-003.png");
+	SetVertex("CG_EXIT/MouseClick/img", 0, 0);
+	Zoom("CG_EXIT/MouseClick/img", 0, 250, 250, null, false);
+	Request("CG_EXIT/MouseClick/img", Smoothing);
+	//CreateColor("CG_EXIT/MouseUsual/hit",160,$X_EXIT,$Y_EXIT,83,18,0x000000);
+	//Request("CG_EXIT/MouseUsual/hit", Erase);
+	//CreateSound("CG_EXIT/MouseClick/sound", SE, $BTN_SE);
+	//CreateProcess("CG_EXIT/MouseClick/seprs",110,0,0,"BtnSE_MENU");
+
+	//ＰＲＥＶ//210x40
+	$X_BACK=732;
+	$Y_BACK=542;
+	CreateChoice("CG_BACK",0,0,0,0,0,0);//);//
+	//SetAlias("CG_BACK","CG_BACK");
+	CreateTexture("CG_BACK/MouseUsual/hit",0,$X_BACK,$Y_BACK,"cg/sys/extra/cglib/hit02.png");
+	CreateTexture("CG_BACK/MouseUsual/img", 2010, $X_BACK, $Y_BACK, "cg/sys/extra/cglib/back-001.png");
+	SetVertex("CG_BACK/MouseUsual/img", 0, 0);
+	Zoom("CG_BACK/MouseUsual/img", 0, 250, 250, null, false);
+	Request("CG_BACK/MouseUsual/img", Smoothing);
+	CreateTexture("CG_BACK/MouseOver/img", 2011, $X_BACK, $Y_BACK, "cg/sys/extra/cglib/back-002.png");
+	SetVertex("CG_BACK/MouseOver/img", 0, 0);
+	Zoom("CG_BACK/MouseOver/img", 0, 250, 250, null, false);
+	Request("CG_BACK/MouseOver/img", Smoothing);
+	CreateTexture("CG_BACK/MouseClick/img", 2011, $X_BACK, $Y_BACK, "cg/sys/extra/cglib/back-003.png");
+	SetVertex("CG_BACK/MouseClick/img", 0, 0);
+	Zoom("CG_BACK/MouseClick/img", 0, 250, 250, null, false);
+	Request("CG_BACK/MouseClick/img", Smoothing);
+	//CreateColor("CG_BACK/MouseUsual/hit",160,$X_BACK,$Y_BACK,123,34,0x000000);
+	//Request("CG_BACK/MouseUsual/hit", Erase);
+	//CreateSound("CG_BACK/MouseClick/sound", SE, $BTN_SE);
+	//CreateProcess("CG_BACK/MouseClick/seprs",110,0,0,"BtnSE_BACK");
+
+	//ＮＥＸＴ//242x20
+	$X_NEXT=831;
+	$Y_NEXT=542;
+	CreateChoice("CG_NEXT",0,0,0,0,0,0);//);//
+	//SetAlias("CG_NEXT","CG_NEXT");
+	CreateTexture("CG_NEXT/MouseUsual/hit",0,$X_NEXT,$Y_NEXT,"cg/sys/extra/cglib/hit02.png");
+	CreateTexture("CG_NEXT/MouseUsual/img", 2010, $X_NEXT, $Y_NEXT, "cg/sys/extra/cglib/next-001.png");
+	SetVertex("CG_NEXT/MouseUsual/img", 0, 0);
+	Zoom("CG_NEXT/MouseUsual/img", 0, 250, 250, null, false);
+	Request("CG_NEXT/MouseUsual/img", Smoothing);
+	CreateTexture("CG_NEXT/MouseOver/img", 2011, $X_NEXT, $Y_NEXT, "cg/sys/extra/cglib/next-002.png");
+	SetVertex("CG_NEXT/MouseOver/img", 0, 0);
+	Zoom("CG_NEXT/MouseOver/img", 0, 250, 250, null, false);
+	Request("CG_NEXT/MouseOver/img", Smoothing);
+	CreateTexture("CG_NEXT/MouseClick/img", 2011, $X_NEXT, $Y_NEXT, "cg/sys/extra/cglib/next-003.png");
+	SetVertex("CG_NEXT/MouseClick/img", 0, 0);
+	Zoom("CG_NEXT/MouseClick/img", 0, 250, 250, null, false);
+	Request("CG_NEXT/MouseClick/img", Smoothing);
+	//CreateColor("CG_NEXT/MouseUsual/hit",160,$X_NEXT,$Y_NEXT,113,34,0x000000);
+	//Request("CG_NEXT/MouseUsual/hit", Erase);
+	//CreateSound("CG_NEXT/MouseClick/sound", SE, $BTN_SE);
+	//CreateProcess("CG_NEXT/MouseClick/seprs",110,0,0,"BtnSE_NEXT");
+
+	//160x120
+	LoadImage("CG_OVER","cg/sys/extra/cglib/選択カーソル.png");
+	SetAlias("CG_OVER","CG_OVER");
+	//160x120
+	LoadImage("CG_BLANK","cg/sys/extra/cglib/NONE.png");
+	SetAlias("CG_BLANK","CG_BLANK");
+
+}
+
+function Fade0($time0)
+{
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+	//Fade("cgnum_empty_*",0,1000,null,false);
+	Fade("CG_NEXT/MouseUsual/*",0,1000,null,false);
+	Fade("CG_BACK/MouseUsual/*",0,1000,null,false);
+
+	select{
+	Fade("cg_capture",$time0,0,null,true);
+	Delete("cg_capture");
+	break;
+	}
+}
+
+//改頁
+function ChgPage($cappg)
+{
+	if($cappg){	CreateTexture("cg_capture",300,center,middle,SCREEN);}
+/*
+	if($CG_PAGE>1){
+	}else{Delete("CG_BACK");}
+
+	if($CG_PAGE<$CG_MAXPAGE){
+	}else{Delete("CG_NEXT");}
+*/
+	ShowCGThumbnail();
+//CreateText("ナット名", 320,0,0, auto,auto,"$CG_PAGE=<VALUE name=$CG_PAGE>");
+	//フォーカス設定
+	SetCGFocus();
+
+}
+
+/*
+function BtnSE_MENU()
+{
+	Request($BTN_SE_NUT_NAME, Stop);
+	Request($BTN_SE_NUT_NAME, Play);
+	SetVolume($BTN_SE_NUT_NAME, 0, 1000, null);
+}
+function BtnSE_BACK()
+{
+	Request($BTN_SE_NUT_NAME, Stop);
+	Request($BTN_SE_NUT_NAME, Play);
+	SetVolume($BTN_SE_NUT_NAME, 0, 1000, null);
+}
+function BtnSE_NEXT()
+{
+	Request($BTN_SE_NUT_NAME, Stop);
+	Request($BTN_SE_NUT_NAME, Play);
+	SetVolume($BTN_SE_NUT_NAME, 0, 1000, null);
+}
+*/
+
+//ＣＧサムネイル表示
+function ShowCGThumbnail()
+{
+	Delete("@cgnum_*");
+	
+	$i_max=20;
+//	if($CHR_NUM==1){		if($CG_PAGE==$CG_MAXPAGE){$i_max=21;}}
+//	else if($CHR_NUM==2){	if($CG_PAGE==$CG_MAXPAGE){$i_max=12;}}
+//	else if($CHR_NUM==3){	if($CG_PAGE==$CG_MAXPAGE){$i_max=24;}}
+//	else if($CHR_NUM==4){	if($CG_PAGE==$CG_MAXPAGE){$i_max=16;}}
+//	else if($CHR_NUM==5){	if($CG_PAGE==$CG_MAXPAGE){$i_max=7;}}
+
+	//ページ番号表示
+	$pagenumfile=String("cg/sys/extra/cglib/No%03d.png",$CG_PAGE);
+	CreateTexture("cgnum_page", 2009, 0, 0, $pagenumfile);
+	SetVertex("cgnum_page", 0, 0);
+	Zoom("cgnum_page", 0, 250, 250, null, false);
+	Request("cgnum_page", Smoothing);
+
+	$i=0;
+	while($i<$i_max){
+		$cgname=String("cgnum_%02d",$i);
+		CreateChoice($cgname);
+		SetAlias($cgname,$cgname);
+		
+		$my_x=0;
+		$my_y=0;
+		SetXtraThumbnailXY($i);
+
+		$hd=($CG_PAGE-1)*20;
+		$cg_num = Integer($i + $hd);
+		
+		ChkCGOpen($cg_num);
+//		if($cg_num<$CG_MAXNUM)
+//		{
+//			$CGOpen=true;
+//		}
+//		else
+//		{
+//			$CGOpen=false;
+//		}
+		
+		//$ntn="txt"+$i;$nty=$i*15;
+		//CreateText($ntn, 320,0,$nty, auto,auto,"$CG_PAGE=<VALUE name=$CG_PAGE>|$i=<VALUE name=$i>|$cg_num=<VALUE name=$cg_num>");//Draw();WaitKey();
+		//Request($ntn,PushText);
+		
+		$nut=$cgname+"/MouseUsual/hit";
+		CreateColor($nut,2010,$my_x,$my_y,192,108,0x000000);
+		Request($nut,Erase);
+		if($CGOpen){
+			//ＣＧ既読
+			$ThumFile="";
+			SetCGThumFile($cg_num,"/sys/extra/thum/",0);
+			//サムネイルが大きいので窓に入れる
+			$nut=String("cgnum_thum_%02d",$i);
+			//CreateWindow($nut,2010,$my_x,$my_y,160,120,true);
+			//$nut=$nut+"/img";
+			CreateTexture($nut,2010,$my_x,$my_y,$ThumFile);
+			SetAlias($nut,$nut);
+			//$my_x2=$my_x-1;
+			//$my_y2=$my_y-1;
+			$nut=$cgname+"/MouseOver/img";
+			//CreateColor($nut,105,$my_x2,$my_y2,130,98,0x008B1D);//0x601903
+			CreateTexture($nut,2010,$my_x,$my_y,"CG_OVER");
+			$nut=$cgname+"/MouseClick/img";
+			CreateTexture($nut,2010,$my_x,$my_y,"CG_OVER");
+		}else{//最終ページのサムネイル無しのコマ
+			if($cg_num<=$CG_MAXNUM){
+				//ＣＧ未読
+				$nut=String("cgnum_empty_%02d",$i);
+				CreateTexture($nut, 2010, $my_x, $my_y, "@CG_BLANK");
+				SetVertex($nut, 0, 0);
+				Zoom($nut, 0, 250, 250, null, false);
+	Request($nut, Smoothing);
+				SetAlias($nut,$nut);
+			}
+			Request($cgname,UnClickable);
+			$nut=String("cgnum_thum_%02d",$i);
+			Delete($nut);
+		}
+		$i++;
+	}
+}
+//サムネイルのx,y座標値取得
+//x:672,482,292,102(-190)
+//y:120,250,380,510(130)
+function SetXtraThumbnailXY($num)
+{
+	$nx=$num%5;
+	$my_x=($nx * 200) + 16;
+
+	$ny=Integer($num/5);
+	$my_y=($ny * 124) + 36;
+}
+//ＣＧサムネイルのファイル名取得
+function SetCGThumFile($num,$dir,$sub)
+{
+	$anth=$num;
+	$filename=$CG_ARY[$anth][$sub];
+//CreateText("ナット名", 120,0,0, auto,auto,"$anth=<VALUE name=$anth>:$ThumFile=<VALUE name=$ThumFile>");
+	//ChkThumFileName($num);
+	$ext=".jpg";
+
+	if(Substr($filename,0,2)=="ev"){$fldname="ev/";}
+	else if(Substr($filename,0,2)=="bg"){$fldname="bg/";}
+	else {$fldname="";}
+
+	$ThumFile="cg"+$dir+$fldname+$filename+$ext;
+
+}
+//ＣＧサムネイル用のファイル名取得(大文字小文字統一対策)
+function ChkThumFileName($cn)
+{
+	$chkname="";
+	
+	if($chkname!=""){$ThumFile=$chkname;}
+}
+
+//ＣＧ既読チェック
+function ChkCGOpen($num)
+{
+	$anth=$num;
+	if($num<=$CG_MAXNUM){
+		$CGOpen=false;
+		if(VariableValue(#,$CG_ARY[$anth][0])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][1])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][2])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][3])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][4])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][5])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][6])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][7])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][8])){
+			$CGOpen=true;
+		}else if(VariableValue(#,$CG_ARY[$anth][9])){
+			$CGOpen=true;
+		}
+	}else{
+		$CGOpen=false;
+	}
+}
+
+//ＣＧサムネイルボタンチェック
+function do_cg($no)
+{
+	$cg_num=($CG_PAGE-1)*20+$no;
+	ChkCGOpen($cg_num);
+	if(!$CGOpen)
+	{
+		$CG_NO=0;return;
+	}
+	
+	show_cg($cg_num);
+}
+//ＣＧサムネイル表示
+function show_cg($cgno)
+{
+	$CG_NO=$cgno;
+	$EVPG_NUM=0;
+	
+	$EVPG_MAX_NUM=0;
+	SetMaxEvNum($CG_NO);
+	//CreateText("ナット名1", 2000,0,400, auto,auto,"$CG_NO=<VALUE name=$CG_NO>");
+	//CreateText("ナット名2", 2000,0,420, auto,auto,"$EVPG_MAX_NUM=<VALUE name=$EVPG_MAX_NUM>");
+	$SYSTEM_r_button_down=false;
+	$CG_LIB=true;
+	while($CG_LIB)
+	{
+		//メニューサムネイル上下左右矢印キー封じ用カラselect
+		CreateWindow("cgwin",2050, 0,0, 1024,768,true);
+		SetAlias("cgwin","cgwin");
+		select
+		{
+			$EVPG_NUM++;
+			if($EVPG_NUM>$EVPG_MAX_NUM){
+				//Request("chk_prs",Stop);
+				Fade($nut,300,0,null,true);
+				Delete($nut);
+				$CG_LIB=false;
+				break;
+			}else{
+				if($EVPG_NUM>1){$prevnut=$nut;}
+				$sub_num=$EVPG_NUM-1;
+				//evファイル名取得
+				$IMG_SCRL=0;
+				if(VariableValue(#,$CG_ARY[$CG_NO][$sub_num])){
+					SetCGThumFile($CG_NO,"/",$sub_num);
+					ChkScrl($CG_NO);
+				}else{
+					$ThumFile="cg/sys/extra/cglib/noimage.png";
+				}
+				$nut="@cgwin/"+"evnum_"+$EVPG_NUM;
+				
+				CreateTexture($nut,2050,center,0,$ThumFile);
+				Fade($nut,0,0,null,true);
+				
+				if($CG_NO==42){
+					Rotate($nut,0,0,180,0,null,false);
+					Zoom($nut,0,1050,1050,null,false);
+				}
+				if($IMG_SCRL>0){
+					$imgWidth =ImageHorizon($nut);
+					$imgHeight=ImageVertical($nut);
+					
+					if($IMG_SCRL==1){//上から
+						$sub=576-$imgHeight;
+					}else if($IMG_SCRL==2){//下から
+						$sub=576-$imgHeight;
+						Move($nut,0,@0,$sub,null,false);
+					}else if($IMG_SCRL==3){//左から
+						$sub=1024-$imgWidth;
+						Move($nut,0,0,@0,null,false);
+					}else if($IMG_SCRL==4){//右から
+						$sub=1024-$imgWidth;
+						Move($nut,0,$sub,@0,null,false);
+					}
+				}
+				
+				FadeWaitKey($nut,300);//表示中キー待ち
+				if($EVPG_NUM>1){Delete($prevnut);}
+				
+				//スクロールmove
+				if($IMG_SCRL>0){
+					if($sub<0){$scrltime=$sub*-10;}
+					else{$scrltime=$sub*10;}
+					if($IMG_SCRL==1){		MoveWaitKey($nut,$scrltime,@0,$sub);}
+					else if($IMG_SCRL==2){	MoveWaitKey($nut,$scrltime,@0,0);}
+					else if($IMG_SCRL==3){	MoveWaitKey($nut,$scrltime,$sub,0);}
+					else if($IMG_SCRL==4){	MoveWaitKey($nut,$scrltime,0,0);}
+				}
+				
+				WaitKey();
+			}
+		}
+		$SYSTEM_r_button_down=false;
+
+		//Delete("chk_prs");
+		Delete("cgwin");
+	}
+}
+function FadeWaitKey($_nut,$_tm)
+{
+	Fade($_nut,$_tm,1000,null,false);
+	WaitKey($_tm);
+	Fade($_nut,0,1000,null,true);
+}
+function MoveWaitKey($_nut,$_tm,$_x,$_y)
+{
+	WaitKey();
+	Move($_nut,$_tm, $_x,$_y, null,false);
+	WaitKey($_tm);
+	Move($_nut,0, $_x,$_y, null,true);
+}
+
+//１コマの最大ＣＧ枚数取得
+function SetMaxEvNum($cgnum)
+{
+	$EVPG_MAX_NUM=Count($CG_ARY[$cgnum]);//1;
+}
+
+//選択待ち
+function CGSelect()
+{
+//	CreateText("ナット名", 2000,0,0, auto,auto,"$CG_PAGE=<VALUE name=$CG_PAGE>");
+//	Request("ナット名",PushText);
+
+	$SYSTEM_r_button_down=false;
+	$XTRA_CG=true;
+	while($XTRA_CG)
+	{
+		select{
+			if($SYSTEM_r_button_down){$XTRA_CG=false;$CHR_NUM=0;break;}
+			//★キーダウン系
+			if($SYSTEM_keydown_f){
+				if(!#SYSTEM_window_full_lock){
+					#SYSTEM_window_full=!#SYSTEM_window_full;
+					#SYSTEM_window_full_lock=false;
+					Wait(300);
+					$SYSTEM_keydown_f=false;
+				}
+			}
+			case @cgnum_00{do_cg(0);}
+			case @cgnum_01{do_cg(1);}
+			case @cgnum_02{do_cg(2);}
+			case @cgnum_03{do_cg(3);}
+			case @cgnum_04{do_cg(4);}
+			case @cgnum_05{do_cg(5);}
+			case @cgnum_06{do_cg(6);}
+			case @cgnum_07{do_cg(7);}
+			case @cgnum_08{do_cg(8);}
+			case @cgnum_09{do_cg(9);}
+			case @cgnum_10{do_cg(10);}
+			case @cgnum_11{do_cg(11);}
+			case @cgnum_12{do_cg(12);}
+			case @cgnum_13{do_cg(13);}
+			case @cgnum_14{do_cg(14);}
+			case @cgnum_15{do_cg(15);}
+			case @cgnum_16{do_cg(16);}
+			case @cgnum_17{do_cg(17);}
+			case @cgnum_18{do_cg(18);}
+			case @cgnum_19{do_cg(19);}
+			case CG_NEXT{
+				Request("cgエキストラ_決定",Play);
+				SelCGNext();
+			}
+			case CG_BACK{
+				Request("cgエキストラ_決定",Play);
+				SelCGPrev();
+			}
+			case CG_EXIT{
+				//BtnSelected("CG_EXIT/MouseClick/img");
+				$XTRA_CG=false;$CHR_NUM=0;break;
+			}
+		}
+	}
+}
+
+//ＮＥＸＴボタン
+function SelCGNext()
+{
+	$CG_PAGE++;
+	if($CG_PAGE>$CG_MAXPAGE){$CG_PAGE=1;}
+	ChgPage(true);
+	Fade0(150);
+}
+//ＰＲＥＶボタン
+function SelCGPrev()
+{
+	$CG_PAGE--;
+	if($CG_PAGE<1){$CG_PAGE=$CG_MAXPAGE;}
+	ChgPage(true);
+	Fade0(150);
+}
+
+//フォーカス設定
+function SetCGFocus()
+{
+
+	//RIGHT
+	if($CG_PAGE!=$CG_MAXPAGE)
+	{
+		SetNextFocus("@cgnum_00/MouseUsual/hit","@cgnum_01/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_01/MouseUsual/hit","@cgnum_02/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_02/MouseUsual/hit","@cgnum_03/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_03/MouseUsual/hit","@cgnum_04/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_04/MouseUsual/hit","@cgnum_00/MouseUsual/hit",RIGHT);
+		
+		SetNextFocus("@cgnum_05/MouseUsual/hit","@cgnum_06/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_06/MouseUsual/hit","@cgnum_07/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_07/MouseUsual/hit","@cgnum_08/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_08/MouseUsual/hit","@cgnum_09/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_09/MouseUsual/hit","@cgnum_05/MouseUsual/hit",RIGHT);
+
+		SetNextFocus("@cgnum_10/MouseUsual/hit","@cgnum_11/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_11/MouseUsual/hit","@cgnum_12/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_12/MouseUsual/hit","@cgnum_13/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_13/MouseUsual/hit","@cgnum_14/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_14/MouseUsual/hit","@cgnum_10/MouseUsual/hit",RIGHT);
+
+		SetNextFocus("@cgnum_15/MouseUsual/hit","@cgnum_16/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_16/MouseUsual/hit","@cgnum_17/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_17/MouseUsual/hit","@cgnum_18/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_18/MouseUsual/hit","@cgnum_19/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_19/MouseUsual/hit","@cgnum_15/MouseUsual/hit",RIGHT);
+	}
+	else
+	{
+		SetNextFocus("@cgnum_00/MouseUsual/hit","@cgnum_01/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_01/MouseUsual/hit","@cgnum_02/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_02/MouseUsual/hit","@cgnum_03/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_03/MouseUsual/hit","@cgnum_04/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_04/MouseUsual/hit","@cgnum_00/MouseUsual/hit",RIGHT);
+		
+		SetNextFocus("@cgnum_05/MouseUsual/hit","@cgnum_06/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_06/MouseUsual/hit","@cgnum_07/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_07/MouseUsual/hit","@cgnum_08/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_08/MouseUsual/hit","@cgnum_09/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_09/MouseUsual/hit","@cgnum_05/MouseUsual/hit",RIGHT);
+
+		SetNextFocus("@cgnum_10/MouseUsual/hit","@cgnum_11/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_11/MouseUsual/hit","@cgnum_12/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_12/MouseUsual/hit","@cgnum_13/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_13/MouseUsual/hit","@cgnum_14/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_14/MouseUsual/hit","@cgnum_10/MouseUsual/hit",RIGHT);
+		
+		SetNextFocus("@cgnum_15/MouseUsual/hit","@cgnum_16/MouseUsual/hit",RIGHT);
+		SetNextFocus("@cgnum_16/MouseUsual/hit","@cgnum_15/MouseUsual/hit",RIGHT);
+	}
+
+	SetNextFocus("CG_EXIT/MouseUsual/hit","CG_BACK/MouseUsual/hit",RIGHT);
+	SetNextFocus("CG_BACK/MouseUsual/hit","CG_NEXT/MouseUsual/hit",RIGHT);
+	SetNextFocus("CG_NEXT/MouseUsual/hit","CG_EXIT/MouseUsual/hit",RIGHT);
+
+	//LEFT
+	if($CG_PAGE!=$CG_MAXPAGE)
+	{
+		SetNextFocus("@cgnum_00/MouseUsual/hit","@cgnum_04/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_01/MouseUsual/hit","@cgnum_00/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_02/MouseUsual/hit","@cgnum_01/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_03/MouseUsual/hit","@cgnum_02/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_04/MouseUsual/hit","@cgnum_03/MouseUsual/hit",LEFT);
+		
+		SetNextFocus("@cgnum_05/MouseUsual/hit","@cgnum_09/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_06/MouseUsual/hit","@cgnum_05/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_07/MouseUsual/hit","@cgnum_06/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_08/MouseUsual/hit","@cgnum_07/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_09/MouseUsual/hit","@cgnum_08/MouseUsual/hit",LEFT);
+	
+		SetNextFocus("@cgnum_10/MouseUsual/hit","@cgnum_14/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_11/MouseUsual/hit","@cgnum_10/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_12/MouseUsual/hit","@cgnum_11/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_13/MouseUsual/hit","@cgnum_12/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_14/MouseUsual/hit","@cgnum_13/MouseUsual/hit",LEFT);
+
+		SetNextFocus("@cgnum_15/MouseUsual/hit","@cgnum_19/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_16/MouseUsual/hit","@cgnum_15/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_17/MouseUsual/hit","@cgnum_16/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_18/MouseUsual/hit","@cgnum_17/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_19/MouseUsual/hit","@cgnum_18/MouseUsual/hit",LEFT);
+	}
+	else
+	{
+		SetNextFocus("@cgnum_00/MouseUsual/hit","@cgnum_04/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_01/MouseUsual/hit","@cgnum_00/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_02/MouseUsual/hit","@cgnum_01/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_03/MouseUsual/hit","@cgnum_02/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_04/MouseUsual/hit","@cgnum_03/MouseUsual/hit",LEFT);
+		
+		SetNextFocus("@cgnum_05/MouseUsual/hit","@cgnum_09/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_06/MouseUsual/hit","@cgnum_05/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_07/MouseUsual/hit","@cgnum_06/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_08/MouseUsual/hit","@cgnum_07/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_09/MouseUsual/hit","@cgnum_08/MouseUsual/hit",LEFT);
+	
+		SetNextFocus("@cgnum_10/MouseUsual/hit","@cgnum_14/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_11/MouseUsual/hit","@cgnum_10/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_12/MouseUsual/hit","@cgnum_11/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_13/MouseUsual/hit","@cgnum_12/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_14/MouseUsual/hit","@cgnum_13/MouseUsual/hit",LEFT);
+		
+		SetNextFocus("@cgnum_15/MouseUsual/hit","@cgnum_16/MouseUsual/hit",LEFT);
+		SetNextFocus("@cgnum_16/MouseUsual/hit","@cgnum_15/MouseUsual/hit",LEFT);
+	}
+	SetNextFocus("CG_EXIT/MouseUsual/hit","CG_NEXT/MouseUsual/hit",LEFT);
+	SetNextFocus("CG_BACK/MouseUsual/hit","CG_EXIT/MouseUsual/hit",LEFT);
+	SetNextFocus("CG_NEXT/MouseUsual/hit","CG_BACK/MouseUsual/hit",LEFT);
+
+	//DOWN
+	if($CG_PAGE!=$CG_MAXPAGE)
+	{
+		SetNextFocus("@cgnum_00/MouseUsual/hit","@cgnum_05/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_01/MouseUsual/hit","@cgnum_06/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_02/MouseUsual/hit","@cgnum_07/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_03/MouseUsual/hit","@cgnum_08/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_04/MouseUsual/hit","@cgnum_09/MouseUsual/hit",DOWN);
+		
+		SetNextFocus("@cgnum_05/MouseUsual/hit","@cgnum_10/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_06/MouseUsual/hit","@cgnum_11/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_07/MouseUsual/hit","@cgnum_12/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_08/MouseUsual/hit","@cgnum_13/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_09/MouseUsual/hit","@cgnum_14/MouseUsual/hit",DOWN);
+
+		SetNextFocus("@cgnum_10/MouseUsual/hit","@cgnum_15/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_11/MouseUsual/hit","@cgnum_16/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_12/MouseUsual/hit","@cgnum_17/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_13/MouseUsual/hit","@cgnum_18/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_14/MouseUsual/hit","@cgnum_19/MouseUsual/hit",DOWN);
+
+		SetNextFocus("@cgnum_15/MouseUsual/hit","@cgnum_00/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_16/MouseUsual/hit","@cgnum_01/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_17/MouseUsual/hit","@cgnum_02/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_18/MouseUsual/hit","CG_BACK/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_19/MouseUsual/hit","CG_NEXT/MouseUsual/hit",DOWN);
+	}
+	else
+	{
+		SetNextFocus("@cgnum_00/MouseUsual/hit","@cgnum_05/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_01/MouseUsual/hit","@cgnum_06/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_02/MouseUsual/hit","@cgnum_07/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_03/MouseUsual/hit","@cgnum_08/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_04/MouseUsual/hit","@cgnum_09/MouseUsual/hit",DOWN);
+		
+		SetNextFocus("@cgnum_05/MouseUsual/hit","@cgnum_10/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_06/MouseUsual/hit","@cgnum_11/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_07/MouseUsual/hit","@cgnum_12/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_08/MouseUsual/hit","@cgnum_13/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_09/MouseUsual/hit","@cgnum_14/MouseUsual/hit",DOWN);
+
+		SetNextFocus("@cgnum_10/MouseUsual/hit","@cgnum_15/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_11/MouseUsual/hit","@cgnum_16/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_12/MouseUsual/hit","@cgnum_02/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_13/MouseUsual/hit","CG_BACK/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_14/MouseUsual/hit","CG_NEXT/MouseUsual/hit",DOWN);
+		
+		SetNextFocus("@cgnum_15/MouseUsual/hit","@cgnum_00/MouseUsual/hit",DOWN);
+		SetNextFocus("@cgnum_16/MouseUsual/hit","@cgnum_01/MouseUsual/hit",DOWN);
+	}
+	SetNextFocus("CG_EXIT/MouseUsual/hit","@cgnum_04/MouseUsual/hit",DOWN);
+	SetNextFocus("CG_BACK/MouseUsual/hit","@cgnum_03/MouseUsual/hit",DOWN);
+	SetNextFocus("CG_NEXT/MouseUsual/hit","@cgnum_04/MouseUsual/hit",DOWN);
+
+	//UP
+	if($CG_PAGE!=$CG_MAXPAGE)
+	{
+		SetNextFocus("@cgnum_00/MouseUsual/hit","@cgnum_15/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_01/MouseUsual/hit","@cgnum_16/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_02/MouseUsual/hit","@cgnum_17/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_03/MouseUsual/hit","CG_BACK/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_04/MouseUsual/hit","CG_NEXT/MouseUsual/hit",UP);
+		
+		SetNextFocus("@cgnum_05/MouseUsual/hit","@cgnum_00/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_06/MouseUsual/hit","@cgnum_01/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_07/MouseUsual/hit","@cgnum_02/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_08/MouseUsual/hit","@cgnum_03/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_09/MouseUsual/hit","@cgnum_04/MouseUsual/hit",UP);
+		
+		SetNextFocus("@cgnum_10/MouseUsual/hit","@cgnum_05/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_11/MouseUsual/hit","@cgnum_06/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_12/MouseUsual/hit","@cgnum_07/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_13/MouseUsual/hit","@cgnum_08/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_14/MouseUsual/hit","@cgnum_09/MouseUsual/hit",UP);
+		
+		SetNextFocus("@cgnum_15/MouseUsual/hit","@cgnum_10/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_16/MouseUsual/hit","@cgnum_11/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_17/MouseUsual/hit","@cgnum_12/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_18/MouseUsual/hit","@cgnum_13/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_19/MouseUsual/hit","@cgnum_14/MouseUsual/hit",UP);
+		
+		SetNextFocus("CG_BACK/MouseUsual/hit","@cgnum_18/MouseUsual/hit",UP);
+		SetNextFocus("CG_NEXT/MouseUsual/hit","@cgnum_19/MouseUsual/hit",UP);
+		SetNextFocus("CG_EXIT/MouseUsual/hit","@cgnum_19/MouseUsual/hit",UP);
+	}
+	else
+	{
+		SetNextFocus("@cgnum_00/MouseUsual/hit","@cgnum_15/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_01/MouseUsual/hit","@cgnum_16/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_02/MouseUsual/hit","@cgnum_12/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_03/MouseUsual/hit","CG_BACK/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_04/MouseUsual/hit","CG_NEXT/MouseUsual/hit",UP);
+		
+		SetNextFocus("@cgnum_05/MouseUsual/hit","@cgnum_00/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_06/MouseUsual/hit","@cgnum_01/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_07/MouseUsual/hit","@cgnum_02/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_08/MouseUsual/hit","@cgnum_03/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_09/MouseUsual/hit","@cgnum_04/MouseUsual/hit",UP);
+		
+		SetNextFocus("@cgnum_10/MouseUsual/hit","@cgnum_05/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_11/MouseUsual/hit","@cgnum_06/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_12/MouseUsual/hit","@cgnum_07/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_13/MouseUsual/hit","@cgnum_08/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_14/MouseUsual/hit","@cgnum_09/MouseUsual/hit",UP);
+		
+		SetNextFocus("@cgnum_15/MouseUsual/hit","@cgnum_10/MouseUsual/hit",UP);
+		SetNextFocus("@cgnum_16/MouseUsual/hit","@cgnum_11/MouseUsual/hit",UP);
+		
+		SetNextFocus("CG_BACK/MouseUsual/hit","@cgnum_13/MouseUsual/hit",UP);
+		SetNextFocus("CG_NEXT/MouseUsual/hit","@cgnum_14/MouseUsual/hit",UP);
+		SetNextFocus("CG_EXIT/MouseUsual/hit","@cgnum_14/MouseUsual/hit",UP);
+	}
+}
+
+//◆イベント絵変数用配列◆//
+function SetCGary()
+{
+	$CG_ARY=null;
+	Array($CG_ARY);
+	DeleteArray($CG_ARY);
+	$CG_ARY[000][0]="ev9002スクルージダッシュ汎用";
+	$CG_ARY[000][1]="ev9002スクルージダッシュ汎用_a";
+	$CG_ARY[001][0]="ev9001スクルージジャンプ汎用";
+	$CG_ARY[001][1]="ev9001スクルージジャンプ汎用キャロル";
+	$CG_ARY[001][2]="ev9001スクルージジャンプ汎用オラトリオ";
+	$CG_ARY[002][0]="ev9000スクルージ着地汎用";
+	$CG_ARY[002][1]="ev9000スクルージ着地汎用キャロル";
+	$CG_ARY[002][2]="ev9000スクルージ着地汎用オラトリオ";
+	$CG_ARY[003][0]="ev9004スクルージバックステップ汎用";
+	$CG_ARY[003][1]="ev9004スクルージバックステップ汎用キャロル";
+	$CG_ARY[004][0]="ev0210スクルージキャロルダッシュ";
+	$CG_ARY[004][1]="ev0210スクルージキャロルダッシュ_a";
+	$CG_ARY[004][2]="ev0210スクルージキャロルダッシュ_b";
+	$CG_ARY[004][3]="ev0210スクルージキャロルダッシュ讃美歌ヴォイド";
+	$CG_ARY[004][4]="ev0210スクルージキャロルダッシュ讃美歌ヴォイド_a";
+	$CG_ARY[004][5]="ev0210スクルージキャロルダッシュ讃美歌ヴォイド_b";
+	$CG_ARY[005][0]="ev9003ダァト兵戦闘汎用";
+	$CG_ARY[006][0]="ev0105プレゼントダァト兵キャンサー化";
+	$CG_ARY[007][0]="ev0106プレゼント結晶盾";
+	$CG_ARY[008][0]="ev0108エデン・ベベ迷彩登場";
+	$CG_ARY[009][0]="ev0110エデン・ベベミサイルランチャー";
+	$CG_ARY[009][1]="ev0110エデン・ベベミサイルランチャーa";
+	$CG_ARY[010][0]="ev0111キャロル飛び降り";
+	$CG_ARY[011][0]="ev0201冒頭研究員";
+	$CG_ARY[012][0]="ev0202スクルージ研究員結晶化";
+	$CG_ARY[013][0]="ev0207スクルージ天井ジャンプ";
+	$CG_ARY[014][0]="ev0203キャロル登場";
+	$CG_ARY[014][1]="ev0203キャロル登場_smile";
+	$CG_ARY[014][2]="ev0203キャロル登場_sad";
+	$CG_ARY[014][3]="ev0203キャロル登場_sad2";
+	$CG_ARY[015][0]="ev0208キャロルスクルージ抱く";
+	$CG_ARY[016][0]="ev0205重機エンドレイヴ登場";
+	$CG_ARY[017][0]="ev0209重機エンドレイヴ銃撃";
+	$CG_ARY[018][0]="ev0206スクルージ重機エンドレイヴ撃破";
+	$CG_ARY[019][0]="ev0211幼きシュウたち";
+	$CG_ARY[020][0]="ev0301スクルージキャロル街歩き";
+	$CG_ARY[021][0]="ev0302オートインセクト破壊";
+	$CG_ARY[022][0]="ev0303オートインセクト監視";
+	$CG_ARY[023][0]="ev0307キャロルオンザベッド";
+	$CG_ARY[024][0]="ev0304クロス背中";
+	$CG_ARY[025][0]="ev0305マナ写真";
+	$CG_ARY[026][0]="ev0306マナ写真アップ";
+	$CG_ARY[027][0]="ev0413喇叭銃";
+	$CG_ARY[028][0]="ev0410スクルージヴォイド武器レールガン構え";
+	$CG_ARY[028][1]="ev0410スクルージヴォイド武器レールガン構え_a";
+	$CG_ARY[028][2]="ev0410スクルージヴォイド武器レールガン構え_b";
+	$CG_ARY[029][0]="ev0412玄周射殺";
+	$CG_ARY[030][0]="ev0405プレゼント登場";
+	$CG_ARY[031][0]="ev0406プレゼント攻撃汎用";
+	$CG_ARY[032][0]="ev0408フライシュマン登場";
+	$CG_ARY[033][0]="ev0407マナ暴走";
+	$CG_ARY[034][0]="ev0517ガイ演説";
+	$CG_ARY[035][0]="ev0414マナ砕ける";
+	$CG_ARY[035][1]="ev0414マナ砕ける_a";
+	$CG_ARY[036][0]="ev0502シュウを庇うフライシュマン";
+	$CG_ARY[037][0]="ev0520指揮車コンテナ内部パストコックピット";
+	$CG_ARY[038][0]="ev0518エデン・ベベ顔アップ";
+	$CG_ARY[038][1]="ev0518エデン・ベベ顔アップa";
+	$CG_ARY[039][0]="ev0508スクルージヴォイド武器オラトリオ構え";
+	$CG_ARY[039][1]="ev0508スクルージヴォイド武器オラトリオ構え_b";
+	$CG_ARY[040][0]="ev0507バイク型エンドレイヴ登場";
+	$CG_ARY[041][0]="ev0510エデン・ベベ狂乱火炎放射";
+	$CG_ARY[041][1]="ev0510エデン・ベベ狂乱火炎放射_a";
+	$CG_ARY[042][0]="ev0512エデン・ベベ壁走行";
+	$CG_ARY[043][0]="ev0514エデン・ベベ頭上登場";
+	$CG_ARY[044][0]="ev0515エデン・ベベ指揮車";
+	$CG_ARY[044][1]="ev0519指揮車破壊";
+	$CG_ARY[045][0]="ev0504パストコクピット";
+	$CG_ARY[046][0]="ev0508エデン・べべ停止";
+	$CG_ARY[047][0]="ev0508エデン・べべキャンサー化";
+	$CG_ARY[048][0]="ev0531エデン・ベベキャンサー化ミサイル射出準備";
+	$CG_ARY[049][0]="ev0532エデン・ベベキャンサー化ミサイル射出";
+	$CG_ARY[050][0]="ev0525スクルージヴォイド武器聖骸布";
+	$CG_ARY[050][1]="ev0525スクルージヴォイド武器聖骸布_a";
+	$CG_ARY[051][0]="ev0523エデン・べべキャンサー化猛追";
+	$CG_ARY[052][0]="ev0522エデン・べべキャンサー化いのりソード砲撃";
+	$CG_ARY[053][0]="ev0526スクルージヴォイド武器天使の輪";
+	$CG_ARY[053][1]="ev0526スクルージヴォイド武器天使の輪_a";
+	$CG_ARY[054][0]="ev0536スクルージキャロル武器取り出し連続";
+	$CG_ARY[055][0]="ev0601スクルージヴォイド乱舞";
+	$CG_ARY[056][0]="ev0528スクルージヴォイド武器鋸";
+	$CG_ARY[056][1]="ev0528スクルージヴォイド武器鋸_c";
+	$CG_ARY[057][0]="ev0535エデン・べべキャンサー化落下ヴォイド展開_a";
+	$CG_ARY[057][1]="ev0535エデン・べべキャンサー化落下ヴォイド展開";
+	$CG_ARY[058][0]="ev0529スクルージヴォイド武器ロンギヌス";
+	$CG_ARY[059][0]="ev0537エデン・ベベキャンサー化撃破";
+	$CG_ARY[059][1]="ev0537エデン・ベベキャンサー化撃破_a";
+	$CG_ARY[060][0]="ev0608マナ結晶化";
+	$CG_ARY[061][0]="ev0607プレゼント結晶剣構え";
+	$CG_ARY[062][0]="ev0609キャロル結晶化";
+	$CG_ARY[063][0]="ev0603プレゼント能力取りこみ";
+	$CG_ARY[063][1]="ev0603プレゼント能力取りこみ_a";
+	$CG_ARY[063][2]="ev0603プレゼント能力取りこみ_b";
+	$CG_ARY[063][3]="ev0603プレゼント能力取りこみ_c";
+	$CG_ARY[064][0]="ev0602プレゼントAP結晶裸";
+	$CG_ARY[065][0]="ev0604イェット・トゥー・カム登場";
+	$CG_ARY[065][1]="ev0604イェット・トゥー・カム登場_smile";
+	$CG_ARY[065][2]="ev0604イェット・トゥー・カム登場_smile目閉じ";
+	$CG_ARY[065][3]="ev0604イェット・トゥー・カム登場_smile口開け";
+	$CG_ARY[065][4]="ev0604イェット・トゥー・カム登場_smile目閉じ口開け";
+	$CG_ARY[065][5]="ev0604イェット・トゥー・カム登場_smile母の笑み";
+	$CG_ARY[065][6]="ev0604イェット・トゥー・カム登場_smile母の笑み目閉じ";
+	$CG_ARY[065][7]="ev0604イェット・トゥー・カム登場_smile母の笑み口開け";
+	$CG_ARY[065][8]="ev0604イェット・トゥー・カム登場_smile母の笑み目閉じ口開け";
+	$CG_ARY[066][0]="ev0606スクルージヴォイド聖杯";
+	$CG_ARY[066][1]="ev0606スクルージヴォイド聖杯_a";
+	$CG_ARY[066][2]="ev0606スクルージヴォイド聖杯_b";
+	$CG_ARY[066][3]="ev0606スクルージヴォイド聖杯_c";
+	$CG_ARY[067][0]="ev0605イェット・トゥー・カムプレゼント殺し";
+	$CG_ARY[067][1]="ev0605イェット・トゥー・カムプレゼント殺し_a";
+	$CG_ARY[068][0]="ev0702スクルージキャロル凌辱";
+	$CG_ARY[069][0]="ev0703最後のヴォイド";
+	$CG_ARY[069][1]="ev0703最後のヴォイド_smile";
+	$CG_ARY[069][2]="ev0703最後のヴォイド_フル";
+	$CG_ARY[070][0]="ev0703最後のヴォイド_バッド";
+	$CG_ARY[070][1]="ev0703最後のヴォイド_バッド_smile";
+	$CG_ARY[070][2]="ev0703最後のヴォイド_バッド_rock";
+	$CG_ARY[070][3]="ev0703最後のヴォイド_バッド_bomb";
+	$CG_ARY[071][0]="ev0704スクルージ自爆右腕";
+	$CG_ARY[072][0]="ev0704クリスマスキャロル";
+	$CG_ARY[073][0]="ev0705オウマ・シュウ１０年後_スクルージ";
+	$CG_ARY[073][1]="ev0705オウマ・シュウ１０年後";
+	$CG_ARY[074][0]="ev9999congratulation";
+	$CG_ARY[075][0]="bg001001_3_六本木街並み1";
+	$CG_ARY[075][1]="bg001011_3_六本木街並み1崩壊";
+	$CG_ARY[076][0]="bg001002_3_六本木街並み2";
+	$CG_ARY[076][1]="bg001012_3_六本木街並み2崩壊";
+	$CG_ARY[077][0]="bg001005_3_高速道路高架下";
+	$CG_ARY[077][1]="bg001015_3_高速道路高架下崩壊";
+	$CG_ARY[078][0]="bg001006_3_高速道路";
+	$CG_ARY[078][1]="bg001016_3_高速道路崩壊";
+	$CG_ARY[079][0]="bg001004_1_けやき坂通り";
+	$CG_ARY[079][1]="bg001004_3_けやき坂通り";
+	$CG_ARY[079][2]="bg001004_3_けやき坂通り崩壊";
+	$CG_ARY[080][0]="bg002001_5_研究所解剖室";
+	$CG_ARY[081][0]="bg002002_5_通路1";
+	$CG_ARY[082][0]="bg002003_5_通路2";
+	$CG_ARY[083][0]="bg002004_5_ゲート前";
+	$CG_ARY[084][0]="bg002007_5_パスト部屋";
+	$CG_ARY[085][0]="bg002005_3_研究所外観";
+	$CG_ARY[086][0]="bg002006_3_研究所中庭";
+	$CG_ARY[087][0]="bg002008_3_大島全景";
+	$CG_ARY[087][1]="bg002008_6_大島全景";
+	$CG_ARY[088][0]="bg002011_2_海辺全景";
+	$CG_ARY[089][0]="bg001003_3_六本木街並み3";
+	$CG_ARY[090][0]="bg003001_1_研究室";
+	$CG_ARY[091][0]="bg003005_5_ホテル部屋";
+	$CG_ARY[092][0]="bg003006_2_六本木全景";
+	$CG_ARY[092][1]="bg003006_3_六本木全景";
+	$CG_ARY[092][2]="bg003016_3_六本木全景崩壊";
+	$CG_ARY[093][0]="bg003002_3_天王洲大学外観";
+	$CG_ARY[093][1]="bg003002_1_天王洲大学外観";
+	$CG_ARY[094][0]="bg003003_5_天王洲大学廊下";
+	$CG_ARY[095][0]="bg003004_5_天王洲大学事務室";
+	$CG_ARY[095][1]="bg003004_7_天王洲大学事務室";
+	$CG_ARY[096][0]="bg004003_5_研究室ドア";
+	$CG_ARY[097][0]="bg004001_1_教会内部";
+	$CG_ARY[097][1]="bg004011_1_教会内部火災";
+	$CG_ARY[097][2]="bg004011_1_教会内部火災_子供たち";
+	$CG_ARY[098][0]="bg004002_1_教会外観";
+	$CG_ARY[098][1]="bg004002_9_教会外観マナ暴走";
+	$CG_ARY[098][2]="bg004012_1_教会外観ドア開き";
+	$CG_ARY[099][0]="bg004007_1_湾岸倉庫";
+	$CG_ARY[100][0]="bg001007_1_六本木公園";
+	$CG_ARY[100][1]="bg001007_3_六本木公園";
+	$CG_ARY[101][0]="bg004004_5_天王洲大学倉庫";
+	$CG_ARY[102][0]="bg004006_1_天王洲大学倉庫前";
+	$CG_ARY[103][0]="bg004005_2_教会崩壊";
+	$CG_ARY[104][0]="bg004008_2_教会崩壊ロング";
+	$CG_ARY[105][0]="bg005001_3_路地裏";
+	$CG_ARY[105][1]="bg005002_3_路地裏ビル倒壊";
+	$CG_ARY[106][0]="bg900006_3_崩壊空汎用";
+	$CG_ARY[106][1]="bg900006_3_崩壊空汎用_m_x01_ogami";
+	$CG_ARY[107][0]="bg005006_3_六本木ヒルズ前";
+	$CG_ARY[107][1]="bg005007_3_六本木ヒルズ前壁面吹き飛び";
+	$CG_ARY[108][0]="bg001017_3_高速道路正面崩壊";
+	$CG_ARY[109][0]="bg001025_3_高速道路高架下倒壊";
+	$CG_ARY[110][0]="bg005003_3_六本木竜巻崩壊";
+	$CG_ARY[111][0]="bg005008_3_六本木ヒルズ内";
+	$CG_ARY[112][0]="bg005004_3_六本木ヒルズ上層階壁面上向き";
+	$CG_ARY[112][1]="bg005005_3_六本木ヒルズ上層階壁面下向き";
+	$CG_ARY[113][0]="bg006002_3_六本木ヒルズ屋上";
+	$CG_ARY[113][1]="bg006004_3_六本木ヒルズ屋上崩壊";
+	$CG_ARY[114][0]="bg006005_3_六本木惨劇";
+	$CG_ARY[115][0]="bg006001_3_六本木ヒルズ";
+	$CG_ARY[116][0]="bg006003_3_コキュートス空間";
+
+	$CG_MAXNUM=116;//Count($CG_ARY);
+	$CG_MAXPAGE=6;//(1P=16)
+}
+
+//スクロール/////////////////////////////////////////////
+//配置開始は、1:上から、2:下から、3:左から、4:右から
+function ChkScrl($num)
+{
+	$IMG_SCRL=0;
+	if($CG_ARY[$num][0]=="ev0101スクルージヴォイド取りだし"){
+		$IMG_SCRL=2;
+	}else if($CG_ARY[$num][0]=="ev0102スクルージヴォイド結晶掲げ"){
+		$IMG_SCRL=1;
+	}else if($CG_ARY[$num][0]=="ev0306マナ写真アップ"){
+		$IMG_SCRL=2;
+	}else if($CG_ARY[$num][0]=="ev_プレゼント笑い"){
+		$IMG_SCRL=2;
+	}else if($CG_ARY[$num][0]=="ev0537エデン・ベベキャンサー化撃破"){
+		$IMG_SCRL=2;
+	}else if($CG_ARY[$num][0]=="ev0537エデン・ベベキャンサー化撃破_a"){
+		$IMG_SCRL=1;
+	}else if($CG_ARY[$num][0]=="bg004008_2_教会崩壊ロング"){
+		$IMG_SCRL=1;
+	}else if($CG_ARY[$num][0]=="bg005006_3_六本木ヒルズ前"){
+		$IMG_SCRL=1;
+	}else if($CG_ARY[$num][0]=="bg005003_3_六本木竜巻崩壊"){
+		$IMG_SCRL=1;
+	}else if($CG_ARY[$num][0]=="bg005008_3_六本木ヒルズ内"){
+		$IMG_SCRL=1;
+	}else if($CG_ARY[$num][0]=="bg005004_3_六本木ヒルズ上層階壁面上向き"){
+		$IMG_SCRL=1;
+	}else if($CG_ARY[$num][0]=="bg002006_3_研究所中庭"){
+		$IMG_SCRL=3;
+	}else if($CG_ARY[$num][0]=="ev0703最後のヴォイド"&&$sub_num==2){
+		$IMG_SCRL=1;
+	}else if($CG_ARY[$num][0]=="ev0405プレゼント登場"){
+		$IMG_SCRL=2;
+	}
+}

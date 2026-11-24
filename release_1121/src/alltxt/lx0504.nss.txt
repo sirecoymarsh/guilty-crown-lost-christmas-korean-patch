@@ -1,0 +1,1581 @@
+//<continuation number="180">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0504.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0520指揮車コンテナ内部パストコックピット=true;
+	#ev0518エデン・ベベ顔アップ=true;
+	#ev0518エデン・ベベ顔アップa=true;
+	#bg001017_3_高速道路正面崩壊=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0505_00.nss";
+
+}
+
+
+scene lx0504.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+	PrintBG("上背景", 30000);
+
+//―――――――――――――――――――――――――――――――――――――――
+//あきゅん「※：突進シーン１：そのうち読み込み位置を移動させる」
+
+	CreateRubble("絵秋演瓦礫一",2910,128,700,1000,0);
+	CreateRubble("絵秋演瓦礫二",2910,256,700,1000,0);
+
+	CreateExplosion("絵秋演爆破砕三",2910,212,200,1,0);//マクロ調整希望
+	CreateRubble("絵秋演瓦礫三",2920,384,580,800,0);
+	CreateRubble("絵秋演瓦礫三一",2920,469,580,800,0);
+	CreateRubble("絵秋演瓦礫三二",2920,554,580,800,0);
+
+	CreateExplosion("絵秋演爆破砕四",3010,468,200,1,0);//マクロ調整希望
+	CreateRubble("絵秋演瓦礫四",2920,639,580,800,0);
+	CreateRubble("絵秋演瓦礫四二",2920,724,580,800,0);
+	CreateRubble("絵秋演瓦礫四三",2920,896,580,800,0);
+
+	CreateRubble("絵秋演瓦礫五",2910,1024,700,1000,0);
+
+	Request("@絵秋演瓦礫一*", Lock);
+	Request("@絵秋演瓦礫二*", Lock);
+	Request("@絵秋演瓦礫三*", Lock);
+	Request("@絵秋演瓦礫四*", Lock);
+	Request("@絵秋演爆破砕三*", Lock);
+	Request("@絵秋演爆破砕四*", Lock);
+	Request("@絵秋演瓦礫五*", Lock);
+
+//あきゅん「※：突進シーン１：そのうち読み込み位置を移動させる、ここまで」
+
+
+
+	SoundPlay("@lx003",3000,450,true);
+
+
+	$SYSTEM_effect_lens_curvature = 5000;
+	$SYSTEM_effect_lens_distance = 5;
+
+	//CreateColorSP("絵色黒", 9900, "000000");
+
+	CreateTextureSPadd("絵演背景", 5000, Center, Middle, "cg/ef/efエデンベベCP.png");
+	Fade("絵演背景", 0, 800, null, true);
+
+	CreateCamera("Ｃ", 0, 150, 1000);
+	SetAlias("Ｃ","Ｃ");
+	MoveCamera("Ｃ", 0, @0, @0, 2000, null, true);
+
+
+	CreateTextureSP("@Ｃ/絵演背景", 0, Center, Middle, "cg/bg/l/bg001017_3_高速道路正面崩壊_l.jpg");
+
+	CreateEffect("絵演覆蓮珠", 4900, Center, Middle, 1200, 1200, "Lens");
+	SetAlias("絵演覆蓮珠", "絵演覆蓮珠");
+
+
+	CreateColorEX("co01", 15000, "000000");
+	Fade("co01", 0, 1000, null, true);
+
+	FadeDelete("上背景", 0, null, true);
+
+
+
+
+
+
+
+
+
+
+
+//？？：※※このファイル、エデン・ベベの脅威をたっぷりと描写。
+
+
+//◆◆パストのコクピット
+//パスト視点
+
+//錯乱しているパスト。何かに怯えている。
+
+//あきゅん「演出予定：最初は真っ暗の画面、フライシュマンの中で怯えている」
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400010a04">
+｡ｶｽﾈｾ釭ｦ｡ｦ ｽﾈｾ﨨釭ｦ｡ｦ｡ｷ
+
+//（泣きながら）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//？？：地の文ペンディング。詩か何かの引用にしたい。神曲？
+//ああ、おそろしいものがやってくる。
+//わたしはおそろしい。
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400020a04">
+｡ｶ｡ｦ｡ｦｹｫｼｭｿｦ｡ｦ ｹｫｼｷｴﾜ ｸｻﾀﾌｾﾟ｡ｦ｡ｦ｡ｷ
+
+//	Fw("fwパスト_通常_normal");
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400030a04">
+《사라져 버려…… 전부 사라져 버려》
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//？？：地の文ペンディング。
+
+//やがてパストの泣き声が止む。
+
+
+
+
+	TextBoxDelete();
+
+
+	CreateTextureSP("ev01", 13000, Center, Middle, "cg/ev/m/ev0520指揮車コンテナ内部パストコックピット_m.jpg");
+	CreateTextureEX("ev02", 13000, 0, Middle, "cg/ev/l/ev0520指揮車コンテナ内部パストコックピット_l.jpg");
+	CreateTextureSPmul("ef01", 13000, Center, Middle, "cg/ef/ef_blackline03.png");
+	Request("ev02", Smoothing);
+	Zoom("ev02", 0, 1500, 1500, null, true);
+
+	MoveFTP1("@ev01", 13500, 5, 5);
+
+	CreateSE("SE01","se人体_心臓_鼓動01L");
+	MusicStart("SE01",1000,350,0,700,null,true);
+
+
+	Fade("co01", 1500, 200, null, true);
+
+
+//あきゅん「※：突進シーン２：そのうち読み込み位置を移動」
+
+	CreateRubbleAK("絵秋演瓦礫次二一",2910,@490,@370,180,0);
+	CreateRubbleAK("絵秋演瓦礫次二二",2910,@540,@370,180,0);
+
+	CreateExplosionAK("絵秋演爆破次砕二三",2910,@500,@380,200,0);
+	CreateRubbleAK("絵秋演瓦礫次二三",2920,@500,@380,200,0);
+
+	CreateRubbleAK("絵秋演瓦礫次二三一",2920,@540,@380,220,0);
+	CreateRubbleAK("絵秋演瓦礫次二三二",2920,@520,@390,250,0);
+
+	Request("@絵秋演瓦礫次二一*", Lock);
+	Request("@絵秋演瓦礫次二二*", Lock);
+	Request("@絵秋演瓦礫次二三*", Lock);
+	Request("@絵秋演爆破次砕二三*", Lock);
+
+//あきゅん「※：突進シーン２：そのうち読み込み位置を移動させる、ここまで」
+
+
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400040a04">
+｡ｶ｡ｦ｡ｦｾﾈ ｵﾅ｡ｷ
+
+
+//	Fw("fwパスト_通常_normal");
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400050a04">
+《그런 거 용서 못 해&.
+　절대로 인정 못 해》
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400060a04">
+《무서운 거&, 해치울 거야》
+
+//（怒り。決意）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	Move("ev02", 60000, -1000, @0, null, false);
+	Fade("ev02", 1500, 1000, null, true);
+
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400070a04">
+《……하지만 지금까지 쓰던 인형으론 안 돼》
+
+//	Fw("fwパスト_通常_normal");
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400080a04">
+《더&, 더…… 힘센 인형》
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400090a04">
+《<RUBY TEXT="티탄">거인</RUBY>보다 힘세고&, <RUBY TEXT="하르피이아">괴조</RUBY>보다 날쌔고&, <RUBY TEXT="케르베로스">마견</RUBY>보다 날카로운 송곳니!》
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	SetVolumeEX("SE*", 1000, 0, null);
+
+	Fade("co01", 0, 1000, null, true);
+
+	MoveFTP1stop();
+
+	Delete("ev*");
+	Delete("ef*");
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400100a04">
+｡ｶｱﾗｷ｡!｡ｷ
+
+//エデン・ベベのシルエット起動。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//あきゅん「演出予定：エデン・ベベに移動し、ベベ起動。マシンＩＦが起動するアニメとか」
+
+
+
+
+	TextBoxDelete(0);
+
+
+
+
+	CreateSE("SE02","se日常_機械_起動音01");
+	CreateSE("SE03","se日常_機械_起動音02L");
+	CreateSE("SE04","se日常_機械_起動音03");
+	CreateSE("SE05","se戦闘_メカ_駆動07");
+	CreateSE("SE06","se特殊_鎧_レース_加速03");
+	CreateSE("SE07","se特殊_格納庫_開く");
+	CreateSE("SE08","se戦闘_動作_突進03");
+	CreateSE("SE09","se人体_足音_着地08");
+	CreateSE("SE10","se戦闘_破壊_爆発01");
+
+	CreateTextureSP("ev01", 13000, Center, Middle, "cg/ev/ev0518エデン・ベベ顔アップ.jpg");
+	CreateTextureEX("ev02", 13000, Center, Middle, "cg/ev/ev0518エデン・ベベ顔アップa.jpg");
+
+
+	MusicStart("SE07",0,2000,0,1000,null,false);
+
+//あきゅん「※：ガトリング地面掃射シーン：そのうち読み込み位置を移動」
+
+	CreateCameraEX("絵秋写真機", 0, 0, 1000);
+	CreateTextureEX("@絵秋写真機/絵秋写真背景", 5, Center, Middle, "cg/bg/bg001016_3_高速道路崩壊.jpg");
+	Zoom("@絵秋写真機/絵秋写真背景", 0, 2000, 2000, null, true);
+
+	CreateRubble("@絵秋写真機/絵秋演瓦礫砕上一",700,800,580,0,0);
+	CreateRubble("@絵秋写真機/絵秋演瓦礫砕上二",500,854,550,0,0);
+	CreateRubble("@絵秋写真機/絵秋演瓦礫砕上三",300,684,520,0,0);
+	CreateRubble("@絵秋写真機/絵秋演瓦礫砕上四",200,514,490,0,0);
+	CreateRubble("@絵秋写真機/絵秋演瓦礫砕上五",150,344,460,0,0);
+	CreateRubble("@絵秋写真機/絵秋演瓦礫砕上六",100,170,430,0,0);
+	CreateRubble("@絵秋写真機/絵秋演瓦礫砕上七",50,0,400,0,0);
+	CreateRubble("@絵秋写真機/絵秋演瓦礫砕上八",300,-150,400,0,0);
+	Request("@絵秋写真機", Lock);
+	Request("@絵秋写真機/絵秋*", Lock);
+
+//あきゅん「※：ガトリング地面掃射シーン：そのうち読み込み位置を移動させる、ここまで」
+
+
+	Fade("co01", 2000, 0, null, true);
+
+	Wait(500);
+
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+	MusicStart("SE03",2000,700,0,1000,null,true);
+	Fade("ev02", 1000, 1000, null, true);
+
+	Wait(1000);
+
+	MusicStart("SE04",0,700,0,1000,null,false);
+
+	Wait(500);
+
+	Fade("co01", 2000, 1000, null, true);
+	Wait(2000);
+	SetVolumeEX("SE03", 1000, 0, null);
+	SetVolumeEX("SE04", 1000, 0, null);
+	SetVolumeEX("SE02", 1000, 0, null);
+
+	MusicStart("SE05",0,700,0,1000,null,false);
+	Wait(1500);
+	MusicStart("SE08",0,700,0,1000,null,false);
+	Wait(500);
+	MusicStart("SE06",0,700,0,1000,null,false);
+
+	Delete("ev01");
+	Delete("ev02");
+
+	Wait(3000);
+
+	SetVolumeEX("SE06", 500, 0, null);
+
+	MusicStart("SE09",0,700,0,1000,null,false);
+	MusicStart("SE10",0,700,0,1000,null,false);
+
+	Shake("@Ｃ/絵演背景", 1000, 0, 10, 0, 0, 1000, null, false);
+
+	FadeDelete("co01", 1000, null, false);
+	MoveCamera("Ｃ", 500, @0, 200, 2000, AxlDxl, true);
+	MoveCamera("Ｃ", 500, @0, 100, 2000, Axl1, true);
+
+
+
+	CreateEffectDropSP("dr01", 14000, 0, 0, 1024, 576, 10, 10, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("dr01", 0, @0, @0, 25, null,true);
+	Request("dr01", AddRender);
+	Zoom("dr01", 0, 2500, 2500, null, true);
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400110a04">
+《이게 내 힘! 내 새로운 <RUBY TEXT="몸">육체</RUBY>!》
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//あきゅん「演出予定：ベベの足元アップっぽく、ドシーンと一歩踏み出しその衝撃を表現」
+
+
+//あきゅん「演出予定：足元から上部に向かってパンして、登場シーンキメ」
+
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreatePlainSP("pl01", 15000);
+
+	Delete("Ｃ/*");
+	Delete("Ｃ*");
+	Fade("dr01", 0, 1000, null, true);
+
+	CreateTextureSP("bg01", 9500, -200, -430, "cg/bg/l/bg001011_3_六本木街並み1崩壊_l.jpg");
+	CreateTextureSP("ev01", 10000, 200, -6500, "cg/ma/エデンベベ_立ち_斜め前.png");
+	CreateTextureEX("02ev02", 11000, -200, 230, "cg/bg/bg001017_3_高速道路正面崩壊.jpg");
+	CreateTextureEX("02ev03", 11002, 150, -363, "cg/ma/x/エデンベベ_直立_斜め前_x01_ogami.png");
+
+	SetShade("02ev02", SEMIHEAVY);
+	Zoom("02ev02", 0, 3000, 3000, null, true);
+
+	CreateMovieEX("mv01", 11001, 100, -50, true, false, "dx/mvfire01.ngs");
+	Request("mv01", AddRender);
+	Zoom("mv01", 0, 3500, 3500, null, true);
+	Rotate("mv01", 0, -30, @0, 0, null,true);
+
+	Request("mv01", Stop);
+
+	CreateTextureEX("ef01", 9998, 300, 300, "cg/ef/x/ef_rubble02_x01.png");
+	CreateTextureSP("ef02", 10000, 300, 700, "cg/ef/x/ef_rubble01_x03.png");
+	CreateTextureSP("ef03", 10001, 300, 700, "cg/ef/x/ef_rubble03_x03.png");
+	CreateTextureSP("ef04", 10003, 300, 700, "cg/ef/x/ef_rubble02_x04.png");
+	CreateTextureSP("ef05", 10004, 300, 700, "cg/ef/x/ef_rubble01_x90.png");
+	CreateTextureSP("ef06", 10002, 300, 800, "cg/ef/ef_smoke06.png");
+	Fade("ef06", 0, 500, null, true);
+	CreateTextureEX("ef07", 9999, 300, 100, "cg/ef/ef_smoke02.png");
+	Zoom("ef07", 0, 4000, 0, null, true);
+	Rotate("ef07", 0, @0, @0, -10, null,true);
+	CreateTextureEX("ef08", 10002, 700, 100, "cg/ef/ef_smoke02.png");
+	Zoom("ef08", 0, 6000, 0, null, true);
+	Rotate("ef08", 0, @0, @0, 10, null,true);
+
+	Request("ef*", Smoothing);
+
+
+	Zoom("ef01", 0, 2000, 1000, null, true);
+	Zoom("ef02", 0, 2000, 1000, null, true);
+	Zoom("ef03", 0, 2000, 1000, null, true);
+	Zoom("ef04", 0, 1500, 1500, null, true);
+	Zoom("ef05", 0, 2000, 2000, null, true);
+	Zoom("ef06", 0, 2000, 2000, null, true);
+
+	CreateSE("SE01","se戦闘_動作_突進04");
+	CreateSE("SE02","se戦闘_破壊_コンクリート03");
+	CreateSE("SE03","se戦闘_破壊_建物01");
+	CreateSE("SE04L","se背景_ガヤ_建物炎上_L");
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+
+	SoundPlay("@lx003",3000,850,true);
+
+	FadeDelete("pl01", 400, null, false);
+
+
+	Move("bg01", 600, @0, -530, null, 300);
+	Move("ev01", 300, -60, -1652, null, 268);
+
+	MusicStart("SE02",0,1000,0,1000,null,false);
+	MusicStart("SE03",0,700,0,1000,null,false);
+
+	Move("ef01", 700, @0, 300, Dxl3, false);
+	FadeFF4("ef*", 3000, 2000, 1000, 0, 0, null, false);
+	FadeFF4("bg*", 3000, 2000, 1000, 0, 0, null, false);
+	//FadeFF4("ev*", 3000, 2000, 1000, 0, 0, null, false);
+	Zoom("ef01", 2000, 2000, 1500, Dxl3, false);
+	Zoom("ef06", 2000, 2500, 2500, Dxl3, false);
+	Zoom("ef07", 2000, 5000, 5000, Dxl3, false);
+	Zoom("ef08", 2000, 6000, 7000, Dxl3, false);
+	Shake("ef0*", 2000, 00, 20, 0, 0, 1000, null, false);
+	Shake("bg01", 2000, 0, 10, 0, 0, 1000, null, false);
+	Shake("ev01", 2000, 0, 15, 0, 0, 1000, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("ef07", 0, 1000, null, true);
+	Fade("ef08", 0, 900, null, true);
+
+	Rotate("ef02", 3000, @0, @0, -20, null,false);
+	Rotate("ef03", 3000, @0, @0, 30, null,false);
+	Move("ef02", 2000, 100, 400, Dxl3, false);
+	Move("ef03", 2000, 700, 286, Dxl3, false);
+	Move("ef04", 2000, @0, 300, Dxl3, false);
+	Move("ef05", 2000, 414, 328, Dxl3, 1500);
+
+	Move("ef*", 2000, @0, @150, Axl3, 1000);
+
+	MusicStart("SE04L",2000,400,0,1000,null,true);
+	Request("mv01", Play);
+
+	Fade("mv01", 1500, 1000, Axl1, false);
+	Fade("02ev02", 1000, 1000, null, false);
+	Fade("02ev03", 1000, 1000, null, false);
+	Move("mv01", 4000, @-60, 50, null, false);
+	Move("02ev02", 4000, @-20, 380, null, false);
+	Move("02ev03", 4000, @-50, -5, null, true);
+
+	Delete("ef*");
+	Delete("ev*");
+	Delete("bg*");
+
+
+	Wait(500);
+
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400120a04">
+｡ｶ｡ｪ｡ｪｿ｡ｵｧ ｺ｣ｺ｣!｡ｷ
+
+//エデン・ベベ全身。怪獣っぽく演出。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400130a04">
+《전부&, 해치울 거야!
+　무서운 것&, 나한테서 빼앗아 가는 것&, 전부! 전부!》
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreatePlainSP("pl01", 15000);
+
+	Delete("02ev*");
+
+	CreateTextureSP("bg01", 11000, -200, 230, "cg/bg/bg001017_3_高速道路正面崩壊.jpg");
+	CreateTextureSP("ev01", 11002, 330, -130, "cg/ma/x/エデンベベ_立ち_斜め前_x01_ogami.png");
+	Rotate("ev01", 0, @0, @0, 20, null,true);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	SetShade("bg01", SEMIHEAVY);
+	Rotate("ev01", 0, @0, @0, 5, null,true);
+	Request("ev01", Smoothing);
+
+	Move("mv01", 0, -500, @0, null, true);
+
+	CreateSE("SE01","se戦闘_メカ_駆動02");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	FadeDelete("pl01", 300, null, false);
+
+	Rotate("ev01", 500, @0, @0, 0, Dxl1,false);
+	Move("ev01", 500, 176, -100, Dxl1, true);
+	Shake("ev01", 300, 1, 2, 0, 0, 1000, null, false);
+
+	Wait(1000);
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400140a04">
+｡ｶﾀﾌｹ｡ｾﾟｸｻｷﾎ｡ｦ｡ｦ ﾀﾌｹ｡ｾﾟｸｻｷﾎ｡ｦ｡ｦ ｳｪｴﾂ｡ｦ｡ｦ!｡ｷ
+
+//（少しだけしっかりとした口調に）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//あきゅん「演出予定：光学迷彩起動、ムービーとかかな」
+
+
+	TextBoxDelete();
+	Wait(16);
+
+	CreateSE("SE01","se戦闘_メカ_ステレス解除");
+	CreateSE("SE02","se日常_機械_電子ショート");
+
+	Position("ev01", $XPos, $YPos);
+	CreateMaskEX("ev01形", 11002, $XPos, $YPos, "cg/ma/x/エデンベベ_立ち_斜め前_x01_ogami.png", false);
+	//Zoom("ev01形", 0, 450, 450, null, true);
+
+	CreateEffect("ev01形/揺", 11003, 0, 0, 1024, 576, "Plain");
+	SetAlias("ev01形/揺","ev01形/揺");
+	Fade("ev01形/揺", 0, 0, null, true);
+	Request("ev01形/揺", SubRender);
+
+	CreateTextureEXover("ev01形/光沢", 11003, Center, Middle, "cg/data/noize_01_00_0.png");
+	Zoom("ev01形/光沢", 0, 2000, 2000, null, true);
+
+	//Rotate("ev01形/揺", 0, @0, @0, @40, null,false);
+	//Zoom("ev01形/揺", 0, 900, 900, null, true);
+
+	Draw();
+
+	Request("ev01形/揺", Passive);
+
+	FadeDelete("上背景", 500, null, true);
+
+	Wait(300);
+
+	MusicStart("SE02",0,1000,0,2000,null,false);
+	SetFrequency("SE02", 2000, 200, null);
+	CreateProcessEX("プロセス", "LProcAK_lx0506_03Act");
+	Request("プロセス", Start);
+
+	SetStream("SE01", 1000);
+	MusicStart("SE01",0,1000,0,1000,null,false);
+	SetFrequency("SE01", 2000, 200, null);
+
+	Fade("ev01形/揺", 200, 1000, null, true);
+	DrawEffect("ev01形/揺", 1000, "Ripple", 0, 1000, null);
+
+	SetVolumeEX("SE02", 2000, 0, null);
+	FadeDelete("ev01", 500, null, true);
+	FadeDelete("ev01形/揺", 2000, null, true);
+	SetVolumeEX("SE01", 2000, 0, null);
+	Request("プロセス", Disused);
+
+
+
+	//おがみ：★演出　ムービーきたら差し込み
+	//CreateMovieEX("mv01", 500, 257, 144, true, true, "dx/mvve01.ngs");
+	//Zoom("mv01", 0, 2000, 2000, null, true);
+	//Fade("mv01", 200, 1000, null, true);
+	SetVolumeEX("SE04L", 1000, 0, null);
+
+	CreateSE("SE11","se戦闘_破壊_コンクリート03");
+	CreateSE("SE12","se戦闘_メカ_移動02");
+	MusicStart("SE11",0,700,0,1200,null,false);
+
+	CreateColorSP("絵黒幕", 19000, "BLACK");
+	DrawTransition("絵黒幕", 200, 0, 1000, 100, null, "cg/data/slide_01_01_0.png", true);
+
+	MusicStart("SE12",0,700,0,1200,null,false);
+
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX05/0400150a04">
+｡ｶｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆ!｡ｷ
+
+//（ハウリング加工）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//エデン・ベベ咆吼
+
+///////////////////////////////////////
+
+
+
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+
+//ＳＥ：エンドレイヴによる破壊音
+
+//あきゅん「※：左進行方向に向かって走るスクルージ、カメラが左進行方向に大きく動く」
+//あきゅん「※：ここの演出はスクルージのいる方向に左右されるので、ここまでに左に走るスクルージを印象づけさせておく」
+
+	PrintGO("上背景", 25000);
+	//CreateColorSP("絵秋色黒", 5000, "000000");
+
+	Delete("ev/*");
+	Delete("ev*");
+	Delete("ef*");
+	Delete("mv*");
+	Delete("dr*");
+	Delete("bg*");
+	Delete("絵*");
+	Delete("Ｃ/*");
+	Delete("Ｃ*");
+
+
+
+//あきゅん「※：３面対峙：そのうち読み込み位置を移動」
+
+	CreateCameraEX("絵秋写真機二", 775, 0, 1000);
+	Wait(16);
+	CreateTextureEX("@絵秋写真機二/絵秋写真背景", 5, 280, -80, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	CreateTextureEX("@絵秋写真機二/絵秋写真背景朧", 5, 280, -80, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	Rotate("@絵秋写真機二/絵秋写真背景*", 0, @0, 180, @0, null,true);
+	Zoom("@絵秋写真機二/絵秋写真背景*", 0, 2000, 2000, null, true);
+	SetShade("@絵秋写真機二/絵秋写真背景朧", SEMIHEAVY);
+	Request("@絵秋写真機二/絵秋写真背景", Smoothing);
+
+	CreateTextureEX("@絵秋写真機二/絵秋人淑", 250, 800, -20, "cg/st/stスクルージ_戦闘_normal.png");
+	CreateTextureEX("@絵秋写真機二/絵秋人淑朧", 250, 800, -20, "cg/st/stスクルージ_戦闘_normal.png");
+	CreateTextureEX("@絵秋写真機二/絵秋人友", 200, 900, 64, "cg/st/stプレゼント_通常_smile1.png");
+	CreateTextureEX("@絵秋写真機二/絵秋人友影", 200, 890, 64, "cg/st/x/stプレゼント_通常_normal_x影.png");
+	Zoom("@絵秋写真機二/絵秋人*", 0, 300, 300, null, true);
+	Zoom("@絵秋写真機二/絵秋人友*", 0, 250, 250, null, true);
+	SetShade("@絵秋写真機二/絵秋人友朧*", SEMIHEAVY);
+
+	CreateTextureEX("@絵秋写真機二/絵秋機天朧", 500, -1190, -960, "cg/ma/x/エデンベベ_伏せ_後2_x朧H.png");
+	CreateTextureEX("@絵秋写真機二/絵秋機天", 500, -590, -960, "cg/ma/エデンベベ_伏せ_後2.png");
+	Zoom("@絵秋写真機二/絵秋機*", 0, 375, 375, null, true);
+	Request("@絵秋写真機二/絵秋*", Smoothing);
+
+	CreateTextureEX("@絵秋写真機二/絵秋演土煙", 510, 950, 100, "cg/ef/ef_smoke04.png");
+	SetVertex("@絵秋写真機二/絵秋演土煙", left, bottom);
+	Fade("@絵秋写真機二/絵秋演土煙", 0, 1000, null, true);
+	Zoom("@絵秋写真機二/絵秋演土煙", 0, 0, 0, null, true);
+
+	Request("@絵秋写真機二", Lock);
+	Request("@絵秋写真機二/絵秋*", Lock);
+
+//あきゅん「※：３面対峙：そのうち読み込み位置を移動させる、ここまで」
+//―――――――――――――――――――――――――――――――――――――――
+
+
+//あきゅん「※：横スクロールに強い壁近影の演出背景欲しい……」
+	CreateTextureEX("絵秋背景", 2110, -3584, -600, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	Zoom("絵秋背景", 0, 8000, 8000, null, true);
+	Request("絵秋背景", Smoothing);
+
+	CreateTextureSP("絵秋移動背景壱", 2010, -4340, Middle, "cg/ef/efbg_効果91.jpg");
+	CreateTextureSP("絵秋移動背景弐", 2010, -4340, Middle, "cg/ef/efbg_効果91.jpg");
+	CreateSCR1("@絵秋移動背景壱","@絵秋移動背景弐",400,0,0);
+
+
+	CreateColorEX("絵色黒", 3000, "000000");
+	DrawTransition("絵色黒", 0, 0, 0, 100, null, "cg/data/blind_01_00_0.png", true);
+	Fade("絵色黒", 0, 1000, null, true);
+
+	CreateSE("SEAK91","se人体_動作_跳躍03");
+	MusicStart("SEAK91",0,700,0,1000,null,false);
+
+	Delete("@bg01");
+	FadeDelete("上背景", 200, null, true);
+
+
+//あきゅん「※：カメラ移動」
+
+	DrawDelete("絵秋色黒", 400, 100, null, "circle_01_00_1", true);
+
+	Request("@絵秋演瓦礫一*", UnLock);
+	Request("@絵秋演瓦礫二*", UnLock);
+	Request("@絵秋演瓦礫三*", UnLock);
+	Request("@絵秋演瓦礫四*", UnLock);
+	Request("@絵秋演爆破砕三*", UnLock);
+	Request("@絵秋演爆破砕四*", UnLock);
+	Request("@絵秋演瓦礫五*", UnLock);
+
+//あきゅん「※：背景横アングルからスクルージの方（右）に向かって爆砕が近づいてくる」
+
+	Wait(500);
+
+	Move("絵秋背景", 1200, -170, @0, Dxl3, false);
+	Fade("絵秋背景", 200, 1000, null, true);
+	SCR1stop();
+	Fade("@絵秋移動背景*", 0, 0, null, true);
+
+	Wait(200);
+
+	CreateSE("SEAK01","se戦闘_破壊_建物03");
+	CreateSE("SEAK02","se戦闘_破壊_建物02");
+	CreateSE("SEAK03","se戦闘_破壊_爆発04");
+	CreateSE("SEAK04","se戦闘_破壊_爆発02");
+	CreateSE("SEAK05","se戦闘_破壊_建物01");
+
+	WaitAction("@絵秋背景", null);
+
+	MusicStart("SEAK01",0,1000,-200,1000,null,false);
+	Shake("絵秋背景", 300, 0, 40, 0, 0, 1000, Dxl1, false);
+	GoRubble("@絵秋演瓦礫一",1200);
+
+	Wait(600);
+
+	MusicStart("SEAK02",0,600,-100,1000,null,false);
+	Shake("絵秋背景", 60, 0, 10, 0, 0, 1000, Dxl1, false);
+	GoRubble("@絵秋演瓦礫二",1200);
+
+	Wait(90);
+
+	MusicStart("SEAK03",0,700,0,1000,null,false);
+	Shake("絵秋背景", 60, 0, 16, 0, 0, 1000, Dxl1, false);
+	GoRubble("@絵秋演瓦礫三",900);
+	GoExplosion("@絵秋演爆破砕三",1);
+
+	Wait(30);
+
+	GoRubble("@絵秋演瓦礫三一",900);
+	Wait(90);
+	GoRubble("@絵秋演瓦礫三二",900);
+	Wait(90);
+
+	MusicStart("SEAK04",0,800,150,1000,null,false);
+	Shake("絵秋背景", 60, 0, 32, 0, 0, 1000, Dxl1, false);
+	GoRubble("@絵秋演瓦礫四",900);
+	GoExplosion("@絵秋演爆破砕四",3);
+
+	Wait(30);
+
+	GoRubble("@絵秋演瓦礫四一",900);
+	Wait(90);
+	GoRubble("@絵秋演瓦礫四二",1500);
+	Wait(90);
+
+	MusicStart("SEAK05",0,1000,300,1000,null,false);
+	Shake("絵秋背景", 60, 0, 64, 0, 0, 1000, Dxl1, false);
+	GoRubble("@絵秋演瓦礫五",2100);
+	Wait(300);
+	DrawTransition("絵色黒", 1400, 0, 1000, 100, null, "cg/data/effect_01_00_0.png", true);
+
+	PrintGO("上背景", 10000);
+	CreateTextureSP("絵秋背景", 10, Center, Middle, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	DrawDelete("上背景", 300, 100, null, "effect_01_00_0", false);
+
+	CreateSE("SELPA011","se戦闘_メカ_パイルバンカー01");
+	MusicStartSet("SELPA011",300,0,1000,null,false);
+	CreateSE("SELPA012","se戦闘_破壊_建物02");
+	MusicStartSet("SELPA012",300,0,1000,null,false);
+	CreateSE("SELPA013","se戦闘_破壊_建物03");
+	MusicStartSet("SELPA013",350,0,1000,null,false);
+	CreateSE("SELPA014","se戦闘_破壊_建物01");
+	MusicStartSet("SELPA014",400,0,1000,null,false);
+	CreateSE("SELPA015","se戦闘_破壊_建物01");
+	MusicStartSet("SELPA015",400,0,1000,null,false);
+
+
+	CreateSE("SELPA021","se戦闘_メカ_パイルバンカー01");
+	MusicStartSet("SELPA021",300,0,1000,null,false);
+	CreateSE("SELPA022","se戦闘_破壊_建物02");
+	MusicStartSet("SELPA022",300,0,1000,null,false);
+	CreateSE("SELPA023","se戦闘_破壊_爆発02");
+	MusicStartSet("SELPA023",350,0,1000,null,false);
+	CreateSE("SELPA024","se戦闘_破壊_建物01");
+	MusicStartSet("SELPA024",400,0,1000,null,false);
+	CreateSE("SELPA025","se戦闘_破壊_建物02");
+	MusicStartSet("SELPA025",400,0,1000,null,false);
+	CreateSE("SELPA026","se戦闘_破壊_爆発01");
+	MusicStartSet("SELPA026",400,0,1000,null,false);
+
+	CreatePlainSP("絵秋演振動背景", 20);
+	CreateProcessEX("プロセス", "LProcAK_lx0010_01Act");
+	Request("プロセス", Start);
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX00/1000280a01">
+｡ｸ｡ｪ｡ｪ｡ｪ｡ｪ!｡ｹ
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	CreateSE("SEAK01","se戦闘_破壊_建物02");
+	SetStream("@SEAK01", 430);
+
+	CreateSE("SEAK02","se戦闘_破壊_建物02");
+	SetStream("@SEAK02", 430);
+
+	CreateSE("SEAK03","se戦闘_破壊_爆発04");
+	SetStream("@SEAK03", 150);
+
+	Request("@絵秋演瓦礫次二一*", UnLock);
+	Request("@絵秋演瓦礫次二二*", UnLock);
+	MusicStart("@SEAK01",0,600,0,1000,null,false);
+	GoRubbleAK("@絵秋演瓦礫次二一",180);
+	Wait(150);
+	MusicStart("@SEAK02",0,600,0,900,null,false);
+	GoRubbleAK("@絵秋演瓦礫次二二",180);
+	MusicStart("@SEAK03",0,600,0,900,null,false);
+	GoExplosionAK("@絵秋演爆破次砕二三",200);
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0131]
+ｴｫｾﾕｿ｡ｼｭ ｾﾆｽｺﾆﾈﾆｮｰ｡ ｱｩ ｳｪｰ｣ｴﾙ&.
+가로등이 쓰러지고&, 자동차가 날아간다&.
+
+하지만 <RUBY TEXT="······">아무것도 없다</RUBY>&. 오직 파괴의 흔적과 굉음&, 그리고 거대한 압박감만이 덮쳐 온다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	//TextBoxDelete(0);
+	//Wait(16);
+
+	CreateSE("SEAK11","se戦闘_破壊_建物02");
+	SetStream("SEAK11", 430);
+
+	CreateSE("SEAK12","se戦闘_破壊_建物02");
+	SetStream("SEAK12", 430);
+
+	CreateSE("SEAK13","se戦闘_破壊_建物02");
+	SetStream("SEAK13", 430);
+
+	Request("@絵秋演瓦礫次二三*", UnLock);
+	Request("@絵秋演爆破次砕二三*", UnLock);
+
+	MusicStart("SEAK11",0,600,-150,900,null,false);
+	GoRubbleAK("@絵秋演瓦礫次二三",200);
+	Wait(200);
+	MusicStart("SEAK11",0,600,150,1050,null,false);
+	GoRubbleAK("@絵秋演瓦礫次二三一",220);
+	Wait(200);
+	MusicStart("SEAK11",0,600,0,1000,null,false);
+	GoRubbleAK("@絵秋演瓦礫次二三二",250);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0132g]
+거대한 프레스기에 말려든 것처럼 길에 쓰러져 있던 바이크가 납작하게 구겨진다&.
+
+ｰ｡ｼﾖｸｰ ﾅﾊﾅｩｰ｡ ｺﾒﾀｻ ｻﾕｴﾂ ｼ｣&, ﾇｳｰ貘ﾌ ｺﾎﾀﾚｿｬｽｺｷｴｰﾔ ﾀﾏｱﾗｷｯﾁｳｴﾙ&.
+
+//　ぐにゃりとゆがみ、巨大な物体が姿を現す。
+
+//エデン・ベベ出現。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete();
+	Wait(16);
+
+
+	Request("@プロセス", Stop);
+	SetVolumeEX("@SELPA*", 3000, 0, null);
+
+	CreateSE("SEAK01","se戦闘_破壊_爆発04");
+	SetStream("SEAK02", 100);
+	CreateSE("SEAK02","se戦闘_破壊_建物02");
+	SetStream("SEAK02", 400);
+
+	CreateProcessEX("プロセスムービーサウンド", "LProcAK_lx0010_03Act");
+
+	CreateSE("SELPA11","se戦闘_メカ_ステレス解除");
+	SetStream("@SELPA11", 1000);
+	MusicStartSet("@SELPA11",1500,0,1000,null,false);
+
+	CreateSE("SELPA12","se戦闘_メカ_駆動02");
+	MusicStartSet("@SELPA12",700,0,1000,null,false);
+	CreateSE("SELPA13","se戦闘_メカ_移動01");
+	SetStream("@SELPA13", 300);
+	MusicStartSet("@SELPA13",700,0,1000,null,false);
+
+//光学迷彩が解け、景色が不自然に歪む。
+MenuLock(true);
+	CreateMovieEX("絵演動画二", 3000, 0, 0, false, false, "dx/mv_eddash.ngs");
+	Request("絵演動画二", Stop);
+
+	CreateMovieEX("絵演動画", 3000, -160, -285, false, false, "dx/mv_edcamo.ngs");
+	Request("絵演動画", Smoothing);
+	Zoom("絵演動画", 0, 2000, 2000, null, true);
+	SetBlur("絵演動画", true, 5, 1000, 100, true);
+	Fade("絵演動画", 0, 1000, null, true);
+	Request("プロセスムービーサウンド", Start);
+
+	Wait(1100);
+	MusicStart("SEAK01",0,600,0,1000,null,false);
+	MusicStart("SEAK02",0,700,0,1000,null,false);
+	FadeFFR("絵演動画", 0,1000, 300, 0, 0, 100,null, true);
+	Wait(200);
+	Zoom("絵演動画", 300, 1000, 1000, null, false);
+	Move("絵演動画", 300, 0, 0, null, true);
+
+	$SETime = RemainTime("@絵演動画");
+	Wait($SETime);
+
+	CreateSE("SEAK01","se戦闘_メカ_移動02");
+	Fade("絵演動画二", 0, 1000, null, true);
+	Request("絵演動画二", Play);
+	Delete("絵演動画");
+MenuLock(false);
+	Wait(1000);
+	MusicStart("SEAK01",400,1500,0,1000,null,false);
+
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0400170a01">
+「엔드레이브!?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreateTextureEX("ev91", 3100, 80, 115, "cg/ev/ev0108エデン・ベベ迷彩登場.jpg");
+	Request("ev91", Smoothing);
+	Zoom("ev91", 0, 1500, 1500, null, true);
+
+	Move("ev91", 15000, -80, @0, null, false);
+	Fade("ev91", 1000, 1000, null, true);
+	Wait(500);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0141]
+도대체 무슨 요술을 부린 건지&, 눈앞에 거대한 엔드레이브가 홀연히 모습을 드러냈다&.
+
+이 녀석도 신형……인 걸까? 지금까지 본 엔드레이브와는 너무나도 다르다&.
+
+거대한 짐승&, 혹은 벌레 같은 <RUBY TEXT="포름">외형</RUBY>에서 설계자의 광기가 엿보인다&.
+강철제 괴수라고나 불러야 할&, 이형의 기체&.
+
+ｰ惞ｬ&.
+ｳﾊｵｵ ﾇﾑﾆﾐ｡ｦ｡ｦ <RUBY TEXT="｡､｡､">ｱｫｹｰ</RUBY>ﾀﾌｶﾂ ｼﾒｸｮｷﾎｱｺ&.
+
+그렇다면 조종사는&, 당연히 그 녀석이겠지&.
+
+
+//？？：地の文。光学迷彩へのショック。姿を隠していただと。
+//新型！　巨大！　異形！
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	TextBoxDelete(0);
+	Wait(16);
+
+
+
+	Request("@プロセスムービーサウンド", Stop);
+	Delete("@プロセス*");
+
+//エデン・べべ出現
+//ＳＥ：エデン・べべ咆吼。ハウリングっぽい感じ
+
+	CreateSE("SEAK01","se戦闘_メカ_咆吼01");
+	CreateSE("SEAK02","se戦闘_メカ_咆吼02");
+	SetStream("SEAK01", 1000);
+	MusicStart("SEAK01",0,700,0,1000,null,false);
+	MusicStart("SEAK02",0,1000,0,1000,null,false);
+	//SetFrequency("SEAK02", 2000, 1500, null);
+	CreateColorSPadd("絵色白", 6000, "FFFFFF");
+	Wait(30);
+	Delete("ev91");
+	Delete("絵演動画*");
+	CreateTextureSP("絵秋機天", 2110, Center, Middle, "cg/ev/ev0108エデン・ベベ迷彩登場.jpg");
+
+	CreateEffectSP("絵秋機天写一", 2200, 0, 0, 1024, 576, "Plain");
+	CreateEffectSP("絵秋機天写二", 2200, 0, 0, 1024, 576, "Plain");
+	CreateEffectSP("絵秋機天写三", 2200, 0, 0, 1024, 576, "Plain");
+	SetBlur("絵秋機天写一", true, 4, 500, 300, false);
+	SetBlur("絵秋機天写二", true, 4, 500, 300, false);
+	SetBlur("絵秋機天写三", true, 4, 500, 300, false);
+	SetVertex("絵秋機天写*", 540, 130);
+
+	Zoom("絵秋機天写一", 2000, 1100, 1100, Axl2, false);
+	Zoom("絵秋機天写二", 2000, 1400, 1400, Axl2, false);
+	Zoom("絵秋機天写三", 2000, 1700, 1700, Axl2, false);
+
+	FadeDelete("絵色白", 100, null, false);
+
+	Fade("絵秋機天写一", 2600, 0, null, false);
+	Fade("絵秋機天写二", 2800, 0, null, false);
+	Fade("絵秋機天写三", 3000, 0, null, false);
+
+	Wait(3000);
+
+
+	Delete("@絵秋機天写*");
+	SetBlur("@絵秋機天", true, 3, 500, 80, false);
+	Move("@絵秋機天", 200, 480, 200, Dxl1, false);
+	Zoom("@絵秋機天", 200, 6000, 6000, Dxl1, true);
+
+	CreateSE("SEAK01","se戦闘_メカ_パイルバンカー04");
+	SetStream("SEAK01", 600);
+	MusicStart("SEAK01",0,700,0,1000,null,false);
+	CreateTextureSP("絵秋動画背景", 1010, Center, -130, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	SetShade("絵秋動画背景", Medium);
+	Zoom("絵秋動画背景", 0, 4000, 4000, null, true);
+	Rotate("@絵秋動画背景", 0, @0, @0, 18, null,true);
+
+	MFlash(30, 8);
+
+	CreateMovieEX("絵秋演動画", 1100, Center, Middle, true, true, "dx/mvgg02.ngs");
+	Request("絵秋演動画", Smoothing);
+	Zoom("絵秋演動画", 0, 1100, 1100, null, true);
+	Fade("絵秋演動画", 0, 1000, null, true);
+	MoveFFP1("@絵秋演動画",200);
+
+	CreateSE("SEAK72","se戦闘_銃器_ガトリング");
+	MusicStart("SEAK72",0,700,0,1000,null,false);
+	CreateSE("SEAK72a","se戦闘_銃器_ガトリング");
+	MusicStart("SEAK72a",0,700,0,800,null,false);
+	FadeDelete("絵秋機天", 200, null, true);
+
+	Wait(1500);
+
+	PrintGO("上背景", 19000);
+	Delete("@SELPA*");
+	Request("@プロセス", Stop);
+	Delete("@プロセス");
+
+	CreateMovieEXover("絵演動画", 2010, Center, Middle, true, true, "dx/mv0003集中線04_白.ngs");
+	Zoom("絵演動画", 0, 3800, 4000, null, true);
+	Rotate("絵演動画", 0, @0, @0, 12, null,true);
+	Fade("絵演動画", 0, 1000, null, true);
+	DrawTransition("絵演動画", 0, 0, 500, 100, null, "cg/data/slide_05_00_0.png", true);
+
+	Request("@絵秋写真機", UnLock);
+	Request("@絵秋写真機/絵秋*", UnLock);
+
+	Fade("@絵秋写真機/絵秋写真背景", 0, 1000, null, true);
+
+	CreateTextureSP("@絵秋写真機/絵秋人淑", 250, 500, 350, "cg/ev/ev9002スクルージダッシュ汎用_キャラのみ.png");
+	Zoom("@絵秋写真機/絵秋人淑", 1, 400, 400, null, true);
+	Request("@絵秋写真機/絵秋人淑", Smoothing);
+	SetBlur("@絵秋写真機/絵秋人淑", true, 3, 250, 45, false);
+
+	MoveCamera("@絵秋写真機", 0, 512, 288, 5000, null, true);
+	Rotate("@絵秋写真機", 0, @0, @0, -12, null,false);
+
+	CreateSE("SEAK00","se人体_動作_跳躍03");
+	CreateSE("SEAK00a","se人体_足音_走る01_L");
+
+	$SE_GatlingRicochet="se戦闘_銃器_跳弾05";
+	CreateSE("SEAK01",$SE_GatlingRicochet);
+	CreateSE("SEAK02",$SE_GatlingRicochet);
+	CreateSE("SEAK03",$SE_GatlingRicochet);
+	CreateSE("SEAK04",$SE_GatlingRicochet);
+	CreateSE("SEAK05",$SE_GatlingRicochet);
+	CreateSE("SEAK06",$SE_GatlingRicochet);
+	CreateSE("SEAK07",$SE_GatlingRicochet);
+	CreateSE("SEAK08",$SE_GatlingRicochet);
+
+	Delete("上背景");
+
+	MoveCamera("@絵秋写真機", 1000, -512, -60, @0, null, false);
+	MusicStart("SEAK00",0,700,0,1200,null,false);
+	MusicStart("SEAK00a",0,700,0,1500,null,true);
+	Move("@絵秋写真機/絵秋人淑", 1100, -650, -20, AxlDxl, false);
+	MoveCamera("@絵秋写真機", 1000, -600, -70, 2500, null, false);
+
+	MusicStart("SEAK01",0,700,200,1000,null,false);
+	GoRubble("@絵秋写真機/絵秋演瓦礫砕上一",600);
+
+	Wait(100);
+
+	MusicStart("SEAK02",0,700,150,1000,null,false);
+	GoRubble("@絵秋写真機/絵秋演瓦礫砕上二",600);
+
+	Wait(100);
+
+	MusicStart("SEAK03",0,700,100,1000,null,false);
+	GoRubble("@絵秋写真機/絵秋演瓦礫砕上三",600);
+
+	Wait(100);
+
+	MusicStart("SEAK04",0,700,50,1000,null,false);
+	GoRubble("@絵秋写真機/絵秋演瓦礫砕上四",600);
+
+	Wait(100);
+
+	MusicStart("SEAK05",0,700,0,1000,null,false);
+	GoRubble("@絵秋写真機/絵秋演瓦礫砕上五",600);
+
+	Wait(100);
+
+	MusicStart("SEAK06",0,700,-50,1000,null,false);
+	GoRubble("@絵秋写真機/絵秋演瓦礫砕上六",600);
+
+	Wait(100);
+
+	MusicStart("SEAK07",0,700,-150,1000,null,false);
+	GoRubble("@絵秋写真機/絵秋演瓦礫砕上七",600);
+
+	Wait(100);
+
+	MusicStart("SEAK08",0,700,-200,1000,null,false);
+	GoRubble("@絵秋写真機/絵秋演瓦礫砕上八",600);
+
+	Wait(500);
+
+	SetBlur("@絵秋写真機/絵秋人淑", false, 0, 500, 1000, false);
+	Wait(200);
+
+	SetVolumeEX("SEAK00a", 300, 0, null);
+
+
+	CreatePlainSP("絵板写", 5000);
+	Move("@絵秋写真機/絵秋人淑", 0, -650, -20, AxlDxl, true);
+	MoveCamera("@絵秋写真機", 0, -600, -70, 2500, null, true);
+	//FadeDelete("絵板写", 1000, null, true);
+	MoveFFP1stop();
+	Delete("@NutFFP1");
+
+
+
+//★鋼屋：テキストとりあえずここに置いておく
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0142]
+//ガトリングガンの砲撃
+ｴﾞｸｰｴﾙ&. ｶﾚｴﾙ&.
+ﾃ豌ﾝﾆﾄｰ｡ ﾇﾇｺﾎｸｦ ｺ･ｴﾙ&.
+
+대구경 개틀링 탄환은 권총탄과는 차원이 다르다&. 폭풍 같은 총격에 휘둘리며 필사적으로 도망친다&.
+
+
+//　跳ぶ。走る。衝撃波が肌を切る。大口径のガトリング弾は、拳銃弾とは訳が違う。
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete();
+	Wait(16);
+
+
+
+
+
+	FadeDelete("絵板写", 300, null, true);
+
+
+//行く手に立ち塞がるように止まるエデン・べべ。
+//ゆっくりとスクルージの背後に迫るプレゼント
+	CreateSE("SEAK11","se戦闘_メカ_移動01");
+	CreateSE("SEAK12","se戦闘_メカ_駆動03");
+	SetStream("SEAK11", 600);
+
+	CreateTextureSP("@絵秋写真機/絵秋機天", 500, 0, Middle, "cg/ma/エデンベベ_伏せ_斜め後.png");
+	Request("@絵秋写真機/絵秋機天", Smoothing);
+	Zoom("@絵秋写真機/絵秋機天", 0, 750, 750, null, true);
+
+	FadeDelete("絵板写", 1000, null, true);
+
+	CreateColorEX("@絵秋写真機/絵色黒", 490, "000000");
+	Zoom("@絵秋写真機/絵色黒", 0, 4000, 4000, null, true);
+
+	SetVolumeEX("SEAK72", 300, 0, null);
+	SetVolumeEX("SEAK72a", 300, 0, null);
+
+	MusicStart("SEAK11",300,700,100,1000,null,false);
+	MusicStart("SEAK12",0,700,0,1000,null,false);
+	SetFrequency("SEAK12", 800, 800, null);
+	SetPan("SEAK11", 800, -100, null);
+	Move("@絵秋写真機/絵秋機天", 800, -2200, @0, AxlDxl, false);
+	Wait(200);
+	Fade("@絵秋写真機/絵色黒", 0, 1000, null, true);
+	DrawTransition("@絵秋写真機/絵色黒", 400, 0, 1000, 100, null, "cg/data/slide_01_00_1.png", true);
+
+
+	PrintGO("上背景", 5000);
+	CreateColorSP("絵色黒", 5000, "000000");
+
+	Delete("@絵秋写真機");
+
+	Request("@絵秋写真機二", UnLock);
+	Request("@絵秋写真機二/絵秋*", UnLock);
+
+	Fade("@絵秋写真機二/絵秋写真背景", 0, 1000, null, true);
+	Fade("@絵秋写真機二/絵秋写真背景朧", 0, 1000, null, true);
+	Fade("@絵秋写真機二/絵秋人淑", 0, 1000, null, true);
+	Fade("@絵秋写真機二/絵秋人淑朧", 0, 1000, null, true);
+	Fade("@絵秋写真機二/絵秋機天", 0, 1000, null, true);
+
+	CreateEffectDropSP("@絵秋写真機二/dr01", 300, 512, Middle, 1024, 576, 64, 10, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("@絵秋写真機二/dr01", 0, @0, @0, 25, null,true);
+	Request("@絵秋写真機二/dr01", AddRender);
+	Fade("@絵秋写真機二/dr01", 0, 1000, null, true);
+	Zoom("@絵秋写真機二/dr01", 0, 1000, 1000, null, true);
+
+	CreateColorSP("絵色黒帯上", 5000, "000000");
+	SetVertex("絵色黒帯上", center, top);
+	Zoom("絵色黒帯上", 0, @0, 150, null, true);
+
+	CreateColorSP("絵色黒帯下", 5000, "000000");
+	SetVertex("絵色黒帯下", center, bottom);
+	Zoom("絵色黒帯下", 0, @0, 250, null, true);
+
+	CreateSE("SEAK21","se戦闘_メカ_移動02");
+	CreateSE("SEAK22","se戦闘_メカ_駆動02");
+	CreateSE("SEAK23","se人体_足音_着地08");
+	MusicStart("SEAK21",300,700,100,1000,null,false);
+	MusicStart("SEAK22",0,700,0,1000,null,false);
+	SetFrequency("SEAK22", 800, 800, null);
+	SetPan("SEAK21", 800, -100, null);
+
+	Fade("@絵秋写真機二/絵秋演土煙", 3000, 0, null, false);
+	Move("@絵秋写真機二/絵秋演土煙", 600, 1050, @0, null, false);
+	Zoom("@絵秋写真機二/絵秋演土煙", 3000, 1000, 1250, null, false);
+	Move("@絵秋写真機二/絵秋機天", 1200, -1190, @0, Dxl3, false);
+	FadeDelete("上背景", 0, null, true);
+	FadeDelete("絵色黒", 500, null, false);
+
+	Wait(200);
+
+	MusicStart("SEAK23",0,900,-150,800,null,false);
+	MoveCamera("@絵秋写真機二", 6000, 325, @0, @0, DxlAuto, true);
+
+	Fade("@絵秋写真機二/絵秋機天朧", 0, 1000, null, true);
+	FadeDelete("@絵秋写真機二/絵秋写真背景朧", 1400, null, false);
+	FadeDelete("@絵秋写真機二/絵秋人淑朧", 1200, null, false);
+	FadeDelete("@絵秋写真機二/絵秋機天", 1000, null, true);
+
+	Wait(600);
+
+	Move("@絵秋写真機二/絵秋機天朧", 3000, -1090, @0, DxlAuto, false);
+	MoveCamera("@絵秋写真機二", 3000, 500, 20, 3200, DxlAuto, true);
+
+	Wait(800);
+
+	CreateSE("SEAK31","se人体_足音_着地02");
+	MusicStart("SEAK31",0,700,0,1000,null,false);
+	Move("@絵秋写真機二/絵秋人友影", 680, 900, @0, DxlAuto, false);
+	Fade("@絵秋写真機二/絵秋人友影", 300, 1000, null, true);
+	Wait(600);
+	Fade("@絵秋写真機二/絵秋人友", 0, 1000, null, true);
+	FadeDelete("@絵秋写真機二/絵秋人友影", 1000, null, true);
+
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX00/1000290a03">
+｡ｸｾﾕｿ｡ｴﾂ ﾈ｣ｶ釥ﾌ&, ｵﾚｿ｡ｴﾂ ｹﾌｳ犖ﾂ ｰﾅﾁｹ
+
+//？？：地の文。追いつかれた。くそったれ。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0151]
+
+｡ｦ｡ｦｵ郞簓﨤ｪ&, ｺ鋕ﾔﾀｻ&.
+
+ｾﾕﾀｸｷﾎ ｰ｡ｵｵ ﾁﾁ&. ｵﾚｷﾎ ｹｰｷｯｼｭｵｵ ﾁﾁ&. ｵﾎ ｱｫｹｰ ｻ鄲ﾌｿ｡ ｳ｢ｴﾏ ﾁﾗﾀｽﾀﾌ ﾀﾌｷｸｰﾔ ｰ｡ｱ鋿ﾌ ｴﾀｲｸﾁ箒ﾂ ﾃｳﾀｽﾀﾌｴﾙ&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+	//おがみ：★あとでループ素材に差し替え
+	CreateSE("SEノイズ3","seヴォイド蝗02L");
+	MusicStart("SEノイズ3",1700,500,0,1000,null,true);
+
+
+	CreateSE("SE_noize","seヴォイド蝗02L");
+	CreateSE("SE_kyoumei","se特殊_雰囲気_集中01_L");
+	CreateSE("SE_heart","se人体_心臓_鼓動01L");
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreateMovieEX("no01", 5000, Center, Middle, true, false, "dx/mvnoize.ngs");
+	Zoom("no01", 0, 2000, 2000, null, true);
+
+	CreateTextureEXmul("eye", 7000, Center, Middle, "cg/data/zzex_eye_01_00_0.png");
+	Fade("eye", 0, 1000, null, true)
+
+	CreateEffectDropEX("drop01", 6350, 0, 0, 1024, 576, 256, 80, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble03_x05.png");
+	Rotate("drop01", 0, @0, @0, 5, null,true);
+	Request("drop01", SubRender);
+	Zoom("drop01", 0, 1500, 2500, null, true);
+
+	CreateEffectDropEX("drop02", 6450, 0, 0, 1024, 576, 156, 120, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble02_x03.png");
+	Rotate("drop02", 0, @0, @0, -185, null,true);
+	Request("drop02", SubRender);
+	Zoom("drop02", 0, 1500, 2500, null, true);
+
+	MusicStart("SE_kyoumei",0,1000,0,500,null,true);
+	MusicStart("SE_noize",0,1000,0,1000,null,true);
+	MusicStart("SE_heart",0,1000,0,500,null,true);
+
+	Fade("no01", 0, 1000, null, true);
+	Fade("drop*", 0, 1000, null, true);
+	Wait(500);
+
+	SetVolumeEX("SE_kyoumei", 0, 100, null);
+	SetVolumeEX("SE_noize", 0, 500, null);
+	Wait(150);
+
+	Delete("co01");
+	Delete("ev01");
+	Fade("drop*", 0, 0, null, true);
+	Fade("no01", 0, 0, null, true);
+
+	Wait(1000);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0151a]
+｡ｪ｡ｪ｡ｪ｡ｪｸｦ ｿﾑｴﾙ&.
+
+ｳｪﾀﾇ ｳｯｰｳ&. ｳｪﾀﾇ ﾈｲｱﾝ&.
+나의 허무를 채울 반쪽&.
+
+｡ｦ｡ｦｶﾇｴﾙ&.
+ﾀﾌｷｱ ｶｧﾀﾎｵ･ｵｵ&, ｱﾗｰﾍﾀｻ ｴﾀｳ､ｴﾙ&.
+
+그 부드러운 통증을 느낀다&.
+
+그리고&, 확신한다&.
+논리가 아니라&, 영혼으로&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+	//おがみ：★あとでループ素材に差し替え
+	CreateSE("SEノイズ3","seヴォイド蝗02L");
+	MusicStart("SEノイズ3",1700,500,0,1000,null,true);
+
+
+	CreateSE("SE_noize","seヴォイド蝗02L");
+	CreateSE("SE_kyoumei","se特殊_雰囲気_集中01_L");
+	CreateSE("SE_heart","se人体_心臓_鼓動01L");
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreateMovieEX("no01", 5000, Center, Middle, true, false, "dx/mvnoize.ngs");
+	Zoom("no01", 0, 2000, 2000, null, true);
+
+	CreateTextureEXmul("eye", 7000, Center, Middle, "cg/data/zzex_eye_01_00_0.png");
+	Fade("eye", 0, 1000, null, true)
+
+	CreateEffectDropEX("drop01", 6350, 0, 0, 1024, 576, 256, 80, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble03_x05.png");
+	Rotate("drop01", 0, @0, @0, 5, null,true);
+	Request("drop01", SubRender);
+	Zoom("drop01", 0, 1500, 2500, null, true);
+
+	CreateEffectDropEX("drop02", 6450, 0, 0, 1024, 576, 156, 120, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble02_x03.png");
+	Rotate("drop02", 0, @0, @0, -185, null,true);
+	Request("drop02", SubRender);
+	Zoom("drop02", 0, 1500, 2500, null, true);
+
+	MusicStart("SE_kyoumei",0,1000,0,500,null,true);
+	MusicStart("SE_noize",0,1000,0,1000,null,true);
+	MusicStart("SE_heart",0,1000,0,500,null,true);
+
+	Fade("no01", 0, 1000, null, true);
+	Fade("drop*", 0, 1000, null, true);
+	Wait(500);
+
+	SetVolumeEX("SE_kyoumei", 0, 100, null);
+	SetVolumeEX("SE_noize", 0, 500, null);
+	Wait(150);
+
+	Delete("co01");
+	Delete("ev01");
+	Fade("drop*", 0, 0, null, true);
+	Fade("no01", 0, 0, null, true);
+
+	Wait(1000);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0151b]
+――――는&, 분명 여기에 있다&.
+
+ﾀﾖﾀｻ ﾅﾍｴﾙ&. ｹﾝｵ蠖ﾃ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+	CreateTextureEX("ev77", 10100, -600, 0, "cg/bg/l/bg001015_3_高速道路高架下崩壊_l.jpg");
+	Request("ev77", Smoothing);
+	Rotate("ev77", 0, @0, 180, @0, null,true);
+	Zoom("ev77", 0, 1500, 1500, null, true);
+
+
+
+	Fade("ev77", 500, 1000, null, false);
+	Move("ev77", 500, -475, 150, Dxl2, true);
+
+	Move("ev77", 5000, -450, 200, null, 500);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0151c]
+갈망에 사로잡혀 나는 하늘을 우러러본다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+//　渦巻く結晶の嵐。放たれるガトリング弾。
+//　これまでにないほど強く死を感じる。
+//　俺はといえば、跳ね回ってかわすことしかできない。
+//　蚤のサーカスだ。
+//　ほしい。
+//　──がほしい。
+//　俺の翼。失われた半身。
+//　──は、きっとここにいる。いるはずだ。
+//　渇望に俺は天を仰ぐ。
+
+
+//→→LX0505
+
+	Request("@絵*", UnLock);
+
+	SetVolumeEX("SE*", 1000, 0, null);
+	ClearFadeAll(1000, true);
+
+}

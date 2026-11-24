@@ -1,0 +1,2936 @@
+{
+  "renderer_version": 2,
+  "jp_font_version": 1,
+  "translator_model": "Codex internal",
+  "source": "user-provided game audio; two local STT passes and source-word crosschecks",
+  "cues": [
+    {
+      "track": "lxbgm01",
+      "start": 39100,
+      "end": 44700,
+      "source": "Die Ruinenstadt ist immer noch schön",
+      "ko": "폐허가 된 도시는 여전히 아름다워",
+      "id": 1
+    },
+    {
+      "track": "lxbgm01",
+      "start": 44700,
+      "end": 50200,
+      "source": "Ich warte lange Zeit auf deine Rückkehr",
+      "ko": "네가 돌아오기를 오래도록 기다려",
+      "id": 2
+    },
+    {
+      "track": "lxbgm01",
+      "start": 50200,
+      "end": 55600,
+      "source": "In der Hand ein Vergissmeinnicht",
+      "ko": "손에는 물망초 한 송이",
+      "id": 3
+    },
+    {
+      "track": "lxbgm01",
+      "start": 59200,
+      "end": 64000,
+      "source": "It might be just like a bird in the cage",
+      "ko": "새장 속 새와 같을지도 몰라",
+      "id": 4
+    },
+    {
+      "track": "lxbgm01",
+      "start": 64300,
+      "end": 68300,
+      "source": "How could I reach to your heart",
+      "ko": "어떻게 해야 네 마음에 닿을까",
+      "id": 5
+    },
+    {
+      "track": "lxbgm01",
+      "start": 69800,
+      "end": 73500,
+      "source": "I need you to be stronger than anyone",
+      "ko": "네가 누구보다 강해지기를 바라",
+      "id": 6
+    },
+    {
+      "track": "lxbgm01",
+      "start": 73500,
+      "end": 77800,
+      "source": "I release my soul so you feel my song",
+      "ko": "내 노래를 느끼도록 영혼을 풀어놓아",
+      "id": 7
+    },
+    {
+      "track": "lxbgm01",
+      "start": 77800,
+      "end": 83300,
+      "source": "Regentropfen sind meine Tränen",
+      "ko": "빗방울은 내 눈물",
+      "id": 8
+    },
+    {
+      "track": "lxbgm01",
+      "start": 83300,
+      "end": 88700,
+      "source": "Wind ist mein Atem und mein Erzählung",
+      "ko": "바람은 내 숨결이자 내 이야기",
+      "id": 9
+    },
+    {
+      "track": "lxbgm01",
+      "start": 88700,
+      "end": 93700,
+      "source": "Zweige und Blätter sind meine Hände",
+      "ko": "가지와 잎사귀는 내 두 손",
+      "id": 10
+    },
+    {
+      "track": "lxbgm01",
+      "start": 93700,
+      "end": 98800,
+      "source": "Denn mein Körper ist in Wurzeln gehüllt",
+      "ko": "내 몸은 뿌리에 감싸여 있으니",
+      "id": 11
+    },
+    {
+      "track": "lxbgm01",
+      "start": 99100,
+      "end": 104000,
+      "source": "Wenn die Jahreszeit des Tauens kommt",
+      "ko": "얼음이 녹는 계절이 오면",
+      "id": 12
+    },
+    {
+      "track": "lxbgm01",
+      "start": 104000,
+      "end": 109100,
+      "source": "Werde ich wach und singe ein Lied",
+      "ko": "나는 깨어나 노래를 불러",
+      "id": 13
+    },
+    {
+      "track": "lxbgm01",
+      "start": 109400,
+      "end": 116900,
+      "source": "Das Vergissmeinnicht, das du mir gegeben hast, ist hier",
+      "ko": "네가 내게 준 물망초는 여기 있어",
+      "id": 14
+    },
+    {
+      "track": "lxbgm01",
+      "start": 118800,
+      "end": 123800,
+      "source": "Erinnerst du dich noch? Erinnerst du dich noch",
+      "ko": "아직 기억하니? 아직 기억하니",
+      "id": 15
+    },
+    {
+      "track": "lxbgm01",
+      "start": 123800,
+      "end": 128800,
+      "source": "An dein Wort, das du mir gegeben hast?",
+      "ko": "네가 내게 했던 그 약속을?",
+      "id": 16
+    },
+    {
+      "track": "lxbgm01",
+      "start": 128800,
+      "end": 133800,
+      "source": "Erinnerst du dich noch? Erinnerst du dich noch",
+      "ko": "아직 기억하니? 아직 기억하니",
+      "id": 17
+    },
+    {
+      "track": "lxbgm01",
+      "start": 133800,
+      "end": 137400,
+      "source": "An den Tag, an dem du mir…?",
+      "ko": "네가 내게… 그날을?",
+      "id": 18
+    },
+    {
+      "track": "lxbgm01",
+      "start": 137400,
+      "end": 143500,
+      "source": "Wenn die Jahreszeit des Vergissmeinnichts kommt",
+      "ko": "물망초의 계절이 오면",
+      "id": 19
+    },
+    {
+      "track": "lxbgm01",
+      "start": 143500,
+      "end": 147000,
+      "source": "Singe ich ein Lied",
+      "ko": "나는 노래를 불러",
+      "id": 20
+    },
+    {
+      "track": "lxbgm01",
+      "start": 147100,
+      "end": 152000,
+      "source": "Wenn die Jahreszeit des Vergissmeinnichts kommt",
+      "ko": "물망초의 계절이 오면",
+      "id": 21
+    },
+    {
+      "track": "lxbgm01",
+      "start": 152000,
+      "end": 155400,
+      "source": "Rufe ich dich",
+      "ko": "너를 불러",
+      "id": 22
+    },
+    {
+      "track": "lxbgm01",
+      "start": 158800,
+      "end": 163500,
+      "source": "Erinnerst du dich noch? Erinnerst du dich noch",
+      "ko": "아직 기억하니? 아직 기억하니",
+      "id": 23
+    },
+    {
+      "track": "lxbgm01",
+      "start": 163500,
+      "end": 168400,
+      "source": "An dein Wort, das du mir gegeben hast?",
+      "ko": "네가 내게 했던 그 약속을?",
+      "id": 24
+    },
+    {
+      "track": "lxbgm01",
+      "start": 168400,
+      "end": 173200,
+      "source": "Erinnerst du dich noch? Erinnerst du dich noch",
+      "ko": "아직 기억하니? 아직 기억하니",
+      "id": 25
+    },
+    {
+      "track": "lxbgm01",
+      "start": 173200,
+      "end": 177000,
+      "source": "An den Tag, an dem du mir…?",
+      "ko": "네가 내게… 그날을?",
+      "id": 26
+    },
+    {
+      "track": "lxbgm01",
+      "start": 177000,
+      "end": 182800,
+      "source": "It could be the whole of the problem change your body",
+      "ko": "너를 바꾸는 모든 문제가 될지도 몰라",
+      "id": 27
+    },
+    {
+      "track": "lxbgm01",
+      "start": 184400,
+      "end": 188400,
+      "source": "I need you to be stronger than anyone",
+      "ko": "네가 누구보다 강해지기를 바라",
+      "id": 28
+    },
+    {
+      "track": "lxbgm01",
+      "start": 188500,
+      "end": 193800,
+      "source": "I release my soul so you can feel my breath",
+      "ko": "내 숨결을 느끼도록 영혼을 풀어놓아",
+      "id": 29
+    },
+    {
+      "track": "lxbgm01",
+      "start": 193800,
+      "end": 197000,
+      "source": "Feel my move",
+      "ko": "내 움직임을 느껴 봐",
+      "id": 30
+    },
+    {
+      "track": "lxbgm01",
+      "start": 199800,
+      "end": 204600,
+      "source": "Regentropfen sind meine Tränen",
+      "ko": "빗방울은 내 눈물",
+      "id": 31
+    },
+    {
+      "track": "lxbgm01",
+      "start": 204600,
+      "end": 209700,
+      "source": "Wind ist mein Atem und mein Erzählung",
+      "ko": "바람은 내 숨결이자 내 이야기",
+      "id": 32
+    },
+    {
+      "track": "lxbgm01",
+      "start": 209700,
+      "end": 214800,
+      "source": "Zweige und Blätter sind meine Hände",
+      "ko": "가지와 잎사귀는 내 두 손",
+      "id": 33
+    },
+    {
+      "track": "lxbgm01",
+      "start": 214800,
+      "end": 219800,
+      "source": "Denn mein Körper ist in Wurzeln gehüllt",
+      "ko": "내 몸은 뿌리에 감싸여 있으니",
+      "id": 34
+    },
+    {
+      "track": "lxbgm01",
+      "start": 220000,
+      "end": 225000,
+      "source": "Wenn die Jahreszeit des Tauens kommt",
+      "ko": "얼음이 녹는 계절이 오면",
+      "id": 35
+    },
+    {
+      "track": "lxbgm01",
+      "start": 225000,
+      "end": 230000,
+      "source": "Werde ich wach und singe ein Lied",
+      "ko": "나는 깨어나 노래를 불러",
+      "id": 36
+    },
+    {
+      "track": "lxbgm01",
+      "start": 230000,
+      "end": 239000,
+      "source": "Das Vergissmeinnicht, das du mir gegeben hast, ist hier",
+      "ko": "네가 내게 준 물망초는 여기 있어",
+      "id": 37
+    },
+    {
+      "track": "lxbgm04",
+      "start": 10200,
+      "end": 12400,
+      "source": "Locked and loaded, ready to go",
+      "ko": "장전 완료, 출격 준비 끝",
+      "id": 38
+    },
+    {
+      "track": "lxbgm04",
+      "start": 12400,
+      "end": 14900,
+      "source": "If you take us on then under you go",
+      "ko": "우릴 상대한다면 무너지는 건 너희야",
+      "id": 39
+    },
+    {
+      "track": "lxbgm04",
+      "start": 14900,
+      "end": 17400,
+      "source": "The plan is simple, we fight to win",
+      "ko": "계획은 단순해, 이기기 위해 싸운다",
+      "id": 40
+    },
+    {
+      "track": "lxbgm04",
+      "start": 17400,
+      "end": 20000,
+      "source": "Try to take our freedom, let the battle begin",
+      "ko": "우리 자유를 뺏어 봐, 싸움을 시작하자",
+      "id": 41
+    },
+    {
+      "track": "lxbgm04",
+      "start": 29500,
+      "end": 33000,
+      "source": "See the world's been broken, we've lost too much already",
+      "ko": "세상은 부서졌어, 이미 너무 많이 잃었지",
+      "id": 42
+    },
+    {
+      "track": "lxbgm04",
+      "start": 33000,
+      "end": 35900,
+      "source": "Time is still ticking, people need to be ready",
+      "ko": "시간은 흐르고 있어, 모두 준비해야 해",
+      "id": 43
+    },
+    {
+      "track": "lxbgm04",
+      "start": 35900,
+      "end": 38000,
+      "source": "Take back what they took from you",
+      "ko": "그들이 빼앗은 걸 되찾아",
+      "id": 44
+    },
+    {
+      "track": "lxbgm04",
+      "start": 38000,
+      "end": 41200,
+      "source": "Search for the truth, break the limits they place on you",
+      "ko": "진실을 찾아, 그들이 씌운 한계를 깨뜨려",
+      "id": 45
+    },
+    {
+      "track": "lxbgm04",
+      "start": 41200,
+      "end": 43100,
+      "source": "Never give up on your friends",
+      "ko": "친구들을 절대 포기하지 마",
+      "id": 46
+    },
+    {
+      "track": "lxbgm04",
+      "start": 43100,
+      "end": 45400,
+      "source": "Show 'em how you do",
+      "ko": "네가 어떻게 하는지 보여 줘",
+      "id": 47
+    },
+    {
+      "track": "lxbgm04",
+      "start": 45800,
+      "end": 47600,
+      "source": "We'll get 'em all free",
+      "ko": "우리가 모두를 해방할 거야",
+      "id": 48
+    },
+    {
+      "track": "lxbgm04",
+      "start": 48300,
+      "end": 50000,
+      "source": "It's time to get freed",
+      "ko": "이젠 자유로워질 시간이야",
+      "id": 49
+    },
+    {
+      "track": "lxbgm04",
+      "start": 59600,
+      "end": 61500,
+      "source": "Since we can't go back",
+      "ko": "돌아갈 수 없으니",
+      "id": 50
+    },
+    {
+      "track": "lxbgm04",
+      "start": 61500,
+      "end": 63300,
+      "source": "We gotta move forward",
+      "ko": "앞으로 나아가야 해",
+      "id": 51
+    },
+    {
+      "track": "lxbgm04",
+      "start": 63300,
+      "end": 65700,
+      "source": "Learn how to do that to see where we're going",
+      "ko": "어떻게 나아갈지 배워, 우리가 갈 곳을 보게",
+      "id": 52
+    },
+    {
+      "track": "lxbgm04",
+      "start": 65700,
+      "end": 68000,
+      "source": "My friends by my side, we'll stand",
+      "ko": "친구들과 함께 우린 버틸 거야",
+      "id": 53
+    },
+    {
+      "track": "lxbgm04",
+      "start": 68000,
+      "end": 70000,
+      "source": "Even when you close in",
+      "ko": "너희가 몰려와도",
+      "id": 54
+    },
+    {
+      "track": "lxbgm04",
+      "start": 70000,
+      "end": 73100,
+      "source": "'Cause you know, you can't keep us down, we won't give in",
+      "ko": "우릴 누를 순 없어, 우린 굴복하지 않아",
+      "id": 55
+    },
+    {
+      "track": "lxbgm04",
+      "start": 73100,
+      "end": 76000,
+      "source": "You can't keep us down, we won't stand for what you're doing",
+      "ko": "우릴 누를 순 없어, 너희 짓을 두고 보지 않아",
+      "id": 56
+    },
+    {
+      "track": "lxbgm04",
+      "start": 76000,
+      "end": 78400,
+      "source": "You can't keep us down, we won't give in",
+      "ko": "우릴 누를 순 없어, 우린 굴복하지 않아",
+      "id": 57
+    },
+    {
+      "track": "lxbgm04",
+      "start": 78400,
+      "end": 80900,
+      "source": "You can't keep us down, we won't give in",
+      "ko": "우릴 누를 순 없어, 우린 굴복하지 않아",
+      "id": 58
+    },
+    {
+      "track": "lxbgm04",
+      "start": 81800,
+      "end": 83300,
+      "source": "We can't go back",
+      "ko": "우린 돌아갈 수 없어",
+      "id": 59
+    },
+    {
+      "track": "lxbgm04",
+      "start": 84400,
+      "end": 86100,
+      "source": "We gotta move forward",
+      "ko": "앞으로 나아가야 해",
+      "id": 60
+    },
+    {
+      "track": "lxbgm04",
+      "start": 87000,
+      "end": 89600,
+      "source": "Learn how to do that to see where we're going",
+      "ko": "어떻게 나아갈지 배워, 우리가 갈 곳을 보게",
+      "id": 61
+    },
+    {
+      "track": "lxbgm04",
+      "start": 89600,
+      "end": 93300,
+      "source": "Because, you see, my friends by my side, we will stand",
+      "ko": "친구들이 곁에 있으니 우린 버틸 거야",
+      "id": 62
+    },
+    {
+      "track": "lxbgm04",
+      "start": 93300,
+      "end": 95000,
+      "source": "Even when you close in",
+      "ko": "너희가 몰려와도",
+      "id": 63
+    },
+    {
+      "track": "lxbgm04",
+      "start": 95000,
+      "end": 98300,
+      "source": "You can't keep us down, we won't give in",
+      "ko": "우릴 누를 순 없어, 우린 굴복하지 않아",
+      "id": 64
+    },
+    {
+      "track": "lxbgm04",
+      "start": 98300,
+      "end": 101000,
+      "source": "You can't keep us down, we won't stand for what you're doing",
+      "ko": "우릴 누를 순 없어, 너희 짓을 두고 보지 않아",
+      "id": 65
+    },
+    {
+      "track": "lxbgm04",
+      "start": 101000,
+      "end": 103300,
+      "source": "Locked and loaded, ready to go",
+      "ko": "장전 완료, 출격 준비 끝",
+      "id": 66
+    },
+    {
+      "track": "lxbgm04",
+      "start": 103300,
+      "end": 105800,
+      "source": "If you take us on then under you go",
+      "ko": "우릴 상대한다면 무너지는 건 너희야",
+      "id": 67
+    },
+    {
+      "track": "lxbgm04",
+      "start": 105800,
+      "end": 108300,
+      "source": "The plan is simple, we fight to win",
+      "ko": "계획은 단순해, 이기기 위해 싸운다",
+      "id": 68
+    },
+    {
+      "track": "lxbgm04",
+      "start": 108300,
+      "end": 110800,
+      "source": "Try to take our freedom, let the battle begin",
+      "ko": "우리 자유를 뺏어 봐, 싸움을 시작하자",
+      "id": 69
+    },
+    {
+      "track": "lxbgm04",
+      "start": 111000,
+      "end": 113400,
+      "source": "Locked and loaded, ready to go",
+      "ko": "장전 완료, 출격 준비 끝",
+      "id": 70
+    },
+    {
+      "track": "lxbgm04",
+      "start": 113400,
+      "end": 115900,
+      "source": "If you take us on then under you go",
+      "ko": "우릴 상대한다면 무너지는 건 너희야",
+      "id": 71
+    },
+    {
+      "track": "lxbgm04",
+      "start": 115900,
+      "end": 118400,
+      "source": "The plan is simple, we fight to win",
+      "ko": "계획은 단순해, 이기기 위해 싸운다",
+      "id": 72
+    },
+    {
+      "track": "lxbgm04",
+      "start": 118400,
+      "end": 121200,
+      "source": "Try to take our freedom, let the battle begin",
+      "ko": "우리 자유를 뺏어 봐, 싸움을 시작하자",
+      "id": 73
+    },
+    {
+      "track": "lxbgm04",
+      "start": 137200,
+      "end": 139100,
+      "source": "Fact or fiction",
+      "ko": "진실인가, 거짓인가",
+      "id": 74
+    },
+    {
+      "track": "lxbgm04",
+      "start": 139100,
+      "end": 141300,
+      "source": "Truth is that the surprise attack made us all victims",
+      "ko": "분명한 건 그 기습에 우리 모두 희생됐다는 것",
+      "id": 75
+    },
+    {
+      "track": "lxbgm04",
+      "start": 141300,
+      "end": 144300,
+      "source": "We lost many but still carry on living strong",
+      "ko": "많은 이를 잃었어도 우린 꿋꿋이 살아가",
+      "id": 76
+    },
+    {
+      "track": "lxbgm04",
+      "start": 144300,
+      "end": 146900,
+      "source": "Though you did your best to take our freedom",
+      "ko": "너희가 자유를 빼앗으려 온 힘을 쏟았어도",
+      "id": 77
+    },
+    {
+      "track": "lxbgm04",
+      "start": 146900,
+      "end": 149300,
+      "source": "We want it back for good",
+      "ko": "우린 그 자유를 영원히 되찾고 싶어",
+      "id": 78
+    },
+    {
+      "track": "lxbgm04",
+      "start": 149300,
+      "end": 151900,
+      "source": "We don't believe that you came to help with a cure",
+      "ko": "치료해 주러 왔다는 너희 말은 믿지 않아",
+      "id": 79
+    },
+    {
+      "track": "lxbgm04",
+      "start": 151900,
+      "end": 155200,
+      "source": "Turn us on each other to insure your own word as bond",
+      "ko": "우릴 서로 싸우게 해 너희 말만 믿게 하지",
+      "id": 80
+    },
+    {
+      "track": "lxbgm04",
+      "start": 155200,
+      "end": 157500,
+      "source": "But our only response is rebellion",
+      "ko": "하지만 우리의 대답은 저항뿐이야",
+      "id": 81
+    },
+    {
+      "track": "lxbgm04",
+      "start": 162300,
+      "end": 164700,
+      "source": "Push your propaganda if you must",
+      "ko": "선전이 필요하다면 어디 해 봐",
+      "id": 82
+    },
+    {
+      "track": "lxbgm04",
+      "start": 164700,
+      "end": 167200,
+      "source": "Steal the government we don't trust",
+      "ko": "우리가 믿지 않는 정부를 빼앗아 봐",
+      "id": 83
+    },
+    {
+      "track": "lxbgm04",
+      "start": 167200,
+      "end": 169900,
+      "source": "Tell the world you came to save us?",
+      "ko": "세상엔 우릴 구하러 왔다고 말하겠지?",
+      "id": 84
+    },
+    {
+      "track": "lxbgm04",
+      "start": 169900,
+      "end": 172300,
+      "source": "Take your time, we're armoring up",
+      "ko": "천천히 해 봐, 우린 무장하고 있으니",
+      "id": 85
+    },
+    {
+      "track": "lxbgm04",
+      "start": 172300,
+      "end": 174900,
+      "source": "We can't get back all we've lost",
+      "ko": "잃은 모든 걸 되찾을 수는 없지만",
+      "id": 86
+    },
+    {
+      "track": "lxbgm04",
+      "start": 174900,
+      "end": 177300,
+      "source": "But we'll recover what we can",
+      "ko": "되찾을 수 있는 건 되찾겠어",
+      "id": 87
+    },
+    {
+      "track": "lxbgm04",
+      "start": 177300,
+      "end": 180000,
+      "source": "The fight we bring is to set things right",
+      "ko": "우린 모든 걸 바로잡으려 싸우는 거야",
+      "id": 88
+    },
+    {
+      "track": "lxbgm04",
+      "start": 180000,
+      "end": 182400,
+      "source": "Doesn't matter what you try, we will stand",
+      "ko": "무슨 짓을 해도 우린 버틸 거야",
+      "id": 89
+    },
+    {
+      "track": "lxbgm04",
+      "start": 183200,
+      "end": 185000,
+      "source": "Because we can't go back",
+      "ko": "우린 돌아갈 수 없으니까",
+      "id": 90
+    },
+    {
+      "track": "lxbgm04",
+      "start": 186000,
+      "end": 187800,
+      "source": "We gotta move forward",
+      "ko": "앞으로 나아가야 해",
+      "id": 91
+    },
+    {
+      "track": "lxbgm04",
+      "start": 188600,
+      "end": 191400,
+      "source": "Learn how to do that to see where we're going",
+      "ko": "어떻게 나아갈지 배워, 우리가 갈 곳을 보게",
+      "id": 92
+    },
+    {
+      "track": "lxbgm04",
+      "start": 192200,
+      "end": 194900,
+      "source": "My friends by my side, we will stand",
+      "ko": "친구들과 함께 우린 버틸 거야",
+      "id": 93
+    },
+    {
+      "track": "lxbgm04",
+      "start": 194900,
+      "end": 196700,
+      "source": "Even when you close in",
+      "ko": "너희가 몰려와도",
+      "id": 94
+    },
+    {
+      "track": "lxbgm04",
+      "start": 197300,
+      "end": 200100,
+      "source": "You can't keep us down, we won't give in",
+      "ko": "우릴 누를 순 없어, 우린 굴복하지 않아",
+      "id": 95
+    },
+    {
+      "track": "lxbgm04",
+      "start": 200100,
+      "end": 203200,
+      "source": "You can't keep us down, we won't stand for what you're doing",
+      "ko": "우릴 누를 순 없어, 너희 짓을 두고 보지 않아",
+      "id": 96
+    },
+    {
+      "track": "lxbgm04",
+      "start": 203500,
+      "end": 205200,
+      "source": "Because we can't go back",
+      "ko": "우린 돌아갈 수 없으니까",
+      "id": 97
+    },
+    {
+      "track": "lxbgm04",
+      "start": 206100,
+      "end": 208000,
+      "source": "We gotta move forward",
+      "ko": "앞으로 나아가야 해",
+      "id": 98
+    },
+    {
+      "track": "lxbgm04",
+      "start": 208800,
+      "end": 211600,
+      "source": "Learn how to do that to see where we're going",
+      "ko": "어떻게 나아갈지 배워, 우리가 갈 곳을 보게",
+      "id": 99
+    },
+    {
+      "track": "lxbgm04",
+      "start": 211600,
+      "end": 215200,
+      "source": "Know that my friends by my side, we will stand",
+      "ko": "친구들과 함께 우린 버틸 거란 걸 알아 둬",
+      "id": 100
+    },
+    {
+      "track": "lxbgm04",
+      "start": 215200,
+      "end": 217300,
+      "source": "Even when you close in",
+      "ko": "너희가 몰려와도",
+      "id": 101
+    },
+    {
+      "track": "lxbgm04",
+      "start": 217300,
+      "end": 220200,
+      "source": "You can't keep us down, we won't give in",
+      "ko": "우릴 누를 순 없어, 우린 굴복하지 않아",
+      "id": 102
+    },
+    {
+      "track": "lxbgm04",
+      "start": 220200,
+      "end": 223400,
+      "source": "You can't keep us down, we won't stand for what you're doing",
+      "ko": "우릴 누를 순 없어, 너희 짓을 두고 보지 않아",
+      "id": 103
+    },
+    {
+      "track": "lxbgm04",
+      "start": 225900,
+      "end": 228000,
+      "source": "This is my guilty crown",
+      "ko": "이것이 나의 길티 크라운",
+      "id": 104
+    },
+    {
+      "track": "lxbgm04",
+      "start": 230900,
+      "end": 233000,
+      "source": "I'll fight for what I believe",
+      "ko": "내가 믿는 것을 위해 싸우겠어",
+      "id": 105
+    },
+    {
+      "track": "lxbgm04",
+      "start": 235900,
+      "end": 238100,
+      "source": "This is my guilty crown",
+      "ko": "이것이 나의 길티 크라운",
+      "id": 106
+    },
+    {
+      "track": "lxbgm04",
+      "start": 240400,
+      "end": 243500,
+      "source": "I'll fight with my friends to set my friends free",
+      "ko": "친구들과 싸워 친구들을 해방하겠어",
+      "id": 107
+    },
+    {
+      "track": "lxbgm05",
+      "start": 15200,
+      "end": 19600,
+      "source": "You have a king of the power, yeah you got it",
+      "ko": "네게는 왕의 힘이 있어, 그래, 네 것이야",
+      "id": 108
+    },
+    {
+      "track": "lxbgm05",
+      "start": 19600,
+      "end": 23800,
+      "source": "Somebody might be a flower, yeah you got it",
+      "ko": "누군가는 꽃일지도 몰라, 그래, 알겠지",
+      "id": 109
+    },
+    {
+      "track": "lxbgm05",
+      "start": 23800,
+      "end": 27800,
+      "source": "It's time to get ready, all you have really",
+      "ko": "이제 준비할 때야, 네가 가진 모든 걸",
+      "id": 110
+    },
+    {
+      "track": "lxbgm05",
+      "start": 27800,
+      "end": 31200,
+      "source": "Time to share, take your chance",
+      "ko": "함께 나눌 때야, 기회를 잡아",
+      "id": 111
+    },
+    {
+      "track": "lxbgm05",
+      "start": 31200,
+      "end": 35800,
+      "source": "It could be the whole of the problem change your body",
+      "ko": "너를 바꾸는 모든 문제가 될지도 몰라",
+      "id": 112
+    },
+    {
+      "track": "lxbgm05",
+      "start": 35800,
+      "end": 39800,
+      "source": "But I need you to be stronger than anyone",
+      "ko": "하지만 네가 누구보다 강해지기를 바라",
+      "id": 113
+    },
+    {
+      "track": "lxbgm05",
+      "start": 39800,
+      "end": 42500,
+      "source": "It's time now to speed up",
+      "ko": "이젠 속도를 낼 때야",
+      "id": 114
+    },
+    {
+      "track": "lxbgm05",
+      "start": 42500,
+      "end": 45800,
+      "source": "All you have to do is make some friends",
+      "ko": "네가 할 일은 친구를 만드는 것뿐",
+      "id": 115
+    },
+    {
+      "track": "lxbgm05",
+      "start": 48900,
+      "end": 52400,
+      "source": "We might be just like a bird in cage",
+      "ko": "우린 새장 속 새와 같을지도 몰라",
+      "id": 116
+    },
+    {
+      "track": "lxbgm05",
+      "start": 53000,
+      "end": 55600,
+      "source": "How could I reach to your heart?",
+      "ko": "어떻게 해야 네 마음에 닿을까?",
+      "id": 117
+    },
+    {
+      "track": "lxbgm05",
+      "start": 55600,
+      "end": 60400,
+      "source": "Coming soon, how can you dance like a clown in the tent?",
+      "ko": "곧 시작이야, 천막 속 광대처럼 춤출 수 있니?",
+      "id": 118
+    },
+    {
+      "track": "lxbgm05",
+      "start": 60400,
+      "end": 67600,
+      "source": "You can change yourself until you'll find the seventh friend",
+      "ko": "일곱 번째 친구를 찾을 때까지 넌 달라질 수 있어",
+      "id": 119
+    },
+    {
+      "track": "lxbgm05",
+      "start": 68200,
+      "end": 72600,
+      "source": "Here we go, come with me, then you open your mind",
+      "ko": "자, 나와 함께 가자, 그러면 마음이 열릴 거야",
+      "id": 120
+    },
+    {
+      "track": "lxbgm05",
+      "start": 72600,
+      "end": 76800,
+      "source": "Here we go, moving on, grooving on, grooving on",
+      "ko": "자, 나아가, 리듬을 타, 리듬을 타",
+      "id": 121
+    },
+    {
+      "track": "lxbgm05",
+      "start": 76800,
+      "end": 79700,
+      "source": "Then we know we'll never see each other again",
+      "ko": "그러면 알게 되겠지, 우린 다신 만나지 못해",
+      "id": 122
+    },
+    {
+      "track": "lxbgm05",
+      "start": 79700,
+      "end": 84800,
+      "source": "Just look so fine, all of your friends with hearts",
+      "ko": "참 멋져 보여, 진심을 가진 네 친구들 모두",
+      "id": 123
+    },
+    {
+      "track": "lxbgm05",
+      "start": 92500,
+      "end": 96900,
+      "source": "You have a king of the right hand, yeah you got it",
+      "ko": "네 오른손엔 왕의 힘이 있어, 그래, 네 것이야",
+      "id": 124
+    },
+    {
+      "track": "lxbgm05",
+      "start": 96900,
+      "end": 101100,
+      "source": "Somebody might be a flower, yeah you got it",
+      "ko": "누군가는 꽃일지도 몰라, 그래, 알겠지",
+      "id": 125
+    },
+    {
+      "track": "lxbgm05",
+      "start": 101100,
+      "end": 103500,
+      "source": "It's time to get ready",
+      "ko": "이제 준비할 때야",
+      "id": 126
+    },
+    {
+      "track": "lxbgm05",
+      "start": 103500,
+      "end": 106900,
+      "source": "All you have to do is make some friends",
+      "ko": "네가 할 일은 친구를 만드는 것뿐",
+      "id": 127
+    },
+    {
+      "track": "lxbgm05",
+      "start": 109900,
+      "end": 113400,
+      "source": "We might be just like a bird in cage",
+      "ko": "우린 새장 속 새와 같을지도 몰라",
+      "id": 128
+    },
+    {
+      "track": "lxbgm05",
+      "start": 113400,
+      "end": 116700,
+      "source": "How could I reach to your heart?",
+      "ko": "어떻게 해야 네 마음에 닿을까?",
+      "id": 129
+    },
+    {
+      "track": "lxbgm05",
+      "start": 117200,
+      "end": 121400,
+      "source": "Coming soon, how can you dance like a clown in the tent?",
+      "ko": "곧 시작이야, 천막 속 광대처럼 춤출 수 있니?",
+      "id": 130
+    },
+    {
+      "track": "lxbgm05",
+      "start": 121700,
+      "end": 128600,
+      "source": "You can change yourself until you'll find the seventh friend",
+      "ko": "일곱 번째 친구를 찾을 때까지 넌 달라질 수 있어",
+      "id": 131
+    },
+    {
+      "track": "lxbgm05",
+      "start": 129300,
+      "end": 133700,
+      "source": "Here we go, come with me, then you open your mind",
+      "ko": "자, 나와 함께 가자, 그러면 마음이 열릴 거야",
+      "id": 132
+    },
+    {
+      "track": "lxbgm05",
+      "start": 133700,
+      "end": 137900,
+      "source": "Here we go, moving on, grooving on, grooving on",
+      "ko": "자, 나아가, 리듬을 타, 리듬을 타",
+      "id": 133
+    },
+    {
+      "track": "lxbgm05",
+      "start": 137900,
+      "end": 140700,
+      "source": "Then we know we'll never see each other again",
+      "ko": "그러면 알게 되겠지, 우린 다신 만나지 못해",
+      "id": 134
+    },
+    {
+      "track": "lxbgm05",
+      "start": 140700,
+      "end": 145900,
+      "source": "Just look so fine, all of your friends with hearts",
+      "ko": "참 멋져 보여, 진심을 가진 네 친구들 모두",
+      "id": 135
+    },
+    {
+      "track": "lxbgm05",
+      "start": 147400,
+      "end": 152800,
+      "source": "Yeah, I've never got satisfied, no",
+      "ko": "그래, 난 한 번도 만족한 적 없어",
+      "id": 136
+    },
+    {
+      "track": "lxbgm05",
+      "start": 155500,
+      "end": 161000,
+      "source": "Yeah, it's gonna be getting worse, no",
+      "ko": "그래, 점점 더 나빠지겠지",
+      "id": 137
+    },
+    {
+      "track": "lxbgm05",
+      "start": 169800,
+      "end": 174100,
+      "source": "Here we go, shaking the ground, then you open yourself",
+      "ko": "자, 땅을 흔들어, 그러면 너 자신을 열게 돼",
+      "id": 138
+    },
+    {
+      "track": "lxbgm05",
+      "start": 174100,
+      "end": 178500,
+      "source": "Here we go, moving on, grooving on, grooving on",
+      "ko": "자, 나아가, 리듬을 타, 리듬을 타",
+      "id": 139
+    },
+    {
+      "track": "lxbgm05",
+      "start": 178500,
+      "end": 181400,
+      "source": "Then we know we'll never see each other again",
+      "ko": "그러면 알게 되겠지, 우린 다신 만나지 못해",
+      "id": 140
+    },
+    {
+      "track": "lxbgm05",
+      "start": 181400,
+      "end": 186100,
+      "source": "Just look so fine, all of your friends with hearts",
+      "ko": "참 멋져 보여, 진심을 가진 네 친구들 모두",
+      "id": 141
+    },
+    {
+      "track": "lxbgm05",
+      "start": 186100,
+      "end": 190700,
+      "source": "Here we go, come with me, then you open your mind",
+      "ko": "자, 나와 함께 가자, 그러면 마음이 열릴 거야",
+      "id": 142
+    },
+    {
+      "track": "lxbgm05",
+      "start": 190700,
+      "end": 194800,
+      "source": "Here we go, moving on, grooving on, grooving on",
+      "ko": "자, 나아가, 리듬을 타, 리듬을 타",
+      "id": 143
+    },
+    {
+      "track": "lxbgm05",
+      "start": 194800,
+      "end": 197600,
+      "source": "Then we know we'll never see each other again",
+      "ko": "그러면 알게 되겠지, 우린 다신 만나지 못해",
+      "id": 144
+    },
+    {
+      "track": "lxbgm05",
+      "start": 197600,
+      "end": 203000,
+      "source": "Just look so fine, all of your friends with hearts",
+      "ko": "참 멋져 보여, 진심을 가진 네 친구들 모두",
+      "id": 145
+    },
+    {
+      "track": "lxbgm12",
+      "start": 18700,
+      "end": 23800,
+      "source": "Oh take a look in the mirror, you look so sad",
+      "ko": "거울을 봐, 네 모습이 너무 슬퍼 보여",
+      "id": 146
+    },
+    {
+      "track": "lxbgm12",
+      "start": 25500,
+      "end": 31300,
+      "source": "It's so cold like that winter market we used to go",
+      "ko": "우리가 다니던 겨울 시장처럼 너무 추워",
+      "id": 147
+    },
+    {
+      "track": "lxbgm12",
+      "start": 33400,
+      "end": 38800,
+      "source": "I don't cry anymore but I feel so hurt",
+      "ko": "더는 울지 않지만 너무 아파",
+      "id": 148
+    },
+    {
+      "track": "lxbgm12",
+      "start": 40000,
+      "end": 44100,
+      "source": "So I don't need you too close to me",
+      "ko": "그러니 내게 너무 가까이 오지 않아도 돼",
+      "id": 149
+    },
+    {
+      "track": "lxbgm12",
+      "start": 44100,
+      "end": 47900,
+      "source": "You don't hear me, so you said",
+      "ko": "넌 내 말이 들리지 않는다고 했지",
+      "id": 150
+    },
+    {
+      "track": "lxbgm12",
+      "start": 47900,
+      "end": 53500,
+      "source": "I don't know why things have changed since yesterday",
+      "ko": "어제 이후 왜 모든 게 달라졌는지 모르겠어",
+      "id": 151
+    },
+    {
+      "track": "lxbgm12",
+      "start": 56200,
+      "end": 60100,
+      "source": "This could be love again",
+      "ko": "다시 사랑할 수 있을지도 몰라",
+      "id": 152
+    },
+    {
+      "track": "lxbgm12",
+      "start": 60100,
+      "end": 63800,
+      "source": "All I need is you",
+      "ko": "내게 필요한 건 너뿐이야",
+      "id": 153
+    },
+    {
+      "track": "lxbgm12",
+      "start": 63800,
+      "end": 71300,
+      "source": "Come back, I'm waiting anytime the heavy rains come",
+      "ko": "돌아와, 폭우가 쏟아질 때마다 기다리고 있어",
+      "id": 154
+    },
+    {
+      "track": "lxbgm12",
+      "start": 71300,
+      "end": 75100,
+      "source": "Still I miss days with you",
+      "ko": "아직도 너와 함께한 날들이 그리워",
+      "id": 155
+    },
+    {
+      "track": "lxbgm12",
+      "start": 75100,
+      "end": 79300,
+      "source": "I can't look into your face",
+      "ko": "네 얼굴을 똑바로 볼 수 없어",
+      "id": 156
+    },
+    {
+      "track": "lxbgm12",
+      "start": 80100,
+      "end": 85300,
+      "source": "Oh feeling blue and looking back again",
+      "ko": "우울한 마음에 다시 뒤돌아봐",
+      "id": 157
+    },
+    {
+      "track": "lxbgm12",
+      "start": 89200,
+      "end": 93000,
+      "source": "Please come back to me",
+      "ko": "제발 내게 돌아와 줘",
+      "id": 158
+    },
+    {
+      "track": "lxbgm12",
+      "start": 118500,
+      "end": 123200,
+      "source": "Oh take a look in the mirror, you look so sad",
+      "ko": "거울을 봐, 네 모습이 너무 슬퍼 보여",
+      "id": 159
+    },
+    {
+      "track": "lxbgm12",
+      "start": 125100,
+      "end": 130600,
+      "source": "It's so cold like that winter market we used to go",
+      "ko": "우리가 다니던 겨울 시장처럼 너무 추워",
+      "id": 160
+    },
+    {
+      "track": "lxbgm12",
+      "start": 133300,
+      "end": 138300,
+      "source": "I don't cry anymore but I feel so hurt",
+      "ko": "더는 울지 않지만 너무 아파",
+      "id": 161
+    },
+    {
+      "track": "lxbgm12",
+      "start": 139500,
+      "end": 143500,
+      "source": "So I don't need you too close to me",
+      "ko": "그러니 내게 너무 가까이 오지 않아도 돼",
+      "id": 162
+    },
+    {
+      "track": "lxbgm12",
+      "start": 143500,
+      "end": 147200,
+      "source": "You don't hear me, so you said",
+      "ko": "넌 내 말이 들리지 않는다고 했지",
+      "id": 163
+    },
+    {
+      "track": "lxbgm12",
+      "start": 147200,
+      "end": 152700,
+      "source": "I don't know why things have changed since yesterday",
+      "ko": "어제 이후 왜 모든 게 달라졌는지 모르겠어",
+      "id": 164
+    },
+    {
+      "track": "lxbgm12",
+      "start": 153700,
+      "end": 157700,
+      "source": "This could be love again",
+      "ko": "다시 사랑할 수 있을지도 몰라",
+      "id": 165
+    },
+    {
+      "track": "lxbgm12",
+      "start": 157700,
+      "end": 161600,
+      "source": "All I need is you",
+      "ko": "내게 필요한 건 너뿐이야",
+      "id": 166
+    },
+    {
+      "track": "lxbgm12",
+      "start": 161600,
+      "end": 169400,
+      "source": "Come back, I'm waiting anytime the heavy rains come",
+      "ko": "돌아와, 폭우가 쏟아질 때마다 기다리고 있어",
+      "id": 167
+    },
+    {
+      "track": "lxbgm12",
+      "start": 169400,
+      "end": 173000,
+      "source": "Still I miss days with you",
+      "ko": "아직도 너와 함께한 날들이 그리워",
+      "id": 168
+    },
+    {
+      "track": "lxbgm12",
+      "start": 173000,
+      "end": 176900,
+      "source": "I can't look into your face",
+      "ko": "네 얼굴을 똑바로 볼 수 없어",
+      "id": 169
+    },
+    {
+      "track": "lxbgm12",
+      "start": 176900,
+      "end": 182700,
+      "source": "Oh feeling blue and looking back again",
+      "ko": "우울한 마음에 다시 뒤돌아봐",
+      "id": 170
+    },
+    {
+      "track": "lxbgm12",
+      "start": 186600,
+      "end": 190200,
+      "source": "Please come back to me",
+      "ko": "제발 내게 돌아와 줘",
+      "id": 171
+    },
+    {
+      "track": "lxbgm12",
+      "start": 213100,
+      "end": 218000,
+      "source": "To stay with you always",
+      "ko": "언제나 너와 함께 있고 싶어",
+      "id": 172
+    },
+    {
+      "track": "lxbgm12",
+      "start": 219200,
+      "end": 221500,
+      "source": "You're the world to me",
+      "ko": "너는 내게 세상 전부야",
+      "id": 173
+    },
+    {
+      "track": "lxbgm12",
+      "start": 221500,
+      "end": 224000,
+      "source": "And dreaming on",
+      "ko": "그리고 계속 꿈을 꿔",
+      "id": 174
+    },
+    {
+      "track": "lxbgm12",
+      "start": 224600,
+      "end": 228400,
+      "source": "So you can take my sword for you",
+      "ko": "그러니 널 위해 내 검을 가져가도 돼",
+      "id": 175
+    },
+    {
+      "track": "lxbgm12",
+      "start": 228400,
+      "end": 233100,
+      "source": "Oh how do you feel so fine",
+      "ko": "어떻게 그렇게 괜찮을 수 있니",
+      "id": 176
+    },
+    {
+      "track": "lxbgm12",
+      "start": 233100,
+      "end": 235800,
+      "source": "You're the world to me",
+      "ko": "너는 내게 세상 전부야",
+      "id": 177
+    },
+    {
+      "track": "lxbgm12",
+      "start": 235800,
+      "end": 238700,
+      "source": "And dream on",
+      "ko": "그리고 계속 꿈을 꿔",
+      "id": 178
+    },
+    {
+      "track": "lxbgm12",
+      "start": 239200,
+      "end": 243600,
+      "source": "You stole my heart so long ago",
+      "ko": "넌 오래전에 내 마음을 훔쳤지",
+      "id": 179
+    },
+    {
+      "track": "lxbgm12",
+      "start": 244100,
+      "end": 246900,
+      "source": "Oh I release my soul",
+      "ko": "내 영혼을 풀어놓아",
+      "id": 180
+    },
+    {
+      "track": "lxbgm12",
+      "start": 246900,
+      "end": 250200,
+      "source": "So you feel my song",
+      "ko": "네가 내 노래를 느낄 수 있도록",
+      "id": 181
+    },
+    {
+      "track": "lxbgm14",
+      "start": 30700,
+      "end": 35700,
+      "source": "There was a bloody fight untold",
+      "ko": "알려지지 않은 피비린내 나는 싸움이 있었어",
+      "id": 182
+    },
+    {
+      "track": "lxbgm14",
+      "start": 40700,
+      "end": 46000,
+      "source": "Nobody seems to find their homes",
+      "ko": "아무도 돌아갈 집을 찾지 못하는 듯해",
+      "id": 183
+    },
+    {
+      "track": "lxbgm14",
+      "start": 51800,
+      "end": 57500,
+      "source": "Raindrops were falling all around",
+      "ko": "사방에 빗방울이 떨어지고 있었어",
+      "id": 184
+    },
+    {
+      "track": "lxbgm14",
+      "start": 61200,
+      "end": 64000,
+      "source": "Let me escape this place",
+      "ko": "이곳에서 벗어나게 해 줘",
+      "id": 185
+    },
+    {
+      "track": "lxbgm14",
+      "start": 64000,
+      "end": 67400,
+      "source": "Be untouchable",
+      "ko": "아무도 건드릴 수 없도록",
+      "id": 186
+    },
+    {
+      "track": "lxbgm14",
+      "start": 69700,
+      "end": 74500,
+      "source": "Here comes the scary light, it's shining on me",
+      "ko": "두려운 빛이 다가와, 나를 비추고 있어",
+      "id": 187
+    },
+    {
+      "track": "lxbgm14",
+      "start": 74500,
+      "end": 78100,
+      "source": "Kill my breath, hiding in this dusty hole",
+      "ko": "먼지투성이 구덩이에 숨어 숨을 죽여",
+      "id": 188
+    },
+    {
+      "track": "lxbgm14",
+      "start": 78100,
+      "end": 81000,
+      "source": "Till my worst fear is gone",
+      "ko": "가장 끔찍한 두려움이 사라질 때까지",
+      "id": 189
+    },
+    {
+      "track": "lxbgm14",
+      "start": 81000,
+      "end": 85200,
+      "source": "We can't follow their rules whatsoever",
+      "ko": "무슨 일이 있어도 그들의 규칙을 따를 순 없어",
+      "id": 190
+    },
+    {
+      "track": "lxbgm14",
+      "start": 85200,
+      "end": 88000,
+      "source": "Now we're climbing up",
+      "ko": "이제 우린 올라가고 있어",
+      "id": 191
+    },
+    {
+      "track": "lxbgm14",
+      "start": 88000,
+      "end": 90600,
+      "source": "Oh, the hill of sorrow",
+      "ko": "슬픔의 언덕을",
+      "id": 192
+    },
+    {
+      "track": "lxbgm14",
+      "start": 153600,
+      "end": 158400,
+      "source": "We're going to hell, is that where we wanna be?",
+      "ko": "우린 지옥으로 가고 있어, 그게 우리가 바라는 곳인가?",
+      "id": 193
+    },
+    {
+      "track": "lxbgm14",
+      "start": 159100,
+      "end": 163900,
+      "source": "What can you say? Is that the way you are?",
+      "ko": "무슨 말을 하겠어? 원래 그런 사람이니?",
+      "id": 194
+    },
+    {
+      "track": "lxbgm14",
+      "start": 164000,
+      "end": 169400,
+      "source": "Why don't you just tell, how is it gonna be?",
+      "ko": "그냥 말해 줘, 앞으로 어떻게 될지",
+      "id": 195
+    },
+    {
+      "track": "lxbgm14",
+      "start": 171600,
+      "end": 174100,
+      "source": "We can't just be one",
+      "ko": "우린 그저 하나가 될 수는 없어",
+      "id": 196
+    },
+    {
+      "track": "lxbgm14",
+      "start": 182600,
+      "end": 187800,
+      "source": "Here comes the scary light, it's shining on me",
+      "ko": "두려운 빛이 다가와, 나를 비추고 있어",
+      "id": 197
+    },
+    {
+      "track": "lxbgm14",
+      "start": 187800,
+      "end": 190500,
+      "source": "Kill my breath, hiding in this dusty hole",
+      "ko": "먼지투성이 구덩이에 숨어 숨을 죽여",
+      "id": 198
+    },
+    {
+      "track": "lxbgm14",
+      "start": 190500,
+      "end": 193000,
+      "source": "Till my worst fear is gone",
+      "ko": "가장 끔찍한 두려움이 사라질 때까지",
+      "id": 199
+    },
+    {
+      "track": "lxbgm14",
+      "start": 193000,
+      "end": 197500,
+      "source": "We can't follow their rules whatsoever",
+      "ko": "무슨 일이 있어도 그들의 규칙을 따를 순 없어",
+      "id": 200
+    },
+    {
+      "track": "lxbgm14",
+      "start": 197500,
+      "end": 200100,
+      "source": "Now we're climbing up",
+      "ko": "이제 우린 올라가고 있어",
+      "id": 201
+    },
+    {
+      "track": "lxbgm14",
+      "start": 200100,
+      "end": 203000,
+      "source": "Oh, the hill of sorrow",
+      "ko": "슬픔의 언덕을",
+      "id": 202
+    },
+    {
+      "track": "lxbgm14",
+      "start": 204600,
+      "end": 207500,
+      "source": "There was a bloody fight untold",
+      "ko": "알려지지 않은 피비린내 나는 싸움이 있었어",
+      "id": 203
+    },
+    {
+      "track": "lxbgm14",
+      "start": 207700,
+      "end": 210400,
+      "source": "Nobody seems to find their homes",
+      "ko": "아무도 돌아갈 집을 찾지 못하는 듯해",
+      "id": 204
+    },
+    {
+      "track": "lxbgm14",
+      "start": 210400,
+      "end": 214100,
+      "source": "Raindrops were falling all around",
+      "ko": "사방에 빗방울이 떨어지고 있었어",
+      "id": 205
+    },
+    {
+      "track": "lxbgm14",
+      "start": 214700,
+      "end": 217000,
+      "source": "Let me escape this place",
+      "ko": "이곳에서 벗어나게 해 줘",
+      "id": 206
+    },
+    {
+      "track": "lxbgm14",
+      "start": 217000,
+      "end": 219800,
+      "source": "Be untouchable",
+      "ko": "아무도 건드릴 수 없도록",
+      "id": 207
+    },
+    {
+      "track": "lxbgm14",
+      "start": 220800,
+      "end": 223700,
+      "source": "The hill of sorrow",
+      "ko": "슬픔의 언덕",
+      "id": 208
+    },
+    {
+      "track": "lxbgm16",
+      "start": 24000,
+      "end": 26700,
+      "source": "You can call my name",
+      "ko": "내 이름을 불러도 돼",
+      "id": 209
+    },
+    {
+      "track": "lxbgm16",
+      "start": 27300,
+      "end": 29600,
+      "source": "Whenever you're feeling down and blue",
+      "ko": "기운이 없고 우울할 때면 언제든",
+      "id": 210
+    },
+    {
+      "track": "lxbgm16",
+      "start": 29600,
+      "end": 32200,
+      "source": "You don't know how to smile",
+      "ko": "어떻게 웃어야 할지 모르겠지",
+      "id": 211
+    },
+    {
+      "track": "lxbgm16",
+      "start": 32200,
+      "end": 36500,
+      "source": "I know how hard it is",
+      "ko": "얼마나 힘든지 알아",
+      "id": 212
+    },
+    {
+      "track": "lxbgm16",
+      "start": 36500,
+      "end": 38800,
+      "source": "I'll make you feel alright",
+      "ko": "내가 괜찮아지게 해 줄게",
+      "id": 213
+    },
+    {
+      "track": "lxbgm16",
+      "start": 38800,
+      "end": 42000,
+      "source": "I remember the day",
+      "ko": "그날을 기억해",
+      "id": 214
+    },
+    {
+      "track": "lxbgm16",
+      "start": 42000,
+      "end": 47200,
+      "source": "I sat with you in this corner",
+      "ko": "이 모퉁이에서 너와 함께 앉았던 날",
+      "id": 215
+    },
+    {
+      "track": "lxbgm16",
+      "start": 50600,
+      "end": 53300,
+      "source": "Alone in front of you",
+      "ko": "네 앞에 홀로 서서",
+      "id": 216
+    },
+    {
+      "track": "lxbgm16",
+      "start": 53300,
+      "end": 57200,
+      "source": "Oh, I don't know the words",
+      "ko": "무슨 말을 해야 할지 모르겠어",
+      "id": 217
+    },
+    {
+      "track": "lxbgm16",
+      "start": 57200,
+      "end": 60300,
+      "source": "Because anywhere is your home",
+      "ko": "어디든 네 집이니까",
+      "id": 218
+    },
+    {
+      "track": "lxbgm16",
+      "start": 60300,
+      "end": 65200,
+      "source": "Your sweet home",
+      "ko": "네 따스한 집",
+      "id": 219
+    },
+    {
+      "track": "lxbgm16",
+      "start": 65200,
+      "end": 69500,
+      "source": "No matter where you are",
+      "ko": "네가 어디에 있든",
+      "id": 220
+    },
+    {
+      "track": "lxbgm16",
+      "start": 72000,
+      "end": 77000,
+      "source": "This thing, it's home, it's incredible",
+      "ko": "여기가 집이라니, 믿기지 않아",
+      "id": 221
+    },
+    {
+      "track": "lxbgm16",
+      "start": 77000,
+      "end": 83500,
+      "source": "All my friends came home again",
+      "ko": "내 친구들이 모두 집으로 돌아왔어",
+      "id": 222
+    },
+    {
+      "track": "lxbgm16",
+      "start": 84700,
+      "end": 91000,
+      "source": "Sometimes you cannot avoid the heavy snow",
+      "ko": "때로는 거센 눈보라를 피할 수 없어",
+      "id": 223
+    },
+    {
+      "track": "lxbgm16",
+      "start": 91000,
+      "end": 94500,
+      "source": "As long as you're alive",
+      "ko": "살아 있는 한",
+      "id": 224
+    },
+    {
+      "track": "lxbgm16",
+      "start": 97700,
+      "end": 100400,
+      "source": "You might lose your luck",
+      "ko": "운이 따라 주지 않을지도 몰라",
+      "id": 225
+    },
+    {
+      "track": "lxbgm16",
+      "start": 100400,
+      "end": 104100,
+      "source": "Whenever you're feeling down and blue",
+      "ko": "기운이 없고 우울할 때면 언제든",
+      "id": 226
+    },
+    {
+      "track": "lxbgm16",
+      "start": 104100,
+      "end": 106400,
+      "source": "You don't know how to smile",
+      "ko": "어떻게 웃어야 할지 모르겠지",
+      "id": 227
+    },
+    {
+      "track": "lxbgm16",
+      "start": 106400,
+      "end": 110500,
+      "source": "I know how hard it is",
+      "ko": "얼마나 힘든지 알아",
+      "id": 228
+    },
+    {
+      "track": "lxbgm16",
+      "start": 110500,
+      "end": 112600,
+      "source": "I'll make you feel alright",
+      "ko": "내가 괜찮아지게 해 줄게",
+      "id": 229
+    },
+    {
+      "track": "lxbgm16",
+      "start": 112600,
+      "end": 115700,
+      "source": "I remember the day",
+      "ko": "그날을 기억해",
+      "id": 230
+    },
+    {
+      "track": "lxbgm16",
+      "start": 115700,
+      "end": 121000,
+      "source": "I sat with you in this corner",
+      "ko": "이 모퉁이에서 너와 함께 앉았던 날",
+      "id": 231
+    },
+    {
+      "track": "lxbgm16",
+      "start": 122800,
+      "end": 126200,
+      "source": "I touched your feeling inside",
+      "ko": "네 안의 마음에 닿았어",
+      "id": 232
+    },
+    {
+      "track": "lxbgm16",
+      "start": 126200,
+      "end": 129100,
+      "source": "You're shifting in my eyes",
+      "ko": "내 눈에 비친 네 모습이 달라져",
+      "id": 233
+    },
+    {
+      "track": "lxbgm16",
+      "start": 129100,
+      "end": 131200,
+      "source": "Drifting away",
+      "ko": "멀리 흘러가",
+      "id": 234
+    },
+    {
+      "track": "lxbgm16",
+      "start": 135300,
+      "end": 137700,
+      "source": "Don't get stuck in sorrow",
+      "ko": "슬픔에 갇혀 있지 마",
+      "id": 235
+    },
+    {
+      "track": "lxbgm16",
+      "start": 137700,
+      "end": 140500,
+      "source": "Get over the things from the past",
+      "ko": "지난 일들을 딛고 일어서",
+      "id": 236
+    },
+    {
+      "track": "lxbgm16",
+      "start": 140500,
+      "end": 144000,
+      "source": "I'll watch your back",
+      "ko": "내가 네 뒤를 지켜 줄게",
+      "id": 237
+    },
+    {
+      "track": "lxbgm16",
+      "start": 147900,
+      "end": 151800,
+      "source": "Alone in front of you",
+      "ko": "네 앞에 홀로 서서",
+      "id": 238
+    },
+    {
+      "track": "lxbgm16",
+      "start": 151800,
+      "end": 155500,
+      "source": "Oh, I don't know the words",
+      "ko": "무슨 말을 해야 할지 모르겠어",
+      "id": 239
+    },
+    {
+      "track": "lxbgm16",
+      "start": 156100,
+      "end": 159300,
+      "source": "Because anywhere is your home",
+      "ko": "어디든 네 집이니까",
+      "id": 240
+    },
+    {
+      "track": "lxbgm16",
+      "start": 159300,
+      "end": 163500,
+      "source": "Your sweet home",
+      "ko": "네 따스한 집",
+      "id": 241
+    },
+    {
+      "track": "lxbgm16",
+      "start": 164100,
+      "end": 168100,
+      "source": "No matter where you are",
+      "ko": "네가 어디에 있든",
+      "id": 242
+    },
+    {
+      "track": "lxbgm16",
+      "start": 170300,
+      "end": 175500,
+      "source": "This thing, it's home, it's incredible",
+      "ko": "여기가 집이라니, 믿기지 않아",
+      "id": 243
+    },
+    {
+      "track": "lxbgm16",
+      "start": 176100,
+      "end": 182000,
+      "source": "All my friends came home again",
+      "ko": "내 친구들이 모두 집으로 돌아왔어",
+      "id": 244
+    },
+    {
+      "track": "lxbgm16",
+      "start": 183100,
+      "end": 189100,
+      "source": "Sometimes you cannot avoid the heavy snow",
+      "ko": "때로는 거센 눈보라를 피할 수 없어",
+      "id": 245
+    },
+    {
+      "track": "lxbgm16",
+      "start": 189100,
+      "end": 193000,
+      "source": "As long as you're alive",
+      "ko": "살아 있는 한",
+      "id": 246
+    },
+    {
+      "track": "lxbgm18",
+      "start": 1800,
+      "end": 8500,
+      "source": "Erinnerst du dich noch? Erinnerst du dich noch",
+      "ko": "아직 기억하니? 아직 기억하니",
+      "id": 247
+    },
+    {
+      "track": "lxbgm18",
+      "start": 8500,
+      "end": 15500,
+      "source": "An dein Wort, das du mir gegeben hast?",
+      "ko": "네가 내게 했던 그 약속을?",
+      "id": 248
+    },
+    {
+      "track": "lxbgm18",
+      "start": 16300,
+      "end": 22000,
+      "source": "Erinnerst du dich noch? Erinnerst du dich noch",
+      "ko": "아직 기억하니? 아직 기억하니",
+      "id": 249
+    },
+    {
+      "track": "lxbgm18",
+      "start": 22000,
+      "end": 28000,
+      "source": "An den Tag, an dem du mir…?",
+      "ko": "네가 내게… 그날을?",
+      "id": 250
+    },
+    {
+      "track": "lxbgm18",
+      "start": 30000,
+      "end": 36700,
+      "source": "Die Ruinenstadt ist immer noch schön",
+      "ko": "폐허가 된 도시는 여전히 아름다워",
+      "id": 251
+    },
+    {
+      "track": "lxbgm18",
+      "start": 37300,
+      "end": 44800,
+      "source": "Ich warte lange Zeit auf deine Rückkehr",
+      "ko": "네가 돌아오기를 오래도록 기다려",
+      "id": 252
+    },
+    {
+      "track": "lxbgm18",
+      "start": 46100,
+      "end": 53100,
+      "source": "In der Hand ein Vergissmeinnicht",
+      "ko": "손에는 물망초 한 송이",
+      "id": 253
+    },
+    {
+      "track": "lxbgm18",
+      "start": 57700,
+      "end": 64200,
+      "source": "Regentropfen sind meine Tränen",
+      "ko": "빗방울은 내 눈물",
+      "id": 254
+    },
+    {
+      "track": "lxbgm18",
+      "start": 64700,
+      "end": 71700,
+      "source": "Wind ist mein Atem und mein Erzählung",
+      "ko": "바람은 내 숨결이자 내 이야기",
+      "id": 255
+    },
+    {
+      "track": "lxbgm18",
+      "start": 71800,
+      "end": 78100,
+      "source": "Zweige und Blätter sind meine Hände",
+      "ko": "가지와 잎사귀는 내 두 손",
+      "id": 256
+    },
+    {
+      "track": "lxbgm18",
+      "start": 78100,
+      "end": 86400,
+      "source": "Denn mein Körper ist in Wurzeln gehüllt",
+      "ko": "내 몸은 뿌리에 감싸여 있으니",
+      "id": 257
+    },
+    {
+      "track": "lxbgm18",
+      "start": 86500,
+      "end": 93400,
+      "source": "Wenn die Jahreszeit des Tauens kommt",
+      "ko": "얼음이 녹는 계절이 오면",
+      "id": 258
+    },
+    {
+      "track": "lxbgm18",
+      "start": 94500,
+      "end": 101700,
+      "source": "Werde ich wach und singe ein Lied",
+      "ko": "나는 깨어나 노래를 불러",
+      "id": 259
+    },
+    {
+      "track": "lxbgm18",
+      "start": 101700,
+      "end": 111900,
+      "source": "Das Vergissmeinnicht, das du mir gegeben hast",
+      "ko": "네가 내게 준 물망초는",
+      "id": 260
+    },
+    {
+      "track": "lxbgm18",
+      "start": 111900,
+      "end": 116700,
+      "source": "Ist hier",
+      "ko": "여기 있어",
+      "id": 261
+    },
+    {
+      "track": "lxbgm19",
+      "start": 30000,
+      "end": 33500,
+      "source": "Wenn ich zum Himmel blicke auf",
+      "ko": "하늘을 올려다보면",
+      "id": 262
+    },
+    {
+      "track": "lxbgm19",
+      "start": 33500,
+      "end": 37700,
+      "source": "Höre ich meine innere Stimme",
+      "ko": "내 안의 목소리가 들려",
+      "id": 263
+    },
+    {
+      "track": "lxbgm19",
+      "start": 37700,
+      "end": 39300,
+      "source": "Wie soll ich sagen?",
+      "ko": "어떻게 말해야 할까?",
+      "id": 264
+    },
+    {
+      "track": "lxbgm19",
+      "start": 39300,
+      "end": 41600,
+      "source": "Was ist wahr? Was ist Lüge?",
+      "ko": "무엇이 진실이고 무엇이 거짓일까?",
+      "id": 265
+    },
+    {
+      "track": "lxbgm19",
+      "start": 41600,
+      "end": 44000,
+      "source": "Wohin soll ich gehen?",
+      "ko": "나는 어디로 가야 할까?",
+      "id": 266
+    },
+    {
+      "track": "lxbgm19",
+      "start": 45700,
+      "end": 47100,
+      "source": "Leere Meldung",
+      "ko": "공허한 소식",
+      "id": 267
+    },
+    {
+      "track": "lxbgm19",
+      "start": 47100,
+      "end": 48300,
+      "source": "Falsche Wahrheit",
+      "ko": "거짓된 진실",
+      "id": 268
+    },
+    {
+      "track": "lxbgm19",
+      "start": 48300,
+      "end": 52700,
+      "source": "Wir sehen nur einen Teil der Dinge",
+      "ko": "우리는 세상의 일부만을 보고 있어",
+      "id": 269
+    },
+    {
+      "track": "lxbgm19",
+      "start": 53200,
+      "end": 54500,
+      "source": "Leere Meldung",
+      "ko": "공허한 소식",
+      "id": 270
+    },
+    {
+      "track": "lxbgm19",
+      "start": 54500,
+      "end": 55900,
+      "source": "Falsche Wahrheit",
+      "ko": "거짓된 진실",
+      "id": 271
+    },
+    {
+      "track": "lxbgm19",
+      "start": 55900,
+      "end": 57100,
+      "source": "What is real?",
+      "ko": "무엇이 진짜일까?",
+      "id": 272
+    },
+    {
+      "track": "lxbgm19",
+      "start": 57100,
+      "end": 60100,
+      "source": "Was heißt Wirklichkeit?",
+      "ko": "현실이란 무엇일까?",
+      "id": 273
+    },
+    {
+      "track": "lxbgm19",
+      "start": 61600,
+      "end": 65300,
+      "source": "Also, sehen wir vom Bildschirm auf",
+      "ko": "그러니 화면에서 눈을 들어 보자",
+      "id": 274
+    },
+    {
+      "track": "lxbgm19",
+      "start": 65300,
+      "end": 68000,
+      "source": "Was können wir sehen?",
+      "ko": "무엇이 보일까?",
+      "id": 275
+    },
+    {
+      "track": "lxbgm19",
+      "start": 68900,
+      "end": 72200,
+      "source": "Ist das der hohle Alltag oder",
+      "ko": "이것은 공허한 일상일까",
+      "id": 276
+    },
+    {
+      "track": "lxbgm19",
+      "start": 72200,
+      "end": 75800,
+      "source": "Der hoffnungsvolle Alltag?",
+      "ko": "아니면 희망으로 가득한 일상일까?",
+      "id": 277
+    },
+    {
+      "track": "lxbgm19",
+      "start": 75800,
+      "end": 79000,
+      "source": "Wir können real vielleicht verändern",
+      "ko": "우리는 현실을 바꿀 수 있을지도 몰라",
+      "id": 278
+    },
+    {
+      "track": "lxbgm19",
+      "start": 79000,
+      "end": 82900,
+      "source": "Wenn wir es sehr wünschen",
+      "ko": "간절히 바란다면",
+      "id": 279
+    },
+    {
+      "track": "lxbgm19",
+      "start": 82900,
+      "end": 87200,
+      "source": "Also, gehen wir vom grauen Alltag ab",
+      "ko": "그러니 잿빛 일상을 벗어나자",
+      "id": 280
+    },
+    {
+      "track": "lxbgm19",
+      "start": 87200,
+      "end": 90800,
+      "source": "Was können wir finden?",
+      "ko": "무엇을 찾을 수 있을까?",
+      "id": 281
+    },
+    {
+      "track": "lxbgm19",
+      "start": 106700,
+      "end": 110200,
+      "source": "Wenn ich zum Himmel blicke auf",
+      "ko": "하늘을 올려다보면",
+      "id": 282
+    },
+    {
+      "track": "lxbgm19",
+      "start": 110200,
+      "end": 114200,
+      "source": "Höre ich meine innere Stimme",
+      "ko": "내 안의 목소리가 들려",
+      "id": 283
+    },
+    {
+      "track": "lxbgm19",
+      "start": 114200,
+      "end": 115800,
+      "source": "Wie soll ich sagen?",
+      "ko": "어떻게 말해야 할까?",
+      "id": 284
+    },
+    {
+      "track": "lxbgm19",
+      "start": 115800,
+      "end": 118000,
+      "source": "Was ist wahr? Was ist Lüge?",
+      "ko": "무엇이 진실이고 무엇이 거짓일까?",
+      "id": 285
+    },
+    {
+      "track": "lxbgm19",
+      "start": 118000,
+      "end": 120100,
+      "source": "Wohin soll ich gehen?",
+      "ko": "나는 어디로 가야 할까?",
+      "id": 286
+    },
+    {
+      "track": "lxbgm19",
+      "start": 122000,
+      "end": 123500,
+      "source": "Leere Meldung",
+      "ko": "공허한 소식",
+      "id": 287
+    },
+    {
+      "track": "lxbgm19",
+      "start": 123500,
+      "end": 124800,
+      "source": "Falsche Wahrheit",
+      "ko": "거짓된 진실",
+      "id": 288
+    },
+    {
+      "track": "lxbgm19",
+      "start": 124800,
+      "end": 129800,
+      "source": "Wir sehen nur einen Teil der Dinge",
+      "ko": "우리는 세상의 일부만을 보고 있어",
+      "id": 289
+    },
+    {
+      "track": "lxbgm19",
+      "start": 129800,
+      "end": 131200,
+      "source": "Leere Meldung",
+      "ko": "공허한 소식",
+      "id": 290
+    },
+    {
+      "track": "lxbgm19",
+      "start": 131200,
+      "end": 132500,
+      "source": "Falsche Wahrheit",
+      "ko": "거짓된 진실",
+      "id": 291
+    },
+    {
+      "track": "lxbgm19",
+      "start": 132500,
+      "end": 133900,
+      "source": "What is real?",
+      "ko": "무엇이 진짜일까?",
+      "id": 292
+    },
+    {
+      "track": "lxbgm19",
+      "start": 133900,
+      "end": 136500,
+      "source": "Was heißt Wirklichkeit?",
+      "ko": "현실이란 무엇일까?",
+      "id": 293
+    },
+    {
+      "track": "lxbgm19",
+      "start": 136600,
+      "end": 140700,
+      "source": "Also, sehen wir vom Bildschirm auf",
+      "ko": "그러니 화면에서 눈을 들어 보자",
+      "id": 294
+    },
+    {
+      "track": "lxbgm19",
+      "start": 140700,
+      "end": 143800,
+      "source": "Was können wir sehen?",
+      "ko": "무엇이 보일까?",
+      "id": 295
+    },
+    {
+      "track": "lxbgm19",
+      "start": 144100,
+      "end": 147400,
+      "source": "Ist das der hohle Alltag oder",
+      "ko": "이것은 공허한 일상일까",
+      "id": 296
+    },
+    {
+      "track": "lxbgm19",
+      "start": 147400,
+      "end": 150900,
+      "source": "Der hoffnungsvolle Alltag?",
+      "ko": "아니면 희망으로 가득한 일상일까?",
+      "id": 297
+    },
+    {
+      "track": "lxbgm19",
+      "start": 150900,
+      "end": 154400,
+      "source": "Wir können real vielleicht verändern",
+      "ko": "우리는 현실을 바꿀 수 있을지도 몰라",
+      "id": 298
+    },
+    {
+      "track": "lxbgm19",
+      "start": 154400,
+      "end": 158200,
+      "source": "Wenn wir es sehr wünschen",
+      "ko": "간절히 바란다면",
+      "id": 299
+    },
+    {
+      "track": "lxbgm19",
+      "start": 158200,
+      "end": 162600,
+      "source": "Also, gehen wir vom grauen Alltag ab",
+      "ko": "그러니 잿빛 일상을 벗어나자",
+      "id": 300
+    },
+    {
+      "track": "lxbgm19",
+      "start": 162600,
+      "end": 167100,
+      "source": "Was können wir finden?",
+      "ko": "무엇을 찾을 수 있을까?",
+      "id": 301
+    },
+    {
+      "track": "lxbgm19",
+      "start": 167900,
+      "end": 171700,
+      "source": "Ist es real und was heißt Wirklichkeit?",
+      "ko": "이건 진짜일까, 현실이란 무엇일까?",
+      "id": 302
+    },
+    {
+      "track": "lxbgm19",
+      "start": 171700,
+      "end": 175400,
+      "source": "Was können wir sehen?",
+      "ko": "무엇이 보일까?",
+      "id": 303
+    },
+    {
+      "track": "lxbgm19",
+      "start": 175700,
+      "end": 179000,
+      "source": "Ist das der hohle Alltag oder",
+      "ko": "이것은 공허한 일상일까",
+      "id": 304
+    },
+    {
+      "track": "lxbgm19",
+      "start": 179000,
+      "end": 182400,
+      "source": "Der hoffnungsvolle Alltag?",
+      "ko": "아니면 희망으로 가득한 일상일까?",
+      "id": 305
+    },
+    {
+      "track": "lxbgm19",
+      "start": 182400,
+      "end": 186200,
+      "source": "Wir können real vielleicht verändern",
+      "ko": "우리는 현실을 바꿀 수 있을지도 몰라",
+      "id": 306
+    },
+    {
+      "track": "lxbgm19",
+      "start": 186200,
+      "end": 190200,
+      "source": "Wenn wir es sehr wünschen",
+      "ko": "간절히 바란다면",
+      "id": 307
+    },
+    {
+      "track": "lxbgm19",
+      "start": 190200,
+      "end": 194500,
+      "source": "Also, gehen wir vom grauen Alltag ab",
+      "ko": "그러니 잿빛 일상을 벗어나자",
+      "id": 308
+    },
+    {
+      "track": "lxbgm19",
+      "start": 194500,
+      "end": 197900,
+      "source": "Was können wir finden?",
+      "ko": "무엇을 찾을 수 있을까?",
+      "id": 309
+    },
+    {
+      "track": "lxsong01",
+      "start": 6400,
+      "end": 12500,
+      "source": "隔離されて行く この世界の外で",
+      "ko": "격리되어 가는 이 세계 밖에서",
+      "id": 310
+    },
+    {
+      "track": "lxsong01",
+      "start": 12500,
+      "end": 18200,
+      "source": "それを嘲笑うのが定めなのか？",
+      "ko": "그걸 비웃는 것이 운명인가?",
+      "id": 311
+    },
+    {
+      "track": "lxsong01",
+      "start": 18700,
+      "end": 25300,
+      "source": "この胸を不意に刺す 抜けない棘じゃ",
+      "ko": "불시에 가슴을 찌르는 뽑히지 않는 가시로는",
+      "id": 312
+    },
+    {
+      "track": "lxsong01",
+      "start": 25300,
+      "end": 31300,
+      "source": "痛みさえも もう感じなくなった",
+      "ko": "이제 아픔조차 느낄 수 없게 됐어",
+      "id": 313
+    },
+    {
+      "track": "lxsong01",
+      "start": 45000,
+      "end": 51000,
+      "source": "孤独な檻の中で 力求めた",
+      "ko": "고독한 우리 안에서 힘을 갈구했어",
+      "id": 314
+    },
+    {
+      "track": "lxsong01",
+      "start": 51000,
+      "end": 56700,
+      "source": "夜ごと繰り返される閉塞感",
+      "ko": "밤마다 되풀이되는 막막함",
+      "id": 315
+    },
+    {
+      "track": "lxsong01",
+      "start": 57800,
+      "end": 63800,
+      "source": "傍らの君に 肩寄せていたのは",
+      "ko": "곁에 있는 네게 어깨를 기댄 건",
+      "id": 316
+    },
+    {
+      "track": "lxsong01",
+      "start": 63800,
+      "end": 69400,
+      "source": "愛し合うためじゃなく 生き抜くため",
+      "ko": "서로 사랑하려고가 아니라 살아남으려고",
+      "id": 317
+    },
+    {
+      "track": "lxsong01",
+      "start": 70000,
+      "end": 76700,
+      "source": "そっと抱き寄せるなんて 全く出来ずに",
+      "ko": "살며시 끌어안지도 못한 채",
+      "id": 318
+    },
+    {
+      "track": "lxsong01",
+      "start": 76700,
+      "end": 82200,
+      "source": "力の限り掴み 壊してきた",
+      "ko": "온 힘을 다해 움켜쥐고 부숴 왔어",
+      "id": 319
+    },
+    {
+      "track": "lxsong01",
+      "start": 82200,
+      "end": 88000,
+      "source": "きっとそれは叶わぬ夢",
+      "ko": "분명 그건 이룰 수 없는 꿈",
+      "id": 320
+    },
+    {
+      "track": "lxsong01",
+      "start": 89300,
+      "end": 96000,
+      "source": "もっと違った？ そんな答えはなかった",
+      "ko": "다른 길도 있었을까? 그런 답은 없었어",
+      "id": 321
+    },
+    {
+      "track": "lxsong01",
+      "start": 96000,
+      "end": 102800,
+      "source": "喧噪の夜は去り 沈黙の朝が来る",
+      "ko": "소란스러운 밤은 가고 침묵의 아침이 와",
+      "id": 322
+    },
+    {
+      "track": "lxsong01",
+      "start": 102800,
+      "end": 107000,
+      "source": "淘汰の風に煽られて",
+      "ko": "도태의 바람에 휩쓸려",
+      "id": 323
+    },
+    {
+      "track": "lxsong01",
+      "start": 108300,
+      "end": 111800,
+      "source": "過去は押しつぶされ",
+      "ko": "과거는 짓눌려 부서지고",
+      "id": 324
+    },
+    {
+      "track": "lxsong01",
+      "start": 112300,
+      "end": 114700,
+      "source": "未来も見えず",
+      "ko": "미래도 보이지 않아",
+      "id": 325
+    },
+    {
+      "track": "lxsong01",
+      "start": 115400,
+      "end": 120000,
+      "source": "現在に残されたものは",
+      "ko": "지금 남겨진 것은",
+      "id": 326
+    },
+    {
+      "track": "lxsong01",
+      "start": 121000,
+      "end": 124000,
+      "source": "罪と罰",
+      "ko": "죄와 벌",
+      "id": 327
+    },
+    {
+      "track": "lxsong01",
+      "start": 134600,
+      "end": 141000,
+      "source": "隔離されて行く この世界の中で",
+      "ko": "격리되어 가는 이 세계 안에서",
+      "id": 328
+    },
+    {
+      "track": "lxsong01",
+      "start": 141000,
+      "end": 147000,
+      "source": "それを受け止めるのが定めなのか？",
+      "ko": "그걸 받아들이는 것이 운명인가?",
+      "id": 329
+    },
+    {
+      "track": "lxsong01",
+      "start": 160000,
+      "end": 165000,
+      "source": "きっとこれは終わらぬ夢",
+      "ko": "분명 이건 끝나지 않을 꿈",
+      "id": 330
+    },
+    {
+      "track": "lxsong01",
+      "start": 166600,
+      "end": 171500,
+      "source": "いっそ罪の想いもどこかへ",
+      "ko": "차라리 죄의 기억도 어딘가로",
+      "id": 331
+    },
+    {
+      "track": "lxsong01",
+      "start": 171500,
+      "end": 173000,
+      "source": "サヨナラ……",
+      "ko": "잘 있어……",
+      "id": 332
+    },
+    {
+      "track": "lxsong01",
+      "start": 173000,
+      "end": 176500,
+      "source": "崩壊する秩序",
+      "ko": "무너져 가는 질서",
+      "id": 333
+    },
+    {
+      "track": "lxsong01",
+      "start": 176500,
+      "end": 180000,
+      "source": "亡者どもがしがみつく",
+      "ko": "망자들이 매달려",
+      "id": 334
+    },
+    {
+      "track": "lxsong01",
+      "start": 180000,
+      "end": 184000,
+      "source": "神様になんてなれずに",
+      "ko": "신 따위는 되지도 못한 채",
+      "id": 335
+    },
+    {
+      "track": "lxsong01",
+      "start": 185300,
+      "end": 188700,
+      "source": "逃げながら見つけた",
+      "ko": "도망치며 찾아낸",
+      "id": 336
+    },
+    {
+      "track": "lxsong01",
+      "start": 189600,
+      "end": 192000,
+      "source": "希望の種",
+      "ko": "희망의 씨앗",
+      "id": 337
+    },
+    {
+      "track": "lxsong01",
+      "start": 192400,
+      "end": 197300,
+      "source": "君が繋いだ世界で……",
+      "ko": "네가 이어 준 세계에서……",
+      "id": 338
+    },
+    {
+      "track": "lxsong01",
+      "start": 197600,
+      "end": 201000,
+      "source": "生きて行く",
+      "ko": "살아갈 거야",
+      "id": 339
+    },
+    {
+      "track": "lxsong02",
+      "start": 21700,
+      "end": 24500,
+      "source": "未来＝虚ろな夜",
+      "ko": "미래는 공허한 밤",
+      "id": 340
+    },
+    {
+      "track": "lxsong02",
+      "start": 24500,
+      "end": 29000,
+      "source": "手招きだけが闇に浮かんでる",
+      "ko": "손짓만이 어둠 속에 떠 있어",
+      "id": 341
+    },
+    {
+      "track": "lxsong02",
+      "start": 29000,
+      "end": 32700,
+      "source": "秒針は冷たく",
+      "ko": "초침은 차갑게",
+      "id": 342
+    },
+    {
+      "track": "lxsong02",
+      "start": 32700,
+      "end": 37200,
+      "source": "俺のかすれた声をかき消す",
+      "ko": "내 쉰 목소리를 지워 버려",
+      "id": 343
+    },
+    {
+      "track": "lxsong02",
+      "start": 43400,
+      "end": 45000,
+      "source": "Show me what's wrong",
+      "ko": "무엇이 잘못됐는지 알려 줘",
+      "id": 344
+    },
+    {
+      "track": "lxsong02",
+      "start": 45000,
+      "end": 48000,
+      "source": "It causes this pain",
+      "ko": "그것이 이 아픔을 불러와",
+      "id": 345
+    },
+    {
+      "track": "lxsong02",
+      "start": 48200,
+      "end": 52800,
+      "source": "時は破裂する",
+      "ko": "시간은 터져 버려",
+      "id": 346
+    },
+    {
+      "track": "lxsong02",
+      "start": 53000,
+      "end": 57500,
+      "source": "まるで終わりの始まり",
+      "ko": "마치 끝의 시작처럼",
+      "id": 347
+    },
+    {
+      "track": "lxsong02",
+      "start": 57800,
+      "end": 60000,
+      "source": "Where am I?",
+      "ko": "난 어디에 있지?",
+      "id": 348
+    },
+    {
+      "track": "lxsong02",
+      "start": 66800,
+      "end": 69000,
+      "source": "現在＝どこにも不明",
+      "ko": "현재는 어디에서도 알 수 없어",
+      "id": 349
+    },
+    {
+      "track": "lxsong02",
+      "start": 69000,
+      "end": 73400,
+      "source": "間違いはなくココにあるはずの",
+      "ko": "분명 여기에 있어야 할",
+      "id": 350
+    },
+    {
+      "track": "lxsong02",
+      "start": 73400,
+      "end": 77200,
+      "source": "触れられるものが真実",
+      "ko": "손에 닿는 것이 진실이야",
+      "id": 351
+    },
+    {
+      "track": "lxsong02",
+      "start": 77300,
+      "end": 81000,
+      "source": "たとえそれが痛みでも",
+      "ko": "그게 아픔이라 해도",
+      "id": 352
+    },
+    {
+      "track": "lxsong02",
+      "start": 87100,
+      "end": 89700,
+      "source": "Show me what's wrong",
+      "ko": "무엇이 잘못됐는지 알려 줘",
+      "id": 353
+    },
+    {
+      "track": "lxsong02",
+      "start": 89700,
+      "end": 92500,
+      "source": "It causes this pain",
+      "ko": "그것이 이 아픔을 불러와",
+      "id": 354
+    },
+    {
+      "track": "lxsong02",
+      "start": 92500,
+      "end": 96500,
+      "source": "俺は加速する",
+      "ko": "나는 가속해",
+      "id": 355
+    },
+    {
+      "track": "lxsong02",
+      "start": 96800,
+      "end": 101600,
+      "source": "まるでジェットコースター",
+      "ko": "마치 롤러코스터처럼",
+      "id": 356
+    },
+    {
+      "track": "lxsong02",
+      "start": 101800,
+      "end": 104000,
+      "source": "To my grave",
+      "ko": "내 무덤으로",
+      "id": 357
+    },
+    {
+      "track": "lxsong02",
+      "start": 170000,
+      "end": 172800,
+      "source": "Show me what's wrong",
+      "ko": "무엇이 잘못됐는지 알려 줘",
+      "id": 358
+    },
+    {
+      "track": "lxsong02",
+      "start": 172800,
+      "end": 176000,
+      "source": "It causes this pain",
+      "ko": "그것이 이 아픔을 불러와",
+      "id": 359
+    },
+    {
+      "track": "lxsong02",
+      "start": 176000,
+      "end": 179700,
+      "source": "時は破裂する",
+      "ko": "시간은 터져 버려",
+      "id": 360
+    },
+    {
+      "track": "lxsong02",
+      "start": 179700,
+      "end": 185000,
+      "source": "まるで終わりの始まり",
+      "ko": "마치 끝의 시작처럼",
+      "id": 361
+    },
+    {
+      "track": "lxsong02",
+      "start": 185300,
+      "end": 187400,
+      "source": "Where am I?",
+      "ko": "난 어디에 있지?",
+      "id": 362
+    },
+    {
+      "track": "lxsong02",
+      "start": 187400,
+      "end": 190800,
+      "source": "It causes this pain",
+      "ko": "그것이 이 아픔을 불러와",
+      "id": 363
+    },
+    {
+      "track": "lxsong02",
+      "start": 190800,
+      "end": 194500,
+      "source": "俺は加速する",
+      "ko": "나는 가속해",
+      "id": 364
+    },
+    {
+      "track": "lxsong02",
+      "start": 194500,
+      "end": 199700,
+      "source": "まるでジェットコースター",
+      "ko": "마치 롤러코스터처럼",
+      "id": 365
+    },
+    {
+      "track": "lxsong02",
+      "start": 199800,
+      "end": 202000,
+      "source": "To my grave",
+      "ko": "내 무덤으로",
+      "id": 366
+    }
+  ]
+}

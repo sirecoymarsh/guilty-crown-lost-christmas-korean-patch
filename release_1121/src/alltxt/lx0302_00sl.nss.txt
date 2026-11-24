@@ -1,0 +1,73 @@
+
+//<continuation number="70">
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0302_00sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	//$PreGameName = $GameName;
+	//$GameName = ".nss";
+
+}
+
+
+scene lx0302_00sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//	$SYSTEM_skip=false;
+//	$SYSTEM_menu_lock=true;
+////////////////////////////////////////
+//♂♀：選択肢
+
+//→→玄周を助ける
+//→→世界を救う
+
+$PreGameName = $GameName;
+////////////////////////////////////////
+
+//lx0302_01
+//lx0302_02
+//■選択肢
+	$select_fade=true;
+	SetChoice02("ﾄ昞ﾎｽｺｸｦ ｱｸﾇﾑｴﾙ","ｼｼｰ雕ｦ ｱｸﾇﾑｴﾙ");
+	WaitChoice02();
+	
+	if($SetChoiceSelect==0){		$GameName = "lx0302_01.nss";$lx0302_00sl選択肢=1;$GOOD_MAN_POINT=$GOOD_MAN_POINT+1;$FLAG_OF_STORY["玄周を助ける"]=true;}
+	else if($SetChoiceSelect==1){	$GameName = "lx0302_02.nss";$lx0302_00sl選択肢=0;}
+
+
+}

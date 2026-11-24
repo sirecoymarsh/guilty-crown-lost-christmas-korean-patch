@@ -1,0 +1,1197 @@
+$Revision: 19 $
+
+//=============================================================================//
+//■メニュー■
+//=============================================================================//
+chapter main
+{
+	if($GameClose){return;}
+
+	//★超速からの変遷用
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_buttondown_close=false;
+
+	$SYSTEM_backselect_lock=true;
+
+	$SYSTEM_keydown_m=false;
+	$SYSTEM_keydown_space=false;
+	
+	CreateTexture("video1",1,center,middle,"VIDEO");
+	CreateTexture("video2", 1000, center, middle, "VIDEO");
+	Fade("video2", 0, 0, null, true);
+
+	//■背景
+	CreateColor("me背景", 10, 0, 0, 1024, 768, "BLACK");
+	Fade("me背景", 0, 0, null, true);
+
+	//■メニュー項目
+	$MenuCancelX=882  + 20;
+	$MenuEraseX =1013 + 20;
+	$MenuSendX  =875  + 20;
+	$MenuSkipX  =835  + 20;
+	$MenuLogX   =899  + 20;
+	$MenuSaveX  =808  + 20;
+	$MenuLoadX  =817  + 20;
+	$MenuConfigX=855  + 20;
+	$MenuTitleX =913  + 20;
+	$MenuExitX  =871  + 20;
+
+	$MenuCancelY =-96  - 20;
+	$MenuEraseY  =-168 - 20;
+	$MenuSendY   =-68  - 20;
+	$MenuSkipY   =-46  - 20;
+	$MenuLogY    =-53  - 20;
+	$MenuSaveY   =-18  - 20;
+	$MenuLoadY   =-7   - 20;
+	$MenuConfigY =6    + 20;
+	$MenuTitleY  =0    + 20;
+	$MenuExitY   =18   + 20;
+
+	$MenuNameX=434;
+	$MenuNameY=100;
+	
+	$MenuInfoX=0;
+	$MenuInfoNameY=528;
+	$MenuInfoYEnd=600;
+	$MenuInfoY=520;
+	$MenuInfoTextY=530;
+
+LockVideo(true);
+	CreateSound("me開始",SE,"sound/se/SE_システム_メニュー_表示.ogg");
+	CreateSound("me決定音",SE,"sound/se/SE_システム_メニュー_決定.ogg");
+	CreateSound("me終了",SE,"sound/se/SE_システム_メニュー_終了.ogg");
+	
+	CreateTexture("meInfoベース", 20, 0, $MenuInfoYEnd, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meInfo", 20, 0, $MenuInfoYEnd, "cg/sys/menu/info/MENU.png");
+	SetVertex("meInfo", 0, 0);
+	Zoom("meInfo", 0, 250, 250, null, false);
+	Request("meInfo", Smoothing);
+
+	CreateChoice("meキャンセル", 0, 0, 0, 0, 0, 0);
+	SetAlias("meキャンセル", "meキャンセル");
+	CreateTexture("meキャンセル/MouseUsual/hit", 0, 898, 60,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meキャンセル/MouseUsual/kr_hitarea", 0, $MenuCancelX, $MenuCancelY, "cg/sys/menu/ko_hit_cancel.png");
+	CreateTexture("meキャンセル/MouseUsual/img", 20, $MenuCancelX, $MenuCancelY, "cg/sys/menu/CANCEL-001.png");
+	SetVertex("meキャンセル/MouseUsual/img", 0, 0);
+	Zoom("meキャンセル/MouseUsual/img", 0, 250, 250, null, false);
+	Request("meキャンセル/MouseUsual/img", Smoothing);
+	CreateTexture("meキャンセル/MouseOver/img", 20, $MenuCancelX, $MenuCancelY, "cg/sys/menu/CANCEL-002.png");
+	SetVertex("meキャンセル/MouseOver/img", 0, 0);
+	Zoom("meキャンセル/MouseOver/img", 0, 250, 250, null, false);
+	Request("meキャンセル/MouseOver/img", Smoothing);
+	CreateTexture("meキャンセル/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/CANCEL.png");
+	SetVertex("meキャンセル/MouseOver/img2", 0, 0);
+	Zoom("meキャンセル/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meキャンセル/MouseOver/img2", Smoothing);
+	CreateTexture("meキャンセル/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meキャンセル/MouseClick/img", 20, $MenuCancelX, $MenuCancelY, "cg/sys/menu/CANCEL-003.png");
+	SetVertex("meキャンセル/MouseClick/img", 0, 0);
+	Zoom("meキャンセル/MouseClick/img", 0, 250, 250, null, false);
+	Request("meキャンセル/MouseClick/img", Smoothing);
+	CreateTexture("meキャンセル/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/CANCEL.png");
+	SetVertex("meキャンセル/MouseClick/img2", 0, 0);
+	Zoom("meキャンセル/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meキャンセル/MouseClick/img2", Smoothing);
+	CreateTexture("meキャンセル/MouseClick/img3",23,0,$MenuInfoY,"cg/sys/menu/info/INFO_00base.png");
+
+	CreateChoice("meメッセージ", 0, 0, 0, 0, 0, 0);
+	SetAlias("meメッセージ", "meメッセージ");
+	CreateTexture("meメッセージ/MouseUsual/hit", 0, 828, 144,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meメッセージ/MouseUsual/kr_hitarea", 0, $MenuEraseX, $MenuEraseY, "cg/sys/menu/ko_hit_delete_message.png");
+	CreateTexture("meVIS_メッセージ", 20, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-001.png");
+	SetAlias("meVIS_メッセージ", "meVIS_メッセージ");
+	SetVertex("meVIS_メッセージ", 0, 0);
+	Zoom("meVIS_メッセージ", 0, 250, 250, null, false);
+	Request("meVIS_メッセージ", Smoothing);
+	if(!$SYSTEM_text_erase_lock)
+	{
+		CreateTexture("meメッセージ/MouseOver/img", 21, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-002.png");
+		SetVertex("meメッセージ/MouseOver/img", 0, 0);
+		Zoom("meメッセージ/MouseOver/img", 0, 250, 250, null, false);
+	Request("meメッセージ/MouseOver/img", Smoothing);
+		CreateTexture("meメッセージ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/DELETE MESSAGE.png");
+		SetVertex("meメッセージ/MouseOver/img2", 0, 0);
+		Zoom("meメッセージ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meメッセージ/MouseOver/img2", Smoothing);
+		CreateTexture("meメッセージ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("meメッセージ/MouseClick/img", 21, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-003.png");
+		SetVertex("meメッセージ/MouseClick/img", 0, 0);
+		Zoom("meメッセージ/MouseClick/img", 0, 250, 250, null, false);
+	Request("meメッセージ/MouseClick/img", Smoothing);
+		CreateTexture("meメッセージ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/DELETE MESSAGE.png");
+		SetVertex("meメッセージ/MouseClick/img2", 0, 0);
+		Zoom("meメッセージ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meメッセージ/MouseClick/img2", Smoothing);
+		CreateTexture("meメッセージ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	}
+	else
+	{
+		CreateTexture("meメッセージ/MouseOver/img", 21, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-001.png");
+		SetVertex("meメッセージ/MouseOver/img", 0, 0);
+		Zoom("meメッセージ/MouseOver/img", 0, 250, 250, null, false);
+	Request("meメッセージ/MouseOver/img", Smoothing);
+		CreateTexture("meメッセージ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/DELETE MESSAGE_UnClick.png");
+		SetVertex("meメッセージ/MouseOver/img2", 0, 0);
+		Zoom("meメッセージ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meメッセージ/MouseOver/img2", Smoothing);
+		CreateTexture("meメッセージ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("meメッセージ/MouseClick/img", 24, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-001.png");
+		SetVertex("meメッセージ/MouseClick/img", 0, 0);
+		Zoom("meメッセージ/MouseClick/img", 0, 250, 250, null, false);
+	Request("meメッセージ/MouseClick/img", Smoothing);
+		CreateTexture("meメッセージ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/DELETE MESSAGE_UnClick.png");
+		SetVertex("meメッセージ/MouseClick/img2", 0, 0);
+		Zoom("meメッセージ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meメッセージ/MouseClick/img2", Smoothing);
+		CreateTexture("meメッセージ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		Request("meメッセージ/MouseUsual/hit", Erase);
+		Request("meメッセージ",UnClickable);
+	}
+	
+	CreateChoice("me自動メッセージ", 0, 0, 0, 0, 0, 0);
+	SetAlias("me自動メッセージ", "me自動メッセージ");
+	CreateTexture("me自動メッセージ/MouseUsual/hit", 0, 940, 126,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me自動メッセージ/MouseUsual/kr_hitarea", 0, $MenuSendX, $MenuSendY, "cg/sys/menu/ko_hit_auto.png");
+	CreateTexture("me自動メッセージ/MouseUsual/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-001.png");
+	SetVertex("me自動メッセージ/MouseUsual/img", 0, 0);
+	Zoom("me自動メッセージ/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseUsual/img", Smoothing);
+	if(!$SYSTEM_text_auto_lock)
+	{
+		CreateTexture("me自動メッセージ/MouseOver/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-002.png");
+		SetVertex("me自動メッセージ/MouseOver/img", 0, 0);
+		Zoom("me自動メッセージ/MouseOver/img", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseOver/img", Smoothing);
+		CreateTexture("me自動メッセージ/MouseClick/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-003.png");
+		SetVertex("me自動メッセージ/MouseClick/img", 0, 0);
+		Zoom("me自動メッセージ/MouseClick/img", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseClick/img", Smoothing);
+		CreateTexture("me自動メッセージ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/AUTO.png");
+		SetVertex("me自動メッセージ/MouseOver/img2", 0, 0);
+		Zoom("me自動メッセージ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseOver/img2", Smoothing);
+		CreateTexture("me自動メッセージ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/AUTO.png");
+		SetVertex("me自動メッセージ/MouseClick/img2", 0, 0);
+		Zoom("me自動メッセージ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseClick/img2", Smoothing);
+		CreateTexture("me自動メッセージ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("me自動メッセージ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	}
+	else
+	{
+		CreateTexture("me自動メッセージ/MouseOver/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-001.png");
+		SetVertex("me自動メッセージ/MouseOver/img", 0, 0);
+		Zoom("me自動メッセージ/MouseOver/img", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseOver/img", Smoothing);
+		CreateTexture("me自動メッセージ/MouseClick/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-001.png");
+		SetVertex("me自動メッセージ/MouseClick/img", 0, 0);
+		Zoom("me自動メッセージ/MouseClick/img", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseClick/img", Smoothing);
+		CreateTexture("me自動メッセージ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/AUTO_UnClick.png");
+		SetVertex("me自動メッセージ/MouseOver/img2", 0, 0);
+		Zoom("me自動メッセージ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseOver/img2", Smoothing);
+		CreateTexture("me自動メッセージ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/AUTO_UnClick.png");
+		SetVertex("me自動メッセージ/MouseClick/img2", 0, 0);
+		Zoom("me自動メッセージ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me自動メッセージ/MouseClick/img2", Smoothing);
+		CreateTexture("me自動メッセージ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("me自動メッセージ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		Request("me自動メッセージ/MouseUsual/hit", Erase);
+		Request("me自動メッセージ",UnClickable);
+	}
+
+	CreateChoice("meスキップ", 0, 0, 0, 0, 0, 0);
+	SetAlias("meスキップ", "meスキップ");
+	CreateTexture("meスキップ/MouseUsual/hit", 0, 962, 159,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meスキップ/MouseUsual/kr_hitarea", 0, $MenuSkipX, $MenuSkipY, "cg/sys/menu/ko_hit_skip.png");
+	CreateTexture("meスキップ/MouseUsual/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-001.png");
+	SetVertex("meスキップ/MouseUsual/img", 0, 0);
+	Zoom("meスキップ/MouseUsual/img", 0, 250, 250, null, false);
+	Request("meスキップ/MouseUsual/img", Smoothing);
+	if(!$SYSTEM_skip_lock)
+	{
+		CreateTexture("meスキップ/MouseOver/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-002.png");
+		SetVertex("meスキップ/MouseOver/img", 0, 0);
+		Zoom("meスキップ/MouseOver/img", 0, 250, 250, null, false);
+	Request("meスキップ/MouseOver/img", Smoothing);
+		CreateTexture("meスキップ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SKIP.png");
+		SetVertex("meスキップ/MouseOver/img2", 0, 0);
+		Zoom("meスキップ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meスキップ/MouseOver/img2", Smoothing);
+		CreateTexture("meスキップ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("meスキップ/MouseClick/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-003.png");
+		SetVertex("meスキップ/MouseClick/img", 0, 0);
+		Zoom("meスキップ/MouseClick/img", 0, 250, 250, null, false);
+	Request("meスキップ/MouseClick/img", Smoothing);
+		CreateTexture("meスキップ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SKIP.png");
+		SetVertex("meスキップ/MouseClick/img2", 0, 0);
+		Zoom("meスキップ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meスキップ/MouseClick/img2", Smoothing);
+		CreateTexture("meスキップ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	}
+	else
+	{
+		CreateTexture("meスキップ/MouseOver/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-001.png");
+		SetVertex("meスキップ/MouseOver/img", 0, 0);
+		Zoom("meスキップ/MouseOver/img", 0, 250, 250, null, false);
+	Request("meスキップ/MouseOver/img", Smoothing);
+		CreateTexture("meスキップ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SKIP_UnClick.png");
+		SetVertex("meスキップ/MouseOver/img2", 0, 0);
+		Zoom("meスキップ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meスキップ/MouseOver/img2", Smoothing);
+		CreateTexture("meスキップ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("meスキップ/MouseClick/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-001.png");
+		SetVertex("meスキップ/MouseClick/img", 0, 0);
+		Zoom("meスキップ/MouseClick/img", 0, 250, 250, null, false);
+	Request("meスキップ/MouseClick/img", Smoothing);
+		CreateTexture("meスキップ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SKIP_UnClick.png");
+		SetVertex("meスキップ/MouseClick/img2", 0, 0);
+		Zoom("meスキップ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meスキップ/MouseClick/img2", Smoothing);
+		CreateTexture("meスキップ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		Request("meスキップ/MouseUsual/hit", Erase);
+		Request("meスキップ",UnClickable);
+	}
+
+	CreateChoice("meバックログ", 0, 0, 0, 0, 0, 0);
+	SetAlias("meバックログ", "meバックログ");
+	CreateTexture("meバックログ/MouseUsual/hit", 0, 926, 210,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meバックログ/MouseUsual/kr_hitarea", 0, $MenuLogX, $MenuLogY, "cg/sys/menu/ko_hit_back_log.png");
+	CreateTexture("meバックログ/MouseUsual/img", 20, $MenuLogX, $MenuLogY, "cg/sys/menu/BACK LOG-001.png");
+	SetVertex("meバックログ/MouseUsual/img", 0, 0);
+	Zoom("meバックログ/MouseUsual/img", 0, 250, 250, null, false);
+	Request("meバックログ/MouseUsual/img", Smoothing);
+	CreateTexture("meバックログ/MouseOver/img", 20, $MenuLogX, $MenuLogY, "cg/sys/menu/BACK LOG-002.png");
+	SetVertex("meバックログ/MouseOver/img", 0, 0);
+	Zoom("meバックログ/MouseOver/img", 0, 250, 250, null, false);
+	Request("meバックログ/MouseOver/img", Smoothing);
+	CreateTexture("meバックログ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/BACK LOG.png");
+	SetVertex("meバックログ/MouseOver/img2", 0, 0);
+	Zoom("meバックログ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meバックログ/MouseOver/img2", Smoothing);
+	CreateTexture("meバックログ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meバックログ/MouseClick/img", 20, $MenuLogX, $MenuLogY, "cg/sys/menu/BACK LOG-003.png");
+	SetVertex("meバックログ/MouseClick/img", 0, 0);
+	Zoom("meバックログ/MouseClick/img", 0, 250, 250, null, false);
+	Request("meバックログ/MouseClick/img", Smoothing);
+	CreateTexture("meバックログ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/BACK LOG.png");
+	SetVertex("meバックログ/MouseClick/img2", 0, 0);
+	Zoom("meバックログ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meバックログ/MouseClick/img2", Smoothing);
+	CreateTexture("meバックログ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+
+	CreateChoice("meセーブ", 0, 0, 0, 0, 0, 0);
+	SetAlias("meセーブ", "meセーブ");
+	CreateTexture("meセーブ/MouseUsual/hit", 0, 972, 240,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meセーブ/MouseUsual/kr_hitarea", 0, $MenuSaveX, $MenuSaveY, "cg/sys/menu/ko_hit_save.png");
+	CreateTexture("meセーブ/MouseUsual/img", 20, $MenuSaveX, $MenuSaveY, "cg/sys/menu/SAVE-001.png");
+	SetVertex("meセーブ/MouseUsual/img", 0, 0);
+	Zoom("meセーブ/MouseUsual/img", 0, 250, 250, null, false);
+	Request("meセーブ/MouseUsual/img", Smoothing);
+	CreateTexture("meセーブ/MouseOver/img", 20, $MenuSaveX, $MenuSaveY, "cg/sys/menu/SAVE-002.png");
+	SetVertex("meセーブ/MouseOver/img", 0, 0);
+	Zoom("meセーブ/MouseOver/img", 0, 250, 250, null, false);
+	Request("meセーブ/MouseOver/img", Smoothing);
+	CreateTexture("meセーブ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SAVE.png");
+	SetVertex("meセーブ/MouseOver/img2", 0, 0);
+	Zoom("meセーブ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meセーブ/MouseOver/img2", Smoothing);
+	CreateTexture("meセーブ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meセーブ/MouseClick/img", 20, $MenuSaveX, $MenuSaveY, "cg/sys/menu/SAVE-003.png");
+	SetVertex("meセーブ/MouseClick/img", 0, 0);
+	Zoom("meセーブ/MouseClick/img", 0, 250, 250, null, false);
+	Request("meセーブ/MouseClick/img", Smoothing);
+	CreateTexture("meセーブ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SAVE.png");
+	SetVertex("meセーブ/MouseClick/img2", 0, 0);
+	Zoom("meセーブ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meセーブ/MouseClick/img2", Smoothing);
+	CreateTexture("meセーブ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+
+	CreateChoice("meロード", 0, 0, 0, 0, 0, 0);
+	SetAlias("meロード", "meロード");
+	CreateTexture("meロード/MouseUsual/hit", 0, 963, 277,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meロード/MouseUsual/kr_hitarea", 0, $MenuLoadX, $MenuLoadY, "cg/sys/menu/ko_hit_load.png");
+	CreateTexture("meロード/MouseUsual/img", 20, $MenuLoadX, $MenuLoadY, "cg/sys/menu/LOAD-001.png");
+	SetVertex("meロード/MouseUsual/img", 0, 0);
+	Zoom("meロード/MouseUsual/img", 0, 250, 250, null, false);
+	Request("meロード/MouseUsual/img", Smoothing);
+	CreateTexture("meロード/MouseOver/img", 20, $MenuLoadX, $MenuLoadY, "cg/sys/menu/LOAD-002.png");
+	SetVertex("meロード/MouseOver/img", 0, 0);
+	Zoom("meロード/MouseOver/img", 0, 250, 250, null, false);
+	Request("meロード/MouseOver/img", Smoothing);
+	CreateTexture("meロード/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/LOAD.png");
+	SetVertex("meロード/MouseOver/img2", 0, 0);
+	Zoom("meロード/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meロード/MouseOver/img2", Smoothing);
+	CreateTexture("meロード/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meロード/MouseClick/img", 20, $MenuLoadX, $MenuLoadY, "cg/sys/menu/LOAD-003.png");
+	SetVertex("meロード/MouseClick/img", 0, 0);
+	Zoom("meロード/MouseClick/img", 0, 250, 250, null, false);
+	Request("meロード/MouseClick/img", Smoothing);
+	CreateTexture("meロード/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/LOAD.png");
+	SetVertex("meロード/MouseClick/img2", 0, 0);
+	Zoom("meロード/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meロード/MouseClick/img2", Smoothing);
+	CreateTexture("meロード/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+
+	CreateChoice("meコンフィグ", 0, 0, 0, 0, 0, 0);
+	SetAlias("meコンフィグ", "meコンフィグ");
+	CreateTexture("meコンフィグ/MouseUsual/hit", 0, 949, 310,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meコンフィグ/MouseUsual/kr_hitarea", 0, $MenuConfigX, $MenuConfigY, "cg/sys/menu/ko_hit_config.png");
+	CreateTexture("meコンフィグ/MouseUsual/img", 20, $MenuConfigX, $MenuConfigY, "cg/sys/menu/CONFIG-001.png");
+	SetVertex("meコンフィグ/MouseUsual/img", 0, 0);
+	Zoom("meコンフィグ/MouseUsual/img", 0, 250, 250, null, false);
+	Request("meコンフィグ/MouseUsual/img", Smoothing);
+	CreateTexture("meコンフィグ/MouseOver/img", 20, $MenuConfigX, $MenuConfigY, "cg/sys/menu/CONFIG-002.png");
+	SetVertex("meコンフィグ/MouseOver/img", 0, 0);
+	Zoom("meコンフィグ/MouseOver/img", 0, 250, 250, null, false);
+	Request("meコンフィグ/MouseOver/img", Smoothing);
+	CreateTexture("meコンフィグ/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/CONFIG.png");
+	SetVertex("meコンフィグ/MouseOver/img2", 0, 0);
+	Zoom("meコンフィグ/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meコンフィグ/MouseOver/img2", Smoothing);
+	CreateTexture("meコンフィグ/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meコンフィグ/MouseClick/img", 20, $MenuConfigX, $MenuConfigY, "cg/sys/menu/CONFIG-003.png");
+	SetVertex("meコンフィグ/MouseClick/img", 0, 0);
+	Zoom("meコンフィグ/MouseClick/img", 0, 250, 250, null, false);
+	Request("meコンフィグ/MouseClick/img", Smoothing);
+	CreateTexture("meコンフィグ/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/CONFIG.png");
+	SetVertex("meコンフィグ/MouseClick/img2", 0, 0);
+	Zoom("meコンフィグ/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meコンフィグ/MouseClick/img2", Smoothing);
+	CreateTexture("meコンフィグ/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+//	Request("meコンフィグ/MouseUsual/hit", Erase);
+//	Request("meコンフィグ",UnClickable);
+//	Delete("meコンフィグ/MouseClick");
+
+	CreateChoice("meタイトル", 0, 0, 0, 0, 0, 0);
+	SetAlias("meタイトル", "meタイトル");
+	CreateTexture("meタイトル/MouseUsual/hit", 0, 908, 339,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meタイトル/MouseUsual/kr_hitarea", 0, $MenuTitleX, $MenuTitleY, "cg/sys/menu/ko_hit_back_to_title.png");
+	CreateTexture("meタイトル/MouseUsual/img", 20, $MenuTitleX, $MenuTitleY, "cg/sys/menu/BACK TO TITLE-001.png");
+	SetVertex("meタイトル/MouseUsual/img", 0, 0);
+	Zoom("meタイトル/MouseUsual/img", 0, 250, 250, null, false);
+	Request("meタイトル/MouseUsual/img", Smoothing);
+	CreateTexture("meタイトル/MouseOver/img", 20, $MenuTitleX, $MenuTitleY, "cg/sys/menu/BACK TO TITLE-002.png");
+	SetVertex("meタイトル/MouseOver/img", 0, 0);
+	Zoom("meタイトル/MouseOver/img", 0, 250, 250, null, false);
+	Request("meタイトル/MouseOver/img", Smoothing);
+	CreateTexture("meタイトル/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/BACK TO TITLE.png");
+	SetVertex("meタイトル/MouseOver/img2", 0, 0);
+	Zoom("meタイトル/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meタイトル/MouseOver/img2", Smoothing);
+	CreateTexture("meタイトル/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meタイトル/MouseClick/img", 20, $MenuTitleX, $MenuTitleY, "cg/sys/menu/BACK TO TITLE-003.png");
+	SetVertex("meタイトル/MouseClick/img", 0, 0);
+	Zoom("meタイトル/MouseClick/img", 0, 250, 250, null, false);
+	Request("meタイトル/MouseClick/img", Smoothing);
+	CreateTexture("meタイトル/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/BACK TO TITLE.png");
+	SetVertex("meタイトル/MouseClick/img2", 0, 0);
+	Zoom("meタイトル/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meタイトル/MouseClick/img2", Smoothing);
+	CreateTexture("meタイトル/MouseClick/img3",23,0,$MenuInfoY,"cg/sys/menu/info/INFO_00base.png");
+//	Request("meタイトル/MouseUsual/hit", Erase);
+//	Request("meタイトル",UnClickable);
+//	Delete("meタイトル/MouseClick");
+
+	CreateChoice("meゲーム終了", 0, 0, 0, 0, 0, 0);
+	SetAlias("meゲーム終了", "meゲーム終了");
+	CreateTexture("meゲーム終了/MouseUsual/hit",0, 947, 373,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("meゲーム終了/MouseUsual/kr_hitarea", 0, $MenuExitX, $MenuExitY, "cg/sys/menu/ko_hit_game_exit.png");
+	CreateTexture("meゲーム終了/MouseUsual/img", 20, $MenuExitX, $MenuExitY, "cg/sys/menu/GAME EXIT-001.png");
+	SetVertex("meゲーム終了/MouseUsual/img", 0, 0);
+	Zoom("meゲーム終了/MouseUsual/img", 0, 250, 250, null, false);
+	Request("meゲーム終了/MouseUsual/img", Smoothing);
+	CreateTexture("meゲーム終了/MouseOver/img", 20, $MenuExitX, $MenuExitY, "cg/sys/menu/GAME EXIT-002.png");
+	SetVertex("meゲーム終了/MouseOver/img", 0, 0);
+	Zoom("meゲーム終了/MouseOver/img", 0, 250, 250, null, false);
+	Request("meゲーム終了/MouseOver/img", Smoothing);
+	CreateTexture("meゲーム終了/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/GAME EXIT.png");
+	SetVertex("meゲーム終了/MouseOver/img2", 0, 0);
+	Zoom("meゲーム終了/MouseOver/img2", 0, 250, 250, null, false);
+	Request("meゲーム終了/MouseOver/img2", Smoothing);
+	CreateTexture("meゲーム終了/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meゲーム終了/MouseClick/img", 20, $MenuExitX, $MenuExitY, "cg/sys/menu/GAME EXIT-003.png");
+	SetVertex("meゲーム終了/MouseClick/img", 0, 0);
+	Zoom("meゲーム終了/MouseClick/img", 0, 250, 250, null, false);
+	Request("meゲーム終了/MouseClick/img", Smoothing);
+	CreateTexture("meゲーム終了/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/GAME EXIT.png");
+	SetVertex("meゲーム終了/MouseClick/img2", 0, 0);
+	Zoom("meゲーム終了/MouseClick/img2", 0, 250, 250, null, false);
+	Request("meゲーム終了/MouseClick/img2", Smoothing);
+	CreateTexture("meゲーム終了/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+
+	Fade("me*/*/hit", 0, 0, null, false);
+
+	//▼フォーカス
+	SetNextFocus("meキャンセル/MouseUsual/hit", "meゲーム終了/MouseUsual/hit",UP);
+	SetNextFocus("meゲーム終了/MouseUsual/hit","meタイトル/MouseUsual/hit", UP);
+	SetNextFocus("meタイトル/MouseUsual/hit", "meコンフィグ/MouseUsual/hit", UP);
+	SetNextFocus("meコンフィグ/MouseUsual/hit", "meロード/MouseUsual/hit", UP);
+	SetNextFocus("meロード/MouseUsual/hit", "meセーブ/MouseUsual/hit", UP);
+	SetNextFocus("meセーブ/MouseUsual/hit", "meバックログ/MouseUsual/hit", UP);
+	SetNextFocus("meバックログ/MouseUsual/hit", "meスキップ/MouseUsual/hit", UP);
+	SetNextFocus("meスキップ/MouseUsual/hit", "me自動メッセージ/MouseUsual/hit", UP);
+	SetNextFocus("me自動メッセージ/MouseUsual/hit", "meメッセージ/MouseUsual/hit", UP);
+	SetNextFocus("meメッセージ/MouseUsual/hit", "meキャンセル/MouseUsual/hit", UP);
+
+	SetNextFocus("meキャンセル/MouseUsual/hit", "meメッセージ/MouseUsual/hit", DOWN);
+	SetNextFocus("meメッセージ/MouseUsual/hit", "me自動メッセージ/MouseUsual/hit", DOWN);
+	SetNextFocus("me自動メッセージ/MouseUsual/hit", "meスキップ/MouseUsual/hit", DOWN);
+	SetNextFocus("meスキップ/MouseUsual/hit", "meバックログ/MouseUsual/hit", DOWN);
+	SetNextFocus("meバックログ/MouseUsual/hit", "meセーブ/MouseUsual/hit", DOWN);
+	SetNextFocus("meセーブ/MouseUsual/hit", "meロード/MouseUsual/hit", DOWN);
+	SetNextFocus("meロード/MouseUsual/hit", "meコンフィグ/MouseUsual/hit", DOWN);
+	SetNextFocus("meコンフィグ/MouseUsual/hit", "meタイトル/MouseUsual/hit", DOWN);
+	SetNextFocus("meタイトル/MouseUsual/hit", "meゲーム終了/MouseUsual/hit",DOWN);
+	SetNextFocus("meゲーム終了/MouseUsual/hit","meキャンセル/MouseUsual/hit", DOWN);
+
+	//●準備
+
+	Fade("me*/MouseOver/img", 0, 0, null, false);
+	Fade("me*/MouseOver/img2", 0, 0, null, false);
+	Fade("me*/MouseOver/img3", 0, 0, null, false);
+	Fade("me*/MouseOver/text", 0, 0, null, false);
+	Fade("me*/MouseClick/img", 0, 0, null, false);
+	Fade("me*/MouseClick/img2", 0, 0, null, false);
+	Fade("me*/MouseClick/img3", 0, 0, null, false);
+LockVideo(false);
+
+	//●動作
+	Request("me開始",Play);
+	$menufade=0;
+	$menuwait=10;
+	Fade("me背景", 100, 500, null, false);
+/*
+	Fade("meキャンセル/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meコンフィグ/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meセーブ/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meロード/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meバックログ/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meスキップ/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me自動メッセージ/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meVIS_メッセージ", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meタイトル/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meゲーム終了/MouseUsual/img", $menufade, 1000, null, true);
+*/
+	Fade("*/MouseUsual/img", $menufade, 1000, null, false);
+
+	Move("me*/*/img", 300, 720, 0, Dxl1, false); Move("meVIS_メッセージ", 300, 720, 0, Dxl1, false); Move("me*/*/kr_hitarea", 300, 720, 0, Dxl1, false);
+//	Move("me*/*/img3", 300, 720, 0, Dxl1, false);
+//	Wait(100);
+	Move("meInfo", 300, 0, $MenuInfoNameY, Dxl1, false);
+	Move("meInfoベース", 300, 0, $MenuInfoY, Dxl1, false);
+
+	$SYSTEM_menu_enable=true;
+	$SYSTEM_keydown_m=false;
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_r_button_down=false;
+	$MenuSelect="無し";
+	while($SYSTEM_menu_enable){
+		$MenuSelect="無し";
+		select{
+			case meキャンセル{
+				$MenuSelect="キャンセル";
+				break;
+			}
+			case meセーブ{
+				if(!$SYSTEM_save_lock){
+					$MenuSelect="セーブ";
+				}
+				break;
+			}
+			case meロード{
+				if(!$SYSTEM_load_lock){
+					$MenuSelect="ロード";
+				}
+				break;
+			}
+			case meスキップ{
+				if(!$SYSTEM_skip_lock){
+					$MenuSelect="スキップ";
+				}
+				break;
+			}
+			case me自動メッセージ{
+				if(!$SYSTEM_text_auto_lock){
+					$MenuSelect="自動メッセージ";
+				}
+				break;
+			}
+			case meメッセージ{
+				if(!$SYSTEM_text_erase_lock)
+				{
+					$MenuSelect="メッセージ";
+				}
+				break;
+			}
+			case meバックログ{
+				if(!$SYSTEM_backlog_lock_a)
+				{
+					$MenuSelect="バックログ";
+				}
+				break;
+			}
+			case meコンフィグ{
+				$MenuSelect="コンフィグ";
+				break;
+			}
+			case meタイトル{
+				if(!$SYSTEM_title_lock){
+					$MenuSelect="タイトル";
+				}
+				break;
+			}
+			case meゲーム終了{
+				$MenuSelect="ゲーム終了";
+				break;
+			}
+			
+
+			//●ショートカットキー対応
+//			if($SYSTEM_keydown_h)
+//			{
+//				if(!$LOCAL_extra_lock){
+//					call_chapter nss/sys_hmode.nss;
+//					$SYSTEM_menu_enable=true;
+//				}
+//			}
+
+			if( $MenuSelect == "無し")
+			{
+				if($SYSTEM_keydown_space)
+				{
+					if(!$SYSTEM_text_erase_lock)
+					{
+						$MenuSelect="メッセージ";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_a)
+				{
+					if(!$SYSTEM_text_auto_lock)
+					{
+						$MenuSelect="自動メッセージ";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_ctrl)
+				{
+					if(!$SYSTEM_skip_lock)
+					{
+						$MenuSelect="スキップ";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_b)
+				{
+					if(!$SYSTEM_backlog_lock_a)
+					{
+						$MenuSelect="バックログ";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_s)
+				{
+					if(!$SYSTEM_save_lock)
+					{
+						$MenuSelect="セーブ";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_l)
+				{
+					if(!$SYSTEM_load_lock)
+					{
+						$MenuSelect="ロード";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_f)
+				{
+					if(!#SYSTEM_window_full_lock)
+					{
+						$MenuSelect="フルスクリーン";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_c)
+				{
+					$MenuSelect="コンフィグ";
+					break;
+				}
+				else if($SYSTEM_keydown_t)
+				{
+					if(!$SYSTEM_title_lock)
+					{
+						$MenuSelect="タイトル";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close)
+				{
+					$MenuSelect="ゲーム終了";
+					break;
+				}
+				else if($SYSTEM_keydown_m)
+				{
+					$MenuSelect="キャンセル";
+					break;
+				}
+				if($SYSTEM_r_button_down)
+				{
+					Request("me終了",Play);
+					$MenuSelect="無し";
+					$SYSTEM_menu_enable=false;
+					break;
+				}
+			}
+		}
+
+		if($MenuSelect!="無し");
+		{
+			Request("me*/MouseClick/img2", Erase);
+			Request("me*/MouseOver/img2", Erase);
+			$TempNut="me"+$MenuSelect+"/MouseClick/*";
+			Request($TempNut, Enter);
+			Fade($TempNut, 0, 1000, null, true);
+//			break;
+		}
+
+		if($MenuSelect=="メッセージ")
+		{
+			Request("me決定音",Play);
+			$SYSTEM_text_erase=!$SYSTEM_text_erase;
+			$SYSTEM_menu_enable=false;
+		}
+		else if($MenuSelect=="自動メッセージ")
+		{
+			Request("me決定音",Play);
+			if($SYSTEM_text_erase){
+				$SYSTEM_text_erase=false;
+			}
+			$SYSTEM_text_auto=!$SYSTEM_text_auto;
+//			$SYSTEM_text_erase=false;
+//			$SYSTEM_text_auto=!$SYSTEM_text_auto;
+			$SYSTEM_menu_enable=false;
+		}
+		else if($MenuSelect=="スキップ")
+		{
+			Request("me決定音",Play);
+			$SYSTEM_skip=true;
+			$SYSTEM_menu_enable=false;
+		}
+		else if($MenuSelect=="バックログ")
+		{
+			Request("me決定音",Play);
+			call_chapter nss/sys_backlog.nss;
+			$SYSTEM_menu_enable=true;
+			Wait(100);
+		}
+		else if($MenuSelect=="セーブ")
+		{
+			Request("me決定音",Play);
+			call_chapter nss/sys_save.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="ロード")
+		{
+			Request("me決定音",Play);
+			call_chapter nss/sys_load.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="フルスクリーン")
+		{
+			Request("me決定音",Play);
+			#SYSTEM_window_full=!#SYSTEM_window_full;
+			$SYSTEM_menu_enable=false;
+			$SYSTEM_keydown_f=false;
+		}
+		else if($MenuSelect=="コンフィグ")
+		{
+			Request("me決定音",Play);
+			call_chapter nss/sys_config.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="タイトル")
+		{
+			Request("me決定音",Play);
+			call_chapter nss/sys_reset.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="ゲーム終了")
+		{
+			Request("me決定音",Play);
+			call_chapter nss/sys_close.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="キャンセル")
+		{
+			Request("me終了",Play);
+			$SYSTEM_menu_enable=false;
+		}
+
+		if($SYSTEM_menu_enable)
+		{
+			Request("me*/MouseOver/img2", Enter);
+			Request("me*/MouseClick/img2", Enter);
+			Fade("me*/MouseClick/*", 150, 0, null, false);
+		}
+	}
+	$menufade=0;
+	$menuwait=10;
+	Move("meキャンセル/*/img", 300, $MenuCancelX, $MenuCancelY, Dxl1, false); Move("meキャンセル/*/kr_hitarea", 300, $MenuCancelX, $MenuCancelY, Dxl1, false);
+	Move("meメッセージ/*/img", 300, $MenuEraseX, $MenuEraseY, Dxl1, false); Move("meVIS_メッセージ", 300, $MenuEraseX, $MenuEraseY, Dxl1, false); Move("meメッセージ/*/kr_hitarea", 300, $MenuEraseX, $MenuEraseY, Dxl1, false);
+	Move("me自動メッセージ/*/img", 300, $MenuSendX, $MenuSendY, Dxl1, false); Move("me自動メッセージ/*/kr_hitarea", 300, $MenuSendX, $MenuSendY, Dxl1, false);
+	Move("meスキップ/*/img", 300, $MenuSkipX, $MenuSkipY, Dxl1, false); Move("meスキップ/*/kr_hitarea", 300, $MenuSkipX, $MenuSkipY, Dxl1, false);
+	Move("meバックログ/*/img", 300, $MenuLogX, $MenuLogY, Dxl1, false); Move("meバックログ/*/kr_hitarea", 300, $MenuLogX, $MenuLogY, Dxl1, false);
+	Move("meセーブ/*/img", 300, $MenuSaveX, $MenuSaveY, Dxl1, false); Move("meセーブ/*/kr_hitarea", 300, $MenuSaveX, $MenuSaveY, Dxl1, false);
+	Move("meロード/*/img", 300, $MenuLoadX, $MenuLoadY, Dxl1, false); Move("meロード/*/kr_hitarea", 300, $MenuLoadX, $MenuLoadY, Dxl1, false);
+	Move("meコンフィグ/*/img", 300, $MenuConfigX, $MenuConfigY, Dxl1, false); Move("meコンフィグ/*/kr_hitarea", 300, $MenuConfigX, $MenuConfigY, Dxl1, false);
+	Move("meタイトル/*/img", 300, $MenuTitleX, $MenuTitleY, Dxl1, false); Move("meタイトル/*/kr_hitarea", 300, $MenuTitleX, $MenuTitleY, Dxl1, false);
+	Move("meゲーム終了/*/img", 300, $MenuExitX, $MenuExitY, Dxl1, false); Move("meゲーム終了/*/kr_hitarea", 300, $MenuExitX, $MenuExitY, Dxl1, false);
+	Move("meInfo", 300, 0, $MenuInfoYEnd, Dxl1, false);
+	Move("meInfoベース", 300, 0, $MenuInfoYEnd, Dxl1, false);
+	Move("me*/*/img3", 300, 0, $MenuInfoYEnd, Dxl1, false);
+	Fade("me*/MouseOver/img2", 0, 0, null, false);
+	Fade("me*/MouseClick/img2", 0, 0, null, false);
+	Fade("me背景", 300, 0, null, false);
+
+	WaitAction("me背景", null);
+	WaitPlay("me決定音");
+	WaitPlay("me終了");
+
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+
+	$SYSTEM_menu_enable=false;
+}
+
+//function MenuFocus(){
+//	Array($Menu,"キャンセル","コンフィグ","セーブ","ロード","バックログ","スキップ","自動メッセージ","メッセージ","タイトル","ゲーム終了");
+//	AssocArray($Menu,"キャンセル","コンフィグ","セーブ","ロード","バックログ","スキップ","自動メッセージ","メッセージ","タイトル","ゲーム終了");
+//	$MenuCount=Count($Menu);
+//
+//	$MenuWhile=0;
+//	while($MenuCount>$MenuWhile){
+//		$Menu[$MenuWhile][0]=true;
+//		$MenuWhile++;
+//	}
+//
+//	$MenuWhile=0;
+//	while($MenuCount>$MenuWhile){
+//		if($Menu[$MenuWhile][0]){
+//			MenuDocusGo();
+//		}
+//		$MenuWhile++;
+//	}
+//}
+
+function MenuFocus(){
+
+	SetNextFocus("meキャンセル/MouseUsual/img","meゲーム終了/MouseUsual/img",UP);
+	SetNextFocus("meメッセージ/MouseUsual/hit","meキャンセル/MouseUsual/img",UP);
+	SetNextFocus("me自動メッセージ/MouseUsual/img","meメッセージ/MouseUsual/hit",UP);
+	SetNextFocus("meスキップ/MouseUsual/img","me自動メッセージ/MouseUsual/img",UP);
+	SetNextFocus("meバックログ/MouseUsual/img","meスキップ/MouseUsual/img",UP);
+	SetNextFocus("meセーブ/MouseUsual/img","meバックログ/MouseUsual/img",UP);
+	SetNextFocus("meロード/MouseUsual/img","meセーブ/MouseUsual/img",UP);
+	SetNextFocus("meコンフィグ/MouseUsual/img","meロード/MouseUsual/img",UP);
+	SetNextFocus("meタイトル/MouseUsual/img","meコンフィグ/MouseUsual/img",UP);
+	SetNextFocus("meゲーム終了/MouseUsual/img","meタイトル/MouseUsual/img",UP);
+
+	SetNextFocus("meキャンセル/MouseUsual/img","meメッセージ/MouseUsual/hit",DOWN);
+	SetNextFocus("meメッセージ/MouseUsual/hit","me自動メッセージ/MouseUsual/img",DOWN);
+	SetNextFocus("me自動メッセージ/MouseUsual/img","meスキップ/MouseUsual/img",DOWN);
+	SetNextFocus("meスキップ/MouseUsual/img","meセーブ/MouseUsual/img",DOWN);
+	SetNextFocus("meセーブ/MouseUsual/img","meロード/MouseUsual/img",DOWN);
+	SetNextFocus("meロード/MouseUsual/img","meコンフィグ/MouseUsual/img",DOWN);
+	SetNextFocus("meコンフィグ/MouseUsual/img","meタイトル/MouseUsual/img",DOWN);
+	SetNextFocus("meタイトル/MouseUsual/img","meゲーム終了/MouseUsual/img",DOWN);
+	SetNextFocus("meゲーム終了/MouseUsual/img","meキャンセル/MouseUsual/img",DOWN);
+}
+
+
+function MenuDocusGo()
+{
+	$MenuStart=1;
+	$MenuWhile2=0;
+	while($MenuCount>$MenuWhile2){
+		if($MenuStart>=$MenuCount){
+			$MenuStart=0;
+		}
+
+		if($Menu[$MenuStart][0]){
+			$menunut="me"+$Menu[$MenuWhile2]+"/MouseUsual/img";
+			$menunut2="me"+$Menu[$MenuStart]+"/MouseUsual/img";
+				SetNextFocus($menunut,$menunut2,DOWN);
+//				SetNextFocus($menunut,$menunut2,LEFT);
+		}
+
+		$MenuStart++;
+		$MenuWhile2++;
+	}
+
+	$MenuStart=1;
+	$MenuWhile2=0;
+	while($MenuCount>$MenuWhile2){
+		if($MenuStart>=$MenuCount){
+			$MenuStart=0;
+		}
+
+		if($Menu[$MenuStart][0]){
+			$menunut="me"+$Menu[$MenuWhile2]+"/MouseUsual/img";
+			$menunut2="me"+$Menu[$MenuStart]+"/MouseUsual/img";
+				SetNextFocus($menunut,$menunut2,UP);
+//				SetNextFocus($menunut,$menunut2,RIGHT);
+		}
+
+		$MenuStart++;
+		$MenuWhile2++;
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function MenuCancelProcessOpen()
+{
+	Request("@meキャンセル/MouseLeave/meキャンセルプロセス２", Stop);
+	WaitAction("@meキャンセル/MouseLeave/meキャンセルプロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuCancelProcess=true;
+	Move("@meキャンセル/*/img", 200, @0, 150, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meキャンセル/*/img", null);
+}
+function MenuCancelProcessPause()
+{
+	Request("@meキャンセル/MouseOver/meキャンセルプロセス１", Stop);
+	WaitAction("@meキャンセル/MouseOver/meキャンセルプロセス１", null);
+
+	$MenuCancelProcess=false;
+	Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meキャンセル/*/img", null);
+}
+
+function MenuConfigProcessOpen()
+{
+	Request("@meコンフィグ/MouseLeave/meコンフィグプロセス２", Stop);
+	WaitAction("@meコンフィグ/MouseLeave/meコンフィグプロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuConfigProcess=true;
+	Move("@meコンフィグ/*/img", 200, @0, 150, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meコンフィグ/*/img", null);
+}
+function MenuConfigProcessPause()
+{
+	Request("@meコンフィグ/MouseOver/meコンフィグプロセス１", Stop);
+	WaitAction("@meコンフィグ/MouseOver/meコンフィグプロセス１", null);
+
+	$MenuConfigProcess=false;
+	Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meコンフィグ/*/img", null);
+}
+
+function MenuSaveProcessOpen()
+{
+	Request("@meセーブ/MouseLeave/meセーブプロセス２", Stop);
+	WaitAction("@meセーブ/MouseLeave/meセーブプロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuSaveProcess=true;
+	Move("@meセーブ/*/img", 200, @0, 150, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meセーブ/*/img", null);
+}
+function MenuSaveProcessPause()
+{
+	Request("@meセーブ/MouseOver/meセーブプロセス１", Stop);
+	WaitAction("@meセーブ/MouseOver/meセーブプロセス１", null);
+
+	$MenuSaveProcess=false;
+	Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meセーブ/*/img", null);
+}
+
+function MenuLoadProcessOpen()
+{
+	Request("@meロード/MouseLeave/meロードプロセス２", Stop);
+	WaitAction("@meロード/MouseLeave/meロードプロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuLoadProcess=true;
+	Move("@meロード/*/img", 200, @0, 150, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meロード/*/img", null);
+}
+function MenuLoadProcessPause()
+{
+	Request("@meロード/MouseOver/meロードプロセス１", Stop);
+	WaitAction("@meロード/MouseOver/meロードプロセス１", null);
+
+	$MenuLoadProcess=false;
+	Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meロード/*/img", null);
+}
+
+function MenuLogProcessOpen()
+{
+	Request("@meバックログ/MouseLeave/meバックログプロセス２", Stop);
+	WaitAction("@meバックログ/MouseLeave/meバックログプロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuLogProcess=true;
+	Move("@meバックログ/*/img", 200, @0, 150, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meバックログ/*/img", null);
+}
+function MenuLogProcessPause()
+{
+	Request("@meバックログ/MouseOver/meバックログプロセス１", Stop);
+	WaitAction("@meバックログ/MouseOver/meバックログプロセス１", null);
+
+	$MenuLogProcess=false;
+	Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meバックログ/*/img", null);
+}
+
+function MenuSkipProcessOpen()
+{
+	Request("@meスキップ/MouseLeave/meスキッププロセス２", Stop);
+	WaitAction("@meスキップ/MouseLeave/meスキッププロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuSkipProcess=true;
+	Move("@meスキップ/*/img", 200, @0, 150, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meスキップ/*/img", null);
+}
+function MenuSkipProcessPause()
+{
+	Request("@meスキップ/MouseOver/meスキッププロセス１", Stop);
+	WaitAction("@meスキップ/MouseOver/meスキッププロセス１", null);
+
+	$MenuSkipProcess=false;
+	Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meスキップ/*/img", null);
+}
+
+function MenuSendProcessOpen()
+{
+	Request("@me自動メッセージ/MouseLeave/me自動メッセージプロセス２", Stop);
+	WaitAction("@me自動メッセージ/MouseLeave/me自動メッセージプロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuSendProcess=true;
+	Move("@me自動メッセージ/*/img", 200, @0, 150, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me自動メッセージ/*/img", null);
+}
+function MenuSendProcessPause()
+{
+	Request("@me自動メッセージ/MouseOver/me自動メッセージプロセス１", Stop);
+	WaitAction("@me自動メッセージ/MouseOver/me自動メッセージプロセス１", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuSendProcess=false;
+	Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me自動メッセージ/*/img", null);
+}
+
+function MenuEraseProcessOpen()
+{
+	Request("@meメッセージ/MouseLeave/meメッセージプロセス２", Stop);
+	WaitAction("@meメッセージ/MouseLeave/meメッセージプロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuEraseProcess=true;
+	Move("@meメッセージ/*/img", 200, @0, 150, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 150, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meメッセージ/*/img", null);
+}
+function MenuEraseProcessPause()
+{
+	Request("@meメッセージ/MouseOver/meメッセージプロセス１", Stop);
+	WaitAction("@meメッセージ/MouseOver/meメッセージプロセス１", null);
+
+	$MenuEraseProcess=false;
+	Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meメッセージ/*/img", null);
+}
+
+function MenuTitleProcessOpen()
+{
+	Request("@meタイトル/MouseLeave/meタイトルプロセス２", Stop);
+	WaitAction("@meタイトル/MouseLeave/meタイトルプロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuTitleProcess=true;
+	Move("@meタイトル/*/img", 200, @0, 150, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meタイトル/*/img", null);
+}
+function MenuTitleProcessPause()
+{
+	Request("@meタイトル/MouseOver/meタイトルプロセス１", Stop);
+	WaitAction("@meタイトル/MouseOver/meタイトルプロセス１", null);
+
+	$MenuTitleProcess=false;
+	Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meタイトル/*/img", null);
+}
+
+function MenuExitProcessOpen()
+{
+	Request("@meゲーム終了/MouseLeave/meゲーム終了プロセス２", Stop);
+	WaitAction("@meゲーム終了/MouseLeave/meゲーム終了プロセス２", null);
+
+	if($MenuTitleProcess){Move("@meキャンセル/*/img", 200, @0, 180, Dxl1, false); Move("@meキャンセル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meコンフィグ/*/img", 200, @0, 180, Dxl1, false); Move("@meコンフィグ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meセーブ/*/img", 200, @0, 180, Dxl1, false); Move("@meセーブ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meロード/*/img", 200, @0, 180, Dxl1, false); Move("@meロード/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meバックログ/*/img", 200, @0, 180, Dxl1, false); Move("@meバックログ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meスキップ/*/img", 200, @0, 180, Dxl1, false); Move("@meスキップ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me自動メッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@me自動メッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meメッセージ/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_メッセージ", 200, @0, 180, Dxl1, false); Move("@meメッセージ/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@meタイトル/*/img", 200, @0, 180, Dxl1, false); Move("@meタイトル/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuExitProcess=true;
+	Move("@meゲーム終了/*/img", 200, @0, 150, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@meゲーム終了/*/img", null);
+}
+function MenuExitProcessPause()
+{
+	Request("@meゲーム終了/MouseOver/meゲーム終了プロセス１", Stop);
+	WaitAction("@meゲーム終了/MouseOver/meゲーム終了プロセス１", null);
+
+	$MenuExitProcess=false;
+	Move("@meゲーム終了/*/img", 200, @0, 180, Dxl1, false); Move("@meゲーム終了/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@meゲーム終了/*/img", null);
+}
+
+
+
+
+
+
+
+
+
+
+

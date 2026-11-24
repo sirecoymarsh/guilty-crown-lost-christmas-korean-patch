@@ -1,0 +1,87 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0604_10sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	//$PreGameName = $GameName;
+
+}
+
+scene lx0604_10sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+	CreateColorSP("絵色黒", 0, "000000");
+	FadeDelete("上背景", 0, null, true);
+
+
+//<continuation number="120">
+
+//イェット・トゥー・カム視点
+//黒背景
+
+
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//→→生きる
+
+//選択肢、最初はひとつしかない。
+//数回（三回くらい選ぶと、次の選択肢追加）
+
+//→→諦める
+
+////////////////////////////////////////
+	$PreGameName = $GameName;
+
+	$select_fade=true;
+	SetChoice02("산다","포기한다");
+	WaitChoice02();
+	
+	if($SetChoiceSelect==0){		$GameName = "lx0604_11.nss";$lx0604_10sl選択肢=1;}
+	else if($SetChoiceSelect==1){	$GameName = "lx0604_12.nss";$lx0604_10sl選択肢=0;}
+
+
+//	ClearFadeAll(1000, true);
+
+}

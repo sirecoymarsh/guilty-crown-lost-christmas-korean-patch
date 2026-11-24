@@ -1,0 +1,10 @@
+{
+  "version": "2026-11-23-song-lyrics",
+  "target": "P:/AI/gclx-codexrun/game",
+  "baseline_nss_sha256": "53de61c86d404ff06e59405aca1279ba00e152e8d8b82359ba6b7971ba1f7d85",
+  "runtime_sha256": "c00681988fdef9c322a23cc57036751a081a98ce5bf793539afa00330c24026d",
+  "patch_sha256": "1d7e6ce8cee1c13770d50b886e723e7e3665edba7d9dc430a4db4ccddc8f62ae",
+  "translator_model": "Codex internal",
+  "cues": 366,
+  "vocal_tracks": 10
+}

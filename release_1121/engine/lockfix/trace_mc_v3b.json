@@ -1,0 +1,122 @@
+{
+ "run": "lk_mc_v3b_081253",
+ "clicks": [
+  {
+   "click": "46:200:71",
+   "sent": 47.1,
+   "first": "s8",
+   "react_ms": 112,
+   "s8_s9": 578,
+   "s3_s4": 110,
+   "s4_s7": 578,
+   "ready_ms": 1378
+  },
+  {
+   "click": "52:200:159",
+   "sent": 53.0,
+   "first": "s8",
+   "react_ms": 134,
+   "s8_s9": 1484,
+   "s3_s4": 157,
+   "s4_s7": 687,
+   "ready_ms": 2462
+  },
+  {
+   "click": "58:200:115",
+   "sent": 59.3,
+   "first": "s8",
+   "react_ms": 225,
+   "s8_s9": 531,
+   "s3_s4": 62,
+   "s4_s7": 641,
+   "ready_ms": 1459
+  },
+  {
+   "click": "64:200:203",
+   "sent": 64.9,
+   "first": "s8",
+   "react_ms": 156,
+   "s8_s9": 953,
+   "s3_s4": 141,
+   "s4_s7": 562,
+   "ready_ms": 1812
+  },
+  {
+   "click": "70:512:559",
+   "sent": 71.0,
+   "first": "s3",
+   "react_ms": 337,
+   "s3_s4": 156,
+   "s4_s7": 594,
+   "ready_ms": 1087
+  },
+  {
+   "click": "76:700:115",
+   "sent": 76.9,
+   "first": "s8",
+   "react_ms": 78,
+   "s8_s9": 578,
+   "s3_s4": 31,
+   "s4_s7": 422,
+   "ready_ms": 1109
+  },
+  {
+   "click": "82:200:247",
+   "sent": 82.9,
+   "first": "s8",
+   "react_ms": 93,
+   "s8_s9": 375,
+   "s3_s4": 47,
+   "s4_s7": 360,
+   "ready_ms": 875
+  },
+  {
+   "click": "88:700:379",
+   "sent": 88.9,
+   "first": "s8",
+   "react_ms": 140,
+   "s8_s9": 625,
+   "s3_s4": 47,
+   "s4_s7": 344,
+   "ready_ms": 1156
+  },
+  {
+   "click": "94:700:423",
+   "sent": 95.1,
+   "first": "s8",
+   "react_ms": 81,
+   "s8_s9": 625,
+   "s3_s4": 78,
+   "s4_s7": 453,
+   "ready_ms": 1237
+  },
+  {
+   "click": "100:200:291",
+   "sent": 101.1,
+   "first": "s8",
+   "react_ms": 112,
+   "s8_s9": 375,
+   "s3_s4": 78,
+   "s4_s7": 453,
+   "ready_ms": 1018
+  },
+  {
+   "click": "106:512:559",
+   "sent": 107.1,
+   "first": "s3",
+   "react_ms": 112,
+   "s3_s4": 63,
+   "s4_s7": 437,
+   "ready_ms": 612
+  }
+ ],
+ "locks": {
+  "delete-waited": 1,
+  "stepped-aside": 3,
+  "delete-stopped": 3,
+  "stop-asked": 2
+ },
+ "frame_gaps": [],
+ "exited_early": null,
+ "dialogs": []
+}

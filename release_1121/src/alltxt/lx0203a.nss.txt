@@ -1,0 +1,449 @@
+//<continuation number="250">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0203a.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0204_00sl.nss";
+
+}
+
+
+scene lx0203a.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+
+	PrintBG("上背景", 30000);
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg003001_1_研究室.jpg");
+	//Delete("@lx004b");
+	FadeDelete("上背景", 300, null, true);
+
+//←←紳士的に接する
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+ﾀﾌｷｱﾀﾌｷｱ&.
+커뮤니케이션이란 참 어렵군&.
+
+그래도 이쪽은 어디까지나 신사답게 대할 뿐이다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00010a01">
+「이봐…… 어떻게 해야 너랑 친구가 될 수 있지?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0025]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00020e33">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ
+
+//（睨みつけている）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00030a01">
+「<RUBY TEXT="······">악수라도 할까</RUBY>?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0035]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00040e33">
+｡ｸ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+ｸｻｶ貘ｻ ｾﾋｾﾆﾂｰ ｸ鄲ﾌｴﾙ&. ｳｲﾀﾚﾀﾇ ﾇ･ﾁ､ﾀﾌ ｴｫｿ｡ ｶ邁ﾔ ｴﾞｶﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00050e33">
+「그만둬…… 나한테 손대지 마!」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0055]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00060a01">
+「섭섭한 소리 하지 마&.
+｡｡ｻ鄲ﾌﾁﾁｰﾔ ﾁｻﾀﾚｰ悅ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	CreatePlainSP("pl01", 5000);
+
+	CreateTextureSP("絵演手", 2000, -50, 100, "cg/ef/x/ef_hand03.png");
+	CreateTextureSP("絵霞", 1000, 0, Inbottom, "cg/bg/bg003001_1_研究室.jpg");
+
+	SetShade("絵霞", MEDIUM);
+	SetVertex("絵演手", center, 0);
+	SetVertex("絵霞", center, bottom);
+
+	Request("絵演手", Smoothing);
+	Request("絵霞", Smoothing);
+
+	Move("絵霞", 0, -20, 50, null, true);
+
+	Zoom("絵霞", 0, 3000, 3000, null, true);
+	Zoom("絵演手", 0, 1400, 1400, null, true);
+
+	Rotate("絵演手", 0, @0, @0, @-90, null,true);
+
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	MusicStart("SE01",0,700,0,1300,null,false);
+
+
+	Move("絵霞", 500, 0, 0, Dxl1, false);
+	Move("絵演手", 500, @-100, @100, Dxl1, false);
+	FadeDelete("pl01", 500, null, true);
+
+	Wait(300);
+
+
+
+//男に右手を伸ばすスクルージ。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00070e33">
+「날 죽이면 아무것도 알아내지 못할 텐데!」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00080a01">
+「새로운 친구를 사귀면 되지」
+
+{	DeleteFw();}
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00090e33">
+｡ｸ｡ｦ｡ｦﾀｿ! ﾁｦｹﾟ ｱﾗｸｸｵﾖ!
+｡｡ﾁ､ｸｻｷﾎ ｸ･ｴﾜ ｸｻﾀﾌｴﾙ!｡ｹ
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00100a01">
+｡ｸﾁﾉﾀﾌ ｾﾈ ｴﾀｲｸﾁﾂｰﾉ｡ｹ
+
+{	DeleteFw();}
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00110e33">
+｡ｸｳｭ ｾ錂ﾇ ｸｻｴﾜﾀﾏ ｻﾓﾀﾌｴﾙ!
+｡｡ｻｺﾎｿﾍ ｿｬﾁﾙﾀﾌ ﾀﾖｴﾂ ﾁｶﾁﾌｶﾂ ｰﾍｹﾛｿ｡ ｸ･ｴﾙ!｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreatePlainSP("絵板写", 5000);
+
+	Delete("絵演*");
+	Delete("絵霞");
+
+
+	//CreateCamera("Ｃ", 0, 0, 1000);
+	//SetAlias("Ｃ","Ｃ");
+
+	//CreateTextureEX("Ｃ/絵演手", 500, 430, 215, "cg/ef/x/ef_hand07_x01.png");
+	//CreateTextureSP("Ｃ/絵立絵", 300, Center, -300, "cg/st/x/st研究員2_通常_normal_x01.png");
+	//CreateTextureSP("Ｃ/絵霞", 100, 0, 250, "cg/bg/bg003001_1_研究室.jpg");
+	CreateTextureEX("絵背景上", 5000, Center, Middle, "cg/bg/bg003001_1_研究室.jpg");
+
+
+//	SetShade("Ｃ/絵霞", MEDIUM);
+//	SetShade("Ｃ/絵演手", LIGHT);
+//	SetVertex("Ｃ/絵霞", right, bottom);
+//	SetVertex("Ｃ/絵演手", 0, 0);
+
+//	Request("Ｃ/絵*", Smoothing);
+
+
+//	Zoom("Ｃ/絵霞", 0, 5000, 5000, null, true);
+//	Zoom("Ｃ/絵演手", 0, 800, 800, null, true);
+//	Rotate("Ｃ/絵演手", 0, @0, @0, @-20, null,true);
+
+//	Zoom("Ｃ/絵演手", 6500, 500, 500, AxlDxl, false);
+//	MoveCamera("Ｃ", 5000, @0, @0, 1400, null, false);
+//	Fade("Ｃ/絵演手", 500, 1000, null, false);
+
+//	Move("Ｃ/絵演手", 1000, @50, @100, null, false);
+//	Fade("絵背景上", 500, 1000, null, true);
+//	Delete("Ｃ/絵*");
+//	Delete("Ｃ*");
+
+
+	FadeDelete("絵板写", 300, null, true);
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00120a01">
+「그 시설에서는 뭘 연구하고 있었지?」
+
+{	DeleteFw();}
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00130e33">
+「아포칼립스 바이러스를 이용한 진화 실험……이었던 모양이다」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00140a01">
+「진화 실험?」
+
+{	DeleteFw();}
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00150e33">
+「다아트는 아포칼립스 바이러스야말로 인류를 다음 단계로 진화시킬 열쇠라고 보는 모양이다」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00160e33">
+「너희들은 실험 과정에서 태어난…… 말하자면 <RUBY TEXT="······">신인류 모조품</RUBY>이다」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00170a01">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ
+
+//（戸惑いと呆れ）
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+……신인류라니&. 참으로 어처구니없는 <RUBY TEXT="워드">단어</RUBY>가 튀어나왔군&.
+
+그때 눈을 뜬 뒤로 내 현실은 통째로 <RUBY TEXT="펄프 픽션">삼류 연극</RUBY> 속에 빨려 들어갔다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00180a01">
+「자세히 말해」
+
+{	DeleteFw();}
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00190e33">
+「……난 그 시설이 폐쇄된 뒤로 아포칼립스 바이러스 연구에 관여하지 않았다&. 기대에 부응하긴 어려울 것 같군」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00200a01">
+「……아직 내 성의가 전해지지 않은 걸까?」
+
+{	DeleteFw();}
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00210e33">
+「기다려! 더 적합한 인물을 알고 있다!」
+
+//（慌てて）
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00220e33">
+「텐노즈 대학의 오우마 쿠로스 교수다! 그 사람은 우리보다 연구가 앞서 있어!」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00230a01">
+「――오우마 쿠로스」
+
+{	DeleteFw();}
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/03a00240e33">
+「내가 알고 있는 건 그 정도다!
+　부탁이니&, 이제 용서해 줘!」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/03a00250a01">
+｡ｸ｡ｪ｡ｪ｡ｪ｡ｪ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	SetVolumeEX("@lx*", 3000, 0, null);
+
+	//▽特殊ループ停止
+	SetVolume_Loop("@lx004b",3000,0,null);
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//解放する
+//→→LX0204a
+
+//→→断罪する
+//→→LX0204b
+
+}
+

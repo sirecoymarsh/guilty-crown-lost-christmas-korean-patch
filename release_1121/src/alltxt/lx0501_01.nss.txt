@@ -1,0 +1,165 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0501_01.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0502.nss";
+
+}
+
+
+scene lx0501_01.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintBG("上背景", 25000);
+	//定義---------------------------
+	CreateTextureSP("bg01", 100, center, middle, "cg/bg/bg005001_3_路地裏.jpg");
+	Request("bg01", Smoothing);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+
+	CreateEffectDropEX("dr01", 2000, 0, 0, 1024, 576, 40, 10, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("dr01", 0, @0, @0, 25, null,true);
+	Request("dr01", AddRender);
+	Fade("dr01", 0, 1000, null, true);
+	Zoom("dr01", 0, 2500, 2500, null, true);
+
+	CreateSE("SE11","se背景_ガヤ_市内混乱模様01");
+	CreateSE("SE12","se背景_ガヤ_建物炎上_L");
+	MusicStart("SE11",3000,500,0,1000,null,true);
+	MusicStart("SE12",3000,500,0,1000,null,true);
+
+	Wait(500);
+
+	//動作---------------------------
+	FadeDelete("上背景", 500, null, true);
+
+
+
+//←←キャロルを探す
+
+//キャロルが心配だ。
+
+//？？：地の文。これ以上やり合うためにはヴォイドが必要になるだろう。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//★★★
+ﾄｳｷﾑﾀｻ ﾃ｣ﾀﾚ&.
+
+걱정되기 때문만은 아니다&.
+그곳에서 무엇이 기다리고 있을지 모르는 이상&, 보이드의 도움이 필요하다&.
+
+ｼｭｵﾑｷｯｾﾟ ﾇﾑｴﾙ｡ｪ｡ｪ
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//ＳＥ：遠くからアサルトライフルの銃声
+
+
+
+	TextBoxDelete();
+	SetVolumeEX("SE11", 1000, 300, null);
+	SetVolumeEX("SE12", 1000, 300, null);
+
+	Wait(1000);
+
+	CreateSERV("SE01","se戦闘_銃器_機関銃乱射01","PARKINGLOT");
+	MusicStart("SE01",200,1600,0,1000,null,false);
+
+	Wait(2500);
+
+	SetVolumeEX("SE*", 1500, 0, null);
+
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0011]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0100090a01">
+｡ｸ｡ｦ｡ｦ?｡ｹ
+
+//★★★
+{	DeleteFw();}
+노랫소리 사이로 내게 무척 익숙한 다른 소리가 들려왔다&.
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0100100a01">
+｡ｸ｡ｦ｡ｦｹ豎ﾝ ｰﾇ&, ﾃﾑｼｺﾀﾎｰ｡?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	SetVolumeEX("@SE*", 1500, 0, null);
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1000, 1000, null, true);
+
+	Wait(1000);
+
+//	ClearFadeAll(1000, true);
+
+
+//→→LX0502
+
+}

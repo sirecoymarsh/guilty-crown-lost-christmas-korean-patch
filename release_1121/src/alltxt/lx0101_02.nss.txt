@@ -1,0 +1,723 @@
+
+
+//<continuation number="70">
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0101_02.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0102.nss";//予告スクリプトへ
+
+}
+
+
+scene lx0101_02.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+////////////////////////////////////////
+//←←やられる前にやれ
+
+	PrintBG("pl01", 25000);
+
+	CreateTextureSP("bg00", 100, center, middle, "cg/bg/bg002002_5_通路1r.jpg");
+	Zoom("bg00", 0, 2000, 2000, null, true);
+	//Rotate("bg00", 0, @0, 180, @0, null,true);
+
+	CreateSE("SE01","se戦闘_動作_突進04");
+	CreateSE("SE02","se人体_足音_着地03");
+	CreateSE("SE03","se人体_動作_衣擦れ01");
+
+	MusicStart("SE01",0,700,0,1100,null,false);
+
+	FadeDelete("上背景", 0, null, true);
+
+	Zoom("pl01", 300, 10000, 10000, Dxl2, false);
+	Zoom("bg00", 500, 1000, 1000, Dxl2, false);
+	FadeDelete("pl01", 300, Axl1, true);
+
+	MusicStart("SE02",0,700,0,1500,null,false);
+
+	Wait(300);
+	MusicStart("SE03",0,700,0,1300,null,false);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+그렇게 둘까 보냐&.
+
+나는 뒤돌아서며 덤벼들어――
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義------------------
+	CreateTextureEX("st01", 150, 276, -47, "cg/st/x/stダァト兵_待機_normal_x01.png");
+	Zoom("st01", 0, 800, 800, Dxl2, false);
+	CreateSE("SE11","se戦闘_動作_突進03");
+
+
+	//動作------------------
+	MusicStart("SE11",0,700,0,1400,null,false);
+	Fade("st01", 300, 1000, null, false);
+	Zoom("st01", 300, 1000, 1000, Dxl2, false);
+	Zoom("bg00", 300, 1500, 1500, Dxl2, false);
+	SetShade("bg00", SEMIHEAVY);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【警備兵Ｂ】
+<voice name="ｰ貅ｴ B" class="警備兵Ｂ" src="voice/LX01/0100470e17">
+｡ｸﾇ遙ｦ｡ｦ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+//ＳＥ：人体があっけなく砕ける音。ぐしゃり。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義--------------------------------------------------------------
+	$jump_attack_prio=150;
+	$jump_attack_time=200;
+	CreateTextureEX("bg01", $jump_attack_prio, 100, -200, "cg/ef/x/ef_zoom01.jpg");
+	CreateTextureEX("bg02", $jump_attack_prio, center, middle, "cg/ef/x/ef_move01.jpg");
+	//CreateTextureEX("ca01", $jump_attack_prio, 100, -200, "cg/ev/x/ev9001スクルージジャンプ汎用_x01.png");
+	CreateTextureEX("ef01", $jump_attack_prio, -800, -1000, "cg/ef/x/ef_crow01_x01.png");
+	Request("bg0*", Smoothing);
+	Request("ca01", Smoothing);
+	Request("ef01", Smoothing);
+	Zoom("bg01", 0, 1800, 1800, null, true);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+	Zoom("ca01", 0, 500, 500, null, true);
+	Zoom("ef01", 0, 1500, 1500, null, true);
+	Rotate("ef01", 0, @0, @0, 67, null,true);
+	Rotate("bg02", 0, @0, @0, 40, null,true);
+	SetBlur("ca01", true, 1, 300, 80, false);
+	SetBlur("ef01", true, 1, 1000, 20, false);
+
+	CreateColorEX("black", 4998, "000000");
+	CreateColorEX("red", 5000, "AA0000");
+	CreateTextureEX("blood01", 4999, Center, Middle, "cg/ef/ef_blood02.png");
+	SetVertex("blood01", 1024, 576);
+	CreateTextureEX("blood02", 4999, Center, Middle, "cg/ef/ef_blood02.png");
+	SetVertex("blood02", 1024, 576);
+	SetBlur("blood01", true, 3, 500, 50, false);
+
+	CreateSE("SE01","se戦闘_動作_突進04");
+	CreateSE("SE02","se戦闘_攻撃_振る05");
+	CreateSE("SE01a","se戦闘_攻撃_斬撃05");
+	CreateSE("SE02a","se人体_血_出血");
+
+
+	//動作--------------------------------------------------------------
+	//Rotate("ca0*", $jump_attack_time, @0, @0, -400, null,false);
+	//Move("ca0*", $jump_attack_time, @-2000, @0, null, false);
+
+	MusicStart("SE01",0,1000,0,1400,null,false);
+
+	Move("st01", 200, @0, @500, Axl2, false);
+	Move("bg00", 200, @0, @100, Axl2, false);
+	Zoom("st01", 200, 3000, 3000, Axl2, false);
+	Zoom("bg00", 200, 2000, 2000, Axl2, false);
+
+	Wait(150);
+	Zoom("bg01", $jump_attack_time, 4000, 4000, Axl1, false);
+	Zoom("ca01", $jump_attack_time, 1200, 1200, Axl1, false);
+	Move("ca01", $jump_attack_time, @0, @700, Axl2, false);
+
+	Fade("bg01", 0, 1000, null, false);
+	Fade("ca01", 0, 1000, null, false);
+	Wait($jump_attack_time);
+
+	MusicStart("SE02",0,1000,0,1000,null,false);
+	Move("ef01", 150, -300, 0, Dxl2, false);
+	//Move("ef01", 150, -1400, 1600, Dxl2, false);
+	Fade("bg02", 100, 1000, null, false);
+	Fade("ca01", 100, 0, null, false);
+	Fade("ef01", 0, 1000, null, false);
+	Wait(150);
+
+	MusicStart("SE01a",0,1000,0,1000,null,false);
+	MusicStart("SE02a",0,900,0,1000,null,false);
+
+	Fade("red", 0, 1000, null, true);
+	Fade("black", 0, 1000, null, true);
+	Fade("blood01", 0, 1000, null, true);
+	Fade("blood02", 0, 500, null, true);
+	FadeDelete("red", 300, null, false);
+	Zoom("blood01", 300, 1100, 1100, Dxl2, false);
+	Zoom("blood02", 300, 1200, 1200, Dxl2, false);
+
+	Wait(500);
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+녀석의 목이 네 바퀴쯤 돌더니 뜯겨 날아갔다&. 놀랄 새도 없이 나는 다음 <RUBY TEXT="···">먹잇감</RUBY>을 노렸다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//ＳＥ：人体破壊
+
+	TextBoxDelete(0);
+	Wait(16);
+
+
+	//定義--------------------------------------------------------------
+	CreateTextureEX("st01", 150, -1000, -47, "cg/st/x/stダァト兵_構え_normal_x01.png");
+	Request("st01", Smoothing);
+	Move("bg00", 0, -100, @0, null, true);
+
+	//Zoom("st01", 0, 800, 800, Dxl2, false);
+	//定義--------------------------------------------------------------
+	$jump_attack_prio=150;
+	$jump_attack_time=200;
+	CreateTextureEX("bg01", $jump_attack_prio, 100, -200, "cg/ef/x/ef_zoom01.jpg");
+	CreateTextureEX("bg02", $jump_attack_prio, 300, middle, "cg/ef/x/ef_move01.jpg");
+	//CreateTextureEX("ca01", $jump_attack_prio, 100, -200, "cg/ev/x/ev9001スクルージジャンプ汎用_x01.png");
+	CreateTextureEX("ef01", $jump_attack_prio, 1024, 100, "cg/ef/x/ef_crow01_x01.png");
+	Request("bg0*", Smoothing);
+	Request("ca01", Smoothing);
+	Request("ef01", Smoothing);
+	Zoom("bg01", 0, 1800, 1800, null, true);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+	Zoom("ca01", 0, 500, 500, null, true);
+	Zoom("ef01", 0, 1500, 1500, null, true);
+	Rotate("ef01", 0, @0, @0, 180, null,true);
+	Rotate("bg02", 0, @0, @0, -20, null,true);
+	SetBlur("ca01", true, 1, 300, 80, false);
+	SetBlur("ef01", true, 1, 1000, 20, false);
+
+	CreateColorEX("black_2", 4998, "000000");
+	CreateColorEX("red_2", 5000, "AA0000");
+	CreateTextureEX("blood01_2", 4999, Center, Middle, "cg/ef/ef_blood02a.png");
+	CreateTextureEX("blood02_2", 4999, Center, Middle, "cg/ef/ef_blood02a.png");
+	SetVertex("blood01_2", 0, 576);
+	SetVertex("blood02_2", 0, 576);
+	SetBlur("blood01_2", true, 3, 500, 50, false);
+
+	//DeleteAllSt(0,true);
+
+	CreateSE("SE01","se戦闘_動作_突進04");
+	CreateSE("SE02","se戦闘_攻撃_振る05");
+	CreateSE("SE03","se戦闘_動作_突進03");
+	CreateSE("SE01a","se人体_動作_瓦礫を押しのける");
+	CreateSE("SE02a","se戦闘_攻撃_斬撃05");
+
+	CreateSE("SE21","se戦闘_攻撃_振る03");
+
+	//動作--------------------------------------------------------------
+	//Rotate("ca0*", $jump_attack_time, @0, @0, -400, null,false);
+	//Move("ca0*", $jump_attack_time, @-2000, @0, null, false);
+
+	//動作--------------------------------------------------------------
+	MusicStart("SE01",0,1000,0,1400,null,false);
+
+	Zoom("blood01", 300, 2200, 2200, Axl2, false);
+	Fade("black", 200, 0, null, false);
+	FadeDelete("blood01", 300, Axl3, false);
+	FadeDelete("blood02", 300, Axl3, false);
+	Move("bg00", 300, 100, @0, Dxl2, flase);
+	Move("st01", 300, 200, @0, Dxl2, flase);
+	Fade("st01", 300, 1000, null, false);
+	Zoom("st01", 300, 1200, 1200, Dxl2, false);
+	Zoom("bg00", 300, 1700, 1700, Dxl2, false);
+	SetShade("bg00", SEMIHEAVY);
+
+	Wait(300);
+	MusicStart("SE03",0,1000,0,1600,null,false);
+	Move("st01", 200, @0, @500, Axl2, false);
+	Move("bg00", 200, @0, @150, Axl2, false);
+	Zoom("st01", 200, 3000, 3000, Axl2, false);
+	Zoom("bg00", 200, 2000, 2000, Axl2, false);
+
+	Wait(150);
+	Zoom("bg01", $jump_attack_time, 4000, 4000, Axl1, false);
+	Zoom("ca01", $jump_attack_time, 1200, 1200, Axl1, false);
+	Move("ca01", $jump_attack_time, @0, @700, Axl2, false);
+
+	Fade("bg01", 0, 1000, null, false);
+	Fade("ca01", 0, 1000, null, false);
+	Wait($jump_attack_time);
+
+	MusicStart("SE02",0,1000,0,1000,null,false);
+	Move("ef01", 150, 0, 100, Dxl2, false);
+	//Move("ef01", 150, -1400, 1600, Dxl2, false);
+	Fade("bg02", 100, 1000, null, false);
+	Fade("ca01", 100, 0, null, false);
+	Fade("ef01", 0, 1000, null, false);
+	Wait(150);
+
+	MusicStart("SE21",0,700,0,1000,null,false);
+
+
+
+
+	MusicStart("SE01a",0,500,0,1000,null,false);
+	MusicStart("SE02a",0,700,0,1500,null,false);
+
+	Fade("red_2", 0, 1000, null, true);
+	Fade("black_2", 0, 1000, null, true);
+	Fade("blood01_2", 0, 1000, null, true);
+	Fade("blood02_2", 0, 500, null, true);
+	FadeDelete("red_2", 300, null, false);
+	Zoom("blood01_2", 300, 1100, 1100, Dxl2, false);
+	Zoom("blood02_2", 300, 1200, 1200, Dxl2, false);
+
+	Wait(400);
+
+	Delete("st*");
+	Delete("ef*");
+	Delete("bg01");
+	Delete("bg02");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//（悲鳴と言うより、血がのどまでこみ上げてきたかのような）
+//【警備兵Ｃ】
+<voice name="ｰ貅ｴ C" class="警備兵Ｃ" src="voice/LX01/0100480e18">
+「커억」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+//蹴りで警備兵の腹を蹴るスクルージ
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+질척&. 미지근하고 불쾌한 감촉&.
+
+그 녀석의 배가 뭉텅 파여 나가며&, <RUBY TEXT="···">내용물</RUBY>이 쏟아져 나온다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	Move("bg00", 0, 0, 0, null, true);
+	Zoom("bg00", 0, 1200, 1200, null, true);
+	SetShade("bg00", null);
+	CreateSE("SE20","se人体_衝撃_弾ける");
+	CreateSE("SE21","se人体_衝撃_転倒02複数");
+
+	MusicStart("SE20",0,900,0,1000,null,false);
+	Zoom("blood01_2", 500, 2200, 2200, Axl2, false);
+	FadeDelete("blood*", 500, Axl3, true);
+	MusicStart("SE21",0,700,0,1000,null,false);
+
+	Zoom("bg00", 600, 1000, 1000, Dxl1, false);
+	FadeDelete("black*", 500, Axl1, true);
+	Fade("black_2", 500, 0, null, true);
+
+	Wait(700);
+	CreateTextureEX("st01", 150, center, middle, "cg/bu/buダァト兵_構え3_normal.png");
+	Zoom("st01", 0, 1100, 1100, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+ﾀｷﾎ ｾｼﾀﾌ ﾂ鏞ｪｷﾁﾁｳｴﾙ&.
+｡ｦ｡ｦﾁｶﾇﾑ ｳｿｻｺ&, ﾀﾌｰﾅ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE01","se戦闘_銃器_構える02");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Shake("st01", 500, 1, 0, 0, 0, 500, null, false);
+	Fade("st01", 300, 1000, null, false);
+	Zoom("st01", 300, 1000, 1000, Dxl1, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【警備兵Ａ】
+<voice name="ｰ貅ｴ A" class="警備兵Ａ" src="voice/LX01/0100490e16">
+｡ｸﾀｸｿﾍ｡ｦ｡ｦ ﾀｸｿﾍｾﾆｾﾆ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE01","se戦闘_動作_突進04");
+	MusicStart("SE01",0,700,0,1500,null,false);
+
+	/*
+	Move("bg00", 200, @10, @50, Dxl3, false);
+	Move("st01", 200, @50, @200, Dxl3, false);
+	Zoom("bg00", 200, 1500, 1500, Dxl3, false);
+	Zoom("st01", 200, 2000, 2000, Dxl3, false);
+
+	Wait(200);
+	*/
+	CreatePlainSP("screen01", 15000);
+	SetBlur("screen01", true, 2, 500, 50, false);
+	Fade("screen01", 0, 1000, null, true);
+	Zoom("screen01", 300, 1500, 1500, Dxl2, false);
+	Fade("koukasen01", 0, 0, null, true);
+	Delete("smoke*");
+
+	Wait(200);
+	CreatePlainSP("screen02", 15000);
+	Delete("st01");
+	Delete("screen01");
+
+	CreateTextureEX("te00", 5000, -512, 100, "cg/bg/x/bg002003_5_通路2_x01.jpg");
+	Zoom("te00", 0, 6000, 2500, null, true);
+	CreateTextureEX("te01", 5000, 1024, 100, "cg/ef/x/ef_hand02.png");
+	SetBlur("te01", true, 2, 500, 50, false);
+	CreateSE("SE31","se戦闘_攻撃_振る04");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+ｰﾌｿ｡ ﾁ弡ﾁ ｵﾞｰﾉﾀｽﾄ｡ｴﾂ ｸｶﾁｷ ﾇﾑ <RUBY TEXT="｡､｡､">ｸｶｸｮ</RUBY>&.
+ｹﾌｾﾈﾇﾏﾁｸ ｳﾆﾁﾙ ｻｰ｢ﾀｺ ｾﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	Fade("te00", 0, 1000, null, true);
+	Fade("te01", 0, 1000, null, true);
+	FadeDelete("screen02", 50, null, false);
+
+	MusicStart("SE31",0,700,0,1000,null,false);
+	Move("te00", 250, 512, @0, Dxl2, false);
+	Move("te01", 250, 150, 0, Dxl2, false);
+	Wait(250);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080a]
+얼굴을 움켜쥐고&, 그대로 힘을 준다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	SetShade("bg00", SEMIHEAVY);
+
+	CreateTextureEX("st01", 150, center, -1000, "cg/st/x/stダァト兵_構え_normal_x02.png");
+	Request("st01", Smoothing);
+	Rotate("st01", 0, @0, 180, 0, null,true);
+	Zoom("st01", 0, 1500, 1500, null, true);
+	Zoom("bg00", 0, 2000, 2000, null, true);
+	Move("bg00", 0, @0, -200, null, true);
+
+	CreateColorEXadd("white", 5000, "FFFFFF");
+
+	CreateSE("SE01","se戦闘_攻撃_殴る01");
+	CreateSE("SE12","se人体_体_骨複数砕ける01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Move("te00", 150, 1200, @0, Axl1, false);
+	Move("te01", 150, 0, 0, Axl1, false);
+	Shake("te*", 200, 0, 10, 0, 0, 1000, null, false);
+	Fade("white", 150, 1000, null, true);
+	Fade("st01", 0, 1000, null, true);
+	Delete("te*");
+
+	Wait(800);
+
+	FadeDelete("white", 300, null, false);
+	Shake("st01", 3000, 2, 0, 0, 0, 500, null, false);
+	Rotate("st01", 2000, @0, @0, -10, AxlDxl,false);
+	Move("st01", 2000, @-50, @-100, Dxl1, false);
+	Move("bg00", 2000, @-20, @50, Dxl1, false);
+	Wait(200);
+	MusicStart("SE12",0,1000,0,1000,null,false);
+
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【警備兵Ａ】
+<voice name="ｰ貅ｴ A" class="警備兵Ａ" src="voice/LX01/0100500e16">
+｡ｸｲﾆｾﾆｾﾆｾﾆｾﾆｾﾆ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+//ＳＥ：頭部粉砕
+	Wait(16);
+	CreateColorEX("red", 10000, "AA0000");
+	CreateTextureEX("blood01", 5000, 500, -500, "cg/ef/ef_blood01_01.png");
+	CreateTextureEX("blood02", 5000, 0, -500, "cg/ef/ef_blood01_02.png");
+	Rotate("blood01", 0, @0, @0, -20, null,true);
+	Rotate("blood02", 0, @0, @0, 20, null,true);
+	CreateTextureEX("blood03", 5000, center, 0, "cg/ef/x/ef_bloodshower01.png");
+	Zoom("blood03", 0, 3000, 1000, null, true);
+
+	CreateSE("SE11","se人体_動作_瓦礫を押しのける");
+	CreateSE("SE12","se人体_体_骨複数砕ける01");
+	CreateSE("SE13","se人体_血_出血");
+
+	Shake("st01", 500, 5, 5, 0, 0, 1000, null, false);
+
+	Fade("blood01", 0, 1000, null, true);
+	Fade("blood02", 0, 1000, null, true);
+	Fade("blood03", 0, 1000, null, true);
+
+	Zoom("blood01", 300, 2000, 5000, null, false);
+	Zoom("blood02", 300, 2000, 5000, null, false);
+	Zoom("blood03", 300, 3000, 5000, null, false);
+
+	MusicStart("SE11",0,700,0,1000,null,false);
+	MusicStart("SE12",0,700,0,1000,null,false);
+	MusicStart("SE13",0,700,0,1000,null,false);
+	Rotate("st01", 300, @0, @0, @-5, Dxl2,false);
+
+	Wait(800);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+진부한 표현이지만&, 으깨진 토마토 같았다&.
+ｸﾓｸｮｸｦ ﾀﾒﾀｺ ｽﾃﾃｼｰ｡ ｱﾗ ﾀﾚｸｮｿ｡ ｾｲｷｯﾁﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	Rotate("st01", 300, @0, @0, -40, Axl2,false);
+	Move("st01", 300, @-400, @300, Axl2, false);
+	Zoom("blood01", 300, 4000, 10000, Dxl1, false);
+	Zoom("blood02", 300, 4000, 10000, Dxl1, false);
+	Zoom("blood03", 300, 6000, 10000, Dxl1, false);
+	Fade("red", 300, 1000, Axl1, true);
+
+	CreateSE("SE01","se人体_衝撃_転倒01");
+	CreateSE("SE02","se人体_血飛沫");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	//Wait(200);
+
+	Delete("blood01");
+	Delete("blood02");
+	Delete("st*");
+
+	Zoom("bg00", 0, 1100, 1100, null, true);
+	Move("bg00", 0, 0, 0, null, true);
+	SetShade("bg00", null);
+
+	MusicStart("SE02",0,700,0,1300,null,false);
+
+	Move("blood03", 1500, @0, @500, Axl2, false);
+	Zoom("bg00", 1500, 1000, 1000, Dxl1, false);
+	Zoom("blood03", 1500, 4000, 6000, Dxl1, false);
+	FadeDelete("blood03", 1500, Axl2, false);
+	FadeDelete("red", 800, Axl3, false);
+
+
+	//おがみ：曲止め
+	SetVolumeEX("@lx*", 3000, 0, null);
+
+
+	Wait(3000);
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100510a01">
+「……어?
+｡｡｡ｦ｡ｦｾﾆ｡ｦ｡ｦ ｾﾆｾﾆｾﾆ｡ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+마침내 흥분이 가라앉자 내가 처한 상황에 공포가 치밀어 올랐다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreatePlainSP("pl01", 5000);
+
+	Zoom("bg00", 0, 3000, 3000, null, true);
+	Move("bg00", 0, @0, -350, null, true);
+
+	CreateTextureSPmul("blood01", 1000, 600, 300, "cg/ef/ef_blood01_01.png");
+	CreateTextureSPmul("blood02", 1000, -200, 300, "cg/ef/ef_blood01_02.png");
+	Rotate("blood02", 0, @0, @0, 20, null,true);
+	Zoom("blood01", 0, 1000, 600, null, true);
+	Zoom("blood02", 0, 1000, 600, null, true);
+	Request("blood*", Smoothing);
+
+	FadeDelete("pl01", 500, null, false);
+
+	Move("blood*", 1000, @50, @0, Dxl1, false);
+	Move("bg00", 1000, 50, @0, Dxl1, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+주변은 온통 피바다&.
+전부&, 내가 했다&.
+
+대체 뭐지&, 이 힘은&.
+명백히 인간의 영역을 벗어나 있다&.
+
+ﾀﾌｷ｡ｼｭｾﾟ ｿｵｶﾂ ｱｫｹｰ ｾﾆｴﾑｰ｡&.
+
+ｰﾔｴﾙｰ｡｡ｦ｡ｦ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+//頭を握り潰した死体。キャンサー化していく。
+
+	CreatePlainSP("pl01", 5000);
+
+	Move("blood01", 0, 300, 100, null, true);
+	Move("blood02", 0, -200, 100, null, true);
+	Zoom("blood01", 0, 2000, 1000, null, true);
+	Zoom("blood02", 0, 2000, 1000, null, true);
+
+	CreateTextureSP("bg01", 100, -300, -600, "cg/bg/bg002002_5_通路1.jpg");
+	Zoom("bg01", 0, 3000, 3000, null, true);
+	Fade("bg01", 0, 1000, null, true);
+	SetShade("bg01", HEAVY);
+
+	CreateTextureSP("st01", 2000, 0, -500, "cg/st/x/st結晶化人間_叫び_normal_x02.png");
+	Request("st01", Smoothing);
+	Zoom("st01", 0, 1200, 1200, null, true);
+	Rotate("st01", 0, @0, 180, 70, null,true);
+	CreateTextureSPadd("st01add", 2000, 0, -500, "cg/st/x/st結晶化人間_叫び_normal_x02.png");
+	Request("st01add", Smoothing);
+	Zoom("st01add", 0, 1200, 1200, null, true);
+	Rotate("st01add", 0, @0, 180, 70, null,true);
+
+	CreateSE("SE01","seヴォイド結晶化01a");
+	MusicStart("SE01",0,600,0,800,null,false);
+
+
+	DrawDelete("st01add", 4000, 200, Dxl1, "effect_01_00_0", false);
+
+	FadeDelete("pl01", 500, null, true);
+
+	Wait(1000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+또다&. 아까와 똑같이 인간이 금속으로 변해 가는 현상&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100520a01">
+「……모르겠어&. 아무것도 모르겠어」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+	Wait(16);
+
+	SetVolumeEX("SE*", 2000, 0, null);
+
+	ClearFadeAll(2000, true);
+
+	Wait(300);
+
+//→→LX0102
+
+}

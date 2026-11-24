@@ -1,0 +1,929 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0502_10.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0503.nss";
+
+}
+
+
+scene lx0502_10.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintBG("上背景", 30000);
+
+	OnBG(10,"bg001012_3_六本木街並み2崩壊");
+	FadeBG(0,true);
+
+	Delete("ev*");
+	Delete("bg*");
+	Delete("ef*");
+	Delete("mv*");
+
+
+
+	CreateMovieEX("koukasen01", 10000, center, middle, true, true, "dx/mv0003集中線01_白.ngs");
+	Request("koukasen01", SubRender);
+	Zoom("koukasen01", 0, 4000, 3000, null, true);
+
+	//★先行ロードＡ-----------------------
+	CreateCamera("Ｃ", -50, 0, 1000);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureSP("Ｃ/ev01", 450, -50, -150, "cg/st/x/stダァト兵_待機_normal_x01.png");
+	CreateTextureSP("Ｃ/ev02", 500, 200, -100, "cg/st/x/stダァト兵_構え_normal_x01.png");
+	CreateTextureSP("Ｃ/ev03", 450, 450, -150, "cg/st/x/stダァト兵_待機_normal_x01.png");
+	CreateTextureSP("Ｃ/ev04", 20, Center, Middle, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	Zoom("Ｃ/ev*", 0, 600, 600, null, true);
+	Zoom("Ｃ/ev04", 0, 4000, 4000, null, true);
+	SetShade("Ｃ/ev04", HEAVY);
+	Request("Ｃ/*", Smoothing);
+	//★先行ロードＡ-----------------------
+
+	SoundPlay("@lx003",0,800,true);
+
+	FadeDelete("上背景", 200, null, false);
+	Fade("smoke01", 200, 0, null, false);
+
+	Fade("bg01b", 200, 0, null, false);
+	MoveCamera("Ｃ", 200, -40, @0, 1150, Dxl2, true);
+
+
+//←←スクルージ無双
+//合流
+
+//？？：演出はペンディング。LX0001とは変化をつけたい。
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【ダァト兵Ａ】
+<voice name="다아트 병사 A" class="�_�@긣빜�`" src="voice/LX00/1000060e01">
+｡ｸｳﾌｴﾙ!｡ｹ
+
+//※（収録不要。使い回し）
+
+//【ダァト兵Ｂ】
+<voice name="다아트 병사 B" class="�_�@긣빜괶" src="voice/LX00/1000070e02">
+「죽여라!」
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//ＳＥ：アサルトライフルの銃声
+//兵士達の一斉射撃。
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+
+	//定義-----------------------
+	//演出：アサルトライフル
+	CreateColorEXadd("white", 15000, "FFFFFF");
+	//連射マクロ定義
+	Gun_Assault01_Create("muzzle01",3000,400,241,"cg/ef/ef_muzzle02.jpg");
+	//最後の一発
+	CreateTextureEXadd("muzzle02", 4000, 22, -62, "cg/ef/ef_muzzle02.jpg");
+	Rotate("muzzle02", 0, @0, @0, @-70, null,true);
+
+	CreateSE("SE01","se戦闘_銃器_機関銃01");
+
+	//動作-----------------------
+	Fade("white", 0, 500, null, true);
+	Fade("koukasen01", 0, 200, null, true);
+	MoveFTP1("@Ｃ/*",1000,6,5);
+	MoveCamera("Ｃ", 200, @0, @0, 1300, Axl2, false);
+
+	//連射マクロ開始
+	MusicStart("SE01",0,1000,0,1000,null,false);
+	Gun_Assault01_Start();
+
+	Fade("white", 50, 0, null, false);
+	Wait(50);
+	Fade("white", 0, 500, null, true);
+	Fade("white", 50, 0, null, false);
+	Wait(50);
+	Fade("white", 0, 500, null, true);
+	Fade("white", 50, 0, null, false);
+	Wait(50);
+	Fade("white", 0, 500, null, true);
+	Fade("white", 50, 0, null, false);
+	Wait(50);
+	Fade("white", 0, 500, null, true);
+	Fade("white", 50, 0, null, false);
+	Wait(50);
+	Fade("white", 0, 500, null, true);
+	Fade("white", 50, 0, null, false);
+	Wait(50);
+	Fade("white", 0, 1000, null, true);
+	Wait(16);
+	Delete("muzzle01");
+	Delete("muzzle01*");
+	Fade("muzzle02", 0, 1000, null, true);
+	CreatePlainSP("screen01", 5000);
+	SetBlur("screen01", true, 3, 500, 50, false);
+	Zoom("screen01", 30000, 1300, 1300, null, false);
+	Fade("koukasen01", 0, 0, null, true);
+	MoveFTP1stop();
+
+	Fade("white", 2000, 200, null, false);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//★鋼屋：修正あり
+좋은 총을 쓰는 모양이다&. 자세도 나쁘지 않다&.
+
+ｱﾗｷ｡ｼｭ ﾅｺﾈｯﾀﾌ <RUBY TEXT="｡､｡､｡､">ｶﾈｹﾙｷﾎ</RUBY> ｳｯｾﾆｿﾂｴﾙ&. ｱﾗ ﾆｴﾀｸｷﾎ ﾆﾄｰ昉蟠ﾂ ｰﾇ ｰ｣ｴﾜﾇﾏｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+
+	Zoom("screen01", 200, 2000, 2000, Axl2, false);
+	Fade("white", 200, 1000, null, true);
+	Delete("screen01");
+	Delete("muzzle*");
+	Fade("koukasen01", 0, 0, null, true);
+	Fade("Ｃ/*", 0, 0, null, true);
+	Delete("Ｃ/ev01");
+	Delete("Ｃ/ev03");
+
+
+	//定義-----------------------
+	CreateTextureEX("bg01", 100, Center, Middle, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	SetShade("bg01", HEAVY);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	Rotate("bg01", 0, @0, @0, -10, null,true);
+	CreateTextureEX("ca01", 200, Center, Middle, "cg/ev/ev9001スクルージジャンプ汎用_キャラのみ.png");
+	CreateTextureEX("ca02", 200, 100, 100, "cg/ev/ev9002スクルージダッシュ汎用_キャラのみ.png");
+	Rotate("ca02", 0, @0, @0, -20, null,true);
+	SetBlur("ca*", true, 1, 500, 50, false);
+
+	CreateTextureEX("spark01", 100, 160, 400, "cg/ef/ef_spark01.png");
+	Rotate("spark01", 0, @0, @0, -80, null,true);
+	CreateTextureEX("spark02", 200, 560, 350, "cg/ef/ef_spark01.png");
+	Rotate("spark02", 0, @0, @0, -80, null,true);
+	CreateTextureEX("spark03", 100, 300, 350, "cg/ef/ef_spark01.png");
+	Rotate("spark03", 0, @0, @0, -80, null,true);
+	SetBlur("spark*", true, 1, 500, 50, false);
+
+	CreateTextureEXmul("smoke01", 100, 160, 400, "cg/ef/ef_smoke01.png");
+	Rotate("smoke01", 0, @0, @0, -80, null,true);
+	CreateTextureEXmul("smoke02", 100, 560, 350, "cg/ef/ef_smoke01.png");
+	Rotate("smoke02", 0, @0, @0, -80, null,true);
+
+	CreateSE("SE00","se戦闘_動作_突進01");
+	CreateSE("SE01","se人体_動作_跳躍02");
+	CreateSE("SE02","se人体_足音_着地03");
+	CreateSE("SE03","se人体_足音_着地05");
+
+	CreateSE("SE51","se戦闘_銃器_跳弾02");
+	CreateSE("SE52","se戦闘_銃器_跳弾01");
+	CreateSE("SE53","se戦闘_銃器_跳弾02");
+
+
+	//動作-----------------------
+	MoveFTP1("@Ｃ/*",1500,4,3);
+
+	Fade("ca01", 0, 1000, null, true);
+	Fade("bg01", 0, 1000, null, true);
+
+	MusicStart("SE00",0,700,0,1000,null,false);
+	Fade("white", 200, 0, null, false);
+
+	MusicStart("SE03",0,700,0,1000,null,false);
+
+	MusicStart("SE51",0,700,0,1000,null,false);
+	Zoom("spark01", 100, 1000, 4000, Dxl3, false);
+	Move("spark01", 100, @100, @-20, null, false);
+	Fade("spark01", 0, 1000, null, true);
+	Fade("spark01", 100, 0, Axl1, false);
+
+	Fade("smoke01", 0, 800, null, true);
+	Rotate("smoke01", 600, @0, @0, @100, Dxl2,false);
+	Zoom("smoke01", 600, 1000, 2000, Dxl2, false);
+
+	Zoom("ca01", 200, 800, 800, Dxl1, false);
+	Move("bg01", 200, @-100, @0, Dxl1, false);
+	BezierMove("ca01", 200, (@0,@0){@40,@-30}{@100,@-50}(@350,@150), Dxl2, 100);
+
+	MusicStart("SE52",0,700,0,1000,null,false);
+	Wait(100);
+	MusicStart("SE53",0,700,0,1300,null,false);
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	Fade("smoke02", 0, 1000, null, true);
+	Rotate("smoke02", 400, @0, @0, @100, Dxl2,false);
+	Zoom("smoke02", 400, 1000, 2000, Dxl2, false);
+
+	Zoom("spark02", 100, 1000, 4000, Dxl3, false);
+	Move("spark02", 100, @100, @-20, null, false);
+	Fade("spark02", 0, 1000, null, true);
+	Fade("spark02", 100, 0, Axl1, false);
+
+	Zoom("spark03", 100, 1000, 4000, Dxl3, false);
+	Move("spark03", 100, @-100, @20, null, false);
+	Fade("spark03", 0, 1000, null, true);
+	Fade("spark03", 100, 0, Axl1, false);
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Fade("ca02", 0, 1000, null, true);
+	Zoom("ca02", 200, 2000, 2000, Dxl1, false);
+	Fade("ca01", 0, 0, null, true);
+	Move("bg01", 400, @100, @0, Dxl1, false);
+	BezierMove("ca02", 200, (@0,@0){@-400,@0}{@-500,@0}(@-2024,@650), Dxl1, true);
+
+	MoveCamera("Ｃ", 200, @0, -100, 1500, Dxl2, false);
+	Fade("Ｃ/*", 200, 1000, null, false);
+	Fade("koukasen01", 200, 1000, null, true);
+
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【ダァト兵Ａ】
+<voice name="다아트 병사 A" class="�_�@긣빜�`" src="voice/LX00/1000080e01">
+｡ｸﾈﾍ｡ｦ｡ｦ!｡ｹ
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreatePlainSP("screen01", 15000);
+	SetBlur("screen01", true, 2, 500, 50, false);
+	Fade("screen01", 0, 1000, null, true);
+	Zoom("screen01", 300, 1500, 1500, Dxl2, false);
+	Fade("koukasen01", 0, 0, null, true);
+	Delete("smoke*");
+
+	Wait(200);
+	CreatePlainSP("screen02", 15000);
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+	Delete("screen01");
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+우선 한 명&. 얼굴을 붙잡는다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorEX("white", 15000, "FFFFFF");
+	CreateTextureEX("ca01", 201, 186, -150, "cg/ev/x/ev9002スクルージダッシュ汎用_x01.png");
+	CreateTextureEX("ca02", 200, 500, -400, "cg/st/x/st結晶化人間_叫び_normal_x01.png");
+
+	Zoom("screen02", 200, 2000, 2000, Axl3, false);
+	Fade("white", 200, 1000, null, true);
+	Delete("screen02");
+
+
+	//定義-----------------------
+	//顔つかみ演出
+
+	CreateTextureEX("te00", 5000, -512, 100, "cg/bg/x/bg001011_3_六本木街並み1崩壊_x01.jpg");
+	Zoom("te00", 0, 6000, 2500, null, true);
+	CreateTextureEX("te01", 5000, 1024, 100, "cg/ef/x/ef_hand01.png");
+	SetBlur("te01", true, 2, 500, 50, false);
+	Fade("te00", 0, 1000, null, true);
+	Fade("te01", 0, 1000, null, true);
+	CreateSE("SE31","se戦闘_攻撃_振る04");
+	MusicStart("SE31",0,700,0,1000,null,false);
+
+	Move("te00", 500, 512, @0, Dxl2, false);
+	Move("te01", 500, 0, 0, Dxl2, false);
+	Fade("white", 100, 0, Axl2, true);
+	Wait(200);
+	Fade("white", 200, 1000, Axl2, true);
+	Delete("te*");
+	CreateSE("SE01","se戦闘_攻撃_殴る01");
+	CreateSE("SE02","seヴォイド汎用01");
+	CreateSE("SE03","seヴォイド崩壊01");
+	CreateSE("SE04","seヴォイド結晶化01a");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	CreateTextureEXadd("ca03", 200, 500, -400, "cg/st/x/st結晶化人間_叫び_normal_x01.png");
+	CreateTextureEXadd("li01", 200, 186, -150, "cg/ef/x/ef_light_x04.png");
+	Rotate("ca02", 0, @0, @0, -50, null,true);
+	Rotate("ca03", 0, @0, @0, -50, null,true);
+	Zoom("ca01", 0, 2000, 2000, null, true);
+	Zoom("ca02", 0, 2500, 2500, null, true);
+	Zoom("ca03", 0, 2500, 2000, null, true);
+	Zoom("li01", 0, 4000, 1000, null, true);
+	Request("ca*", Smoothing);
+
+
+
+	//動作-----------------------
+	Fade("ca01", 0, 1000, null, false);
+	Fade("ca02", 0, 1000, null, false);
+	Fade("ca03", 0, 1000, null, false);
+	Fade("bg01", 0, 1000, null, false);
+
+	Shake("ca*", 1500, 0, 10, 0, 0, 1000, null, false);
+
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+	MusicStart("SE03",0,700,0,1000,null,false);
+
+	DrawDelete("ca03", 5000, 100, Axl3, "worm_01_00_0", false);
+	Fade("ca03", 5000, 0, Axl3, false);
+	Fade("li01", 0, 1000, null, true);
+	Zoom("li01", 10000, 5000, 2000, Dxl1, false);
+	Zoom("ca01", 1000, 1000, 1000, Dxl1, false);
+	Zoom("ca02", 1000, 1000, 1000, Dxl1, false);
+	Zoom("ca03", 1000, 1000, 1000, Dxl1, false);
+	Move("ca01", 10000, @-200, @100, null, false);
+	Move("ca02", 10000, @-150, @80, null, false);
+	Move("ca03", 10000, @-150, @80, null, false);
+	Move("bg01", 10000, @-50, @20, null, false);
+
+	FadeDelete("white", 1000, null, false);
+
+	Wait(200);
+
+	MusicStart("SE03",0,700,0,1000,null,false);
+
+	Wait(500);
+	FadeDelete("li01", 8000, Axl2, false);
+
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0051]
+//【ダァト兵Ａ】
+<voice name="다아트 병사 A" class="�_�@긣빜�`" src="voice/LX00/1000090e01">
+｡ｸｾﾆｾﾆ｡ｦ｡ｦ ｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆ!｡ｹ
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義---------------------------------------------
+	CreateTextureSP("bg02", 98, Center, Middle, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	SetShade("bg02", SEMIHEAVY);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+	Move("bg02", 0, @-50, @0, null, true);
+
+	St("C",99, @-50,@0,"buダァト兵_構え_normal");
+
+	CreateSE("SE11","se人体_足音_着地03");
+	CreateSE("SE12","se戦闘_銃器_構える02");
+
+	MusicStart("SE11",0,700,0,1000,null,false);
+
+	//動作---------------------------------------------
+	DrawTransition("ca*", 150, 1000, 0, 100, null, "cg/data/slide_01_03_0.png", false);
+	DrawTransition("bg01", 150, 1000, 0, 100, null, "cg/data/slide_01_03_0.png", false);
+	FadeDelete("li01", 150, null, false);
+
+	Move("bg02", 300, @40, @-20, Dxl1, false);
+	Move("@StNameC/C*", 300, @60, @-20, Dxl1, false);
+	FadeSt("C",200,true);
+
+	MusicStart("SE12",0,700,0,1000,null,false);
+
+	Fade("ca*", 0, 0, null, true);
+	Fade("bg01", 0, 0, null, true);
+	Delete("ca*");
+	DrawTransition("bg01", 0, 1000, 1000, 100, null, "cg/data/slide_01_03_1.png", true);
+
+	//★定義：先行----------------------------------
+	CreateTextureEX("ca11", 100, Center, 50, "cg/bu/buスクルージ_通常_normal.png");
+	CreateTextureEX("ca12", 100, 150, 50, "cg/st/x/st結晶化人間_屈み_normal_x01.png");
+	CreateTextureEXsub("ef01", 100, center, middle, "cg/ef/ef_smoke01.png");
+	Request("ca*", Smoothing);
+	Rotate("ca12", 0, 10, 180, @0, null,true);
+	Zoom("ca11", 0, 1150, 1150, null, true);
+	Zoom("ca12", 0, 1300, 1300, null, true);
+	//★定義：先行----------------------------------
+	Wait(100);
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【ダァト兵Ｂ】
+<voice name="다아트 병사 B" class="�_�@긣빜괶" src="voice/LX00/1000100e02">
+｡ｸｺ鋕ﾔﾀｻ!｡ｹ
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義----------------------------------
+	$f_gare_prio=200;
+	$f_gare_time=1200;
+	$f_gare_time2=500;
+	CreateTextureEXadd("f_gare01", $f_gare_prio, 398, 104, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("f_gare02", $f_gare_prio, 445, 237, "cg/ef/x/ef_voidrubble01_x02.png");
+	CreateTextureEXadd("f_gare03", $f_gare_prio, 255, 120, "cg/ef/x/ef_voidrubble01_x03.png");
+	CreateTextureEXadd("f_gare04", $f_gare_prio, 449, 218, "cg/ef/x/ef_voidrubble01_x04.png");
+	CreateTextureEXadd("f_gare05", $f_gare_prio, -70, 240, "cg/ef/x/ef_voidrubble01_x05.png");
+	CreateTextureEXadd("f_gare06", $f_gare_prio, 241, 323, "cg/ef/x/ef_voidrubble02_x01.png");
+	CreateTextureEXadd("f_gare07", $f_gare_prio, 420, 270, "cg/ef/x/ef_voidrubble02_x02.png");
+	CreateTextureEXadd("f_gare08", $f_gare_prio, 534, 182, "cg/ef/x/ef_voidrubble02_x03.png");
+	CreateTextureEXadd("f_gare09", $f_gare_prio, 412, 66, "cg/ef/x/ef_voidrubble03_x01.png");
+	CreateTextureEXadd("f_gare10", $f_gare_prio, 397, 94, "cg/ef/x/ef_voidrubble03_x02.png");
+	CreateTextureEXadd("f_gare11", $f_gare_prio, 255, 128, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("f_gare12", $f_gare_prio, center, 376, "cg/ef/x/ef_voidrubble01_x90.png");
+	CreateTextureEXadd("f_gare13", $f_gare_prio, center, 276, "cg/ef/x/ef_voidrubble01_x90.png");
+	Request("f_gare*", Smoothing);
+	Zoom("f_gare*", 0, 2000, 2000, null, true);
+	//SetBlur("f_gare*", true, 1, 500, 50, false);
+
+	//背景bg01　再利用
+	Rotate("bg01", 0, 0, 0, 0, null,true);
+
+	//連射マクロ定義
+	Gun_Assault01_Create("muzzle01",99,378,418,"cg/ef/ef_muzzle02.jpg");
+	Gun_Assault02_Create("muzzle02",101,504,395,"cg/ef/ef_spark02.png");
+
+	//ムービー準備
+	Fade("koukasen01", 200, 200, null, false);
+
+	CreateSE("SE01","se戦闘_銃器_機関銃01");
+	CreateSE("SE02","seヴォイド崩壊01");
+	CreateSE("SE03","seヴォイド崩壊03");
+
+
+	//動作----------------------------------
+	//連射マクロ開始
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Gun_Assault01_Start();
+	Shake("@StNameC/C*", 500, 0, 2, 0, 2, 1000, null, false);
+
+	Wait(300);
+
+	Move("ca11", 300, @-100, @-20, Axl1, false);
+	Move("ca12", 300, @-50, @-10, Dxl1, false);
+	Move("bg01", 300, @-100, @-40, Dxl1, false);
+
+	Fade("ca11", 200, 1000, null, false);
+	Fade("ca12", 200, 1000, null, false);
+	Fade("bg01", 200, 1000, null, false);
+	Fade("絵効果火粉", 200, 0, null, false);
+
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+	Gun_Assault02_Start();
+	Shake("ca12", 500, 2, 6, 0, 0, 1000, null, false);
+
+	Wait(300);
+
+	Shake("ca11", 300, 10, 0, 20, 0, 1000, null, false);
+	Move("ca11", 300, @-300, @-20, Dxl2, false);
+	Move("bg01", 600, @-200, @20, Dxl2, false);
+	FadeDelete("ca11", 400, Axl1, false);
+
+	MusicStart("SE03",0,700,0,1000,null,false);
+	Fade("f_gare*", 0, 1000, null, true);
+	Rotate("f_gare01", $f_gare_time, @0, @0, @-320, null,false);
+	Rotate("f_gare02", $f_gare_time, @0, @0, @-120, null,false);
+	Rotate("f_gare03", $f_gare_time, @0, @0, @-430, null,false);
+	Rotate("f_gare04", $f_gare_time, @0, @0, @-140, null,false);
+	Rotate("f_gare05", $f_gare_time, @0, @0, @235, null,false);
+	Rotate("f_gare06", $f_gare_time, @0, @0, @10, null,false);
+	Rotate("f_gare07", $f_gare_time, @0, @0, @320, null,false);
+	Rotate("f_gare08", $f_gare_time, @0, @0, @-220, null,false);
+	Rotate("f_gare09", $f_gare_time, @0, @0, @315, null,false);
+	Rotate("f_gare10", $f_gare_time, @0, @0, @13, null,false);
+	Rotate("f_gare11", $f_gare_time, @0, @0, @120, null,false);
+	BezierMove("f_gare01", $f_gare_time, (@0,@0){@50,@-450}{@90,@-590}(@120,@2700), null, false);
+	BezierMove("f_gare02", $f_gare_time, (@0,@0){@-50,@-100}{@-90,@-90}(@-1220,@1700), null, false);
+	BezierMove("f_gare03", $f_gare_time, (@0,@0){@-50,@-400}{@-90,@-490}(@-320,@3700), null, false);
+	BezierMove("f_gare04", $f_gare_time, (@0,@0){@-50,@-250}{@-90,@-90}(@-1420,@2700), null, false);
+	BezierMove("f_gare05", $f_gare_time, (@0,@0){@50,@-100}{@90,@90}(@520,@3700), null, false);
+	BezierMove("f_gare06", $f_gare_time, (@0,@0){@0,@-5}{@0,@-25}(@0,@1700), null, false);
+	BezierMove("f_gare07", $f_gare_time, (@0,@0){@-50,@-100}{@-90,@-90}(@-1720,@3700), null, false);
+	BezierMove("f_gare08", $f_gare_time, (@0,@0){@50,@-100}{@90,@-90}(@820,@1700), null, false);
+	BezierMove("f_gare09", $f_gare_time, (@0,@0){@50,@-600}{@90,@-290}(@920,@1700), null, false);
+	BezierMove("f_gare10", $f_gare_time, (@0,@0){@-50,@-100}{@-90,@-90}(@-1020,@2500), null, false);
+	BezierMove("f_gare11", $f_gare_time, (@0,@0){@-50,@-200}{@-90,@-390}(@-1120,@3700), null, false);
+	Move("f_gare12", $f_gare_time2, @0, @-250, Dxl2, false);
+	Zoom("f_gare12", $f_gare_time2, 2000, 2000, Dxl2, false);
+	Fade("f_gare12", $f_gare_time2, 0, Axl2, false);
+	Move("f_gare13", $f_gare_time2, @0, @-250, Dxl2, false);
+	Zoom("f_gare13", $f_gare_time2, 1500, 1500, Dxl2, false);
+	Fade("f_gare13", $f_gare_time2, 0, Axl2, false);
+
+	DrawDelete("ca12", 150, 100, Dxl3, "worm_01_00_0", false);
+	Fade("koukasen01", 1000, 0, null, false);
+
+	Rotate("ef01", 1500, @0, @0, @5, null,false);
+	Zoom("ef01", 1500, 1200, 1600, Dxl1, false);
+	Fade("ef01", 0, 1000, null, true);
+
+	FadeDelete("ef01", 1500, Axl3, false);
+
+	Wait(1000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+병사들이 우왕좌왕한다&. 겁에 질려 총구가 떨린다&.
+
+얄궂은 일이지만&, 그쪽이 나에게는 더 무섭다&.
+그러니 조금 진지해지기로 할까&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//ＳＥ：跳躍
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+	DeleteAllSt(0,true);
+	Delete("f_gare*");
+	Delete("ca*");
+	Delete("spark*");
+
+	//定義----------------------------------
+	$f_junp_prio=200;
+	$f_junp_time=200;
+	$f_blood_time=350;
+	CreateTextureEX("bg02", $f_junp_prio, Center, 200, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	CreateTextureEX("ca00", $f_junp_prio, 150, -300, "cg/ev/x/ev9001スクルージジャンプ汎用_x01.png");
+	//CreateTextureEX("ca01", $f_junp_prio, Center, -700, "cg/ev/x/ev9000スクルージ着地汎用_x01.png");
+	CreateTextureEX("ca01", $f_junp_prio, 30, -885, "cg/ev/x/ev9000スクルージ着地汎用_x01.png");
+
+	CreateTextureEX("ca03", $f_junp_prio, Center, 100, "cg/bu/buダァト兵_見張り_normal.png");
+	CreateTextureEX("blood01", $f_junp_prio, -150, 300, "cg/ef/ef_blood01_01.png");
+	CreateTextureEX("blood02", $f_junp_prio, 650, 300, "cg/ef/ef_blood01_02.png");
+	Request("ca01", Smoothing);
+	Request("blood*", Smoothing);
+	SetShade("bg02", SEMIHEAVY);
+	SetShade("ca03", SEMIHEAVY);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+	Zoom("ca00", 0, 500, 500, null, true);
+	Zoom("ca01", 0, 1500, 1500, null, true);
+	Zoom("ca03", 0, 1500, 1500, null, true);
+	Rotate("ca00", 0, @0, @0, -20, null,true);
+
+	Rotate("blood01", 0, @0, @0, -20, null,true);
+	Rotate("blood02", 0, @0, @0, 20, null,true);
+
+	CreateSE("SE10","se戦闘_動作_突進04");
+	CreateSE("SE11","se人体_動作_瓦礫を押しのける");
+	CreateSE("SE12","se人体_体_骨複数砕ける01");
+	CreateSE("SE13","se人体_血_出血");
+
+	//動作----------------------------------
+
+	MusicStart("SE10",0,700,0,1000,null,false);
+
+	Fade("bg02", 200, 1000, null, false);
+	Fade("ca00", 200, 1000, null, false);
+	Fade("ca03", 200, 1000, null, false);
+
+	Zoom("ca00", 300, 1000, 1000, Axl2, false);
+
+	Move("ca00", 200, @0, @-50, Dxl1, false);
+	Move("ca03", 500, @0, @50, AxlDxl, false);
+
+	Move("bg02", 200, @0, @50, AxlDxl, true);
+	Move("bg02", 200, @0, -270, AxlDxl, false);
+
+	Fade("ca00", 100, 0, null, false);
+
+	Wait(100);
+
+	MusicStart("SE11",0,800,0,1000,null,false);
+	MusicStart("SE12",0,1000,0,1000,null,false);
+	MusicStart("SE13",0,1000,0,1000,null,false);
+	//Move("ca01", $f_junp_time, @0, -644, Dxl3, false);
+	Move("ca01", $f_junp_time, @0, -829, Dxl3, false);
+	Move("ca03", $f_junp_time, @0, 600, Dxl3, false);
+	Fade("ca01", 0, 1000, null, true);
+	Shake("ca01", 300, 0, 10, 0, 0, 1000, null, false);
+
+	Zoom("blood01", $f_blood_time, 1500, 4000, Dxl2, false);
+	Fade("blood01", 0, 1000, null, false);
+	Wait(100);
+	Zoom("blood02", $f_blood_time, 1500, 4000, Dxl2, false);
+	Fade("blood02", 0, 1000, null, false);
+
+	Wait(400);
+	Delete("koukasen01");
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+불규칙하게 튀어 올라 덮친다&. 한복판으로 뛰어들기만 하면 그다음은 간단하다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//ＳＥ：骨が砕ける音
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義----------------------------------
+	//演出：爪攻撃
+	$f_crow_prio=3000;
+	CreateColorEX("efblack01", $f_crow_prio, "000000");
+	CreateTextureEXadd("efcrow01", $f_crow_prio, -1400, -700, "cg/ef/x/ef_crow01_x01.png");
+	Rotate("efcrow01", 0, @0, @0, 30, null,true);
+	//Zoom("efcrow01", 0, 1500, 1500, null, true);
+	SetBlur("efcrow01", true, 2, 500, 50, false);
+
+	CreateTextureEXadd("efcrow02",$f_crow_prio, 800, -1000, "cg/ef/x/ef_crow01_x01.png");
+	Rotate("efcrow02", 0, @0, 0, 140, null,true);
+	//Zoom("efcrow02", 0, 1500, 1500, null, true);
+	SetBlur("efcrow02", true, 2, 500, 50, false);
+
+	//演出：出血
+	$f_blood_prio=5000;
+	CreateTextureEX("efblood01", $f_blood_prio, 150, -236, "cg/ef/ef_blood01_01.png");
+	CreateTextureEX("efblood02", $f_blood_prio, 636, 193, "cg/ef/ef_blood01_02.png");
+	CreateTextureEX("efblood03", $f_blood_prio, -108, 141, "cg/ef/ef_blood01_01.png");
+	CreateColorEXadd("efred01", $f_blood_prio, "FF0000");
+	Request("efblood01", Smoothing);
+	Request("efblood02", Smoothing);
+	Request("efblood03", Smoothing);
+	Zoom("efblood0*", 0, 500, 500, null, false);
+	Rotate("efblood03", 0, @0, @0, 40, null,true);
+
+	CreateSE("SE01","se戦闘_動作_突進03");
+	CreateSE("SE02","seヴォイド結晶化_l");
+	CreateSE("SE03","seヴォイド崩壊01");
+	CreateSE("SE04","seヴォイド崩壊02");
+	CreateSE("SE05","se戦闘_攻撃_斬撃04");
+	CreateSE("SE06","se戦闘_攻撃_斬撃05");
+	CreateSE("SE07","se戦闘_攻撃_斬撃04");
+	CreateSE("SE08","se戦闘_攻撃_斬撃03");
+	CreateSE("SE09","se戦闘_攻撃_斬撃03");
+	CreateSE("SE10","se戦闘_攻撃_斬撃03");
+	CreateSE("SE11","se人体_血飛沫");
+	CreateSE("SE12","se戦闘_攻撃_殴打連撃01_L");
+
+
+
+	//動作----------------------------------
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	$f_blood_endtime=200;
+	Zoom("ca01", $f_blood_endtime, 5000, 5000, Axl2, false);
+	Fade("ca01", $f_blood_endtime, 0, Axl2, false);
+	Zoom("blood01", $f_blood_endtime, 2000, 18000, Dxl2, false);
+	Fade("blood01", $f_blood_endtime, 0, Axl2, false);
+	Zoom("blood02", $f_blood_endtime, 2000, 18000, Dxl2, false);
+	Fade("blood02", $f_blood_endtime, 0, Axl2, false);
+
+	Wait(200);
+
+	MusicStart("SE09",0,900,0,1000,null,false);
+	Fade("efblack01", 100, 1000, null, false);
+	Fade("efcrow01", 0, 1000, null, true);
+	Move("efcrow01", 300, 1400, 1200, null, false);
+
+	Wait(200);
+	MusicStart("SE10",0,900,0,1100,null,false);
+	Fade("efcrow02", 0, 1000, null, true);
+	Move("efcrow02", 300, -1400, 1000, null, false);
+
+	Fade("efred01", 0, 1000, null, true);
+	Fade("efred01", 200, 0, null, false);
+	Shake("efblood01", 150, 3, 2, 0, 0, 1000, null, false);
+	Zoom("efblood01", 300, 1200, 1200, Dxl2, false);
+	Fade("efblood01", 0, 1000, null, false);
+	Wait(100);
+	Fade("efred01", 0, 1000, null, true);
+	Fade("efred01", 200, 0, null, false);
+	Shake("efblood02", 300, 1, 4, 0, 0, 1000, null, false);
+	Zoom("efblood02", 300, 1200, 1200, Dxl2, false);
+	Fade("efblood02", 0, 1000, null, false);
+	Wait(50);
+	Fade("efred01", 0, 1000, null, true);
+	Fade("efred01", 200, 0, null, false);
+	Shake("efblood03", 300, 4, 1, 0, 0, 1000, null, false);
+	Zoom("efblood03", 300, 1200, 1200, Dxl2, false);
+	Fade("efblood03", 0, 1000, null, false);
+
+	Wait(500);
+
+	MoveFTP1stop();
+	Delete("efcrow*");
+
+
+	//定義----------------------------------
+	//血
+	CreateTextureEX("blood01", 5000, 200, 300, "cg/ef/ef_blood01_01.png");
+	CreateTextureEX("blood02", 5000, 0, 300, "cg/ef/ef_blood01_02.png");
+	CreateTextureEX("blood03", 5000, 700, 300, "cg/ef/ef_blood01_02.png");
+	Request("blood*", Smoothing);
+
+	Rotate("blood01", 0, @0, @0, 70, null,true);
+	Rotate("blood02", 0, @0, @0, -20, null,true);
+
+	//カメラ
+	CreateCamera("Ｃ", 100, -100, 1500);
+	SetAlias("Ｃ","Ｃ");
+	CreateTextureEX("Ｃ/ev00", 400, 0, 0, "cg/ev/ev9003ダァト兵戦闘汎用_倒れ兵.png");
+	CreateTextureEX("Ｃ/ev01", 500, 0, 0, "cg/ev/ev9003ダァト兵戦闘汎用_左兵.png");
+	CreateTextureEX("Ｃ/ev02", 600, 0, 0, "cg/ev/ev9003ダァト兵戦闘汎用_スクルージ.png");
+	CreateTextureEX("Ｃ/ev03", 700, 0, 0, "cg/ev/ev9003ダァト兵戦闘汎用_手前兵士.png");
+	CreateTextureEX("Ｃ/ev04", 20, 0, -50, "cg/ev/ev9003ダァト兵戦闘汎用_背景.jpg");
+	Zoom("Ｃ/ev04", 0, 2200, 2200, null, true);
+	Request("Ｃ/ev*", Smoothing);
+	SetShade("Ｃ/ev04", SEMIHEAVY);
+	//SetBlur("Ｃ/ev02", true, 1, 500, 100, false);
+	MoveFTP1("@Ｃ/*",3000,8,3);
+	Fade("Ｃ/ev*", 0, 1000, null, true);
+
+	//イベント絵
+	CreateTextureEX("ev01", 6000, 0, 0, "cg/ev/ev9003ダァト兵戦闘汎用.jpg");
+	Zoom("ev01", 0, 1100, 1100, null, true);
+	SetBlur("ev01", true, 1, 500, 100, false);
+
+
+	//動作----------------------------------
+	MusicStart("SE02",0,500,0,1000,null,false);
+	MusicStart("SE12",0,700,0,1000,null,false);
+
+
+	DrawTransition("efblood*", 400, 1000, 0, 100, null, "cg/data/zoom_01_00_0.png", false);
+	Zoom("efblood01", 200, 2000, 2000, Axl2, false);
+	FadeDelete("efblood01", 200, Axl2, false);
+	Wait(100);
+	Zoom("efblood02", 200, 2000, 2000, Dxl2, false);
+	FadeDelete("efblood02", 200, Axl2, false);
+	Wait(50);
+	Zoom("efblood03", 200, 2000, 2000, Dxl2, false);
+	FadeDelete("efblood03", 200, Axl2, false);
+	Fade("efblack01", 100, 0, null, false);
+
+	MusicStart("SE05",0,800,0,800,null,false);
+	Zoom("blood01", 200, 1200, 4000, Dxl2, false);
+	Fade("blood01", 0, 1000, null, true);
+	MoveCamera("Ｃ", 500, @0, 0, 1200, Dxl3, false);
+	Wait(500);
+	MusicStart("SE06",0,800,0,1000,null,false);
+	Fade("blood01", 200, 500, null, false);
+	Zoom("blood02", 200, 1500, 6000, Dxl2, false);
+	Fade("blood02", 0, 1000, null, true);
+	MoveCamera("Ｃ", 500, -200, -150, 1000, Dxl3, false);
+	Wait(500);
+	MusicStart("SE07",0,800,0,1100,null,false);
+	Fade("blood02", 200, 500, null, false);
+	Zoom("blood03", 200, 1500, 6000, Dxl2, false);
+	Fade("blood03", 0, 1000, null, true);
+	MoveCamera("Ｃ", 500, 200, -100, 650, Dxl3, false);
+	Wait(500);
+	MusicStart("SE03",0,800,0,1000,null,false);
+	MusicStart("SE08",0,800,0,1100,null,false);
+	Zoom("blood*", 600, 2000, 25000, Dxl2, false);
+	Fade("blood*", 600, 0, Axl2, false);
+	MoveCamera("Ｃ", 500, 100, -100, 500, Dxl3, true);
+	MoveCamera("Ｃ", 500, 100, -100, 1200, Axl3, false);
+
+	Wait(300);
+
+	SetVolumeEX("SE02", 2000, 0, null);
+	MusicStart("SE04",0,800,0,1000,null,false);
+	MusicStart("SE11",0,1000,0,1100,null,false);
+	Fade("ev01", 200, 1000, null, false);
+	Zoom("ev01", 1000, 1000, 1000, Dxl1, true);
+
+	MoveFTP1stop();
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+	Delete("muzzle*");
+	Delete("ca*");
+	Delete("ef*");
+	Delete("bg*");
+	Delete("blood*");
+
+
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0081]
+ｺｸｽﾃｴﾙｽﾃﾇﾇ&.
+ｽｺﾅｩｷ･ｺ暠｡ｱﾗ ﾇﾏｳｪ ｿﾏｼｺﾀﾌｴﾙ&.
+
+//【ダァト兵Ｃ】
+<voice name="다아트 병사 C" class="�_�@긣빜괷" src="voice/LX00/1000110e03">
+「겁먹지 마라! 적은 혼자다!」
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+――그렇군&. 곧 너 혼자만 남게 될 거다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+	SetVolumeEX("SE*", 1000, 0, null);
+
+	ClearFadeAll(1000, true);
+
+
+//→→LX0503
+
+}

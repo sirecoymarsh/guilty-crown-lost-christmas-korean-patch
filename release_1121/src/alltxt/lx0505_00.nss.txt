@@ -1,0 +1,734 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0505_00.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	if($lx0108_00sl選択肢==1){	$GameName = "lx0505_01.nss";
+	}else{	$GameName = "lx0505_02.nss";
+	}
+
+}
+
+
+scene lx0505_00.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintBG("上背景", 30000);
+
+	SoundPlay("@lx003",3000,450,true);
+
+	Wait(1000);
+
+	CreateTextureSP("bg51a", 100, -1024, -300, "cg/bg/l/bg003016_3_六本木全景崩壊_l.jpg");
+	CreateTextureSP("bg51b", 100, -512, -15, "cg/bg/x/bg003016_3_六本木全景崩壊_炎_x01.png");
+	Fade("bg51b", 0, 900, null, true);
+	Zoom("bg51b", 0, 2000, 2000, null, true);
+	DrawEffectSkip("bg51b", 1000, "Ripple", 150, 50, null);
+
+	CreateSE("SE11","se背景_ガヤ_市内混乱模様01");
+	CreateSE("SE12","se背景_ガヤ_建物炎上_L");
+
+	MusicStart("SE11",3000,300,0,1000,null,true);
+	MusicStart("SE12",3000,300,0,1000,null,true);
+
+	Move("bg51*", 60000, @700, @0, null, false);
+	FadeDelete("上背景", 2000, null, true);
+
+	Wait(2000);
+
+
+
+
+
+//◆◆六本木／夜
+
+//阿鼻叫喚の六本木。
+//混乱する人々。キャンサー化する人々。ダァト兵に殺された人々など。
+
+//※キャロルのモノローグ。
+//カギ括弧なしだが、ボイス入り。
+
+
+
+//あきゅん「演出予定：今までのダイジェスト的な流れをみせる。左に画面がスクロールしながら流れる系」
+
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500010a02">
+――세계는 종말을 고하려 하고 있어&.
+
+//	Fw("fwキャロル_通常_normal");
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500020a02">
+원인은 분명&, 단추 하나를 잘못 끼운 것 같은 사소한 일&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500030a02">
+ｳｲﾀﾚｿﾍ ｿｩﾀﾚﾀﾇ ｾ･ｸｲ ｰｰﾀｺ｡ｪ｡ｪ
+개도 안 말린다는 사랑싸움 같은 것이겠지&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500040a02">
+ｱﾗｷｸｰﾔｳｪ ｻ郛ﾒﾇﾑ ﾀﾏﾀﾎｵ･ｵｵ&.
+ｾﾆｾﾆ&, ﾀﾌｷｸｰﾔｳｪ ｽｱｰﾔ ｺﾎｼｭﾁｮ ｹﾁ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//ＳＥ：マナの歌
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500050a02">
+<RUBY TEXT="이브">여자</RUBY>가&, 울고 있어&.
+<RUBY TEXT="아담을">남자를</RUBY> 그리며&, 울고 있어&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500060a02">
+<RUBY TEXT="이브">여자</RUBY>가 흘리는 눈물의 음색은&, 붕괴의 <RUBY TEXT="심포니">교향곡</RUBY>&.
+불완전한 묵시록은 왕국의 도래를 기다리지 않고&, 모든 것을 멸망시켜 버려&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500070a02">
+마치 알 속에서 썩어 가는 새끼 새처럼&. 열매를 맺지 못한 채 시들어 가는 꽃처럼&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreateColorEX("co01", 15000, "000000");
+	Fade("co01", 2000, 1000, null, true);
+
+	Delete("ev*");
+	Delete("bg*");
+
+	Wait(1000);
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500080a02">
+｡ｸｼｼｰ雍ﾂ ﾀﾚｱﾃ&. ﾀﾚｱﾃﾀｺ ﾁﾗﾀｽ&.
+　모든 것은 태어나기 전에 썩어 있다」
+
+//（ここはモノローグではなく、セリフ）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+	//PrintGO("上背景", 10000);
+
+	//おがみ：★演出　調整のため退避
+	/*
+	CreateCamera("Ｃ", -512, -130, 1000);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureSP("@Ｃ/絵背景", 0, Center, -380, "cg/bg/l/bg001016_3_高速道路崩壊_l.jpg");
+	CreateTextureSP("@Ｃ/絵演立木屋", 500, Center, Middle, "cg/st/x/stキャロル_通常_normal_x01.png");
+	Zoom("@Ｃ/絵演立木屋", 0, 500, 500, null, true);
+	Move("@Ｃ/絵演立木屋", 0, @640, @150, null, true);
+
+	CreateProcessEX("プロセス", "LProcAK_lx0505_00Act");
+	Request("プロセス", Start);
+	*/
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorEXadd("co02", 15000, "FFFFFF");
+
+	CreateSE("SEAK00","se戦闘_メカ_一歩01");
+	CreateSE("SEAK00b","se戦闘_メカ_パイルバンカー03");
+
+	CreateTextureSP("絵秋専天", 5110, 0, -270, "cg/ev/l/ev0110エデン・ベベミサイルランチャー_l.jpg");
+	CreateTextureEX("絵秋専天発", 5110, 0, -270, "cg/ev/l/ev0110エデン・ベベミサイルランチャーa_l.jpg");
+
+	FadeDelete("co01", 200, null, false);
+	MusicStart("SEAK00",0,400,0,1000,null,false);
+	MusicStart("SEAK00b",0,800,0,1000,null,false);
+	BezierMove("@絵秋専天*", 600, (0,-270){-170,-340}{-280,-360}(-400,-530), Dxl2, true);
+
+	Delete("@絵秋覆*");
+	Delete("@絵秋写真機二*");
+	Delete("@絵色黒帯*");
+
+	CreateSE("SEAK01","se戦闘_銃器_ミサイル");
+	SetStream("SEAK01", 700);
+
+	CreateSE("SELPA020","se戦闘_銃器_ミサイル複数");
+	CreateSE("SELPA021","se戦闘_銃器_ミサイル複数");
+	CreateSE("SELPA022","se戦闘_銃器_ミサイル複数");
+	CreateSE("SELPA023","se戦闘_銃器_ミサイル複数");
+	CreateSE("SELPA024","se戦闘_銃器_ミサイル複数");
+	MusicStartSet("SELPA021",700,-200,1000,null,false);
+	MusicStartSet("SELPA022",700,-100,1000,null,false);
+	MusicStartSet("SELPA023",700,100,1000,null,false);
+	MusicStartSet("SELPA024",700,200,1000,null,false);
+	SetStream("SELPA02*", 600);
+	CreateProcessEX("プロセス", "LProcAK_lx0010_02Act");
+
+
+
+	SetFrequency("@SEAK00", 1000, 500, null);
+	SetVolumeEX("@SEAK00*", 600, 0, null);
+
+
+
+	SetBlur("@絵秋専天*", true, 3, 300, 60, false);
+	Move("@絵秋専天*", 400, 340, 70, null, false);
+	Zoom("@絵秋専天*", 400, 2000, 2000, null, false);
+	Wait(280);
+	MusicStart("SEAK01",0,800,0,1000,null,false);
+	MusicStart("SEAK02",0,1200,0,1000,null,false);
+	Request("プロセス", Start);
+	Fade("@絵秋専天発", 0, 1000, null, true);
+	DrawTransition("@絵秋専天発", 300, 0, 1000, 100, null, "cg/data/circle_05_00_0.png", false);
+	Zoom("@絵秋専天*", 200, 500, 500, Dxl3, false);
+	Move("@絵秋専天*", 200, -512, -288, Dxl3, false);
+
+	Wait(200);
+
+	CreateColorEX("絵色黒", 6000, "000000");
+	CreateTextureSP("絵秋専天発弾", 5115, 194, 240, "cg/ev/ev0110エデン・ベベミサイルランチャーa_ミサイルのみ.png");
+	Zoom("@絵秋専天発弾", 0, 500, 500, null, true);
+	Request("@絵秋専天発弾", Smoothing);
+
+	Move("@絵秋専天発弾", 220, 430, 160, Axl1, false);
+	Zoom("@絵秋専天発弾", 220, 10000, 10000, Axl1, false);
+	Wait(200);
+
+	Fade("co02", 200, 1000, null, true);
+	Delete("@絵秋専天*");
+
+
+
+	CreateTextureSP("bg51a", 100, -1024, -450, "cg/bg/l/bg001016_3_高速道路崩壊_l.jpg");
+	CreateTextureSP("bg51b", 100, -512, -165, "cg/bg/bg001016_3_高速道路崩壊_炎2.png");
+	CreateTextureSP("bg51c", 100, -1024, -450, "cg/bg/l/bg001016_3_高速道路崩壊_高速道路_l.png");
+	Fade("bg51b", 0, 900, null, true);
+	Zoom("bg51b", 0, 2000, 2000, null, true);
+	DrawEffectSkip("bg51b", 1000, "Ripple", 150, 50, null);
+
+	Move("bg51*", 30000, @200, @0, null, false);
+
+	Fade("co02", 500, 0, null, true);
+
+
+	Wait(500);
+
+//◆◆六本木／高速道路
+
+//高速道路の上から戦うスクルージを見守るキャロル。
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500090a02">
+――그 사람은 싸우고 있어&.
+
+//	Fw("fwキャロル_通常_normal");
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500100a02">
+스크루지――나의 임금님&. 사랑스러운 괴물&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500110a02">
+네 싸움은 언제나&, 살아남기 위한 싸움&.
+ｳﾊｸｦ ﾁﾗﾀﾌｷﾁｴﾂ ｼｼｰ霑｡&, ｹﾝｿｪﾀﾇ ﾀﾇﾁｦ ｺｸｿｩﾁﾖｴﾂ ｰﾍ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete();
+
+	Fade("co02", 200, 1000, null, true);
+
+	Fade("bg51*", 0, 0, null, true);
+
+
+	CreateTextureEX("絵秋景", 5010, 50, -150, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	Rotate("絵秋景", 0, @0, @0, -7, null,true);
+	Zoom("絵秋景", 0, 6000, 6000, null, true);
+	CreateTextureSP("絵秋専友", 5110, 150, 545, "cg/ev/l/ev0105プレゼントダァト兵キャンサー化_プレゼント_l.png");
+	Zoom("絵秋専友", 0, 2000, 2000, null, true);
+	Request("絵秋専友", Smoothing);
+
+	CreateRubble("絵秋演瓦礫砕上一",5210,760,600,500,0);
+
+	CreateTextureEX("絵秋演結晶一", 5220, 245, -50, "cg/ef/ef_結晶割れ04.png");
+	CreateTextureEX("絵秋演結晶二", 5220, 305, 220, "cg/ef/ef_結晶割れ07.png");
+	CreateTextureEX("絵秋演結晶三", 5220, 350, 480, "cg/ef/x/ef_voidrubble03_x01.png");
+	CreateTextureEX("絵秋演結晶四", 5220, 60, 300, "cg/ef/x/ef_結晶割れ04_shima_x01.png");
+	CreateTextureEX("絵秋演結晶五", 5220, 280, 2000, "cg/ef/x/ef_voidrubble03_x03.png");
+	SetVertex("絵秋演結晶*", center, bottom);
+	Zoom("絵秋演結晶*", 0, @0, 0, null, true);
+
+	CreateSE("SEAK11","se戦闘_破壊_建物02");
+	CreateSE("SEAK12","se戦闘_破壊_建物03");
+	CreateSE("SEAK13","se戦闘_破壊_建物01");
+	CreateSE("SEAK14","se戦闘_破壊_建物03");
+	CreateSE("SEAK15","se戦闘_破壊_建物02");
+
+	CreateSE("SEAK11a","seヴォイド斬撃01");
+	CreateSE("SEAK12a","seヴォイド斬撃01");
+	CreateSE("SEAK13a","seヴォイド斬撃01");
+	CreateSE("SEAK14a","seヴォイド斬撃01");
+	CreateSE("SEAK15a","seヴォイド斬撃01");
+	SetStream("SEAK11a", 360);
+	SetStream("SEAK12a", 360);
+	SetStream("SEAK13a", 360);
+	SetStream("SEAK14a", 360);
+	SetStream("SEAK15a", 360);
+
+	CreateSE("SEAK21","seヴォイド汎用01");
+	SetStream("SEAK21", 290);
+	MusicStart("SEAK21",0,700,0,1000,null,false);
+	CreateSlash("絵秋演斬撃一",7000,512,230,-187);
+	Zoom("@絵秋演斬撃一", 0, @0, 10000, null, true);
+
+	GoSlash("@絵秋演斬撃一");
+	Fade("co02", 200, 0, null, true);
+
+
+	Wait(100);
+
+	Fade("絵秋景", 600, 1000, null, false);
+	Zoom("絵秋景", 400, 3000, 3000, Dxl3, false);
+	Move("@絵秋専友", 400, 490, -250, Dxl3, false);
+	Zoom("@絵秋専友", 400, 500, 500, Dxl3, true);
+
+
+
+	MusicStart("SEAK11",0,700,0,1000,null,false);
+	MusicStart("SEAK11a",100,400,-350,1000,null,false);
+	GoRubble("@絵秋演瓦礫砕上一",1000);
+	Zoom("絵秋演結晶一", 140, 1000, 1000, null, false);
+	Move("絵秋演結晶一", 8000, @0, @-40, null, false);
+	Fade("絵秋演結晶一", 0, 1000, null, true);
+
+	Wait(600);
+
+	MusicStart("SEAK12",0,700,0,1000,null,false);
+	MusicStart("SEAK12a",100,500,-300,800,null,false);
+	Zoom("絵秋演結晶二", 140, 1200, 1200, null, false);
+	Move("絵秋演結晶二", 8000, @0, @-40, null, false);
+	Fade("絵秋演結晶二", 0, 1000, null, true);
+
+	Wait(200);
+
+
+	MusicStart("SEAK13",0,700,0,1000,null,false);
+	MusicStart("SEAK13a",100,600,-150,1100,null,false);
+	Zoom("絵秋演結晶三", 140, 1500, 1500, null, false);
+	Move("絵秋演結晶三", 8000, @0, @-40, null, false);
+	Fade("絵秋演結晶三", 0, 1000, null, true);
+
+	Wait(150);
+
+	MusicStart("SEAK14",0,700,0,1000,null,false);
+	MusicStart("SEAK14a",100,700,0,1500,null,false);
+	Zoom("絵秋演結晶四", 140, 1900, 1900, null, false);
+	Move("絵秋演結晶四", 8000, @0, @-40, null, false);
+	Fade("絵秋演結晶四", 0, 1000, null, true);
+
+	Wait(100);
+
+	MusicStart("SEAK15",0,700,0,1000,null,false);
+	MusicStart("SEAK15a",100,900,50,1000,null,false);
+	Fade("絵秋演結晶五", 0, 1000, null, true);
+	Zoom("絵秋演結晶五", 0, 5000, 5000, null, true);
+	Move("絵秋演結晶五", 160, @0, 560, Axl1, true);
+	Move("絵秋演結晶五", 8000, @0, 500, null, false);
+
+
+	SetVolumeEX("@SELPA*", 3000, 0, null);
+	SetVolumeEX("@SEAK*", 3000, 0, null);
+
+	Fade("co02", 200, 1000, null, true);
+
+	Delete("@絵秋*");
+	Fade("bg51*", 0, 1000, null, true);
+
+	Move("bg51*", 30000, @200, @0, null, false);
+
+	Fade("co02", 500, 0, null, true);
+
+	Wait(500);
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500120a02">
+세계가 이렇게 되어도&, 네 싸움은 변하지 않아&.
+아니&, <RUBY TEXT="····">그렇기에</RUBY> 너의 일격은 한층 날카롭고&, 격렬해&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500130a02">
+하지만 말야&, 스크루지? 모든 건 단추 하나를 잘못 끼운 것 같은 사소한 일이야&. 조그만 일로도 쉽게 부서져 버려&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//プレゼントとパストの攻撃をかわすスクルージ。
+//ミサイルが爆発する。
+
+
+	SetVolumeEX("SE*", 1000, 0, null);
+
+	TextBoxDelete();
+	Wait(16);
+
+	CreateMovieEXover("絵演動画突中央", 5000, Center, Middle, true, true, "dx/mv0003集中線01_白.ngs");
+	Zoom("絵演動画突中央", 0, 6000, 6000, null, true);
+	Fade("絵演動画突中央", 0, 1000, null, true);
+
+	CreateMovieEXover("絵演動画突縦", 5000, Center, Middle, true, true, "dx/mv0003集中線04_白.ngs");
+	Rotate("絵演動画突縦", 0, @0, @0, 72, null,true);
+	Zoom("絵演動画突縦", 0, 4000, 4000, null, true);
+	DrawTransition("絵演動画突縦", 0, 0, 500, 100, null, "cg/data/slide_06_00_0.png", true);
+
+
+	Fade("co02", 200, 1000, null, true);
+	Delete("bg*");
+	Delete("ev*");
+	Delete("ef*");
+
+	CreateCameraEX("絵秋映写機参", 0, 0, 1000);
+	CreateTextureSP("@絵秋映写機参/絵背景", 50, 20, -1244, "cg/ev/x/ev9001スクルージジャンプ汎用_背景x縦.jpg");
+	CreateTextureSP("@絵秋映写機参/絵人淑", 500, -110, 190, "cg/ev/x/ev9003ダァト兵戦闘汎用_x01.png");
+	Request("@絵秋映写機参/絵人淑", Smoothing);
+	MoveCamera("@絵秋映写機参", 0, 80, @0, 2000, null, true);
+
+
+	CreateMissile("絵秋誘導弾一",3330,250,960,12000);
+	CreateMissile("絵秋誘導弾二",3320,500,940,11000);
+	CreateMissile("絵秋誘導弾三",3310,750,920,10000);
+	CreateMissile("絵秋誘導弾四",3300,1000,900,9000);
+
+	CreateMissile("絵秋誘導弾八",3400,1100,900,12000);
+	CreateMissile("絵秋誘導弾七",3410,850,920,11000);
+	CreateMissile("絵秋誘導弾六",3420,600,940,10000);
+	CreateMissile("絵秋誘導弾五",3430,450,960,9000);
+
+	MissileeRotateNF("@絵秋誘導弾一",1,80,null,true);
+	MissileeRotateNF("@絵秋誘導弾二",1,80,null,true);
+	MissileeRotateNF("@絵秋誘導弾三",1,80,null,true);
+	MissileeRotateNF("@絵秋誘導弾四",1,80,null,true);
+
+	MissileeRotateNF("@絵秋誘導弾八",1,80,null,true);
+	MissileeRotateNF("@絵秋誘導弾七",1,80,null,true);
+	MissileeRotateNF("@絵秋誘導弾六",1,80,null,true);
+	MissileeRotateNF("@絵秋誘導弾五",1,80,null,true);
+
+	CreateColorEXadd("絵色白", 5100, "FFFFFF");
+
+	CreateMovieEXover("絵演動画突中央", 5000, Center, Middle, true, true, "dx/mv0003集中線01_白.ngs");
+	Zoom("絵演動画突中央", 0, 6000, 6000, null, true);
+
+	CreateSE("SEAK01","se戦闘_銃器_ミサイル複数");
+	SetStream("SEAK01", 600);
+
+	CreateSE("SE爆発01","se戦闘_破壊_爆発01");
+	CreateSE("SE爆発02","se戦闘_破壊_爆発05");
+
+	MoveCamera("@絵秋映写機参", 3000, 0, @0, 2500, null, false);
+	Zoom("絵演動画突中央", 3000, 2800, 2800, null, false);
+	CreateSE("SEAK31","se人体_動作_跳躍滞空01");
+	MusicStart("SEAK31",2000,700,0,800,null,false);
+	FadeDelete("co02", 500, null, true);
+
+	Delete("絵演動画突中央");
+	Fade("絵演動画突縦", 0, 1000, null, true);
+	CreateSE("SEAK32","se人体_動作_跳躍03");
+	SetStream("SEAK32", 100);
+	MusicStart("SEAK32",0,700,0,1000,null,false);
+	SetFrequency("SEAK31", 1000, 1200, null);
+	SetVolumeEX("SEAK31", 1000, 0, null);
+	Zoom("@絵秋映写機参/絵背景", 300, 2000, 2000, Dxl1, false);
+	Zoom("@絵秋映写機参/絵人淑", 450, 150, 150, Dxl1, false);
+	Move("@絵秋映写機参/絵背景", 40000, @0, -500, null, false);
+	Move("@絵秋映写機参/絵人淑", 450, @0, -1500, Dxl1, false);
+	MoveCamera("@絵秋映写機参", 300, @0, -1152, 500, null, true);
+
+
+
+
+
+//エデン・べべのミサイルランチャー
+//プレゼントの結晶攻撃
+//弾丸のように跳躍するスクルージ
+
+//爆発
+
+	MusicStart("SEAK01",600,700,0,1000,null,false);
+	Fade("絵演動画突中央", 0, 1000, null, true);
+	FadeDelete("絵演動画突縦", 1000, null, false);
+
+	Fade("絵色白", 8000, 800, Axl3, false);
+
+	MoveCamera("@絵秋映写機参", 10000, @0, -1300, 1000, null, false);
+
+	Zoom("@絵秋誘導弾一", 400, 500, 500, Dxl2, false);
+	MissileMove("@絵秋誘導弾一",400,0,-288,Dxl3,false);
+
+	Wait(180);
+
+	Zoom("@絵秋誘導弾二", 400, 500, 500, Dxl2, false);
+	MissileMove("@絵秋誘導弾二",400,250,-288,Dxl3,false);
+
+	Wait(180);
+
+	Zoom("@絵秋誘導弾三", 400, 500, 500, Dxl2, false);
+	MissileMove("@絵秋誘導弾三",400,600,-288,Dxl3,false);
+
+	Wait(180);
+
+	Zoom("@絵秋誘導弾四", 400, 500, 500, Dxl2, false);
+	MissileMove("@絵秋誘導弾四",400,750,-288,Dxl3,false);
+
+	Wait(180);
+
+	Zoom("@絵秋誘導弾八", 400, 500, 500, Dxl2, false);
+	MissileMove("@絵秋誘導弾八",400,850,-576,Dxl3,false);
+
+	Wait(180);
+
+	Zoom("@絵秋誘導弾七", 400, 500, 500, Dxl2, false);
+	MissileMove("@絵秋誘導弾七",400,500,-576,Dxl3,false);
+
+	Wait(180);
+
+	Zoom("@絵秋誘導弾六", 400, 500, 500, Dxl2, false);
+	MissileMove("@絵秋誘導弾六",400,350,-576,Dxl3,false);
+
+	Wait(180);
+
+	Zoom("@絵秋誘導弾五", 400, 500, 500, Dxl2, false);
+	MissileMove("@絵秋誘導弾五",400,100,-576,Dxl3,false);
+
+//上空を旋回
+	Wait(560);
+
+	Zoom("@絵秋誘導弾一", 2000, 750, 750, Dxl2, false);
+	MissileBezierMoveFF("@絵秋誘導弾一",2000,-550,-2000,-1500,-1500,-170,-160,DxlAuto,false);
+
+	Wait(80);
+
+	Zoom("@絵秋誘導弾二", 2000, 750, 750, Dxl2, false);
+	MissileBezierMoveFF("@絵秋誘導弾二",2000,-500,-2000,-2000,-1500,-80,680,DxlAuto,false);
+
+	Wait(80);
+
+	Zoom("@絵秋誘導弾三", 2000, 750, 750, Dxl2, false);
+	MissileBezierMoveFF("@絵秋誘導弾三",2000,1000,-2000,1500,-1500,1080,-120,DxlAuto,false);
+
+	Wait(80);
+
+	Zoom("@絵秋誘導弾四", 2000, 750, 750, Dxl2, false);
+	MissileBezierMoveFF("@絵秋誘導弾四",2000,1250,-2000,2000,-1500,1090,540,DxlAuto,false);
+
+	Wait(80);
+
+	Zoom("@絵秋誘導弾八", 2000, 750, 750, Dxl2, false);
+	MissileBezierMoveFF("@絵秋誘導弾八",2000,-1250,-2000,-1500,-1500,-290,-30,DxlAuto,false);
+
+	Wait(80);
+
+	Zoom("@絵秋誘導弾七", 2000, 750, 750, Dxl2, false);
+	MissileBezierMoveFF("@絵秋誘導弾七",2000,-1000,-2000,-1500,-1500,-290,450,DxlAuto,false);
+
+	Wait(80);
+
+	Zoom("@絵秋誘導弾六", 2000, 750, 750, Dxl2, false);
+	MissileBezierMoveFF("@絵秋誘導弾六",2000,1500,-2000,2000,-1500,1330,90,DxlAuto,false);
+
+	Wait(80);
+
+	Zoom("@絵秋誘導弾五", 2000, 750, 750, Dxl2, false);
+	MissileBezierMoveFF("@絵秋誘導弾五",2000,1750,-2000,2500,-1500,1330,410,DxlAuto,false);
+
+	Wait(400);
+
+
+	Delete("@絵秋誘導弾*");
+	MoveCamera("@絵秋映写機参", 1000, -32, -1300, 10000, Dxl3, 800);
+
+	MusicStart("SE爆発01",0,800,0,1000,null,false);
+	MusicStart("SE爆発02",0,800,0,1000,null,false);
+	Fade("絵色白", 200, 1000, Axl3, true);
+
+	CreateTextureSP("絵秋演爆発", 5010, Center, Middle, "cg/ef/ef_exp03.jpg");
+	Zoom("絵秋演爆発", 0, 1000, 1000, null, true);
+	SetBlur("絵秋演爆発", true, 3, 300, 200, false);
+
+	CreateTextureEX("絵秋演爆発二", 5010, Center, Middle, "cg/ef/ef_exp03.jpg");
+	Zoom("絵秋演爆発二", 0, 1000, 1000, null, true);
+	SetBlur("絵秋演爆発二", true, 3, 200, 400, false);
+	Fade("絵秋演爆発二", 0, 200, null, true);
+
+
+	CreateTextureEX("絵秋演爆発三", 5010, Center, Middle, "cg/ef/ef_exp03.jpg");
+	Zoom("絵秋演爆発三", 0, 1000, 1000, null, true);
+	SetBlur("絵秋演爆発三", true, 3, 200, 600, false);
+	Fade("絵秋演爆発三", 0, 200, null, true);
+
+	Zoom("絵秋演爆発", 8000, 1200, 1200, null, false);
+	Fade("絵秋演爆発二", 8000, 0, null, false);
+	Zoom("絵秋演爆発二", 8000, 1500, 1500, null, false);
+	Fade("絵秋演爆発三", 8000, 0, null, false);
+	Zoom("絵秋演爆発三", 8000, 2000, 2000, null, false);
+
+	FadeDelete("絵色白", 2000, null, true);
+
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500140a02">
+타오르는 불길 속에서도 상처 하나 입지 않는 네가――길가의 하찮은 돌부리에 걸려 넘어져 죽어 버릴지도 몰라&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	SetVolumeEX("SE*", 1000, 0, null);
+	Wait(1000);
+
+////////////////////////////////////////
+//♂♀：フラグ分岐
+//LX0108で選んだ選択肢
+
+//→→自分を取り戻す
+//→→奴らに報いを
+
+////////////////////////////////////////
+
+
+//	ClearFadeAll(1000, true);
+
+}

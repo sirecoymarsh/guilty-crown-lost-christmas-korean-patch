@@ -1,0 +1,1197 @@
+$Revision: 19 $
+
+//=============================================================================//
+//걾긽긦깄�[걾
+//=============================================================================//
+chapter main
+{
+	if($GameClose){return;}
+
+	//걳뮪뫊궔귞궻빾멙뾭
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_buttondown_close=false;
+
+	$SYSTEM_backselect_lock=true;
+
+	$SYSTEM_keydown_m=false;
+	$SYSTEM_keydown_space=false;
+	
+	CreateTexture("video1",1,center,middle,"VIDEO");
+	CreateTexture("video2", 1000, center, middle, "VIDEO");
+	Fade("video2", 0, 0, null, true);
+
+	//걾봶똧
+	CreateColor("me봶똧", 10, 0, 0, 1024, 768, "BLACK");
+	Fade("me봶똧", 0, 0, null, true);
+
+	//걾긽긦깄�[��뽞
+	$MenuCancelX=882  + 20;
+	$MenuEraseX =1013 + 20;
+	$MenuSendX  =875  + 20;
+	$MenuSkipX  =835  + 20;
+	$MenuLogX   =899  + 20;
+	$MenuSaveX  =808  + 20;
+	$MenuLoadX  =817  + 20;
+	$MenuConfigX=855  + 20;
+	$MenuTitleX =913  + 20;
+	$MenuExitX  =871  + 20;
+
+	$MenuCancelY =-96  - 20;
+	$MenuEraseY  =-168 - 20;
+	$MenuSendY   =-68  - 20;
+	$MenuSkipY   =-46  - 20;
+	$MenuLogY    =-53  - 20;
+	$MenuSaveY   =-18  - 20;
+	$MenuLoadY   =-7   - 20;
+	$MenuConfigY =6    + 20;
+	$MenuTitleY  =0    + 20;
+	$MenuExitY   =18   + 20;
+
+	$MenuNameX=434;
+	$MenuNameY=100;
+	
+	$MenuInfoX=0;
+	$MenuInfoNameY=528;
+	$MenuInfoYEnd=600;
+	$MenuInfoY=520;
+	$MenuInfoTextY=530;
+
+LockVideo(true);
+	CreateSound("me둎럑",SE,"sound/se/SE_긘긚긡��_긽긦깄�[_�\렑.ogg");
+	CreateSound("me뙂믦돶",SE,"sound/se/SE_긘긚긡��_긽긦깄�[_뙂믦.ogg");
+	CreateSound("me뢎뿹",SE,"sound/se/SE_긘긚긡��_긽긦깄�[_뢎뿹.ogg");
+	
+	CreateTexture("meInfo긹�[긚", 20, 0, $MenuInfoYEnd, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("meInfo", 20, 0, $MenuInfoYEnd, "cg/sys/menu/info/MENU.png");
+	SetVertex("meInfo", 0, 0);
+	Zoom("meInfo", 0, 250, 250, null, false);
+	Request("meInfo", Smoothing);
+
+	CreateChoice("me긌긿깛긜깑", 0, 0, 0, 0, 0, 0);
+	SetAlias("me긌긿깛긜깑", "me긌긿깛긜깑");
+	CreateTexture("me긌긿깛긜깑/MouseUsual/hit", 0, 898, 60,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me긌긿깛긜깑/MouseUsual/kr_hitarea", 0, $MenuCancelX, $MenuCancelY, "cg/sys/menu/ko_hit_cancel.png");
+	CreateTexture("me긌긿깛긜깑/MouseUsual/img", 20, $MenuCancelX, $MenuCancelY, "cg/sys/menu/CANCEL-001.png");
+	SetVertex("me긌긿깛긜깑/MouseUsual/img", 0, 0);
+	Zoom("me긌긿깛긜깑/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me긌긿깛긜깑/MouseUsual/img", Smoothing);
+	CreateTexture("me긌긿깛긜깑/MouseOver/img", 20, $MenuCancelX, $MenuCancelY, "cg/sys/menu/CANCEL-002.png");
+	SetVertex("me긌긿깛긜깑/MouseOver/img", 0, 0);
+	Zoom("me긌긿깛긜깑/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긌긿깛긜깑/MouseOver/img", Smoothing);
+	CreateTexture("me긌긿깛긜깑/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/CANCEL.png");
+	SetVertex("me긌긿깛긜깑/MouseOver/img2", 0, 0);
+	Zoom("me긌긿깛긜깑/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긌긿깛긜깑/MouseOver/img2", Smoothing);
+	CreateTexture("me긌긿깛긜깑/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("me긌긿깛긜깑/MouseClick/img", 20, $MenuCancelX, $MenuCancelY, "cg/sys/menu/CANCEL-003.png");
+	SetVertex("me긌긿깛긜깑/MouseClick/img", 0, 0);
+	Zoom("me긌긿깛긜깑/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긌긿깛긜깑/MouseClick/img", Smoothing);
+	CreateTexture("me긌긿깛긜깑/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/CANCEL.png");
+	SetVertex("me긌긿깛긜깑/MouseClick/img2", 0, 0);
+	Zoom("me긌긿깛긜깑/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긌긿깛긜깑/MouseClick/img2", Smoothing);
+	CreateTexture("me긌긿깛긜깑/MouseClick/img3",23,0,$MenuInfoY,"cg/sys/menu/info/INFO_00base.png");
+
+	CreateChoice("me긽긞긜�[긙", 0, 0, 0, 0, 0, 0);
+	SetAlias("me긽긞긜�[긙", "me긽긞긜�[긙");
+	CreateTexture("me긽긞긜�[긙/MouseUsual/hit", 0, 828, 144,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me긽긞긜�[긙/MouseUsual/kr_hitarea", 0, $MenuEraseX, $MenuEraseY, "cg/sys/menu/ko_hit_delete_message.png");
+	CreateTexture("meVIS_긽긞긜�[긙", 20, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-001.png");
+	SetAlias("meVIS_긽긞긜�[긙", "meVIS_긽긞긜�[긙");
+	SetVertex("meVIS_긽긞긜�[긙", 0, 0);
+	Zoom("meVIS_긽긞긜�[긙", 0, 250, 250, null, false);
+	Request("meVIS_긽긞긜�[긙", Smoothing);
+	if(!$SYSTEM_text_erase_lock)
+	{
+		CreateTexture("me긽긞긜�[긙/MouseOver/img", 21, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-002.png");
+		SetVertex("me긽긞긜�[긙/MouseOver/img", 0, 0);
+		Zoom("me긽긞긜�[긙/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긽긞긜�[긙/MouseOver/img", Smoothing);
+		CreateTexture("me긽긞긜�[긙/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/DELETE MESSAGE.png");
+		SetVertex("me긽긞긜�[긙/MouseOver/img2", 0, 0);
+		Zoom("me긽긞긜�[긙/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긽긞긜�[긙/MouseOver/img2", Smoothing);
+		CreateTexture("me긽긞긜�[긙/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("me긽긞긜�[긙/MouseClick/img", 21, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-003.png");
+		SetVertex("me긽긞긜�[긙/MouseClick/img", 0, 0);
+		Zoom("me긽긞긜�[긙/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긽긞긜�[긙/MouseClick/img", Smoothing);
+		CreateTexture("me긽긞긜�[긙/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/DELETE MESSAGE.png");
+		SetVertex("me긽긞긜�[긙/MouseClick/img2", 0, 0);
+		Zoom("me긽긞긜�[긙/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긽긞긜�[긙/MouseClick/img2", Smoothing);
+		CreateTexture("me긽긞긜�[긙/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	}
+	else
+	{
+		CreateTexture("me긽긞긜�[긙/MouseOver/img", 21, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-001.png");
+		SetVertex("me긽긞긜�[긙/MouseOver/img", 0, 0);
+		Zoom("me긽긞긜�[긙/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긽긞긜�[긙/MouseOver/img", Smoothing);
+		CreateTexture("me긽긞긜�[긙/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/DELETE MESSAGE_UnClick.png");
+		SetVertex("me긽긞긜�[긙/MouseOver/img2", 0, 0);
+		Zoom("me긽긞긜�[긙/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긽긞긜�[긙/MouseOver/img2", Smoothing);
+		CreateTexture("me긽긞긜�[긙/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("me긽긞긜�[긙/MouseClick/img", 24, $MenuEraseX, $MenuEraseY, "cg/sys/menu/DELETE MESSAGE-001.png");
+		SetVertex("me긽긞긜�[긙/MouseClick/img", 0, 0);
+		Zoom("me긽긞긜�[긙/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긽긞긜�[긙/MouseClick/img", Smoothing);
+		CreateTexture("me긽긞긜�[긙/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/DELETE MESSAGE_UnClick.png");
+		SetVertex("me긽긞긜�[긙/MouseClick/img2", 0, 0);
+		Zoom("me긽긞긜�[긙/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긽긞긜�[긙/MouseClick/img2", Smoothing);
+		CreateTexture("me긽긞긜�[긙/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		Request("me긽긞긜�[긙/MouseUsual/hit", Erase);
+		Request("me긽긞긜�[긙",UnClickable);
+	}
+	
+	CreateChoice("me렔벍긽긞긜�[긙", 0, 0, 0, 0, 0, 0);
+	SetAlias("me렔벍긽긞긜�[긙", "me렔벍긽긞긜�[긙");
+	CreateTexture("me렔벍긽긞긜�[긙/MouseUsual/hit", 0, 940, 126,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me렔벍긽긞긜�[긙/MouseUsual/kr_hitarea", 0, $MenuSendX, $MenuSendY, "cg/sys/menu/ko_hit_auto.png");
+	CreateTexture("me렔벍긽긞긜�[긙/MouseUsual/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-001.png");
+	SetVertex("me렔벍긽긞긜�[긙/MouseUsual/img", 0, 0);
+	Zoom("me렔벍긽긞긜�[긙/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseUsual/img", Smoothing);
+	if(!$SYSTEM_text_auto_lock)
+	{
+		CreateTexture("me렔벍긽긞긜�[긙/MouseOver/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-002.png");
+		SetVertex("me렔벍긽긞긜�[긙/MouseOver/img", 0, 0);
+		Zoom("me렔벍긽긞긜�[긙/MouseOver/img", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseOver/img", Smoothing);
+		CreateTexture("me렔벍긽긞긜�[긙/MouseClick/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-003.png");
+		SetVertex("me렔벍긽긞긜�[긙/MouseClick/img", 0, 0);
+		Zoom("me렔벍긽긞긜�[긙/MouseClick/img", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseClick/img", Smoothing);
+		CreateTexture("me렔벍긽긞긜�[긙/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/AUTO.png");
+		SetVertex("me렔벍긽긞긜�[긙/MouseOver/img2", 0, 0);
+		Zoom("me렔벍긽긞긜�[긙/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseOver/img2", Smoothing);
+		CreateTexture("me렔벍긽긞긜�[긙/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/AUTO.png");
+		SetVertex("me렔벍긽긞긜�[긙/MouseClick/img2", 0, 0);
+		Zoom("me렔벍긽긞긜�[긙/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseClick/img2", Smoothing);
+		CreateTexture("me렔벍긽긞긜�[긙/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("me렔벍긽긞긜�[긙/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	}
+	else
+	{
+		CreateTexture("me렔벍긽긞긜�[긙/MouseOver/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-001.png");
+		SetVertex("me렔벍긽긞긜�[긙/MouseOver/img", 0, 0);
+		Zoom("me렔벍긽긞긜�[긙/MouseOver/img", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseOver/img", Smoothing);
+		CreateTexture("me렔벍긽긞긜�[긙/MouseClick/img", 20, $MenuSendX, $MenuSendY, "cg/sys/menu/AUTO-001.png");
+		SetVertex("me렔벍긽긞긜�[긙/MouseClick/img", 0, 0);
+		Zoom("me렔벍긽긞긜�[긙/MouseClick/img", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseClick/img", Smoothing);
+		CreateTexture("me렔벍긽긞긜�[긙/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/AUTO_UnClick.png");
+		SetVertex("me렔벍긽긞긜�[긙/MouseOver/img2", 0, 0);
+		Zoom("me렔벍긽긞긜�[긙/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseOver/img2", Smoothing);
+		CreateTexture("me렔벍긽긞긜�[긙/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/AUTO_UnClick.png");
+		SetVertex("me렔벍긽긞긜�[긙/MouseClick/img2", 0, 0);
+		Zoom("me렔벍긽긞긜�[긙/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me렔벍긽긞긜�[긙/MouseClick/img2", Smoothing);
+		CreateTexture("me렔벍긽긞긜�[긙/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("me렔벍긽긞긜�[긙/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		Request("me렔벍긽긞긜�[긙/MouseUsual/hit", Erase);
+		Request("me렔벍긽긞긜�[긙",UnClickable);
+	}
+
+	CreateChoice("me긚긌긞긵", 0, 0, 0, 0, 0, 0);
+	SetAlias("me긚긌긞긵", "me긚긌긞긵");
+	CreateTexture("me긚긌긞긵/MouseUsual/hit", 0, 962, 159,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me긚긌긞긵/MouseUsual/kr_hitarea", 0, $MenuSkipX, $MenuSkipY, "cg/sys/menu/ko_hit_skip.png");
+	CreateTexture("me긚긌긞긵/MouseUsual/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-001.png");
+	SetVertex("me긚긌긞긵/MouseUsual/img", 0, 0);
+	Zoom("me긚긌긞긵/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseUsual/img", Smoothing);
+	if(!$SYSTEM_skip_lock)
+	{
+		CreateTexture("me긚긌긞긵/MouseOver/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-002.png");
+		SetVertex("me긚긌긞긵/MouseOver/img", 0, 0);
+		Zoom("me긚긌긞긵/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseOver/img", Smoothing);
+		CreateTexture("me긚긌긞긵/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SKIP.png");
+		SetVertex("me긚긌긞긵/MouseOver/img2", 0, 0);
+		Zoom("me긚긌긞긵/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseOver/img2", Smoothing);
+		CreateTexture("me긚긌긞긵/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("me긚긌긞긵/MouseClick/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-003.png");
+		SetVertex("me긚긌긞긵/MouseClick/img", 0, 0);
+		Zoom("me긚긌긞긵/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseClick/img", Smoothing);
+		CreateTexture("me긚긌긞긵/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SKIP.png");
+		SetVertex("me긚긌긞긵/MouseClick/img2", 0, 0);
+		Zoom("me긚긌긞긵/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseClick/img2", Smoothing);
+		CreateTexture("me긚긌긞긵/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	}
+	else
+	{
+		CreateTexture("me긚긌긞긵/MouseOver/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-001.png");
+		SetVertex("me긚긌긞긵/MouseOver/img", 0, 0);
+		Zoom("me긚긌긞긵/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseOver/img", Smoothing);
+		CreateTexture("me긚긌긞긵/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SKIP_UnClick.png");
+		SetVertex("me긚긌긞긵/MouseOver/img2", 0, 0);
+		Zoom("me긚긌긞긵/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseOver/img2", Smoothing);
+		CreateTexture("me긚긌긞긵/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		CreateTexture("me긚긌긞긵/MouseClick/img", 20, $MenuSkipX, $MenuSkipY, "cg/sys/menu/SKIP-001.png");
+		SetVertex("me긚긌긞긵/MouseClick/img", 0, 0);
+		Zoom("me긚긌긞긵/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseClick/img", Smoothing);
+		CreateTexture("me긚긌긞긵/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SKIP_UnClick.png");
+		SetVertex("me긚긌긞긵/MouseClick/img2", 0, 0);
+		Zoom("me긚긌긞긵/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긚긌긞긵/MouseClick/img2", Smoothing);
+		CreateTexture("me긚긌긞긵/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+		Request("me긚긌긞긵/MouseUsual/hit", Erase);
+		Request("me긚긌긞긵",UnClickable);
+	}
+
+	CreateChoice("me긫긞긏깓긐", 0, 0, 0, 0, 0, 0);
+	SetAlias("me긫긞긏깓긐", "me긫긞긏깓긐");
+	CreateTexture("me긫긞긏깓긐/MouseUsual/hit", 0, 926, 210,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me긫긞긏깓긐/MouseUsual/kr_hitarea", 0, $MenuLogX, $MenuLogY, "cg/sys/menu/ko_hit_back_log.png");
+	CreateTexture("me긫긞긏깓긐/MouseUsual/img", 20, $MenuLogX, $MenuLogY, "cg/sys/menu/BACK LOG-001.png");
+	SetVertex("me긫긞긏깓긐/MouseUsual/img", 0, 0);
+	Zoom("me긫긞긏깓긐/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me긫긞긏깓긐/MouseUsual/img", Smoothing);
+	CreateTexture("me긫긞긏깓긐/MouseOver/img", 20, $MenuLogX, $MenuLogY, "cg/sys/menu/BACK LOG-002.png");
+	SetVertex("me긫긞긏깓긐/MouseOver/img", 0, 0);
+	Zoom("me긫긞긏깓긐/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긫긞긏깓긐/MouseOver/img", Smoothing);
+	CreateTexture("me긫긞긏깓긐/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/BACK LOG.png");
+	SetVertex("me긫긞긏깓긐/MouseOver/img2", 0, 0);
+	Zoom("me긫긞긏깓긐/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긫긞긏깓긐/MouseOver/img2", Smoothing);
+	CreateTexture("me긫긞긏깓긐/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("me긫긞긏깓긐/MouseClick/img", 20, $MenuLogX, $MenuLogY, "cg/sys/menu/BACK LOG-003.png");
+	SetVertex("me긫긞긏깓긐/MouseClick/img", 0, 0);
+	Zoom("me긫긞긏깓긐/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긫긞긏깓긐/MouseClick/img", Smoothing);
+	CreateTexture("me긫긞긏깓긐/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/BACK LOG.png");
+	SetVertex("me긫긞긏깓긐/MouseClick/img2", 0, 0);
+	Zoom("me긫긞긏깓긐/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긫긞긏깓긐/MouseClick/img2", Smoothing);
+	CreateTexture("me긫긞긏깓긐/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+
+	CreateChoice("me긜�[긳", 0, 0, 0, 0, 0, 0);
+	SetAlias("me긜�[긳", "me긜�[긳");
+	CreateTexture("me긜�[긳/MouseUsual/hit", 0, 972, 240,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me긜�[긳/MouseUsual/kr_hitarea", 0, $MenuSaveX, $MenuSaveY, "cg/sys/menu/ko_hit_save.png");
+	CreateTexture("me긜�[긳/MouseUsual/img", 20, $MenuSaveX, $MenuSaveY, "cg/sys/menu/SAVE-001.png");
+	SetVertex("me긜�[긳/MouseUsual/img", 0, 0);
+	Zoom("me긜�[긳/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me긜�[긳/MouseUsual/img", Smoothing);
+	CreateTexture("me긜�[긳/MouseOver/img", 20, $MenuSaveX, $MenuSaveY, "cg/sys/menu/SAVE-002.png");
+	SetVertex("me긜�[긳/MouseOver/img", 0, 0);
+	Zoom("me긜�[긳/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긜�[긳/MouseOver/img", Smoothing);
+	CreateTexture("me긜�[긳/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SAVE.png");
+	SetVertex("me긜�[긳/MouseOver/img2", 0, 0);
+	Zoom("me긜�[긳/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긜�[긳/MouseOver/img2", Smoothing);
+	CreateTexture("me긜�[긳/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("me긜�[긳/MouseClick/img", 20, $MenuSaveX, $MenuSaveY, "cg/sys/menu/SAVE-003.png");
+	SetVertex("me긜�[긳/MouseClick/img", 0, 0);
+	Zoom("me긜�[긳/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긜�[긳/MouseClick/img", Smoothing);
+	CreateTexture("me긜�[긳/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/SAVE.png");
+	SetVertex("me긜�[긳/MouseClick/img2", 0, 0);
+	Zoom("me긜�[긳/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긜�[긳/MouseClick/img2", Smoothing);
+	CreateTexture("me긜�[긳/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+
+	CreateChoice("me깓�[긤", 0, 0, 0, 0, 0, 0);
+	SetAlias("me깓�[긤", "me깓�[긤");
+	CreateTexture("me깓�[긤/MouseUsual/hit", 0, 963, 277,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me깓�[긤/MouseUsual/kr_hitarea", 0, $MenuLoadX, $MenuLoadY, "cg/sys/menu/ko_hit_load.png");
+	CreateTexture("me깓�[긤/MouseUsual/img", 20, $MenuLoadX, $MenuLoadY, "cg/sys/menu/LOAD-001.png");
+	SetVertex("me깓�[긤/MouseUsual/img", 0, 0);
+	Zoom("me깓�[긤/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me깓�[긤/MouseUsual/img", Smoothing);
+	CreateTexture("me깓�[긤/MouseOver/img", 20, $MenuLoadX, $MenuLoadY, "cg/sys/menu/LOAD-002.png");
+	SetVertex("me깓�[긤/MouseOver/img", 0, 0);
+	Zoom("me깓�[긤/MouseOver/img", 0, 250, 250, null, false);
+	Request("me깓�[긤/MouseOver/img", Smoothing);
+	CreateTexture("me깓�[긤/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/LOAD.png");
+	SetVertex("me깓�[긤/MouseOver/img2", 0, 0);
+	Zoom("me깓�[긤/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me깓�[긤/MouseOver/img2", Smoothing);
+	CreateTexture("me깓�[긤/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("me깓�[긤/MouseClick/img", 20, $MenuLoadX, $MenuLoadY, "cg/sys/menu/LOAD-003.png");
+	SetVertex("me깓�[긤/MouseClick/img", 0, 0);
+	Zoom("me깓�[긤/MouseClick/img", 0, 250, 250, null, false);
+	Request("me깓�[긤/MouseClick/img", Smoothing);
+	CreateTexture("me깓�[긤/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/LOAD.png");
+	SetVertex("me깓�[긤/MouseClick/img2", 0, 0);
+	Zoom("me깓�[긤/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me깓�[긤/MouseClick/img2", Smoothing);
+	CreateTexture("me깓�[긤/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+
+	CreateChoice("me긓깛긲귻긐", 0, 0, 0, 0, 0, 0);
+	SetAlias("me긓깛긲귻긐", "me긓깛긲귻긐");
+	CreateTexture("me긓깛긲귻긐/MouseUsual/hit", 0, 949, 310,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me긓깛긲귻긐/MouseUsual/kr_hitarea", 0, $MenuConfigX, $MenuConfigY, "cg/sys/menu/ko_hit_config.png");
+	CreateTexture("me긓깛긲귻긐/MouseUsual/img", 20, $MenuConfigX, $MenuConfigY, "cg/sys/menu/CONFIG-001.png");
+	SetVertex("me긓깛긲귻긐/MouseUsual/img", 0, 0);
+	Zoom("me긓깛긲귻긐/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me긓깛긲귻긐/MouseUsual/img", Smoothing);
+	CreateTexture("me긓깛긲귻긐/MouseOver/img", 20, $MenuConfigX, $MenuConfigY, "cg/sys/menu/CONFIG-002.png");
+	SetVertex("me긓깛긲귻긐/MouseOver/img", 0, 0);
+	Zoom("me긓깛긲귻긐/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긓깛긲귻긐/MouseOver/img", Smoothing);
+	CreateTexture("me긓깛긲귻긐/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/CONFIG.png");
+	SetVertex("me긓깛긲귻긐/MouseOver/img2", 0, 0);
+	Zoom("me긓깛긲귻긐/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긓깛긲귻긐/MouseOver/img2", Smoothing);
+	CreateTexture("me긓깛긲귻긐/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("me긓깛긲귻긐/MouseClick/img", 20, $MenuConfigX, $MenuConfigY, "cg/sys/menu/CONFIG-003.png");
+	SetVertex("me긓깛긲귻긐/MouseClick/img", 0, 0);
+	Zoom("me긓깛긲귻긐/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긓깛긲귻긐/MouseClick/img", Smoothing);
+	CreateTexture("me긓깛긲귻긐/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/CONFIG.png");
+	SetVertex("me긓깛긲귻긐/MouseClick/img2", 0, 0);
+	Zoom("me긓깛긲귻긐/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긓깛긲귻긐/MouseClick/img2", Smoothing);
+	CreateTexture("me긓깛긲귻긐/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+//	Request("me긓깛긲귻긐/MouseUsual/hit", Erase);
+//	Request("me긓깛긲귻긐",UnClickable);
+//	Delete("me긓깛긲귻긐/MouseClick");
+
+	CreateChoice("me�^귽긣깑", 0, 0, 0, 0, 0, 0);
+	SetAlias("me�^귽긣깑", "me�^귽긣깑");
+	CreateTexture("me�^귽긣깑/MouseUsual/hit", 0, 908, 339,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me�^귽긣깑/MouseUsual/kr_hitarea", 0, $MenuTitleX, $MenuTitleY, "cg/sys/menu/ko_hit_back_to_title.png");
+	CreateTexture("me�^귽긣깑/MouseUsual/img", 20, $MenuTitleX, $MenuTitleY, "cg/sys/menu/BACK TO TITLE-001.png");
+	SetVertex("me�^귽긣깑/MouseUsual/img", 0, 0);
+	Zoom("me�^귽긣깑/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me�^귽긣깑/MouseUsual/img", Smoothing);
+	CreateTexture("me�^귽긣깑/MouseOver/img", 20, $MenuTitleX, $MenuTitleY, "cg/sys/menu/BACK TO TITLE-002.png");
+	SetVertex("me�^귽긣깑/MouseOver/img", 0, 0);
+	Zoom("me�^귽긣깑/MouseOver/img", 0, 250, 250, null, false);
+	Request("me�^귽긣깑/MouseOver/img", Smoothing);
+	CreateTexture("me�^귽긣깑/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/BACK TO TITLE.png");
+	SetVertex("me�^귽긣깑/MouseOver/img2", 0, 0);
+	Zoom("me�^귽긣깑/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me�^귽긣깑/MouseOver/img2", Smoothing);
+	CreateTexture("me�^귽긣깑/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("me�^귽긣깑/MouseClick/img", 20, $MenuTitleX, $MenuTitleY, "cg/sys/menu/BACK TO TITLE-003.png");
+	SetVertex("me�^귽긣깑/MouseClick/img", 0, 0);
+	Zoom("me�^귽긣깑/MouseClick/img", 0, 250, 250, null, false);
+	Request("me�^귽긣깑/MouseClick/img", Smoothing);
+	CreateTexture("me�^귽긣깑/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/BACK TO TITLE.png");
+	SetVertex("me�^귽긣깑/MouseClick/img2", 0, 0);
+	Zoom("me�^귽긣깑/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me�^귽긣깑/MouseClick/img2", Smoothing);
+	CreateTexture("me�^귽긣깑/MouseClick/img3",23,0,$MenuInfoY,"cg/sys/menu/info/INFO_00base.png");
+//	Request("me�^귽긣깑/MouseUsual/hit", Erase);
+//	Request("me�^귽긣깑",UnClickable);
+//	Delete("me�^귽긣깑/MouseClick");
+
+	CreateChoice("me긒�[��뢎뿹", 0, 0, 0, 0, 0, 0);
+	SetAlias("me긒�[��뢎뿹", "me긒�[��뢎뿹");
+	CreateTexture("me긒�[��뢎뿹/MouseUsual/hit",0, 947, 373,"cg/sys/menu/Hit_Focus.png");
+	CreateTexture("me긒�[��뢎뿹/MouseUsual/kr_hitarea", 0, $MenuExitX, $MenuExitY, "cg/sys/menu/ko_hit_game_exit.png");
+	CreateTexture("me긒�[��뢎뿹/MouseUsual/img", 20, $MenuExitX, $MenuExitY, "cg/sys/menu/GAME EXIT-001.png");
+	SetVertex("me긒�[��뢎뿹/MouseUsual/img", 0, 0);
+	Zoom("me긒�[��뢎뿹/MouseUsual/img", 0, 250, 250, null, false);
+	Request("me긒�[��뢎뿹/MouseUsual/img", Smoothing);
+	CreateTexture("me긒�[��뢎뿹/MouseOver/img", 20, $MenuExitX, $MenuExitY, "cg/sys/menu/GAME EXIT-002.png");
+	SetVertex("me긒�[��뢎뿹/MouseOver/img", 0, 0);
+	Zoom("me긒�[��뢎뿹/MouseOver/img", 0, 250, 250, null, false);
+	Request("me긒�[��뢎뿹/MouseOver/img", Smoothing);
+	CreateTexture("me긒�[��뢎뿹/MouseOver/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/GAME EXIT.png");
+	SetVertex("me긒�[��뢎뿹/MouseOver/img2", 0, 0);
+	Zoom("me긒�[��뢎뿹/MouseOver/img2", 0, 250, 250, null, false);
+	Request("me긒�[��뢎뿹/MouseOver/img2", Smoothing);
+	CreateTexture("me긒�[��뢎뿹/MouseOver/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+	CreateTexture("me긒�[��뢎뿹/MouseClick/img", 20, $MenuExitX, $MenuExitY, "cg/sys/menu/GAME EXIT-003.png");
+	SetVertex("me긒�[��뢎뿹/MouseClick/img", 0, 0);
+	Zoom("me긒�[��뢎뿹/MouseClick/img", 0, 250, 250, null, false);
+	Request("me긒�[��뢎뿹/MouseClick/img", Smoothing);
+	CreateTexture("me긒�[��뢎뿹/MouseClick/img2", 24, $MenuInfoX, $MenuInfoNameY, "cg/sys/menu/info/GAME EXIT.png");
+	SetVertex("me긒�[��뢎뿹/MouseClick/img2", 0, 0);
+	Zoom("me긒�[��뢎뿹/MouseClick/img2", 0, 250, 250, null, false);
+	Request("me긒�[��뢎뿹/MouseClick/img2", Smoothing);
+	CreateTexture("me긒�[��뢎뿹/MouseClick/img3", 23, 0, $MenuInfoY, "cg/sys/menu/info/INFO_00base.png");
+
+	Fade("me*/*/hit", 0, 0, null, false);
+
+	//겈긲긅�[긇긚
+	SetNextFocus("me긌긿깛긜깑/MouseUsual/hit", "me긒�[��뢎뿹/MouseUsual/hit",UP);
+	SetNextFocus("me긒�[��뢎뿹/MouseUsual/hit","me�^귽긣깑/MouseUsual/hit", UP);
+	SetNextFocus("me�^귽긣깑/MouseUsual/hit", "me긓깛긲귻긐/MouseUsual/hit", UP);
+	SetNextFocus("me긓깛긲귻긐/MouseUsual/hit", "me깓�[긤/MouseUsual/hit", UP);
+	SetNextFocus("me깓�[긤/MouseUsual/hit", "me긜�[긳/MouseUsual/hit", UP);
+	SetNextFocus("me긜�[긳/MouseUsual/hit", "me긫긞긏깓긐/MouseUsual/hit", UP);
+	SetNextFocus("me긫긞긏깓긐/MouseUsual/hit", "me긚긌긞긵/MouseUsual/hit", UP);
+	SetNextFocus("me긚긌긞긵/MouseUsual/hit", "me렔벍긽긞긜�[긙/MouseUsual/hit", UP);
+	SetNextFocus("me렔벍긽긞긜�[긙/MouseUsual/hit", "me긽긞긜�[긙/MouseUsual/hit", UP);
+	SetNextFocus("me긽긞긜�[긙/MouseUsual/hit", "me긌긿깛긜깑/MouseUsual/hit", UP);
+
+	SetNextFocus("me긌긿깛긜깑/MouseUsual/hit", "me긽긞긜�[긙/MouseUsual/hit", DOWN);
+	SetNextFocus("me긽긞긜�[긙/MouseUsual/hit", "me렔벍긽긞긜�[긙/MouseUsual/hit", DOWN);
+	SetNextFocus("me렔벍긽긞긜�[긙/MouseUsual/hit", "me긚긌긞긵/MouseUsual/hit", DOWN);
+	SetNextFocus("me긚긌긞긵/MouseUsual/hit", "me긫긞긏깓긐/MouseUsual/hit", DOWN);
+	SetNextFocus("me긫긞긏깓긐/MouseUsual/hit", "me긜�[긳/MouseUsual/hit", DOWN);
+	SetNextFocus("me긜�[긳/MouseUsual/hit", "me깓�[긤/MouseUsual/hit", DOWN);
+	SetNextFocus("me깓�[긤/MouseUsual/hit", "me긓깛긲귻긐/MouseUsual/hit", DOWN);
+	SetNextFocus("me긓깛긲귻긐/MouseUsual/hit", "me�^귽긣깑/MouseUsual/hit", DOWN);
+	SetNextFocus("me�^귽긣깑/MouseUsual/hit", "me긒�[��뢎뿹/MouseUsual/hit",DOWN);
+	SetNextFocus("me긒�[��뢎뿹/MouseUsual/hit","me긌긿깛긜깑/MouseUsual/hit", DOWN);
+
+	//걶��뷈
+
+	Fade("me*/MouseOver/img", 0, 0, null, false);
+	Fade("me*/MouseOver/img2", 0, 0, null, false);
+	Fade("me*/MouseOver/img3", 0, 0, null, false);
+	Fade("me*/MouseOver/text", 0, 0, null, false);
+	Fade("me*/MouseClick/img", 0, 0, null, false);
+	Fade("me*/MouseClick/img2", 0, 0, null, false);
+	Fade("me*/MouseClick/img3", 0, 0, null, false);
+LockVideo(false);
+
+	//걶벍띿
+	Request("me둎럑",Play);
+	$menufade=0;
+	$menuwait=10;
+	Fade("me봶똧", 100, 500, null, false);
+/*
+	Fade("me긌긿깛긜깑/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me긓깛긲귻긐/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me긜�[긳/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me깓�[긤/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me긫긞긏깓긐/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me긚긌긞긵/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me렔벍긽긞긜�[긙/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("meVIS_긽긞긜�[긙", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me�^귽긣깑/MouseUsual/img", $menufade, 1000, null, false);
+	Wait($menuwait);
+	Fade("me긒�[��뢎뿹/MouseUsual/img", $menufade, 1000, null, true);
+*/
+	Fade("*/MouseUsual/img", $menufade, 1000, null, false);
+
+	Move("me*/*/img", 300, 720, 0, Dxl1, false); Move("meVIS_긽긞긜�[긙", 300, 720, 0, Dxl1, false); Move("me*/*/kr_hitarea", 300, 720, 0, Dxl1, false);
+//	Move("me*/*/img3", 300, 720, 0, Dxl1, false);
+//	Wait(100);
+	Move("meInfo", 300, 0, $MenuInfoNameY, Dxl1, false);
+	Move("meInfo긹�[긚", 300, 0, $MenuInfoY, Dxl1, false);
+
+	$SYSTEM_menu_enable=true;
+	$SYSTEM_keydown_m=false;
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_r_button_down=false;
+	$MenuSelect="뼰궢";
+	while($SYSTEM_menu_enable){
+		$MenuSelect="뼰궢";
+		select{
+			case me긌긿깛긜깑{
+				$MenuSelect="긌긿깛긜깑";
+				break;
+			}
+			case me긜�[긳{
+				if(!$SYSTEM_save_lock){
+					$MenuSelect="긜�[긳";
+				}
+				break;
+			}
+			case me깓�[긤{
+				if(!$SYSTEM_load_lock){
+					$MenuSelect="깓�[긤";
+				}
+				break;
+			}
+			case me긚긌긞긵{
+				if(!$SYSTEM_skip_lock){
+					$MenuSelect="긚긌긞긵";
+				}
+				break;
+			}
+			case me렔벍긽긞긜�[긙{
+				if(!$SYSTEM_text_auto_lock){
+					$MenuSelect="렔벍긽긞긜�[긙";
+				}
+				break;
+			}
+			case me긽긞긜�[긙{
+				if(!$SYSTEM_text_erase_lock)
+				{
+					$MenuSelect="긽긞긜�[긙";
+				}
+				break;
+			}
+			case me긫긞긏깓긐{
+				if(!$SYSTEM_backlog_lock_a)
+				{
+					$MenuSelect="긫긞긏깓긐";
+				}
+				break;
+			}
+			case me긓깛긲귻긐{
+				$MenuSelect="긓깛긲귻긐";
+				break;
+			}
+			case me�^귽긣깑{
+				if(!$SYSTEM_title_lock){
+					$MenuSelect="�^귽긣깑";
+				}
+				break;
+			}
+			case me긒�[��뢎뿹{
+				$MenuSelect="긒�[��뢎뿹";
+				break;
+			}
+			
+
+			//걶긘깈�[긣긇긞긣긌�[뫮돒
+//			if($SYSTEM_keydown_h)
+//			{
+//				if(!$LOCAL_extra_lock){
+//					call_chapter nss/sys_hmode.nss;
+//					$SYSTEM_menu_enable=true;
+//				}
+//			}
+
+			if( $MenuSelect == "뼰궢")
+			{
+				if($SYSTEM_keydown_space)
+				{
+					if(!$SYSTEM_text_erase_lock)
+					{
+						$MenuSelect="긽긞긜�[긙";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_a)
+				{
+					if(!$SYSTEM_text_auto_lock)
+					{
+						$MenuSelect="렔벍긽긞긜�[긙";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_ctrl)
+				{
+					if(!$SYSTEM_skip_lock)
+					{
+						$MenuSelect="긚긌긞긵";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_b)
+				{
+					if(!$SYSTEM_backlog_lock_a)
+					{
+						$MenuSelect="긫긞긏깓긐";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_s)
+				{
+					if(!$SYSTEM_save_lock)
+					{
+						$MenuSelect="긜�[긳";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_l)
+				{
+					if(!$SYSTEM_load_lock)
+					{
+						$MenuSelect="깓�[긤";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_f)
+				{
+					if(!#SYSTEM_window_full_lock)
+					{
+						$MenuSelect="긲깑긚긏깏�[깛";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_c)
+				{
+					$MenuSelect="긓깛긲귻긐";
+					break;
+				}
+				else if($SYSTEM_keydown_t)
+				{
+					if(!$SYSTEM_title_lock)
+					{
+						$MenuSelect="�^귽긣깑";
+					}
+					break;
+				}
+				else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close)
+				{
+					$MenuSelect="긒�[��뢎뿹";
+					break;
+				}
+				else if($SYSTEM_keydown_m)
+				{
+					$MenuSelect="긌긿깛긜깑";
+					break;
+				}
+				if($SYSTEM_r_button_down)
+				{
+					Request("me뢎뿹",Play);
+					$MenuSelect="뼰궢";
+					$SYSTEM_menu_enable=false;
+					break;
+				}
+			}
+		}
+
+		if($MenuSelect!="뼰궢");
+		{
+			Request("me*/MouseClick/img2", Erase);
+			Request("me*/MouseOver/img2", Erase);
+			$TempNut="me"+$MenuSelect+"/MouseClick/*";
+			Request($TempNut, Enter);
+			Fade($TempNut, 0, 1000, null, true);
+//			break;
+		}
+
+		if($MenuSelect=="긽긞긜�[긙")
+		{
+			Request("me뙂믦돶",Play);
+			$SYSTEM_text_erase=!$SYSTEM_text_erase;
+			$SYSTEM_menu_enable=false;
+		}
+		else if($MenuSelect=="렔벍긽긞긜�[긙")
+		{
+			Request("me뙂믦돶",Play);
+			if($SYSTEM_text_erase){
+				$SYSTEM_text_erase=false;
+			}
+			$SYSTEM_text_auto=!$SYSTEM_text_auto;
+//			$SYSTEM_text_erase=false;
+//			$SYSTEM_text_auto=!$SYSTEM_text_auto;
+			$SYSTEM_menu_enable=false;
+		}
+		else if($MenuSelect=="긚긌긞긵")
+		{
+			Request("me뙂믦돶",Play);
+			$SYSTEM_skip=true;
+			$SYSTEM_menu_enable=false;
+		}
+		else if($MenuSelect=="긫긞긏깓긐")
+		{
+			Request("me뙂믦돶",Play);
+			call_chapter nss/sys_backlog.nss;
+			$SYSTEM_menu_enable=true;
+			Wait(100);
+		}
+		else if($MenuSelect=="긜�[긳")
+		{
+			Request("me뙂믦돶",Play);
+			call_chapter nss/sys_save.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="깓�[긤")
+		{
+			Request("me뙂믦돶",Play);
+			call_chapter nss/sys_load.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="긲깑긚긏깏�[깛")
+		{
+			Request("me뙂믦돶",Play);
+			#SYSTEM_window_full=!#SYSTEM_window_full;
+			$SYSTEM_menu_enable=false;
+			$SYSTEM_keydown_f=false;
+		}
+		else if($MenuSelect=="긓깛긲귻긐")
+		{
+			Request("me뙂믦돶",Play);
+			call_chapter nss/sys_config.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="�^귽긣깑")
+		{
+			Request("me뙂믦돶",Play);
+			call_chapter nss/sys_reset.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="긒�[��뢎뿹")
+		{
+			Request("me뙂믦돶",Play);
+			call_chapter nss/sys_close.nss;
+			$SYSTEM_menu_enable=true;
+		}
+		else if($MenuSelect=="긌긿깛긜깑")
+		{
+			Request("me뢎뿹",Play);
+			$SYSTEM_menu_enable=false;
+		}
+
+		if($SYSTEM_menu_enable)
+		{
+			Request("me*/MouseOver/img2", Enter);
+			Request("me*/MouseClick/img2", Enter);
+			Fade("me*/MouseClick/*", 150, 0, null, false);
+		}
+	}
+	$menufade=0;
+	$menuwait=10;
+	Move("me긌긿깛긜깑/*/img", 300, $MenuCancelX, $MenuCancelY, Dxl1, false); Move("me긌긿깛긜깑/*/kr_hitarea", 300, $MenuCancelX, $MenuCancelY, Dxl1, false);
+	Move("me긽긞긜�[긙/*/img", 300, $MenuEraseX, $MenuEraseY, Dxl1, false); Move("meVIS_긽긞긜�[긙", 300, $MenuEraseX, $MenuEraseY, Dxl1, false); Move("me긽긞긜�[긙/*/kr_hitarea", 300, $MenuEraseX, $MenuEraseY, Dxl1, false);
+	Move("me렔벍긽긞긜�[긙/*/img", 300, $MenuSendX, $MenuSendY, Dxl1, false); Move("me렔벍긽긞긜�[긙/*/kr_hitarea", 300, $MenuSendX, $MenuSendY, Dxl1, false);
+	Move("me긚긌긞긵/*/img", 300, $MenuSkipX, $MenuSkipY, Dxl1, false); Move("me긚긌긞긵/*/kr_hitarea", 300, $MenuSkipX, $MenuSkipY, Dxl1, false);
+	Move("me긫긞긏깓긐/*/img", 300, $MenuLogX, $MenuLogY, Dxl1, false); Move("me긫긞긏깓긐/*/kr_hitarea", 300, $MenuLogX, $MenuLogY, Dxl1, false);
+	Move("me긜�[긳/*/img", 300, $MenuSaveX, $MenuSaveY, Dxl1, false); Move("me긜�[긳/*/kr_hitarea", 300, $MenuSaveX, $MenuSaveY, Dxl1, false);
+	Move("me깓�[긤/*/img", 300, $MenuLoadX, $MenuLoadY, Dxl1, false); Move("me깓�[긤/*/kr_hitarea", 300, $MenuLoadX, $MenuLoadY, Dxl1, false);
+	Move("me긓깛긲귻긐/*/img", 300, $MenuConfigX, $MenuConfigY, Dxl1, false); Move("me긓깛긲귻긐/*/kr_hitarea", 300, $MenuConfigX, $MenuConfigY, Dxl1, false);
+	Move("me�^귽긣깑/*/img", 300, $MenuTitleX, $MenuTitleY, Dxl1, false); Move("me�^귽긣깑/*/kr_hitarea", 300, $MenuTitleX, $MenuTitleY, Dxl1, false);
+	Move("me긒�[��뢎뿹/*/img", 300, $MenuExitX, $MenuExitY, Dxl1, false); Move("me긒�[��뢎뿹/*/kr_hitarea", 300, $MenuExitX, $MenuExitY, Dxl1, false);
+	Move("meInfo", 300, 0, $MenuInfoYEnd, Dxl1, false);
+	Move("meInfo긹�[긚", 300, 0, $MenuInfoYEnd, Dxl1, false);
+	Move("me*/*/img3", 300, 0, $MenuInfoYEnd, Dxl1, false);
+	Fade("me*/MouseOver/img2", 0, 0, null, false);
+	Fade("me*/MouseClick/img2", 0, 0, null, false);
+	Fade("me봶똧", 300, 0, null, false);
+
+	WaitAction("me봶똧", null);
+	WaitPlay("me뙂믦돶");
+	WaitPlay("me뢎뿹");
+
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+
+	$SYSTEM_menu_enable=false;
+}
+
+//function MenuFocus(){
+//	Array($Menu,"긌긿깛긜깑","긓깛긲귻긐","긜�[긳","깓�[긤","긫긞긏깓긐","긚긌긞긵","렔벍긽긞긜�[긙","긽긞긜�[긙","�^귽긣깑","긒�[��뢎뿹");
+//	AssocArray($Menu,"긌긿깛긜깑","긓깛긲귻긐","긜�[긳","깓�[긤","긫긞긏깓긐","긚긌긞긵","렔벍긽긞긜�[긙","긽긞긜�[긙","�^귽긣깑","긒�[��뢎뿹");
+//	$MenuCount=Count($Menu);
+//
+//	$MenuWhile=0;
+//	while($MenuCount>$MenuWhile){
+//		$Menu[$MenuWhile][0]=true;
+//		$MenuWhile++;
+//	}
+//
+//	$MenuWhile=0;
+//	while($MenuCount>$MenuWhile){
+//		if($Menu[$MenuWhile][0]){
+//			MenuDocusGo();
+//		}
+//		$MenuWhile++;
+//	}
+//}
+
+function MenuFocus(){
+
+	SetNextFocus("me긌긿깛긜깑/MouseUsual/img","me긒�[��뢎뿹/MouseUsual/img",UP);
+	SetNextFocus("me긽긞긜�[긙/MouseUsual/hit","me긌긿깛긜깑/MouseUsual/img",UP);
+	SetNextFocus("me렔벍긽긞긜�[긙/MouseUsual/img","me긽긞긜�[긙/MouseUsual/hit",UP);
+	SetNextFocus("me긚긌긞긵/MouseUsual/img","me렔벍긽긞긜�[긙/MouseUsual/img",UP);
+	SetNextFocus("me긫긞긏깓긐/MouseUsual/img","me긚긌긞긵/MouseUsual/img",UP);
+	SetNextFocus("me긜�[긳/MouseUsual/img","me긫긞긏깓긐/MouseUsual/img",UP);
+	SetNextFocus("me깓�[긤/MouseUsual/img","me긜�[긳/MouseUsual/img",UP);
+	SetNextFocus("me긓깛긲귻긐/MouseUsual/img","me깓�[긤/MouseUsual/img",UP);
+	SetNextFocus("me�^귽긣깑/MouseUsual/img","me긓깛긲귻긐/MouseUsual/img",UP);
+	SetNextFocus("me긒�[��뢎뿹/MouseUsual/img","me�^귽긣깑/MouseUsual/img",UP);
+
+	SetNextFocus("me긌긿깛긜깑/MouseUsual/img","me긽긞긜�[긙/MouseUsual/hit",DOWN);
+	SetNextFocus("me긽긞긜�[긙/MouseUsual/hit","me렔벍긽긞긜�[긙/MouseUsual/img",DOWN);
+	SetNextFocus("me렔벍긽긞긜�[긙/MouseUsual/img","me긚긌긞긵/MouseUsual/img",DOWN);
+	SetNextFocus("me긚긌긞긵/MouseUsual/img","me긜�[긳/MouseUsual/img",DOWN);
+	SetNextFocus("me긜�[긳/MouseUsual/img","me깓�[긤/MouseUsual/img",DOWN);
+	SetNextFocus("me깓�[긤/MouseUsual/img","me긓깛긲귻긐/MouseUsual/img",DOWN);
+	SetNextFocus("me긓깛긲귻긐/MouseUsual/img","me�^귽긣깑/MouseUsual/img",DOWN);
+	SetNextFocus("me�^귽긣깑/MouseUsual/img","me긒�[��뢎뿹/MouseUsual/img",DOWN);
+	SetNextFocus("me긒�[��뢎뿹/MouseUsual/img","me긌긿깛긜깑/MouseUsual/img",DOWN);
+}
+
+
+function MenuDocusGo()
+{
+	$MenuStart=1;
+	$MenuWhile2=0;
+	while($MenuCount>$MenuWhile2){
+		if($MenuStart>=$MenuCount){
+			$MenuStart=0;
+		}
+
+		if($Menu[$MenuStart][0]){
+			$menunut="me"+$Menu[$MenuWhile2]+"/MouseUsual/img";
+			$menunut2="me"+$Menu[$MenuStart]+"/MouseUsual/img";
+				SetNextFocus($menunut,$menunut2,DOWN);
+//				SetNextFocus($menunut,$menunut2,LEFT);
+		}
+
+		$MenuStart++;
+		$MenuWhile2++;
+	}
+
+	$MenuStart=1;
+	$MenuWhile2=0;
+	while($MenuCount>$MenuWhile2){
+		if($MenuStart>=$MenuCount){
+			$MenuStart=0;
+		}
+
+		if($Menu[$MenuStart][0]){
+			$menunut="me"+$Menu[$MenuWhile2]+"/MouseUsual/img";
+			$menunut2="me"+$Menu[$MenuStart]+"/MouseUsual/img";
+				SetNextFocus($menunut,$menunut2,UP);
+//				SetNextFocus($menunut,$menunut2,RIGHT);
+		}
+
+		$MenuStart++;
+		$MenuWhile2++;
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function MenuCancelProcessOpen()
+{
+	Request("@me긌긿깛긜깑/MouseLeave/me긌긿깛긜깑긵깓긜긚괧", Stop);
+	WaitAction("@me긌긿깛긜깑/MouseLeave/me긌긿깛긜깑긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuCancelProcess=true;
+	Move("@me긌긿깛긜깑/*/img", 200, @0, 150, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me긌긿깛긜깑/*/img", null);
+}
+function MenuCancelProcessPause()
+{
+	Request("@me긌긿깛긜깑/MouseOver/me긌긿깛긜깑긵깓긜긚괦", Stop);
+	WaitAction("@me긌긿깛긜깑/MouseOver/me긌긿깛긜깑긵깓긜긚괦", null);
+
+	$MenuCancelProcess=false;
+	Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me긌긿깛긜깑/*/img", null);
+}
+
+function MenuConfigProcessOpen()
+{
+	Request("@me긓깛긲귻긐/MouseLeave/me긓깛긲귻긐긵깓긜긚괧", Stop);
+	WaitAction("@me긓깛긲귻긐/MouseLeave/me긓깛긲귻긐긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuConfigProcess=true;
+	Move("@me긓깛긲귻긐/*/img", 200, @0, 150, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me긓깛긲귻긐/*/img", null);
+}
+function MenuConfigProcessPause()
+{
+	Request("@me긓깛긲귻긐/MouseOver/me긓깛긲귻긐긵깓긜긚괦", Stop);
+	WaitAction("@me긓깛긲귻긐/MouseOver/me긓깛긲귻긐긵깓긜긚괦", null);
+
+	$MenuConfigProcess=false;
+	Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me긓깛긲귻긐/*/img", null);
+}
+
+function MenuSaveProcessOpen()
+{
+	Request("@me긜�[긳/MouseLeave/me긜�[긳긵깓긜긚괧", Stop);
+	WaitAction("@me긜�[긳/MouseLeave/me긜�[긳긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuSaveProcess=true;
+	Move("@me긜�[긳/*/img", 200, @0, 150, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me긜�[긳/*/img", null);
+}
+function MenuSaveProcessPause()
+{
+	Request("@me긜�[긳/MouseOver/me긜�[긳긵깓긜긚괦", Stop);
+	WaitAction("@me긜�[긳/MouseOver/me긜�[긳긵깓긜긚괦", null);
+
+	$MenuSaveProcess=false;
+	Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me긜�[긳/*/img", null);
+}
+
+function MenuLoadProcessOpen()
+{
+	Request("@me깓�[긤/MouseLeave/me깓�[긤긵깓긜긚괧", Stop);
+	WaitAction("@me깓�[긤/MouseLeave/me깓�[긤긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuLoadProcess=true;
+	Move("@me깓�[긤/*/img", 200, @0, 150, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me깓�[긤/*/img", null);
+}
+function MenuLoadProcessPause()
+{
+	Request("@me깓�[긤/MouseOver/me깓�[긤긵깓긜긚괦", Stop);
+	WaitAction("@me깓�[긤/MouseOver/me깓�[긤긵깓긜긚괦", null);
+
+	$MenuLoadProcess=false;
+	Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me깓�[긤/*/img", null);
+}
+
+function MenuLogProcessOpen()
+{
+	Request("@me긫긞긏깓긐/MouseLeave/me긫긞긏깓긐긵깓긜긚괧", Stop);
+	WaitAction("@me긫긞긏깓긐/MouseLeave/me긫긞긏깓긐긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuLogProcess=true;
+	Move("@me긫긞긏깓긐/*/img", 200, @0, 150, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me긫긞긏깓긐/*/img", null);
+}
+function MenuLogProcessPause()
+{
+	Request("@me긫긞긏깓긐/MouseOver/me긫긞긏깓긐긵깓긜긚괦", Stop);
+	WaitAction("@me긫긞긏깓긐/MouseOver/me긫긞긏깓긐긵깓긜긚괦", null);
+
+	$MenuLogProcess=false;
+	Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me긫긞긏깓긐/*/img", null);
+}
+
+function MenuSkipProcessOpen()
+{
+	Request("@me긚긌긞긵/MouseLeave/me긚긌긞긵긵깓긜긚괧", Stop);
+	WaitAction("@me긚긌긞긵/MouseLeave/me긚긌긞긵긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuSkipProcess=true;
+	Move("@me긚긌긞긵/*/img", 200, @0, 150, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me긚긌긞긵/*/img", null);
+}
+function MenuSkipProcessPause()
+{
+	Request("@me긚긌긞긵/MouseOver/me긚긌긞긵긵깓긜긚괦", Stop);
+	WaitAction("@me긚긌긞긵/MouseOver/me긚긌긞긵긵깓긜긚괦", null);
+
+	$MenuSkipProcess=false;
+	Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me긚긌긞긵/*/img", null);
+}
+
+function MenuSendProcessOpen()
+{
+	Request("@me렔벍긽긞긜�[긙/MouseLeave/me렔벍긽긞긜�[긙긵깓긜긚괧", Stop);
+	WaitAction("@me렔벍긽긞긜�[긙/MouseLeave/me렔벍긽긞긜�[긙긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuSendProcess=true;
+	Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 150, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me렔벍긽긞긜�[긙/*/img", null);
+}
+function MenuSendProcessPause()
+{
+	Request("@me렔벍긽긞긜�[긙/MouseOver/me렔벍긽긞긜�[긙긵깓긜긚괦", Stop);
+	WaitAction("@me렔벍긽긞긜�[긙/MouseOver/me렔벍긽긞긜�[긙긵깓긜긚괦", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuSendProcess=false;
+	Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me렔벍긽긞긜�[긙/*/img", null);
+}
+
+function MenuEraseProcessOpen()
+{
+	Request("@me긽긞긜�[긙/MouseLeave/me긽긞긜�[긙긵깓긜긚괧", Stop);
+	WaitAction("@me긽긞긜�[긙/MouseLeave/me긽긞긜�[긙긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuEraseProcess=true;
+	Move("@me긽긞긜�[긙/*/img", 200, @0, 150, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 150, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me긽긞긜�[긙/*/img", null);
+}
+function MenuEraseProcessPause()
+{
+	Request("@me긽긞긜�[긙/MouseOver/me긽긞긜�[긙긵깓긜긚괦", Stop);
+	WaitAction("@me긽긞긜�[긙/MouseOver/me긽긞긜�[긙긵깓긜긚괦", null);
+
+	$MenuEraseProcess=false;
+	Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me긽긞긜�[긙/*/img", null);
+}
+
+function MenuTitleProcessOpen()
+{
+	Request("@me�^귽긣깑/MouseLeave/me�^귽긣깑긵깓긜긚괧", Stop);
+	WaitAction("@me�^귽긣깑/MouseLeave/me�^귽긣깑긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuTitleProcess=true;
+	Move("@me�^귽긣깑/*/img", 200, @0, 150, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me�^귽긣깑/*/img", null);
+}
+function MenuTitleProcessPause()
+{
+	Request("@me�^귽긣깑/MouseOver/me�^귽긣깑긵깓긜긚괦", Stop);
+	WaitAction("@me�^귽긣깑/MouseOver/me�^귽긣깑긵깓긜긚괦", null);
+
+	$MenuTitleProcess=false;
+	Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me�^귽긣깑/*/img", null);
+}
+
+function MenuExitProcessOpen()
+{
+	Request("@me긒�[��뢎뿹/MouseLeave/me긒�[��뢎뿹긵깓긜긚괧", Stop);
+	WaitAction("@me긒�[��뢎뿹/MouseLeave/me긒�[��뢎뿹긵깓긜긚괧", null);
+
+	if($MenuTitleProcess){Move("@me긌긿깛긜깑/*/img", 200, @0, 180, Dxl1, false); Move("@me긌긿깛긜깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긓깛긲귻긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긓깛긲귻긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긜�[긳/*/img", 200, @0, 180, Dxl1, false); Move("@me긜�[긳/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me깓�[긤/*/img", 200, @0, 180, Dxl1, false); Move("@me깓�[긤/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긫긞긏깓긐/*/img", 200, @0, 180, Dxl1, false); Move("@me긫긞긏깓긐/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긚긌긞긵/*/img", 200, @0, 180, Dxl1, false); Move("@me긚긌긞긵/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me렔벍긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@me렔벍긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me긽긞긜�[긙/*/img", 200, @0, 180, Dxl1, false); Move("@meVIS_긽긞긜�[긙", 200, @0, 180, Dxl1, false); Move("@me긽긞긜�[긙/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuTitleProcess){Move("@me�^귽긣깑/*/img", 200, @0, 180, Dxl1, false); Move("@me�^귽긣깑/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+	if($MenuExitProcess){Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);}
+
+	$MenuExitProcess=true;
+	Move("@me긒�[��뢎뿹/*/img", 200, @0, 150, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 150, Dxl1, false);
+	WaitAction("@me긒�[��뢎뿹/*/img", null);
+}
+function MenuExitProcessPause()
+{
+	Request("@me긒�[��뢎뿹/MouseOver/me긒�[��뢎뿹긵깓긜긚괦", Stop);
+	WaitAction("@me긒�[��뢎뿹/MouseOver/me긒�[��뢎뿹긵깓긜긚괦", null);
+
+	$MenuExitProcess=false;
+	Move("@me긒�[��뢎뿹/*/img", 200, @0, 180, Dxl1, false); Move("@me긒�[��뢎뿹/*/kr_hitarea", 200, @0, 180, Dxl1, false);
+	WaitAction("@me긒�[��뢎뿹/*/img", null);
+}
+
+
+
+
+
+
+
+
+
+
+

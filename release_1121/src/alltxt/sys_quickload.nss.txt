@@ -1,0 +1,116 @@
+#include "nss/function_dialog.nss"
+
+$Revision: $
+
+//=============================================================================//
+//■クイックロード■
+//=============================================================================//
+chapter main
+{
+	Wait(16);
+
+	//★ロックの場合
+	if($SYSTEM_load_lock){
+		return;
+	}
+
+	//★タイトルからの場合
+	if($PLACE_title){
+		return;
+	}
+
+	//★クイックセーブが一個も無い
+	if(!#LATEST_SAVE_QUICK){
+		return;
+	}
+
+	//★前提変数
+	$SYSTEM_menu_quickload_enable=true;
+
+	//★超速からの変遷用
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_buttondown_close=false;
+
+	//アイコンを抹消するコマンド
+	$SYSTEM_text_icon_disable=true;
+
+	//■定義「ビデオ設置」
+	if(IsInterrupt()){
+		CreateTexture("video",10000,center,middle,"VIDEO");
+	}
+
+	//■定義「メッセージウインドウ作成」
+	CreateName("MSGWND");
+
+	//□基礎構築
+	DialogBase("クイックロード");
+
+	//★選択肢開始
+	$SYSTEM_keydown_l=false;
+	$SYSTEM_r_button_down=false;
+	select{
+		if($SYSTEM_keydown_l||$SYSTEM_r_button_down){$save=false;break;}
+
+		case MSGWND/MSG_no{
+			//所定の動作
+			Request("MSGWND/MSG_no/se", Play);
+			Wait(200);
+			$save=false;
+		}case MSGWND/MSG_yes{
+			Request("MSGWND/MSG_yes/se", Play);
+			$save=true;
+		}
+
+		//★キーダウン系
+		if($SYSTEM_keydown_f){
+			DialogFull();
+		}else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close){
+			DialogClose();
+		}else if($SYSTEM_keydown_t&&!$SYSTEM_menu_lock&&!$SYSTEM_title_lock){
+			DialogTitle();
+		}else if($SYSTEM_keydown_r&&!$SYSTEM_menu_lock&&!$SYSTEM_backselect_lock&&ExistSave(9999)){
+			DialogBack();
+		}
+	}
+
+	if($save){
+		CreateColor("BLACK",99999999,center,middle,1024,768,BLACK);
+		Fade("BLACK", 0, 0, null, true);
+
+		CreateTexture("MSGWND/MSG_msg",99999999,56,184,"cg/sys/dialog/ベース2.png");
+		CreateTexture("MSG_load",99999999,293,248,"cg/sys/dialog/読み込んでいます.png");
+		Fade("BLACK", 300, 1000, null, true);
+
+		$SYSTEM_menu_enable=false;
+		$SYSTEM_menu_load_enable=false;
+
+		//★：ゲームスピード
+		if($Title_Quick){
+			#SYSTEM_play_speed = #play_speed_plus2;
+		}
+
+		DeleteSaveFile(9999);
+
+		#InitCV=false;
+		#PreSaveFlag=false;
+		#START_TIME=Time();
+
+		//グローバルセーブ（変数を記憶）
+		Save(0);
+
+		#IsLoaded=true;
+		Load(#LATEST_SAVE_QUICK);
+	}
+
+	//■終了共通演出
+	DialogEnd();
+
+	$SYSTEM_r_button_down=false;
+	$SYSTEM_keydown_l=false;
+	$SYSTEM_menu_reset_enable=false;
+
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+	$SYSTEM_text_icon_disable=false;
+}
+

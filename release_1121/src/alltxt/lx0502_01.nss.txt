@@ -1,0 +1,258 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0502_01.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0502_10.nss";
+
+}
+
+
+scene lx0502_01.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+
+	PrintBG("上背景", 25000);
+
+	CreateSE("SE90L","se背景_ガヤ_建物炎上_L");
+	MusicStart("SE90L",3000,500,0,1000,null,true);
+
+	CreateTextureSP("bg01", 5100, 0, -200, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	Rotate("bg01", 0, @0, 180, @0, null,true);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	SetShade("bg01", HEAVY);
+	CreateTextureSP("bg02", 5100, -205, 141, "cg/bg/x/bg005001_3_路地裏.jpg_x11_ogami.png");
+	Request("bg02", Smoothing);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+
+	Move("bg01", 0, 50, @0, null, true);
+	Move("bg02", 0, -49, @0, null, true);
+
+	FadeDelete("上背景", 500, null, true);
+
+
+
+//←←奴らの言葉を真実にする
+
+//おがみ：旧シナリオ退避
+
+//生存者はいない。
+//奴らはそう言った。
+
+//おそらくは、そこに倒れているガキと、その上で、まだびくびくと震えている母親の話をしているんだろう。
+
+
+//だが、おかしいな。
+//ここには俺と奴らがいるじゃないか。
+//バケモノの俺は、生存者に含まないにしても、やつらは、ヒトで生きている。
+//大人なら、自分の言った言葉には責任をとらないとな。
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//★★★
+
+ｻﾁｸﾀﾚｴﾂ ｾﾙ&.
+ｳ鯊ｺ ｱﾗｷｸｰﾔ ｸｻﾇﾟｴﾙ&.
+
+하지만 이상하군&. 여기엔 아직 나와 너희가 있잖나&.
+
+뭐&, 난 괴물이니 셈에서 뺀다 치자&.<K> 그래도 너희는 어엿한 인간이고&, 아직 살아 있잖아&.
+
+이러면 안 되지&.
+어른이라면 자기 말에는 책임을 져야지&.
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//ダァト兵たちの前に姿を現すスクルージ。
+
+
+	TextBoxDelete();
+
+	CreateColorEX("co01", 10000, "000000");
+
+	Zoom("bg01", 500, 2300, 2300, Axl1, false);
+	Zoom("bg02", 500, 4000, 4000, Axl1, false);
+	Move("bg02", 500, @-600, @50, Axl1, 200);
+	Fade("co01", 300, 1000, null, true);
+
+	Delete("bg*");
+
+	//定義-----------------------
+	CreateTextureEX("bg01", 2000, Center, Middle, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	CreateTextureEX("ca01", 2100, Center, -200, "cg/st/x/stスクルージ_通常_normal_x01.png");
+	CreateTextureEXmul("ca02", 2000, Center, -200, "cg/st/x/stスクルージ_通常_normal_x02.jpg");
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	Zoom("ca*", 0, 900, 900, null, true);
+	SetShade("bg01", LIGHT);
+
+	CreateSE("SE01","se人体_足音_着地02");
+
+	//動作-----------------------
+	FadeDelete("co01", 1000, null, false);
+	MoveCamera("Ｃ", 2000, @0, @0, 1000, AxlDxl, false);
+	Zoom("bg01", 2000, 2200, 2200, AxlDxl, false);
+	Zoom("ca*", 2000, 1000, 1000, AxlDxl, false);
+	Fade("bg01", 500, 1000, null, false);
+	Fade("ca02", 1000, 1000, Axl2, false);
+	Fade("ca01", 2000, 1000, Axl3, false);
+
+	Wait(1800);
+
+	SetVolumeEX("SE90L", 1000, 0, null);
+	SetVolumeEX("SE11L", 500, 0, null);
+	SetVolumeEX("SE12L", 500, 0, null);
+	SetVolumeEX("SE13L", 500, 0, null);
+
+	Fade("ca02", 200, 0, null, false);
+
+	Wait(600);
+	MusicStart("SE01",0,500,0,1000,null,false);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【ダァトＡ】
+<voice name="다아트 병사 A" class="�_�@긣빜�`" src="voice/LX00/1000050e01">
+｡ｸ｡ｪ｡ｪ!｡ｹ
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+	Move("smoke01", 2000, @0, @200, AxlDxl, false);
+	Move("bg01", 2000, @0, @100, AxlDxl, false);
+	Move("ca01", 2000, @0, @150, AxlDxl, true);
+
+	Wait(500);
+
+	CreateTextureEX("bg01b", 2100, Center, Middle, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	Request("bg01b", Smoothing);
+
+	St("C",2110, @0,@50,"stスクルージ_通常_normal");
+
+	Fade("bg01b", 300, 1000, null, false);
+	Wait(500);
+	FadeSt("C",500,false);
+
+	Wait(1000);
+
+	Fade("ca01", 0, 0, null, false);
+	Fade("bg01", 0, 0, null, false);
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0200060a01">
+｡ｸ｡ｪ｡ｪｷﾎﾅｫｷﾑﾀﾌｴﾙ｡ｹ
+
+//（ぼつりと。独り言）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+	Wait(16);
+
+	CreateColorEX("co99", 2110, "000000");
+	CreateTextureEX("ef99", 2110, Center, -200, "cg/ef/x/ef_coat01_x01.png");
+	Rotate("ef99", 0, @0, @0, -90, null,true);
+	CreateTextureEX("ef99b", 2110, Center, -500, "cg/ef/x/ef_hand07_停止.png");
+	Request("ef99*", Smoothing);
+	Rotate("ef99b", 0, @0, @0, 190, null,true);
+	Zoom("ef99", 0, 2500, 2500, null, true);
+	Zoom("ef99b", 0, 900, 900, null, true);
+
+	CreateSE("SE01","se人体_動作_絞める01");
+	CreateSE("SE02","se人体_心臓_鼓動01");
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Fade("co99", 0, 1000, null, true);
+	Fade("ef99", 200, 1000, null, false);
+	Move("ef99b", 200, @0, @50, Dxl3, false);
+	Fade("ef99b", 200, 1000, null, true);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+	CreatePlainSP("pl99", 3000);
+	Zoom("pl99", 300, 1050, 1050, Dxl2, false);
+	FadeDelete("pl99", 300, Axl1, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040a]
+{	DeleteFw();}
+｡ｪ｡ｪｿﾀｸ･ｼﾕﾀﾌ ｶﾟｰﾅｿﾂ ｰﾍﾀｻ ｴﾀｲｼｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+	Wait(16);
+
+
+//俺の右腕が熱くなった。
+
+
+//→→スクルージ無双
+
+
+//	ClearFadeAll(1000, true);
+
+}

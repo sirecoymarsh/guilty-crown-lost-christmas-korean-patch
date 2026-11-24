@@ -1,0 +1,744 @@
+[
+ {
+  "file": "lx0010.nss",
+  "phase": 1,
+  "texts": 86,
+  "thumb": "sys/extra/thum/ev/ev0106プレゼント結晶盾_盾のみ.jpg",
+  "cg": "cg/ev/ev0106プレゼント結晶盾_盾のみ.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0101.nss",
+  "phase": 2,
+  "texts": 42,
+  "thumb": "sys/extra/thum/ev/ev0201冒頭研究員_背景.jpg",
+  "cg": "cg/ev/ev0201冒頭研究員_背景.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0101_01.nss",
+  "phase": 2,
+  "texts": 3,
+  "thumb": "sys/extra/thum/bg/bg002003_5_通路2.jpg",
+  "cg": "cg/bg/bg002003_5_通路2.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0101_02.nss",
+  "phase": 2,
+  "texts": 16,
+  "thumb": "sys/extra/thum/bg/bg002002_5_通路1r.jpg",
+  "cg": "cg/bg/bg002002_5_通路1r.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0102.nss",
+  "phase": 2,
+  "texts": 84,
+  "thumb": "sys/extra/thum/ev/ev0201冒頭研究員.jpg",
+  "cg": "cg/ev/ev0201冒頭研究員.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0103.nss",
+  "phase": 2,
+  "texts": 11,
+  "thumb": "sys/extra/thum/bg/bg002002_5_通路1r.jpg",
+  "cg": "cg/bg/bg002002_5_通路1r.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0104a.nss",
+  "phase": 2,
+  "texts": 25,
+  "thumb": "sys/extra/thum/ev/ev0207スクルージ天井ジャンプ.jpg",
+  "cg": "cg/ev/ev0207スクルージ天井ジャンプ.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0104a_01.nss",
+  "phase": 2,
+  "texts": 7,
+  "thumb": "sys/extra/thum/bg/bg002004_5_ゲート前.jpg",
+  "cg": "cg/bg/bg002004_5_ゲート前.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0104a_02.nss",
+  "phase": 2,
+  "texts": 7,
+  "thumb": "sys/extra/thum/bg/bg002004_5_ゲート前.jpg",
+  "cg": "cg/bg/bg002004_5_ゲート前.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0104b.nss",
+  "phase": 2,
+  "texts": 5,
+  "thumb": "sys/extra/thum/bg/bg002004_5_ゲート前.jpg",
+  "cg": "cg/bg/bg002004_5_ゲート前.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0105.nss",
+  "phase": 2,
+  "texts": 6,
+  "thumb": "sys/extra/thum/bg/bg002002_5_通路1.jpg",
+  "cg": "cg/bg/bg002002_5_通路1.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0106.nss",
+  "phase": 2,
+  "texts": 61,
+  "thumb": "sys/extra/thum/ev/ev0210スクルージキャロルダッシュ.jpg",
+  "cg": "cg/ev/ev0210スクルージキャロルダッシュ.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0107.nss",
+  "phase": 2,
+  "texts": 7,
+  "thumb": "sys/extra/thum/bg/bg002003_5_通路2.jpg",
+  "cg": "cg/bg/bg002003_5_通路2.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0108.nss",
+  "phase": 2,
+  "texts": 19,
+  "thumb": "sys/extra/thum/ev/ev0101スクルージヴォイド取りだし.jpg",
+  "cg": "cg/ev/ev0101スクルージヴォイド取りだし.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0108_01.nss",
+  "phase": 2,
+  "texts": 1,
+  "thumb": "sys/extra/thum/ev/ev0101スクルージヴォイド取りだし.jpg",
+  "cg": "cg/ev/ev0101スクルージヴォイド取りだし.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0108_02.nss",
+  "phase": 2,
+  "texts": 1,
+  "thumb": "sys/extra/thum/ev/ev0101スクルージヴォイド取りだし.jpg",
+  "cg": "cg/ev/ev0101スクルージヴォイド取りだし.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0109.nss",
+  "phase": 2,
+  "texts": 8,
+  "thumb": "sys/extra/thum/ev/ev0211幼きシュウたち.jpg",
+  "cg": "cg/ev/ev0211幼きシュウたち.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0201.nss",
+  "phase": 3,
+  "texts": 24,
+  "thumb": "sys/extra/thum/ev/ev0301スクルージキャロル街歩き.jpg",
+  "cg": "cg/ev/ev0301スクルージキャロル街歩き.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0202.nss",
+  "phase": 3,
+  "texts": 36,
+  "thumb": "sys/extra/thum/ev/ev0201冒頭研究員.jpg",
+  "cg": "cg/ev/ev0201冒頭研究員.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0203a.nss",
+  "phase": 3,
+  "texts": 18,
+  "thumb": "sys/extra/thum/bg/bg003001_1_研究室.jpg",
+  "cg": "cg/bg/bg003001_1_研究室.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0203b.nss",
+  "phase": 3,
+  "texts": 19,
+  "thumb": "sys/extra/thum/bg/bg003001_1_研究室.jpg",
+  "cg": "cg/bg/bg003001_1_研究室.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0204a.nss",
+  "phase": 3,
+  "texts": 12,
+  "thumb": "sys/extra/thum/ev/ev0302オートインセクト破壊.jpg",
+  "cg": "cg/ev/ev0302オートインセクト破壊.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0204b.nss",
+  "phase": 3,
+  "texts": 7,
+  "thumb": "sys/extra/thum/ev/ev0303オートインセクト監視.jpg",
+  "cg": "cg/ev/ev0303オートインセクト監視.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0205.nss",
+  "phase": 3,
+  "texts": 42,
+  "thumb": "sys/extra/thum/ev/ev0307キャロルオンザベッド.jpg",
+  "cg": "cg/ev/ev0307キャロルオンザベッド.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0206.nss",
+  "phase": 3,
+  "texts": 34,
+  "thumb": "sys/extra/thum/ev/ev0304クロス背中.jpg",
+  "cg": "cg/ev/ev0304クロス背中.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0207.nss",
+  "phase": 3,
+  "texts": 18,
+  "thumb": "sys/extra/thum/bg/bg003002_3_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_3_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0300.nss",
+  "phase": 3,
+  "texts": 6,
+  "thumb": "sys/extra/thum/bg/bg004001_1_教会内部.jpg",
+  "cg": "cg/bg/bg004001_1_教会内部.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0301.nss",
+  "phase": 4,
+  "texts": 67,
+  "thumb": "sys/extra/thum/ev/ev0206スクルージ重機エンドレイヴ撃破.jpg",
+  "cg": "cg/ev/ev0206スクルージ重機エンドレイヴ撃破.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0302.nss",
+  "phase": 4,
+  "texts": 13,
+  "thumb": "sys/extra/thum/ev/ev0304クロス背中.jpg",
+  "cg": "cg/ev/ev0304クロス背中.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0302_01.nss",
+  "phase": 4,
+  "texts": 2,
+  "thumb": "sys/extra/thum/ev/ev0304クロス背中.jpg",
+  "cg": "cg/ev/ev0304クロス背中.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0302_02.nss",
+  "phase": 4,
+  "texts": 3,
+  "thumb": "sys/extra/thum/ev/ev0304クロス背中.jpg",
+  "cg": "cg/ev/ev0304クロス背中.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0303.nss",
+  "phase": 4,
+  "texts": 34,
+  "thumb": "sys/extra/thum/ev/ev9000スクルージ着地汎用キャロル.jpg",
+  "cg": "cg/ev/ev9000スクルージ着地汎用キャロル.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0304.nss",
+  "phase": 4,
+  "texts": 68,
+  "thumb": "sys/extra/thum/ev/ev0205重機エンドレイヴ登場.jpg",
+  "cg": "cg/ev/ev0205重機エンドレイヴ登場.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0401.nss",
+  "phase": 4,
+  "texts": 26,
+  "thumb": "sys/extra/thum/bg/bg004006_1_天王洲大学倉庫前.jpg",
+  "cg": "cg/bg/bg004006_1_天王洲大学倉庫前.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0402a_00.nss",
+  "phase": 4,
+  "texts": 2,
+  "thumb": "sys/extra/thum/bg/bg003002_1_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_1_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0402a_01.nss",
+  "phase": 4,
+  "texts": 2,
+  "thumb": "sys/extra/thum/bg/bg003002_1_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_1_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0402a_02.nss",
+  "phase": 4,
+  "texts": 2,
+  "thumb": "sys/extra/thum/bg/bg003002_1_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_1_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0402a_10.nss",
+  "phase": 4,
+  "texts": 1,
+  "thumb": "sys/extra/thum/bg/bg003002_1_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_1_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0402b_00.nss",
+  "phase": 4,
+  "texts": 2,
+  "thumb": "sys/extra/thum/bg/bg003002_1_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_1_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0402b_01.nss",
+  "phase": 4,
+  "texts": 5,
+  "thumb": "sys/extra/thum/bg/bg003002_1_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_1_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0402b_02.nss",
+  "phase": 4,
+  "texts": 6,
+  "thumb": "sys/extra/thum/bg/bg003002_1_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_1_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0402b_10.nss",
+  "phase": 4,
+  "texts": 3,
+  "thumb": "sys/extra/thum/bg/bg003002_1_天王洲大学外観.jpg",
+  "cg": "cg/bg/bg003002_1_天王洲大学外観.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0403.nss",
+  "phase": 4,
+  "texts": 25,
+  "thumb": "sys/extra/thum/bg/bg004013_1_教会外観_林ロング.jpg",
+  "cg": "cg/bg/bg004013_1_教会外観_林ロング.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0500.nss",
+  "phase": 4,
+  "texts": 21,
+  "thumb": "sys/extra/thum/ev/ev0590スクルージガイ視点.jpg",
+  "cg": "cg/ev/ev0590スクルージガイ視点.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0501.nss",
+  "phase": 5,
+  "texts": 18,
+  "thumb": "sys/extra/thum/ev/ev0502シュウを庇うフライシュマン.jpg",
+  "cg": "cg/ev/ev0502シュウを庇うフライシュマン.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0501_01.nss",
+  "phase": 5,
+  "texts": 3,
+  "thumb": "sys/extra/thum/bg/bg005001_3_路地裏.jpg",
+  "cg": "cg/bg/bg005001_3_路地裏.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0501_02.nss",
+  "phase": 5,
+  "texts": 3,
+  "thumb": "sys/extra/thum/bg/bg005001_3_路地裏.jpg",
+  "cg": "cg/bg/bg005001_3_路地裏.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0502.nss",
+  "phase": 5,
+  "texts": 4,
+  "thumb": "sys/extra/thum/bg/bg001011_3_六本木街並み1崩壊.jpg",
+  "cg": "cg/bg/bg001011_3_六本木街並み1崩壊.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0502_01.nss",
+  "phase": 5,
+  "texts": 4,
+  "thumb": "sys/extra/thum/bg/bg001012_3_六本木街並み2崩壊.jpg",
+  "cg": "cg/bg/bg001012_3_六本木街並み2崩壊.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0502_02.nss",
+  "phase": 5,
+  "texts": 3,
+  "thumb": "sys/extra/thum/bg/bg001012_3_六本木街並み2崩壊.jpg",
+  "cg": "cg/bg/bg001012_3_六本木街並み2崩壊.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0502_10.nss",
+  "phase": 5,
+  "texts": 10,
+  "thumb": "sys/extra/thum/ev/ev9003ダァト兵戦闘汎用_背景.jpg",
+  "cg": "cg/ev/ev9003ダァト兵戦闘汎用_背景.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0503.nss",
+  "phase": 5,
+  "texts": 39,
+  "thumb": "sys/extra/thum/ev/ev_プレゼント笑い.jpg",
+  "cg": "cg/ev/ev_プレゼント笑い.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0504.nss",
+  "phase": 5,
+  "texts": 23,
+  "thumb": "sys/extra/thum/ev/ev0518エデン・ベベ顔アップ.jpg",
+  "cg": "cg/ev/ev0518エデン・ベベ顔アップ.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0505_00.nss",
+  "phase": 5,
+  "texts": 12,
+  "thumb": "sys/extra/thum/bg/bg001011_3_六本木街並み1崩壊.jpg",
+  "cg": "cg/bg/bg001011_3_六本木街並み1崩壊.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0505_01.nss",
+  "phase": 5,
+  "texts": 2,
+  "thumb": "sys/extra/thum/bg/bg001016_3_高速道路崩壊.jpg",
+  "cg": "cg/bg/bg001016_3_高速道路崩壊.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0505_02.nss",
+  "phase": 5,
+  "texts": 2,
+  "thumb": "sys/extra/thum/bg/bg001016_3_高速道路崩壊.jpg",
+  "cg": "cg/bg/bg001016_3_高速道路崩壊.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0505_10.nss",
+  "phase": 5,
+  "texts": 12,
+  "thumb": "sys/extra/thum/bg/bg001016_3_高速道路崩壊.jpg",
+  "cg": "cg/bg/bg001016_3_高速道路崩壊.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0506.nss",
+  "phase": 5,
+  "texts": 101,
+  "thumb": "sys/extra/thum/ev/ev0508スクルージヴォイド武器オラトリオ構え.jpg",
+  "cg": "cg/ev/ev0508スクルージヴォイド武器オラトリオ構え.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0507.nss",
+  "phase": 5,
+  "texts": 44,
+  "thumb": "sys/extra/thum/ev/ev0108エデン・ベベ迷彩登場.jpg",
+  "cg": "cg/ev/ev0108エデン・ベベ迷彩登場.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0507_01.nss",
+  "phase": 5,
+  "texts": 2,
+  "thumb": "sys/extra/thum/ev/ev0108エデン・ベベ迷彩登場.jpg",
+  "cg": "cg/ev/ev0108エデン・ベベ迷彩登場.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0507_02.nss",
+  "phase": 5,
+  "texts": 7,
+  "thumb": "sys/extra/thum/ev/ev0520指揮車コンテナ内部パストコックピット.jpg",
+  "cg": "cg/ev/ev0520指揮車コンテナ内部パストコックピット.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0507_10.nss",
+  "phase": 5,
+  "texts": 18,
+  "thumb": "sys/extra/thum/ev/ev0508エデン・べべ停止.jpg",
+  "cg": "cg/ev/ev0508エデン・べべ停止.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0508.nss",
+  "phase": 5,
+  "texts": 26,
+  "thumb": "sys/extra/thum/ev/ev9004スクルージバックステップ汎用キャロル.jpg",
+  "cg": "cg/ev/ev9004スクルージバックステップ汎用キャロル.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0509.nss",
+  "phase": 6,
+  "texts": 32,
+  "thumb": "sys/extra/thum/ev/ev0525スクルージヴォイド武器聖骸布.jpg",
+  "cg": "cg/ev/ev0525スクルージヴォイド武器聖骸布.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0510.nss",
+  "phase": 6,
+  "texts": 16,
+  "thumb": "sys/extra/thum/ev/ev9003ダァト兵戦闘汎用_背景.jpg",
+  "cg": "cg/ev/ev9003ダァト兵戦闘汎用_背景.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0510_01.nss",
+  "phase": 6,
+  "texts": 2,
+  "thumb": "sys/extra/thum/bg/bg005006_3_六本木ヒルズ前.jpg",
+  "cg": "cg/bg/bg005006_3_六本木ヒルズ前.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0510_02.nss",
+  "phase": 6,
+  "texts": 3,
+  "thumb": "sys/extra/thum/bg/bg005006_3_六本木ヒルズ前.jpg",
+  "cg": "cg/bg/bg005006_3_六本木ヒルズ前.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0510_10.nss",
+  "phase": 6,
+  "texts": 25,
+  "thumb": "sys/extra/thum/ev/ev0523エデン・べべキャンサー化猛追.jpg",
+  "cg": "cg/ev/ev0523エデン・べべキャンサー化猛追.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0511_00.nss",
+  "phase": 6,
+  "texts": 7,
+  "thumb": "sys/extra/thum/ev/ev0528スクルージヴォイド武器鋸_b.jpg",
+  "cg": "cg/ev/ev0528スクルージヴォイド武器鋸_b.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0511_01.nss",
+  "phase": 6,
+  "texts": 2,
+  "thumb": "sys/extra/thum/ev/ev0528スクルージヴォイド武器鋸_b.jpg",
+  "cg": "cg/ev/ev0528スクルージヴォイド武器鋸_b.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0511_02.nss",
+  "phase": 6,
+  "texts": 3,
+  "thumb": "sys/extra/thum/ev/ev0528スクルージヴォイド武器鋸_b.jpg",
+  "cg": "cg/ev/ev0528スクルージヴォイド武器鋸_b.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0511_10.nss",
+  "phase": 6,
+  "texts": 12,
+  "thumb": "sys/extra/thum/ev/ev0536スクルージキャロル武器取り出し連続.jpg",
+  "cg": "cg/ev/ev0536スクルージキャロル武器取り出し連続.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0600.nss",
+  "phase": 6,
+  "texts": 14,
+  "thumb": "sys/extra/thum/bg/bg002011_2_海辺全景.jpg",
+  "cg": "cg/bg/bg002011_2_海辺全景.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0601.nss",
+  "phase": 7,
+  "texts": 73,
+  "thumb": "sys/extra/thum/ev/ev0608マナ結晶化.jpg",
+  "cg": "cg/ev/ev0608マナ結晶化.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0602.nss",
+  "phase": 7,
+  "texts": 69,
+  "thumb": "sys/extra/thum/ev/ev0603プレゼント能力取りこみ.jpg",
+  "cg": "cg/ev/ev0603プレゼント能力取りこみ.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0602_02.nss",
+  "phase": 7,
+  "texts": 1,
+  "thumb": "sys/extra/thum/ev/ev0603プレゼント能力取りこみ.jpg",
+  "cg": "cg/ev/ev0603プレゼント能力取りこみ.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0602_10.nss",
+  "phase": 7,
+  "texts": 7,
+  "thumb": "sys/extra/thum/ev/ev0606スクルージヴォイド聖杯.jpg",
+  "cg": "cg/ev/ev0606スクルージヴォイド聖杯.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0603.nss",
+  "phase": 7,
+  "texts": 33,
+  "thumb": "sys/extra/thum/ev/ev0604イェット・トゥー・カム登場.jpg",
+  "cg": "cg/ev/ev0604イェット・トゥー・カム登場.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0604_11.nss",
+  "phase": 7,
+  "texts": 1,
+  "thumb": "sys/extra/thum/ev/ev0604イェット・トゥー・カム登場.jpg",
+  "cg": "cg/ev/ev0604イェット・トゥー・カム登場.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0604_20.nss",
+  "phase": 7,
+  "texts": 16,
+  "thumb": "sys/extra/thum/ev/ev0536スクルージキャロル武器取り出し連続.jpg",
+  "cg": "cg/ev/ev0536スクルージキャロル武器取り出し連続.jpg",
+  "ending": false,
+  "also": []
+ },
+ {
+  "file": "lx0605a.nss",
+  "phase": 7,
+  "texts": 16,
+  "thumb": "sys/extra/thum/ev/ev0703最後のヴォイド_フル.jpg",
+  "cg": "cg/ev/ev0703最後のヴォイド_フル.jpg",
+  "ending": true,
+  "also": [
+   "lx0605a_90ed.nss"
+  ]
+ },
+ {
+  "file": "lx0605b.nss",
+  "phase": 7,
+  "texts": 13,
+  "thumb": "sys/extra/thum/ev/ev0703最後のヴォイド_バッド_smile.jpg",
+  "cg": "cg/ev/ev0703最後のヴォイド_バッド_smile.jpg",
+  "ending": true,
+  "also": [
+   "lx0605b_90ed.nss"
+  ]
+ }
+]

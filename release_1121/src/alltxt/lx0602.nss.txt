@@ -1,0 +1,1763 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0602.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0609キャロル結晶化=true;
+	#ev0603プレゼント能力取りこみ=true;
+	#ev0603プレゼント能力取りこみ_a=true;
+	#ev0603プレゼント能力取りこみ_b=true;
+	#ev0603プレゼント能力取りこみ_c=true;
+	#ev0602プレゼントAP結晶裸=true;
+	#ev0604イェット・トゥー・カム登場=true;
+	#bg006003_3_コキュートス空間=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0602_00sl.nss";
+
+}
+
+
+scene lx0602.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+if(1){
+	PrintBG("pr01", 30000);
+
+	CreateSE("SE_noize","seヴォイド蝗03L");
+	CreateSE("SE_kyoumei","se特殊_雰囲気_集中01_L");
+	CreateSE("SE_heart","se人体_心臓_鼓動01L");
+
+
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreateColorEXadd("white01", 20000, "FFFFFF");
+	CreateColorEX("black02", 20000, "000000");
+	CreateTextureEX("ef01", 20000, Center, 200, "cg/ef/ef_noize02.jpg");
+	Zoom("ef01", 0, 1100, 4000, null, true);
+
+	CreateTextureEX("ef02", 5000, Center, Middle, "cg/ef/ef_noize02.jpg");
+	CreateTextureEXsub("ef03", 5000, Center, Middle, "cg/ef/ef_noize01.jpg");
+	DrawEffectSkip("ef03", 1000, "Ripple", 0, 300, null);
+	Zoom("ef*", 0, 2000, 2000, null, true);
+	Rotate("ef02", 0, @0, @0, 90, null,true);
+	Rotate("ef03", 0, @0, @0, 0, null,true);
+	Request("ef03", Smoothing);
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+	CreateColorSP("black01", 5000, "000000");
+	CreateTextureEXmul("eye", 15000, Center, Middle, "cg/data/zzex_eye_01_00_0.png");
+	Fade("eye", 0, 1000, null, true);
+
+	FadeDelete("pr01", 0, null, true);
+
+
+
+
+	Wait(1000);
+
+
+
+	CreateTextureEX("ef02", 5000, Center, Middle, "cg/ef/ef_noize02.jpg");
+	CreateTextureEXsub("ef03", 5000, Center, Middle, "cg/ef/ef_noize01.jpg");
+	DrawEffectSkip("ef03", 1000, "Ripple", 0, 300, null);
+	Zoom("ef*", 0, 2000, 2000, null, true);
+	Rotate("ef02", 0, @0, @0, 90, null,true);
+	Rotate("ef03", 0, @0, @0, 0, null,true);
+	Request("ef03", Smoothing);
+
+	CreateEffectDropEX("drop01", 5350, 0, 0, 1024, 576, 256, 80, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble03_x05.png");
+	Rotate("drop01", 0, @0, @0, 5, null,true);
+	Request("drop01", SubRender);
+	Zoom("drop01", 0, 1500, 2500, null, true);
+
+	CreateEffectDropEX("drop02", 5450, 0, 0, 1024, 576, 156, 120, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble02_x03.png");
+	Rotate("drop02", 0, @0, @0, -185, null,true);
+	Request("drop02", SubRender);
+	Zoom("drop02", 0, 1500, 2500, null, true);
+
+	Fade("drop*", 0, 1000, null, true);
+
+	Shake("ef02", 50000000, 0, 1, 0, 1, 1000, null, false);
+	Shake("ef03", 50000000, 0, 5, 0, 1, 1000, null, false);
+
+
+
+
+	//音のテンポなど
+	MusicStart("SE_kyoumei",0,1,0,500,null,true);
+	Wait(500);
+	SetVolumeEX("SE_kyoumei", 0, 500, null);
+	MusicStart("SE_noize",0,800,0,1000,null,true);
+	MusicStart("SE_heart",0,1,0,500,null,true);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+	Wait(150);
+	SetVolumeEX("SE_kyoumei", 0, 1, null);
+	SetVolumeEX("SE_noize", 0, 1, null);
+
+	Fade("ef02", 0, 0, Axl1, false);
+	Fade("ef03", 0, 0, Axl1, true);
+
+	Wait(3000);
+
+	SetVolumeEX("SE_kyoumei", 0, 500, null);
+	SetVolumeEX("SE_noize", 0, 800, null);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+	Wait(100);
+	SetVolumeEX("SE_kyoumei", 0, 0, null);
+	SetVolumeEX("SE_noize", 0, 1, null);
+	Fade("ef02", 0, 0, Axl1, false);
+	Fade("ef03", 0, 0, Axl1, true);
+
+	Wait(4400);
+
+	SetVolumeEX("SE_noize", 0, 700, null);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+
+	Wait(1000);
+
+	SetVolumeEX("SE_noize", 4000, 500, null);
+
+	Wait(2000);
+
+	Delete("white*");
+
+
+//<continuation number="530">
+
+//LX0101冒頭、LX0205と意図的に演出を似せる感じで。
+//スクルージの意識
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+지옥으로 모든 중력이 모인다면&.<K> 죄인은 자기 죄의 무게에 이끌려 지옥으로 떨어지는 것이리라&.
+
+나는 떨어진다&.<K> 바닥 없는 구멍 속으로&. 세계의 중심――지옥의 가장 깊은 곳을 향해&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+과거도 미래도 없는 내가―― 텅 빈 내가 떨어진다면&.
+
+ｱﾗｰ｡ｴﾂ ｳｻ ﾁﾋｰ｡ ﾀﾖｴﾙ&.<K>
+잃어버린 줄 알았던 나 자신이 있다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+｡ｦ｡ｦｸﾓｸｴｼﾓｿ｡ｼｭ ｳｯｹ弡ｹｵ鯊ﾌ ｿｺｰﾅｸｰｴﾙ&.<K>
+하지만&, 이제 두통은 없다&.
+
+의식과 사고는 맑게 개고―― 뿔뿔이 흩어져 있던 모든 것이 맞물려 간다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+여정의 끝이 머지않았다&.<K> 그리고 예감한다&.
+
+모든 것을 되찾았을 때―― 나는 파멸하리라는 것을&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+////////////////////////////////////////
+//◆◆コキュートス
+
+//目覚めるスクルージ
+//誰かがのしかかっている
+
+//スクルージにのしかかるプレゼント
+
+//？？：LX0205キャロルのシーンを意識した演出か？
+
+
+
+
+
+	TextBoxDelete(0);
+
+	Wait(2000);
+
+	CreateColorEX("co01", 5000, "000000");
+
+	SetVolumeEX("SE*", 200, 0, null);
+	SetVolumeEX("vo*", 200, 0, null);
+	Fade("co01", 200, 1000, null, true);
+
+	Delete("ef*");
+	Delete("drop*");
+	Delete("black*");
+
+	Wait(1000);
+
+	CreateTextureEX("bg01", 100, -884, -90, "cg/bg/l/bg006003_3_コキュートス空間_l.jpg");
+	CreateTextureSP("ev00", 100, 0, 450, "cg/ev/ev_プレゼント笑い_プレゼント.png");
+	CreateTextureSP("ev01", 100, 0, 450, "cg/ev/ev_プレゼント笑い_プレゼント.png");
+	Request("ev01", Smoothing);
+	Request("bg01", Smoothing);
+	Zoom("ev0*", 0, 2200, 2200, null, true);
+	Zoom("bg01", 0, 1500, 1500, null, true);
+	Rotate("bg01", 0, @0, @0, -20, null,true);
+
+	SetShade("ev01", HEAVY);
+	SetShade("bg01", HEAVY);
+
+	Fade("bg01", 500, 1000, null, false);
+
+	Fade("co01", 1500, 500, Dxl1, true);
+	Wait(1000);
+	Move("ev0*", 2000, @0, 400, AxlDxl, false);
+	Zoom("ev0*", 2000, 2000, 2000, AxlDxl, false);
+	Zoom("bg01", 2000, 1400, 1400, AxlDxl, false);
+	FadeDelete("co01", 1500, Axl1, true);
+
+
+	Wait(1000);
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+누군가가&, 나를 물끄러미 내려다보고 있다&.
+
+남이 자는 얼굴을 들여다보는 건 그리 좋은 취미가 아니다&. 그런 고약한 취미를 가진 녀석이라면 딱 하나 떠오른다&.
+
+……애초에 내가 기억하는 사람이 몇 없긴 하지만&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200010a01">
+｡ｸ｡ｦ｡ｦﾄｳｷﾑﾀﾎｰ｡?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	DeleteFw();
+
+
+//	Fw("fwプレゼント_通常_normal");
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0062a]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200020a03">
+｡ｸﾀｯｰｨﾀﾌｳﾗ&. ｳｪｾﾟ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	$sp=600;
+
+	Move("ev0*", $sp, @0, -20, AxlDxl, false);
+	Move("bg01", $sp, -736, -100, AxlDxl, false);
+	Zoom("ev0*", $sp, 1000, 1000, AxlDxl, false);
+	Zoom("bg01", $sp, 1000, 1000, AxlDxl, false);
+	FadeDelete("eye", $sp, Axl1, false);
+	FadeDelete("ev01", $sp, Axl1, true);
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200030a01">
+｡ｸ｡ｪ｡ｪ｡ｪ｡ｪ!｡ｹ
+
+//反射的に跳ね起きようとするスクルージ。
+//しかし動けない。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+ｴｫﾀﾌ ｹｽ ｶﾟｿｴｴﾙ&. ｳｻ ｾｼｿ｡ｼｭ ﾇﾍｱ箍｡ ｰ｡ｽﾃｴﾂ ｰﾔ ｳｪﾇﾑﾅﾗｵｵ ｴﾀｲｸﾁｳｴﾙ&.
+
+ｾ鍰ｳｱｸｴﾏｾﾂ ﾃﾟﾅﾂｿｴｴﾙ&.
+살해당하지 않은 게 신기할 지경이다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+	CreateSE("SE01","se人体_動作_抱く02");
+	CreateSE("SE02","se人体_動作_衣擦れ06");
+	CreateSE("SE03","seヴォイド結晶化01b");
+
+	FadeF3("bg01", 0, 1000, 300, 0, 0, Dxl1, false);
+	FadeF4("ev00", 0, 1000, 300, 0, 0, Dxl1, false);
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Wait(200);
+	MusicStart("SE02",0,700,0,1000,null,false);
+	Wait(100);
+	MusicStart("SE03",0,500,0,1000,null,false);
+
+	Wait(1000);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+ｹﾝｻ鄲釥ｸｷﾎ ｹ巐ｱ ﾀﾏｾ鋧ｪｷﾁｴﾙ｡ｦ｡ｦ
+몸이 전혀 움직이지 않는다는 것을 깨달았다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0091]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200040a01">
+｡ｸﾀﾌｰﾇ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//AP結晶に覆われ、身動きできないスクルージ。
+
+
+	TextBoxDelete();
+	Wait(16);
+
+
+	CreatePlainSP("pl01", 15000);
+
+	CreateTextureEX("ev01", 100, -438, -572, "cg/ev/l/ev0603プレゼント能力取りこみ_l.jpg");
+	Fade("ev01", 0, 1000, null, true);
+
+	CreateTextureEX("ef01", 100, -500, 340, "cg/ef/x/ef_voidrubble02_x01.png");
+	CreateTextureEX("ef02", 100, 142, 368, "cg/ef/x/ef_voidrubble03_x03.png");
+	Fade("ef0*", 0, 1000, null, true);
+	Zoom("ef01", 0, 2000, 2000, null, true);
+	Zoom("ef02", 0, 1500, 1500, null, true);
+	Request("ef0*", Smoothing);
+
+	CreateSE("SE01L","seヴォイド結晶化_l");
+	MusicStart("SE01L",2000,200,0,300,null,true);
+
+	FadeDelete("pl01", 500, null, false);
+
+	BezierMove("ef0*", 2000, (@0,@0){@350,@100}{@500,@150}(@800,@500), AxlDxl, false);
+	BezierMove("ev01", 2000, (@0,@0){@250,@10}{@300,@20}(0,-372), AxlDxl, true);
+
+	Wait(500);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+ﾇﾁｷｹﾁｨﾆｮﾀﾇ ﾁﾀﾎｰ｡&.
+ｿﾂｸﾌ AP ｰ眞､ｿ｡ ｵﾚｵ､ｿｩ ﾀﾖｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0101]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200050a01">
+｡ｸ｡ｦ｡ｦﾃﾂ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+빠져나오려고 발버둥 쳐 보지만 꿈쩍도 하지 않는다&. 그러는 사이에도 AP 결정이 점점 나를 침식해 간다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0111]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200060a03">
+「그렇게 싫어하지 않아도 되잖아&. 상처받는걸」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+	Wait(100);
+
+	CreateSE("SE01","se人体_動作_抱く02");
+	CreateSE("SE02","seヴォイド結晶化01b");
+	MusicStart("SE01",0,1200,0,1000,null,false);
+	MusicStart("SE02",0,700,0,1200,null,false);
+
+	CreateTextureEX("ev02", 100, center, middle, "cg/ev/ev0603プレゼント能力取りこみ.jpg");
+	Fade("ev02", 1000, 1000, null, true);
+
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+남의 몸 위에 올라탄 채 프레젠트가 웃는다&.
+
+후려갈기고 싶을 만큼&, 비위에 거슬리는 미소였다&.
+그 허여멀건 얼굴을 짓이겨서&, 뇌수를 흩뿌려주고 싶다&.
+
+목을 간신히 움직여&, 주변 상황을 살핀다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//周囲を見回すスクルージ。
+//自分と同じように、辺りはAP結晶に覆われている。
+
+
+	TextBoxDelete();
+
+	CreateTextureEX("bg01", 100, 300, -150, "cg/bg/l/bg006003_3_コキュートス空間_l.jpg");
+	Request("bg01", Smoothing);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	Rotate("bg01", 0, @0, @0, 30, null,true);
+
+
+	Fade("bg01", 700, 1000, null, false);
+	Move("bg01", 3000, -1050, -50, AxlDxl, true);
+	//BezierMove("bg01", 2000, (@0,@0){@-250,@-10}{@-300,@-20}(-500,-372), AxlDxl, true);
+
+	Wait(300);
+
+	CreateMovieEX("mv01", 2100, center, middle, true, true, "dx/mvk200.ngs");
+	Zoom("mv01", 0, 2000, 2000, null, true);
+	Request("mv01", AddRender);
+
+	CreateTextureEX("bg02", 100, center, middle, "cg/bg/bg006003_3_コキュートス空間.jpg");
+	Request("bg02", Smoothing);
+	Fade("mv01", 1000, 1000, null, false);
+	Fade("bg02", 1000, 1000, null, true);
+
+	Wait(1000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+｡ｦ｡ｦｴﾌ ｱ箜ｫﾇﾑ ｰ｣ﾀﾌｾ嶸ﾙ&.
+
+AP 결정으로 가득 메워진 세계&.
+모든 것이 얼어붙어 있는 것처럼 보이기도 한다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0131]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200070a01">
+「……뭐냐&, 여긴?」
+
+//（緊張。危機感）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200080a03">
+「지옥의 중심이잖아? 그렇다면 <RUBY TEXT="코퀴토스">얼음 연못</RUBY> 아닐까?」
+
+//？？：地の文
+//罪で凍りついているというワケか。クソが。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+｡ｦ｡ｦｰ惞ｬ&.
+죄의 차가움으로 얼어붙어 있다는 소린가&. 빌어먹을&.
+
+그리고 코퀴토스 한가운데&. 한 소녀가 잠들어 있었다&. 소녀를 에워싼 것이 마치 짐승을 가두는 우리 같았다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//コキュートスの中心、繭の中で眠るマナ。
+//アニメ12話参照。
+
+	TextBoxDelete();
+
+	CreatePlainSP("pl01", 15000);
+
+	Delete("ev*");
+	Delete("bg*");
+
+	CreateCameraEX("cam", 0, 0, 800);
+
+	CreateTextureEX("cam/ev01", 10, Center, Middle, "cg/ev/x/ev0608マナ結晶化_x04_背景.jpg");
+	Zoom("cam/ev01", 0, 2000, 2000, null, true);
+	CreateTextureEX("cam/ev02", 150, Center, Middle, "cg/ev/x/ev0608マナ結晶化_x03_かご奥.png");
+	CreateTextureEX("cam/ev03", 300, Center, Middle, "cg/ev/x/ev0608マナ結晶化_x02_マナ.png");
+	CreateTextureEX("cam/ev03b", 300, Center, Middle, "cg/ev/x/ev0608マナ結晶化_x02_マナb.png");
+	CreateTextureEX("cam/ev04", 500, Center, Middle, "cg/ev/x/ev0608マナ結晶化_x01_かご手前.png");
+	Fade("cam/ev*", 0, 1000, null, true);
+
+	Zoom("cam/ev04", 0, 1500, 1500, null, true);
+	MoveCamera("cam", 0, 0, 100, 900, null, true);
+	Request("cam/*", Smoothing);
+
+	DrawEffectSkip("cam/ev03", 500, "Ripple", 90, 50, null);
+
+	MoveFTP1("@cam/*",16000,3,5);
+	MoveFTP2("@cam/ev03*",10000,5,2);
+
+	manasong_start(300);
+
+	FadeDelete("pl01", 2000, null, false);
+
+	MoveCamera("cam", 3000, 0, 0, 800, Dxl1, true);
+
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200090a01">
+「――오우마 마나!」
+
+//ＳＥ：マナの歌
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete(0);
+
+	Wait(200);
+
+	CreateTextureEX("ev01", 3000, Center, Middle, "cg/ev/ev0608マナ結晶化.jpg");
+	Fade("ev01", 1000, 1000, null, true);
+
+	MoveFTP1stop();
+	MoveFTP2stop();
+
+	Delete("cam/*");
+	Delete("cam");
+
+	Wait(500);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+잠든 오우마 마나에게서는 그 노래가 흘러나오고 있었다&. 노래에 호응하듯 주변의 결정이 자라난다&.
+
+저것을 멈추지 않으면 머지않아 온 세상이 이런 풍경으로 변해 버릴지도 모른다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0172]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200100a03">
+「여긴 마음을 닫은 이브를 지키는 고치야」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0180]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200110a03">
+「저 아이의 차갑게 식은 영혼이&, 모든 것을 얼어붙게 만들어 버리지」
+
+//プレゼントの視線を追うスクルージ。
+//AP結晶の中に、氷漬けにされたようなキャロルの姿。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+
+
+	CreatePlainSP("pl01", 15000);
+
+	Delete("cam/*");
+	Delete("cam");
+	Delete("ev*");
+
+	manasong_volchange(150);
+
+	CreateTextureEX("bg01", 100, -300, -150, "cg/bg/l/bg006003_3_コキュートス空間_l.jpg");
+	Request("bg01", Smoothing);
+	Fade("bg01", 0, 1000, null, true);
+
+
+
+	FadeDelete("pl01", 500, null, false);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0190]
+의미심장하게 미소 지으며&, 프레젠트는 내게서 시선을 돌렸다&.
+물끄러미 어느 한 곳을 응시하고 있다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	CreateTextureEX("ev01", 100, -600, -555, "cg/ev/l/ev0609キャロル結晶化_l.jpg");
+
+	Move("bg01", 1000, -20, @0, AxlDxl, 500);
+	Move("ev01", 1000, -512, @0, Dxl1, false);
+	Fade("ev01", 500, 1000, null, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0195]
+ｳｪｴﾂ ﾇﾁｷｹﾁｨﾆｮﾀﾇ ｽﾃｼｱﾀｻ ｵ郞｡ｴﾙ｡ｦ｡ｦ ｸｶﾄｧｳｻ ｾﾋｾﾆﾂﾈｴﾙ&.
+
+은빛으로 빛나는 결정 기둥&, 그 속에 갇힌 누군가의 모습을&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreateTextureEX("ev02", 100, Center, Middle, "cg/ev/ev0609キャロル結晶化.jpg");
+
+	CreateSE("SE01","seヴォイド結晶化01b");
+	MusicStart("SE01",0,600,0,500,null,false);
+
+	Move("ev01", 1000, -512, -150, AxlDxl, 500);
+	Fade("ev02", 500, 1000, null, true);
+
+	Wait(500);
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0200]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200120a01">
+｡ｸﾄｳｷﾑ!｡ｹ
+
+{	Fw("fwプレゼント_通常_normal");}
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200130a03">
+｡ｸﾇﾊｻ鄲釥ﾌｳﾗ&. ﾁ愰｡ ｴﾙ ｳｪｴﾂｰﾉ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//スクルージに顔を近づけるプレゼント。
+
+
+	TextBoxDelete();
+
+	CreateSE("SE02","se人体_動作_衣擦れ06");
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	CreateTextureEX("ev01", 100, -99, -218, "cg/ev/l/ev0603プレゼント能力取りこみ_l.jpg");
+	Zoom("ev01", 0, 1050, 1050, null, true);
+	Request("ev01", Smoothing);
+
+	Fade("ev01", 500, 1000, null, false);
+	Move("ev01", 800, @0, -168, Dxl2, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0210]
+ﾇﾁｷｹﾁｨﾆｮｰ｡ ｾｼﾀｻ ｰ｡ｱ鋿ﾌ ｵ鯊ﾌｴ昻ﾙ&.
+ﾀｧｱ箍ｨｿ｡ ｸﾌ ｱｻｾ錝ﾂ ｰﾔ ｴﾀｲｸﾁｳｴﾙ&.
+
+그리고&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0211]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200140a03">
+｡ｸｳｪｵｵ ﾁｻ ｹﾙｶﾁ ﾁ爍ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	Wait(200);
+
+	CreateTextureEX("ev02", 100, center, middle, "cg/ev/ev0603プレゼント能力取りこみ_a.jpg");
+	Move("ev01", 400, @0, -118, AxlDxl, 200);
+	Fade("ev02", 200, 1000, null, true);
+
+
+	Wait(200);
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0220]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200150a01">
+｡ｸ｡ｦ｡ｦ!｡ｹ
+
+//スクルージに口づけするプレゼント。
+//ディープキス。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0230]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200160a03">
+｡ｸﾀｽ｡ｦ｡ｦ ﾀｸﾀｽ｡ｦ｡ｦ｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200170a01">
+｡ｸﾅｪ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreateSE("SE01","se人体_血_出血03");
+	MusicStart("SE01",0,700,0,1100,null,false);
+
+	CreateColorEX("co01", 5000, "990000");
+	Fade("co01", 100, 1000, null, true);
+
+	Delete("ev0*");
+
+	CreateTextureEX("bg01", 100, center, middle, "cg/bg/bg006003_3_コキュートス空間.jpg");
+	Request("bg01", Smoothing);
+	Fade("bg01", 0, 1000, null, true);
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0240]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200180a03">
+｡ｸ｡ｦ｡ｦﾀｿ!?｡ｹ
+
+//スクルージに舌を噛まれるプレゼント。
+//慌てて離れる。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	CreateSE("SE02","se人体_血_たれる01");
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	FadeDelete("co01", 500, null, true);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	Wait(500);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0250]
+튕겨 나가듯 프레젠트가 몸을 뗐다&. 이대로 계속했더라면 물어뜯어 버릴 참이었다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0251]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200190a03">
+｡ｸﾇﾏﾇﾏ｡ｦ｡ｦ ﾁ､ｸｻ ｸﾅﾁ､ﾇﾑ ｳ狆ｮ｡ｹ
+
+//（口元から垂れる血を拭いながら笑う）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0260]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200200a01">
+｡ｸｹｫｽｼ ｼﾓｼﾀﾀﾌｳﾄ!｡ｹ
+
+//（激昂。戸惑い）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0270]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200210a03">
+「난 그저 되찾고 싶을 뿐이야」
+
+//服を脱ぎ始めるプレゼント。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	Wait(200);
+
+	SetVolumeEX("SE*", 2000, 0, null);
+	manasong_delete(3000);
+
+	CreateColorEX("co01", 5000, "000000");
+
+	CreateSE("SE01","se人体_動作_衣擦れ04");
+	MusicStart("SE01",0,1200,0,1000,null,false);
+
+	Fade("co01", 1000, 1000, null, true);
+
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0280]
+무슨 생각인지 프레젠트는 천천히 옷을 벗기 시작했다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0281]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200220a01">
+｡ｸｹｹ｡ｦ｡ｦ!?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0290]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200230a03">
+｡ｸｵ遧ｹｸｲｴ酩ﾏｴﾂ ｰﾇ ｽﾈｰﾅｵ遑ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200240a01">
+｡ｸｹｫｽｼ｡ｦ｡ｦ!｡ｹ
+
+//（戸惑い。焦り）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//服を脱ぎ捨てるプレゼント。
+//裸身を見て、驚愕するスクルージ。
+
+
+	TextBoxDelete();
+	Wait(16);
+
+
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	MusicStart("SE01",0,700,0,700,null,false);
+
+	CreateTextureSP("bg01", 100, -390, -1105, "cg/bg/l/bg006003_3_コキュートス空間_l.jpg");
+	Request("bg01", Smoothing);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+
+	CreateTextureSP("ev01", 100, 64, -1600, "cg/ev/x/ev0602プレゼントAP結晶裸_x01.png");
+
+
+	Fade("co01", 1000, 0, null, false);
+
+	Move("bg01", 2000, -590, -1050, Dxl1, false);
+	Move("ev01", 2000, -290, -1500, Dxl1, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0300]
+이윽고 프레젠트의 알몸이 드러났다&.
+ｱﾗ ｸﾀｿ｡&, ｳｪｴﾂ ｰ貔ﾇﾇﾟｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0301]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200250a01">
+｡ｸ｡ｪ｡ｪ!? ｱﾗ ｸｺ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//キャンサーに侵された身体。
+//性別不明の、中性的な肉体。
+//（ぶっちゃけ性器までキャンサー化してる）
+
+//？？：通常のキャンサーと違う感じが欲しい。キャンサー化したまま安定した存在。
+
+
+	TextBoxDelete();
+
+	Wait(16);
+
+	CreateTextureEX("ef01", 100, 300, -50, "cg/ef/x/ef_voidrubble02_x03.png");
+	CreateTextureEX("ef02", 100, 600, -50, "cg/ef/x/ef_voidrubble03_x05.png");
+	CreateTextureEX("ef03", 100, 450, -50, "cg/ef/x/ef_voidrubble02_x03.png");
+	CreateTextureEX("ef04", 100, 350, -50, "cg/ef/x/ef_voidrubble03_x04.png");
+	CreateTextureEX("ef05", 100, 650, -50, "cg/ef/x/ef_voidrubble03_x05.png");
+
+	CreateTextureEX("ev02", 100, Center, Middle, "cg/ev/ev0602プレゼントAP結晶裸.jpg");
+
+	Fade("ef0*", 0, 1000, null, true);
+
+
+	CreateSE("SE01","seヴォイド結晶化01a");
+	MusicStart("SE01",0,500,0,300,null,false);
+
+	Move("bg01", 10000, -600, -250, AxlDxl, false);
+	Move("ev01", 10000, -311, -170, AxlDxl, false);
+
+	$sp=1000;
+	Rotate("ef01", 10000, @0, @0, 380, null,false);
+	Rotate("ef02", 10000, @0, @0, 80, null,false);
+	Rotate("ef03", 10000, @0, @0, -280, null,false);
+	Rotate("ef04", 10000, @0, @0, 180, null,false);
+	Rotate("ef05", 10000, @0, @0, -380, null,false);
+	Move("ef01", $sp, @0, 600, Axl1, false);
+	Wait(1200);
+	Move("ef02", $sp, @0, 600, Axl2, false);
+	Wait(600);
+	Move("ef03", $sp, @0, 600, Axl2, false);
+	Wait(1200);
+	Move("ef04", $sp, @0, 600, Axl2, false);
+	Wait(700);
+	Move("ef05", $sp, @0, 600, Axl1, false);
+	Wait(5000);
+
+	SoundPlay("@lx008",2000,850,true);
+
+	Fade("ev02", 1000, 1000, null, true);
+
+	Wait(1000);
+
+	Delete("ef*");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0310]
+캔서화되어 있다&.
+
+그것도 상당히 진행된 상태다&. 이 정도로 움직일 수 있는 게 이상할 만큼&.
+
+ｾﾆｴﾏ&, ｱﾗｰﾔ ｾﾆｴﾑｰ｡&.
+ﾀﾌｰﾇ ﾄｵｼｭｿ｡ ﾄｧｽﾄｵﾇｾ嶸ﾙｱ篌ｸｴﾙｴﾂ ｿﾀﾈﾁ｡ｪ｡ｪ
+
+<RUBY TEXT="··">동화</RUBY>하고 있는 건가?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0320]
+이 상태는 오히려 지금의 오우마 마나에 가깝다&.
+ｾﾆﾆｮｸｳｽｺ ｹﾙﾀﾌｷｯｽｺｿﾍ ﾀｶﾇﾕﾇﾑ ﾇﾏｳｪﾀﾇ ｻｸ朎ｼｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0321]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200260a03">
+「난 나 자신을 잃고 말았어&.
+｡｡ﾀﾌﾁｨ <RUBY TEXT="｡､｡､｡､">ｾ鋗ﾀ ﾂﾊ</RUBY>ﾀﾌｾ嶸ﾂﾁｵ ｸ｣ｰﾚｾ釭ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//スクルージにしなだれかかる。
+
+	TextBoxDelete();
+	Wait(16);
+
+	CreateTextureEX("ev01", 100, -340, 100, "cg/ev/l/ev0603プレゼント能力取りこみ_b_l.jpg");
+	Request("ev01", Smoothing);
+	Zoom("ev01", 0, 1200, 1200, null, true);
+
+	Fade("ev01", 1000, 1000, null, false);
+	Move("ev01", 20000, -110, 106, null, false);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0330]
+캔서와 동화되어 어느 쪽도 아니게 된 몸으로&, 프레젠트는 한탄한다&.
+――자신을 잃었다고&.
+
+ｳｪ ｿｪｽﾃ ｸｶﾂ｡ﾁﾙ&.
+
+ﾇﾁｷｹﾁｨﾆｮｰ｡ ﾀﾎｰ｣ﾀｸｷﾎｼｭﾀﾇ ﾀｰﾃｼｸｦ ﾀﾒｾ嶹暲ﾌ&. ｾﾆｸｶ ﾆﾐｽｺﾆｮｰ｡ <RUBY TEXT="｡､｡､｡､">ｹｫｾ｡</RUBY>ｸｦ ﾀﾒｾ嶹暲ﾌ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0340]
+나는 기억을&, 인간으로서 살아온 시간을 잃어버렸다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0341]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200270a03">
+「난 그 무엇도 되지 못했어&.
+　황금을 손에 쥐지도&, 만들어 내지도 못했지」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0350]
+프레젠트가 무슨 말을 하는 건지 나로서는 이해할 수 없다&. 이해할 수 있는 건 오직 그 눈동자 깊은 곳에 고인 광기뿐이다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0351]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200280a03">
+｡ｸ｡ｦ｡ｦｾﾆｳﾄ&. ｳｪｻﾓｸｸﾀﾌ ｾﾆｴﾏｾﾟ&.
+　너희도 마찬가지야! 스크루지!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//スクルージに掴みかかるプレゼント。
+
+
+
+	TextBoxDelete();
+
+	//おがみ：★演出　ダミー組み込み
+
+	CreateSE("SE01","se人体_動作_掴む01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	CreateTextureEX("ev02", 100, Center, Middle, "cg/ev/ev0603プレゼント能力取りこみ_b.jpg");
+	Fade("ev02", 500, 1000, null, true);
+
+	Wait(300);
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0360]
+프레젠트의 하얀 손이 내 목을 움켜쥔다&.
+옴짝달싹 못 하는 나는 그저 당할 뿐이다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0361]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200290a03">
+「진화하지도 도태되지도 않는 <RUBY TEXT="목숨">생명</RUBY>&.
+｡｡ｼｼｰ霑｡ｼｭ ｹｲｹﾞﾀｺ&, ｾ錝ﾟｰ｣ﾇﾑ ｱｫｹｰﾀﾌﾁｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0370]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200300a03">
+「즉…… 특별하다는 거지」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200310a01">
+｡ｸ｡ｦ｡ｦﾀｹ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//プレゼントのキャンサーが、スクルージを侵蝕してゆく。
+
+
+	TextBoxDelete();
+	Wait(16);
+
+	//おがみ：★演出　ダミー組み込み
+
+	CreateSE("SE01","seヴォイド結晶化_l");
+	MusicStart("SE01",2000,300,0,800,null,true);
+
+	CreateTextureEX("ev01", 100, Center, Middle, "cg/ev/ev0603プレゼント能力取りこみ_c.jpg");
+
+	Fade("ev01", 0, 1000, null, true);
+	DrawTransition("ev01", 1000, 0, 1000, 100, null, "cg/data/random_01_00_0.png", true);
+
+	Wait(1000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0380]
+프레젠트에게 깃든 캔서가 내 몸을 침식해 온다&. 아니&, 이건 침식이 아니다&. 이것도 <RUBY TEXT="··">동화</RUBY>다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwプレゼント_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0381]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200320a03">
+「우리는 같은 존재야&.
+｡｡ｼｭｷﾎ ｴﾙｸ･ ﾀｰﾃｼｷﾎ ｳｪｴｶ ﾇﾏｳｪﾀﾇ ｿｵﾈ･ﾀﾌﾁｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0390]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200330a03">
+「그러니까&, 스크루지&. ……우리 하나가 되자」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0400]
+프레젠트는 나를 집어삼키려 하고 있다!
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0401]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200340a01">
+「네놈과…… 같이 죽을 생각은 없어!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0410]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200350a03">
+「말했잖아? 우린 소멸하지 않는다고」
+
+{	Fw("fwプレゼント_通常_normal");}
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200360a03">
+「진화도 도태도 없다면&, 우리는 불변이야&.
+｡｡ｿｵｿﾑ ｰﾅｶ悅ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0420]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200370a03">
+｡ｸｿｵｿﾑ ｻ邯釥ｻ ｸﾍｼｼﾇﾏﾀﾚ&.
+｡｡ｳｪｿﾍ ｳﾊ&, ｱﾗｸｮｰ悅ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	Wait(500);
+
+	SetVolumeEX("SE*", 200, 0, null);
+	SetVolumeEX("@lx*", 200, 0, null);
+
+	CreateColorEX("co01", 5000, "000000");
+	Fade("co01", 0, 1000, null, true);
+	Wait(1000);
+
+	Delete("ev*");
+
+//おがみ：★演出　顔窓出さない
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0430]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200380a02">
+「그 말대로야&. 우리는 소멸하지 않아」
+
+//（イェット・トゥー・カム人格。いつもより厳かに）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//おがみ：★演出　顔窓出さない
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0440]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200390a02">
+「우리는 생명의 윤회에서 벗어난 존재니까」
+
+//（イェット・トゥー・カム人格。いつもより厳かに）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//おがみ：★演出　顔窓出さない
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0450]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200400a02">
+｡ｸ｡ｦ｡ｦﾇﾏﾁｸ&, ｳﾊｴﾂ ｴﾞｶｹ
+
+//（イェット・トゥー・カム人格。いつもより厳かに）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0460]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200410a03">
+｡ｸ｡ｪ｡ｪ!?｡ｹ
+
+//スクルージを拘束する結晶が砕け散る。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete();
+
+
+	CreateSE("SE02","seヴォイド崩壊02");
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	CreateColorEXadd("co02", 5000, "FFFFFF");
+	Fade("co02", 100, 1000, null, true);
+
+	Delete("co01");
+
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	Rotate("bg01", 0, @0, @0, 20, null,true);
+	Move("bg01", 0, -455, -240, null, true);
+
+	CreateTextureEX("ef01", 101, 150,-70, "cg/ef/x/ef_結晶割れ07_shima_x01.png");
+	CreateTextureEX("ef02", 101, 392,337, "cg/ef/x/ef_voidrubble01_x91.png");
+	CreateTextureEX("ef03", 101, 610,-30, "cg/ef/x/ef_結晶割れ04_shima_x01.png");
+	CreateTextureEX("ef04", 101, -67,50, "cg/ef/x/ef_結晶割れ05_shima_x02.png");
+	CreateTextureEX("ef05", 101, -132,255, "cg/ef/x/ef_voidrubble02_x01.png");
+	CreateTextureEXadd("ef11", 101, -132,255, "cg/ef/x/ef_light_x02.png");
+	Fade("ef*", 0, 1000, null, true);
+	Zoom("ef11", 0, 2000, 2000, null, true);
+
+	Wait(1000);
+
+	$sp=10000;
+	Shake("ef*", $sp, 0, 1, 0, 0, 1000, null, false);
+	Move("bg01", $sp, @-20, @100, null, false);
+	Move("ef01", $sp, @10, @-20, null, false);
+	Move("ef02", $sp, @12, @-40, null, false);
+	Move("ef03", $sp, @14, @-60, null, false);
+	Move("ef04", $sp, @16, @-80, null, false);
+	Move("ef05", $sp, @20, @-100, null, false);
+	Move("ef11", $sp, @50, @-300, null, false);
+
+
+	Fade("co02", 2000, 0, null, true);
+
+	Wait(1000);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0470]
+아무런 전조도 없이&, 나를 구속하고 있던 AP 결정이 산산이 부서졌다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0471]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX06/0200420a01">
+「……뭐지?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreateColorEX("co01", 5000, "990000");
+
+	Fade("co01", 0, 1000, null, true);
+
+	Delete("ev*");
+	Delete("ef*");
+	Delete("bg*");
+
+	CreateColorSP("co02", 3110, "000000");
+	CreateTextureSP("ev01", 3110, Center, -150, "cg/ef/x/ef_hand01.png");
+	Rotate("ev01", 0, @0, @0, -90, null,true);
+	SetBlur("ev01", true, 2, 500, 150, false);
+
+	CreateSE("SE11","se人体_心臓_鼓動01");
+	MusicStart("SE11",0,1000,0,900,null,false);
+
+
+	Zoom("ev01", 1200, 1100, 1100, Dxl1, false);
+	Fade("co01", 600, 0, null, true);
+
+	FadeDelete("ev01", 1000, Axl1, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0480]
+ｿﾀｸ･ｼﾕﾀﾌ ﾅｸｿﾀｸ･ｴﾙ&.
+부드러운 통증&.
+
+ｱﾗｸｮｰ悅ｪ｡ｪ
+
+//プレゼントの背後に立つ人物。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+	Wait(16);
+}
+
+	CreateTextureSP("bg01", 100, 200, middle, "cg/bg/bg006003_3_コキュートス空間.jpg");
+	CreateTextureSP("ev01", 100, 238, -208, "cg/ev/l/ev0604イェット・トゥー・カム登場_l.png");
+	CreateTextureSP("ev02", 100, 238, -208, "cg/ev/x/ev0604イェット・トゥー・カム登場_x01_ぼかし.png");
+	CreateTextureSP("ev11", 100, 0, -120, "cg/ev/x/ev0602プレゼントAP結晶裸_x02.png");
+	CreateTextureEX("ev12", 100, 0, -120, "cg/ev/x/ev0602プレゼントAP結晶裸_x02_ぼかし.png");
+
+	SetShade("bg01", SEMIHEAVY);
+
+	Zoom("bg01", 0, 2000, 2000, null, true);
+
+	Zoom("ev0*", 0, 1050, 1050, null, true);
+	Zoom("ev1*", 0, 1600, 1600, null, true);
+	Request("ev*", Smoothing);
+
+
+	Fade("co02", 500, 0, null, false);
+
+	Move("bg0*", 1000, @0, @20, AxlDxl, false);
+	Move("ev0*", 1000, @0, -158, AxlDxl, false);
+	Move("ev1*", 1000, @0, 139, AxlDxl, 800);
+
+
+	Zoom("bg01", 1000, 1900, 1900, Dxl1, false);
+	Zoom("ev0*", 1000, 1000, 1000, Dxl1, false);
+	Zoom("ev1*", 1000, 1500, 1500, Dxl1, false);
+
+	Fade("ev02", 1000, 0, null, false);
+	Fade("ev12", 1000, 1000, null, true);
+
+	Wait(200);
+
+	CreateSE("SE01","seヴォイド取り出し01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	CreateColorEXadd("co01", 5000, "FFFFFF");
+
+	Fade("co01", 500, 1000, null, true);
+
+	Wait(200);
+
+	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0490]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200430a03">
+｡ｸｳﾊｴﾂ｡ｪ｡ｪ!｡ｹ
+
+//それが誰かわかる前に、ヴォイド空間が展開。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//◆◆ヴォイド空間
+
+
+
+	TextBoxDelete();
+	Wait(16);
+
+	Delete("ev*");
+	Delete("bg*");
+
+
+	CreateSE("SE01L","seヴォイドエフェクト_l");
+	MusicStart("SE01L",2000,700,0,1000,null,true);
+
+	CreateColorSP("co02", 100, "FFFFFF");
+
+	CreateMovieEX("mv02", 2150, center, middle, true, true, "dx/mvve01.ngs");
+	Zoom("mv02", 0, 2000, 3000, null, true);
+	Request("mv02", AddRender);
+	Fade("mv02", 0, 1000, null, true);
+
+	CloudZoomSmokeSet01("ef01",2200,"cg/ef/x/ef_smoke03_x01.png");
+	CloudZoomSmokeSet02("ef02",2200,"cg/ef/x/ef_smoke03_x01.png");
+	Request("ef01*", AddRender);
+
+	CreateTextureSPadd("ef03", 2500, Center, Middle, "cg/data/slide_02_00_0.png");
+	Fade("ef03", 0, 500, null, true);
+
+	CreateCameraEX("cam", -50, 0, 1000);
+	CreateTextureSP("cam/ev01", 100, center, middle, "cg/ev/x/ev0604イェット・トゥー・カム登場_x01_normal.png");
+	Request("cam/ev01", Smoothing);
+
+
+	Fade("co01", 1500, 0, null, false);
+
+	//Move("ev01", 16000, @0, -280, null, false);
+	CloudZoomSmokeStart01(6800,200,300,5500,900,200,668,-300,-200,Dxl1);
+	CloudZoomSmokeStart02(6500,200,300,5500,900,724,668,1224,-200,Dxl1);
+
+	MoveCamera("cam", 16000, -50, -600, 1000, Dxl1, true);
+
+
+	TextBoxDelete();
+
+//おがみ：★演出　顔ウィンドウ非表示
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0500]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200440a02">
+「스크루지&. 아끼는 자」
+
+//キャロル、イェット・トゥー・カム登場。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//おがみ：★演出　顔ウィンドウ非表示
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0510]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200450a02">
+｡ｸｳﾊﾀﾇ ﾈｲｱﾝﾀｻ ｰﾅｵﾎｾ鋙鯀ｩ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(200);
+
+	SetVolumeEX("SE*", 1000, 0, null);
+
+	CreatePlainEX("pl01", 15000);
+	SetTone("pl01", Monochrome);
+
+	Fade("pl01", 1000, 1000, null, true);
+
+	Delete("ev*");
+	Delete("ef*");
+	Delete("co*");
+	Delete("bg*");
+	Delete("mv*");
+
+////////////////////////////////////////
+//♂♀：選択肢
+//とる
+//→→アバドン まで飛ぶ
+
+//→→とらない
+
+//////////////////////////////////////
+
+
+//	ClearFadeAll(1000, true);
+
+}

@@ -1,0 +1,133 @@
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0108_02.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#bg002008_6_大島全景=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0109.nss";
+
+}
+
+
+scene lx0108_02.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	//おがみ：曲借入
+	SoundPlay("@lx013",0,800,true);
+
+
+	PrintBG("上背景", 30000);
+	CreateTextureSP("絵演背景", 110, -770, -140, "cg/bg/l/bg002008_6_大島全景_l.jpg");
+	CreateTextureSP("絵演祝福元", 740, Center, Middle, "cg/bu/buキャロル_通常_smile1.png");
+	CreateTextureSP("絵演祝福", 720, Center, Middle, "cg/bu/buキャロル_通常_cry3.png");
+	CreateTextureSP("絵演祝福弐", 710, Center, Middle, "cg/bu/buキャロル_通常_smile2.png");
+	CreateTextureSP("絵演祝福参", 700, Center, Middle, "cg/bu/buキャロル_通常_cry4.png");
+
+	SetVertex("絵演背景*", right, 300);
+	SetVertex("絵演祝福*", center, 200);
+	Request("絵演*", Smoothing);
+
+	Zoom("絵演*", 0, 1350, 1350, null, true);
+
+	Move("絵演背景*", 0, @0, @30, Dxl1, true);
+	Move("絵演祝福*", 0, @0, @50, Dxl1, true);
+
+	FadeDelete("上背景", 1500, null, true);
+
+	Wait(300);
+	FadeDelete("絵演祝福元", 200, null, true);
+
+
+
+//←←奴らに報いを
+
+//？？：演出いろいろとペンディング。
+
+//夜明けが来る。朝日に照らされてキャロル。
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800210a02">
+「그래…… 그렇지&.
+｡｡ｳﾗ ﾁﾀｴﾂ ﾁ､ｴ酩ﾘ｡ｹ
+
+{	Fw("fwキャロル_通常_normal");
+	FadeDelete("絵演祝福", 200, null, true);}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800220a02">
+「해치우자&, 스크루지&. 그 녀석들한테 하나도 빠짐없이 본때를 보여 주자」
+
+{	Fw("fwキャロル_通常_normal");
+	FadeDelete("絵演祝福弐", 200, null, true);}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800230a02">
+｡ｸｳｪｴﾂ ｳﾊｸｸﾀﾇ ｹｫｱ箍｡ ｵﾉｰﾔ&.
+　네가 그 증오를 잊지 않는 한은」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(500);
+
+	SetVolumeEX("@lx*", 4000, 0, null);
+	SetVolumeEX("SE*", 4000, 0, null);
+	Wait(1000);
+
+
+	ClearFadeAll(3000, true);
+
+	Wait(1000);
+
+
+
+//→→LX0201
+
+////////////////////////////////////////
+//？？：ペンディング
+
+//ホントはこの後ガイを救出するシュウとマナを遠目に見つけるシーンを入れたい。
+//でも時間帯が合わない。
+
+}

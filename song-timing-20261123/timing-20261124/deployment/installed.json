@@ -1,0 +1,43 @@
+{
+  "at": "2026-11-24T08:54:01.419050+09:00",
+  "game": "P:\\AI\\gclx-codexrun\\game",
+  "previous": {
+    "lyrics-resume/active-bgm.n2l": "98a5c90242c90b70e3e40adc5cec5f4ed676e42c0a3ba776142d90b3547d60cd",
+    "lyrics-resume/data.n2l": "a0829c1a0c0e382a2ff3db2d71e0c72d56257726381af4c8bbfad44efa25f903",
+    "lyrics-resume/loop.n2l": "06b904bfe07c5a932a4b613e296fbc5fbae0dfedd9676b8a2e0c2cb13208763d",
+    "lyrics-resume/repair-loop-v1.n2l": "dd659c2a0e49f1bed91893c30e8d538064800d669a65fe81863427ee15438855",
+    "lyrics-resume/repair-v1.n2l": "4830b72d65fa2370cf5ad4be87fc3185525e26fda94d3e81fc23ba560843a9c4",
+    "lyrics-resume/timing-crlf.n2l": null,
+    "lyrics-resume/timing-legacy.n2l": null,
+    "lyrics-resume/timing-lf.n2l": null,
+    "nss.npa": "c30df6fbd861869a73160e2f517f26a3a4325caa19b9507aad89fd3b9417c470",
+    "n2hd_runtime.dll": "e71cb482882824395a6fb798dc94982c61fc12138776de5c8bf0e701a077afee"
+  },
+  "installed": {
+    "lyrics-resume/active-bgm.n2l": "98a5c90242c90b70e3e40adc5cec5f4ed676e42c0a3ba776142d90b3547d60cd",
+    "lyrics-resume/data.n2l": "a0829c1a0c0e382a2ff3db2d71e0c72d56257726381af4c8bbfad44efa25f903",
+    "lyrics-resume/loop.n2l": "06b904bfe07c5a932a4b613e296fbc5fbae0dfedd9676b8a2e0c2cb13208763d",
+    "lyrics-resume/repair-loop-v1.n2l": "dd659c2a0e49f1bed91893c30e8d538064800d669a65fe81863427ee15438855",
+    "lyrics-resume/repair-v1.n2l": "4830b72d65fa2370cf5ad4be87fc3185525e26fda94d3e81fc23ba560843a9c4",
+    "lyrics-resume/timing-crlf.n2l": "0438bc96e653e7cc86bd404e8d3a4297f3b47ec8d0349d556e24c0689ce48832",
+    "lyrics-resume/timing-legacy.n2l": "36e7c27ca6f259b3ac4dcad5ba8889524e4da324be39451e94b011d0cbde8810",
+    "lyrics-resume/timing-lf.n2l": "e4fb97fff0aebd595974976c568ab67de367ad9e63dfaa054e660fa149be87fa",
+    "nss.npa": "13dd4641cb095e3fc97ce2e1c1c4aa911bbc980acd31f923a2a0d7164009264f",
+    "n2hd_runtime.dll": "f568a117e7a3d65597777ca3ff941dce39a66e745548500e2ee6248deda2d14e"
+  },
+  "changed": [
+    "lyrics-resume/timing-crlf.n2l",
+    "lyrics-resume/timing-legacy.n2l",
+    "lyrics-resume/timing-lf.n2l",
+    "nss.npa",
+    "n2hd_runtime.dll"
+  ],
+  "native_user_saves_written": false,
+  "latest_shared_archive": {
+    "source": "F:\\AI\\gclx-4k\\release_1121\\staging\\nss_play.npa",
+    "source_hash": "1e5f0b8cd5244de97fa05595b9c937b23b0ef385aeb90a3bb64e1eaca6f9345a",
+    "target_hash": "0e3a258d53984e870d899fc8aa33baa0bf82731f9d715ab9fd0d2a0ebe01dcb9",
+    "unchanged_entries": 558
+  },
+  "latest_engine_base": "030ac5ce88834bfa599ef1be1731b5cae8008b0561a1719dd4bc17c28f8ceebc"
+}

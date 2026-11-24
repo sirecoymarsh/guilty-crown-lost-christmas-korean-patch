@@ -1,0 +1,767 @@
+//<continuation number="320">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0201.nss_MAIN
+{
+	$PHASE_num=3;
+	$PHASE_name="우리는 천사가 아니다";
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0301スクルージキャロル街歩き=true;
+	#bg001003_3_六本木街並み3=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0202.nss";
+
+}
+
+
+scene lx0201.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+
+//？？：演出ペンディング
+
+//以下の会話に合わせて、研究施設脱出からクリスマスまでの時間経過を表現する。
+//カイル・クーパー調に様々なシーンをフラッシュバックするとか
+//いっそ特典アニメの映像とかも挿入する？
+//『コール・オブ・デューティ ブラックオプス』とか、あんな感じ。
+
+
+
+
+
+
+
+//覇：下記ムービーとのことなので、暫く黒ベタ。
+
+	PrintBG("上背景", 30000);
+
+	CreateMovieEX("mv01", 10000, Center, Middle, false, false, "dx/mv_lx0201.ngs");
+	//Request("mv01", "Stop");
+	Fade("mv01", 0, 1000, null, true);
+
+	FadeDelete("上背景", 0, null, true);
+
+//	WaitPlay("mv01", null);
+	MenuLock(true);
+	MovieSkipPlay("mv01","lx0201_mv01");
+	MenuLock(false);
+
+
+
+	//★演出処理　バックログ
+
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX02/0100010a02">
+//「――セフィラゲノミクス」
+	SetBacklog("「세피라 게노믹스」", "voice/LX02/0100010a02", 긌긿깓깑);
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0100020a01">
+//「それが連中の名前か」
+	SetBacklog("「그게 놈들 이름인가」", "voice/LX02/0100020a01", 긚긏깑�[긙);
+
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX02/0100030a02">
+//「製薬会社みたいなものだと思えばいいよ」
+	SetBacklog("「제약 회사 같은 거라고 생각하면 돼」", "voice/LX02/0100030a02", 긌긿깓깑);
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0100040a01">
+//「表向きは、だろう？」
+	SetBacklog("「겉으로만 그렇겠지?」", "voice/LX02/0100040a01", 긚긏깑�[긙);
+
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX02/0100050a02">
+//「だがしかーし！
+//　その実体は世界征服を企む悪の秘密結社なのだっ！」
+	SetBacklog("｡ｸﾇﾏﾁｸ, ｱﾗｷｯｳｪ!", "voice/LX02/0100050a02", キャロル);
+	SetBacklog("　그 실체는 세계 정복을 꾀하는 악의 비밀 결사인 것이다!」", NULL, NULL);
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0100060a01">
+//「アホか」
+	SetBacklog("｡ｸｹﾙｺｸｳﾄ｡ｹ", "voice/LX02/0100060a01", スクルージ);
+
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX02/0100070a02">
+//「ノリが悪いなあ、改造人間一号」
+	SetBacklog("「장단 참 안 맞춰 주네, 개조인간 1호」", "voice/LX02/0100070a02", 긌긿깓깑);
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0100080a01">
+//「二号はお前か？」
+	SetBacklog("｡ｸｱﾗｷｳ 2ﾈ｣ｴﾂ ｳﾊｳﾄ?｡ｹ", "voice/LX02/0100080a01", スクルージ);
+
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX02/0100090a02">
+//「技の一号！　力の二号！」
+	SetBacklog("｡ｸｱ箴惕ﾇ 1ﾈ｣! ﾈ釥ﾇ 2ﾈ｣!｡ｹ", "voice/LX02/0100090a02", キャロル);
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0100100a01">
+//「……ミスキャストだろう、それ」
+	SetBacklog("｡ｸ｡ｦ｡ｦｱﾗｰﾅ ｹﾌｽｺﾄｳｽｺﾆｮﾀﾝｾﾆ.｡ｹ", "voice/LX02/0100100a01", スクルージ);
+
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX02/0100110a02">
+//「……わたしたちの他にもね。
+//　実験体の子はいたんだよ」
+	SetBacklog("「……우리 말고도 말이야.", "voice/LX02/0100110a02", 긌긿깓깑);
+	SetBacklog("｡｡ｽﾇﾇ霤ｼﾀﾎ ｾﾖｵ鯊ﾌ ﾀﾖｾ悊釭ｹ", NULL, NULL);
+
+//（突然、声のトーンが変わって）
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0100120a01">
+//「……？」
+	SetBacklog("｡ｸ｡ｦ｡ｦ?｡ｹ", "voice/LX02/0100120a01", スクルージ);
+
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX02/0100130a02">
+//「どうなっちゃったかは……あまり考えたくないよね」
+	SetBacklog("「어떻게 됐을지는…… 별로 생각하고 싶지 않네」", "voice/LX02/0100130a02", 긌긿깓깑);
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0100140a01">
+//「…………」
+	SetBacklog("｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ", "voice/LX02/0100140a01", スクルージ);
+
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX02/0100150a02">
+//「さてさて、<RUBY TEXT="インクレディブル">超人</RUBY>スクルージ。
+//　そんな悪魔のような連中を相手にどう戦うのさ？」
+	SetBacklog("「자아, 인크레더블 스크루지.", "voice/LX02/0100150a02", 긌긿깓깑);
+	SetBacklog("　그런 악마 같은 놈들하고 어떻게 싸울 거야?」", NULL, NULL);
+
+//（気を取り直して）
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0100160a01">
+//「そうだな……」
+	SetBacklog("｡ｸｱﾛｽ遙ｦ｡ｦ｡ｹ", "voice/LX02/0100160a01", スクルージ);
+
+
+
+/*
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100010a02">
+「――세피라 게노믹스」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100020a01">
+「그게 놈들 이름인가」
+
+{	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100030a02">
+「제약 회사 같은 거라고 생각하면 돼」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100040a01">
+「겉으로만 그렇겠지?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100050a02">
+｡ｸﾇﾏﾁｸ&, ｱﾗｷｯｳｪ!
+　그 실체는 세계 정복을 꾀하는 악의 비밀 결사인 것이다!」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100060a01">
+｡ｸｹﾙｺｸｳﾄ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100070a02">
+「장단 참 안 맞춰 주네&, 개조인간 1호」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100080a01">
+｡ｸｱﾗｷｳ 2ﾈ｣ｴﾂ ｳﾊｳﾄ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100090a02">
+｡ｸｱ箴惕ﾇ 1ﾈ｣! ﾈ釥ﾇ 2ﾈ｣!｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100100a01">
+｡ｸ｡ｦ｡ｦｱﾗｰﾅ ｹﾌｽｺﾄｳｽｺﾆｮﾀﾝｾﾆ&.｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100110a02">
+「……우리 말고도 말이야&.
+｡｡ｽﾇﾇ霤ｼﾀﾎ ｾﾖｵ鯊ﾌ ﾀﾖｾ悊釭ｹ
+
+//（突然、声のトーンが変わって）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100120a01">
+｡ｸ｡ｦ｡ｦ?｡ｹ
+
+{	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100130a02">
+「어떻게 됐을지는…… 별로 생각하고 싶지 않네」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100140a01">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100150a02">
+「자아&, <RUBY TEXT="인크레더블">초인</RUBY> 스크루지&.
+　그런 악마 같은 놈들하고 어떻게 싸울 거야?」
+
+//（気を取り直して）
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100160a01">
+｡ｸｱﾛｽ遙ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+*/
+
+
+
+////////////////////////////////////////
+
+
+	SetVolumeEX("@lx*", 3000, 0, null);
+
+
+	CreateColorEX("絵色黒", 15000, "000000");
+	Fade("絵色黒", 500, 1000, null, true);
+
+	Delete("mv01");
+
+	CreateTextureSP("絵演背景", 200, 0, -100, "cg/bg/l/bg001004_3_けやき坂通り_l.jpg");
+	CreateTextureSP("絵演背景弐", 100, 0, -100, "cg/bg/l/bg001003_3_六本木街並み3_l.jpg");
+	CreateTextureEX("絵背景", 100, 0, Middle, "cg/bg/bg001003_3_六本木街並み3.jpg");
+
+	//Wait(1000);
+
+	//★章タイトル定義
+	PhaseSet(3);
+
+	CreateSE("SE01L","seBGM_クリスマスロンド");
+	MusicStart("SE01L",3000,500,0,1000,null,true);
+
+	Wait(1000);
+
+	//▽章タイトル描画
+	PhaseOn();
+
+	//おがみ：修正　速度遅く
+	//Move("絵演背景", 5000, @0, @-200, null, false);
+	Move("絵演背景", 20000, @0, @-200, null, false);
+	FadeDelete("絵色黒", 5000, null, 4000);
+
+	//▽章タイトル消去
+	PhaseOff();
+
+	Wait(2000);
+
+
+
+
+
+
+//シーン切り替え
+//時は流れて、12月。
+
+//◆◆六本木／夜
+
+//寄り添って歩くスクルージとキャロル。
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+데코레이션이 과한 가로수&.<K>
+{
+	//おがみ：修正　速度遅く
+	//Move("絵演背景弐", 7000, @-500, @0, null, false);
+	Move("絵演背景弐", 20000, @-500, @0, null, false);
+	FadeDelete("絵演背景", 700, null, true);
+}
+쓸데없이 고급스러움을 내세우는 부티크의 쇼윈도&.<K>
+ｱﾗｸｮｰ悅ｦ｡ｦ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	Wait(500);
+
+
+	//おがみ：EV修正　夜にする
+	CreateTextureEX("絵画像大", 1000, -680, -150, "cg/ev/l/ev0301スクルージキャロル街歩き_l.jpg");
+	CreateTextureEX("絵画像", 100, Center, Middle, "cg/ev/ev0301スクルージキャロル街歩き.jpg");
+
+	Move("絵画像大", 700, @0, @-50, Dxl1, false);
+	Fade("絵画像大", 700, 1000, null, true);
+
+	Delete("絵演*");
+
+	Wait(250);
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100170a02">
+「저기 좀 봐! 커다란 크리스마스트리야!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	CreateSE("SE02L","se背景_ガヤ_雑踏02L");
+	MusicStart("SE02L",2000,500,0,1000,null,true);
+
+	Wait(500);
+
+	Fade("絵背景", 0, 1000, null, true);
+	FadeDelete("絵画像大", 1000, null, true);
+
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+즉&, 그런 셈이다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+그 탈주극으로부터 몇 달이 지나 어느덧 12월&. 거리에는 온통 크리스마스 장식이 들어섰다&.
+
+24일까지는 아직 시간이 있는데도&, 참으로 성급하기도 하지&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Wait(500);
+	Fade("絵画像", 1000, 1000, null, true);
+	Wait(500);
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100180a02">
+「저기 저기&. 치킨 사 가자&, 치킨&.
+｡｡ﾅｩｸｮｽｺｸｶｽｺ ｱ篌ﾐ ｳｪｰﾔ ｸｻﾀﾌｾﾟ｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100190a01">
+｡ｸﾅｩｸｮｽｺｸｶｽｺｴﾂ <RUBY TEXT="ﾅﾍﾅｰ">ﾄ･ｸ鮹ｶ</RUBY>ﾀﾝｾﾆ｡ｹ
+
+{	Fw("fwキャロル_通常_normal");}
+//（冗談めかして。小説『クリスマスキャロル』のセリフを引用したジョーク）
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100200a02">
+「심부름값으로 1실링 줘&. 5분 안에 돌아오면 반 크라운 추가야」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+주변을 신기한 듯 둘러보며 들떠 있는 캐롤&.
+이런 거리 분위기에는 별로 익숙하지 않은 걸까?
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//おがみ：ズーム演出オミット
+	/*
+	TextBoxDelete(0);
+
+	CreateTextureEX("絵画像大", 1000, -170, 0, "cg/ev/l/ev0301スクルージキャロル街歩き_l.jpg");
+	Fade("絵画像大", 700, 1000, null, true);
+
+	Delete("絵画像");
+	*/
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+……나는 어떨까?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	//TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0145]
+실험체가 되기 전의 나는…… 그 연구시설에 끌려오기 전의 나는&, 어떤 인간이었고 어떤 생활을 하고 있었을까?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	//TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+내 기억은 아직 돌아오지 않는다&.
+눈앞에 있는 광경에도 딱히 감회는 없다&.
+
+여전히 나는 텅 빈 채다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	Wait(200);
+
+	SetVolumeEX("SE02L", 2000, 0, null);
+
+	//FadeDelete("絵画像大", 1000, null, true);
+	FadeDelete("絵画像", 1000, null, true);
+
+	Wait(100);
+
+	St("C",740, @0,@0,"stキャロル_通常_sigh");
+	FadeSt("C",300,true);
+
+	Wait(100);
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100210a02">
+「우중충하네&, 아저씨」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100220a01">
+「아저씨라고 불릴 나이는 아니다…… 아마도」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	St("C",740, @0,@0,"stキャロル_通常_cry3");
+	FadeSt("C",200,true);
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100230a02">
+｡ｸｾﾆﾀ悊ｾｴﾂ ﾇｳｱ箒ﾂ ｺﾐﾀｧｱ篌ﾎﾅﾍｰ｡ ｴﾄｼﾗｷｹﾇﾏﾀﾝｾﾆ｡ｹ
+
+{	St("C",740, @0,@0,"stキャロル_通常_cry1");
+	FadeSt("C",200,true);}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100240a02">
+「정말이지&. 모처럼 데이트하는데 좀 더 즐거운 표정 지어 봐」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	DeleteSt("C", 200,true);
+
+	CreateSE("SE01","se人体_動作_抱く03");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	BGPlainShake(2000, 300, 0, 5, 0, 0, 1000, Dxl1, true);
+
+
+	St("C",740, @0,@0,"buキャロル_通常_smile5口閉じ");
+	FadeSt("C",200,true);
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0180]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100250a01">
+「너무 달라붙지 마&. 움직이기 불편해」
+
+{	St("C",740, @0,@0,"buキャロル_通常_smile5口開け");
+	FadeSt("C",200,true);
+	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100260a02">
+「헤헤―」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	//TextBoxDelete(0);
+
+	DeleteSt("C", 300,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0190]
+그런 그녀의 모습에&, 지나쳐 가던 점잖은 부부의 얼굴에 미소가 번진다&.
+
+그렇군&. 남들 눈에는 제법 흐뭇한 광경이겠지&.
+
+팔짱을 끼고 이렇게 들떠 있으니&, 남들이 보면 크리스마스 분위기에 취한 커플 같기도 하겠지&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0200]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100270a01">
+「애초에 데이트가 아니잖아&. <RUBY TEXT="··">친구</RUBY>를 만나러 가는 거지?」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	St("C",740, @0,@0,"buキャロル_通常_normal");
+	FadeSt("C",300,true);
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0210]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100280a02">
+「뭐&, 그렇긴 하지만」
+
+{	St("C",740, @0,@0,"buキャロル_通常_smile5口閉じ");
+	FadeSt("C",200,true);}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100290a02">
+「어쩔래? 선물이라도 사 갈까?
+｡｡ﾄ｡ﾅｲ? ﾅﾍﾅｰ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreatePlainSP("絵板写", 5000);
+
+	CreateTextureSP("絵演立絵", 1500, Center, 50, "cg/bu/buスクルージ_通常_normal.png");
+	CreateTextureSP("絵演背景", 1000, Center, Middle, "cg/bg/bg001003_3_六本木街並み3.jpg");
+	CreateTextureEX("絵演立絵2", 1500, Center, 50, "cg/bu/buスクルージ_通常_smile3.png");
+	SetShade("絵演背景", HEAVY);
+	Request("絵演立絵*", Smoothing);
+	Move("絵演立絵", 0, @0, @100, null, true);
+	Move("絵演背景", 0, @0, @25, null, true);
+
+	Zoom("絵演立絵*", 0, 1500, 1500, null, true);
+	Zoom("絵演背景", 0, 2000, 2000, null, true);
+
+
+	Move("絵演立絵", 500, @0, @-100, Dxl1, false);
+	Move("絵演背景", 500, @0, @-25, Dxl1, false);
+	FadeDelete("絵板写", 500, null, true);
+	//Wait(200);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0220]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100300a01">
+｡ｸﾇｪｵﾌﾁｹ
+
+{
+//	St("C",740, @0,@0,"buキャロル_通常_normal");
+//	FadeSt("C",200,true);
+	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0100310a02">
+｡ｸｱﾗｰﾅ ｶﾇ ｽｺﾀｧﾃﾏｳﾗ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//おがみ：演出入れる位置を手前に
+/*
+	TextBoxDelete(0);
+
+	CreatePlainSP("絵板写", 5000);
+
+	CreateTextureSP("絵演立絵", 1500, Center, Middle, "cg/bu/buスクルージ_通常_smile3.png");
+	CreateTextureSP("絵演背景", 1000, Center, Middle, "cg/bg/bg001003_3_六本木街並み3.jpg");
+	SetShade("絵演背景", HEAVY);
+	Request("絵演立絵", Smoothing);
+
+	Zoom("絵演立絵", 0, 1500, 1500, null, true);
+	Zoom("絵演背景", 0, 2500, 2500, null, true);
+
+	FadeDelete("絵板写", 1000, null, true);
+*/
+
+	Fade("絵演立絵2", 300, 1000, null, true);
+	FadeDelete("絵演立絵", 200, null, false);
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0230]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0100320a01">
+「얼간이를 함께 삶아 주는 거지&.
+　심장에는 호랑가시나무 말뚝을 박아 넣고 말이야」
+
+//（小説『クリスマスキャロル』のセリフを引用した皮肉）
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	Wait(500);
+
+	SetVolumeEX("SE*", 2500, 0, null);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 2000, 1000, null, true);
+
+	Wait(1500);
+
+//→→LX0202
+
+}

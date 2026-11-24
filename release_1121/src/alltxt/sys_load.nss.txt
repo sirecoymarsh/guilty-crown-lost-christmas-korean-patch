@@ -1,0 +1,1658 @@
+#include "nss/function_dialog.nss"
+
+//=============================================================================//
+.//■ロード■
+//=============================================================================//
+chapter main
+{
+	//★ロックの場合
+	if($SYSTEM_load_lock){
+		return;
+	}
+
+	//★前提変数
+	if($Title_Load){
+		//★：ゲームスピード
+		#play_speed_plus2 = #SYSTEM_play_speed;
+		#SYSTEM_play_speed=3;
+	}
+
+	Wait(16);
+	
+	//★超速からの変遷用
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_buttondown_close=false;
+
+	$SYSTEM_keydown_l = false;
+
+	//■準備「スクリーン」//※右クリックから来ていなければ
+	if(!$SYSTEM_menu_enable&&!$PLACE_title){
+		CreateTexture("video",10000,center,middle,VIDEO);
+		CreateTexture("SaveScreen", 200000, 0, 0, VIDEO);
+	}else{
+		CreateTexture("SaveScreen", 200000, 0, 0, SCREEN);
+	}
+	Delete("@TITLE_絵Snow");
+	Wait(1);
+
+	//行間調整
+	$SYSTEM_text_margin_column=0;
+	$SYSTEM_text_margin_row=0;
+
+	//デリート初期化
+	$SaveDelete=false;
+
+	//初回無し
+	$SaveFiest=false;
+
+	//■定義「共通素材」
+	SaveReady();
+
+	//■アニメーション定義
+	//CreateLoadAnime();
+
+	//■開始「ロード画面」
+	$SYSTEM_menu_load_enable=true;
+	while($SYSTEM_menu_load_enable){
+
+		//▼定義
+		SaveSet();
+
+		//▼描画
+		SaveFade();
+
+		//▼選択肢
+		SaveSelect();
+	}
+
+	Request("セーブ_終了",Play);
+
+	//★終了動作「描画」
+	CreateTexture("システム背景SL", 20100, 0, 0, SCREEN);
+
+	Delete("WND");
+	Delete("Save*");
+	Delete("@Save*");
+	Request("@TITLE_絵Snow",Resume);
+	Fade("システム背景SL",300,0,null,true);
+
+	if($Title_Load){
+		#SYSTEM_play_speed = #play_speed_plus2;
+	}
+
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+
+	$SYSTEM_menu_load_enable=false;
+}
+
+
+
+
+
+
+
+
+
+.//■共通定義
+function SaveReady()
+{
+LockVideo(true);
+..	//■準備「サムネイルのための窓」
+	CreateName("WND");
+	SetAlias("WND","WND");
+
+..	//■ロード「共通画像系」
+	//HIT用
+	LoadFile("cg/sys/save/hit.png", true);
+	//NO用
+	LoadFile("cg/sys/save/Blank.png", true);
+	//Waku用
+	LoadFile("cg/sys/save/サムネールカーソル.png", true);
+
+	LoadImage("SAVE_背景1","cg/sys/save/page-001.png");
+	LoadImage("SAVE_背景2","cg/sys/save/page-002.png");
+	LoadImage("SAVE_背景3","cg/sys/save/page-003.png");
+	LoadImage("SAVE_背景4","cg/sys/save/page-004.png");
+
+	CreateTexture("SaveCase",90010,0,0,"cg/sys/save/背景くりぬいてない.png");
+/*
+	//Usual用
+	LoadImage("SaveImage1","cg/sys/save/選択_off.png");
+	SetAlias("SaveImage1","SaveImage1");
+	//Over用
+	LoadImage("SaveImage2","cg/sys/save/選択_over.png");
+	SetAlias("SaveImage2","SaveImage2");
+	//Click用
+	LoadImage("SaveImage3","cg/sys/save/選択_on.png");
+	SetAlias("SaveImage3","SaveImage3");
+	//Index用
+	LoadImage("SaveImage4","cg/sys/save/txt_totaltime.png");
+	SetAlias("SaveImage4","SaveImage4");
+*/
+
+..	//▼定義「背景」
+//	CreateTexture("SaveBack",10000,center,middle,"cg/sys/save/ロード背景.png");
+//	SetAlias("SaveBack", "SaveBack");
+//
+//..	//▼定義「サムネイル枠」
+//	CreateTexture("SaveCase",10010,98,20,"cg/sys/save/ロード日付ワク.png");
+//	SetAlias("SaveCase", "SaveCase");
+
+..	//▼定義「プロセス」
+	//CreateProcess("セーブプロセス", 150, 0, 0, "SaveAnime2");
+	//SetAlias("セーブプロセス", "セーブプロセス");
+
+..	//▼定義「NOサムネイルベース」
+	//CreateTexture("SaveNOT",10009,216,34,"cg/sys/save/NODATAベース.png");
+	//SetAlias("SaveNOT", "SaveNOT");
+
+..	//▼定義「NEW」
+	CreateTexture("SaveNEW", 125000, 1000, 1000, "cg/sys/save/new.png");
+	SetVertex("SaveNEW", 0, 0);
+	Zoom("SaveNEW", 0, 250, 250, null, false);
+	Request("SaveNEW", Smoothing);
+	SetAlias("SaveNEW", "SaveNEW");
+	CreateProcess("SaveNewProcess", 150, 0, 0, "SaveProcess");
+
+..	//▼定義「総プレイ時間」
+	//●総プレイ時間：合計
+	#ALL_PLAY_TIME=#ALL_PLAY_TIME+(Time()-#BEGIN_TIME);
+	//●総プレイ時間：計測開始
+	#BEGIN_TIME=Time();
+
+	$PlayTime=String("PLAY TIME  %01d:%02d",#ALL_PLAY_TIME/3600,Integer(#ALL_PLAY_TIME-(3600*Integer(#ALL_PLAY_TIME/3600)))/60,#ALL_PLAY_TIME%60);
+	//$PlayTime="PLAY TIME  000000000";
+
+//	SetFont("Noto Serif KR",21,#000000,#000000,500,null);
+//	CreateText("SavePlay", 10100, 0, 14, Auto, Auto, $PlayTime);
+//	SetAlias("SavePlay", "SavePlay");
+//	Request("SavePlay", PushText);
+//
+//	$SavePlayH=-(ImageHorizon("SavePlay")/2);
+//	//CreateText("テキスト１", 20000, 50, 150, 700, 500, $SavePlayH);
+//	$SavePlayH=290+$SavePlayH;
+//	Move("SavePlay", 0, @$SavePlayH, @0, null, true);
+
+	$SaveNextPageX=822;
+	$SaveNextPageY=469;
+	$SaveBackPageX=726;
+	$SaveExitX=918;
+
+..	//▼定義「Exit」
+	CreateChoice("SaveEXIT");
+	CreateTexture("SaveEXIT/MouseUsual/hit",0,$SaveExitX,$SaveNextPageY,"cg/sys/save/hit02.png");
+	CreateTexture("SaveEXIT/icon", 105000, $SaveExitX, $SaveNextPageY, "cg/sys/save/exit-001.png");
+	SetVertex("SaveEXIT/icon", 0, 0);
+	Zoom("SaveEXIT/icon", 0, 250, 250, null, false);
+	Request("SaveEXIT/icon", Smoothing);
+	CreateTexture("SaveEXIT/MouseOver/icon", 106000, $SaveExitX, $SaveNextPageY, "cg/sys/save/exit-002.png");
+	SetVertex("SaveEXIT/MouseOver/icon", 0, 0);
+	Zoom("SaveEXIT/MouseOver/icon", 0, 250, 250, null, false);
+	Request("SaveEXIT/MouseOver/icon", Smoothing);
+	CreateTexture("SaveEXIT/MouseClick/icon", 106000, $SaveExitX, $SaveNextPageY, "cg/sys/save/exit-003.png");
+	SetVertex("SaveEXIT/MouseClick/icon", 0, 0);
+	Zoom("SaveEXIT/MouseClick/icon", 0, 250, 250, null, false);
+	Request("SaveEXIT/MouseClick/icon", Smoothing);
+	Request("SaveEXIT/MouseUsual/hit", Erase);
+
+..	//▼定義「Back」
+	CreateChoice("SavePrev");
+	CreateTexture("SavePrev/MouseUsual/hit",0,$SaveBackPageX,$SaveNextPageY,"cg/sys/save/hit02.png");
+	CreateTexture("SavePrev/icon", 105000, $SaveBackPageX, $SaveNextPageY, "cg/sys/save/back-001.png");
+	SetVertex("SavePrev/icon", 0, 0);
+	Zoom("SavePrev/icon", 0, 250, 250, null, false);
+	Request("SavePrev/icon", Smoothing);
+	CreateTexture("SavePrev/MouseOver/icon", 106000, $SaveBackPageX, $SaveNextPageY, "cg/sys/save/back-002.png");
+	SetVertex("SavePrev/MouseOver/icon", 0, 0);
+	Zoom("SavePrev/MouseOver/icon", 0, 250, 250, null, false);
+	Request("SavePrev/MouseOver/icon", Smoothing);
+	CreateTexture("SavePrev/MouseClick/icon", 106000, $SaveBackPageX, $SaveNextPageY, "cg/sys/save/back-003.png");
+	SetVertex("SavePrev/MouseClick/icon", 0, 0);
+	Zoom("SavePrev/MouseClick/icon", 0, 250, 250, null, false);
+	Request("SavePrev/MouseClick/icon", Smoothing);
+	Request("SavePrev/MouseUsual/hit", Erase);
+
+..	//▼定義「Next」
+	CreateChoice("SaveNEXT");
+	CreateTexture("SaveNEXT/MouseUsual/hit",0,$SaveNextPageX,$SaveNextPageY,"cg/sys/save/hit02.png");
+	CreateTexture("SaveNEXT/icon", 105000, $SaveNextPageX, $SaveNextPageY, "cg/sys/save/next-001.png");
+	SetVertex("SaveNEXT/icon", 0, 0);
+	Zoom("SaveNEXT/icon", 0, 250, 250, null, false);
+	Request("SaveNEXT/icon", Smoothing);
+	CreateTexture("SaveNEXT/MouseOver/icon", 106000, $SaveNextPageX, $SaveNextPageY, "cg/sys/save/next-002.png");
+	SetVertex("SaveNEXT/MouseOver/icon", 0, 0);
+	Zoom("SaveNEXT/MouseOver/icon", 0, 250, 250, null, false);
+	Request("SaveNEXT/MouseOver/icon", Smoothing);
+	CreateTexture("SaveNEXT/MouseClick/icon", 106000, $SaveNextPageX, $SaveNextPageY, "cg/sys/save/next-003.png");
+	SetVertex("SaveNEXT/MouseClick/icon", 0, 0);
+	Zoom("SaveNEXT/MouseClick/icon", 0, 250, 250, null, false);
+	Request("SaveNEXT/MouseClick/icon", Smoothing);
+	Request("SaveNEXT/MouseUsual/hit", Erase);
+
+
+	LoadImage("PAGE_BUTTON","cg/sys/save/pagebutton.bmp");
+	CreateChoice("PAGE_1");
+	CreateTexture("PAGE_1/MouseUsual/hit",0,638,0,"PAGE_BUTTON");
+	CreateTexture("PAGE_1/MouseOver/hit",0,638,0,"PAGE_BUTTON");
+	CreateTexture("PAGE_1/MouseClick/hit",0,638,0,"PAGE_BUTTON");
+	CreateChoice("PAGE_2");
+	CreateTexture("PAGE_2/MouseUsual/hit",0,720,0,"PAGE_BUTTON");
+	CreateTexture("PAGE_2/MouseOver/hit",0,720,0,"PAGE_BUTTON");
+	CreateTexture("PAGE_2/MouseClick/hit",0,720,0,"PAGE_BUTTON");
+	CreateChoice("PAGE_3");
+	CreateTexture("PAGE_3/MouseUsual/hit",0,802,0,"PAGE_BUTTON");
+	CreateTexture("PAGE_3/MouseOver/hit",0,802,0,"PAGE_BUTTON");
+	CreateTexture("PAGE_3/MouseClick/hit",0,802,0,"PAGE_BUTTON");
+	CreateChoice("PAGE_4");
+	CreateTexture("PAGE_4/MouseUsual/hit",0,884,0,"PAGE_BUTTON");
+	CreateTexture("PAGE_4/MouseOver/hit",0,884,0,"PAGE_BUTTON");
+	CreateTexture("PAGE_4/MouseClick/hit",0,884,0,"PAGE_BUTTON");
+	Request("PAGE_*/MouseUsual/hit", Erase);
+/*
+..	//▼定義「消去」
+	$SaveDeleteX=790;
+	$SaveDeleteY=226;
+	CreateChoice("SaveDELETE");
+	CreateTexture("SaveDELETE/MouseUsual/hit",10010,$SaveDeleteX,$SaveDeleteY,"cg/sys/save/削除ボタン-001.png");
+	CreateTexture("SaveDELETE/icon",10010,$SaveDeleteX,$SaveDeleteY,"cg/sys/save/削除ボタン-001.png");
+	CreateTexture("SaveDELETE/MouseOver/icon",10050,$SaveDeleteX,$SaveDeleteY,"cg/sys/save/削除ボタン-002.png");
+//	CreateTexture("SaveDELETE/MouseClick/icon",10050,$SaveDeleteX,$SaveDeleteY,"cg/sys/save/削除ボタン-003.png");
+	CreateTexture("SaveDELETE/icon2",10050,$SaveDeleteX,$SaveDeleteY,"cg/sys/save/削除ボタン-003.png");
+	Request("SaveDELETE/MouseUsual/hit", Erase);
+	Request("SaveDELETE",UnClickable);
+
+	Delete("SaveDELETE/MouseClick");
+	Fade("SaveDELETE/icon2", 0, 0, null, false);
+
+..	//▼定義「１ページ」
+	$SavePage1X=305;
+	$SavePage1Y=548;
+	CreateChoice("SavePAGE1");
+	CreateTexture("SavePAGE1/MouseUsual/hit",10010,$SavePage1X,$SavePage1Y,"cg/sys/save/page_off.png");
+	CreateTexture("SavePAGE1/MouseUsual/icon",10010,$SavePage1X,$SavePage1Y,"cg/sys/save/page_off.png");
+	CreateTexture("SavePAGE1/MouseOver/icon",10050,$SavePage1X,$SavePage1Y,"cg/sys/save/page_over.png");
+	CreateTexture("SavePAGE1/MouseClick/icon",10050,$SavePage1X,$SavePage1Y,"cg/sys/save/page_on.png");
+	Request("SavePAGE1/MouseUsual/hit", Erase);
+
+	CreateTexture("SavePAGE1_ON",10050,$SavePage1X,$SavePage1Y,"cg/sys/save/page_over.png");
+	SetAlias("SavePAGE1_ON", "SavePAGE1_ON");
+
+..	//▼定義「２ページ」
+	$SavePage2X=372;
+	$SavePage2Y=548;
+	CreateChoice("SavePAGE2");
+	CreateTexture("SavePAGE2/MouseUsual/hit",10010,$SavePage2X,$SavePage2Y,"cg/sys/save/page_off.png");
+	CreateTexture("SavePAGE2/MouseUsual/icon",10010,$SavePage2X,$SavePage2Y,"cg/sys/save/page_off.png");
+	CreateTexture("SavePAGE2/MouseOver/icon",10050,$SavePage2X,$SavePage2Y,"cg/sys/save/page_over.png");
+	CreateTexture("SavePAGE2/MouseClick/icon",10050,$SavePage2X,$SavePage2Y,"cg/sys/save/page_on.png");
+	Request("SavePAGE2/MouseUsual/hit", Erase);
+
+	CreateTexture("SavePAGE2_ON",10050,$SavePage2X,$SavePage2Y,"cg/sys/save/page_over.png");
+	SetAlias("SavePAGE2_ON", "SavePAGE2_ON");
+
+..	//▼定義「３ページ」
+	$SavePage3X=439;
+	$SavePage3Y=548;
+	CreateChoice("SavePAGE3");
+	CreateTexture("SavePAGE3/MouseUsual/hit",10010,$SavePage3X,$SavePage3Y,"cg/sys/save/page_off.png");
+	CreateTexture("SavePAGE3/MouseUsual/icon",10010,$SavePage3X,$SavePage3Y,"cg/sys/save/page_off.png");
+	CreateTexture("SavePAGE3/MouseOver/icon",10050,$SavePage3X,$SavePage3Y,"cg/sys/save/page_over.png");
+	CreateTexture("SavePAGE3/MouseClick/icon",10050,$SavePage3X,$SavePage3Y,"cg/sys/save/page_on.png");
+	Request("SavePAGE3/MouseUsual/hit", Erase);
+
+	CreateTexture("SavePAGE3_ON",10050,$SavePage3X,$SavePage3Y,"cg/sys/save/page_over.png");
+	SetAlias("SavePAGE3_ON", "SavePAGE3_ON");
+
+..	//▼定義「４ページ」
+	$SavePage4X=506;
+	$SavePage4Y=548;
+	CreateChoice("SavePAGE4");
+	CreateTexture("SavePAGE4/MouseUsual/hit",10010,$SavePage4X,$SavePage4Y,"cg/sys/save/page_off.png");
+	CreateTexture("SavePAGE4/MouseUsual/icon",10010,$SavePage4X,$SavePage4Y,"cg/sys/save/page_off.png");
+	CreateTexture("SavePAGE4/MouseOver/icon",10050,$SavePage4X,$SavePage4Y,"cg/sys/save/page_over.png");
+	CreateTexture("SavePAGE4/MouseClick/icon",10050,$SavePage4X,$SavePage4Y,"cg/sys/save/page_on.png");
+	Request("SavePAGE4/MouseUsual/hit", Erase);
+
+	CreateTexture("SavePAGE4_ON",10050,$SavePage4X,$SavePage4Y,"cg/sys/save/page_over.png");
+	SetAlias("SavePAGE4_ON", "SavePAGE4_ON");
+*/
+	CreateSound("セーブ_記録",SE,"sound/se/SE_システム_セーブ_記録.ogg");
+	CreateSound("セーブ_決定",SE,"sound/se/SE_システム_セーブ_決定.ogg");
+	CreateSound("セーブ_終了",SE,"sound/se/SE_システム_セーブ_終了.ogg");
+LockVideo(false);
+}
+
+.//■素材定義２
+function SaveSet()
+{
+LockVideo(true);	
+..	//▲サムネイル初期化
+	Delete("@WND/Savenum_*");
+	Delete("*/*/prd");
+	Move("SaveNEW",0,0,-100,null,false);
+
+..	//▲リクエスト
+/*
+	Request("SavePAGE1",Clickable);
+	Request("SavePAGE2",Clickable);
+	Request("SavePAGE3",Clickable);
+	Request("SavePAGE4",Clickable);
+
+	Request("SavePAGE1/MouseUsual/icon", Enter);
+	Request("SavePAGE1/MouseOver/icon", Enter);
+	Request("SavePAGE1/MouseClick/icon", Enter);
+	Request("SavePAGE2/MouseUsual/icon", Enter);
+	Request("SavePAGE2/MouseOver/icon", Enter);
+	Request("SavePAGE2/MouseClick/icon", Enter);
+	Request("SavePAGE3/MouseUsual/icon", Enter);
+	Request("SavePAGE3/MouseOver/icon", Enter);
+	Request("SavePAGE3/MouseClick/icon", Enter);
+	Request("SavePAGE4/MouseUsual/icon", Enter);
+	Request("SavePAGE4/MouseOver/icon", Enter);
+	Request("SavePAGE4/MouseClick/icon", Enter);
+*/
+
+	$SaveMaxNum=24;
+	$SaveMaxPage=4;
+
+..	//●変数「ページ初期設定」
+	$SaveBanX=672;
+	$SaveBanY=678;
+	if(!#SavePage)
+	{
+		#SavePage=1;
+	}
+	else if($SaveFirst)
+	{
+		$tempInt=0;
+		$tempInt2=0;
+		if($PLACE_title){
+			//タイトルから
+			$tempInt=Integer(#LATEST_SAVE_NUM1/$SaveMaxNum);
+			$tempInt2=#LATEST_SAVE_NUM1%$SaveMaxNum;
+		}else if($SYSTEM_menu_quicksave_enable){
+			//ロックされている場合
+			$tempInt=Integer(#LATEST_SAVE_QUICK/$SaveMaxNum);
+			$tempInt2=#LATEST_SAVE_QUICK%$SaveMaxNum;
+		}else if(#LATEST_SAVE_NUM){
+			//ADVから
+			$tempInt=Integer(#LATEST_SAVE_NUM/$SaveMaxNum);
+			$tempInt2=#LATEST_SAVE_NUM%$SaveMaxNum;
+		}
+
+		if($tempInt2>0){$tempInt++;}
+		if($tempInt==0){$tempInt=1;}
+		#SavePage=$tempInt;
+	}
+
+//	$SaveBanNut=String("cg/sys/save/カウント/%03d.png",#SavePage);
+//	CreateTexture("SaveBan",10010,$SaveBanX,$SaveBanY,$SaveBanNut);
+//	SetAlias("SaveBan", "SaveBan");
+//
+//	$SaveMaxNum=12;
+//	$SaveMax=#SavePage*$SaveMaxNum;
+//	$SaveGroval=$SaveMax-($SaveMaxNum-1);
+
+	Request("PAGE_*",Clickable);
+	if(#SavePage==1)
+	{
+		$SaveGroval=1;
+		$SaveMax=$SaveMaxNum;
+		//Request("SavePAGE1",UnClickable);
+		//Request("SavePAGE1/MouseUsual/icon", Erase);
+		//Request("SavePAGE1/MouseOver/icon", Erase);
+		//Request("SavePAGE1/MouseClick/icon", Erase);
+		CreateTexture("SaveBack", 100000, 0, 0, "SAVE_背景1");
+		SetVertex("SaveBack", 0, 0);
+		Zoom("SaveBack", 0, 250, 250, null, false);
+	Request("SaveBack", Smoothing);
+		SetAlias("SaveBack", "SaveBack");
+		
+		Request("PAGE_1",UnClickable);
+	}
+	else if(#SavePage==2)
+	{
+		$SaveGroval=$SaveMaxNum + 1;
+		$SaveMax=$SaveMaxNum * 2;
+		//Request("SavePAGE2",UnClickable);
+		//Request("SavePAGE2/MouseUsual/icon", Erase);
+		//Request("SavePAGE2/MouseOver/icon", Erase);
+		//Request("SavePAGE2/MouseClick/icon", Erase);
+		CreateTexture("SaveBack", 100000, 0, 0, "SAVE_背景2");
+		SetVertex("SaveBack", 0, 0);
+		Zoom("SaveBack", 0, 250, 250, null, false);
+	Request("SaveBack", Smoothing);
+		SetAlias("SaveBack", "SaveBack");
+		
+		Request("PAGE_2",UnClickable);
+	}
+	else if(#SavePage==3)
+	{
+		$SaveGroval=$SaveMaxNum * 2 + 1;
+		$SaveMax=$SaveMaxNum * 3;
+		//Request("SavePAGE3",UnClickable);
+		//Request("SavePAGE3/MouseUsual/icon", Erase);
+		//Request("SavePAGE3/MouseOver/icon", Erase);
+		//Request("SavePAGE3/MouseClick/icon", Erase);
+		CreateTexture("SaveBack", 100000, 0, 0, "SAVE_背景3");
+		SetVertex("SaveBack", 0, 0);
+		Zoom("SaveBack", 0, 250, 250, null, false);
+	Request("SaveBack", Smoothing);
+		SetAlias("SaveBack", "SaveBack");
+		
+		Request("PAGE_3",UnClickable);
+	}
+	else if(#SavePage==4)
+	{
+		$SaveGroval=$SaveMaxNum * 3 + 1;
+		$SaveMax=$SaveMaxNum * 4;
+		//Request("SavePAGE4",UnClickable);
+		//Request("SavePAGE4/MouseUsual/icon", Erase);
+		//Request("SavePAGE4/MouseOver/icon", Erase);
+		//Request("SavePAGE4/MouseClick/icon", Erase);
+		CreateTexture("SaveBack", 100000, 0, 0, "SAVE_背景4");
+		SetVertex("SaveBack", 0, 0);
+		Zoom("SaveBack", 0, 250, 250, null, false);
+	Request("SaveBack", Smoothing);
+		SetAlias("SaveBack", "SaveBack");
+		
+		Request("PAGE_4",UnClickable);
+	}
+/*	else if(#SavePage==5)
+	{
+		$SaveGroval=81;$SaveMax=100;
+		//Request("SavePAGE4",UnClickable);
+		//Request("SavePAGE4/MouseUsual/icon", Erase);
+		//Request("SavePAGE4/MouseOver/icon", Erase);
+		//Request("SavePAGE4/MouseClick/icon", Erase);
+		CreateTexture("SaveBack",10000,center,middle,"cg/sys/save/数字80-100背景save.png");
+		SetAlias("SaveBack", "SaveBack");
+	}
+*/	else
+	{
+		$SaveGroval=1;
+		$SaveMax=$SaveMaxNum;
+		#SavePage=1;
+		//Request("SavePAGE1",UnClickable);
+		//Request("SavePAGE1/MouseUsual/icon", Erase);
+		//Request("SavePAGE1/MouseOver/icon", Erase);
+		//Request("SavePAGE1/MouseClick/icon", Erase);
+		CreateTexture("SaveBack", 100000, 0, 0, "SAVE_背景1");
+		SetVertex("SaveBack", 0, 0);
+		Zoom("SaveBack", 0, 250, 250, null, false);
+	Request("SaveBack", Smoothing);
+		SetAlias("SaveBack", "SaveBack");
+	}
+
+
+	//サムネイルサイズ
+	#SYSTEM_save_thumbnail_width=160;
+	#SYSTEM_save_thumbnail_height=90;
+
+	//カウント初期化
+	$SaveCount=1;
+
+	//行数
+	$Gyou1=6;
+	$Gyou2=12;
+	$Gyou3=18;
+	$Gyou3=24;
+
+..	//●変数「初期位置」
+	//サムネイル（大）
+	$PreSaveVisionX=22;
+	$PreSaveVisionY=467;
+	//サムネイル
+	$PreSaveThumX=22;
+	$PreSaveThumY=26;
+	$SaveThumX_plus=164;
+	$SaveThumY_plus=106;
+	//ユージュアル、オーバー、クリック
+	$PreSaveBaseX=22;
+	$PreSaveBaseY=26;
+	$SaveBaseX_plus=164;
+	$SaveBaseY_plus=106;
+	//情報（ナンバー）
+	$PreSaveNumberX=200;
+	$PreSaveNumberY=466;
+	//情報（テキスト）
+	$PreSaveCommentX=200;
+	$PreSaveCommentY=500;
+	$SaveCommentH="Auto";
+	$SaveCommentV=100;
+	$Save_text_margin_column=0;
+	$Save_text_margin_row=25;
+	//情報（日にち）
+	$PreSaveDateX=118;
+	$PreSaveDateY=14;
+	//情報（時間）
+	$PreSaveTimeX=68;
+	$PreSaveTimeY=528;
+	//情報（タイトル）
+	$PreSaveChapterX=889;
+	$PreSaveChapterY=153;
+	$Save_text_margin_column2=0;
+	$Save_text_margin_row2=0;
+	//情報（インデックス）
+	$PreSaveIndexX=385;
+	$PreSaveIndexY=411;
+	//NEW（ナンバー）
+	$SaveNewX_plus=0;
+	$SaveNewY_plus=0;
+
+..	//●変数「初期変数の値を代入」
+	$SaveVisionX=$PreSaveVisionX;
+	$SaveVisionY=$PreSaveVisionY;
+	$SaveThumX=$PreSaveThumX;
+	$SaveThumY=$PreSaveThumY;
+	$SaveBaseX=$PreSaveBaseX;
+	$SaveBaseY=$PreSaveBaseY;
+	$SaveNumberX=$PreSaveNumberX;
+	$SaveNumberY=$PreSaveNumberY;
+	$SaveDateX=$PreSaveDateX;
+	$SaveDateY=$PreSaveDateY;
+	$SaveCommentX=$PreSaveCommentX;
+	$SaveCommentY=$PreSaveCommentY;
+	$SaveTimeX=$PreSaveTimeX;
+	$SaveTimeY=$PreSaveTimeY;
+	$SaveChapterX=$PreSaveChapterX;
+	$SaveChapterY=$PreSaveChapterY;
+	$SaveIndexX=$PreSaveIndexX;
+	$SaveIndexY=$PreSaveIndexY;
+
+..//■選択肢作成
+	while($SaveGroval<=$SaveMax){
+...		//▼定義「選択肢」
+		$SaveChoiceName="Savenum_"+$SaveCount;
+		CreateChoice($SaveChoiceName);
+		SetAlias($SaveChoiceName,$SaveChoiceName);
+
+		$SaveChoiceNameEX=$SaveChoiceName;
+		$SaveChoiceName="@"+$SaveChoiceName;
+
+...		//●データ移動
+		$count = $SaveCount-1;
+		$SaveThumX = $PreSaveThumX + ($SaveThumX_plus * ($count % $Gyou1));
+		$SaveThumY = $PreSaveThumY + ($SaveThumY_plus * Integer($count / $Gyou1));
+
+		$SaveBaseY=$SaveThumX;
+		$SaveBaseX=$SaveThumY;
+/*		if($SaveCount<=$Gyou1){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-1));
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-1));
+		}else if($SaveCount<=$Gyou2){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-$Gyou1-1));
+			$SaveThumX=$PreSaveThumX+$SaveThumX_plus;
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-$Gyou1-1));
+			$SaveBaseX=$PreSaveBaseX+$SaveBaseX_plus;
+		}else if($SaveCount<=$Gyou3){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-$Gyou2-1));
+			$SaveThumX=$PreSaveThumX+($SaveThumX_plus*2);
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-$Gyou2-1));
+			$SaveBaseX=$PreSaveBaseX+($SaveBaseX_plus*2);
+		}else if($SaveCount<=$Gyou4){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-$Gyou3-1));
+			$SaveThumX=$PreSaveThumX+($SaveThumX_plus*3);
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-$Gyou3-1));
+			$SaveBaseX=$PreSaveBaseX+($SaveBaseX_plus*3);
+		}else if($SaveCount<=$Gyou5){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-$Gyou4-1));
+			$SaveThumX=$PreSaveThumX+($SaveThumX_plus*4);
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-$Gyou4-1));
+			$SaveBaseX=$PreSaveBaseX+($SaveBaseX_plus*4);
+		}
+*/
+		//スマガ、フラッシュ吐き出しのズレ
+		if($SaveCount==1||$SaveCount==2||$SaveCount==3||$SaveCount==6||$SaveCount==7||$SaveCount==10){
+			//$SaveThumX+=1;
+			//$SaveBaseX+=1;
+		}
+
+		//枠の位置
+		$SaveWakuX=$SaveBaseX;
+		$SaveWakuY=$SaveBaseY;
+
+//		$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($PreSaveCount-1));
+//		$SaveNumberY=$PreSaveNumberY+($SaveNumberY_plus*($PreSaveCount-1));
+//		$SaveDateY=$PreSaveDateY+($SaveDateY_plus*($PreSaveCount-1));
+//		$SaveCommentY=$PreSaveCommentY+($SaveCommentY_plus*($PreSaveCount-1));
+
+//=========================================================================================
+...		//●データ位置「セーブデータ変数位置とデータ取得」
+		if(ExistSave($SaveGroval)){
+			$SaveCountmg=String("%s/%04d/thum.npf",#SYSTEM_save_path,$SaveGroval);//サムネイル
+			$date=String("%s/%04d/date.npf",#SYSTEM_save_path,$SaveGroval);//日付
+			$cmt=String("%s/%04d/cmt.npf",#SYSTEM_save_path,$SaveGroval);//コメント
+			$cpt=String("%s/%04d/cpt.npf",#SYSTEM_save_path,$SaveGroval);//タイトル
+			$tm=String("%s/%04d/tm.npf",#SYSTEM_save_path,$SaveGroval);//プレイ時間
+			$date=ReadFile($date);
+			$cmt=ReadFile($cmt);
+			$cpt=ReadFile($cpt);
+			$tm=ReadFile($tm);
+			$num=String("FILE No %03d",$SaveGroval); //ナンバー
+			if($cpt=="0"){$cpt=" ";}
+			if($cmt=="0"){$cmt=" ";}
+		}else{
+			$date="<PRE></PRE>";
+			$cmt=" ";
+			$cpt=" ";
+			$tm=" ";
+			$num=String("FILE No %03d",$SaveGroval); //ナンバー
+		}
+
+		//●ナット名「サムネイル」
+		$SaveThumImage="@WND/"+$SaveChoiceNameEX+"_img";
+		$SaveThum="@WND/"+$SaveChoiceNameEX+"_btn";
+		$SaveOverVision=$SaveChoiceName+"/MouseOver/prd";
+		$SaveClickVision=$SaveChoiceName+"/MouseClick/prd";
+
+		//●ナット名「Usual」
+		$SaveUsualHit=$SaveChoiceName+"/MouseUsual/hit";
+		$SaveUsualNut=$SaveChoiceName+"/MouseUsual/img";
+//		$SaveUsualText1=$SaveChoiceName+"/MouseUsual/date";
+//		$SaveUsualText2=$SaveChoiceName+"/MouseUsual/cmt";
+//		$SaveUsualText3=$SaveChoiceName+"/MouseUsual/num";
+
+		//●ナット名「Over」
+		$SaveOverNut=$SaveChoiceName+"/MouseOver/img";
+		$SaveOverText1=$SaveChoiceName+"/MouseOver/date";
+		$SaveOverText2=$SaveChoiceName+"/MouseOver/cmt";
+		$SaveOverText3=$SaveChoiceName+"/MouseOver/num";
+		$SaveOverText4=$SaveChoiceName+"/MouseOver/tm";
+		$SaveOverText5=$SaveChoiceName+"/MouseOver/cpt";
+		$SaveOverWaku=$SaveChoiceName+"/MouseOver/waku";
+		$SaveOverIndex=$SaveChoiceName+"/MouseOver/index";
+
+		//●ナット名「Click」
+		$SaveClickNut=$SaveChoiceName+"/MouseClick/img";
+		$SaveClickText1=$SaveChoiceName+"/MouseClick/date";
+		$SaveClickText2=$SaveChoiceName+"/MouseClick/cmt";
+		$SaveClickText3=$SaveChoiceName+"/MouseClick/num";
+		$SaveClickText4=$SaveChoiceName+"/MouseClick/tm";
+		$SaveClickText5=$SaveChoiceName+"/MouseClick/cpt";
+		$SaveClickWaku=$SaveChoiceName+"/MouseClick/waku";
+		//$SaveClickIndex=$SaveChoiceName+"/MouseClick/index";
+
+...	//▼定義「常設サムネイル」
+		if(ExistSave($SaveGroval)){
+			LoadImage($SaveThumImage, $SaveCountmg);
+		}else{
+			$SaveThumImage="cg/sys/save/Blank.png";
+		}
+		CreateTexture($SaveThum,105000,$SaveThumX,$SaveThumY,$SaveThumImage);
+		if($SaveThumImage=="cg/sys/save/Blank.png"){
+		SetVertex($SaveThum, 0, 0);
+		Zoom($SaveThum, 0, 250, 250, null, false);
+		Request($SaveThum, Smoothing);
+		}
+
+...	//▼定義「サムネイル大」
+		if(ExistSave($SaveGroval)){
+			CreateTexture($SaveOverVision,105000,$SaveVisionX,$SaveVisionY,$SaveThumImage);
+			//$shimanut=$SaveChoiceName+"/*/prd";
+			//Request($shimanut, Smoothing);
+			//SetVertex($shimanut, 0, 0);
+			//Zoom($shimanut, 0, 1199, 1199, null, false);
+		}
+
+...	//▼定義「Usual」
+		//サムネイル
+		CreateTexture($SaveUsualHit,105010,$SaveThumX,$SaveThumY,"cg/sys/save/hit.png");
+//		CreateTexture($SaveUsualNut,10010,$SaveBaseX,$SaveBaseY,"@SaveImage1");
+
+...	//▼定義「Over」
+		if(ExistSave($SaveGroval)){
+			//サムネイル
+			//CreateTexture($SaveOverNut,10010,$SaveBaseX,$SaveBaseY,$SaveThumImage);
+		}
+		
+		$num = "<FONT size=16>"+$num + " " + $tm + " " + $cpt+"</FONT>";
+		//日にち
+		//SetFont("Noto Serif KR",21,#000000,#000000,500,null);
+		//CreateText($SaveOverText1, 10010, $SaveDateX, $SaveDateY, Auto, Auto, $date);
+		//プレイ時間
+		//SetFont("Noto Serif KR",18,#FFFFFF,#000000,500,null);
+		//CreateText($SaveOverText4, 10010, $SaveTimeX, $SaveTimeY, Auto, Auto, $tm);
+		//テキスト
+		$SYSTEM_text_margin_column=$Save_text_margin_column;$SYSTEM_text_margin_row=$Save_text_margin_row;
+		SetFont("Noto Serif KR",20,BLACK,BLACK,500,null);
+		CreateText($SaveOverText2, 105010, $SaveCommentX, $SaveCommentY, $SaveCommentH, $SaveCommentV, $cmt);
+		//タイトル
+		$SYSTEM_text_margin_column=$Save_text_margin_column2;$SYSTEM_text_margin_row=$Save_text_margin_row2;
+		SetFont("Noto Serif KR",20,BLACK,BLACK,500,null);
+		CreateText($SaveOverText5, 105010, $SaveNumberX, $SaveNumberY, Auto, Auto, $num);
+		$SYSTEM_text_margin_column=0;$SYSTEM_text_margin_row=0;
+		//選択枠
+		if(ExistSave($SaveGroval)){
+			CreateTexture($SaveOverWaku,115010,$SaveThumX,$SaveThumY,"cg/sys/save/サムネールカーソル.png");
+		}
+
+		//ナンバー
+		//SetFont("Noto Serif KR",25,#FFFFFF,#FFFFFF,500,null);
+		//CreateText($SaveOverText3, 10010, $SaveNumberX, $SaveNumberY, Auto, Auto, $num);
+		//インデックス
+		//CreateTexture($SaveOverIndex,10050,$SaveIndexX,$SaveIndexY,"@SaveImage4");
+		//SetAlias($SaveOverIndex, $SaveOverIndex);
+		SetVertex($SaveOverText2, 0, 0);
+		SetVertex($SaveOverText5, 0, 0);
+
+//=========================================================================================
+
+...	//▼定義「NEW判定」
+		if($SaveGroval==#LATEST_SAVE_NUM){
+			$new_X=$SaveThumX+$SaveNewX_plus;
+			$new_Y=$SaveThumY+$SaveNewY_plus;
+			Move("SaveNEW",0,$new_X,$new_Y,null,false);
+			Request("SaveNewProcess", Start);
+		}
+
+...	//▼クリッカブル＆イレース
+		if(!ExistSave($SaveGroval)){
+			Request($SaveChoiceName,UnClickable);
+		}
+
+		$SaveCount++;
+		$SaveGroval++;
+	}
+
+..	//▼準備「最終準備」
+	Delete("@Savenum_*/MouseClick");
+
+	Request("@Savenum_*/*",PushText);
+	Request("@Savenum_*/*/*",PushText);
+	Request("*/MouseUsual/hit",Erase);
+
+	Fade("@WND/Savenum_*",0,0,null,false);
+	Fade("Save*",0,0,null,false);
+	Fade("*/MouseUsual/*",0,0,null,false);
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+	Fade("SaveScreen", 0, 1000, null, true);
+
+..	//▼準備「フォーカス」
+	SaveFocus();
+LockVideo(false);
+}
+
+function SaveProcess()
+{
+	while(1)
+	{
+		Fade("@SaveNEW",300,1000,null,true);
+		Wait(600);
+		Fade("@SaveNEW",300,0,null,true);
+		Wait(300);
+	}
+}
+
+
+.//■動作「描画開始」
+function SaveFade()
+{
+..	//▼アニメ動作
+	if($SaveFiest){
+		SaveAnime();
+//		Request("セーブプロセス", Start);
+//		WaitAction("セーブプロセス", null);
+		$SaveFiest=0;
+	}else{
+		if(#SavePage==1){Fade("SaveBan1",0,1000,null,false);Fade("SavePAGE1_ON", 0, 1000, null, false);}
+		else if(#SavePage==2){Fade("SaveBan2",0,1000,null,false);Fade("SavePAGE2_ON", 0, 1000, null, false);}
+		else if(#SavePage==3){Fade("SaveBan3",0,1000,null,false);Fade("SavePAGE3_ON", 0, 1000, null, false);}
+		else if(#SavePage==4){Fade("SaveBan4",0,1000,null,false);Fade("SavePAGE4_ON", 0, 1000, null, false);}
+		else if(#SavePage==5){Fade("SaveBan5",0,1000,null,false);Fade("SavePAGE5_ON", 0, 1000, null, false);}
+		Fade("*/MouseUsual/*",0,1000,null,true);
+		Fade("SaveAnime0020",0,1000,null,false);
+		Fade("@WND/Savenum_*",0,1000,null,false);
+		Fade("SavePlay", 0, 1000, null, true);
+		Fade("SaveBack", 0, 1000, null, true);
+		Fade("SaveBan",0,1000,null,false);
+		Fade("SaveNOT",0,1000,null,false);
+		Fade("SaveNEW",0,1000,null,false);
+		Fade("SaveCase",0,1000,null,false);
+		Fade("SaveScreen", 300, 0, null, true);
+	}
+}
+
+
+
+.//■選択「選択開始」
+function SaveSelect()
+{
+	$SYSTEM_menu_load_enable=true;
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_r_button_down=false;
+	while($SYSTEM_menu_load_enable)
+	{
+		select{
+			if($SYSTEM_r_button_down||$SYSTEM_keydown_l){$SYSTEM_menu_load_enable=false;break;}
+			case @Savenum_1{do_save(1);}
+			case @Savenum_2{do_save(2);}
+			case @Savenum_3{do_save(3);}
+			case @Savenum_4{do_save(4);}
+			case @Savenum_5{do_save(5);}
+			case @Savenum_6{do_save(6);}
+			case @Savenum_7{do_save(7);}
+			case @Savenum_8{do_save(8);}
+			case @Savenum_9{do_save(9);}
+			case @Savenum_10{do_save(10);}
+			case @Savenum_11{do_save(11);}
+			case @Savenum_12{do_save(12);}
+			case @Savenum_13{do_save(13);}
+			case @Savenum_14{do_save(14);}
+			case @Savenum_15{do_save(15);}
+			case @Savenum_16{do_save(16);}
+			case @Savenum_17{do_save(17);}
+			case @Savenum_18{do_save(18);}
+			case @Savenum_19{do_save(19);}
+			case @Savenum_20{do_save(20);}
+			case @Savenum_21{do_save(21);}
+			case @Savenum_22{do_save(22);}
+			case @Savenum_23{do_save(23);}
+			case @Savenum_24{do_save(24);}
+
+			case PAGE_1{
+				if(#SavePage!=1){
+					Request("セーブ_決定",Play);
+					CreateTexture("SaveScreen", 200000, 0, 0, SCREEN);
+					#SavePage=1;
+					return;
+				}
+			}
+			case PAGE_2{
+				if(#SavePage!=2){
+					Request("セーブ_決定",Play);
+					CreateTexture("SaveScreen", 200000, 0, 0, SCREEN);
+					#SavePage=2;
+					return;
+				}
+			}
+			case PAGE_3{
+				if(#SavePage!=3){
+					Request("セーブ_決定",Play);
+					CreateTexture("SaveScreen", 200000, 0, 0, SCREEN);
+					#SavePage=3;
+					return;
+				}
+			}
+			case PAGE_4{
+				if(#SavePage!=4){
+					Request("セーブ_決定",Play);
+					CreateTexture("SaveScreen", 200000, 0, 0, SCREEN);
+					#SavePage=4;
+					return;
+				}
+			}
+			case SaveNEXT{
+				Request("セーブ_決定",Play);
+				CreateTexture("SaveScreen", 200000, 0, 0, SCREEN);
+				#SavePage++;
+				if(#SavePage>=5){#SavePage=1;}
+				return;
+			}
+			case SavePrev{
+				Request("セーブ_決定",Play);
+				CreateTexture("SaveScreen", 200000, 0, 0, SCREEN);
+				#SavePage--;
+				if(#SavePage<=0){#SavePage=4;}
+				return;
+			}
+			case SaveDELETE{
+				Request("セーブ_決定",Play);
+				if($SaveDelete){
+					$SaveDelete=false;
+					Fade("SaveDELETE/icon2", 150, 0, null, true);
+				}else{
+					$SaveDelete=true;
+					Fade("SaveDELETE/icon2", 150, 1000, null, true);
+				}
+			}
+			case SaveEXIT{$SYSTEM_menu_load_enable=false;}
+			if(!$SYSTEM_menu_load_enable){break;}
+
+			//★キーダウン系
+			if($SYSTEM_keydown_f){
+				if(!#SYSTEM_window_full_lock){
+					#SYSTEM_window_full=!#SYSTEM_window_full;
+					#SYSTEM_window_full_lock=false;
+					Wait(300);
+					$SYSTEM_keydown_f=false;
+				}
+			}else if(($SYSTEM_keydown_esc||$SYSTEM_buttondown_close)&&!$Title_Load){
+				if(!#no_ask){
+					CreateColor("MSGBLK",1010000,center,middle,1024,576,BLACK);
+					Fade("MSGBLK",0,0,null,false);
+					Fade("MSGBLK",150,750,null,false);
+				}
+				call_chapter nss/sys_close.nss;
+				Fade("MSGBLK",150,0,null,false);
+			}
+			else if($SYSTEM_keydown_t)
+			{
+				if(!$PLACE_title)
+				{
+					if(!#no_ask){
+						CreateColor("MSGBLK",1010000,center,middle,1024,576,BLACK);
+						Fade("MSGBLK",0,0,null,false);
+						Fade("MSGBLK",150,750,null,false);
+					}
+					call_chapter nss/sys_reset.nss;
+					Fade("MSGBLK",150,0,null,false);
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.//■マクロ「セーブ動作」
+function do_save($SaveCount)
+{
+	$SaveGroval=$SaveCount+((#SavePage-1)*$SaveMaxNum);
+	$save=true;
+
+..	//▼確認「新規か上書きか？」
+	if(!ExistSave($SaveGroval)){
+		return;
+	}else{
+		if(!#no_ask){
+			SaveDialog();
+//			SaveDialogTrial();
+		}else{
+			Request("セーブ_記録",Play);
+		}
+	}
+
+
+..	//▼読込「ロード開始」
+	if($save){
+		if(!$SaveDelete){
+			CreateColor("BLACK",99999999,center,middle,1024,768,BLACK);
+			Fade("BLACK", 0, 0, null, true);
+//			CreateTexture("MSG_load",99999999,362,334,"cg/sys/dialog/読み込んでいます.png");
+			Fade("BLACK", 300, 1000, null, true);
+	
+			$SYSTEM_menu_enable=false;
+			$SYSTEM_menu_load_enable=false;
+	
+			//★：ゲームスピード
+			if($Title_Load){
+				#SYSTEM_play_speed = #play_speed_plus2;
+			}
+	
+			DeleteSaveFile(9999);
+	
+			#InitCV=false;
+			#PreSaveFlag=false;
+			#START_TIME=Time();
+			Save(0);
+	
+			Load($SaveGroval);
+		}else{
+			DeleteSaveFile($SaveGroval);
+
+			SaveThumbnail();
+		}
+	}
+
+	//■終了共通演出
+	DialogEnd();
+
+	$OnDialog=false;
+}
+
+
+
+
+
+
+.//■マクロ「上書き確認ダイアログ」
+function SaveDialog()
+{
+	if($PLACE_title){
+		$OnDialog=true;
+	}
+
+	//■定義「メッセージウインドウ作成」
+	CreateName("MSGWND");
+
+	CreateColor("MSGBLK",1010000,center,middle,1024,576,BLACK);
+	Fade("MSGBLK",0,0,null,false);
+	Fade("MSGBLK",150,750,null,false);
+	//□基礎構築
+	DialogBase("このデータから再開しますか？");
+
+	//★選択肢開始
+	$SYSTEM_r_button_down=false;
+	select{
+		if($SYSTEM_r_button_down){$save=false;break;}
+
+		case MSGWND/MSG_no{
+			//所定の動作
+			Wait(200);
+			$save=false;
+		}case MSGWND/MSG_yes{
+		}
+
+		//★キーダウン系
+		if($SYSTEM_keydown_f){
+			DialogFull();
+		}else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close){
+			DialogClose();
+		}else if($SYSTEM_keydown_t&&!$SYSTEM_menu_lock&&!$SYSTEM_title_lock){
+			DialogTitle();
+		}else if($SYSTEM_keydown_r&&!$SYSTEM_menu_lock&&!$SYSTEM_backselect_lock&&ExistSave(9999)){
+			DialogBack();
+		}
+	}
+	$SYSTEM_r_button_down=false;
+	
+	if(!$save){
+		Fade("MSGBLK",150,0,null,false);
+	}
+	//$save_check=true;
+}
+
+
+.//■マクロ「体験版用上書き確認ダイアログ」
+function SaveDialogTrial()
+{
+		//■体験版用
+		#ResetMessage="セーブデータをロードしますか？";
+		if(!Message("저장 파일 불러오기",#ResetMessage,OKCANCEL)){
+			Wait(200);
+			$load=false;
+		}
+}
+
+
+
+.//■マクロ「セーブ上書き」
+function SaveThumbnail()
+{
+..		//●変数「初期変数の値を代入」
+		$SaveVisionX=$PreSaveVisionX;
+		$SaveVisionY=$PreSaveVisionY;
+		$SaveThumX=$PreSaveThumX;
+		$SaveThumY=$PreSaveThumY;
+		$SaveBaseX=$PreSaveBaseX;
+		$SaveBaseY=$PreSaveBaseY;
+		$SaveNumberX=$PreSaveNumberX;
+		$SaveNumberY=$PreSaveNumberY;
+		$SaveDateX=$PreSaveDateX;
+		$SaveDateY=$PreSaveDateY;
+		$SaveCommentX=$PreSaveCommentX;
+		$SaveCommentY=$PreSaveCommentY;
+		$SaveTimeX=$PreSaveTimeX;
+		$SaveTimeY=$PreSaveTimeY;
+		$SaveChapterX=$PreSaveChapterX;
+		$SaveChapterY=$PreSaveChapterY;
+		$SaveIndexX=$PreSaveIndexX;
+		$SaveIndexY=$PreSaveIndexY;
+
+..		//▼定義「選択肢」
+		$SaveChoiceName="Savenum_"+$SaveCount;
+//		CreateChoice($SaveChoiceName);
+//		SetAlias($SaveChoiceName,$SaveChoiceName);
+
+		$SaveChoiceNameEX=$SaveChoiceName;
+		$SaveChoiceName="@"+$SaveChoiceName;
+
+..		//●データ移動
+		$count = $SaveCount-1;
+		$SaveThumX = $PreSaveThumX + ($SaveThumX_plus * ($count % $Gyou1));
+		$SaveThumY = $PreSaveThumY + ($SaveThumY_plus * Integer($count / $Gyou1));
+
+		$SaveBaseY=$SaveThumX;
+		$SaveBaseX=$SaveThumY;
+
+/*		if($SaveCount<=$Gyou1){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-1));
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-1));
+		}else if($SaveCount<=$Gyou2){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-$Gyou1-1));
+			$SaveThumX=$PreSaveThumX+$SaveThumX_plus;
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-$Gyou1-1));
+			$SaveBaseX=$PreSaveBaseX+$SaveBaseX_plus;
+		}else if($SaveCount<=$Gyou3){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-$Gyou2-1));
+			$SaveThumX=$PreSaveThumX+($SaveThumX_plus*2);
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-$Gyou2-1));
+			$SaveBaseX=$PreSaveBaseX+($SaveBaseX_plus*2);
+		}else if($SaveCount<=$Gyou4){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-$Gyou3-1));
+			$SaveThumX=$PreSaveThumX+($SaveThumX_plus*3);
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-$Gyou3-1));
+			$SaveBaseX=$PreSaveBaseX+($SaveBaseX_plus*3);
+		}else if($SaveCount<=$Gyou5){
+			$SaveThumY=$PreSaveThumY+($SaveThumY_plus*($SaveCount-$Gyou4-1));
+			$SaveThumX=$PreSaveThumX+($SaveThumX_plus*4);
+			$SaveBaseY=$PreSaveBaseY+($SaveBaseY_plus*($SaveCount-$Gyou4-1));
+			$SaveBaseX=$PreSaveBaseX+($SaveBaseX_plus*4);
+		}
+*/
+		//スマガ、フラッシュ吐き出しのズレ
+		if($SaveCount==1||$SaveCount==2||$SaveCount==3||$SaveCount==6||$SaveCount==7||$SaveCount==10){
+			//$SaveThumX+=1;
+			//$SaveBaseX+=1;
+		}
+
+		//枠の位置
+		$SaveWakuX=$SaveBaseX;
+		$SaveWakuY=$SaveBaseY;
+
+..	//●データ消去（オリジナル）
+	$SaveUsualDelete=$SaveChoiceName+"/MouseUsual/*";
+	$SaveOverDelete=$SaveChoiceName+"/MouseOver/*";
+//	$SaveClickDelete=$SaveChoiceName+"/MouseClick/*";
+	$SaveThumDelete="@WND/"+$SaveChoiceNameEX+"_btn";
+
+	Delete($SaveUsualDelete);
+	Delete($SaveOverDelete);
+//	Delete($SaveClickDelete);
+	Delete($SaveThumDelete);
+
+//=========================================================================================
+...		//●データ位置「セーブデータ変数位置とデータ取得」
+		if(ExistSave($SaveGroval)){
+			$SaveCountmg=String("%s/%04d/thum.npf",#SYSTEM_save_path,$SaveGroval);//サムネイル
+			$date=String("%s/%04d/date.npf",#SYSTEM_save_path,$SaveGroval);//日付
+			$cmt=String("%s/%04d/cmt.npf",#SYSTEM_save_path,$SaveGroval);//コメント
+			$cpt=String("%s/%04d/cpt.npf",#SYSTEM_save_path,$SaveGroval);//タイトル
+			$tm=String("%s/%04d/tm.npf",#SYSTEM_save_path,$SaveGroval);//プレイ時間
+			$date=ReadFile($date);
+			$cmt=ReadFile($cmt);
+			$cpt=ReadFile($cpt);
+			$tm=ReadFile($tm);
+			$num=String("FILE No %03d",$SaveGroval); //ナンバー
+			if($cpt=="0"){$cpt=" ";}
+			if($cmt=="0"){$cmt=" ";}
+		}else{
+			$date="<PRE></PRE>";
+			$cmt=" ";
+			$cpt=" ";
+			$tm=" ";
+			$num=String("FILE No %03d",$SaveGroval); //ナンバー
+		}
+
+		//●ナット名「サムネイル」
+		$SaveThumImage="@WND/"+$SaveChoiceNameEX+"_img";
+		$SaveThum="@WND/"+$SaveChoiceNameEX+"_btn";
+		$SaveOverVision=$SaveChoiceName+"/MouseOver/prd";
+		$SaveClickVision=$SaveChoiceName+"/MouseClick/prd";
+
+		//●ナット名「Usual」
+		$SaveUsualHit=$SaveChoiceName+"/MouseUsual/hit";
+		$SaveUsualNut=$SaveChoiceName+"/MouseUsual/img";
+//		$SaveUsualText1=$SaveChoiceName+"/MouseUsual/date";
+//		$SaveUsualText2=$SaveChoiceName+"/MouseUsual/cmt";
+//		$SaveUsualText3=$SaveChoiceName+"/MouseUsual/num";
+
+		//●ナット名「Over」
+		$SaveOverNut=$SaveChoiceName+"/MouseOver/img";
+		$SaveOverText1=$SaveChoiceName+"/MouseOver/date";
+		$SaveOverText2=$SaveChoiceName+"/MouseOver/cmt";
+		$SaveOverText3=$SaveChoiceName+"/MouseOver/num";
+		$SaveOverText4=$SaveChoiceName+"/MouseOver/tm";
+		$SaveOverText5=$SaveChoiceName+"/MouseOver/cpt";
+		$SaveOverWaku=$SaveChoiceName+"/MouseOver/waku";
+		$SaveOverIndex=$SaveChoiceName+"/MouseOver/index";
+
+		//●ナット名「Click」
+		$SaveClickNut=$SaveChoiceName+"/MouseClick/img";
+		$SaveClickText1=$SaveChoiceName+"/MouseClick/date";
+		$SaveClickText2=$SaveChoiceName+"/MouseClick/cmt";
+		$SaveClickText3=$SaveChoiceName+"/MouseClick/num";
+		$SaveClickText4=$SaveChoiceName+"/MouseClick/tm";
+		$SaveClickText5=$SaveChoiceName+"/MouseClick/cpt";
+		$SaveClickWaku=$SaveChoiceName+"/MouseClick/waku";
+		//$SaveClickIndex=$SaveChoiceName+"/MouseClick/index";
+
+...	//▼定義「常設サムネイル」
+		if(ExistSave($SaveGroval)){
+			LoadImage($SaveThumImage, $SaveCountmg);
+		}else{
+			$SaveThumImage="cg/sys/save/Blank.png";
+		}
+		CreateTexture($SaveThum,105009,$SaveThumX,$SaveThumY,$SaveThumImage);
+		if($SaveThumImage=="cg/sys/save/Blank.png"){
+		SetVertex($SaveThum, 0, 0);
+		Zoom($SaveThum, 0, 250, 250, null, false);
+		Request($SaveThum, Smoothing);
+		}
+
+...	//▼定義「サムネイル大」
+		if(ExistSave($SaveGroval)){
+			CreateTexture($SaveOverVision,105000,$SaveVisionX,$SaveVisionY,$SaveThumImage);
+			//$shimanut=$SaveChoiceName+"/*/prd";
+			//Request($shimanut, Smoothing);
+			//SetVertex($shimanut, 0, 0);
+			//Zoom($shimanut, 0, 1199, 1199, null, false);
+		}
+
+...	//▼定義「Usual」
+		//サムネイル
+		CreateTexture($SaveUsualHit,105010,$SaveThumX,$SaveThumY,"cg/sys/save/hit.png");
+//		CreateTexture($SaveUsualNut,10010,$SaveBaseX,$SaveBaseY,"@SaveImage1");
+
+...	//▼定義「Over」
+		if(ExistSave($SaveGroval)){
+			//サムネイル
+			//CreateTexture($SaveOverNut,10010,$SaveBaseX,$SaveBaseY,$SaveThumImage);
+		}
+	
+		$num = "<FONT size=16>"+$num + " " + $tm + " " + $cpt+"</FONT>";
+
+		//日にち
+		//SetFont("Noto Serif KR",21,#000000,#000000,500,null);
+		//CreateText($SaveOverText1, 10010, $SaveDateX, $SaveDateY, Auto, Auto, $date);
+		//プレイ時間
+		//SetFont("Noto Serif KR",18,#FFFFFF,#000000,500,null);
+		//CreateText($SaveOverText4, 10010, $SaveTimeX, $SaveTimeY, Auto, Auto, $tm);
+		//テキスト
+		$SYSTEM_text_margin_column=$Save_text_margin_column;$SYSTEM_text_margin_row=$Save_text_margin_row;
+		SetFont("@Noto Serif KR",22,BLACK,BLACK,500,null);
+		CreateText($SaveOverText2, 10010, $SaveCommentX, $SaveCommentY, $SaveCommentH, $SaveCommentV, $cmt);
+		//タイトル
+		$SYSTEM_text_margin_column=$Save_text_margin_column2;$SYSTEM_text_margin_row=$Save_text_margin_row2;
+		SetFont("@Noto Serif KR",30,BLACK,BLACK,500,null);
+		CreateText($SaveOverText5, 105000, $SaveNumberX, $SaveNumberY, Auto, Auto, $num);
+		$SYSTEM_text_margin_column=0;$SYSTEM_text_margin_row=0;
+		//選択枠
+		if(ExistSave($SaveGroval)){
+			CreateTexture($SaveOverWaku,11010,$SaveWakuX,$SaveWakuY,"cg/sys/save/サムネールカーソル.png");
+		}
+
+		//ナンバー
+		//SetFont("Noto Serif KR",25,#FFFFFF,#FFFFFF,500,null);
+		//CreateText($SaveOverText3, 10010, $SaveNumberX, $SaveNumberY, Auto, Auto, $num);
+		//インデックス
+		//CreateTexture($SaveOverIndex,10050,$SaveIndexX,$SaveIndexY,"@SaveImage4");
+		//SetAlias($SaveOverIndex, $SaveOverIndex);
+		SetVertex($SaveOverText2, 0, 0);
+		Rotate($SaveOverText2, 0, @0, @0, @90, null, false);
+		SetVertex($SaveOverText5, 0, 0);
+		Rotate($SaveOverText5, 0, @0, @0, @90, null, false);
+
+//=========================================================================================
+
+..		//▼定義「NEW」
+		if(ExistSave($SaveGroval)){
+			$new_X=$SaveThumX+$SaveNewX_plus;
+			$new_Y=$SaveThumY+$SaveNewY_plus;
+			Move("SaveNEW",0,$new_X,$new_Y,null,false);
+		}else if($SaveGroval==#LATEST_SAVE_NUM){
+			Move("SaveNEW",0,0,-100,false);
+			#LATEST_SAVE_NUM=0;
+		}
+
+..	//▼準備「最終準備」
+	Delete("@Savenum_*/MouseClick");
+
+	$SaveAllText=$SaveChoiceName+"/*/*";
+	$SaveOverAll=$SaveChoiceName+"/MouseOver/*";
+	$SaveClickAll=$SaveChoiceName+"/MouseClick/*";
+	Request($SaveAllText,PushText);
+	Request("*/MouseUsual/hit",Erase);
+
+	Fade($SaveOverAll,0,0,null,false);
+	Fade($SaveClickAll,0,0,null,false);
+
+..	//▼準備「フォーカス」
+	SaveFocus();
+}
+
+
+.//■マクロ「フォーカス」
+function SaveFocus()
+{
+	SetNextFocus("@Savenum_1/MouseUsual/hit","@Savenum_19/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_1/MouseUsual/hit","@Savenum_7/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_1/MouseUsual/hit","@Savenum_6/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_1/MouseUsual/hit","@Savenum_2/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_2/MouseUsual/hit","@Savenum_20/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_2/MouseUsual/hit","@Savenum_8/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_2/MouseUsual/hit","@Savenum_1/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_2/MouseUsual/hit","@Savenum_3/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_3/MouseUsual/hit","@Savenum_21/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_3/MouseUsual/hit","@Savenum_9/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_3/MouseUsual/hit","@Savenum_2/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_3/MouseUsual/hit","@Savenum_4/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_4/MouseUsual/hit","PAGE_1/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_4/MouseUsual/hit","@Savenum_10/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_4/MouseUsual/hit","@Savenum_3/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_4/MouseUsual/hit","@Savenum_5/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_5/MouseUsual/hit","PAGE_2/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_5/MouseUsual/hit","@Savenum_11/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_5/MouseUsual/hit","@Savenum_4/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_5/MouseUsual/hit","@Savenum_6/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_6/MouseUsual/hit","PAGE_4/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_6/MouseUsual/hit","@Savenum_12/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_6/MouseUsual/hit","@Savenum_5/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_6/MouseUsual/hit","@Savenum_1/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_7/MouseUsual/hit","@Savenum_1/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_7/MouseUsual/hit","@Savenum_13/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_7/MouseUsual/hit","@Savenum_12/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_7/MouseUsual/hit","@Savenum_8/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_8/MouseUsual/hit","@Savenum_2/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_8/MouseUsual/hit","@Savenum_14/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_8/MouseUsual/hit","@Savenum_7/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_8/MouseUsual/hit","@Savenum_9/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_9/MouseUsual/hit","@Savenum_3/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_9/MouseUsual/hit","@Savenum_15/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_9/MouseUsual/hit","@Savenum_8/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_9/MouseUsual/hit","@Savenum_10/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_10/MouseUsual/hit","@Savenum_4/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_10/MouseUsual/hit","@Savenum_16/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_10/MouseUsual/hit","@Savenum_9/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_10/MouseUsual/hit","@Savenum_11/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_11/MouseUsual/hit","@Savenum_5/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_11/MouseUsual/hit","@Savenum_17/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_11/MouseUsual/hit","@Savenum_10/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_11/MouseUsual/hit","@Savenum_12/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_12/MouseUsual/hit","@Savenum_6/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_12/MouseUsual/hit","@Savenum_18/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_12/MouseUsual/hit","@Savenum_11/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_12/MouseUsual/hit","@Savenum_7/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_13/MouseUsual/hit","@Savenum_7/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_13/MouseUsual/hit","@Savenum_19/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_13/MouseUsual/hit","@Savenum_18/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_13/MouseUsual/hit","@Savenum_14/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_14/MouseUsual/hit","@Savenum_8/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_14/MouseUsual/hit","@Savenum_20/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_14/MouseUsual/hit","@Savenum_13/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_14/MouseUsual/hit","@Savenum_15/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_15/MouseUsual/hit","@Savenum_9/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_15/MouseUsual/hit","@Savenum_21/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_15/MouseUsual/hit","@Savenum_14/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_15/MouseUsual/hit","@Savenum_16/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_16/MouseUsual/hit","@Savenum_10/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_16/MouseUsual/hit","@Savenum_22/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_16/MouseUsual/hit","@Savenum_15/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_16/MouseUsual/hit","@Savenum_17/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_17/MouseUsual/hit","@Savenum_11/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_17/MouseUsual/hit","@Savenum_23/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_17/MouseUsual/hit","@Savenum_16/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_17/MouseUsual/hit","@Savenum_18/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_18/MouseUsual/hit","@Savenum_12/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_18/MouseUsual/hit","@Savenum_24/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_18/MouseUsual/hit","@Savenum_17/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_18/MouseUsual/hit","@Savenum_13/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_19/MouseUsual/hit","@Savenum_13/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_19/MouseUsual/hit","@Savenum_1/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_19/MouseUsual/hit","@Savenum_24/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_19/MouseUsual/hit","@Savenum_20/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_20/MouseUsual/hit","@Savenum_14/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_20/MouseUsual/hit","@Savenum_2/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_20/MouseUsual/hit","@Savenum_19/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_20/MouseUsual/hit","@Savenum_21/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_21/MouseUsual/hit","@Savenum_15/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_21/MouseUsual/hit","@Savenum_3/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_21/MouseUsual/hit","@Savenum_20/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_21/MouseUsual/hit","@Savenum_22/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_22/MouseUsual/hit","@Savenum_16/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_22/MouseUsual/hit","@Savenum_4/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_22/MouseUsual/hit","@Savenum_21/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_22/MouseUsual/hit","@Savenum_23/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_23/MouseUsual/hit","@Savenum_17/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_23/MouseUsual/hit","SavePrev/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_23/MouseUsual/hit","@Savenum_22/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_23/MouseUsual/hit","@Savenum_24/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("@Savenum_24/MouseUsual/hit","@Savenum_18/MouseUsual/hit",UP);
+	SetNextFocus("@Savenum_24/MouseUsual/hit","SaveNEXT/MouseUsual/hit",DOWN);
+	SetNextFocus("@Savenum_24/MouseUsual/hit","@Savenum_23/MouseUsual/hit",LEFT);
+	SetNextFocus("@Savenum_24/MouseUsual/hit","@Savenum_19/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("SavePrev/MouseUsual/hit","@Savenum_23/MouseUsual/hit",UP);
+	SetNextFocus("SavePrev/MouseUsual/hit","PAGE_2/MouseUsual/hit",DOWN);
+	SetNextFocus("SavePrev/MouseUsual/hit","SaveEXIT/MouseUsual/hit",LEFT);
+	SetNextFocus("SavePrev/MouseUsual/hit","SaveNEXT/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("SaveNEXT/MouseUsual/hit","@Savenum_24/MouseUsual/hit",UP);
+	SetNextFocus("SaveNEXT/MouseUsual/hit","PAGE_3/MouseUsual/hit",DOWN);
+	SetNextFocus("SaveNEXT/MouseUsual/hit","SavePrev/MouseUsual/hit",LEFT);
+	SetNextFocus("SaveNEXT/MouseUsual/hit","SaveEXIT/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("SaveEXIT/MouseUsual/hit","@Savenum_24/MouseUsual/hit",UP);
+	SetNextFocus("SaveEXIT/MouseUsual/hit","PAGE_4/MouseUsual/hit",DOWN);
+	SetNextFocus("SaveEXIT/MouseUsual/hit","SaveNEXT/MouseUsual/hit",LEFT);
+	SetNextFocus("SaveEXIT/MouseUsual/hit","SavePrev/MouseUsual/hit",RIGHT);
+	
+	SetNextFocus("PAGE_1/MouseUsual/hit","SavePrev/MouseUsual/hit",UP);
+	SetNextFocus("PAGE_1/MouseUsual/hit","@Savenum_5/MouseUsual/hit",DOWN);
+	SetNextFocus("PAGE_1/MouseUsual/hit","PAGE_4/MouseUsual/hit",LEFT);
+	SetNextFocus("PAGE_1/MouseUsual/hit","PAGE_2/MouseUsual/hit",RIGHT);
+	
+	SetNextFocus("PAGE_2/MouseUsual/hit","SavePrev/MouseUsual/hit",UP);
+	SetNextFocus("PAGE_2/MouseUsual/hit","@Savenum_5/MouseUsual/hit",DOWN);
+	SetNextFocus("PAGE_2/MouseUsual/hit","PAGE_1/MouseUsual/hit",LEFT);
+	SetNextFocus("PAGE_2/MouseUsual/hit","PAGE_3/MouseUsual/hit",RIGHT);
+	
+	SetNextFocus("PAGE_3/MouseUsual/hit","SaveNEXT/MouseUsual/hit",UP);
+	SetNextFocus("PAGE_3/MouseUsual/hit","@Savenum_6/MouseUsual/hit",DOWN);
+	SetNextFocus("PAGE_3/MouseUsual/hit","PAGE_2/MouseUsual/hit",LEFT);
+	SetNextFocus("PAGE_3/MouseUsual/hit","PAGE_4/MouseUsual/hit",RIGHT);
+	
+	SetNextFocus("PAGE_4/MouseUsual/hit","SaveEXIT/MouseUsual/hit",UP);
+	SetNextFocus("PAGE_4/MouseUsual/hit","@Savenum_6/MouseUsual/hit",DOWN);
+	SetNextFocus("PAGE_4/MouseUsual/hit","PAGE_3/MouseUsual/hit",LEFT);
+	SetNextFocus("PAGE_4/MouseUsual/hit","PAGE_1/MouseUsual/hit",RIGHT);
+}
+
+
+
+
+
+
+.//■マクロ「先頭アニメーション」
+function CreateSaveAnime()
+{
+	CreateTexture("SaveAnime0000", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0000.png");
+	CreateTexture("SaveAnime0001", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0001.png");
+	CreateTexture("SaveAnime0002", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0002.png");
+	CreateTexture("SaveAnime0003", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0003.png");
+	CreateTexture("SaveAnime0004", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0004.png");
+	CreateTexture("SaveAnime0005", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0005.png");
+	CreateTexture("SaveAnime0006", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0006.png");
+	CreateTexture("SaveAnime0007", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0007.png");
+	CreateTexture("SaveAnime0008", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0008.png");
+	CreateTexture("SaveAnime0009", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0009.png");
+	CreateTexture("SaveAnime0010", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0010.png");
+	CreateTexture("SaveAnime0011", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0011.png");
+	CreateTexture("SaveAnime0012", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0012.png");
+	CreateTexture("SaveAnime0013", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0013.png");
+	CreateTexture("SaveAnime0014", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0014.png");
+	CreateTexture("SaveAnime0015", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0015.png");
+	CreateTexture("SaveAnime0016", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0016.png");
+	CreateTexture("SaveAnime0017", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0017.png");
+	CreateTexture("SaveAnime0018", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0018.png");
+	CreateTexture("SaveAnime0019", 10000, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0019.png");
+	CreateTexture("SaveAnime0020", 10005, 0, 0, "cg/sys/save/セーブアニメ連番/セーブ_0020.png");
+	Fade("SaveAnime*", 0, 0, null, true);
+
+	SetAlias("SaveAnime0000","SaveAnime0000");
+	SetAlias("SaveAnime0001","SaveAnime0001");
+	SetAlias("SaveAnime0002","SaveAnime0002");
+	SetAlias("SaveAnime0003","SaveAnime0003");
+	SetAlias("SaveAnime0004","SaveAnime0004");
+	SetAlias("SaveAnime0005","SaveAnime0005");
+	SetAlias("SaveAnime0006","SaveAnime0006");
+	SetAlias("SaveAnime0007","SaveAnime0007");
+	SetAlias("SaveAnime0008","SaveAnime0008");
+	SetAlias("SaveAnime0009","SaveAnime0009");
+	SetAlias("SaveAnime0010","SaveAnime0010");
+	SetAlias("SaveAnime0011","SaveAnime0011");
+	SetAlias("SaveAnime0012","SaveAnime0012");
+	SetAlias("SaveAnime0013","SaveAnime0013");
+	SetAlias("SaveAnime0014","SaveAnime0014");
+	SetAlias("SaveAnime0015","SaveAnime0015");
+	SetAlias("SaveAnime0016","SaveAnime0016");
+	SetAlias("SaveAnime0017","SaveAnime0017");
+	SetAlias("SaveAnime0018","SaveAnime0018");
+	SetAlias("SaveAnime0019","SaveAnime0019");
+	SetAlias("SaveAnime0020","SaveAnime0020");
+
+}
+
+
+function CreateLoadAnime()
+{
+	CreateTexture("SaveAnime0000", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0000.png");
+	CreateTexture("SaveAnime0001", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0001.png");
+	CreateTexture("SaveAnime0002", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0002.png");
+	CreateTexture("SaveAnime0003", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0003.png");
+	CreateTexture("SaveAnime0004", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0004.png");
+	CreateTexture("SaveAnime0005", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0005.png");
+	CreateTexture("SaveAnime0006", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0006.png");
+	CreateTexture("SaveAnime0007", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0007.png");
+	CreateTexture("SaveAnime0008", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0008.png");
+	CreateTexture("SaveAnime0009", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0009.png");
+	CreateTexture("SaveAnime0010", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0010.png");
+	CreateTexture("SaveAnime0011", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0011.png");
+	CreateTexture("SaveAnime0012", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0012.png");
+	CreateTexture("SaveAnime0013", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0013.png");
+	CreateTexture("SaveAnime0014", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0014.png");
+	CreateTexture("SaveAnime0015", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0015.png");
+	CreateTexture("SaveAnime0016", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0016.png");
+	CreateTexture("SaveAnime0017", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0017.png");
+	CreateTexture("SaveAnime0018", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0018.png");
+	CreateTexture("SaveAnime0019", 10000, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0019.png");
+	CreateTexture("SaveAnime0020", 10005, 0, 0, "cg/sys/save/ロードアニメ連番/ロード_0020.png");
+	Fade("SaveAnime*", 0, 0, null, true);
+
+	SetAlias("SaveAnime0000","SaveAnime0000");
+	SetAlias("SaveAnime0001","SaveAnime0001");
+	SetAlias("SaveAnime0002","SaveAnime0002");
+	SetAlias("SaveAnime0003","SaveAnime0003");
+	SetAlias("SaveAnime0004","SaveAnime0004");
+	SetAlias("SaveAnime0005","SaveAnime0005");
+	SetAlias("SaveAnime0006","SaveAnime0006");
+	SetAlias("SaveAnime0007","SaveAnime0007");
+	SetAlias("SaveAnime0008","SaveAnime0008");
+	SetAlias("SaveAnime0009","SaveAnime0009");
+	SetAlias("SaveAnime0010","SaveAnime0010");
+	SetAlias("SaveAnime0011","SaveAnime0011");
+	SetAlias("SaveAnime0012","SaveAnime0012");
+	SetAlias("SaveAnime0013","SaveAnime0013");
+	SetAlias("SaveAnime0014","SaveAnime0014");
+	SetAlias("SaveAnime0015","SaveAnime0015");
+	SetAlias("SaveAnime0016","SaveAnime0016");
+	SetAlias("SaveAnime0017","SaveAnime0017");
+	SetAlias("SaveAnime0018","SaveAnime0018");
+	SetAlias("SaveAnime0019","SaveAnime0019");
+	SetAlias("SaveAnime0020","SaveAnime0020");
+}
+
+
+function SaveAnime2()
+{
+	$SaveAnimeCount=0;
+	$SaveAnimeTexture=0;
+	while($SaveAnimeCount<32)
+	{
+		$SaveAnimeCountPre=$SaveAnimeTexture;
+		$SaveAnimeTexture=String("@SaveAnime%04d",$SaveAnimeCount);
+		$SaveAnimeCount+=1;
+
+		Fade($SaveAnimeTexture, 0, 1000, null, true);
+		Fade($SaveAnimeCountPre, 0, 0, null, false);
+		Draw();
+
+		if($SaveAnimeCount==27)
+		{
+			if(#SavePage==1){Fade("@SaveBan1",200,1000,null,false);Fade("@SavePAGE1_ON", 200, 1000, null, false);}
+			else if(#SavePage==2){Fade("@SaveBan2",200,1000,null,false);Fade("@SavePAGE2_ON", 200, 1000, null, false);}
+			else if(#SavePage==3){Fade("@SaveBan3",200,1000,null,false);Fade("@SavePAGE3_ON", 200, 1000, null, false);}
+			else if(#SavePage==4){Fade("@SaveBan4",200,1000,null,false);Fade("@SavePAGE4_ON", 200, 1000, null, false);}
+			Fade("@WND/Savenum_*",200,1000,null,false);
+			Fade("@SaveNEW",200,1000,null,false);
+			Fade("@SaveNOT",200,1000,null,false);
+			Fade("@*/MouseUsual/*",200,1000,null,false);
+		}
+
+		if($SaveAnimeCount==31)
+		{
+			Fade("@SaveBack", 0, 1000, null, true);
+		}
+	}
+}
+
+function SaveAnime()
+{
+	$SaveAnimeCount=0;
+	$SaveAnimeTexture=0;
+	while($SaveAnimeCount<21)
+	{
+		$SaveAnimeCountPre=$SaveAnimeTexture;
+		$SaveAnimeTexture=String("@SaveAnime%04d",$SaveAnimeCount);
+		$SaveAnimeCount+=1;
+
+		Fade($SaveAnimeTexture, 0, 1000, null, false);
+		Wait(32);
+		Fade($SaveAnimeCountPre, 0, 0, null, false);
+
+		if($SaveAnimeCount==18)
+		{
+			if(#SavePage==1){Fade("@SaveBan1",100,1000,null,false);Fade("@SavePAGE1_ON", 100, 1000, null, false);}
+			else if(#SavePage==2){Fade("@SaveBan2",100,1000,null,false);Fade("@SavePAGE2_ON", 100, 1000, null, false);}
+			else if(#SavePage==3){Fade("@SaveBan3",100,1000,null,false);Fade("@SavePAGE3_ON", 100, 1000, null, false);}
+			else if(#SavePage==4){Fade("@SaveBan4",100,1000,null,false);Fade("@SavePAGE4_ON", 100, 1000, null, false);}
+			Fade("@WND/Savenum_*",100,1000,null,false);
+			Fade("@SaveNEW",100,1000,null,false);
+			Fade("@SaveNOT",100,1000,null,false);
+			Fade("*/MouseUsual/*",100,1000,null,false);
+		}
+
+		if($SaveAnimeCount==21)
+		{
+			Fade("@SaveBack", 0, 1000, null, true);
+		}
+	}
+
+	Draw();
+}
+
+
+
+
+
+
+
+
+

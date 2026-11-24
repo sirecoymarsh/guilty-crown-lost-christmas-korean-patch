@@ -1,0 +1,494 @@
+[
+ {
+  "file": "lx0010.nss",
+  "start": null,
+  "end": "text0030",
+  "title": "불타는 롯폰기",
+  "thumb": "cg/sys/extra/thum/bg/bg001016_3_高速道路崩壊.jpg",
+  "clusters": [
+   0
+  ]
+ },
+ {
+  "file": "lx0010.nss",
+  "start": "text0450",
+  "end": "text0510",
+  "title": "프레젠트의 회오리",
+  "thumb": "cg/sys/extra/thum/ev/ev0107プレゼント竜巻攻撃.jpg",
+  "clusters": [
+   1,
+   2
+  ]
+ },
+ {
+  "file": "lx0010.nss",
+  "start": "text0530",
+  "end": "text0640",
+  "title": "에덴 베베의 추격",
+  "thumb": "cg/sys/extra/thum/ev/ev9001スクルージジャンプ汎用.jpg",
+  "clusters": [
+   3
+  ]
+ },
+ {
+  "file": "lx0010.nss",
+  "start": "text0652",
+  "end": "text0670",
+  "title": "미사일과 결정 공격",
+  "thumb": "cg/sys/extra/thum/ev/ev0111キャロル飛び降り.jpg",
+  "clusters": [
+   4
+  ]
+ },
+ {
+  "file": "lx0010.nss",
+  "start": "text0710",
+  "end": "text0750",
+  "title": "보이드 결정",
+  "thumb": "cg/sys/extra/thum/ev/ev0101スクルージヴォイド取りだし.jpg",
+  "clusters": [
+   5
+  ]
+ },
+ {
+  "file": "lx0103.nss",
+  "start": "text0087",
+  "end": "text0090",
+  "title": "게이트 잠입",
+  "thumb": "cg/sys/extra/thum/bg/bg002004_5_ゲート前.jpg",
+  "clusters": [
+   8
+  ]
+ },
+ {
+  "file": "lx0106.nss",
+  "start": "text0290",
+  "end": "text0340",
+  "title": "총구를 피하다",
+  "thumb": "cg/sys/extra/thum/ev/ev0209重機エンドレイヴ銃撃.jpg",
+  "clusters": [
+   9
+  ]
+ },
+ {
+  "file": "lx0106.nss",
+  "start": "text0500",
+  "end": "text0540",
+  "title": "검을 꺼내다",
+  "thumb": "cg/sys/extra/thum/ev/ev0102スクルージヴォイド結晶掲げ.jpg",
+  "clusters": [
+   10
+  ]
+ },
+ {
+  "file": "lx0106.nss",
+  "start": "text0540",
+  "end": null,
+  "title": "엔드레이브 격파",
+  "thumb": "cg/sys/extra/thum/ev/ev0206スクルージ重機エンドレイヴ撃破.jpg",
+  "clusters": [
+   10
+  ]
+ },
+ {
+  "file": "lx0204b.nss",
+  "start": "text0020",
+  "end": "text0060",
+  "title": "연구원의 캔서화",
+  "thumb": "cg/sys/extra/thum/bg/bg003001_1_研究室.jpg",
+  "clusters": [
+   14
+  ]
+ },
+ {
+  "file": "lx0301.nss",
+  "start": "text0030",
+  "end": "text0100",
+  "title": "저격수의 조준경",
+  "thumb": "cg/sys/extra/thum/ev/ev0413喇叭銃.jpg",
+  "clusters": [
+   16
+  ]
+ },
+ {
+  "file": "lx0301.nss",
+  "start": "text0201",
+  "end": "text0205",
+  "title": "나팔총 돌격",
+  "thumb": "cg/sys/extra/thum/ev/ev9000スクルージ着地汎用.jpg",
+  "clusters": [
+   17
+  ]
+ },
+ {
+  "file": "lx0301.nss",
+  "start": "text0621",
+  "end": "text0690",
+  "title": "레일건 일격",
+  "thumb": "cg/sys/extra/thum/ev/ev0102スクルージヴォイド結晶掲げ.jpg",
+  "clusters": [
+   19
+  ]
+ },
+ {
+  "file": "lx0303.nss",
+  "start": "text0220",
+  "end": "text0260",
+  "title": "케이도 추격",
+  "thumb": "cg/sys/extra/thum/ev/ev0412玄周射殺.jpg",
+  "clusters": [
+   20
+  ]
+ },
+ {
+  "file": "lx0403.nss",
+  "start": "text0060a",
+  "end": "text0080",
+  "title": "패스트 추격전",
+  "thumb": "cg/sys/extra/thum/ev/ev9004スクルージバックステップ汎用.jpg",
+  "clusters": [
+   21
+  ]
+ },
+ {
+  "file": "lx0403.nss",
+  "start": "text0120b",
+  "end": null,
+  "title": "빛에 삼켜지다",
+  "thumb": "cg/sys/extra/thum/ev/ev0414マナ砕ける.jpg",
+  "clusters": [
+   22
+  ]
+ },
+ {
+  "file": "lx0501.nss",
+  "start": "text0045a",
+  "end": "text0065b",
+  "title": "아비규환의 롯폰기",
+  "thumb": "cg/sys/extra/thum/bg/bg003016_3_六本木全景崩壊.jpg",
+  "clusters": [
+   24
+  ]
+ },
+ {
+  "file": "lx0503.nss",
+  "start": "text0170",
+  "end": "text0223",
+  "title": "회오리 속으로",
+  "thumb": "cg/sys/extra/thum/ev/ev0107プレゼント竜巻攻撃.jpg",
+  "clusters": [
+   27,
+   28
+  ]
+ },
+ {
+  "file": "lx0504.nss",
+  "start": "text0070",
+  "end": "text0090",
+  "title": "에덴 베베 기동",
+  "thumb": "cg/sys/extra/thum/ev/ev0518エデン・ベベ顔アップ.jpg",
+  "clusters": [
+   29
+  ]
+ },
+ {
+  "file": "lx0504.nss",
+  "start": "text0120",
+  "end": "text0150",
+  "title": "위장 추격",
+  "thumb": "cg/sys/extra/thum/ev/ev0108エデン・ベベ迷彩登場.jpg",
+  "clusters": [
+   30
+  ]
+ },
+ {
+  "file": "lx0505_00.nss",
+  "start": "text0090",
+  "end": "text0120",
+  "title": "협공을 피하다",
+  "thumb": "cg/sys/extra/thum/ev/ev9003ダァト兵戦闘汎用.jpg",
+  "clusters": [
+   31
+  ]
+ },
+ {
+  "file": "lx0505_10.nss",
+  "start": "text0080",
+  "end": null,
+  "title": "보이드 꺼내기",
+  "thumb": "cg/sys/extra/thum/ev/ev0102スクルージヴォイド結晶掲げ.jpg",
+  "clusters": [
+   32
+  ]
+ },
+ {
+  "file": "lx0506.nss",
+  "start": "text0190",
+  "end": "text0361",
+  "title": "패스트의 목소리",
+  "thumb": "cg/sys/extra/thum/ev/ev0508スクルージヴォイド武器オラトリオ構え.jpg",
+  "clusters": [
+   33
+  ]
+ },
+ {
+  "file": "lx0506.nss",
+  "start": "text0452",
+  "end": "text0470a",
+  "title": "골목 질주",
+  "thumb": "cg/sys/extra/thum/ev/ev0210スクルージキャロルダッシュ讃美歌ヴォイド.jpg",
+  "clusters": [
+   34
+  ]
+ },
+ {
+  "file": "lx0506.nss",
+  "start": "text0480",
+  "end": "text0500",
+  "title": "잔해 사이로",
+  "thumb": "cg/sys/extra/thum/ev/ev9000スクルージ着地汎用オラトリオ.jpg",
+  "clusters": [
+   35
+  ]
+ },
+ {
+  "file": "lx0506.nss",
+  "start": "text0550",
+  "end": "text0640",
+  "title": "벽을 달리다",
+  "thumb": "cg/sys/extra/thum/ev/ev0508スクルージヴォイド武器オラトリオ構え_a.jpg",
+  "clusters": [
+   36
+  ]
+ },
+ {
+  "file": "lx0506.nss",
+  "start": "text0651a",
+  "end": "text0662",
+  "title": "등에 올라타다",
+  "thumb": "cg/sys/extra/thum/ev/ev0508スクルージヴォイド武器オラトリオ構え_a.jpg",
+  "clusters": [
+   37
+  ]
+ },
+ {
+  "file": "lx0507.nss",
+  "start": "text0112",
+  "end": "text0123",
+  "title": "바이크형 던지기",
+  "thumb": "cg/sys/extra/thum/ev/ev0210スクルージキャロルダッシュ_a.jpg",
+  "clusters": [
+   39
+  ]
+ },
+ {
+  "file": "lx0507_10.nss",
+  "start": "text0071",
+  "end": "text0091",
+  "title": "보이드 포",
+  "thumb": "cg/sys/extra/thum/bg/bg001015_3_高速道路高架下崩壊.jpg",
+  "clusters": [
+   41
+  ]
+ },
+ {
+  "file": "lx0508.nss",
+  "start": "text0072",
+  "end": "text0120",
+  "title": "보이드 미사일 폭풍",
+  "thumb": "cg/sys/extra/thum/ev/ev0531エデン・ベベキャンサー化ミサイル射出準備.jpg",
+  "clusters": [
+   42
+  ]
+ },
+ {
+  "file": "lx0509.nss",
+  "start": "text0040",
+  "end": "text0100",
+  "title": "피의 비",
+  "thumb": "cg/sys/extra/thum/ev/ev0525スクルージヴォイド武器聖骸布.jpg",
+  "clusters": [
+   43
+  ]
+ },
+ {
+  "file": "lx0509.nss",
+  "start": "text0111",
+  "end": "text0160",
+  "title": "성해포 잘라내기",
+  "thumb": "cg/sys/extra/thum/ev/ev0525スクルージヴォイド武器聖骸布.jpg",
+  "clusters": [
+   44
+  ]
+ },
+ {
+  "file": "lx0509.nss",
+  "start": "text0170b",
+  "end": "text0211",
+  "title": "미사일을 피하다",
+  "thumb": "cg/sys/extra/thum/ev/ev0531エデン・ベベキャンサー化ミサイル射出準備.jpg",
+  "clusters": [
+   45
+  ]
+ },
+ {
+  "file": "lx0510.nss",
+  "start": "text0150",
+  "end": "text0160",
+  "title": "정면 충돌",
+  "thumb": "cg/sys/extra/thum/ev/ev0525スクルージヴォイド武器聖骸布.jpg",
+  "clusters": [
+   47
+  ]
+ },
+ {
+  "file": "lx0510_10.nss",
+  "start": null,
+  "end": "text0030",
+  "title": "보이드 난무",
+  "thumb": "cg/sys/extra/thum/ev/ev0536スクルージキャロル武器取り出し連続.jpg",
+  "clusters": [
+   48
+  ]
+ },
+ {
+  "file": "lx0510_10.nss",
+  "start": "text0040",
+  "end": "text0041a",
+  "title": "천사의 고리 요격",
+  "thumb": "cg/sys/extra/thum/bg/bg005002_3_路地裏ビル倒壊.jpg",
+  "clusters": [
+   49
+  ]
+ },
+ {
+  "file": "lx0510_10.nss",
+  "start": "text0071",
+  "end": null,
+  "title": "불길 속의 빛",
+  "thumb": "cg/sys/extra/thum/ev/ev0510エデン・ベベ狂乱火炎放射_a.jpg",
+  "clusters": [
+   50
+  ]
+ },
+ {
+  "file": "lx0511_00.nss",
+  "start": null,
+  "end": "text0052",
+  "title": "마지막 결착",
+  "thumb": "cg/sys/extra/thum/ev/ev0528スクルージヴォイド武器鋸.jpg",
+  "clusters": [
+   51
+  ]
+ },
+ {
+  "file": "lx0511_10.nss",
+  "start": null,
+  "end": "text0051",
+  "title": "벼락 같은 창",
+  "thumb": "cg/sys/extra/thum/ev/ev0536スクルージキャロル武器取り出し連続.jpg",
+  "clusters": [
+   52
+  ]
+ },
+ {
+  "file": "lx0601.nss",
+  "start": null,
+  "end": "text0010",
+  "title": "결정검과 결정화",
+  "thumb": "cg/sys/extra/thum/ev/ev0607プレゼント結晶剣構え.jpg",
+  "clusters": [
+   53
+  ]
+ },
+ {
+  "file": "lx0601.nss",
+  "start": "text0070",
+  "end": "text0090",
+  "title": "마나 결정화",
+  "thumb": "cg/sys/extra/thum/bg/bg006002_3_六本木ヒルズ屋上.jpg",
+  "clusters": [
+   54
+  ]
+ },
+ {
+  "file": "lx0601.nss",
+  "start": "text0440",
+  "end": null,
+  "title": "롯폰기 소멸",
+  "thumb": "cg/sys/extra/thum/bg/bg006004_3_六本木ヒルズ屋上崩壊.jpg",
+  "clusters": [
+   55
+  ]
+ },
+ {
+  "file": "lx0602.nss",
+  "start": "text0460",
+  "end": "text0500",
+  "title": "이엣 투 컴",
+  "thumb": "cg/sys/extra/thum/ev/ev0604イェット・トゥー・カム登場.jpg",
+  "clusters": [
+   56
+  ]
+ },
+ {
+  "file": "lx0602_10.nss",
+  "start": null,
+  "end": "text0031",
+  "title": "아바돈",
+  "thumb": "cg/sys/extra/thum/ev/ev0606スクルージヴォイド聖杯.jpg",
+  "clusters": [
+   57
+  ]
+ },
+ {
+  "file": "lx0603.nss",
+  "start": "text0170",
+  "end": "text0230",
+  "title": "부서지는 보이드들",
+  "thumb": "cg/sys/extra/thum/ev/ev0413喇叭銃.jpg",
+  "clusters": [
+   58
+  ]
+ },
+ {
+  "file": "lx0604_11.nss",
+  "start": null,
+  "end": null,
+  "title": "결말 연출 1",
+  "thumb": "cg/sys/extra/thum/bg/bg900000_1_空汎用.jpg",
+  "clusters": [
+   59
+  ]
+ },
+ {
+  "file": "lx0604_12.nss",
+  "start": null,
+  "end": null,
+  "title": "결말 연출 2",
+  "thumb": "cg/sys/extra/thum/bg/bg900000_1_空汎用.jpg",
+  "clusters": [
+   60
+  ]
+ },
+ {
+  "file": "lx0605a.nss",
+  "start": "text0020",
+  "end": "text0070",
+  "title": "마지막 보이드 1",
+  "thumb": "cg/sys/extra/thum/ev/ev0604イェット・トゥー・カム登場_smile口開け.jpg",
+  "clusters": [
+   61
+  ]
+ },
+ {
+  "file": "lx0605b.nss",
+  "start": "text0011",
+  "end": "text0080",
+  "title": "마지막 보이드 2",
+  "thumb": "cg/sys/extra/thum/ev/ev0604イェット・トゥー・カム登場_smile口開け.jpg",
+  "clusters": [
+   62
+  ]
+ }
+]

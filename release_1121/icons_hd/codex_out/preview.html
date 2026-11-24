@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>길티 크라운 문장 끝 아이콘 비교</title>
+<style>
+:root{color-scheme:dark;font:16px system-ui,sans-serif;background:#171c24;color:#edf3ff}*{box-sizing:border-box}body{max-width:1100px;margin:32px auto;padding:0 24px}h1{font-size:26px;font-weight:650;margin:0 0 10px}p{color:#b9c5d7;line-height:1.6}button,select,input{font:inherit;accent-color:#91e3e8}button,select{padding:9px 13px;background:#293343;color:inherit;border:1px solid #526278;border-radius:7px}button{cursor:pointer}button:hover{background:#39475b}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0}.panes{display:grid;grid-template-columns:1fr 1fr;gap:18px}section{background:#222b38;border:1px solid #3d4d62;border-radius:12px;overflow:hidden}h2{font-size:17px;margin:14px 18px}canvas{display:block;width:100%;height:340px;touch-action:none;cursor:zoom-in}footer{margin-top:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}#scrub{width:min(500px,65vw)}small{color:#a9bbcf}a{color:#a7e8ed}.status{font-variant-numeric:tabular-nums;margin-left:auto}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #9aeaff;outline-offset:3px}@media(max-width:650px){body{padding:0 12px}.panes{grid-template-columns:1fr}canvas{height:270px}.status{margin-left:0}}
+</style>
+<h1>문장 끝 아이콘 · 원본과 고해상도</h1>
+<p>두 그림을 같은 프레임으로 재생합니다. 그림 위에서 마우스 휠로 확대·축소하고 드래그로 이동할 수 있습니다.</p>
+<div class="controls">
+<label>아이콘 <select id="kind"><option value="crystal">광물 · 34장</option><option value="auto">유전자 · 16장</option></select></label>
+<button id="play">일시 정지</button>
+<label>기본 크기 <select id="size"><option value="40">40px · 일반 창</option><option value="104" selected>104px · 4K 캔버스</option><option value="208">208px · 확대</option></select></label>
+<label>배경 <select id="bg"><option value="dark">어둡게</option><option value="light">밝게</option><option value="checker">투명 격자</option></select></label>
+<button id="reset">크기·위치 초기화</button>
+</div>
+<div class="panes"><section><h2>원본 · 26 × 26</h2><canvas id="old" aria-label="원본 아이콘 미리보기"></canvas></section><section><h2>새 그림 · 104 × 104</h2><canvas id="hd" aria-label="고해상도 아이콘 미리보기"></canvas></section></div>
+<footer><label>프레임 <input id="scrub" type="range" min="0" max="33" value="0"></label><output id="frame">000 / 033</output><output class="status" id="zoom">104px · 100%</output></footer>
+<div class="controls"><label>미리보기 속도 <select id="fps"><option value="5">5 fps</option><option value="10" selected>10 fps</option><option value="15">15 fps</option><option value="20">20 fps</option></select></label><small>미리보기 속도는 비교용입니다. 게임의 실제 재생 간격은 기존 엔진 설정을 따릅니다.</small></div>
+<p><a href="comparison.png">정지 비교 그림</a> · <a href="通常-preview.webp">광물 WebP</a> · <a href="auto-preview.webp">유전자 WebP</a></p>
+<script>
+const $=s=>document.querySelector(s),canvases=[$('#old'),$('#hd')];
+const state={kind:'crystal',frame:0,playing:true,zoom:1,x:0,y:0,size:104,bg:'dark',fps:10,ready:false};
+const assets={crystal:[[],[]],auto:[[],[]]};
+function count(){return state.kind==='crystal'?34:16}
+function reset(){state.zoom=1;state.x=state.y=0;draw()}
+function draw(){
+for(let k=0;k<2;k++){
+ const c=canvases[k],r=c.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+ if(c.width!==Math.round(r.width*dpr)||c.height!==Math.round(r.height*dpr)){c.width=Math.round(r.width*dpr);c.height=Math.round(r.height*dpr)}
+ const ctx=c.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle=state.bg==='light'?'#edf1f5':'#1f232b';ctx.fillRect(0,0,r.width,r.height);
+ if(state.bg==='checker'){for(let y=0;y<r.height;y+=20)for(let x=0;x<r.width;x+=20){ctx.fillStyle=((x+y)/20)%2?'#778492':'#a9b4c2';ctx.fillRect(x,y,20,20)}}
+ const img=assets[state.kind][k][state.frame],sz=state.size*state.zoom;
+ ctx.imageSmoothingEnabled=k===1;ctx.imageSmoothingQuality='high';
+ if(img&&img.complete&&img.naturalWidth)ctx.drawImage(img,r.width/2+state.x-sz/2,r.height/2+state.y-sz/2,sz,sz);
+ c.dataset.zoom=state.zoom;c.dataset.panX=state.x;c.dataset.panY=state.y;c.dataset.frame=state.frame;
+}
+$('#frame').textContent=String(state.frame).padStart(3,'0')+' / '+String(count()-1).padStart(3,'0');$('#scrub').value=state.frame;
+$('#zoom').textContent=Math.round(state.size*state.zoom)+'px · '+Math.round(state.zoom*100)+'%';
+}
+for(const c of canvases){
+ c.addEventListener('wheel',e=>{if(e.ctrlKey||e.metaKey)return;e.preventDefault();const r=c.getBoundingClientRect(),px=e.clientX-r.left-r.width/2,py=e.clientY-r.top-r.height/2,prev=state.zoom;state.zoom=Math.min(8,Math.max(.25,prev*Math.exp(-e.deltaY*.0015)));state.x=px-(px-state.x)*state.zoom/prev;state.y=py-(py-state.y)*state.zoom/prev;draw()},{passive:false});
+ let drag=null;c.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,y:e.clientY};c.setPointerCapture(e.pointerId);c.style.cursor='grabbing'});c.addEventListener('pointermove',e=>{if(!drag)return;state.x+=e.clientX-drag.x;state.y+=e.clientY-drag.y;drag={x:e.clientX,y:e.clientY};draw()});c.addEventListener('pointerup',()=>{drag=null;c.style.cursor='zoom-in'});c.addEventListener('pointercancel',()=>{drag=null;c.style.cursor='zoom-in'});c.addEventListener('dblclick',reset);
+}
+$('#play').onclick=()=>{state.playing=!state.playing;$('#play').textContent=state.playing?'일시 정지':'재생'};
+$('#kind').onchange=e=>{state.kind=e.target.value;state.frame=0;$('#scrub').max=count()-1;reset()};
+$('#size').onchange=e=>{state.size=+e.target.value;reset()};$('#bg').onchange=e=>{state.bg=e.target.value;draw()};$('#fps').onchange=e=>state.fps=+e.target.value;
+$('#scrub').oninput=e=>{state.frame=+e.target.value;state.playing=false;$('#play').textContent='재생';draw()};$('#reset').onclick=reset;
+window.addEventListener('resize',draw);
+(async()=>{let pending=[];for(const kind of ['crystal','auto'])for(let k=0;k<2;k++)for(let i=0;i<(kind==='crystal'?34:16);i++){const img=new Image(),name=String(i).padStart(3,'0'),prefix=kind==='crystal'?'通常':'auto';assets[kind][k][i]=img;pending.push(new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('이미지 불러오기 실패: '+img.src))}));img.src=k===0?'reference/'+prefix+'_'+name+'.png':prefix+'/'+prefix+'-'+name+'.png'}try{await Promise.all(pending);state.ready=true;document.body.dataset.loaded='100';draw()}catch(e){$('#frame').textContent=e.message;console.error(e)}})();
+let last=0;function tick(t){if(state.ready&&state.playing&&t-last>=1000/state.fps){state.frame=(state.frame+1)%count();last=t;draw()}requestAnimationFrame(tick)}requestAnimationFrame(tick);draw();
+</script></html>

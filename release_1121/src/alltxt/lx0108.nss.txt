@@ -1,0 +1,471 @@
+//<continuation number="230">
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0108.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#bg002008_3_大島全景=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0108_00sl.nss";
+
+}
+
+
+scene lx0108.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+//―――――――――――――――――――――――――――――――――――――――
+
+//◆◆大島／夜明け前
+	PrintBG("上背景", 30000);
+
+	CreateTextureSP("絵背景", 100, -1822, -938, "cg/bg/l/bg002008_3_大島全景_l.jpg");
+	Request("絵背景", Smoothing);
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+	CreateTextureEX("絵背景弐", 1100, -350, -300, "cg/bg/m/bg002008_3_大島全景_m.jpg");
+	CreateTextureEX("絵背景参", 105, Center, Middle, "cg/bg/bg002008_3_大島全景.jpg");
+
+//	SetShade("絵背景", MEDIUM);
+	SetShade("絵背景参", MEDIUM);
+	Zoom("絵背景参", 0, 1100, 1100, null, true);
+
+	CreateSE("SE01L","se自然_風_雰囲気01_L");
+	MusicStart("SE01L",4000,700,0,1000,null,true);
+
+//	Move("絵背景", 400, @0, @-50, Dxl1, false);
+	FadeDelete("上背景", 1500, null, true);
+
+	Wait(1000);
+
+
+	CreateSE("SE01","se自然_草木_探る02");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	St("C",740, @0,@0,"buキャロル_通常_normal");
+	Move("@StNameC/C*", 0, @0, @20, Dxl1, true);
+	Move("@StNameC/C*", 300, @0, @-20, Dxl1, false);
+	FadeSt("C",300,true);
+
+
+
+
+
+
+
+//？？：研究施設についてアニメスタッフのチェック必要。
+//？？：地の文全体的に追加予定。万が一の時はなくてもいける。
+
+//研究施設を脱出したスクルージとキャロル。
+//高台に登って。
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800010a02">
+｡ｸｿｵﾂｦ｡ｦ ﾇﾏｰ悅ｹ
+
+{	St("C",740, @0,@0,"buキャロル_通常_smile1");
+//	Move("@StNameC/C02", 0, @0, @70, Dxl1, true);
+	FadeSt("C",200,true);
+	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800020a02">
+「자&, 여기라면 잘 보여」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	Move("絵背景", 1500, @100, @100, AxlDxl, false);
+	Move("@StNameC/C*", 1200, @50, @50, AxlDxl, false);
+	Move("絵背景弐", 2000, -250, -245, Dxl1, false);
+	Wait(200);
+	DeleteSt("C", 300,true);
+	Fade("絵背景弐", 600, 1000, null, true);
+	Wait(1500);
+
+//眼下、半ば森と同化したクレーター。
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+연구소에서 탈출한 우리는 잠시 후 고지대로 나왔다&.
+
+눈앞에 탁 트인 풍경&. 이건……
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0800030a01">
+｡ｸ｡ｦ｡ｦﾅｩｷｹﾀﾌﾅﾍ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+나무에 뒤덮여 알아보기 힘들지만&, 지형이 사발처럼 부자연스럽게 움푹 파여 있다&.
+
+즉&, 여기가……
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800040a02">
+「맞아&. 운석이 떨어진 장소&.
+｡｡ｾﾆﾆｮｸｳｽｺ ｹﾙﾀﾌｷｯｽｺﾀﾇ ｽﾃﾀﾛ｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0800050a01">
+「……저것이 모든 것의 원흉인가」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Fade("絵背景参", 0, 1000, null, true);
+
+	CreateTextureSP("絵演手", 300, Center, Middle, "cg/ef/x/ef_hand03.png");
+	Request("絵演手", Smoothing);
+	Zoom("絵演手", 0, 1050, 1050, null, true);
+	Move("絵演手", 0, @100, @0, null, true);
+
+
+	Zoom("絵演手", 800, 1000, 1000, Dxl1, false);
+	Zoom("絵背景弐", 800, 950, 950, Dxl1, false);
+	FadeDelete("絵背景弐", 800, null, true);
+
+	Wait(500);
+
+//右手を見つめるスクルージ。
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+아포칼립스 바이러스――닿은 상대를 금속으로 바꾸어 버리는&, 이 저주받은 오른손을 낳은 것&.
+
+ﾇﾏﾁｸ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateTextureEX("絵背景", 500, -1311, -696, "cg/bg/l/bg002008_3_大島全景_l.jpg");
+	Request("絵背景", Smoothing);
+	Zoom("絵背景", 0, 1500, 1500, null, true);
+
+	Fade("絵背景", 1000, 1000, null, true);
+
+	Delete("絵演手");
+
+	Wait(200);
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0800060a01">
+｡ｸ｡ｦ｡ｦﾄｳｷﾑ｡ｹ
+
+{	St("C",740, @0,@0,"buキャロル_通常_normal");
+	FadeSt("C",200,true);
+	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800070a02">
+｡ｸﾀﾀ?｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0800080a01">
+「……어째서 넌 멀쩡한 거지?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+……캐롤은 분명 내 오른손에 닿았다&. 하지만 다른 인간들과 달리 금속으로 변하지 않는다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//おがみ：テンポ重視したいので回想はオミット
+/*
+	TextBoxDelete(0);
+
+	CreatePlainSP("絵板写", 5000);
+
+//覇：仮過去演出
+	CreateTextureSP("絵画像", 1000, Center, Middle, "cg/ev/ev0101スクルージヴォイド取りだし.jpg");
+	//CreateColorSPmul("絵過去色", 2000, "6B4A2B");
+	SetTone("絵画像", Monochrome);
+
+	FadeDelete("絵板写", 500, null, true);
+
+	Wait(300);
+*/
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0085]
+ｱﾗｻﾓｸｸﾀﾌ ｾﾆｴﾏｴﾙ&.
+ｱﾗｳ狢ﾇ ｾﾈｿ｡ｼｭ ｳｪﾅｸｳｭ ｱﾗ｡ｦ｡ｦ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	St("C",740, @0,@0,"buキャロル_通常_smile1");
+	FadeSt("C",200,true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800090a02">
+｡ｸｱﾗｰﾇ ｸｻﾀﾌﾁｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	SetVolumeEX("SE*", 2000, 0, null);
+
+	CreatePlainSP("絵板写", 5000);
+
+	Delete("絵画像");
+	Delete("絵過去*");
+	DeleteSt("C", 0,true);
+
+	CreateSE("SE01","se人体_動作_抱く03");
+	MusicStart("SE01",0,700,0,1000,null,false);
+	FadeDelete("絵板写", 500, null, true);
+
+
+	//おがみ：曲借入
+	SoundPlay("@lx013",0,800,true);
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0095]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0800100a01">
+｡ｸｾﾆ｡ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	//St("C",740, @0,@0,"buキャロル_通常_smile2");
+	//FadeSt("C",300,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+ﾄｳｷﾑﾀﾇ ｵﾎ ｼﾕﾀﾌ ｳｻ ｿﾀｸ･ｼﾕﾀｻ ｰｨｽﾎ ﾁ蟠ﾙ&. ﾀﾛﾁｸ ｵ釭ｺﾇﾑ ｼﾕ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	//St("C",740, @0,@0,"buキャロル_通常_smile4");
+	//FadeSt("C",200,true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800110a02">
+｡ｸｳｪｴﾂ ｳﾗ ｹｫｱ箒ﾏｱ釭ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0800120a01">
+｡ｸ｡ｦ｡ｦｹｫｱ筍ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	CreatePlainSP("絵板写", 5000);
+
+	Delete("絵背景*");
+	Delete("絵演*");
+	DeleteSt("C", 0,true);
+
+	CreateTextureSP("絵演背景", 100, -770, -140, "cg/bg/l/bg002008_3_大島全景_l.jpg");
+	CreateTextureSP("絵演祝福", 720, Center, Middle, "cg/bu/buキャロル_通常_smile2.png");
+	CreateTextureSP("絵演祝福弐", 710, Center, Middle, "cg/bu/buキャロル_通常_smile4.png");
+	CreateTextureSP("絵演祝福参", 700, Center, Middle, "cg/bu/buキャロル_通常_smile1.png");
+
+	SetVertex("絵演背景*", right, 300);
+	SetVertex("絵演祝福*", center, 200);
+	Request("絵演*", Smoothing);
+
+	Zoom("絵演*", 0, 1350, 1350, null, true);
+
+	CreateSE("SE01","se人体_動作_衣擦れ05");
+	MusicStart("SE01",0,800,0,1000,null,false);
+	Move("絵演背景", 700, @0, @30, Dxl1, false);
+	Move("絵演祝福*", 700, @0, @50, Dxl1, false);
+	FadeDelete("絵板写", 700, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+ﾄｳｷﾑﾀﾌ ｳｻ ｿﾀｸ･ｼﾕﾀｻ ﾁｦ ｰ｡ｽｿﾆﾅﾀｸｷﾎ ｲ鋗邀莇ﾙ&.
+
+｡ｦ｡ｦｰ昉ｿﾀﾌ ｴﾀｲｸﾁﾙ&.
+내 오른손이 닿을 수 있는&, 아마도 유일한 생명&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800130a02">
+｡ｸｳｪｴﾂ ｳﾊｿ｡ｰﾔ ﾈ釥ｻ ﾁﾙｰﾔ&.
+｡｡ｳﾗｰ｡ ｹﾙｶﾂ ｹｫｱ箍｡ ｵﾉｰﾔ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+그리고 역시나 똑바로 내 눈을 바라보며――
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	FadeDelete("絵演祝福", 200, null, true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+//※深堀：5/31最新シナリオ追加台詞
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800140a02">
+｡ｸｳﾍ ﾀﾓｱﾝｴﾔ｡ｹ
+
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800150a02">
+「너는 네가 하고 싶은 대로 하면 돼&.
+｡｡ﾀﾚ&, ｽｺﾅｩｷ鄰ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+ﾄｳｷﾑﾀﾌ ｹｯｴﾂｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	FadeDelete("絵演祝福弐", 200, null, true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/0800160a02">
+「날 써서&, 너는 무엇을 얻고 싶어?」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0800170a01">
+｡ｸｳｪｴﾂ｡ｪ｡ｪ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+//→→LX0108_00sl.nss
+
+}

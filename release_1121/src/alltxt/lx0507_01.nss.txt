@@ -1,0 +1,150 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0507_01.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0507_10.nss";
+
+}
+
+
+scene lx0507_01.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintBG("上背景", 30000);
+
+	Request("@EFWIN/SE01", UnLock);
+
+	CreateMovieEXadd("絵演動画二", 1100, Center, Middle, true, true, "dx/mvk200.ngs");
+	Zoom("絵演動画二", 0, 2000, 2000, null, true);
+	Fade("絵演動画二", 0, 1000, null, true);
+
+	CreateCameraEX("絵写機対面", 0, 0, 1000);
+	MoveCamera("@絵写機対面", 0, -65, 0, 1000, null, true);
+
+	CreateTextureSP("絵写機対面/絵背景", 0, Center, Middle, "cg/ev/m/ev0504パストコクピット_m.jpg");
+	Zoom("絵写機対面/絵背景", 0, 750, 750, null, true);
+	CreateTextureSP("絵写機対面/絵演人酢", 750, 480, 30, "cg/st/x/stスクルージ_通常_normal_x02.png");
+	Zoom("絵写機対面/絵演人酢", 0, 750, 750, null, true);
+	Zoom("絵板写", 0, 1600, 1600, null, false);
+	Request("絵写機対面/絵*", Smoothing);
+	Draw();
+	Wait(24);
+
+	CreateSERV("@EFWIN/SE01","se日常_建物_機械駆動音","SEWERPIPE");
+	MusicStart("@EFWIN/SE01",1500,700,0,500,null,true);
+
+	FadeDelete("上背景", 500, null, true);
+
+	Wait(800);
+
+//←←殺す
+
+	CreateSE("SE02","se物体_ガラス_割れる01");
+	MusicStart("SE02",0,700,0,1300,null,false);
+	CreateColorSP("絵色白", 4000, "FFFFFF");
+
+	CreateColorSP("絵色黒", 0, "000000");
+	Delete("絵背景");
+	Delete("絵写機対面");
+	Delete("絵演動画二");
+
+	Wait(30);
+	DeleteAllSt(0,true);
+	FadeDelete("絵色白", 70, null, true);
+
+	SetFrequency("@EFWIN/SE01", 3000, 0, null);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+ｰ｣ｴﾜﾇﾟｴﾙ&.
+캡슐을 때려 부수고&, 파일럿에게 오른손을 댄다&.
+
+{
+	CreateSE("SE02","seヴォイド結晶化01a");
+	MusicStart("SE02",0,700,0,1000,null,false);
+}
+이미 캔서화가 진행된 탓인지&, 순식간에 온몸이 결정이 되어 산산조각 나더니 먼지로 변했다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	PrintGO("上背景", 5000);
+
+	Delete("@EFWIN/SE*");
+
+	CreateTextureSP("絵背景", 100, -1250, -290, "cg/ev/l/ev0520指揮車コンテナ内部パストコックピット_l.jpg");
+	Rotate("絵背景", 0, @0, @0, 13, null,true);
+	Request("絵背景", Smoothing);
+	Zoom("絵背景", 0, 1200, 1200, null, true);
+
+
+	FadeDelete("上背景", 500, null, true);
+
+{	St("C",730, @0,@0,"buキャロル_通常_smile2");
+	FadeSt("C",200,true);}
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0011]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0700220a02">
+｡ｸﾀ邏ﾂ ﾀ邱ﾎ&, ｸﾕﾁﾂ ｸﾕﾁﾎ｡ｦ｡ｦｶﾂ ｰﾅｳﾗ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+
+//→→キャンサー化エデン・ベベ
+
+
+	ClearFadeAll(2000, true);
+	Wait(500);
+
+}

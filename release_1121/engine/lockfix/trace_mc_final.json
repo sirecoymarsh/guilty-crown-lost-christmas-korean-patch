@@ -1,0 +1,121 @@
+{
+ "run": "lk_mc_final_082801",
+ "clicks": [
+  {
+   "click": "46:200:71",
+   "sent": 46.9,
+   "first": "s8",
+   "react_ms": 17,
+   "s8_s9": 453,
+   "s3_s4": 16,
+   "s4_s7": 359,
+   "ready_ms": 861
+  },
+  {
+   "click": "52:200:159",
+   "sent": 53.1,
+   "first": "s8",
+   "react_ms": -11,
+   "s8_s9": 828,
+   "s3_s4": 63,
+   "s4_s7": 359,
+   "ready_ms": 1239
+  },
+  {
+   "click": "58:200:115",
+   "sent": 59.1,
+   "first": "s8",
+   "react_ms": 20,
+   "s8_s9": 375,
+   "s3_s4": 63,
+   "s4_s7": 359,
+   "ready_ms": 817
+  },
+  {
+   "click": "64:200:203",
+   "sent": 65.1,
+   "first": "s8",
+   "react_ms": 83,
+   "s8_s9": 641,
+   "s3_s4": 63,
+   "s4_s7": 343,
+   "ready_ms": 1145
+  },
+  {
+   "click": "70:512:559",
+   "sent": 71.1,
+   "first": "s3",
+   "react_ms": 99,
+   "s3_s4": 46,
+   "s4_s7": 344,
+   "ready_ms": 489
+  },
+  {
+   "click": "76:700:115",
+   "sent": 77.1,
+   "first": "s8",
+   "react_ms": 83,
+   "s8_s9": 547,
+   "s3_s4": 47,
+   "s4_s7": 343,
+   "ready_ms": 1020
+  },
+  {
+   "click": "82:200:247",
+   "sent": 82.9,
+   "first": "s8",
+   "react_ms": 17,
+   "s8_s9": 360,
+   "s3_s4": 62,
+   "s4_s7": 344,
+   "ready_ms": 783
+  },
+  {
+   "click": "88:700:379",
+   "sent": 89.1,
+   "first": "s8",
+   "react_ms": 99,
+   "s8_s9": 593,
+   "s3_s4": 47,
+   "s4_s7": 328,
+   "ready_ms": 1083
+  },
+  {
+   "click": "94:700:423",
+   "sent": 94.9,
+   "first": "s8",
+   "react_ms": 2,
+   "s8_s9": 687,
+   "s3_s4": 63,
+   "s4_s7": 343,
+   "ready_ms": 1095
+  },
+  {
+   "click": "100:200:291",
+   "sent": 101.1,
+   "first": "s8",
+   "react_ms": 99,
+   "s8_s9": 359,
+   "s3_s4": 62,
+   "s4_s7": 344,
+   "ready_ms": 864
+  },
+  {
+   "click": "106:512:559",
+   "sent": 107.1,
+   "first": "s3",
+   "react_ms": 192,
+   "s3_s4": 32,
+   "s4_s7": 343,
+   "ready_ms": 567
+  }
+ ],
+ "locks": {
+  "stop-asked": 7,
+  "stepped-aside": 7,
+  "delete-stopped": 1
+ },
+ "frame_gaps": [],
+ "exited_early": null,
+ "dialogs": []
+}

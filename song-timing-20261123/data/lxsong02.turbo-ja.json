@@ -1,0 +1,1797 @@
+{
+  "source": "user game sound.npa",
+  "audio_sha256": "fe81a9e0b6e1cb6f6f7925600e2dbd43b2fbd14295f36594cbd80494dd5e4eb0",
+  "model": "P:\\AI\\Codex\\projects\\fatal-twelve-ko\\opening_localization_20261002\\tools\\model_cache\\models--mobiuslabsgmbh--faster-whisper-large-v3-turbo\\snapshots\\0a363e9161cbc7ed1431c9597a8ceaf0c4f78fcf",
+  "language": "ja",
+  "task": "transcribe",
+  "duration": 235.36,
+  "segments": [
+    {
+      "id": 1,
+      "seek": 1236,
+      "start": 21.840000000000003,
+      "end": 29.28,
+      "text": "未来虚ろな夜 手招きだけが闇に浮かんでる",
+      "tokens": [
+        50365,
+        29954,
+        6912,
+        12026,
+        248,
+        12488,
+        3203,
+        30124,
+        220,
+        11389,
+        6852,
+        249,
+        7016,
+        36215,
+        5142,
+        8259,
+        229,
+        4108,
+        11038,
+        106,
+        3703,
+        35356,
+        4895,
+        51219
+      ],
+      "avg_logprob": -0.26230053318307756,
+      "compression_ratio": 0.9734513274336283,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 21.840000000000003,
+          "end": 22.64,
+          "word": "未",
+          "probability": 0.72216796875
+        },
+        {
+          "start": 22.64,
+          "end": 23.12,
+          "word": "来",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 23.12,
+          "end": 23.8,
+          "word": "虚",
+          "probability": 0.6761474609375
+        },
+        {
+          "start": 23.8,
+          "end": 24.04,
+          "word": "ろ",
+          "probability": 0.9677734375
+        },
+        {
+          "start": 24.04,
+          "end": 24.28,
+          "word": "な",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 24.28,
+          "end": 24.66,
+          "word": "夜",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 25.08,
+          "end": 25.22,
+          "word": " 手",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 25.22,
+          "end": 25.66,
+          "word": "招",
+          "probability": 0.998046875
+        },
+        {
+          "start": 25.66,
+          "end": 25.9,
+          "word": "き",
+          "probability": 0.98779296875
+        },
+        {
+          "start": 25.9,
+          "end": 26.22,
+          "word": "だけ",
+          "probability": 0.986328125
+        },
+        {
+          "start": 26.22,
+          "end": 26.72,
+          "word": "が",
+          "probability": 0.9921875
+        },
+        {
+          "start": 26.72,
+          "end": 27.38,
+          "word": "闇",
+          "probability": 0.98046875
+        },
+        {
+          "start": 27.38,
+          "end": 27.8,
+          "word": "に",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 27.8,
+          "end": 28.08,
+          "word": "浮",
+          "probability": 0.9970703125
+        },
+        {
+          "start": 28.08,
+          "end": 28.34,
+          "word": "か",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 28.34,
+          "end": 28.78,
+          "word": "んで",
+          "probability": 0.90673828125
+        },
+        {
+          "start": 28.78,
+          "end": 29.28,
+          "word": "る",
+          "probability": 0.87255859375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 2,
+      "seek": 1236,
+      "start": 29.28,
+      "end": 36.88,
+      "text": "秒針は冷たく 俺の掠れた声を掻き消す",
+      "tokens": [
+        51219,
+        20956,
+        5873,
+        251,
+        3065,
+        32499,
+        3368,
+        6134,
+        220,
+        37334,
+        2972,
+        6900,
+        254,
+        35478,
+        32045,
+        5998,
+        6900,
+        119,
+        7016,
+        28837,
+        2659,
+        51591
+      ],
+      "avg_logprob": -0.26230053318307756,
+      "compression_ratio": 0.9734513274336283,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 29.28,
+          "end": 30.22,
+          "word": "秒",
+          "probability": 0.260986328125
+        },
+        {
+          "start": 30.22,
+          "end": 30.88,
+          "word": "針",
+          "probability": 0.98779296875
+        },
+        {
+          "start": 30.88,
+          "end": 31.26,
+          "word": "は",
+          "probability": 0.970703125
+        },
+        {
+          "start": 31.26,
+          "end": 31.56,
+          "word": "冷",
+          "probability": 0.982421875
+        },
+        {
+          "start": 31.56,
+          "end": 31.88,
+          "word": "た",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 31.88,
+          "end": 32.24,
+          "word": "く",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 32.46,
+          "end": 32.94,
+          "word": " 俺",
+          "probability": 0.6494140625
+        },
+        {
+          "start": 32.94,
+          "end": 33.34,
+          "word": "の",
+          "probability": 0.89013671875
+        },
+        {
+          "start": 33.34,
+          "end": 33.74,
+          "word": "掠",
+          "probability": 0.5867919921875
+        },
+        {
+          "start": 33.74,
+          "end": 34.36,
+          "word": "れた",
+          "probability": 0.9873046875
+        },
+        {
+          "start": 34.36,
+          "end": 35.08,
+          "word": "声",
+          "probability": 0.97314453125
+        },
+        {
+          "start": 35.08,
+          "end": 35.42,
+          "word": "を",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 35.42,
+          "end": 35.66,
+          "word": "掻",
+          "probability": 0.783935546875
+        },
+        {
+          "start": 35.66,
+          "end": 35.86,
+          "word": "き",
+          "probability": 0.97900390625
+        },
+        {
+          "start": 35.86,
+          "end": 36.16,
+          "word": "消",
+          "probability": 0.99169921875
+        },
+        {
+          "start": 36.16,
+          "end": 36.88,
+          "word": "す",
+          "probability": 0.998046875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 3,
+      "seek": 4236,
+      "start": 48.260000000000005,
+      "end": 52.02,
+      "text": "時は破裂する",
+      "tokens": [
+        50365,
+        6611,
+        3065,
+        39560,
+        8083,
+        224,
+        22570,
+        50865
+      ],
+      "avg_logprob": -0.3539496411879857,
+      "compression_ratio": 0.9777777777777777,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 48.260000000000005,
+          "end": 49.1,
+          "word": "時",
+          "probability": 0.0765380859375
+        },
+        {
+          "start": 49.1,
+          "end": 49.94,
+          "word": "は",
+          "probability": 0.935546875
+        },
+        {
+          "start": 49.94,
+          "end": 50.52,
+          "word": "破",
+          "probability": 0.97802734375
+        },
+        {
+          "start": 50.52,
+          "end": 50.9,
+          "word": "裂",
+          "probability": 0.995849609375
+        },
+        {
+          "start": 50.9,
+          "end": 52.02,
+          "word": "する",
+          "probability": 0.9912109375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 4,
+      "seek": 4236,
+      "start": 52.02,
+      "end": 57.08,
+      "text": "まるで終わりの始まり",
+      "tokens": [
+        50865,
+        2889,
+        4895,
+        2474,
+        29371,
+        9206,
+        5095,
+        2972,
+        15476,
+        41446,
+        51115
+      ],
+      "avg_logprob": -0.3539496411879857,
+      "compression_ratio": 0.9777777777777777,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 52.02,
+          "end": 53.2,
+          "word": "ま",
+          "probability": 0.4912109375
+        },
+        {
+          "start": 53.2,
+          "end": 53.36,
+          "word": "る",
+          "probability": 0.97705078125
+        },
+        {
+          "start": 53.36,
+          "end": 54.08,
+          "word": "で",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 54.08,
+          "end": 54.88,
+          "word": "終",
+          "probability": 0.78515625
+        },
+        {
+          "start": 54.88,
+          "end": 55.1,
+          "word": "わ",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 55.1,
+          "end": 55.28,
+          "word": "り",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 55.28,
+          "end": 55.46,
+          "word": "の",
+          "probability": 0.7724609375
+        },
+        {
+          "start": 55.46,
+          "end": 55.88,
+          "word": "始",
+          "probability": 0.9931640625
+        },
+        {
+          "start": 55.88,
+          "end": 57.08,
+          "word": "まり",
+          "probability": 0.99755859375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 5,
+      "seek": 4236,
+      "start": 65.96000000000001,
+      "end": 70.9,
+      "text": "今どこにも不明 間違いはなく",
+      "tokens": [
+        51115,
+        6480,
+        7594,
+        3503,
+        4108,
+        4801,
+        1960,
+        11100,
+        220,
+        11016,
+        31846,
+        1764,
+        3065,
+        40252,
+        51765
+      ],
+      "avg_logprob": -0.3539496411879857,
+      "compression_ratio": 0.9777777777777777,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 65.96000000000001,
+          "end": 66.80000000000001,
+          "word": "今",
+          "probability": 0.11456298828125
+        },
+        {
+          "start": 66.80000000000001,
+          "end": 67.64,
+          "word": "ど",
+          "probability": 0.7509765625
+        },
+        {
+          "start": 67.64,
+          "end": 67.94,
+          "word": "こ",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 67.94,
+          "end": 68.14,
+          "word": "に",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 68.14,
+          "end": 68.36,
+          "word": "も",
+          "probability": 0.998046875
+        },
+        {
+          "start": 68.36,
+          "end": 68.56,
+          "word": "不",
+          "probability": 0.98779296875
+        },
+        {
+          "start": 68.56,
+          "end": 69.04,
+          "word": "明",
+          "probability": 0.9833984375
+        },
+        {
+          "start": 69.42,
+          "end": 69.56,
+          "word": " 間",
+          "probability": 0.9619140625
+        },
+        {
+          "start": 69.56,
+          "end": 69.98,
+          "word": "違",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 69.98,
+          "end": 70.22,
+          "word": "い",
+          "probability": 0.9970703125
+        },
+        {
+          "start": 70.22,
+          "end": 70.48,
+          "word": "は",
+          "probability": 0.99072265625
+        },
+        {
+          "start": 70.48,
+          "end": 70.9,
+          "word": "なく",
+          "probability": 0.75146484375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 6,
+      "seek": 7090,
+      "start": 70.9,
+      "end": 73.7,
+      "text": "どこにあるはずの",
+      "tokens": [
+        50365,
+        7594,
+        3503,
+        4108,
+        24719,
+        3065,
+        18216,
+        2972,
+        50515
+      ],
+      "avg_logprob": -0.33574218973517417,
+      "compression_ratio": 1.105263157894737,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 70.9,
+          "end": 71.44,
+          "word": "ど",
+          "probability": 0.10260009765625
+        },
+        {
+          "start": 71.44,
+          "end": 71.76,
+          "word": "こ",
+          "probability": 0.9951171875
+        },
+        {
+          "start": 71.76,
+          "end": 72.06,
+          "word": "に",
+          "probability": 0.75244140625
+        },
+        {
+          "start": 72.06,
+          "end": 72.46,
+          "word": "ある",
+          "probability": 0.978515625
+        },
+        {
+          "start": 72.46,
+          "end": 72.76,
+          "word": "は",
+          "probability": 0.86865234375
+        },
+        {
+          "start": 72.76,
+          "end": 72.96,
+          "word": "ず",
+          "probability": 0.96435546875
+        },
+        {
+          "start": 72.96,
+          "end": 73.7,
+          "word": "の",
+          "probability": 0.89453125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 7,
+      "seek": 7090,
+      "start": 73.7,
+      "end": 78.42,
+      "text": "触れられるものが事実だとえ",
+      "tokens": [
+        50515,
+        6758,
+        99,
+        4132,
+        5154,
+        35367,
+        44726,
+        5142,
+        6973,
+        33197,
+        5362,
+        3193,
+        6474,
+        50715
+      ],
+      "avg_logprob": -0.33574218973517417,
+      "compression_ratio": 1.105263157894737,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 73.7,
+          "end": 74.5,
+          "word": "触",
+          "probability": 0.869140625
+        },
+        {
+          "start": 74.5,
+          "end": 74.68,
+          "word": "れ",
+          "probability": 0.99169921875
+        },
+        {
+          "start": 74.68,
+          "end": 75.12,
+          "word": "ら",
+          "probability": 0.9912109375
+        },
+        {
+          "start": 75.12,
+          "end": 75.74,
+          "word": "れる",
+          "probability": 0.986328125
+        },
+        {
+          "start": 75.74,
+          "end": 76.06,
+          "word": "もの",
+          "probability": 0.8115234375
+        },
+        {
+          "start": 76.06,
+          "end": 76.52,
+          "word": "が",
+          "probability": 0.9931640625
+        },
+        {
+          "start": 76.52,
+          "end": 76.92,
+          "word": "事",
+          "probability": 0.93310546875
+        },
+        {
+          "start": 76.92,
+          "end": 77.56,
+          "word": "実",
+          "probability": 1.0
+        },
+        {
+          "start": 77.56,
+          "end": 77.82,
+          "word": "だ",
+          "probability": 0.11724853515625
+        },
+        {
+          "start": 77.82,
+          "end": 78.1,
+          "word": "と",
+          "probability": 0.97412109375
+        },
+        {
+          "start": 78.1,
+          "end": 78.42,
+          "word": "え",
+          "probability": 0.97216796875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 8,
+      "seek": 7090,
+      "start": 78.42,
+      "end": 81.0,
+      "text": "それが来たびでも",
+      "tokens": [
+        50715,
+        13873,
+        5142,
+        6912,
+        3368,
+        38761,
+        17783,
+        50865
+      ],
+      "avg_logprob": -0.33574218973517417,
+      "compression_ratio": 1.105263157894737,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 78.42,
+          "end": 79.08,
+          "word": "それ",
+          "probability": 0.58154296875
+        },
+        {
+          "start": 79.08,
+          "end": 79.44,
+          "word": "が",
+          "probability": 0.98974609375
+        },
+        {
+          "start": 79.44,
+          "end": 79.72,
+          "word": "来",
+          "probability": 0.47998046875
+        },
+        {
+          "start": 79.72,
+          "end": 79.9,
+          "word": "た",
+          "probability": 0.93603515625
+        },
+        {
+          "start": 79.9,
+          "end": 80.12,
+          "word": "び",
+          "probability": 0.7412109375
+        },
+        {
+          "start": 80.12,
+          "end": 81.0,
+          "word": "でも",
+          "probability": 0.91357421875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 9,
+      "seek": 7090,
+      "start": 92.7,
+      "end": 96.36,
+      "text": "俺は加速する",
+      "tokens": [
+        51465,
+        37334,
+        3065,
+        9990,
+        31217,
+        22570,
+        51665
+      ],
+      "avg_logprob": -0.33574218973517417,
+      "compression_ratio": 1.105263157894737,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 92.7,
+          "end": 93.5,
+          "word": "俺",
+          "probability": 0.002960205078125
+        },
+        {
+          "start": 93.5,
+          "end": 94.3,
+          "word": "は",
+          "probability": 0.9921875
+        },
+        {
+          "start": 94.3,
+          "end": 94.62,
+          "word": "加",
+          "probability": 0.53076171875
+        },
+        {
+          "start": 94.62,
+          "end": 95.24,
+          "word": "速",
+          "probability": 0.99072265625
+        },
+        {
+          "start": 95.24,
+          "end": 96.36,
+          "word": "する",
+          "probability": 0.9912109375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 10,
+      "seek": 9636,
+      "start": 96.36,
+      "end": 104.76,
+      "text": "You まるで チェーチャー キョー スタート マグレイブ",
+      "tokens": [
+        50365,
+        3223,
+        20979,
+        4895,
+        2474,
+        15096,
+        223,
+        28571,
+        15266,
+        223,
+        17233,
+        3384,
+        220,
+        15535,
+        28579,
+        3384,
+        220,
+        9550,
+        30736,
+        7588,
+        220,
+        13258,
+        23839,
+        16680,
+        8040,
+        28889,
+        50815
+      ],
+      "avg_logprob": -0.7488839456013271,
+      "compression_ratio": 1.0142857142857142,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 96.36,
+          "end": 96.84,
+          "word": "You",
+          "probability": 0.467041015625
+        },
+        {
+          "start": 96.84,
+          "end": 97.5,
+          "word": " ま",
+          "probability": 0.390869140625
+        },
+        {
+          "start": 97.5,
+          "end": 97.66,
+          "word": "る",
+          "probability": 0.98583984375
+        },
+        {
+          "start": 97.66,
+          "end": 98.68,
+          "word": "で",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 98.68,
+          "end": 99.3,
+          "word": " チ",
+          "probability": 0.4583892822265625
+        },
+        {
+          "start": 99.3,
+          "end": 99.38,
+          "word": "ェ",
+          "probability": 0.9462890625
+        },
+        {
+          "start": 99.38,
+          "end": 99.66,
+          "word": "ーチ",
+          "probability": 0.44140625
+        },
+        {
+          "start": 99.66,
+          "end": 99.86,
+          "word": "ャ",
+          "probability": 0.5888671875
+        },
+        {
+          "start": 99.86,
+          "end": 99.86,
+          "word": "ー",
+          "probability": 0.435546875
+        },
+        {
+          "start": 99.88,
+          "end": 100.04,
+          "word": " キ",
+          "probability": 0.31103515625
+        },
+        {
+          "start": 100.04,
+          "end": 100.28,
+          "word": "ョ",
+          "probability": 0.580078125
+        },
+        {
+          "start": 100.28,
+          "end": 100.68,
+          "word": "ー",
+          "probability": 0.8505859375
+        },
+        {
+          "start": 100.84,
+          "end": 100.92,
+          "word": " ス",
+          "probability": 0.9345703125
+        },
+        {
+          "start": 100.92,
+          "end": 101.2,
+          "word": "ター",
+          "probability": 0.5888671875
+        },
+        {
+          "start": 101.2,
+          "end": 102.3,
+          "word": "ト",
+          "probability": 0.89453125
+        },
+        {
+          "start": 102.58,
+          "end": 102.98,
+          "word": " マ",
+          "probability": 0.6083984375
+        },
+        {
+          "start": 102.98,
+          "end": 103.14,
+          "word": "グ",
+          "probability": 0.46630859375
+        },
+        {
+          "start": 103.14,
+          "end": 103.46,
+          "word": "レ",
+          "probability": 0.72021484375
+        },
+        {
+          "start": 103.46,
+          "end": 104.2,
+          "word": "イ",
+          "probability": 0.395263671875
+        },
+        {
+          "start": 104.2,
+          "end": 104.76,
+          "word": "ブ",
+          "probability": 0.6865234375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 11,
+      "seek": 14930,
+      "start": 149.57999999999998,
+      "end": 156.74,
+      "text": "過去 舐めくじの後 日絡みて 名をぬめりとこべりつく",
+      "tokens": [
+        50365,
+        36910,
+        220,
+        10256,
+        238,
+        11429,
+        6134,
+        9257,
+        2972,
+        5661,
+        220,
+        6890,
+        6948,
+        94,
+        11362,
+        2996,
+        220,
+        15940,
+        5998,
+        487,
+        105,
+        11429,
+        5095,
+        3193,
+        3503,
+        28043,
+        5095,
+        9335,
+        6134,
+        50715
+      ],
+      "avg_logprob": -0.4693396293892051,
+      "compression_ratio": 1.0338983050847457,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 149.57999999999998,
+          "end": 150.22,
+          "word": "過去",
+          "probability": 0.373779296875
+        },
+        {
+          "start": 150.68,
+          "end": 150.9,
+          "word": " 舐",
+          "probability": 0.5430908203125
+        },
+        {
+          "start": 150.9,
+          "end": 150.94,
+          "word": "め",
+          "probability": 0.9453125
+        },
+        {
+          "start": 150.94,
+          "end": 151.2,
+          "word": "く",
+          "probability": 0.92919921875
+        },
+        {
+          "start": 151.2,
+          "end": 151.4,
+          "word": "じ",
+          "probability": 0.9267578125
+        },
+        {
+          "start": 151.4,
+          "end": 151.7,
+          "word": "の",
+          "probability": 0.95751953125
+        },
+        {
+          "start": 151.7,
+          "end": 152.02,
+          "word": "後",
+          "probability": 0.265869140625
+        },
+        {
+          "start": 152.52,
+          "end": 152.64,
+          "word": " 日",
+          "probability": 0.40966796875
+        },
+        {
+          "start": 152.64,
+          "end": 153.04,
+          "word": "絡",
+          "probability": 0.699462890625
+        },
+        {
+          "start": 153.04,
+          "end": 153.28,
+          "word": "み",
+          "probability": 0.7841796875
+        },
+        {
+          "start": 153.28,
+          "end": 153.48,
+          "word": "て",
+          "probability": 0.7802734375
+        },
+        {
+          "start": 153.68,
+          "end": 153.78,
+          "word": " 名",
+          "probability": 0.283447265625
+        },
+        {
+          "start": 153.78,
+          "end": 154.18,
+          "word": "を",
+          "probability": 0.64013671875
+        },
+        {
+          "start": 154.18,
+          "end": 154.46,
+          "word": "ぬ",
+          "probability": 0.6685791015625
+        },
+        {
+          "start": 154.46,
+          "end": 154.68,
+          "word": "め",
+          "probability": 0.46044921875
+        },
+        {
+          "start": 154.68,
+          "end": 154.92,
+          "word": "り",
+          "probability": 0.8984375
+        },
+        {
+          "start": 154.92,
+          "end": 155.14,
+          "word": "と",
+          "probability": 0.97412109375
+        },
+        {
+          "start": 155.14,
+          "end": 155.32,
+          "word": "こ",
+          "probability": 0.5478515625
+        },
+        {
+          "start": 155.32,
+          "end": 155.58,
+          "word": "べ",
+          "probability": 0.95751953125
+        },
+        {
+          "start": 155.58,
+          "end": 155.8,
+          "word": "り",
+          "probability": 0.94677734375
+        },
+        {
+          "start": 155.8,
+          "end": 156.12,
+          "word": "つ",
+          "probability": 0.732421875
+        },
+        {
+          "start": 156.12,
+          "end": 156.74,
+          "word": "く",
+          "probability": 0.982421875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 12,
+      "seek": 14930,
+      "start": 156.74,
+      "end": 163.98,
+      "text": "夢 薄れる朝 天后と共に餌を与えてる",
+      "tokens": [
+        50715,
+        35165,
+        220,
+        27746,
+        226,
+        35367,
+        46610,
+        220,
+        6135,
+        13547,
+        3193,
+        15408,
+        4108,
+        22217,
+        234,
+        5998,
+        940,
+        236,
+        31045,
+        4895,
+        51115
+      ],
+      "avg_logprob": -0.4693396293892051,
+      "compression_ratio": 1.0338983050847457,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 156.74,
+          "end": 157.58,
+          "word": "夢",
+          "probability": 0.94580078125
+        },
+        {
+          "start": 158.04,
+          "end": 158.42,
+          "word": " 薄",
+          "probability": 0.900146484375
+        },
+        {
+          "start": 158.42,
+          "end": 158.92,
+          "word": "れる",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 158.92,
+          "end": 159.42,
+          "word": "朝",
+          "probability": 0.9677734375
+        },
+        {
+          "start": 159.88,
+          "end": 160.12,
+          "word": " 天",
+          "probability": 0.64990234375
+        },
+        {
+          "start": 160.12,
+          "end": 160.44,
+          "word": "后",
+          "probability": 0.254638671875
+        },
+        {
+          "start": 160.44,
+          "end": 160.66,
+          "word": "と",
+          "probability": 0.98388671875
+        },
+        {
+          "start": 160.66,
+          "end": 161.08,
+          "word": "共",
+          "probability": 0.7451171875
+        },
+        {
+          "start": 161.08,
+          "end": 161.66,
+          "word": "に",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 161.66,
+          "end": 162.08,
+          "word": "餌",
+          "probability": 0.825439453125
+        },
+        {
+          "start": 162.08,
+          "end": 162.62,
+          "word": "を",
+          "probability": 0.9736328125
+        },
+        {
+          "start": 162.62,
+          "end": 162.96,
+          "word": "与",
+          "probability": 0.976318359375
+        },
+        {
+          "start": 162.96,
+          "end": 163.44,
+          "word": "えて",
+          "probability": 0.9892578125
+        },
+        {
+          "start": 163.44,
+          "end": 163.98,
+          "word": "る",
+          "probability": 0.82958984375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 13,
+      "seek": 16398,
+      "start": 163.98,
+      "end": 169.3,
+      "text": "Yeah! Yeah! Yeah!",
+      "tokens": [
+        50365,
+        5973,
+        0,
+        865,
+        0,
+        865,
+        0,
+        50665
+      ],
+      "avg_logprob": -0.4898310479308878,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 163.98,
+          "end": 164.78,
+          "word": "Yeah!",
+          "probability": 0.035675048828125
+        },
+        {
+          "start": 167.82,
+          "end": 168.38,
+          "word": " Yeah!",
+          "probability": 0.139892578125
+        },
+        {
+          "start": 169.3,
+          "end": 169.3,
+          "word": " Yeah!",
+          "probability": 0.1085205078125
+        }
+      ],
+      "temperature": 0.2
+    },
+    {
+      "id": 14,
+      "seek": 16398,
+      "start": 170.8,
+      "end": 171.76,
+      "text": "So be right!",
+      "tokens": [
+        50715,
+        6455,
+        312,
+        558,
+        0,
+        50765
+      ],
+      "avg_logprob": -0.4898310479308878,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 170.8,
+          "end": 171.22,
+          "word": "So",
+          "probability": 0.0053863525390625
+        },
+        {
+          "start": 171.22,
+          "end": 171.5,
+          "word": " be",
+          "probability": 0.63037109375
+        },
+        {
+          "start": 171.5,
+          "end": 171.76,
+          "word": " right!",
+          "probability": 0.1253662109375
+        }
+      ],
+      "temperature": 0.2
+    },
+    {
+      "id": 15,
+      "seek": 16398,
+      "start": 172.32,
+      "end": 172.72,
+      "text": "Done!",
+      "tokens": [
+        50765,
+        35,
+        546,
+        0,
+        50815
+      ],
+      "avg_logprob": -0.4898310479308878,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 172.32,
+          "end": 172.4,
+          "word": "D",
+          "probability": 0.01399993896484375
+        },
+        {
+          "start": 172.4,
+          "end": 172.72,
+          "word": "one!",
+          "probability": 0.2822265625
+        }
+      ],
+      "temperature": 0.2
+    },
+    {
+      "id": 16,
+      "seek": 16398,
+      "start": 172.98,
+      "end": 174.38,
+      "text": "Cause this pain",
+      "tokens": [
+        50815,
+        7585,
+        341,
+        1822,
+        50965
+      ],
+      "avg_logprob": -0.4898310479308878,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 172.98,
+          "end": 173.34,
+          "word": "Cause",
+          "probability": 0.369384765625
+        },
+        {
+          "start": 173.34,
+          "end": 173.64,
+          "word": " this",
+          "probability": 0.8701171875
+        },
+        {
+          "start": 173.64,
+          "end": 174.38,
+          "word": " pain",
+          "probability": 0.96923828125
+        }
+      ],
+      "temperature": 0.2
+    },
+    {
+      "id": 17,
+      "seek": 16398,
+      "start": 175.73999999999998,
+      "end": 179.4,
+      "text": "時は破裂する",
+      "tokens": [
+        50965,
+        6611,
+        3065,
+        39560,
+        8083,
+        224,
+        22570,
+        51165
+      ],
+      "avg_logprob": -0.4898310479308878,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 175.73999999999998,
+          "end": 176.82,
+          "word": "時",
+          "probability": 0.356689453125
+        },
+        {
+          "start": 176.82,
+          "end": 177.34,
+          "word": "は",
+          "probability": 0.95263671875
+        },
+        {
+          "start": 177.34,
+          "end": 177.92,
+          "word": "破",
+          "probability": 0.89892578125
+        },
+        {
+          "start": 177.92,
+          "end": 178.28,
+          "word": "裂",
+          "probability": 0.93310546875
+        },
+        {
+          "start": 178.28,
+          "end": 179.4,
+          "word": "する",
+          "probability": 0.9716796875
+        }
+      ],
+      "temperature": 0.2
+    },
+    {
+      "id": 18,
+      "seek": 16398,
+      "start": 179.98,
+      "end": 184.34,
+      "text": "まるで終わりの始まり",
+      "tokens": [
+        51165,
+        2889,
+        4895,
+        2474,
+        29371,
+        9206,
+        5095,
+        2972,
+        15476,
+        41446,
+        51415
+      ],
+      "avg_logprob": -0.4898310479308878,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 179.98,
+          "end": 180.62,
+          "word": "ま",
+          "probability": 0.958984375
+        },
+        {
+          "start": 180.62,
+          "end": 180.74,
+          "word": "る",
+          "probability": 0.95751953125
+        },
+        {
+          "start": 180.74,
+          "end": 181.6,
+          "word": "で",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 181.6,
+          "end": 182.18,
+          "word": "終",
+          "probability": 0.6181640625
+        },
+        {
+          "start": 182.18,
+          "end": 182.52,
+          "word": "わ",
+          "probability": 0.9951171875
+        },
+        {
+          "start": 182.52,
+          "end": 182.7,
+          "word": "り",
+          "probability": 1.0
+        },
+        {
+          "start": 182.7,
+          "end": 182.86,
+          "word": "の",
+          "probability": 0.55615234375
+        },
+        {
+          "start": 182.86,
+          "end": 183.28,
+          "word": "始",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 183.28,
+          "end": 184.34,
+          "word": "まり",
+          "probability": 0.998046875
+        }
+      ],
+      "temperature": 0.2
+    },
+    {
+      "id": 19,
+      "seek": 16398,
+      "start": 184.98,
+      "end": 186.78,
+      "text": "Where am I?",
+      "tokens": [
+        51415,
+        14436,
+        669,
+        286,
+        30,
+        51515
+      ],
+      "avg_logprob": -0.4898310479308878,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 184.98,
+          "end": 185.68,
+          "word": "Where",
+          "probability": 0.93310546875
+        },
+        {
+          "start": 185.68,
+          "end": 186.2,
+          "word": " am",
+          "probability": 0.33154296875
+        },
+        {
+          "start": 186.2,
+          "end": 186.78,
+          "word": " I?",
+          "probability": 0.98974609375
+        }
+      ],
+      "temperature": 0.2
+    },
+    {
+      "id": 20,
+      "seek": 16398,
+      "start": 187.26,
+      "end": 189.2,
+      "text": "Cause this pain",
+      "tokens": [
+        51515,
+        7585,
+        341,
+        1822,
+        51715
+      ],
+      "avg_logprob": -0.4898310479308878,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 187.26,
+          "end": 188.12,
+          "word": "Cause",
+          "probability": 0.96630859375
+        },
+        {
+          "start": 188.12,
+          "end": 188.4,
+          "word": " this",
+          "probability": 0.9833984375
+        },
+        {
+          "start": 188.4,
+          "end": 189.2,
+          "word": " pain",
+          "probability": 0.9931640625
+        }
+      ],
+      "temperature": 0.2
+    },
+    {
+      "id": 21,
+      "seek": 18920,
+      "start": 190.66,
+      "end": 198.82,
+      "text": "俺は加速するまうで 手と交差",
+      "tokens": [
+        50365,
+        37334,
+        3065,
+        9990,
+        31217,
+        22570,
+        2889,
+        2646,
+        2474,
+        220,
+        11389,
+        3193,
+        28455,
+        21679,
+        50865
+      ],
+      "avg_logprob": -0.6436011904761905,
+      "compression_ratio": 0.8225806451612904,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 190.66,
+          "end": 191.78,
+          "word": "俺",
+          "probability": 0.724609375
+        },
+        {
+          "start": 191.78,
+          "end": 192.16,
+          "word": "は",
+          "probability": 0.98291015625
+        },
+        {
+          "start": 192.16,
+          "end": 192.4,
+          "word": "加",
+          "probability": 0.06683349609375
+        },
+        {
+          "start": 192.4,
+          "end": 193.06,
+          "word": "速",
+          "probability": 0.95703125
+        },
+        {
+          "start": 193.06,
+          "end": 194.08,
+          "word": "する",
+          "probability": 0.84375
+        },
+        {
+          "start": 194.08,
+          "end": 195.3,
+          "word": "ま",
+          "probability": 0.65185546875
+        },
+        {
+          "start": 195.3,
+          "end": 195.6,
+          "word": "う",
+          "probability": 0.6708984375
+        },
+        {
+          "start": 195.6,
+          "end": 196.5,
+          "word": "で",
+          "probability": 0.8359375
+        },
+        {
+          "start": 196.58,
+          "end": 197.22,
+          "word": " 手",
+          "probability": 0.42724609375
+        },
+        {
+          "start": 197.22,
+          "end": 197.68,
+          "word": "と",
+          "probability": 0.703125
+        },
+        {
+          "start": 197.68,
+          "end": 198.12,
+          "word": "交",
+          "probability": 0.48046875
+        },
+        {
+          "start": 198.12,
+          "end": 198.82,
+          "word": "差",
+          "probability": 0.849609375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 22,
+      "seek": 18920,
+      "start": 198.82,
+      "end": 201.16,
+      "text": "To my grave",
+      "tokens": [
+        50865,
+        13342,
+        452,
+        12525,
+        51165
+      ],
+      "avg_logprob": -0.6436011904761905,
+      "compression_ratio": 0.8225806451612904,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 198.82,
+          "end": 200.42,
+          "word": "To",
+          "probability": 0.10076904296875
+        },
+        {
+          "start": 200.42,
+          "end": 200.9,
+          "word": " my",
+          "probability": 0.8642578125
+        },
+        {
+          "start": 200.9,
+          "end": 201.16,
+          "word": " grave",
+          "probability": 0.81982421875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 23,
+      "seek": 21920,
+      "start": 223.23999999999998,
+      "end": 226.28,
+      "text": "ご視聴ありがとうございました",
+      "tokens": [
+        50365,
+        9991,
+        27333,
+        8171,
+        112,
+        38538,
+        51864
+      ],
+      "avg_logprob": -0.55712890625,
+      "compression_ratio": 0.8571428571428571,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 223.23999999999998,
+          "end": 224.64,
+          "word": "ご",
+          "probability": 0.08221435546875
+        },
+        {
+          "start": 224.64,
+          "end": 226.04,
+          "word": "視",
+          "probability": 0.98681640625
+        },
+        {
+          "start": 226.04,
+          "end": 226.26,
+          "word": "聴",
+          "probability": 0.999755859375
+        },
+        {
+          "start": 226.26,
+          "end": 226.28,
+          "word": "ありがとうございました",
+          "probability": 0.9970703125
+        }
+      ],
+      "temperature": 0.0
+    }
+  ],
+  "seconds": 4.465990781784058
+}

@@ -1,0 +1,101 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0507_00sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+
+}
+
+
+scene lx0507_00sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+	Request("@EFWIN/SE01", UnLock);
+
+	CreateMovieEXadd("絵演動画二", 1100, Center, Middle, true, true, "dx/mvk200.ngs");
+	Zoom("絵演動画二", 0, 2000, 2000, null, true);
+	Fade("絵演動画二", 0, 1000, null, true);
+
+	CreateCameraEX("絵写機対面", 0, 0, 1000);
+	MoveCamera("@絵写機対面", 0, -65, 0, 1000, null, true);
+
+	CreateTextureSP("絵写機対面/絵背景", 0, Center, Middle, "cg/ev/m/ev0504パストコクピット_m.jpg");
+	Zoom("絵写機対面/絵背景", 0, 750, 750, null, true);
+	CreateTextureSP("絵写機対面/絵演人酢", 750, 480, 30, "cg/st/x/stスクルージ_通常_normal_x02.png");
+	Zoom("絵写機対面/絵演人酢", 0, 750, 750, null, true);
+	Zoom("絵板写", 0, 1600, 1600, null, false);
+	Request("絵写機対面/絵*", Smoothing);
+	Draw();
+	Wait(24);
+
+	CreatePlainEX("selpl01", 16000);
+	SetTone("selpl01", Monochrome);
+
+	CreateMovieEXsub("selmovie01", 21000, Center, Middle, true, true, "dx/mvselect01.ngs");
+	Zoom("selmovie01", 0, 3500, 3500, null, true);
+	Fade("selmovie01", 0, 500, null, true);
+
+	FadeDelete("上背景", 500, null, false);
+	Fade("selpl01", 500, 1000, null, true);
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//→→パストを殺す
+//→→何かが気になる
+
+////////////////////////////////////////
+
+	$select_fade=true;
+	SetChoice02("ﾆﾐｽｺﾆｮｸｦ ﾁﾗﾀﾎｴﾙ","ｹｫｾ｡ｰ｡ ｸｶﾀｽｿ｡ ｰﾉｸｰｴﾙ");
+	WaitChoice02();
+	
+	if($SetChoiceSelect==0){		$GameName = "lx0507_01.nss";$lx0507_00sl選択肢=1;}
+	else if($SetChoiceSelect==1){	$GameName = "lx0507_02.nss";$lx0507_00sl選択肢=0;$GOOD_MAN_POINT=$GOOD_MAN_POINT+1;}
+
+//	ClearFadeAll(1000, true);
+
+}

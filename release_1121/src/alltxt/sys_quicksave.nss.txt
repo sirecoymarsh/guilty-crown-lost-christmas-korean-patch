@@ -1,0 +1,205 @@
+#include "nss/sys_save.nss"
+
+$Revision: $
+
+//=============================================================================//
+//■クイックセーブ■
+//=============================================================================//
+chapter main
+{
+	Wait(16);
+
+	//★ロックの場合
+	if($SYSTEM_save_lock){
+		return;
+	}
+
+	//★タイトルからの場合
+	if($PLACE_title){
+		return;
+	}
+
+	//★前提変数
+	$SYSTEM_menu_quicksave_enable=true;
+
+	//★超速からの変遷用
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_buttondown_close=false;
+
+	//アイコンを抹消するコマンド
+	$SYSTEM_text_icon_disable=false;
+
+	//■定義「ビデオ設置」
+	if(IsInterrupt()){
+		CreateTexture("video",10000,center,middle,"VIDEO");
+	}
+
+	//■定義「メッセージウインドウ作成」
+	CreateName("MSGWND");
+
+	//選択肢前の自動セーブでなかった場合
+	if(!$LOCAL_quick_save_enabled){
+		//□基礎構築
+		DialogBase3("クイックセーブ中");
+	}
+
+	//===========================================================
+	//せーぶより
+	$SaveMaxNum=20;//１ページ最大数
+	$SaveMaximum=80;//最大セーブ数
+	$SaveShortPage=60;//ここからショートページ
+
+	//サムネイルサイズ
+	#SYSTEM_save_thumbnail_width=146-2;
+	#SYSTEM_save_thumbnail_height=83-2;
+
+	$tempbreak=false;
+
+	//セーブデータに空きがありますか？
+	$temp=$SaveShortPage+1;
+	while($SaveMaximum>=$temp){
+		if(!ExistSave($temp)){
+			$SaveGroval=$temp;
+			break;
+		}
+		$temp++;
+	}
+
+	//ロックはどうですか？
+	if($temp>$SaveMaximum){
+		$temp=#LATEST_SAVE_QUICK+1;
+		if($temp>$SaveMaximum){$temp=$SaveShortPage+1;}
+
+		while($SaveMaximum>=$temp){
+			if(VariableValue(#,"SaveLock"+$temp)==false){
+				$SaveGroval=$temp;
+				$tempbreak=false;
+				break;
+			}
+			$temp++;
+			if($temp>$SaveMaximum){$temp=$SaveShortPage+1;}
+
+			if($tempbreak){break;}
+			if($temp==#LATEST_SAVE_QUICK){$tempbreak=true;}
+		}
+	}
+
+	//▼セーブ実行
+	if($tempbreak){
+	//セーブが一杯でした
+		Wait(300);
+
+		//選択肢の前解除
+		$LOCAL_quick_save_enabled=false;
+
+		//□基礎構築
+		DialogBase4("ロックで上書できません");
+
+		//★選択肢開始
+		$SYSTEM_r_button_down=false;
+		$SYSTEM_l_button_down=false;$SYSTEM_keydown_enter=false;
+		select{
+			if($SYSTEM_l_button_down||$SYSTEM_keydown_enter||$SYSTEM_r_button_down){break;}
+	
+			//★キーダウン系
+			if($SYSTEM_keydown_f){
+				DialogFull();
+			}else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close){
+				DialogClose();
+			}else if($SYSTEM_keydown_t&&!$SYSTEM_menu_lock&&!$SYSTEM_title_lock){
+				DialogTitle();
+			}else if($SYSTEM_keydown_r&&!$SYSTEM_menu_lock&&!$SYSTEM_backselect_lock&&ExistSave(9999)){
+				DialogBack();
+			}
+			$SYSTEM_l_button_down=false;$SYSTEM_keydown_enter=false;
+		}
+		$SYSTEM_r_button_down=false;
+
+		//□基礎構築
+		DialogBase4("クイックセーブできません");
+
+		//★選択肢開始
+		$SYSTEM_r_button_down=false;
+		$SYSTEM_l_button_down=false;$SYSTEM_keydown_enter=false;
+		select{
+			if($SYSTEM_l_button_down||$SYSTEM_keydown_enter||$SYSTEM_r_button_down){break;}
+	
+			//★キーダウン系
+			if($SYSTEM_keydown_f){
+				DialogFull();
+			}else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close){
+				DialogClose();
+			}else if($SYSTEM_keydown_t&&!$SYSTEM_menu_lock&&!$SYSTEM_title_lock){
+				DialogTitle();
+			}else if($SYSTEM_keydown_r&&!$SYSTEM_menu_lock&&!$SYSTEM_backselect_lock&&ExistSave(9999)){
+				DialogBack();
+			}
+			$SYSTEM_l_button_down=false;$SYSTEM_keydown_enter=false;
+		}
+		$SYSTEM_r_button_down=false;
+
+
+		//□基礎構築
+		DialogBase5("ロックを解除しますか");
+
+		//★選択肢開始
+		$SYSTEM_keydown_s=false;
+		$SYSTEM_r_button_down=false;
+		select{
+			if($SYSTEM_keydown_s||$SYSTEM_r_button_down){$save=false;break;}
+	
+			case MSGWND/MSG_no{
+				//所定の動作
+				Request("MSGWND/MSG_no/se", Play);
+				Wait(200);
+				$save=false;
+			}case MSGWND/MSG_yes{
+				Request("MSGWND/MSG_yes/se", Play);
+				$save=true;
+			}
+	
+			//★キーダウン系
+			if($SYSTEM_keydown_f){
+				DialogFull();
+			}else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close){
+				DialogClose();
+			}else if($SYSTEM_keydown_t&&!$SYSTEM_menu_lock&&!$SYSTEM_title_lock){
+				DialogTitle();
+			}else if($SYSTEM_keydown_r&&!$SYSTEM_menu_lock&&!$SYSTEM_backselect_lock&&ExistSave(9999)){
+				DialogBack();
+			}
+		}
+
+		if($save){
+			CreateTexture("QuickSaveScreen", 10000, 0, 0, SCREEN);
+			SetAlias("QuickSaveScreen", "QuickSaveScreen");
+			//■終了共通演出
+			DialogEnd2();
+			call_chapter nss/sys_save.nss;
+		}else{
+			//■終了共通演出
+			DialogEnd();
+		}
+	}else{
+	//セーブ開始
+		//セーブ中
+		$SaveQuickON=true;
+		SaveOn();//セーブマクロ
+
+		//■終了共通演出
+		DialogEnd();
+	}
+
+	//===========================================================
+
+
+	$SYSTEM_r_button_down=false;
+	$SYSTEM_keydown_s=false;
+	$SYSTEM_menu_quicksave_enable=false;
+
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+}
+
+
+

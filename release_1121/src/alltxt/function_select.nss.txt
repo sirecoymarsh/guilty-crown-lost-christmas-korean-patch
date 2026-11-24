@@ -1,0 +1,867 @@
+$Revision: 26 $
+
+//======================================================================//
+//　選択肢用の設定
+//======================================================================//
+//======================================================================//
+.//■選択肢
+//======================================================================//
+//―――――――――――――――――――――――――――――――――――//
+..//▼１択の選択肢ボタンを表示
+//―――――――――――――――――――――――――――――――――――//
+...//１択の選択肢ボタンを表示
+function SetChoice01($テキストデータ１)
+{
+	//選択肢の数は何個？
+	$SetChoiceNum=1;
+	//すべての設定
+	SetChoiceBase();
+}
+...//１択の１番目が選ばれた後の処理
+function ChoiceA01()
+{
+	//選択肢は何？
+	$SetChoiceSelect=0;
+	//選択肢動作
+	ChoiceFade();
+}
+
+//―――――――――――――――――――――――――――――――――――//
+..//▼２択の選択肢ボタンを表示
+//―――――――――――――――――――――――――――――――――――//
+...//２択の選択肢ボタンを表示
+function SetChoice02($テキストデータ１,$テキストデータ２)
+{
+	//選択肢の数は何個？
+	$SetChoiceNum=2;
+	//すべての設定
+	SetChoiceBase();
+}
+...//２択の１番目が選ばれた後の処理
+function ChoiceA02()
+{
+	//選択肢は何？
+	$SetChoiceSelect=0;
+	//選択肢動作
+	ChoiceFade();
+}
+...//２択の２番目が選ばれた後の処理
+function ChoiceB02()
+{
+	//選択肢は何？
+	$SetChoiceSelect=1;
+	//選択肢動作
+	ChoiceFade();
+}
+//―――――――――――――――――――――――――――――――――――//
+..//▼３択の選択肢ボタンを表示
+//―――――――――――――――――――――――――――――――――――//
+...//３択の選択肢ボタンを表示
+function SetChoice03($テキストデータ１,$テキストデータ２,$テキストデータ３)
+{
+	//選択肢の数は何個？
+	$SetChoiceNum=3;
+	//すべての設定
+	SetChoiceBase();
+}
+...//３択の１番目が選ばれた後の処理
+function ChoiceA03()
+{
+	//選択肢は何？
+	$SetChoiceSelect=0;
+	//選択肢動作
+	ChoiceFade();
+}
+...//３択の２番目が選ばれた後の処理
+function ChoiceB03()
+{
+	//選択肢は何？
+	$SetChoiceSelect=1;
+	//選択肢動作
+	ChoiceFade();
+}
+...//３択の３番目が選ばれた後の処理
+function ChoiceC03()
+{
+	//選択肢は何？
+	$SetChoiceSelect=2;
+	//選択肢動作
+	ChoiceFade();
+}
+//―――――――――――――――――――――――――――――――――――//
+..//▼４択の選択肢ボタンを表示
+//―――――――――――――――――――――――――――――――――――//
+...//４択の選択肢ボタンを表示
+function SetChoice04($テキストデータ１,$テキストデータ２,$テキストデータ３,$テキストデータ４)
+{
+	//選択肢の数は何個？
+	$SetChoiceNum=4;
+	//すべての設定
+	SetChoiceBase();
+}
+...//４択の１番目が選ばれた後の処理
+function ChoiceA04()
+{
+	//選択肢は何？
+	$SetChoiceSelect=0;
+	//選択肢動作
+	ChoiceFade();
+}
+...//４択の２番目が選ばれた後の処理
+function ChoiceB04()
+{
+	//選択肢は何？
+	$SetChoiceSelect=1;
+	//選択肢動作
+	ChoiceFade();
+}
+...//４択の３番目が選ばれた後の処理
+function ChoiceC04()
+{
+	//選択肢は何？
+	$SetChoiceSelect=2;
+	//選択肢動作
+	ChoiceFade();
+}
+...//４択の４番目が選ばれた後の処理
+function ChoiceD04()
+{
+	//選択肢は何？
+	$SetChoiceSelect=3;
+	//選択肢動作
+	ChoiceFade();
+}
+//―――――――――――――――――――――――――――――――――――//
+..//▼５択の選択肢ボタンを表示
+//―――――――――――――――――――――――――――――――――――//
+...//５択の選択肢ボタンを表示
+function SetChoice05($テキストデータ１,$テキストデータ２,$テキストデータ３,$テキストデータ４,$テキストデータ５)
+{
+	//選択肢の数は何個？
+	$SetChoiceNum=5;
+	//すべての設定
+	SetChoiceBase();
+}
+...//５択の１番目が選ばれた後の処理
+function ChoiceA05()
+{
+	//選択肢は何？
+	$SetChoiceSelect=0;
+	//選択肢動作
+	ChoiceFade();
+}
+...//５択の２番目が選ばれた後の処理
+function ChoiceB05()
+{
+	//選択肢は何？
+	$SetChoiceSelect=1;
+	//選択肢動作
+	ChoiceFade();
+}
+...//５択の３番目が選ばれた後の処理
+function ChoiceC05()
+{
+	//選択肢は何？
+	$SetChoiceSelect=2;
+	//選択肢動作
+	ChoiceFade();
+}
+...//５択の４番目が選ばれた後の処理
+function ChoiceD05()
+{
+	//選択肢は何？
+	$SetChoiceSelect=3;
+	//選択肢動作
+	ChoiceFade();
+}
+...//５択の５番目が選ばれた後の処理
+function ChoiceE05()
+{
+	//選択肢は何？
+	$SetChoiceSelect=4;
+	//選択肢動作
+	ChoiceFade();
+}
+//―――――――――――――――――――――――――――――――――――//
+..//▼６択の選択肢ボタンを表示
+//―――――――――――――――――――――――――――――――――――//
+...//６択の選択肢ボタンを表示
+function SetChoice06($テキストデータ１,$テキストデータ２,$テキストデータ３,$テキストデータ４,$テキストデータ５,$テキストデータ６)
+{
+	//選択肢の数は何個？
+	$SetChoiceNum=6;
+	//すべての設定
+	SetChoiceBase();
+}
+...//６択の１番目が選ばれた後の処理
+function ChoiceA06()
+{
+	//選択肢は何？
+	$SetChoiceSelect=0;
+	//選択肢動作
+	ChoiceFade();
+}
+...//６択の２番目が選ばれた後の処理
+function ChoiceB06()
+{
+	//選択肢は何？
+	$SetChoiceSelect=1;
+	//選択肢動作
+	ChoiceFade();
+}
+...//６択の３番目が選ばれた後の処理
+function ChoiceC06()
+{
+	//選択肢は何？
+	$SetChoiceSelect=2;
+	//選択肢動作
+	ChoiceFade();
+}
+...//６択の４番目が選ばれた後の処理
+function ChoiceD06()
+{
+	//選択肢は何？
+	$SetChoiceSelect=3;
+	//選択肢動作
+	ChoiceFade();
+}
+...//６択の５番目が選ばれた後の処理
+function ChoiceE06()
+{
+	//選択肢は何？
+	$SetChoiceSelect=4;
+	//選択肢動作
+	ChoiceFade();
+}
+...//６択の６番目が選ばれた後の処理
+function ChoiceF06()
+{
+	//選択肢は何？
+	$SetChoiceSelect=5;
+	//選択肢動作
+	ChoiceFade();
+}
+
+
+//―――――――――――――――――――――――――――――――――――//
+..//選択肢用マクロ
+//―――――――――――――――――――――――――――――――――――//
+
+...//▼選択肢における「前の選択肢に戻る」記憶用
+function SelectSave()
+{
+	#PreSaveFlag=true;
+	Save(0);
+
+	if(!$エキストラタイトル&&$GameName!="a0_01_01.nss"){
+		$SYSTEM_mousewheel_up=false;
+		$SYSTEM_mousewheel_down=false;
+		//Save(9999);//★トレーラーは封印
+	}else{
+		#PreSaveFlag=false;
+	}
+}
+
+
+...//▼座標ファンクション群
+function SelectPat(){
+	$select_index="cg/sys/select/";
+}
+
+
+function SelectPat01(){
+	$SelectX=1024/2-261;
+	$SelectY=191;
+	$SelectTextX=$SelectX+261-(24*(Strlen($ChoiceNameText[$ChoiceWhile])/2));//-$SelectX
+	$SelectTextY=$SelectY-8;//-$SelectY
+}
+function SelectPat02(){
+	$SelectX=1024/2-261;
+	$SelectY=222;
+	$SelectTextX=$SelectX+261-(24*(Strlen($ChoiceNameText[$ChoiceWhile])/2));//-$SelectX
+	$SelectTextY=$SelectY-8;//-$SelectY
+}
+function SelectPat03(){
+	$SelectX=1024/2-261;
+	$SelectY=253;
+	$SelectTextX=$SelectX+261-(24*(Strlen($ChoiceNameText[$ChoiceWhile])/2));//-$SelectX
+	$SelectTextY=$SelectY-8;//-$SelectY
+}
+function SelectPat04(){
+	$SelectX=1024/2-261;
+	$SelectY=253;
+	$SelectTextX=$SelectX+261-(24*(Strlen($ChoiceNameText[$ChoiceWhile])/2));//-$SelectX
+	$SelectTextY=$SelectY-8;//-$SelectY
+}
+
+
+
+...//▼基本制御
+function SetChoiceBase()
+{
+	//描画発声の為絶対！
+	Wait(16);
+
+	$PLACE_select=true;
+	#PreSaveFlag=true;
+
+	$express_log=#SYSTEM_skip_express;
+	$skip_log=$SYSTEM_skip;
+	$auto_log=$SYSTEM_text_auto;
+
+	$SYSTEM_menu_lock=true;
+	$SYSTEM_backlog_lock = true;
+	$SYSTEM_text_erase_lock = true;
+	$SYSTEM_skip_lock = true;
+	$SYSTEM_text_auto_lock = true;
+	$SYSTEM_backselect_lock = true;
+
+	//★ロック設置
+	LockVideo(true);
+
+	SetFont("Malgun Gothic", 24, 707070, FFFFFF, NORMAL, NONE);
+
+	//■文字とデフォルト板
+	LoadImage("select_img1","cg/sys/select/bar-001-002.png");
+	LoadImage("select_img2","cg/sys/select/bar-001-002.png");
+	LoadImage("select_img3","cg/sys/select/bar-003.png");
+	$select_img1="select_img1";
+	$select_img2="select_img2";
+	$select_img3="select_img3";
+
+	if(0){
+		// パラパラアニメ素材(善)
+		$select_anime01="cg/sys/select/A-0001.png";
+		CreateTexture("選択肢アニメ01", 40010, 0, 0, $select_anime01);
+		SetAlias("選択肢アニメ01", "選択肢アニメ01");
+
+		// パラパラアニメ素材(中立)
+		$select_anime11="cg/sys/select/B-0001.png";
+		CreateTexture("選択肢アニメ11", 40010, 0, 0, $select_anime11);
+		SetAlias("選択肢アニメ11", "選択肢アニメ11");
+
+		// パラパラアニメ素材(悪)
+		$select_anime21="cg/sys/select/C-0001.png";
+		CreateTexture("選択肢アニメ21", 40010, 0, 0, $select_anime21);
+		SetAlias("選択肢アニメ21", "選択肢アニメ21");
+
+		Fade("選択肢アニメ*", 0, 0, null, true);
+		Fade("@選択肢アニメ*", 0, 0, null, true);
+	}else{
+		CreateMovie("選択肢動画１",40010,center,middle,true,true,"dx/mv_select01.ngs");
+		CreateMovie("選択肢動画２",40010,center,middle,true,true,"dx/mv_select02.ngs");
+		CreateMovie("選択肢動画３",40010,center,middle,true,true,"dx/mv_select03.ngs");
+		SetAlias("選択肢動画１","選択肢動画１");
+		SetAlias("選択肢動画２","選択肢動画２");
+		SetAlias("選択肢動画３","選択肢動画３");
+		Fade("選択肢動画*",0,0,null,false);
+		if($GameName=="lx0101_00sl.nss"||$GameName=="lx0203_00sl.nss"||$GameName=="lx0502_00sl.nss"||$GameName=="lx0602_00sl.nss"||$GameName=="lx0604_10sl.nss"){
+			if(Random(100)<=50){
+				$Select01MV="@選択肢動画１";
+				$Select02MV="@選択肢動画３";
+			}else{
+				$Select01MV="@選択肢動画３";
+				$Select02MV="@選択肢動画１";
+			}
+		}
+	}
+
+	//▼等間隔試算
+	//$SelectX_plus=100;
+	//$SelectX=(($SelectX_plus)*($SetChoiceNum-2)+50)+1024/2;
+	//$SelectY="Middle";
+
+	//▼アレイ
+	Array($ChoiceName,"選択肢１","選択肢２","選択肢３","選択肢４","選択肢５","選択肢６","選択肢７");
+	AssocArray($ChoiceName,"選択肢１","選択肢２","選択肢３","選択肢４","選択肢５","選択肢６","選択肢７");
+
+	Array($ChoiceNameText,$テキストデータ１,$テキストデータ２,$テキストデータ３,$テキストデータ４,$テキストデータ５,$テキストデータ６,$テキストデータ７);
+
+	//■選択肢生成
+	$LOCAL_last_text1=" ";
+	$LOCAL_last_text2=" ";
+	SetBacklog("｡｡", "null", null);
+
+	$ChoiceWhile=0;
+	while($SetChoiceNum>$ChoiceWhile){
+		if($SetChoiceNum==2){
+			if($ChoiceWhile==0){SelectPat01();}
+			else if($ChoiceWhile==1){SelectPat02();}
+		}else if($SetChoiceNum==3){
+			if($ChoiceWhile==0){SelectPat01();}
+			else if($ChoiceWhile==1){SelectPat02();}
+			else if($ChoiceWhile==2){SelectPat03();}
+		}else if($SetChoiceNum==4){
+			if($ChoiceWhile==0){SelectPat01();}
+			else if($ChoiceWhile==1){SelectPat02();}
+			else if($ChoiceWhile==2){SelectPat03();}
+			else if($ChoiceWhile==3){SelectPat04();}
+		}else{
+			if($ChoiceWhile==0){SelectPat01();}
+		}
+
+		CreateChoice($ChoiceName[$ChoiceWhile]);
+		SetAlias($ChoiceName[$ChoiceWhile],$ChoiceName[$ChoiceWhile]);
+
+		$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseUsual/img";
+		CreateTexture($choicenut,30000,$SelectX,$SelectY,$select_img1);
+		$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseOver/img";
+		CreateTexture($choicenut, 30410,$SelectX,$SelectY,$select_img2);
+		$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseClick/img";
+		CreateTexture($choicenut, 30410,$SelectX,$SelectY,$select_img3);
+
+		$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseOver/se";
+		CreateSound($choicenut,SE,"sound/se/SE_システム_選択肢_選択.ogg");
+		
+		// 背景ムービー用
+		if(#ENDING_OF_XMAS||#ENDING_OF_TOBECONTINUED){
+			$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseOver/pro";
+			$choicepro=String("SelectOpen%02d",$ChoiceWhile+1);
+			CreateProcess($choicenut, 30400, 0, 0, $choicepro);
+			$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseLeave/pro";
+			$choicepro=String("SelectPause%02d",$ChoiceWhile+1);
+			CreateProcess($choicenut, 30400, 0, 0, $choicepro);
+		}
+
+		$SYSTEM_text_margin_column=-1;
+		SetFont("Malgun Gothic", 24, 707070, FFFFFF, NORMAL, NONE);
+		$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseUsual/txt";
+		CreateText($choicenut,30411,$SelectTextX,$SelectTextY,auto,auto,$ChoiceNameText[$ChoiceWhile]);
+		Request($choicenut,NoLog);
+		Request($choicenut,PushText);
+		SetFont("Malgun Gothic", 24, WHITE, FFFFFF, NORMAL, NONE);
+		$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseOver/txt";
+		CreateText($choicenut,30411,$SelectTextX,$SelectTextY,auto,auto,$ChoiceNameText[$ChoiceWhile]);
+		Request($choicenut,NoLog);
+		Request($choicenut,PushText);
+		SetFont("Malgun Gothic", 24, BLACK, FFFFFF, NORMAL, NONE);
+		$choicenut=$ChoiceName[$ChoiceWhile]+"/MouseClick/txt";
+		CreateText($choicenut,30411,$SelectTextX,$SelectTextY,auto,auto,$ChoiceNameText[$ChoiceWhile]);
+		Request($choicenut,NoLog);
+		Request($choicenut,PushText);
+		$SYSTEM_text_margin_column=0;
+
+		//ラストテキスト・バックログ登録
+		$LOCAL_last_text1="『"+$ChoiceNameText[$ChoiceWhile]+"』";
+		SetBacklog($LOCAL_last_text1, "null", null);//★バクログ
+
+		$LOCAL_last_text2=$LOCAL_last_text2+"『"+$ChoiceNameText[$ChoiceWhile]+"』";
+
+		//$SelectX+=$SelectX_plus;
+		$SelectX-=$SelectX_plus;
+		$ChoiceWhile++;
+	}
+	SetBacklog("｡｡", "null", null);
+
+	Fade("選択肢*/*",0,0,null,false);
+	Fade("選択肢*/*/*",0,0,null,false);
+
+	CreateSound("@EFWIN/選択肢_決定音",SE,"sound/se/SE_システム_選択肢_決定.ogg");
+	
+	//★ロック解除
+	LockVideo(false);
+
+	//フォーカス
+	ChoiceFocus();
+
+	$SYSTEM_skip=false;
+	#SYSTEM_skip_express=false;
+	$SYSTEM_text_auto=false;
+	#SYSTEM_skip_express_minimum_time=0;
+
+	if(!$エキストラタイトル){
+		//Save(9999);//★トレーラーは封印
+	}
+	if($GameName!="a0_01_01.nss"){
+		$SYSTEM_menu_lock=false;
+		//Boxframe();
+	}
+
+
+
+//▽演出
+
+//	CreateEffect("選択肢_背景", 29000, 0, 0, 1024, 576, "Plain");
+//	SetAlias("選択肢_背景", "選択肢_背景");
+//	Request("選択肢_背景", Passive);
+//	SetTone("選択肢_背景", Monochrome);
+
+	Fade("選択肢動画２",300,1000,null,false);
+	Fade("選択肢１/txt",300,1000,null,false);
+	Wait(50);
+	Fade("選択肢２/txt",300,1000,null,false);
+	Wait(50);
+	Fade("選択肢３/txt",300,1000,null,false);
+	Wait(50);
+	Fade("選択肢４/txt",300,1000,null,false);
+
+	Fade("選択肢*/MouseUsual/*",300,1000,null,true);
+	WaitAction("選択肢*/txt", null);
+
+	$LOCAL_keydown_left=false;
+	$LOCAL_keydown_right=false;
+	$LOCAL_keydown_up=false;
+	$LOCAL_keydown_down=false;
+	$LOCAL_mousewheel_up=false;
+	$LOCAL_mousewheel_down=false;
+
+	$SYSTEM_keydown_left=false;
+	$SYSTEM_keydown_right=false;
+	$SYSTEM_keydown_up=false;
+	$SYSTEM_keydown_down=false;
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+
+	//★選択肢カーソル停止バグ用
+	CursorPosition($X座標選択,$Y座標選択);
+	$Y座標選択+=5;
+	MoveCursor($X座標選択,$Y座標選択);
+	Wait(16);
+
+	$SYSTEM_show_cursor = true;
+	$SYSTEM_last_text = $LOCAL_last_text2;
+
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+
+	//▽ドラマダ（選択肢手前でクイックセーブ）
+//	if(#quick_save_enabled){
+//		$SYSTEM_skip=false;
+//		#SYSTEM_skip_express=false;
+//		$SYSTEM_text_auto=false;
+//		#SYSTEM_skip_express_minimum_time=0;
+//
+//		$LOCAL_quick_save_enabled=true;
+//		KickShortcut("s");
+//		$LOCAL_quick_save_enabled=false;
+//	}
+}
+
+...//■フォーカス
+function ChoiceFocus()
+{
+	$ChoiceMax=$SetChoiceNum;
+	$ChoiceWhile=0;
+	while($ChoiceMax>$ChoiceWhile){
+		//次へ（下、右）
+		$ChoiceNext=$ChoiceWhile+1;
+		if($ChoiceNext>=$ChoiceMax){
+			$ChoiceNext=0;
+		}
+		$nut1=$ChoiceName[$ChoiceWhile]+"/MouseUsual/img";
+		$nut2=$ChoiceName[$ChoiceNext]+"/MouseUsual/img";
+		SetNextFocus($nut1,$nut2,DOWN);
+		SetNextFocus($nut1,$nut2,LEFT);
+	
+		//前へ（上、左）
+		$ChoiceBack=$ChoiceWhile-1;
+		if($ChoiceBack<0){
+			$ChoiceBack=$ChoiceMax-1;
+		}
+		$nut1=$ChoiceName[$ChoiceWhile]+"/MouseUsual/img";
+		$nut2=$ChoiceName[$ChoiceBack]+"/MouseUsual/img";
+		SetNextFocus($nut1,$nut2,UP);
+		SetNextFocus($nut1,$nut2,RIGHT);
+
+		$ChoiceWhile++;
+	}
+}
+
+...//■選択後処理
+function ChoiceFade()
+{
+	Request("@EFWIN/選択肢_決定音",Play);
+	Request("@EFWIN/選択肢_決定音",Disused);
+//	Fade("選択肢*/MouseClick/*", 0, 0, null, true);
+
+	Fade("選択肢*/*/img", 500, 0, null, false);
+	Fade("選択肢*/*/txt", 500, 0, null, false);
+	Fade("@選択肢アニメ*", 500, 0, null, false);
+	Wait(1000);
+
+	$select_fade=false;
+
+	Fade("@選択肢_背景", 400, 0, null, false);
+	Fade("@選択肢動画*",400,0,null,true);
+	Request("@選択肢動画*",Stop);
+	WaitAction("@選択肢*");
+	WaitAction("@選択肢*/*");
+	WaitAction("@選択肢*/*/*");
+
+	$テキストデータバックログ１="【"+$ChoiceNameText[$SetChoiceSelect]+"】";
+
+	SetBacklog("｡｡", "null", null);//★バクログ
+	SetBacklog($テキストデータバックログ１, "null", null);//★バクログ
+	SetBacklog("｡｡", "null", null);//★バクログ
+
+	Delete("選択*");
+	Delete("@選択*");
+	Delete("select_*");
+
+	$SYSTEM_backlog_lock = false;
+	$SYSTEM_skip_lock=false;
+	$SYSTEM_text_auto_lock = false;
+	$SYSTEM_show_cursor = false;
+	$SYSTEM_text_erase_lock = false;
+	if(!$エキストラタイトル){
+		$SYSTEM_backselect_lock =false;
+	}
+
+	if(#keep_auto_and_skip)
+	{
+
+		#SYSTEM_skip_express=$express_log;
+
+		if($skip_log)
+		{
+			$SYSTEM_skip=true;
+		}
+		else if($auto_log)
+		{
+			$SYSTEM_text_auto=true;
+		}
+	}
+	else
+	{
+		if($auto_log)
+		{
+			$SYSTEM_text_auto=true;
+		}
+	}
+
+	$PLACE_select=false;
+}
+
+
+function ChoiceCursor(){
+	$ChoiceOn=false;
+	$ChoiceWhile=0;
+	while($SetChoiceNum>$ChoiceWhile){
+		$ChoiceUnderX1=VariableValue($,String("ChoiceArea%02dX",$ChoiceWhile));
+		$ChoiceUnderX2=VariableValue($,String("ChoiceArea%02dH",$ChoiceWhile));
+		$ChoiceUnderY1=VariableValue($,String("ChoiceArea%02dY",$ChoiceWhile));
+		$ChoiceUnderY2=VariableValue($,String("ChoiceArea%02dV",$ChoiceWhile));
+
+		if(($CsrX>$ChoiceUnderX1)&&($CsrX<$ChoiceUnderX2)&&($CsrY>$ChoiceUnderY1)&&($CsrY<$ChoiceUnderY2)){
+			$ChoiceOn=true;
+		}
+		$ChoiceWhile++;
+	}
+
+	if(!$ChoiceOn){
+		if($LOCAL_keydown_left){
+			MoveCursor($MouseFirstX,$MouseFirstY);
+		}else if($LOCAL_keydown_down){
+			MoveCursor($MouseFirstX,$MouseFirstY);
+		}else if($LOCAL_keydown_right){
+			MoveCursor($MouseLastX,$MouseLastY);
+		}else if($LOCAL_keydown_up){
+			MoveCursor($MouseLastX,$MouseLastY);
+		}else if($LOCAL_mousewheel_down){
+			MoveCursor($MouseFirstX,$MouseFirstY);
+		}else if($LOCAL_mousewheel_up){
+			MoveCursor($MouseLastX,$MouseLastY);
+		}
+	}
+
+	$LOCAL_keydown_left=false;
+	$LOCAL_keydown_right=false;
+	$LOCAL_keydown_up=false;
+	$LOCAL_keydown_down=false;
+	$LOCAL_mousewheel_up=false;
+	$LOCAL_mousewheel_down=false;
+//	Wait(16);
+}
+
+function ChoiceCursorSet(){
+	if($SYSTEM_keydown_left){
+		$LOCAL_keydown_left=true;
+		ChoiceCursor();
+	}else if($SYSTEM_keydown_right){
+		$LOCAL_keydown_right=true;
+		ChoiceCursor();
+	}else if($SYSTEM_keydown_up){
+		$LOCAL_keydown_up=true;
+		ChoiceCursor();
+	}else if($SYSTEM_keydown_down){
+		$LOCAL_keydown_down=true;
+		ChoiceCursor();
+	}
+}
+
+
+
+
+
+//―――――――――――――――――――――――――――――――――――//
+..//選択肢動作マクロ
+//―――――――――――――――――――――――――――――――――――//
+...//▼１択
+function WaitChoice01()
+{
+	select
+	{
+		if(!#PreSaveFlag){
+			SelectSave();
+		}
+
+		if($SYSTEM_skip||$SYSTEM_text_auto){
+			$SYSTEM_skip=false;
+			#SYSTEM_skip_express=false;
+			$SYSTEM_text_auto=false;
+		}
+	
+		case @選択肢１
+		{
+			ChoiceA01();
+		}
+	}
+}
+...//▼２択
+function WaitChoice02()
+{
+	select
+	{
+		if(!#PreSaveFlag){
+			SelectSave();
+		}
+
+		if($SYSTEM_skip||$SYSTEM_text_auto){
+			$SYSTEM_skip=false;
+			#SYSTEM_skip_express=false;
+			$SYSTEM_text_auto=false;
+		}
+	
+		case @選択肢１
+		{
+			ChoiceA02();
+		}
+		case @選択肢２
+		{
+			ChoiceB02();
+		}
+	}
+}
+...//▼３択
+function WaitChoice03()
+{
+	select
+	{
+		if(!#PreSaveFlag){
+			SelectSave();
+		}
+
+		if($SYSTEM_skip||$SYSTEM_text_auto){
+			$SYSTEM_skip=false;
+			#SYSTEM_skip_express=false;
+			$SYSTEM_text_auto=false;
+		}
+	
+		case @選択肢１
+		{
+			ChoiceA03();
+		}
+		case @選択肢２
+		{
+			ChoiceB03();
+		}
+		case @選択肢３
+		{
+			ChoiceC03();
+		}
+	}
+}
+...//▼４択
+function WaitChoice04()
+{
+	select
+	{
+		if(!#PreSaveFlag){
+			SelectSave();
+		}
+
+		if($SYSTEM_skip||$SYSTEM_text_auto){
+			$SYSTEM_skip=false;
+			#SYSTEM_skip_express=false;
+			$SYSTEM_text_auto=false;
+		}
+	
+		case @選択肢１
+		{
+			ChoiceA04();
+		}
+		case @選択肢２
+		{
+			ChoiceB04();
+		}
+		case @選択肢３
+		{
+			ChoiceC04();
+		}
+		case @選択肢４
+		{
+			ChoiceD04();
+		}
+	}
+}
+
+//―――――――――――――――――――――――――――――――――――//
+..//選択肢動作マクロ
+//―――――――――――――――――――――――――――――――――――//
+...//▼01
+function SelectOpen01(){
+	Wait(100);
+	if(!#ENDING_OF_XMAS&&!#ENDING_OF_TOBECONTINUED){
+//		Fade("@選択肢動画２",300,1000,null,true);
+	}else{
+		Fade("@選択肢動画２",300,0,null,false);
+		if($GameName=="lx0010.nss"||$GameName=="lx0104a_00sl.nss"||$GameName=="lx0108_00sl.nss"||$GameName=="lx0204_00sl.nss"||$GameName=="lx0302_00sl.nss"||$GameName=="lx0401_00sl.nss"||$GameName=="lx0501_00sl.nss"||$GameName=="lx0510_00sl.nss"){
+			Fade("@選択肢動画１",300,1000,null,true);
+		}else if($GameName=="lx0507_00sl.nss"){
+			Fade("@選択肢動画３",300,1000,null,true);
+		}else if($GameName=="lx0604_00sl.nss"){
+			Fade("@選択肢動画１",300,1000,null,true);
+		}else if($GameName=="lx0604_20sl.nss"){
+			if($SetChoiceNum==1){
+				Fade("@選択肢動画３",300,1000,null,true);
+			}else{
+				Fade("@選択肢動画１",300,1000,null,true);
+			}
+		}else if($GameName=="lx0101_00sl.nss"||$GameName=="lx0203_00sl.nss"||$GameName=="lx0502_00sl.nss"||$GameName=="lx0602_00sl.nss"||$GameName=="lx0604_10sl.nss"){
+			Fade($Select01MV,300,1000,null,true);
+		}
+	}
+}
+function SelectPause01(){
+	Fade("@選択肢動画*",300,0,null,false);
+	Fade("@選択肢動画２",300,1000,null,false);
+}
+
+...//▼02
+function SelectOpen02(){
+	Wait(100);
+	if(!#ENDING_OF_XMAS&&!#ENDING_OF_TOBECONTINUED){
+		//Fade("@選択肢動画２",300,1000,null,true);
+	}else{
+		Fade("@選択肢動画２",300,0,null,false);
+		if($GameName=="lx0010.nss"||$GameName=="lx0104a_00sl.nss"||$GameName=="lx0108_00sl.nss"||$GameName=="lx0204_00sl.nss"||$GameName=="lx0302_00sl.nss"||$GameName=="lx0401_00sl.nss"||$GameName=="lx0501_00sl.nss"||$GameName=="lx0510_00sl.nss"){
+			Fade("@選択肢動画３",300,1000,null,true);
+		}else if($GameName=="lx0507_00sl.nss"){
+			Fade("@選択肢動画１",300,1000,null,true);
+		}else if($GameName=="lx0604_00sl.nss"){
+			Fade("@選択肢動画１",300,1000,null,true);
+		}else if($GameName=="lx0604_20sl.nss"){
+			if($SetChoiceNum==1){
+				Fade("@選択肢動画３",300,1000,null,true);
+			}else{
+				Fade("@選択肢動画３",300,1000,null,true);
+			}
+		}else if($GameName=="lx0101_00sl.nss"||$GameName=="lx0203_00sl.nss"||$GameName=="lx0502_00sl.nss"||$GameName=="lx0602_00sl.nss"||$GameName=="lx0604_10sl.nss"){
+			Fade($Select02MV,300,1000,null,true);
+		}
+	}
+}
+function SelectPause02(){
+	Fade("@選択肢動画*",300,0,null,false);
+	Fade("@選択肢動画２",300,1000,null,false);
+}

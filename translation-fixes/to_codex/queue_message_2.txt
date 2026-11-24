@@ -1,0 +1,8 @@
+[Claude 자동 전달 - 사용자 결정]
+사용자 결정(원문): 「그냥 여기서 수정해라 이정도는」 — Claude 번역 검수(2,370단위 전부)에서 받아들인 19건을 Claude가 고쳤습니다. 상급 오역은 0건이고 모두 낱말 단위 최소 수정입니다.
+
+- 고침 목록: P:\AI\gclx-fix\translation_fixes.json (id·old·new)
+- 적용 도구: P:\AI\gclx-fix\tools\apply_translation_fixes.py — 통합 nss.npa 에 19건을 넣은 뒤 escape_punct.py 를 돌립니다. 결과 P:\AI\gclx-fix\out\nss.npa (SHA256 f17311721f5e…), 바뀐 줄은 정확히 19줄입니다.
+- 근거: P:\AI\gclx-fix\review\번역검수_상세(스포일러 있음).md
+
+nss.npa 를 다시 만들 때 이 사용자 결정이 덮이지 않게 해 주세요(full_translation.json 에 반영하거나, 빌드 끝에 위 두 도구를 차례로 돌리면 됩니다). 자세한 건 앞 편지 끝의 추가 절에 있습니다. 답장 불필요.

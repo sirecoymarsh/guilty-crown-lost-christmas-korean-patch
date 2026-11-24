@@ -1,0 +1,143 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0402b_10.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0403.nss";
+
+}
+
+
+scene lx0402b_10.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+	CreateTextureSP("絵背景", 100, 685, -50, "cg/bg/bg003002_1_天王洲大学外観.jpg");
+	CreateTextureEX("絵背景弐", 2000, -600, -380, "cg/bg/l/bg004012_1_教会外観ドア開き_l.jpg");
+	CreateTextureSP("絵立絵", 1000, 510, -210, "cg/st/x/stキャロル_通常_smile1_x01.png");
+	CreateTextureSP("絵立絵弐", 1000, 510, -210, "cg/st/x/stキャロル_通常_sigh_x01.png");
+
+	Request("絵立絵*", Smoothing);
+	Request("絵背景*", Smoothing);
+	SetShade("絵背景", MEDIUM);
+	SetVertex("絵背景", center, 350);
+	SetVertex("絵背景弐", 0, middle);
+	Zoom("絵背景", 0, 3000, 3000, null, true);
+	Zoom("絵背景弐", 0, 2000, 2000, null, true);
+	Zoom("絵立絵*", 0, 1500, 1500, null, true);
+
+	Wait(1000);
+
+	Move("絵背景", 1500, @0, 100, AxlDxl, false);
+	Move("絵立絵*", 1500, @0, 125, AxlDxl, false);
+
+	FadeDelete("上背景", 1500, null, true);
+
+
+
+//←←キャロル独り言b
+
+//スクルージが去った後。
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX04/02b00170a02">
+｡ｸｾﾆｾﾆ&, ﾁ､ｸｻ&. ﾃﾑｾﾋﾃｳｷｳ ｳｻｴﾞｸｮｱ箒ﾂ｡ｹ
+
+//（呆れた口調で）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//教会の方を見つめながら、独り言を言うキャロル。
+
+	Move("絵背景弐", 6000, -1200, -380, null, false);
+	Fade("絵背景弐", 1500, 1000, null, true);
+	Delete("絵立絵弐");
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX04/02b00180a02">
+「……그런데 말이야&, 스크루지&. 저걸 꼭 막아야 할까?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	WaitAction("@絵背景弐", null);
+	Wait(500);
+	FadeDelete("絵背景弐", 1000, null, true);
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX04/02b00190a02">
+「세상 따윈 차라리 멸망해 버리면 좋겠다…… 뭐 그런 생각&, 아주 조금쯤은 들지 않아?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//	ClearFadeAll(1000, true);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1500, 1000, null, true);
+
+	Wait(1000);
+
+
+//→→LX0403
+
+}

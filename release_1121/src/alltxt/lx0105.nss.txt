@@ -1,0 +1,422 @@
+//<continuation number="120">
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0105.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#bg002007_5_パスト部屋=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0106.nss";
+}
+
+
+scene lx0105.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+//―――――――――――――――――――――――――――――――――――――――
+//◆◆研究施設／廊下
+
+//慌ただしく駆け回る増援の警備兵たち。
+
+	//定義-----------------------------
+	PrintBG("上背景", 30000);
+
+	CreateTextureEX("bg01", 2000, Center, Middle, "cg/bg/bg002002_5_通路1.jpg");
+
+	CreateCamera("Ｃ", -100, 0, 1000);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureSP("Ｃ/絵背景", 1, -260, -340, "cg/bg/l/bg002002_5_通路1_l.jpg");
+	CreateTextureSP("Ｃ/絵立絵", 900, 600, -200, "cg/st/x/stダァト兵_待機_normal_x01.png");
+	CreateTextureSP("Ｃ/絵立絵弐", 900, 480, -200, "cg/st/x/stダァト兵_待機_normal_x01.png");
+
+	Request("Ｃ/絵*", Smoothing);
+
+	Zoom("Ｃ/絵立絵", 0, 150, 150, null, true);
+	Zoom("Ｃ/絵立絵弐", 0, 200, 200, null, true);
+
+	//CreateSE("SE00","se戦闘_銃器_機関銃乱射01");
+	CreateSE("SE01","se人体_足音_走る03");
+	CreateSE("SE02","se人体_足音_走る03");
+	CreateSE("SE05","se背景_環境_研究施設01L");
+
+	//定義-----------------------------
+	//MusicStart("SE00",2000,300,0,1000,null,true);
+	MusicStart("SE05",2000,800,0,800,null,true);
+	MusicStart("SE01",0,700,0,1100,null,false);
+	MoveFTP1("@Ｃ/絵立絵",1500,15,5);
+	Wait(100);
+	MusicStart("SE02",0,700,0,1300,null,false);
+	MoveFTP2("@Ｃ/絵立絵弐",1500,17,6);
+
+	MoveCamera("Ｃ", 1500, 550, @0, 1500, Dxl2, false);
+	FadeDelete("上背景", 500, null, true);
+
+	Fade("Ｃ/絵立*", 300, 0, Axl3, true);
+
+
+	Fade("bg01", 200, 1000, null, true);
+
+	St("L",2730, @0,@0,"stダァト兵_構え3_normal");
+	St("R",2730, @0,@0,"stダァト兵_待機_normal");
+	FadeSt("L",200,false);
+	FadeSt("R",200,true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【警備兵Ｉ】
+<voice name="ｰ貅ｴ I" class="警備兵Ｉ" src="voice/LX01/0500010e24">
+「아직도 실험체를 포착하지 못한 건가!」
+
+//【警備兵Ｊ】
+<voice name="ｰ貅ｴ J" class="警備兵Ｊ" src="voice/LX01/0500020e25">
+「그게 게이트 부근과 연락이 끊기는 바람에……」
+
+//【警備兵Ｉ】
+<voice name="ｰ貅ｴ I" class="警備兵Ｉ" src="voice/LX01/0500030e24">
+｡ｸﾃﾂ!
+｡｡ｼｭｵﾑｷｯ! ｼｭｵﾑｷｯ!｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//◆◆研究施設／ゲート
+
+//ゲートに駆けつける増援たち。
+
+	SetVolumeEX("SE*", 3000, 0, null);
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE01","se人体_足音_走る03");
+	CreateSE("SE02","se人体_足音_走る03");
+
+	MusicStart("SE01",0,700,0,1200,null,false);
+	DeleteAllSt(150,true);
+	MusicStart("SE02",0,700,0,1400,null,false);
+
+
+
+	CreateColorSP("絵色黒", 5000, "000000");
+	DrawTransition("絵色黒", 500, 0, 1000, 100, Dxl3, "cg/data/slide_01_02_0.png", true);
+
+	Delete("bg01");
+	Delete("Ｃ*");
+	Delete("Ｃ/絵*");
+	Delete("Nut*");
+
+	Wait(1000);
+
+//覇：演出背景
+	CreateTextureSP("絵組背景", 100, Center, 40, "cg/bg/bg002004_5_ゲート前.jpg");
+//	CreateTextureSP("絵組立絵", 500, Center, Middle, "cg/st/x/stダァト兵_待機_normal_x02.png");
+	CreateTextureSP("絵組立絵弐", 600, 650, -480, "cg/st/x/stダァト兵_待機_normal_x02.png");
+	CreateTextureSP("絵組立絵参", 706, 515, 270, "cg/ef/x/ef_manbreak01.png");
+	CreateTextureSP("絵組立絵四", 700, 570, 470, "cg/ef/x/ef_manbreak02.png");
+	CreateTextureSP("絵組立絵五", 700, 430, 400, "cg/ef/x/ef_manbreak03.png");
+	CreateTextureSP("絵組演血", 200, -100, 100, "cg/ef/ef_blood02.png");
+	CreateTextureSP("絵組演血弐", 703, 630, 60, "cg/ef/ef_blood01_01.png");
+	CreateTextureSP("絵組演血参", 705, 445, 145, "cg/ef/ef_blood01_02.png");
+	CreateTextureSP("絵組演血四", 706, 235, 10, "cg/ef/ef_blood01_01b.png");
+
+	SetVertex("絵組背景", center, bottom);
+
+	Zoom("絵組背景", 0, 2300, 2300, null, true);
+	Zoom("絵組立絵", 0, 600, 600, null, true);
+	Zoom("絵組立絵弐", 0, 400, 300, null, true);
+	Zoom("絵組立絵参", 0, 400, 300, null, true);
+	Zoom("絵組立絵四", 0, 600, 600, null, true);
+	Zoom("絵組立絵五", 0, 600, 600, null, true);
+	Zoom("絵組演血*", 0, 1200, 800, null, true);
+	Zoom("絵組演血弐", 0, 1100, 800, null, true);
+	Zoom("絵組演血参", 0, 1100, 1000, null, true);
+
+	Rotate("絵組演血", 0, @-60, @0, @0, null,true);
+	Rotate("絵組演血弐", 0, @-60, @0, @0, null,true);
+	Rotate("絵組演血参", 0, @-60, @0, @0, null,true);
+	Rotate("絵組演血四", 0, @-60, @0, @0, null,true);
+	Rotate("絵組立絵", 0, @0, @0, @90, null,true);
+	Rotate("絵組立絵弐", 0, @0, @40, @80, null,true);
+	Rotate("絵組立絵参", 0, @0, @30, @-60, null,true);
+	Rotate("絵組立絵四", 0, @0, @0, @-30, null,true);
+	Rotate("絵組立絵五", 0, @0, @0, @20, null,true);
+
+	Fade("絵組演血弐", 0, 900, null, true);
+	Fade("絵組演血参", 0, 900, null, true);
+	Fade("絵組演血四", 0, 950, null, true);
+
+	CreatePlainSP("絵写組", 3000);
+	SetVertex("絵写組", right, top);
+	SetShade("絵写組", HEAVY);
+	Delete("絵組*");
+	Request("絵写組", Smoothing);
+
+	CreateSE("SE01","se人体_足音_着地02");
+	CreateSE("SE02","se人体_足音_着地02");
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Wait(250);
+	MusicStart("SE02",0,700,0,1300,null,false);
+
+	Zoom("絵写組", 0, 1500, 1500, null, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【警備兵Ｊ】
+<voice name="ｰ貅ｴ J" class="警備兵Ｊ" src="voice/LX01/0500040e25">
+｡ｸﾀﾌｰﾇ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE11L","seヴォイド結晶化_l");
+	MusicStart("SE11L",4000,300,0,150,null,true);
+
+	Move("絵写組", 3000, @0, -220, Dxl1, false);
+	FadeDelete("絵色黒", 2000, null, true);
+
+
+
+	Wait(1500);
+
+	CreateCamera("Ｃ", 0, 0, 1000);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureSP("Ｃ/絵背景", 10, -570, -460, "cg/bg/l/bg002004_5_ゲート前_l.jpg");
+	CreateTextureSP("Ｃ/絵立絵", 150, 110, 0, "cg/st/stダァト兵_構え2_normal.png");
+	CreateTextureSP("Ｃ/絵立絵弐", 150, 490, -25, "cg/st/stダァト兵_待機_normal.png");
+
+	CreateTextureEX("絵立絵", 5900, Center, -200, "cg/st/x/stユウ_通常_smile1_x02.png");
+	CreateTextureEX("絵立絵2", 5900, Center, -200, "cg/st/x/stユウ_通常_smile2_x02.png");
+	CreateTextureEX("絵霞", 5100, -543, -400, "cg/bg/l/bg002003_5_通路2_l.jpg");
+	CreateTextureEX("絵背景", 5000, -543, -400, "cg/bg/l/bg002003_5_通路2_l.jpg");
+	Zoom("絵背景", 0, 1500, 1500, null, true);
+	Zoom("絵霞", 0, 1500, 1500, null, true);
+	Request("絵背景", Smoothing);
+
+	SetShade("絵霞", HEAVY);
+
+	CreateColorEX("絵色黒", 6000, "BLACK");
+
+
+	Request("Ｃ/*", Smoothing);
+	Request("絵演*", Smoothing);
+
+	Zoom("Ｃ/絵背景", 0, 1700, 1700, null, true);
+
+	FadeDelete("絵写組", 1500, null, true);
+
+
+//辺り一面、血の海
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【警備兵Ｉ】
+<voice name="ｰ貅ｴ I" class="警備兵Ｉ" src="voice/LX01/0500050e24">
+｡ｸ｡ｦ｡ｦｵｵｸﾁﾄ｣ ｰﾇ ｱｫｼｪ ｹｹ ｱﾗｷｱ ｰﾇｰ｡?｡ｹ
+
+//【警備兵Ｊ】
+<voice name="ｰ貅ｴ J" class="警備兵Ｊ" src="voice/LX01/0500060e25">
+｡ｸｾﾆﾆｮｸｳｽｺ ｹﾙﾀﾌｷｯｽｺ ｽﾇﾇ霑｡ｼｭ ｾ錂ｼｴﾙ ﾀﾌｷｱ ﾀﾏﾀﾌ?｡ｹ
+
+//【警備兵Ｉ】
+<voice name="ｰ貅ｴ I" class="警備兵Ｉ" src="voice/LX01/0500070e24">
+「……대체 여기서 무슨 일이 벌어지고 있는 거지?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	MoveCamera("Ｃ", 1500, @0, @-500, 9000, Axl1, false);
+
+	Wait(350);
+
+	Fade("絵色黒", 0, 1000, null, false);
+	DrawTransition("絵色黒", 300, 0, 1000, 300, Axl3, "cg/data/slide_02_00_0.png", true);
+
+	$SYSTEM_effect_lens_distance=1;
+	$SYSTEM_effect_lens_curvature=5000;
+	CreateEffect("hoge",5950,Center,Middle,1500,1500,"Lens");
+
+	Move("hoge", 0, @0, -800, null, true);
+	Fade("絵背景", 0, 1000, Dxl1, false);
+
+//おののき立ちつくす警備兵たち
+//それを高い場所から見下ろす視点
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0500080b06">
+「호오&. 그저 실패작이라고 생각했습니다만……
+　아주 조금은 즐거워질 것 같군요」
+
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0500090b06">
+「어떻게 성장하느냐에 따라서는 이브에게 도움이 될지도 모르겠군요」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+#CFGVC_YUU=1;
+//天井に逆さに立つユウの登場
+
+	Move("hoge", 1000, @0, -200, Dxl1, false);
+	Fade("絵霞", 500, 1000, Dxl1, false);
+	Fade("絵立絵", 500, 1000, Dxl2, false);
+
+	DrawDelete("絵色黒", 500, 200, Dxl1, "slide_02_00_1", true);
+
+
+	Wait(1100);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0500100b06">
+「그럼 스크루지&. 가짜 왕이여」
+
+{	Fade("絵立絵2", 300, 1000, Axl3, true);}
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0500110b06">
+｡ｸｴ鄂ﾅﾀﾇ ﾀﾌｾﾟｱ篩｡ ｲﾉﾀｻ ｴﾘ ｵ蟶ｮﾁ茖ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	SetVolumeEX("SE11L", 100, 0, null);
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorSPsub("絵色黒", 8000, "WHITE");
+	Delete("Ｃ*");
+	Delete("Ｃ/絵*");
+	Delete("絵立絵");
+	Delete("絵霞");
+	Delete("絵立絵2");
+	Delete("hoge");
+
+	//CreateTextureSP("絵背景", 100, Center, -70, "cg/bg/l/bg002007_5_パスト部屋_l.jpg");
+	CreateTextureSP("絵背景", 100, Center, middle, "cg/bg/bg002007_5_パスト部屋.jpg");
+	Request("絵背景", Smoothing);
+	SetBlur("絵背景", true, 2, 300, 100, false);
+
+	//Zoom("絵背景", 0, 1800, 1800, null, true);
+
+	CreateSE("SE21","se人体_動作_指鳴らし01");
+	CreateSE("SE22","se日常_機械_起動音01");
+	CreateSE("SE23","se日常_機械_起動音02L");
+	CreateSE("SE24","se日常_機械_起動音03");
+
+	//動作--------------------------------
+
+	MusicStart("SE21",0,700,0,1000,null,false);
+	Wait(1000);
+
+	MusicStart("SE22",0,700,0,1000,null,false);
+	//Zoom("絵背景", 6000, 2000, 2000, null, false);
+	Fade("絵色黒", 1000, 500, null, true);
+
+	Wait(1000);
+
+	MusicStart("SE23",3000,700,0,1000,null,true);
+	MusicStart("SE24",0,700,0,1000,null,false);
+
+	Fade("絵色黒", 3000, 0, Axl2, false);
+
+
+//言って指を鳴らすユウ。
+
+////////////////////////////////////////
+//◆◆パストコクピット
+
+//真っ暗な部屋。
+//ユウの合図と共に、部屋中の機器に電気が点る。
+
+//中央には無数のコードに繋がれた何者かの姿。
+//機器に埋め尽くされているので外見はまったくわからない。
+
+
+
+	//Fade("絵色黒", 500, 0, Dxl3, false);
+	//Zoom("絵背景", 500, 2800, 2800, Dxl3, false);
+
+	Wait(3000);
+
+
+	//Zoom("絵背景", 150, 2000, 2000, Dxl3, false);
+	//Fade("絵色黒", 150, 500, Dxl3, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX01/0500120a04">
+｡ｶ｡ｦ｡ｦｾﾆﾇﾏ｢ﾜ｡ｷ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(500);
+
+	SetVolumeEX("SE*", 2500, 0, null);
+
+	Fade("絵色黒", 2000, 1000, Axl1, true);
+
+	Wait(1000);
+
+
+//→→LX0106
+}

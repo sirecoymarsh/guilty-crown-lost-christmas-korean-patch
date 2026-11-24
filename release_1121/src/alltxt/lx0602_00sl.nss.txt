@@ -1,0 +1,93 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0602_00sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+
+}
+
+
+scene lx0602_00sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+	CreateSE("SE01","se人体_心臓_鼓動01L");
+	MusicStart("SE01",1000,700,0,500,null,true);
+
+
+	CreatePlainEX("pl02", 16000);
+	SetTone("pl02", Monochrome);
+
+	Fade("pl01", 0, 1000, null, true);
+
+	FadeDelete("上背景", 1000, null, true);
+
+
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//とる
+//→→アバドン まで飛ぶ
+
+//→→とらない
+
+//////////////////////////////////////
+
+	$select_fade=true;
+	SetChoice02("거둔다","거두지 않는다");
+	WaitChoice02();
+	
+	if($SetChoiceSelect==0){		$GameName = "lx0602_10.nss";$lx0602_00sl選択肢=1;}
+	else if($SetChoiceSelect==1){	$GameName = "lx0602_02.nss";$lx0602_00sl選択肢=0;}
+
+//	ClearFadeAll(1000, true);
+
+	SetVolumeEX("SE*", 1000, 0, null);
+	CreateColorEXadd("co01", 20000, "FFFFFF");
+	Fade("co01", 1000, 1000, null, true);
+
+
+}

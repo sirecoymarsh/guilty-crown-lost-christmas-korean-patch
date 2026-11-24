@@ -1,0 +1,877 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0507_10.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0508エデン・べべ停止=true;
+	#ev0508エデン・べべキャンサー化=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0508.nss";
+
+}
+
+
+scene lx0507_10.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+	$DebugNo="０";
+
+//―――――――――――――――――――――――――――――――――――――――
+
+while($DebugNo=="１")
+{
+
+	CreateColorSP("下地", 0, "FFFF00");
+
+	WaitKey();//――――――――――――――――――――――――――――――――――――――――
+
+	CreateTextureSP("絵専停止", 1210, Center, Middle, "cg/ev/ev0508エデン・べべ停止.jpg");
+
+	WaitKey();//――――――――――――――――――――――――――――――――――――――――
+	WaitKey();//――――――――――――――――――――――――――――――――――――――――
+}
+
+//―――――――――――――――――――――――――――――――――――――――
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+	CreateTextureSP("絵背景", 100, -200, -90, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+	Request("絵背景", Smoothing);
+
+		CreateSE("SEL01","se背景_ガヤ_燃える町並み_L");
+		MusicStart("SEL01",3000,500,0,1000,null,true);
+
+	FadeDelete("上背景", 1000, null, true);
+
+
+//←←キャンサー化エデン・ベベ
+//・合流
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+――땅울림이 멎었다&.
+
+//外。エデン・ベベが止まっている。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	CreateTextureEX("絵専停止", 1210, Center, -576, "cg/ev/l/ev0508エデン・べべ停止_l.jpg");
+	Move("絵専停止", 8000, @0, -170, null, false);
+	Fade("絵専停止", 500, 1000, null, true);
+
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0011]
+정말 아슬아슬했다&. 덩치 큰 놈은 트레일러 바로 옆에 멈춰 서 있었다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0700270a02">
+｡ｸﾁｶｸｶﾁｶｸｶﾇﾟｳﾗ｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0700280a01">
+｡ｸｾﾖｸﾔﾀﾌｱ箒ﾂ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	CreatePlainSP("絵板写", 5000);
+
+	CreateTextureSP("絵専停止", 1210, Center, Middle, "cg/ev/ev0508エデン・べべ停止.jpg");
+
+	FadeDelete("絵板写", 1000, null, true);
+	Wait(300);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0021]
+기묘한 자세로 멈춰 선 엔드레이브는 상처 입은 코끼리와도 닮아 있었다&.
+
+엔드레이브는 원격 조작 기체다&. 다른 지휘차와 조종자가 오지 않으리란 법도 없다&.
+
+지금 파괴해 두는 편이 좋겠지&.
+
+//エデン・ベベ揺れる
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	SetVolumeEX("SE*", 150, 0, null);
+	CreateSE("SE01","se戦闘_破壊_コンクリート03");
+	MusicStart("SE01",0,700,0,1000,null,false);
+	CreatePlainEX("絵板写", 5000);
+	Zoom("絵板写", 0, 1150, 1150, null, true);
+	SetBlur("絵板写", true, 3, 500, 200, false);
+	Fade("絵板写", 0, 800, null, true);
+	Shake("絵板写", 400, -5, 80, 0, 0, 1000, null, false);
+	Wait(200);
+	FadeDelete("絵板写", 500, null, true);
+
+	CreateSE("SE03","se日常_機械_起動音03");
+	MusicStart("SE03",0,700,0,800,null,false);
+	SetFrequency("SE03", 6000, 1400, Axl2);
+
+
+	CreatePlainSP("絵板写二", 5000);
+
+	CreateTextureSP("絵演変形背景", 1110, 980, -1000, "cg/bg/l/bg001015_3_高速道路高架下崩壊_l.jpg");
+	Zoom("絵演変形背景", 0, 2000, 2000, null, true);
+
+	CreateTextureEX("絵演変形機一", 1210, -30, -60, "cg/ma/x/ev0508エデン・べべキャンサー化_xキャラのみ結晶無影01c.png");
+	Fade("絵演変形機一", 0, 750, null, true);
+	Position("@絵演変形機一", $akx1, $aky1);
+
+	CreateTextureEX("絵演変形機二", 1210, $akx1, $aky1, "cg/ma/x/ev0508エデン・べべキャンサー化_xキャラのみ結晶無影01b.png");
+	CreateTextureEX("絵演変形機三", 1210, $akx1, $aky1, "cg/ma/x/ev0508エデン・べべキャンサー化_xキャラのみ結晶無影01a.png");
+	CreateTextureEX("絵演変形機四", 1210, $akx1, $aky1, "cg/ma/x/ev0508エデン・べべキャンサー化_xキャラのみ結晶無影01.png");
+
+	Request("絵演変形*", Smoothing);
+	Delete("絵専停止");
+	FadeDelete("絵板写二", 500, null, true);
+
+	CreateSE("SE02","se戦闘_メカ_駆動07");
+	MusicStart("SE02",0,700,0,300,null,false);
+	SetFrequency("SE02", 1000, 800, null);
+
+	Wait(2000);//―――――――――――――――
+
+	CreateVOICE("パスト","LX05/0600290a04");
+	MusicStart("パスト",0,1200,0,1000,null,false);
+
+	CreateBGM_Loop("lx015c");
+	SoundPlay_Loop("lx015c",0,800,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+그때&, <RUBY TEXT="덩치 큰 놈이">거대한 짐승이</RUBY> 움직였다&. 몸을 흔들고 다리를 뻗더니 신음 소리까지 내며 몸을 비튼다&.
+
+//★鋼屋：
+//？？：パストの声入れた方がいい？　どこかのボイス流用で。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	CreateEffectSP("絵板写", 4990, Center, Middle, 1024, 576, "Plain");
+	Fade("絵板写", 0, 500, null, true);
+	CreateProcessEX("LProc0507", "LProcAK_lx0506_01Act");
+	Request("LProc0507", Start);
+	SetBlur("絵板写", true, 3, 500, 60, false);
+	MoveFFP1("@絵板写",600);
+
+	CreateSE("SE04a","se戦闘_銃器_ミサイル");//胴体の接続箇所が外れる
+	SetStream("SE04a", 680);
+	MusicStart("SE04a",0,700,0,1200,null,false);
+
+	Wait(800);
+
+	CreateSE("SE04b","se戦闘_金属_ひび割れ03");//変形の際に金属が軋む
+	MusicStart("SE04b",0,1200,0,1000,null,false);
+
+	Wait(500);
+
+	CreateSE("SE04c","se戦闘_メカ_駆動03");//胴体伸び
+	MusicStart("SE04c",0,1000,0,800,null,false);
+
+	CreatePlainSP("絵板写変形", 5000);
+	Fade("絵演変形機二", 0, 750, null, true);//胴体伸び
+	Delete("絵演変形機一");
+	DrawDelete("絵板写変形", 1000, 100, null, "noize_01_00_0", true);
+
+	Wait(1000);//―――――――――――――――
+
+	CreateSE("SE05L","se戦闘_メカ_駆動04");//左腕開く
+	MusicStart("SE05L",0,700,-30,900,null,false);
+	Wait(300);
+	CreateSE("SE05R","se戦闘_メカ_駆動04");//右腕開く
+	MusicStart("SE05R",0,700,30,1000,null,false);
+
+	Wait(300);
+
+	CreateSE("SE05bL","se戦闘_メカ_駆動01");
+	MusicStart("SE05bL",0,900,-30,900,null,false);
+	Wait(200);
+	CreateSE("SE05bR","se戦闘_メカ_駆動01");
+	MusicStart("SE05bR",0,900,30,1100,null,false);
+	CreatePlainSP("絵板写変形", 5000);
+	Fade("絵演変形機三", 0, 750, null, true);//腕伸び
+	Delete("絵演変形機二");
+	DrawDelete("絵板写変形", 1000, 100, null, "noize_01_00_0", true);
+
+	Wait(2000);//―――――――――――――――
+
+	CreateSE("SE06a","se戦闘_メカ_駆動06");//首の付根開口
+	MusicStart("SE06a",0,700,0,1000,null,false);
+
+	Wait(300);
+
+	CreateSE("SE06b","se特殊_格納庫_開く");//首伸びる
+	MusicStart("SE06b",0,1200,0,2000,null,false);
+	CreatePlainSP("絵板写変形", 5000);
+	Fade("絵演変形機四", 0, 750, null, true);//腕伸び
+	Delete("絵演変形機三");
+	DrawDelete("絵板写変形", 1000, 100, null, "noize_01_00_0", true);
+
+//	Delete("絵板写");
+
+	CreateVOICE("パスト","LX04/0300090a04");
+	MusicStart("パスト",0,1200,0,1000,null,false);
+
+	CreatePlainSP("絵板写二", 5000);
+
+	CreateCameraEX("絵写機", 0, 0, 1000);
+	MoveCamera("@絵写機", 0, @0, @0, 1000, null, true);
+
+	CreateTextureSP("絵写機/絵背景", 0, 440, 40, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Zoom("絵写機/絵背景", 0, 2000, 2000, null, true);
+
+	CreateTextureSP("絵写機/絵人木", 200, 390, -160, "cg/st/x/stキャロル_通常_cry2_x01.png");
+	CreateTextureSP("絵写機/絵人酢", 200, -60, -300, "cg/st/x/stスクルージ_戦闘_angry口開き_x01.png");
+	Zoom("絵写機/絵人木", 0, 700, 700, null, true);
+
+
+	Rotate("絵写機", 0, @0, @0, -15, null,true);
+	Request("絵写機/絵*", Smoothing);
+	Delete("絵演変形*");
+	FadeDelete("絵板写二", 1000, null, true);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0031]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0700290a01">
+「……!? 왜 움직이지!?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0700300a02">
+「다른 <RUBY TEXT="오퍼레이터">조종자</RUBY>로 <RUBY TEXT="스왑">교대</RUBY>한 거야!? 아니&, 아냐!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(200);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0041]
+
+//　キャロルが指した先。
+//　エデン・ベベに、キャンサー結晶が生えていた。
+//　結晶はみるみるうちに、装甲を浸食し、それと同時に、エデン・ベベが身を起こしてゆく。
+
+ﾄｳｷﾑﾀﾌ ｼﾕｰ｡ｶｸｷﾎ ｰ｡ｸｮﾅｲｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreatePlainSP("絵板写二", 5000);
+
+	CreateTextureSP("絵背景", 1010, 512, -288, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+	SetShade("絵背景", MEDIUM);
+
+	CreateTextureSP("絵演変化機", 1110, -230, -40, "cg/ma/x/エデンベベキャンサー化01.png");
+
+	CreateTextureEX("絵演変化結晶一", 1210, 840, 200, "cg/ef/x/ef_voidrubble77_03_ogami.png");//右下
+	CreateTextureEX("絵演変化結晶三", 1210, 930, 350, "cg/ef/x/ef_voidrubble77_04_ogami.png");//右中
+
+	CreateTextureEX("絵演変化結晶四", 1210, 50, 160, "cg/ef/x/ef_voidrubble77_01_ogami.png");//左上
+	CreateTextureEX("絵演変化結晶五", 1210, -90, 110, "cg/ef/x/ef_voidrubble03_x03.png");//左中
+	CreateTextureEX("絵演変化結晶二", 1210, 77, 405, "cg/ef/x/ef_voidrubble77_02_ogami.png");//左下
+
+	Zoom("絵演変化結晶*", 0, 0, 0, null, true);
+
+	Request("絵演変化結晶*", Smoothing);
+	Delete("絵写機/絵*");
+	Delete("絵板写二");
+
+
+	Fade("絵演変化結晶*", 0, 1000, null, true);
+
+	CreateSE("SE11","seヴォイド結晶化01a");
+	MusicStart("SE11",0,700,90,1000,null,false);
+	SetPan("SE11", 2000, -30, null);
+
+	SetVertex("絵演変化結晶三", center, 190);
+	Zoom("絵演変化結晶三", 200, 1800, 1800, null, false);
+	Wait(190);
+
+	SetVertex("絵演変化結晶二", 105, 195);
+	Zoom("絵演変化結晶二", 200, 1800, 1800, null, false);
+	Wait(190);
+
+	SetVertex("絵演変化結晶一", 28, 210);
+	Zoom("絵演変化結晶一", 200, 1800, 1800, null, false);
+	Wait(190);
+
+	SetVertex("絵演変化結晶五", 163, 320);
+	Zoom("絵演変化結晶五", 200, 1000, 1000, null, false);
+	Wait(190);
+
+	SetVertex("絵演変化結晶四", 30, 220);
+	Zoom("絵演変化結晶四", 200, 1800, 1800, null, false);
+	Wait(200);
+
+	CreateSE("SE11b","seヴォイド結晶化01a");
+	MusicStart("SE11b",0,700,-90,1500,null,false);
+	SetPan("SE11b", 2000, 30, null);
+
+	CreatePlainSP("絵板写二", 5000);
+
+	Delete("絵演変化結晶*");
+
+	CreateTextureSP("絵背景", 1010, 512, -288, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+	SetShade("絵背景", MEDIUM);
+
+	CreateTextureSP("絵演変化機", 1110, -230, -40, "cg/ma/x/エデンベベキャンサー化02.png");
+
+	CreateTextureEX("絵演変化結晶左弐", 1120, 107, 257, "cg/ef/x/ef_voidrubble77_02_ogami.png");
+	SetVertex("絵演変化結晶左弐", 55, 185);
+	CreateTextureEX("絵演変化結晶左一", 1120, 90, 380, "cg/ef/x/ef_voidrubble77_03_ogami.png");
+	SetVertex("絵演変化結晶左一", 85, 200);
+
+	CreateTextureEX("絵演変化結晶中二", 1120, 500, 90, "cg/ef/x/ef_voidrubble77_03_ogami.png");
+	SetVertex("絵演変化結晶中二", 130, 210);
+	CreateTextureEX("絵演変化結晶中一", 1120, 565, 220, "cg/ef/x/ef_voidrubble77_04_ogami.png");
+	SetVertex("絵演変化結晶中一", 50, 200);
+
+	CreateTextureEX("絵演変化結晶奥一", 1105, 600, 110, "cg/ef/x/ef_voidrubble03_x03.png");
+	SetVertex("絵演変化結晶奥一", 160, 320);
+	Rotate("絵演変化結晶奥一", 0, @0, @0, 30, null,true);
+
+
+	Zoom("絵演変化結晶*", 0, 0, 0, null, true);
+	Request("絵演変化結晶*", Smoothing);
+	Delete("絵板写二");
+
+
+
+	Fade("絵演変化結晶*", 0, 1000, null, true);
+	Zoom("絵演変化結晶左一", 200, 1500, 1500, null, false);
+	Wait(190);
+	Zoom("絵演変化結晶左弐", 200, 1500, 1500, null, false);
+	Wait(190);
+	Zoom("絵演変化結晶中一", 200, 1500, 1500, null, false);
+	Wait(190);
+	Zoom("絵演変化結晶中二", 200, 1500, 1500, null, false);
+	Wait(190);
+	Zoom("絵演変化結晶奥一", 200, 1500, 1500, null, false);
+	Wait(190);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0042]
+엔드레이브에 AP 결정이 돋아나 있었다&. 폭발적으로 증식하며 순식간에 기체를 침식해 간다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	CreateSE("SE21","se戦闘_メカ_駆動07");
+	MusicStart("SE21",0,700,0,1000,null,false);
+	CreateTextureEX("絵専復活機", 2110, Center, -576, "cg/ev/l/ev0508エデン・べべキャンサー化_l.jpg");
+	Move("絵専復活機", 4000, @0, 0, null, false);
+	Fade("絵専復活機", 1000, 1000, null, true);
+
+	Wait(2800);
+
+	CreateVOICE("パスト","LX04/0100060a04");
+	MusicStart("パスト",0,1200,0,1000,null,false);
+
+	CreatePlainSP("絵板写二", 9930);
+	Delete("絵板写");
+	CreateEffectSP("絵板写三", 9910, Center, Middle, 1024, 576, "Plain");
+	CreateEffectSP("絵板写四", 9920, Center, Middle, 1024, 576, "Plain");
+	CreateEffectSP("絵板写五", 9930, Center, Middle, 1024, 576, "Plain");
+	SetVertex("絵板写三", center, 110);
+	SetVertex("絵板写四", center, 110);
+	SetVertex("絵板写五", center, 110);
+	SetBlur("絵板写三", true, 3, 300, 100, false);
+	SetBlur("絵板写四", true, 3, 300, 100, false);
+	SetBlur("絵板写五", true, 3, 300, 100, false);
+
+	Zoom("絵板写三", 1900, 1100, 1100, Axl1, false);
+	Zoom("絵板写四", 1900, 1200, 1200, Axl1, false);
+	Zoom("絵板写五", 1900, 1300, 1300, Axl1, false);
+
+	FadeDelete("絵板写二", 300, null, false);
+
+	Wait(1870);
+
+	CreatePlainSP("絵板写全", 10000);
+	Request("絵板写全", Lock);
+	Delete("絵板写*");
+	Delete("絵演変化*");
+	Delete("LProc*");
+	Delete("NutFFP*");
+	Request("絵板写全", UnLock);
+	FadeDelete("絵板写全", 500, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0043]
+거대한 짐승이 몸을 일으킨다&. 그 움직임이 어찌나 생생한지 꼭 살아 있는 짐승 같았다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0700310a01">
+｡ｸ｡ｦ｡ｦｹｹｾﾟ&, ﾀ嵓ﾇ?｡ｹ
+
+//（呆然と）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	CreateTextureEX("絵専", 2110, Center, Middle, "cg/ev/ev0508エデン・べべキャンサー化.jpg");
+	Fade("絵専", 1000, 1000, null, true);
+
+	Wait(500);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0700320a02">
+「……대단해」
+
+{	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0700330a02">
+「인격 그 자체가 결정화하고 있어」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0700340a01">
+｡ｸｱﾗｷｱ ｸｻｵｵ ｾﾈ ｵﾇｴﾂ ﾀﾏﾀﾌ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	PrintGO("上背景", 5000);
+
+	CreateSE("SE01","se戦闘_メカ_駆動01");
+	MusicStart("SE01",0,700,0,1200,null,false);
+	SetFrequency("SE01", 1000, 800, Axl1);
+
+	CreateTextureSP("絵背景", 10, -377, 130, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+	SetShade("絵背景", MEDIUM);
+	Rotate("絵背景", 0, @0, @0, 10, null,true);
+
+	CreateTextureSP("絵演機引", 1010, -240, -250, "cg/ma/x/ma_エデンベベキャンサー化_立ち_正面_x00s50.png");
+	Rotate("絵演機引", 0, @0, @0, 10, null,true);
+	Request("絵演機引", Smoothing);
+
+	FadeDelete("上背景", 500, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0071]
+//　砲塔が糸を引いて持ち上がり、俺たちのほうをポイントする中、俺はしゃべり続けるキャロルを抱き寄せて走る。
+
+거대한 짐승이 우리를 노려보듯 내려다본다&. 그 기체 깊숙한 곳에서 무언가 강대한 힘이 소용돌이치는 게 느껴졌다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	CreatePlainEX("絵板写", 1900);
+	SetShade("絵板写", MEDIUM);
+	Fade("絵板写", 500, 1000, null, true);
+
+	Move("絵背景", 0, -320, 270, null, true);
+	Zoom("絵背景", 0, 2500, 2500, null, true);
+
+	CreateTextureEX("絵演機寄", 2010, 6, -400, "cg/ma/x/ma_エデンベベキャンサー化_立ち_正面_x00カット.png");
+	Rotate("絵演機寄", 0, @0, @0, 10, null,true);
+	Request("絵演機寄", Smoothing);
+
+	Move("絵演機寄", 6000, 95, -350, null, false);
+
+	Delete("絵演機引");
+	FadeDelete("絵板写", 500, null, false);
+	Fade("絵演機寄", 500, 1000, null, true);
+
+	CreateSE("SE91","seヴォイドエフェクト_l");
+	MusicStart("SE91",2000,900,0,500,null,true);
+	CreateMovieEXsub("絵演動画奥", 2005, Center, Middle, true, true, "dx/mvve02.ngs");
+	CreateMovieEXsub("絵演動画前", 2100, Center, Middle, true, true, "dx/mvve02.ngs");
+	Rotate("絵演動画奥", 0, @0, @0, 10, null,true);
+	Rotate("絵演動画前", 0, @0, @0, 10, null,true);
+
+	Zoom("絵演動画奥", 0, -2500, 2500, null, true);
+	Fade("絵演動画奥", 3000, 100, null, false);
+
+	Zoom("絵演動画前", 0, 3500, 3500, null, true);
+	Fade("絵演動画前", 3000, 100, null, false);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0072]
+예사롭지 않은&, 명백히 초자연적인 힘&.
+ﾀﾌｰﾍﾀｺ｡ｦ｡ｦ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//あきゅん「演出：ヴォイド砲、負荷調整元位置(１／２)」
+	CreateCameraEX("絵写機砲", 0, 0, 1000);
+	MoveCamera("@絵写機砲", 0, 0, 60, 1500, null, true);
+
+	CreateTextureEX("絵写機砲/絵背景", -100, 110, 75, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Rotate("絵写機砲/絵背景", 0, @0, @0, -10, null,true);
+	Zoom("絵写機砲/絵背景", 0, 3100, 3100, null, true);
+
+	CreateMovieEXadd("絵写機砲/絵演動画後", 0, Center, Middle, true, true, "dx/mvve02.ngs");
+	Zoom("絵写機砲/絵演動画後", 0, -4000, 4000, null, true);
+//あきゅん「演出：ヴォイド砲、負荷調整元位置(１／２)：ここまで↑↑↑↑」
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0700350a01">
+｡ｸ｡ｦ｡ｦ!?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//あきゅん「演出：ヴォイド砲、負荷調整元位置(２／２)」
+	CreateTextureEX("絵写機砲/絵演機", 0, Center, Middle, "cg/ev/ev0522エデン・べべキャンサー化いのりソード砲撃_べべのみ.png");
+	Position("@絵写機砲/絵演機", $akx1, $aky1);
+	CreateStencil("絵写機砲/絵枠",0,$akx1, $aky1,128,"cg/ev/ev0522エデン・べべキャンサー化いのりソード砲撃_べべのみ.png",false);
+	SetAlias("絵写機砲/絵枠","絵写機砲/絵枠");
+//あきゅん「演出：ヴォイド砲、負荷調整元位置(２／２)：ここまで↑↑↑↑」
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+이건…… 굳이 말하자면&, <RUBY TEXT="····">보이드에</RUBY> <RUBY TEXT="···">가깝다</RUBY>――
+
+//エデン・ベベ砲撃
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	CreatePlainSP("上背景", 5000);
+	Delete("絵演機引");
+	Delete("絵演機寄");
+	Delete("絵演動画奥");
+	Delete("絵演動画前");
+
+//あきゅん「演出：ヴォイド砲、負荷調整元位置」
+/*
+	CreateCameraEX("絵写機砲", 0, 0, 1000);
+	MoveCamera("@絵写機砲", 0, 0, 60, 1500, null, true);
+
+	CreateTextureEX("絵写機砲/絵背景", -100, 110, 75, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Rotate("絵写機砲/絵背景", 0, @0, @0, -10, null,true);
+	Zoom("絵写機砲/絵背景", 0, 3100, 3100, null, true);
+
+
+	CreateMovieEXadd("絵写機砲/絵演動画後", 0, Center, Middle, true, true, "dx/mvve02.ngs");
+	Zoom("絵写機砲/絵演動画後", 0, -4000, 4000, null, true);
+
+	CreateTextureEX("絵写機砲/絵演機", 0, Center, Middle, "cg/ev/ev0522エデン・べべキャンサー化いのりソード砲撃_べべのみ.png");
+	Position("@絵写機砲/絵演機", $akx1, $aky1);
+	CreateStencil("絵写機砲/絵枠",0,$akx1, $aky1,128,"cg/ev/ev0522エデン・べべキャンサー化いのりソード砲撃_べべのみ.png",false);
+	SetAlias("絵写機砲/絵枠","絵写機砲/絵枠");
+*/
+//あきゅん「演出：ヴォイド砲、負荷調整元位置：ここまで↑↑↑↑」
+
+	CreateColorEXadd("絵写機砲/絵枠/照光", 0, "33CCFF");
+	Zoom("絵写機砲/絵枠/照光", 0, 10000, 10000, null, true);
+
+	CreateTextureEXadd("絵写機砲/絵演機集中", 0, 199, -172, "cg/ef/ef_spark03.png");
+	Zoom("絵写機砲/絵演機集中", 0, 5000, 5000, null, true);
+
+	CreateTextureEXadd("絵写機砲/絵演機陣", 0, 452, -46, "cg/ef/x/ef_field_x04中心点調整.png");
+	Zoom("@絵写機砲/絵演機陣", 0, 1500, 1500, Dxl1, true);
+
+	CreateTextureEXadd("絵写機砲/絵演機発射前閃", 0, 655, 182, "cg/ef/x/ef_spark02_x01.png");
+	SetVertex("絵写機砲/絵演機発射前閃", 56, 33);
+
+
+	CreateTextureEXadd("絵写機砲/絵演機集中二", 0, 513, 12, "cg/ef/ef_lightring01.jpg");
+	Zoom("絵写機砲/絵演機集中二", 0, 200, 200, null, true);
+
+	CreateMovieEXadd("絵写機砲/絵演動画前", 0, Center, Middle, true, true, "dx/mvve02.ngs");
+	Zoom("絵写機砲/絵演動画前", 0, 5000, 5000, null, true);
+
+	CreateTextureEXadd("絵写機砲/絵演機砲", 0, -662, -484, "cg/ev/ev0522エデン・べべキャンサー化いのりソード砲撃_砲撃のみ.png");
+	SetVertex("絵写機砲/絵演機砲", 1366, 694);
+	Zoom("絵写機砲/絵演機砲", 0, 1000, 0, null, true);
+
+	CreateTextureEXadd("絵写機砲/絵演機空圧", 0, -150, 205, "cg/ef/x/ef_smoke03_x01.png");
+	Zoom("絵写機砲/絵演機空圧", 0, 0, 0, null, true);
+
+	CreateTextureSP("絵写機砲/絵演機瓦礫一", 50, 280, 900, "cg/ef/x/ef_rubble01_x01.png");//左から準に
+	CreateTextureSP("絵写機砲/絵演機瓦礫二", 50, 680, 1000, "cg/ef/x/ef_rubble01_x02.png");
+	CreateTextureSP("絵写機砲/絵演機瓦礫三", 50, 1100, 900, "cg/ef/x/ef_rubble01_x03.png");
+	CreateTextureSP("絵写機砲/絵演機瓦礫四", 50, 900, 1000, "cg/ef/x/ef_rubble01_x04.png");
+	CreateTextureSP("絵写機砲/絵演機瓦礫五", 50, 1000, 700, "cg/ef/x/ef_rubble01_x90.png");
+	Zoom("絵写機砲/絵演機瓦礫*", 0, 2000, 2000, null, true);
+	Zoom("絵写機砲/絵演機瓦礫三", 0, 2500, 2500, null, true);
+	Zoom("絵写機砲/絵演機瓦礫四", 0, 2500, 2500, null, true);
+	Zoom("絵写機砲/絵演機瓦礫五", 0, 3000, 3000, null, true);
+
+	Request("絵写機砲/絵*", Smoothing);
+
+//	WaitKey();//――――――――――――――――――――――――――――――――――――――――
+
+	CreateTextureSP("絵演事前背景", 1010, Center, -800, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	SetShade("絵演事前背景", MEDIUM);
+	Zoom("絵演事前背景", 0, 4000, 4000, null, true);
+
+	CreateTextureSP("絵演事前足", 1110, -100, -1100, "cg/ma/x/ma_エデンベベキャンサー化_スライド2_斜め前1_x01カット.png");
+
+	CreateTextureSP("絵演事前煙右", 1990, 600, 500, "cg/ef/x/ef_smoke02_x01.png");
+	SetVertex("絵演事前煙右", center, 230);
+	Zoom("絵演事前煙右", 0, 12000, 100, null, true);
+
+	CreateTextureSP("絵演事前煙左", 1990, 260, 470, "cg/ef/x/ef_smoke02_x01.png");
+	SetVertex("絵演事前煙左", center, 230);
+	Zoom("絵演事前煙左", 0, 12000, 100, null, true);
+
+	FadeDelete("上背景", 0, null, true);
+
+//	WaitKey();//――――――――――――――――――――――――――――――――――――――――
+
+	CreateSE("SE01","se戦闘_破壊_コンクリート03");
+
+	Move("絵演事前足", 100, -70, -200, null, false);
+	Wait(70);
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Shake("絵演事前足", 300, 0, 30, 0, 0, 1000, null, false);
+	Shake("絵演事前背景", 300, 0, 60, 0, 0, 1000, null, false);
+	Wait(20);
+	Zoom("絵演事前煙左", 200, 12000, 9000, null, false);
+	Wait(90);
+	Zoom("絵演事前煙右", 200, 12000, 12000, null, false);
+	Wait(100);
+	Move("絵演事前煙*", 3000, @0, @60, null, false);
+	Wait(300);
+
+	Fade("絵写機砲/絵背景", 0, 1000, null, true);
+	Fade("絵写機砲/絵演機", 0, 1000, null, true);
+	Fade("絵写機砲/絵演動画後", 0, 500, null, true);
+	Fade("絵写機砲/絵演動画前", 0, 500, null, true);
+
+	Delete("絵演事前足");
+	Delete("絵演事前背景");
+	Fade("絵演事前煙*", 2000, 0, Axl1, false);
+	DrawDelete("絵演事前煙*", 3000, 200, null, "effect_01_00_0", false);
+
+//	WaitKey();//――――――――――――――――――――――――――――――――――――――――
+
+	SetVolumeEX("SE91", 3000, 0, null);
+	CreateSE("SE02","seヴォイドエフェクト_l");
+	MusicStart("SE02",2000,1000,0,1000,null,true);
+	MoveCamera("@絵写機砲", 3000, 100, 0, 1500, null, true);
+
+//	WaitKey();//――――――――――――――――――――――――――――――――――――――――
+
+	CreateProcessEX("プロセス１", "LProcAK_lx050710_01aAct");//砲門に力が溜まる
+	CreateProcessEX("プロセス２", "LProcAK_lx050710_01bAct");//陣発生
+	CreateProcessEX("プロセス３", "LProcAK_lx050710_01cAct");//ガイナ的なキラッ★
+	CreateProcessEX("プロセス４", "LProcAK_lx050710_01dAct");//発射前空気振動
+	CreateProcessEX("プロセス５", "LProcAK_lx050710_01eAct");//発射
+	CreateProcessEX("プロセス６", "LProcAK_lx050710_01fAct");//発射の際の空圧変化
+	CreateProcessEX("プロセス７", "LProcAK_lx050710_01gAct");//発射時に巻き上がる瓦礫
+
+		CreateSE("SE03","seヴォイド汎用02");
+		MusicStart("SE03",0,700,0,600,null,false);
+		SetFrequency("SE03", 500, 900, Axl3);
+	Request("プロセス１", Start);//砲門に力が溜まる
+
+	Wait(600);
+
+	Request("プロセス２", Start);//陣発生
+
+	Wait(1000);
+		CreateSE("SE04","se擬音_光04");
+		MusicStart("SE04",0,700,0,2000,null,false);
+	Request("プロセス３", Start);//ガイナ的なキラッ★
+
+	Wait(1000);
+
+		CreateSE("SE04a","se戦闘_攻撃_衝撃波");
+		MusicStart("SE04a",0,700,0,500,null,false);
+	Request("プロセス４", Start);//発射前空気振動
+
+	Wait(30);
+
+	Delete("絵写機砲/絵演動画*");
+		SetVolumeEX("SE*", 200, 0, null);
+		CreateSE("SE05","seヴォイドエデンべべ攻撃01");
+		SetStream("SE05", 400);
+		MusicStart("SE05",0,1100,0,1000,null,false);
+	Request("プロセス５", Start);//発射
+
+	Wait(180);
+
+		CreateSE("SE06","se戦闘_衝撃_攻撃交錯02");
+		MusicStartSet("SE06",500,0,1500,null,false);
+		Request("SE06", Play);
+	CreateEffectEX("絵効果", 1900, Center, Middle, 1024, 576, "Plain");
+	Request("絵効果", Passive);
+	SetVertex("絵効果", 660, 180);
+	Zoom("絵効果", 700, 2000, 2000, Dxl3, false);
+	Fade("絵効果", 0, 600, null, true);
+	SetBlur("絵効果", true, 3, 500, 30, false);
+
+	FadeDelete("絵効果", 600, null, false);
+	Shake("@絵写機砲/絵*", 300, -4, 60, 0, 0, 1000, null, false);
+	MoveCamera("@絵写機砲", 100, 100, @0, 500, null, false);
+
+	Request("プロセス６", Start);//発射の際の空圧変化
+
+	Request("プロセス７", Start);//発射時に巻き上がる瓦礫
+
+	Wait(200);
+
+	CreateColorEXadd("絵色白", 1049, "FFFFFF");
+	CreateColorEXadd("絵色白二", 9900, "FFFFFF");
+	Fade("絵色白", 1000, 1000, Axl1, false);
+	Wait(500);
+	Fade("絵色白二", 300, 1000, Axl1, false);
+
+	Wait(2000);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0091]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0700360a02">
+｡ｸｰ惞ｬ ﾆﾐｽｺﾆｮｴ莎ﾗ&. ｱﾗｷｱ ｸﾀﾀﾌ ｵﾇｾ鋙ｵ｡ｦ｡ｦ｡ｹ
+
+//爆発
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	SetVolumeEX("SE06", 1000, 0, null);
+
+//娘を守りたいのね、というセリフをのみ込む。
+
+//	SetVolumeEX("SE*", 1000, 0, null);
+//	PrintGO("上背景", 9900);
+	Delete("プロセス*");
+//	CreateColorSP("絵色黒", 0, "000000");
+//	FadeDelete("上背景", 2000, null, true);
+
+//→→LX0508
+
+
+//	ClearFadeAll(1000, true);
+
+}

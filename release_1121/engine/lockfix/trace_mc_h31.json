@@ -1,0 +1,131 @@
+{
+ "run": "lk_mc_h31_081928",
+ "clicks": [
+  {
+   "click": "46:200:71",
+   "sent": 47.0,
+   "first": "s8",
+   "react_ms": -12,
+   "s8_s9": 468,
+   "s3_s4": 32,
+   "s4_s7": 343,
+   "ready_ms": 831
+  },
+  {
+   "click": "52:200:159",
+   "sent": 53.1,
+   "first": "s8",
+   "react_ms": -3,
+   "s8_s9": 797,
+   "s3_s4": 47,
+   "s4_s7": 344,
+   "ready_ms": 1200
+  },
+  {
+   "click": "58:200:115",
+   "sent": 58.9,
+   "first": "s8",
+   "react_ms": 25,
+   "s8_s9": 359,
+   "s3_s4": 47,
+   "s4_s7": 359,
+   "ready_ms": 806
+  },
+  {
+   "click": "64:200:203",
+   "sent": 65.1,
+   "first": "s8",
+   "react_ms": 13,
+   "s8_s9": 703,
+   "s3_s4": 47,
+   "s4_s7": 359,
+   "ready_ms": 1122
+  },
+  {
+   "click": "70:512:559",
+   "sent": 70.9,
+   "first": "s3",
+   "react_ms": 56,
+   "s3_s4": 47,
+   "s4_s7": 344,
+   "ready_ms": 447
+  },
+  {
+   "click": "76:700:115",
+   "sent": 77.0,
+   "first": "s8",
+   "react_ms": 81,
+   "s8_s9": 563,
+   "s3_s4": 31,
+   "s4_s7": 344,
+   "ready_ms": 1019
+  },
+  {
+   "click": "82:200:247",
+   "sent": 82.9,
+   "first": "s8",
+   "react_ms": 41,
+   "s8_s9": 375,
+   "s3_s4": 47,
+   "s4_s7": 343,
+   "ready_ms": 806
+  },
+  {
+   "click": "88:700:379",
+   "sent": 89.0,
+   "first": "s8",
+   "react_ms": 66,
+   "s8_s9": 734,
+   "s3_s4": 47,
+   "s4_s7": 437,
+   "ready_ms": 1300
+  },
+  {
+   "click": "94:700:423",
+   "sent": 95.1,
+   "first": "s8",
+   "react_ms": 481,
+   "s8_s9": 703,
+   "s3_s4": 94,
+   "s4_s7": 578,
+   "ready_ms": 1856
+  },
+  {
+   "click": "100:200:291",
+   "sent": 100.9,
+   "first": "s8",
+   "react_ms": 150,
+   "s8_s9": 500,
+   "s3_s4": 109,
+   "s4_s7": 641,
+   "ready_ms": 1416
+  },
+  {
+   "click": "106:512:559",
+   "sent": 107.0,
+   "first": "s3",
+   "react_ms": 3,
+   "s3_s4": 63,
+   "s4_s7": 453,
+   "ready_ms": 519
+  }
+ ],
+ "locks": {
+  "delete-waited": 6,
+  "stepped-aside": 9,
+  "delete-stopped": 3,
+  "stop-asked": 1
+ },
+ "frame_gaps": [
+  [
+   65.1,
+   0.64
+  ],
+  [
+   95.6,
+   0.6
+  ]
+ ],
+ "exited_early": null,
+ "dialogs": []
+}

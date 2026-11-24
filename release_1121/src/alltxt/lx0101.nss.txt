@@ -1,0 +1,2289 @@
+
+
+//<continuation number="520">
+
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0101.nss_MAIN
+{
+	$PHASE_num=2;
+	$PHASE_name="크리스마스의 악몽";
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0201冒頭研究員=true;
+	#ev0202スクルージ研究員結晶化=true;
+	#ev0207スクルージ天井ジャンプ=true;
+	#bg002001_5_研究所解剖室=true;
+	#bg002002_5_通路1=true;
+	#bg002003_5_通路2=true;
+
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0101_00sl.nss";//次、選択肢ファイル
+
+}
+
+
+scene lx0101.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+	//$SYSTEM_skip=false;
+	//$SYSTEM_menu_lock=true;
+	//$SYSTEM_menu_lock=false;
+	//#SYSTEM_skip_absolute = true;
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+
+
+	PrintBG("pr01", 30000);
+
+	OnBG(10,"bg002001_5_研究所解剖室");
+	FadeBG(0,true);
+
+
+
+//♪♪: 06.VOiD
+////////////////////////////////////////
+
+//スクルージの意識
+//スクルージの激しい心音。荒い息づかい。
+
+//ＳＥ：不快な音。ヴゥーンとかギィィンとか。耳鳴り、頭痛、二日酔いのイメージ。
+//ＳＥ：激しい心音
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX01/0100010a01">
+//「ハァ……ハァ……ハァ……ハァ……」
+//（荒い息づかい。うなされている感じ。息苦しい。熱い。辛い）
+//（テキストは表示せず。バックグラウンドで流す）
+
+
+
+	CreateVOICEEX("vo01","LX01/0100010a01","スクルージ");
+	MusicStart("vo01",1000,1200,0,1000,null,true);
+
+//	CreateSE("SE_noize","se擬音_効果_ノイズ01L");
+//	CreateSE("SE_kyoumei","se特殊_雰囲気_集中01_L");
+//	CreateSE("SE_heart","se人体_心臓_鼓動01L");
+	CreateSE("SE_noize","seヴォイド蝗04L");
+	CreateSE("SE_kyoumei","se特殊_雰囲気_集中01_L");
+	CreateSE("SE_heart","se人体_心臓_鼓動01L");
+
+	CreateColorSP("black01", 5000, "000000");
+	CreateTextureEXmul("eye", 15000, Center, Middle, "cg/data/zzex_eye_01_00_0.png");
+	Fade("eye", 0, 900, null, true);
+
+	FadeDelete("pr01", 0, null, true);
+
+	Wait(1500);
+
+	//★章タイトル定義
+	PhaseSet(2);
+
+	//▽章タイトル描画
+	PhaseOn();
+
+
+	SoundPlay("@lx006",5000,600,true);
+
+	CreateTextureEX("ef02", 5000, Center, Middle, "cg/ef/ef_noize02.jpg");
+	CreateTextureEXsub("ef03", 5000, Center, Middle, "cg/ef/ef_noize01.jpg");
+	//DrawEffectSkip("ef02", 1000, "Ripple ", 0, 100, null);
+	DrawEffectSkip("ef02", 1000, "Ripple", 0, 600, null);
+	//DrawEffectSkip("ef03", 1000, "LowWave", 0, 600, null);
+	Zoom("ef*", 0, 2000, 2000, null, true);
+	Rotate("ef02", 0, @0, @0, 0, null,true);
+	Rotate("ef03", 0, @0, @0, 0, null,true);
+	Request("ef03", Smoothing);
+
+	CreateEffectDropEX("drop01", 5350, 0, 0, 1024, 576, 256, 80, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble03_x05.png");
+	Rotate("drop01", 0, @0, @0, 5, null,true);
+	Request("drop01", SubRender);
+	Zoom("drop01", 0, 1500, 2500, null, true);
+
+	CreateEffectDropEX("drop02", 5450, 0, 0, 1024, 576, 156, 120, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble02_x03.png");
+	Rotate("drop02", 0, @0, @0, -185, null,true);
+	Request("drop02", SubRender);
+	Zoom("drop02", 0, 1500, 2500, null, true);
+
+	Fade("drop*", 0, 1000, null, true);
+
+	Shake("ef02", 5000000, 0, 1, 0, 1, 1000, null, false);
+	Shake("ef03", 5000000, 0, 5, 0, 1, 1000, null, false);
+
+	//音のテンポなど
+	MusicStart("SE_kyoumei",0,1,0,500,null,true);
+	Wait(500);
+	SetVolumeEX("SE_kyoumei", 0, 500, null);
+	MusicStart("SE_noize",0,1000,0,1000,null,true);
+	MusicStart("SE_heart",0,1,0,500,null,true);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+	Wait(150);
+	SetVolumeEX("SE_kyoumei", 0, 1, null);
+	SetVolumeEX("SE_noize", 0, 1, null);
+
+	Fade("ef02", 0, 0, Axl1, false);
+	Fade("ef03", 0, 0, Axl1, true);
+
+
+	Wait(1500);
+
+	//▽章タイトル消去
+	PhaseOff();
+
+	Wait(1500);
+
+	SetVolumeEX("SE_kyoumei", 0, 500, null);
+	SetVolumeEX("SE_noize", 0, 1000, null);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+	Wait(100);
+	SetVolumeEX("SE_kyoumei", 0, 1, null);
+	SetVolumeEX("SE_noize", 0, 1, null);
+	Fade("ef02", 0, 0, Axl1, false);
+	Fade("ef03", 0, 0, Axl1, true);
+
+	Wait(4400);
+
+	SetVolumeEX("SE_noize", 0, 1000, null);
+	SetVolumeEX("SE_kyoumei", 0, 500, null);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+
+	Wait(1000);
+
+	SetVolumeEX("SE_noize", 4000, 400, null);
+
+	Wait(2000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+ｸﾓｸｮｰ｡ ﾁｶﾇﾏｰﾔ ｾﾆﾇﾁｴﾙ&.
+ｸｶﾄ｡ ｸﾓｸｴｼﾓｿ｡ｼｭ ｹｫｼﾑ ｳｯｹ弡ｹｰ｡ ｳｯｾﾆｴﾙｴﾏｴﾂ ｰﾍﾃｳｷｳ&.
+
+탁해진 의식&. 흐트러진 사고&.
+모든 것이 산산이 흩어져 형체를 이루지 못한다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+////////////////////////////////////////
+//フラッシュバックで切り替え
+
+//◆◆研究施設／手術室
+
+//手術台の上のスクルージ。
+//スクルージ視点。スクルージを覗き込むダァトの研究者達。逆光でよく見えない。
+//ぼやける視界。スクルージの意識は混濁している。
+
+	CreateColorEXadd("white01", 15000, "FFFFFF");
+
+	SetVolumeEX("vo01", 1000, 0, null);
+	SetVolumeEX("SE_noize", 1500, 1, null);
+	SetVolumeEX("SE_kyoumei", 1500, 1, null);
+	Fade("white01", 100, 1000, null, true);
+
+	Delete("black*");
+	Delete("ef*");
+	Fade("drop*", 0, 0, null, true);
+
+	CreateColorEX("black01", 5000, "000000");
+
+	CreateMovieEX("selmovie10", 4999, Center, Middle, true, true, "dx/mvselect01.ngs");
+	SetAlias("selmovie10","selmovie10");
+
+	Request("selmovie10", MulRender);
+	Zoom("selmovie10", 0, 2000, 4000, null, true);
+	Fade("selmovie10", 0, 1000, null, true);
+	//Rotate("selmovie10", 0, @0, @0, 90, null,true);
+	DrawTransition("selmovie10", 0, 150, 150, 600, null, "cg/data/slide_05_00_0.png", true);
+
+
+	/*
+	CreateEffectSP("pl01", 15000, 0, 0, 1024, 576, "Plain");
+	SetShade("pl01", HEAVY);
+	FadeLoop01("pl01",1500,3000);
+	*/
+
+	Wait(500);
+
+	CreateCamera("Ｃ", 0, 0, 1500);
+	SetAlias("Ｃ","Ｃ");
+
+
+
+	CreateTextureEX("Ｃ/ev01", 100, Center, Middle, "cg/ev/x/ev0201冒頭研究員_背景_x01.jpg");
+	CreateTextureEX("Ｃ/ev02", 300, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員2.png");
+	CreateTextureEX("Ｃ/ev02_shade", 300, Center, Middle, "cg/ev/x/ev0201冒頭研究員_研究員2_x01.png");
+	CreateTextureEX("Ｃ/ev03", 500, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員_体.png");
+	CreateTextureEX("Ｃ/ev03_shade", 500, Center, Middle, "cg/ev/x/ev0201冒頭研究員_研究員_体_x01.png");
+	//Request("Ｃ/ev*", Smoothing);
+	//SetShade("Ｃ/ev01", MEDIUM);
+	//SetShade("Ｃ/ev02_shade", MEDIUM);
+	//SetShade("Ｃ/ev03_shade", MEDIUM);
+	Zoom("Ｃ/ev01", 0, 2000, 2000, null, true);
+	Zoom("Ｃ/ev02*", 0, 1200, 1200, null, true);
+
+	Fade("Ｃ/ev01", 0, 1000, null, true);
+	//Fade("Ｃ/ev02", 0, 1000, null, true);
+	//Fade("Ｃ/ev03", 0, 1000, null, true);
+	Fade("Ｃ/ev02_shade", 0, 1000, null, true);
+	Fade("Ｃ/ev03_shade", 0, 1000, null, true);
+
+	//SetBlur("Ｃ/ev02", true, 1, 500, 100, false);
+	//SetBlur("Ｃ/ev03", true, 1, 500, 100, false);
+
+	//Zoom("Ｃ/ev*", 0, 2000, 2000, null, true);
+
+
+	MoveFTP1("@Ｃ/*",10000,18,5);
+	FadeLoop01("black01",100,2000);
+	FadeLoop_lx0101A("fl01",500,1000);
+
+	SetVolumeEX("SE_heart", 3000, 500, null);
+
+	MoveCamera("Ｃ", 2500, 0, 0, 1000, AxlDxl, false);
+	Fade("white01", 2000, 0, null, true);
+	//Zoom("pl01", 3000, 10000, 10000, null, true);
+
+
+	Wait(1000);
+
+	MoveCamera("Ｃ", 1500, -100, -50, 800, AxlDxl, true);
+
+	Wait(1000);
+
+	MoveCamera("Ｃ", 2000, 100, -100, 1000, AxlDxl, false);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【研究者Ａ】
+<voice name="ｿｬｱｸﾀﾚ A" class="研究者Ａ" src="voice/LX01/0100020e31">
+「피험체 번호 1843…… '스크루지'」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+#CFGVC_SCROOGE=1;
+
+	MoveCamera("Ｃ", 1000, -50, 50, 1000, AxlDxl, false);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020a]
+//【研究者Ｂ】
+<voice name="ｿｬｱｸﾀﾚ B" class="研究者Ｂ" src="voice/LX01/0100030e32">
+「이래도 되겠어? 유일한 성공 사례잖아」
+
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX01/0100040e33">
+｡ｸｾﾆｴﾏｴﾙ&. ｽﾇﾆﾐﾀﾛﾀﾌｴﾙ｡ｹ
+
+{
+	MoveCamera("Ｃ", 2000, 20, -30, 1000, AxlDxl, false);
+}
+//【研究者Ａ】
+<voice name="ｿｬｱｸﾀﾚ A" class="研究者Ａ" src="voice/LX01/0100050e31">
+「스크루지는 능력 발동 시&, 상대의 인트론 코드를 파괴해 버린다&. 이래서는 도저히 '왕의 능력'이라 부를 수 없어」
+
+{
+	MoveCamera("Ｃ", 2000, -30, 20, 1000, AxlDxl, false);
+}
+//【研究者Ｂ】
+<voice name="ｿｬｱｸﾀﾚ B" class="研究者Ｂ" src="voice/LX01/0100060e32">
+｡ｸ｡ｦ｡ｦｿｪｽﾃ ｳｪﾀﾌ ｹｮﾁｦﾀﾎｰ｡｡ｹ
+
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX01/0100070e33">
+「선택받지 못한 거다&. 시작의 돌에게」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+////////////////////////////////////////
+//フラッシュバックで切り替え
+//スクルージの意識
+
+//ＳＥ：激しい心音
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX01/0100080a01">
+//「グッ……がぁ……！　ハァ……ハァ……ハァ……」
+//（荒い息づかい。ときおり苦しむ。息が詰まる。痛みが走る）
+//（テキストは表示せず。バックグラウンドで流す）
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreatePlainEX("plain01", 20000);
+	Request("plain01", SubRender);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	CreateColorEXadd("white01", 20000, "FFFFFF");
+	CreateColorEX("black02", 20000, "000000");
+
+	CreateTextureEX("ef02", 5000, Center, Middle, "cg/ef/ef_noize02.jpg");
+	CreateTextureEXsub("ef03", 5000, Center, Middle, "cg/ef/ef_noize01.jpg");
+
+	DrawEffectSkip("ef02", 1000, "Ripple", 0, 300, null);
+
+	Zoom("ef*", 0, 2000, 2000, null, true);
+	Rotate("ef03", 0, @0, @0, 0, null,true);
+	Request("ef03", Smoothing);
+
+	MoveFTP4("@plain01", 300, 10, 7);
+	MoveFTP1stop();
+	Request("selmovie10", Stop);
+
+	SetVolumeEX("SE_noize", 0, 1000, null);
+	SetVolumeEX("SE_kyoumei", 1000, 200, null);
+	SetVolumeEX("SE_heart", 200, 1, null);
+
+	Fade("plain01", 0, 1000, null, true);
+	Zoom("plain01", 0, 1100, 4000, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	SetVolumeEX("SE_noize", 0, 1, null);
+	Wait(30);
+	Move("ef01", 400, @0, -200, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("white01", 0, 0, null, true);
+	Wait(30);
+	SetVolumeEX("SE_noize", 0, 1000, null);
+	Fade("plain01", 0, 1000, null, true);
+	Zoom("plain01", 0, 10000, 1100, null, true);
+	Fade("ef01", 0, 500, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	SetVolumeEX("SE_noize", 0, 1, null);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("black02", 0, 1000, null, true);
+	Fade("ef01", 300, 0, null, false);
+
+
+	Fade("drop*", 0, 1000, null, true);
+
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+
+	CreateVOICEEX("vo01","LX01/0100080a01","スクルージ");
+	MusicStart("vo01",1000,1200,0,1000,null,true);
+	//SetVolumeEX("vo01", 1000, 0, null);
+
+	SetVolumeEX("SE_noize", 0, 400, null);
+	Fade("plain01", 300, 0, null, true);
+	Delete("plain01");
+	Delete("white01");
+	Fade("Ｃ/*", 0, 0, null, true);
+
+	MoveFTP4stop();
+
+	Fade("black02", 500, 0, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+때때로 덮쳐 오는 아픔&. 괴로움&. 그 정체만은 어째서인지 또렷이 알 수 있었다&.
+
+ｻﾇｰｨ&.
+내 안의 무언가가 좀먹혀 간다&.
+
+ﾀﾒｾ銧｡ｴﾂ ｹｫｾ｡ｸｦ&, ｳｪｴﾂ ﾇﾊｻ鄲釥ｸｷﾎ ｺﾙﾀ篝ﾆ ｵﾎｷﾁ ﾇﾏｴﾙｰ｡｡ｦ｡ｦ
+
+ｰﾅﾁｸｻﾀﾌｴﾙ&.
+
+나는 체념하고 있다&.
+발버둥 치지도 않고&, 스스로 놓아버리려 하고 있다&.
+
+ｱﾗｷｸｴﾙ&.
+이대로 전부 먹혀 버리면 된다&.
+
+그러면 편해질 수 있다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+////////////////////////////////////////
+//フラッシュバックで切り替え
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorEXadd("white01", 15000, "FFFFFF");
+	SetVolumeEX("vo01", 1000, 0, null);
+	SetVolumeEX("SE_noize", 1500, 1, null);
+	SetVolumeEX("SE_kyoumei", 1500, 1, null);
+	Fade("white01", 100, 1000, null, true);
+
+	Delete("black*");
+	Delete("ef*");
+	Fade("drop*", 0, 0, null, true);
+	Request("selmovie10", Play);
+	Fade("Ｃ/*", 0, 1000, null, true);
+
+	CreateColorEX("black01", 5000, "000000");
+	FadeLoop01("black01",100,1000);
+
+	/*
+	//CreateMovieEX("selmovie10", 10000, Center, Middle, true, true, "dx/mvselect01.ngs");
+	Request("selmovie10", MulRender);
+	Zoom("selmovie10", 0, 2000, 6000, null, true);
+	Fade("selmovie10", 0, 500, null, true);
+	Rotate("selmovie10", 0, @0, @0, 90, null,true);
+	DrawTransition("selmovie10", 0, 100, 100, 600, null, "cg/data/circle_02_00_1.png", true);
+
+
+	CreateEffectSP("pl01", 15000, 0, 0, 1024, 576, "Plain");
+	SetShade("pl01", HEAVY);
+	FadeLoop01("pl01",1500,3000);
+	*/
+
+	Wait(500);
+
+	//つなぎ----------------------------------------------------------
+
+	//定義----------------------------------------------------------
+	/*
+	CreateCamera("Ｃ", 50, -50, 1100);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureEX("Ｃ/ev01", 100, Center, Middle, "cg/ev/ev0201冒頭研究員_背景.jpg");
+	//CreateTextureSP("Ｃ/ev01_shade", 100, Center, Middle, "cg/ev/ev0201冒頭研究員_背景.jpg");
+	CreateTextureEX("Ｃ/ev02", 300, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員2.png");
+	CreateTextureEX("Ｃ/ev02_shade", 300, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員2.png");
+	CreateTextureEX("Ｃ/ev03", 500, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員.png");
+	CreateTextureEX("Ｃ/ev03_shade", 500, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員.png");
+	Request("Ｃ/ev*", Smoothing);
+	SetShade("Ｃ/ev01", MEDIUM);
+	SetShade("Ｃ/ev02_shade", MEDIUM);
+	SetShade("Ｃ/ev03_shade", MEDIUM);
+	Zoom("Ｃ/ev01", 0, 2000, 2000, null, true);
+
+	Fade("Ｃ/ev01", 0, 1000, null, true);
+	Fade("Ｃ/ev02", 0, 1000, null, true);
+	Fade("Ｃ/ev02_shade", 0, 1000, null, true);
+	Fade("Ｃ/ev03_shade", 0, 1000, null, true);
+	Fade("Ｃ/ev03", 0, 1000, null, true);
+	*/
+	//SetBlur("Ｃ/ev02", true, 1, 500, 100, false);
+	//SetBlur("Ｃ/ev03", true, 1, 500, 100, false);
+
+	//Zoom("Ｃ/ev*", 0, 2000, 2000, null, true);
+
+
+	//動作----------------------------------------------------------
+	MoveFTP1("@Ｃ/*",10000,18,5);
+	SetVolumeEX("SE_heart", 3000, 500, null);
+	Fade("white01", 1000, 0, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【研究者Ａ】
+<voice name="ｿｬｱｸﾀﾚ A" class="研究者Ａ" src="voice/LX01/0100090e31">
+「처분하기 전에 최대한 많은 데이터를 확보한다&. 시작하지」
+
+//メスを持つ研究者。
+//【研究者Ｂ】
+<voice name="ｿｬｱｸﾀﾚ B" class="研究者Ｂ" src="voice/LX01/0100100e32">
+｡ｸｿﾀｸ･ｼﾕﾀｻ ﾁｶｽﾉﾇﾘ&. ｰｨｿｰｵﾈｴﾙ｡ｹ
+
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX01/0100110e33">
+｡ｸｸｶﾄ｡ ｻｹｰ ｺｴｱ箙ﾎｱｺ｡ｹ
+
+//【研究者Ａ】
+<voice name="ｿｬｱｸﾀﾚ A" class="研究者Ａ" src="voice/LX01/0100120e31">
+「실제로 그런 방안도 있어&. 그 왜&, 그 기술은 게놈 레조넌스 효과를 응용한 거잖아&. 실용화도 머지않았어」
+
+//【研究者Ｂ】
+<voice name="ｿｬｱｸﾀﾚ B" class="研究者Ｂ" src="voice/LX01/0100130e32">
+「달갑지 않은 이야기군&.
+　강화 게놈 실험체…… 괴물 같은 놈」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+////////////////////////////////////////
+//フラッシュバックで切り替え
+//スクルージの意識
+
+//ＳＥ：激しい心音
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX01/0100140a01">
+//「くっ……ううっ……ぐうっ……ッ」
+//（荒い息づかい。痛みをこらえる。楽になりたい。悲しい）
+//（テキストは表示せず。バックグラウンドで流す）
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreatePlainEX("plain01", 20000);
+	Request("plain01", SubRender);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	CreateColorEXadd("white01", 20000, "FFFFFF");
+	CreateColorEX("black02", 20000, "000000");
+	CreateTextureEX("ef01", 20000, Center, 200, "cg/ef/ef_noize02.jpg");
+	Zoom("ef01", 0, 1100, 4000, null, true);
+
+	CreateTextureEX("ef02", 5000, Center, Middle, "cg/ef/ef_noize02.jpg");
+	CreateTextureEXsub("ef03", 5000, Center, Middle, "cg/ef/ef_noize01.jpg");
+	//DrawEffectSkip("ef02", 1000, "Ripple ", 0, 100, null);
+	//DrawEffectSkip("ef03", 1000, "Ripple", 0, 300, null);
+	DrawEffectSkip("ef02", 1000, "Ripple", 0, 600, null);
+	//DrawEffectSkip("ef03", 1000, "LowWave", 0, 600, null);
+	Zoom("ef*", 0, 2000, 2000, null, true);
+	//Rotate("ef02", 0, @0, @0, 90, null,true);
+	//Rotate("ef03", 0, @0, @0, 0, null,true);
+	Request("ef03", Smoothing);
+
+	MoveFTP4("@plain01", 300, 10, 7);
+	MoveFTP1stop();
+
+
+	SetVolumeEX("SE_noize", 0, 1000, null);
+	SetVolumeEX("SE_kyoumei", 1000, 200, null);
+	SetVolumeEX("SE_heart", 200, 1, null);
+
+	Fade("plain01", 0, 1000, null, true);
+	Zoom("plain01", 0, 1100, 4000, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	SetVolumeEX("SE_noize", 0, 1, null);
+	Wait(30);
+	Move("ef01", 400, @0, -200, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("white01", 0, 0, null, true);
+	Wait(30);
+	SetVolumeEX("SE_noize", 0, 1000, null);
+	Fade("plain01", 0, 1000, null, true);
+	Zoom("plain01", 0, 10000, 1100, null, true);
+	Fade("ef01", 0, 500, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	SetVolumeEX("SE_noize", 0, 1, null);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("black02", 0, 1000, null, true);
+	Fade("ef01", 300, 0, null, false);
+
+
+	//定義----------------------------------------------------------
+	Fade("drop*", 0, 1000, null, true);
+
+	//動作----------------------------------------------------------
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+
+	CreateVOICEEX("vo01","LX01/0100140a01","スクルージ");
+	MusicStart("vo01",1000,1200,0,1000,null,true);
+	//SetVolumeEX("vo01", 1000, 0, null);
+
+	SetVolumeEX("SE_noize", 0, 400, null);
+	Fade("plain01", 300, 0, null, true);
+	Delete("white01");
+	//Delete("Ｃ/*");
+	Delete("plain01");
+	MoveFTP4stop();
+
+	Fade("black02", 500, 0, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+아아&, 시끄러워&.
+떠들지 마&. 머리가 울려&.
+
+그 음울한 말소리가&, 너무나 눈부신 라이트가&, 하나하나 비위에 거슬린다&.
+
+//メスが近づく。光るメス。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorEXadd("white01", 15000, "FFFFFF");
+	SetVolumeEX("vo01", 1000, 0, null);
+	SetVolumeEX("SE_noize", 1500, 1, null);
+	SetVolumeEX("SE_kyoumei", 1500, 1, null);
+	Fade("white01", 100, 1000, null, true);
+
+	Delete("black*");
+	Delete("ef*");
+	Delete("drop*");
+
+	CreateColorEX("black01", 5000, "000000");
+	FadeLoop01("black01",100,1000);
+
+
+	/*
+	//CreateMovieEX("selmovie10", 10000, Center, Middle, true, true, "dx/mvselect01.ngs");
+	Request("selmovie10", MulRender);
+	Zoom("selmovie10", 0, 2000, 6000, null, true);
+	Fade("selmovie10", 0, 500, null, true);
+	Rotate("selmovie10", 0, @0, @0, 90, null,true);
+	DrawTransition("selmovie10", 0, 100, 100, 600, null, "cg/data/circle_02_00_1.png", true);
+
+
+	CreateEffectSP("pl01", 15000, 0, 0, 1024, 576, "Plain");
+	SetShade("pl01", HEAVY);
+	FadeLoop01("pl01",1500,3000);
+
+	Wait(500);
+
+
+	//つなぎ----------------------------------------------------------
+
+	//定義----------------------------------------------------------
+	CreateCamera("Ｃ", 100, 0, 1100);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureEX("Ｃ/ev01", 100, Center, Middle, "cg/ev/ev0201冒頭研究員_背景.jpg");
+	//CreateTextureSP("Ｃ/ev01_shade", 100, Center, Middle, "cg/ev/ev0201冒頭研究員_背景.jpg");
+	CreateTextureEX("Ｃ/ev02", 300, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員2.png");
+	CreateTextureEX("Ｃ/ev02_shade", 300, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員2.png");
+	CreateTextureEX("Ｃ/ev03", 500, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員.png");
+	CreateTextureEX("Ｃ/ev03_shade", 500, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員.png");
+	Request("Ｃ/ev*", Smoothing);
+	SetShade("Ｃ/ev01", MEDIUM);
+	SetShade("Ｃ/ev02_shade", MEDIUM);
+	SetShade("Ｃ/ev03_shade", MEDIUM);
+	Zoom("Ｃ/ev01", 0, 2000, 2000, null, true);
+
+	Fade("Ｃ/ev01", 0, 1000, null, true);
+	Fade("Ｃ/ev02", 0, 1000, null, true);
+	Fade("Ｃ/ev02_shade", 0, 1000, null, true);
+	Fade("Ｃ/ev03_shade", 0, 1000, null, true);
+	Fade("Ｃ/ev03", 0, 1000, null, true);
+
+	SetBlur("Ｃ/ev02", true, 1, 500, 100, false);
+	SetBlur("Ｃ/ev03", true, 1, 500, 100, false);
+
+	//Zoom("Ｃ/ev*", 0, 2000, 2000, null, true);
+
+	*/
+	CreateTextureEX("Ｃ/ev04", 500, Center, Middle, "cg/ev/ev0201冒頭研究員_研究員_手.png");
+	CreateTextureSP("Ｃ/ev04_shade", 500, Center, Middle, "cg/ev/x/ev0201冒頭研究員_研究員_手_x01.png");
+	Move("Ｃ/ev04*", 0, @230, @-90, null, true);
+	Zoom("Ｃ/ev04*", 0, 500, 500, null, true);
+
+	//動作----------------------------------------------------------
+	MoveFTP1("@Ｃ/*",10000,18,5);
+
+
+	SetFrequency("SE_heart", 15000, 1000, null);
+	SetVolumeEX("SE_heart", 3000, 500, null);
+	MoveCamera("Ｃ", 1000, 150, -100, 1100, Dxl1, false);
+	Fade("white01", 500, 0, null, false);
+
+	Fade("selmovie10", 1000, 0, null, false);
+	Wait(500);
+	Move("Ｃ/ev04*", 1000, @-100, @0, Dxl1, 500);
+	Fade("Ｃ/ev04", 1000, 1000, Dxl1, false);
+	Fade("Ｃ/ev04_shade", 1000, 0, Axl1, true);
+
+	//Wait(1000);
+
+	CreateColorSP("bl01", 10000, "000000");
+	CreateTextureSP("bg11", 5000, 100, 53, "cg/bg/x/bg002001_5_研究所解剖室_x02.jpg");
+	CreateTextureSP("ev11", 5000, 700, 220, "cg/ev/x/ev0202スクルージ研究員結晶化_メスのみ.png");
+	Request("bg11", Smoothing);
+	Request("ev11", Smoothing);
+	SetShade("bg11", HEAVY);
+	Zoom("ev11", 0, 3000, 3000, null, true);
+	Zoom("bg11", 0, 2000, 2000, null, true);
+	Rotate("ev11", 0, @0, @180, @-15, null,true);
+
+
+	Fade("bl01", 300, 1000, null, true);
+	Fade("bg11", 0, 1000, null, true);
+	Fade("ev11", 0, 1000, null, true);
+	Move("ev11", 2000, @-120, @50, AxlDxl, false);
+	Move("bg11", 2000, @50, @0, AxlDxl, false);
+	Fade("bl01", 300, 500, null, true);
+	Fade("bl01", 1500, 1000, Axl2, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//（呟きのような小さな声）
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100150a01">
+｡ｸ｡ｦ｡ｦｱﾗｸｸｵﾖ｡ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+ｱﾗｸｸｵﾖ&. ｳｻｹﾁ ｵﾖ&.
+난 그저 편해지고 싶을 뿐인데&.
+
+두통은 이제 견디기 힘들다&.
+ｳｯｹ弡ｹｵ鯊ﾌ ｿｺｰﾅｸｰｴﾙ&.
+머리가 깨질 것 같다&.
+
+//メスがスクルージの身体に触れる。
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	Fade("bl01", 300, 1000, null, true);
+	Fade("bg11", 0, 1000, null, true);
+	Fade("ev11", 0, 1000, null, true);
+	Rotate("ev11", 2000, @0, @0, @-10, AxlDxl,false);
+	Move("ev11", 2000, @-5, @100, AxlDxl, false);
+	Move("bg11", 2000, @10, @-50, AxlDxl, false);
+	Fade("bl01", 300, 500, null, true);
+	Fade("bl01", 1500, 1000, Axl2, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+서늘한 감촉&. 구역질이 치밀어 오른다&.
+
+ｺﾒﾄ隹ｨﾀｺ ﾇﾑｰ霑｡ ｴﾞﾇﾘ ﾀﾖｾ嶸ﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorEX("black02", 15000, "000000");
+	Fade("black02", 0, 1000, null, true);
+	Delete("ev11");
+	Delete("bg11");
+	Delete("bl01");
+
+
+	MoveFTP1stop();
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+	Delete("eye*");
+	Delete("black01");
+
+
+	//つなぎ----------------------------------------------------------
+
+	//定義----------------------------------------------------------
+	CreateTextureEX("ev01", 100, Center, Middle, "cg/ev/ev0201冒頭研究員.jpg");
+	Zoom("ev01", 0, 2000, 2000, null, true);
+	SetBlur("ev01", true, 3, 500, 50, false);
+
+	CreateColorEXadd("white01", 20000, "FFFFFF");
+
+	//動作----------------------------------------------------------
+	Fade("white01", 100, 1000, null, true);
+	Delete("black*");
+	Fade("ev01", 0, 1000, null, true);
+
+
+	SetVolumeEX("@lx*", 300, 0, null);
+	SetVolumeEX("SE*", 300, 0, null);
+
+	Zoom("ev01", 200, 1000, 1000, Dxl2, false);
+	FadeDelete("white01", 200, null, true);
+	Wait(200);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100160a01">
+｡ｸ｡ｦ｡ｦｱﾗｸｸｵﾖ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//スクルージ、カッ！と目を見開く。
+//跳ね起きるスクルージ。
+
+//ＳＥ：周囲のものが倒れる音。ガシャーン。
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義----------------------------------------------------------
+	CreateTextureEX("bg01", 100, Center, -50, "cg/bg/x/bg002001_5_研究所解剖室_x02.jpg");
+	//CreateTextureEX("bg01b", 100, Center, Middle, "cg/bg/x/bg002001_5_研究所解剖室_x01.jpg");
+	//CreateTextureEX("ev00", 100, Center, Middle, "cg/ev/x/ev0202スクルージ研究員結晶化_メスのみ.png");
+	//Zoom("bg01b", 0, 2000, 2000, null, true);
+
+	CreateSE("SE01","se戦闘_金属_破壊01");
+
+	//動作----------------------------------------------------------
+	MusicStart("SE01",0,700,0,800,null,false);
+
+	Zoom("ev01", 100, 2000, 2000, Axl1, false);
+	FadeFR2("bg01",100,800,300,0,10,20,null, false);
+	Shake("bg01", 800, 5, 0, 0, 0, 1000, null, false);
+
+	Fade("bg01", 100, 1000, null, true);
+	Wait(800);
+
+
+	//Move("bg01b", 1000, @0, @0, null, false);
+	//Move("ev00", 1000, @0, @0, null, false);
+	//Fade("bg01b", 0, 1000, null, true);
+	//Fade("ev00", 0, 1000, null, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【研究者Ｂ】
+<voice name="ｿｬｱｸﾀﾚ B" class="研究者Ｂ" src="voice/LX01/0100170e32">
+「뭐라고!?」
+
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX01/0100180e33">
+「깨어났어!? 말도 안 돼!」
+
+//【研究者Ａ】
+<voice name="ｿｬｱｸﾀﾚ A" class="研究者Ａ" src="voice/LX01/0100190e31">
+｡ｸﾀｸｾﾇ&, ﾀｸｾﾆｾﾆｾﾆｾﾇ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//意識が朦朧としたままのスクルージ。視界が不安定。
+//足掻くように暴れ、右手を伸ばす。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義----------------------------------------------------------
+	CreateTextureEX("bg02", 100, Center, Middle, "cg/bg/bg002001_5_研究所解剖室.jpg");
+	Zoom("bg02", 0, 2000, 2000, null, true);
+	SetShade("bg02", HEAVY);
+
+	CreateTextureEX("ev01", 100, -712, 74, "cg/ev/ev0201冒頭研究員_研究員.png");
+	Zoom("ev01", 0, 2000, 2000, null, true);
+	Request("ev01", Smoothing);
+
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	//動作----------------------------------------------------------
+	//MoveFTP1("@bg02",4000,5,5);
+	//MoveFTP2("@ev01",4000,10,10);
+
+	Shake("bg02", 500, 2, 5, 0, 0, 1000, null, false);
+	Shake("ev01", 500, 2, 5, 0, 0, 1000, null, false);
+
+
+	Zoom("bg02", 300, 2200, 2200, Dxl3, false);
+	Zoom("ev01", 300, 2500, 2500, Dxl3, false);
+	Fade("ev01", 300, 1000, null, false);
+	Fade("bg02", 300, 1000, null, true);
+	SetBlur("ev01", true, 1, 500, 150, false);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100200a01">
+「내게…… 손대지 마!」
+
+//（怯え、恐怖）
+//【研究者Ａ】
+<voice name="ｿｬｱｸﾀﾚ A" class="研究者Ａ" src="voice/LX01/0100210e31">
+「내 몸에 손대지 마아악!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//右手で研究者を掴むスクルージ。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義----------------------------------------------------------
+	CreateColorEXadd("white01", 5000, "FFFFFF");
+	CreateColorEXadd("white02", 10000, "FFFFFF");
+
+	CreateTextureEX("bg01", 100, -512, -288, "cg/ef/x/ef_move01.jpg");
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	CreateTextureEX("ev02", 100, 1100, 576, "cg/ef/x/ef_hand02.png");
+	Request("ev02", Smoothing);
+	Rotate("ev02", 0, @0, @0, 30, null,true);
+	Zoom("ev02", 0, 2000, 2000, null, true);
+
+	CreateSE("SE02","se人体_動作_跳躍02");
+	CreateSE("SE03","se戦闘_攻撃_殴る01");
+
+
+
+	//動作----------------------------------------------------------
+	Zoom("bg02", 600, 3000, 3000, Axl2, false);
+	Zoom("ev01", 600, 4000, 4000, Axl2, false);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+	Move("bg01", 400, 512, 288, Axl1, false);
+	Move("ev02", 400, 0, 0, Dxl2, false);
+
+	Fade("bg01", 100, 1000, null, false);
+	Fade("ev02", 100, 1000, null, false);
+
+	Wait(300);
+	Fade("white01", 100, 1000, Axl3, true);
+
+	MusicStart("SE03",0,700,0,1300,null,false);
+
+	MoveFTP1stop();
+	MoveFTP2stop();
+
+
+	//つなぎ----------------------------------------------------------
+
+
+	//定義----------------------------------------------------------
+	CreateTextureEX("bg00", 5000, center, middle, "cg/bg/bg002001_5_研究所解剖室.jpg");
+	Zoom("bg00", 0, 4000, 4000, null, true);
+	CreateTextureEX("ev00", 5000, 100, 200, "cg/ev/ev0104キャンサー化_手c.png");
+	Zoom("ev00", 0, 2000, 2000, null, true);
+	Rotate("ev00", 0, @0, 180, 40, null,true);
+	Request("ev00", Smoothing);
+
+	CreateTextureEX("bg01", 6000, Center, Middle, "cg/bg/x/bg002001_5_研究所解剖室_x01.jpg");
+	CreateTextureEX("ev01", 6000, 182, 53, "cg/ev/x/ev0202スクルージ研究員結晶化_メスのみ.png");
+	Zoom("bg01", 0, 4000, 4000, null, true);
+	Zoom("ev01", 0, 2000, 2000, null, true);
+	SetBlur("ev01", true, 3, 300, 50, false);
+
+	CreateTextureEX("bg02", 6000, -512, -288, "cg/bg/bg002001_5_研究所解剖室.jpg");
+	Zoom("bg02", 0, 2000, 2000, null, true);
+	SetShade("bg02", HEAVY);
+	CreateTextureEX("ev02", 6000, -1024, -576, "cg/ev/l/ev0202スクルージ研究員結晶化_キャラのみ_l.png");
+
+
+	//結晶生成-----------------------------------------------------
+	CreateTextureEX("ks01", 5010, 765, 200, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("ks02", 5009, 540, 350, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEX("ks03", 5008, 260, 150, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("ks04", 5007, 0, 100, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("ks05", 5006, 0, 100, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("ks01add", 5010, 765, 200, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("ks02add", 5009, 540, 350, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("ks03add", 5008, 260, 150, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("ks04add", 5007, 0, 100, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("ks05add", 5006, 0, 100, "cg/ef/x/ef_voidrubble01_x01.png");
+
+	Rotate("ks02*", 0, @0, @0, 60, null,true);
+	Rotate("ks03*", 0, @0, 180, -90, null,true);
+
+	Request("ks0*", Smoothing);
+	Zoom("ks0*", 0, 1500, 1500, null, true);
+
+
+
+	CreateSE("SE_vef02","seヴォイド結晶化01a");
+	CreateSE("SE_vef03","seヴォイド結晶化01a");
+	CreateSE("SE_vef04","seヴォイド結晶化01a");
+	MusicStart("SE_vef02",0,1000,0,1000,null,false);
+
+	//動作----------------------------------------------------------
+	$k_time=100;
+	$k_delete_time=100;
+
+	Shake("ev00", 100000, 1, 1, 1, 1, 1000, null, false);
+	Shake("bg00", 100000, 1, 1, 1, 1, 1000, null, false);
+
+	//MoveFTP1("@ev00",4000,4,3);
+	//MoveFTP2("@bg00",4000,3,2);
+	Move("ev00", 5000, @50, @20, null, false);
+	Move("bg00", 5000, @50, @20, null, false);
+	Fade("ev00", 300, 1000, null, false);
+	Fade("bg00", 300, 1000, null, true);
+
+	MusicStart("SE_vef03",0,1000,0,1000,null,false);
+
+	Shake("ks05*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks05*", 100, 1000, null, false);
+	Move("ks05*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks05*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks05add", $k_delete_time, null, false);
+
+	MusicStart("SE_vef04",0,1000,0,1000,null,false);
+
+	Shake("ks04*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks04*", 100, 1000, null, false);
+	Move("ks04*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks04*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks04add", $k_delete_time, null, false);
+
+	Shake("ks03*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks03*", 100, 1000, null, false);
+	Move("ks03*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks03*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks03add", $k_delete_time, null, false);
+
+	Shake("ks02*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks02*", 100, 1000, null, false);
+	Move("ks02*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks02*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks02add", $k_delete_time, null, false);
+
+
+	Shake("ks01*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks01*", 100, 1000, null, false);
+	Move("ks01*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks01*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks01add", $k_delete_time, null, false);
+
+	//MoveFTP1("@bg02",3000,5,5);
+	//MoveFTP2("@ev02",3000,10,10);
+
+
+	//★メス落とす速度
+	$md_speed=500;
+	Rotate("ev01", $md_speed, @0, @0, 30, null,false);
+	Move("bg01", $md_speed, @-100, @-100, null, false);
+	Move("ev01", $md_speed, 466, 333, null, false);
+	Fade("bg01", 100, 1000, null, false);
+	Fade("ev01", 100, 1000, null, true);
+
+	Delete("ks*");
+
+	$md_wait=$md_speed-300;
+	Wait($md_wait);
+
+
+	//★EV表示速度
+	$md_speed=600;
+	Move("ev02", $md_speed, -100, 0, AxlDxl, false);
+	Move("bg02", $md_speed, 0, 0, AxlDxl, false);
+	Fade("bg02", 200, 1000, null, false);
+	Fade("ev02", 200, 1000, null, false);
+
+	Fade("white02", $md_speed, 1000, Axl3, true);
+	//MoveFTP1stop();
+	//MoveFTP2stop();
+
+	Delete("ev*");
+	Delete("bg*");
+	Delete("ks*");
+
+	CreateSE("SE_vef06","seヴォイド崩壊03");
+	MusicStart("SE_vef06",0,1000,0,1000,null,false);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110a]
+//【研究者Ａ】
+<voice name="ｿｬｱｸﾀﾚ A" class="研究者Ａ" src="voice/LX01/0100220e31">
+｡ｸｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆ!｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//キャンサー化する研究者。
+
+////////////////////////////////////////
+//ここから正気のスクルージによる語り
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	Wait(500);
+
+	CreateColorSP("black", 5000, "000000");
+	Delete("white01");
+	FadeDelete("white02", 2000, Axl1, true);
+
+
+	SetVolumeEX("SE*", 2000, 0, null);
+
+
+	Wait(2500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+ﾀ眩｡ｼｭ ｱ嶸ﾏ ｱ篌ﾐﾀﾌ ﾃﾖｾﾇﾀﾌｾ嶸ﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorEX("re01", 10000, "AA0000");
+	CreateSE("SE01","se人体_心臓_鼓動01");
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Fade("re01", 0, 1000, null, true);
+
+	DrawDelete("re01", 800, 300, Axl1, "circle_02_00_1", true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+어지럼을 동반한 두통&.
+숨쉬기가 힘들다&. 몸이 불타듯 뜨겁다&.
+ｾﾇｸ｡ ｽﾃｴﾞｷﾈﾀｻﾁｵ ｸ･ｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE01","se戦闘_金属_破壊01");
+	MusicStart("SE01",0,300,0,800,null,false);
+
+	Wait(1000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130a]
+ｰﾟｵﾙ ｸﾘ ｹ巐ｱ ﾀﾏｾ鋧ｵｴﾙ&.
+유난히 소란스럽다&.
+무언가를 엎어 버린 건가&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130b]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100230a01">
+｡ｸ｡ｦ｡ｦ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義---------------------------------
+	CreateTextureEX("bg01", 100, 0, 0, "cg/bg/bg002001_5_研究所解剖室.jpg");
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	SetShade("bg01", MEDIUM);
+	CreateTextureEX("ev01", 100, -200, -50, "cg/ev/l/ev0202スクルージ研究員結晶化_キャラのみ_l.png");
+	SetShade("ev01", MEDIUM);
+	CreateTextureEX("ev02", 100, -200, -50, "cg/ev/l/ev0202スクルージ研究員結晶化_キャラのみ_l.png");
+
+	CreateSE("SE_heart","se人体_心臓_鼓動01L");
+
+	//動作---------------------------------
+	MusicStart("SE_heart",2000,700,0,600,null,true);
+
+	Fade("bg01", 0, 1000, null, true);
+	Fade("ev01", 0, 1000, null, true);
+
+	MoveFTP1("@bg01",7000,3,1);
+	MoveFTP2("@ev*",7000,6,2);
+
+
+	FadeDelete("black", 2000, null, true);
+	Wait(1000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+오른손에 뭔가 이상한 느낌이 든다&. ……난 뭘 쥐고 있는 거지?
+
+흐릿하던 시야가 조금씩 또렷해진다&.
+ﾀﾌｰﾇ｡ｦ｡ｦ?
+
+수정 같기도 하고…… 금속 같기도 한…… 본 적도 없는 물질&.
+ｾ錂ｰｼｭ ﾀﾌｷｱ ｰﾔ ｳｻ ｼﾕｿ｡?
+
+//AP結晶、脈打つ。
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreatePlainSP("pl01", 5000);
+	Zoom("pl01", 500, 1050, 1050, Dxl1, false);
+	Fade("pl01", 500, 0, Axl1, true);
+
+	Wait(500);
+	Fade("pl01", 0, 1000, null, true);
+	Zoom("pl01", 0, 1000, 1000, null, true);
+	Zoom("pl01", 500, 1050, 1050, Dxl1, false);
+	FadeDelete("pl01", 500, null, false);
+
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+……움직이고 있나?
+ｱﾝｼﾓﾀﾌ ｸｶﾄ｡ ｻｹｰﾃｳｷｳ ｸﾆｵｿﾇﾏｸ遑ｪ｡ｪ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	Fade("ev02", 1000, 1000, null, true);
+
+	Wait(500);
+
+	CreateTextureEX("xev03", 1000, center, middle, "cg/ev/ev0202スクルージ研究員結晶化.jpg");
+	Zoom("xev03", 0, 1500, 1500, null, true);
+	SetBlur("xev03", true, 3, 700, 80, false);
+
+	CreateSE("SE01","seヴォイド結晶化01a.ogg");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	SetVolumeEX("SE_heart", 1000, 0, null);
+	Zoom("xev03", 2000, 1000, 1000, Dxl2, false);
+	Fade("xev03", 500, 1000, null, true);
+
+	MoveFTP1stop();
+	MoveFTP2stop();
+
+
+	Wait(2000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+//【研究者Ａ】
+<voice name="ｿｬｱｸﾀﾚ A" class="研究者Ａ" src="voice/LX01/0100240e31">
+｡ｸｾﾆｾﾆ｡ｦ｡ｦ ｾﾆｾﾆｾﾆ｡ｦ｡ｦ!｡ｹ
+
+//（悲鳴を飲み込むような感じ）
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100250a01">
+｡ｸ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0165]
+ｻ邯ﾎｰ｡!?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100260a01">
+｡ｸﾀｸｾﾆｾﾆｾﾆｾﾇ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//反射的に手放すスクルージ。
+
+//ＳＥ：AP結晶砕ける
+//（全身粉々になるのではなく、結晶化した一部が壊れる）
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	Delete("ev01");
+	Delete("ev02");
+	//Delete("xev03");
+	Move("bg01", 0, 0, 0, null, true);
+	Zoom("bg01", 0, 1000, 1000, null, true);
+
+	CreateSE("SE02","seヴォイド崩壊01");
+	CreateSE("SE03","seヴォイド崩壊01");
+
+	MusicStart("SE02",0,700,0,800,null,false);
+	FadeDelete("xev03", 300, null, true);
+	MusicStart("SE03",0,700,0,1200,null,false);
+
+	CreateTextureEX("st01", 100, 500, 0, "cg/st/st研究員2_通常_normal.png");
+	CreateTextureEX("st02", 100, 96, 62, "cg/st/st研究員1_通常_normal.png");
+	Zoom("st02", 0, 1300, 1300, null, true);
+	Request("st02", Smoothing);
+	//SetShade("st02", HEAVY);
+
+	CreateSE("SE04","se人体_足音_走る04");
+	CreateSE("SE05","se人体_足音_走る04");
+	CreateSE("SE06","se人体_動作_衣擦れ01");
+
+
+	Move("st01", 300, @30, @0, Dxl1, false);
+	Fade("st01", 200, 1000, null, 100);
+	Move("st02", 300, @-50, @-20, Dxl1, false);
+	Fade("st02", 200, 1000, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0180]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX01/0100270e33">
+「가사 상태였을 텐데!」
+
+//【研究者Ｂ】
+<voice name="ｿｬｱｸﾀﾚ B" class="研究者Ｂ" src="voice/LX01/0100280e32">
+｡ｸﾁﾝ ｱﾗｷｱ ｼﾒｸｮ ﾇﾒ ｶｧｳﾄ! ｵｵｸﾁﾃﾄ!｡ｹ
+
+{
+	MusicStart("SE06",0,500,0,800,null,false);
+	Shake("st02", 400, 0, 2, 0, 0, 500, null, false);
+	Move("st02", 150, @-50, @10, Axl2, false);
+	FadeDelete("st02", 150, null, 100);}
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX01/0100290e33">
+「이&, 이봐! 기다려 줘!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//逃げ出す研究者Ｂ、Ｃ。
+//ＳＥ：非常警報
+
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	MusicStart("SE04",0,700,0,1000,null,false);
+
+	Shake("st01", 400, 0, 2, 0, 0, 500, null, false);
+	Move("st01", 150, @20, @2, Axl2, false);
+	FadeDelete("st01", 150, null, true);
+
+	MusicStart("SE05",0,700,0,1100,null,false);
+
+	Wait(500);
+
+	//定義-----------------------------------
+	CreatePlainSP("pl01", 10000);
+
+	CreateCamera("Ｃ", 100, 0, 1000);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureSP("Ｃ/bg01", 100, center, -500, "cg/bg/l/bg002001_5_研究所解剖室_l.jpg");
+	SetBlur("Ｃ/bg01", true, 1, 500, 500, false);
+	MoveFTP1("@Ｃ/*",10000,18,5);
+
+	CreateColorSP("black01", 6000, "000000");
+	CreateTextureEXmul("eye", 15000, Center, Middle, "cg/data/zzex_eye_01_00_0.png");
+	Fade("eye", 0, 900, null, true);
+
+	CreateSE("SE_heart","se人体_心臓_鼓動01L");
+
+
+	//動作-----------------------------------
+
+//♪♪：Hill Of Sorrow
+//？？：BGMはペンディング。とりあえず。
+	SoundPlay("@lx014",0,600,true);
+
+	MusicStart("SE_heart",3000,500,0,500,null,true);
+
+	FadeDelete("pl01", 500, null, true);
+	Wait(500);
+	Fade("black01", 1000, 0, Axl1, true);
+
+	FadeLoop01("black01",100,1000);
+
+	Wait(1000);
+
+	//おがみ：★演出　ここから顔窓出します
+
+	Fw("fwスクルージ_通常フード無し_normal");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0190]
+//（頭痛をこらえる感じで）
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100300a01">
+「……도대체 뭐야&, 이게?」
+
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100310a01">
+｡ｸｿｩｱ箒ﾂ｡ｦ｡ｦ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//スクルージ視点で辺りを見回す。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	SetBlur("Ｃ/bg01", true, 0, 500, 500, false);
+	MoveCamera("Ｃ", 2000, -300, @-100, 1000, AxlDxl, true);
+	SetBlur("Ｃ/bg01", true, 1, 500, 500, false);
+	Wait(1000);
+	//SetBlur("Ｃ/bg01", true, 0, 500, 500, false);
+	//MoveCamera("Ｃ", 1000, 300, @0, 1000, AxlDxl, true);
+	//SetBlur("Ｃ/bg01", true, 1, 500, 500, false);
+
+	Wait(1000);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0200]
+병원? 연구소?
+｡ｦ｡ｦｸ｣ｰﾚｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	Fw("fwスクルージ_通常フード無し_normal");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0210]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100320a01">
+｡ｸｾ錂ｰｼｭ ｳｻｰ｡ ﾀﾌｷｱ ｰ｡｡ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//スクルージの足元。キャンサー化して死亡した研究者Ａ。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateTextureEX("bg02", 5000, -512, -300, "cg/bg/bg002001_5_研究所解剖室.jpg");
+	Zoom("bg02", 0, 2000, 2000, null, true);
+	SetShade("bg02", MEDIUM);
+
+	CreateTextureEX("st01", 5000, 380, -220, "cg/st/x/st結晶化人間_叫び_normal_x02.png");
+	Request("st01", Smoothing);
+	Zoom("st01", 0, 1200, 1200, null, true);
+	Rotate("st01", 0, @0, @0, -70, null,true);
+
+	SetBlur("Ｃ/bg01", true, 0, 500, 500, false);
+	MoveCamera("Ｃ", 1000, -300, @100, 1000, AxlDxl, 500);
+
+	Move("st01", 1000, @0, @-70, Dxl1, false);
+	Move("bg02", 1000, @0, @-50, Dxl1, false);
+
+	Fade("st01", 500, 1000, null, false);
+	Fade("bg02", 500, 1000, null, false);
+
+	Wait(1600);
+
+	Fw("fwスクルージ_通常フード無し_normal");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0220]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100330a01">
+「……젠장! 대체 어떻게 돌아가는 거야!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//よろよろと歩き出すスクルージ。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateTextureSP("bg01", 100, -50, Middle, "cg/bg/m/bg002001_5_研究所解剖室_m.jpg");
+	SetBlur("bg01", true, 1, 500, 500, false);
+
+	SetBlur("Ｃ/bg01", true, 1, 500, 500, false);
+	MoveFTP3("@bg01",10000,18,5);
+
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+
+	FadeDelete("st01", 800, null, false);
+	FadeDelete("bg02", 800, null, true);
+
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0230]
+｡ｦ｡ｦﾁ､ﾇﾏﾀﾚ&.
+기억해 내는 거다&.
+
+이렇게 되기 전에 난 뭘 하고 있었지?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//激しい頭痛に襲われる。
+
+
+	TextBoxDelete(0);
+	Wait(300);
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreatePlainEX("plain01", 20000);
+	Request("plain01", SubRender);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	CreateColorEXadd("white01", 20000, "#FFFFFF");
+	CreateTextureEX("ef01", 20000, Center, 200, "cg/ef/ef_noize01.jpg");
+	Zoom("ef01", 0, 1100, 2000, null, true);
+
+	CreateSE("SE_noize","se擬音_効果_ノイズ01L");
+	CreateSE("SE01","se人体_足音_着地02.ogg");
+	CreateSE("SE77ina","seヴォイド蝗04L");
+	MusicStart("SE77ina",0,700,0,1000,null,false);
+	MusicStart("SE_noize",0,700,0,1000,null,false);
+
+
+	MoveFTP2("@plain01", 300, 10, 7);
+	MoveFTP1stop();
+
+	Rotate("bg01", 50, @0, @0, 3, null,false);
+
+	Shake("bg01", 600, 1, 2, 0, 0, 1000, null, false);
+
+	Fade("plain01", 0, 1000, null, true);
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+	Zoom("plain01", 0, 1100, 4000, null, true);
+	Wait(30);
+	Rotate("bg01", 50, @0, @0, -5, null,false);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	Move("ef01", 400, @0, -200, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("white01", 0, 0, null, true);
+	Wait(30);
+	Fade("plain01", 0, 1000, null, true);
+	Zoom("plain01", 0, 10000, 1100, null, true);
+	Fade("ef01", 0, 500, null, true);
+	Rotate("bg01", 50, @0, @0, 4, null,false);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 0, null, true);
+	Fade("ef01", 300, 0, null, false);
+	Fade("plain01", 300, 0, null, false);
+	Rotate("bg01", 50, @0, @0, 0, null,false);
+
+	SetVolumeEX("SE_noize", 0, 0, null);
+	SetVolumeEX("SE77ina", 0, 0, null);
+
+	Wait(200);
+	Move("bg01", 200, @0, -260, Axl1, 150);
+	MusicStart("SE01",0,700,0,1000,null,false);
+	MoveFTP3("@bg01",10000,18,5);
+	Shake("bg01", 100, 0, 5, 0, 0, 1000, null, false);
+
+
+	Fw("fwスクルージ_通常フード無し_normal");
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0240]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100340a01">
+｡ｸﾅｪ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0250]
+머리가 깨질 듯이 아프다&.
+생각이 전혀 정리되지 않는다&.
+
+나는…… 지금까지 무엇을……
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//激しい頭痛に襲われる。
+
+
+	TextBoxDelete(0);
+	Wait(300);
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreatePlainEX("plain01", 20000);
+	Request("plain01", SubRender);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	CreateColorEXadd("white01", 20000, "#FFFFFF");
+	CreateTextureEX("ef01", 20000, Center, 200, "cg/ef/ef_noize01.jpg");
+	Zoom("ef01", 0, 1100, 2000, null, true);
+
+	CreateSE("SE_noize","se擬音_効果_ノイズ01L");
+	CreateSE("SE77ina","seヴォイド蝗04L");
+	MusicStart("SE77ina",0,700,0,1000,null,false);
+	MusicStart("SE_noize",0,700,0,1000,null,false);
+
+	MoveFTP2("@plain01", 300, 10, 7);
+	MoveFTP1stop();
+
+	Shake("bg01", 600, 1, 2, 0, 0, 1000, null, false);
+
+	Fade("plain01", 0, 1000, null, true);
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+	Zoom("plain01", 0, 1100, 4000, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	Move("ef01", 400, @0, -200, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("white01", 0, 0, null, true);
+	Wait(30);
+	Fade("plain01", 0, 1000, null, true);
+	Zoom("plain01", 0, 10000, 1100, null, true);
+	Fade("ef01", 0, 500, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 0, null, true);
+	Fade("ef01", 300, 0, null, false);
+	Fade("plain01", 300, 0, null, true);
+
+	SetVolumeEX("SE77ina", 500, 0, null);
+	SetVolumeEX("SE_noize", 0, 0, null);
+
+	Wait(300);
+
+	CreateColorEX("bl01", 5000, "000000");
+	Fade("bl01", 1000, 1000, null, false);
+
+	Fw("fwスクルージ_通常フード無し_normal");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0260]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100350a01">
+｡ｸﾀｹ｡ｦ｡ｦ ﾅｩｾﾆｾﾇ｡ｦ｡ｦ!｡ｹ
+
+{	DeleteFw();}
+ｳｪｴﾂ｡ｦ｡ｦ
+ｳｪｴﾂ｡ｦ｡ｦ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//よろよろと手術室から出る。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	WaitPlay("bl01", null);
+	Delete("black*");
+	Delete("eye");
+
+	//定義------------------------------------
+
+	MoveFTP1stop();
+	MoveFTP2stop();
+	MoveFTP3stop();
+
+	CreateTextureEX("bg01", 100, -270, Middle, "cg/bg/m/bg002003_5_通路2_m.jpg");
+	Fade("bg01", 0, 1000, null, true);
+	CreateTextureEX("bg02", 100, 1000, 75, "cg/bg/x/bg002003_5_通路2_x01.png");
+	Fade("bg02", 0, 1000, null, true);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+
+	CreateSE("se01","se日常_建物_自動ドア");
+	//よろよろ歩くSE
+	CreateSE("se02","se人体_動作_抱く03");
+
+
+	//動作------------------------------------
+	SetVolumeEX("SE*", 2000, 0, null);
+
+	MusicStart("se01",0,700,0,1000,null,false);
+
+	Wait(1500);
+
+	Move("bg01", 2000, -220, @0, Dxl1, false);
+	Move("bg02", 2000, 1300, @0, Dxl1, false);
+
+	FadeDelete("bl01", 800, null, false);
+
+	Wait(500);
+	MusicStart("se01",0,700,0,1000,null,false);
+	Wait(2000);
+
+
+	CreatePlainSP("pl01", 5000);
+
+	Delete("bg02");
+	//CreateTextureEX("bg01", 100, center, Middle, "cg/bg/bg002002_5_通路1.jpg");
+	CreateTextureEX("bg01", 100, center, Middle, "cg/bg/bg002003_5_通路2.jpg");
+	Fade("bg01", 0, 1000, null, true);
+
+	FadeDelete("pl01", 500, null, true);
+
+	Wait(500);
+
+	Fw("fwスクルージ_通常フード無し_normal");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0270]
+//◆◆研究施設／廊下
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100360a01">
+「<RUBY TEXT="··">나는</RUBY>&, <RUBY TEXT="···">누구지</RUBY>?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0280]
+……아무것도 기억나지 않는다&.
+
+지금까지 어떻게 지냈는지&.<K>
+어째서 여기에 있는지&.<K>
+ｱﾗｻﾓﾀﾎｰ｡&, ｳｻ ﾀﾌｸｧﾁｶﾂｵ&.
+
+즉…… <RUBY TEXT="····">기억상실</RUBY>&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	Fw("fwスクルージ_通常フード無し_normal");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0290]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100370a01">
+｡ｸ｡ｦ｡ｦﾀﾌｰﾔ ｹｫｽｼ ｰ暙猊ﾑ ｳ翅ﾌｾﾟ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//激しい頭痛に襲われる。
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreatePlainEX("plain01", 20000);
+	Request("plain01", SubRender);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	CreateColorEXadd("white01", 20000, "#FFFFFF");
+	CreateTextureEX("ef01", 20000, Center, 200, "cg/ef/ef_noize01.jpg");
+	Zoom("ef01", 0, 1100, 2000, null, true);
+
+	CreateSE("SE_noize","se擬音_効果_ノイズ01L");
+	CreateSE("SE77ina","seヴォイド蝗04L");
+	MusicStart("SE77ina",0,700,0,1000,null,false);
+	MusicStart("SE_noize",0,700,0,1000,null,false);
+
+	MoveFTP2("@plain01", 300, 10, 7);
+	MoveFTP1stop();
+
+	Rotate("bg01", 50, @0, @0, 13, null,false);
+
+	Shake("bg01", 600, 1, 2, 0, 0, 1000, null, false);
+
+	Fade("plain01", 0, 1000, null, true);
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+	Zoom("plain01", 0, 1100, 4000, null, true);
+	Wait(30);
+	Rotate("bg01", 50, @0, @0, -15, null,false);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	Move("ef01", 400, @0, -200, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("white01", 0, 0, null, true);
+	Wait(30);
+	Fade("plain01", 0, 1000, null, true);
+	Zoom("plain01", 0, 10000, 1100, null, true);
+	Fade("ef01", 0, 500, null, true);
+	Rotate("bg01", 50, @0, @0, 10, null,false);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	Zoom("plain01", 0, 1100, 1100, null, true);
+	Fade("white01", 0, 0, null, true);
+	Fade("ef01", 300, 0, null, false);
+	Fade("plain01", 300, 0, null, false);
+
+	SetVolumeEX("SE77ina", 500, 0, null);
+	SetVolumeEX("SE_noize", 0, 0, null);
+
+
+	Rotate("bg01", 50, @0, @0, 0, null,false);
+
+	Wait(500);
+
+	Fw("fwスクルージ_通常フード無し_normal");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0300]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/0100380a01">
+｡ｸﾅｩｾﾆｾﾆｾﾆｾﾇ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//膝をつくスクルージ
+//複数の、物々しい足音が近づく。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義---------------------
+	CreateTextureEX("bg02", 1000, center, -500, "cg/bg/l/bg002003_5_通路2_l.jpg");
+	CreateTextureEX("bg02_shade", 1000, center, -500, "cg/bg/l/bg002003_5_通路2_l.jpg");
+	SetShade("bg02_shade", SEMIHEAVY);
+
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	CreateSE("SE02","se人体_衝撃_転倒01");
+
+	//動作---------------------
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Fade("bg02", 100, 1000, null, false);
+	Fade("bg02_shade", 400, 1000, null, false);
+	Shake("bg02*", 500, 0, 0, 0, 10, 800, null, false);
+	Move("bg02*", 500, @0, -550, Axl1, false);
+
+	Wait(500);
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	Fade("bg02_shade", 1000, 400, null, false);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0310]
+두통을 견디지 못하고&, 그만 무릎을 꿇는다&.
+쓰러진 내게로 누군가가 달려온다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//取り囲まれるスクルージ。
+//視界がぼやけていて、よくわからない。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE11","se人体_足音_走る03");
+	CreateSE("SE12","se人体_足音_走る03");
+
+	MusicStart("SE11",0,1000,0,1000,null,false);
+	Wait(200);
+	MusicStart("SE12",0,1000,0,1200,null,false);
+
+	//定義----------------------------------
+	CreateTextureSP("bg01", 100, -770, -480, "cg/bg/l/bg002003_5_通路2_l.jpg");
+	CreateTextureSP("st01", 150, 57, -76, "cg/st/stダァト兵_構え2_normal.png");
+	CreateTextureSP("st02", 150, 276, -47, "cg/st/x/stダァト兵_構え_normal_x01.png");
+//	CreateTextureSP("st03", 150, -450, -47, "cg/st/x/stダァト兵_構え_normal_x01.png");
+	Request("st*", Smoothing);
+	Request("bg01", Smoothing);
+	//SetShade("st03", SEMIHEAVY);
+	SetShade("st*", SEMIHEAVY);
+	SetShade("bg01", SEMIHEAVY);
+
+
+	Zoom("bg01", 0, 1100, 1100, null, true);
+	Zoom("st01", 0, 950, 950, null, true);
+	Zoom("st02", 0, 900, 900, null, true);
+	//Zoom("st03", 0, 1800, 1800, null, true);
+
+
+	CreateSE("SE13","se戦闘_銃器_構える01");
+	CreateSE("SE14","se戦闘_銃器_構える01");
+
+
+	//動作----------------------------------
+
+	Wait(1000);
+
+	$d_sp=500;
+	Move("bg01", $d_sp, -800, -480, Dxl2, false);
+	Move("st01", $d_sp, 47, -65, Dxl2, false);
+	Move("st02", $d_sp, 253, -77, Dxl2, false);
+	//Move("st03", $d_sp, -163, -46, Dxl2, true);
+	Zoom("st01", $d_sp, 1000, 1000, Dxl2, false);
+	Zoom("st02", $d_sp, 1000, 1000, Dxl2, false);
+	//Zoom("st03", $d_sp, 1500, 1500, Dxl2, true);
+
+	MusicStart("SE13",0,700,0,900,null,false);
+	FadeDelete("bg02_shade", 250, null, false);
+	FadeDelete("bg02", 250, null, true);
+	MusicStart("SE14",0,700,0,1000,null,false);
+
+	Wait(400);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0320]
+ﾀﾇｻ鄲ﾎｰ｡?
+｡ｦ｡ｦｾﾆｴﾑｰ｡?
+
+뭘 들고 있는 거지?
+현기증이 심해서 잘 보이지 않는다&.
+
+ﾀ嵓ﾇ｡ｦ｡ｦ ﾃﾑﾀﾎｰ｡?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//警備兵に銃口を向けられているスクルージ。
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0330]
+//【警備兵Ａ】
+<voice name="ｰ貅ｴ A" class="警備兵Ａ" src="voice/LX01/0100390e16">
+｡ｸｽﾇﾇ霤ｼｰ｡ ﾅｻﾃ簓ﾟｴﾙ!｡ｹ
+
+//【警備兵Ｂ】
+<voice name="ｰ貅ｴ B" class="警備兵Ｂ" src="voice/LX01/0100400e17">
+｡ｸﾃｳｺﾐﾇﾘ! ｾ錡ｭ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義----------------------
+	CreateTextureEXadd("ef01", 1000, Center, Middle, "cg/ef/x/ef_zoom01.jpg");
+	CreateMovieEX("mv01", 10000, center, middle, true, true, "dx/mv0003集中線01_白.ngs");
+	Request("mv01", SubRender);
+	Zoom("mv01", 0, 6000, 4000, null, true);
+
+	CreateSE("SE01","se戦闘_銃器_構える02");
+	CreateSE("SE02","se人体_動作_跳躍03");
+
+
+	//動作----------------------
+	MusicStart("SE01",0,700,0,1000,null,false);
+	MusicStart("SE02",0,700,0,2000,null,false);
+
+
+	Zoom("ef01", 30000, 1200, 1200, null, false);
+	Fade("ef01", 200, 700, Axl1, false);
+
+	Move("st01", 150, @-100, @0, Axl3, false);
+	Move("st02", 150, 422, @100, Axl3, false);
+	Zoom("bg01", 150, 1200, 1200, Axl3, false);
+	Zoom("st01", 150, 1500, 1500, Axl3, false);
+	Zoom("st02", 150, 1700, 1700, Axl3, true);
+	Move("st02", 30000, 442, @0, null, false);
+	Zoom("st01", 30000, 1700, 1700, null, false);
+	Zoom("st02", 30000, 2000, 2000, null, false);
+	Zoom("bg01", 30000, 1500, 1500, null, false);
+
+	SetFrequency("SE02", 0, 100, null);
+
+
+	Wait(500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0340]
+날 쏘려고?
+어째서지? 내가 뭘 어쨌다는 거야?
+
+현기증으로 흔들리는 시야 속에서도&, 놈들이 방아쇠를 당기는 찰나의 동작만은 어째서인지 유독 또렷하게 들어왔다&.
+
+<RUBY TEXT="｡､｡､｡､">ﾁﾗｴﾂｴﾙ</RUBY>&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//ＳＥ：銃声
+
+//スクルージの視界、もの凄いスピードで回転する。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorEX("black01", 5000, "000000");
+	CreateTextureEXadd("ef11", 1000, Center, 506, "cg/ef/ef_muzzle03.jpg");
+
+	CreateSE("SE10","se戦闘_銃器_機関銃01");
+	CreateSE("SE11","se人体_動作_跳躍01");
+	CreateSE("SE12","se戦闘_攻撃_殴る01");
+	CreateSE("SE13","se戦闘_攻撃_振る04");
+	CreateSE("SE14","se戦闘_動作_突進04");
+
+	CreateSE("SE15","se戦闘_銃器_跳弾01");
+	CreateSE("SE16","se戦闘_銃器_跳弾02");
+	CreateSE("SE17","se戦闘_銃器_跳弾01");
+	CreateSE("SE18","se戦闘_銃器_跳弾02");
+
+	MusicStart("SE10",0,700,0,1200,null,false);
+	MusicStart("SE11",0,700,0,1100,null,false);
+	MusicStart("SE12",0,700,0,1500,null,false);
+
+	$d_sp=1000;
+	$d_sp2=700;
+	Fade("mv01", 150, 1000, null, false);
+	Rotate("mv01", 1000, @0, @0, 180, Axl3,false);
+	Move("bg01", $d_sp, @0, 600, Dxl3, false);
+	Move("st01", $d_sp, @-100, @1000, Dxl3, false);
+	Move("st02", $d_sp, @0, @2000, Dxl3, false);
+	Zoom("bg01", $d_sp, 1800, 1800, AxlDxl, false);
+	Zoom("st01", $d_sp, 2000, 2000, Dxl3, false);
+	Zoom("st02", $d_sp, 3000, 3000, Dxl3, false);
+
+	Wait(100);
+	Fade("ef11", 0, 1000, null, false);
+	Zoom("bg01", $d_sp2, 2000, 5000, Axl1, false);
+	Move("bg01", $d_sp2, @0, -1500, Axl3, false);
+	Rotate("bg01", $d_sp2, @0, @0, 180, Axl3,false);
+
+	MusicStart("SE13",0,700,0,1500,null,false);
+	MusicStart("SE14",0,700,0,1100,null,false);
+
+	Wait(100);
+	Delete("ef11");
+	MusicStart("SE15",0,700,0,1000,null,false);
+	Wait(100);
+	MusicStart("SE16",0,700,0,1000,null,false);
+	Wait(100);
+	MusicStart("SE17",0,700,0,900,null,false);
+	Wait(100);
+	MusicStart("SE18",0,700,0,1200,null,false);
+
+	Shake("bg01", 500, 2, 5, 0, 0, 1000, null, false);
+	Fade("black01", 300, 1000, Axl3, true);
+
+	Wait(500);
+
+	Delete("bg*");
+	Delete("ev*");
+	Delete("st*");
+	Delete("ef*");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0350]
+ｱﾗ ｼ｣&, ｼｼｻﾌ ｺﾗｸ｣ｸ｣ ｵﾚﾁﾇ逸ﾙ&.
+무슨 일이 벌어지고 있는지 나조차도 이해할 수 없다&.
+
+이건…… 천장? 바닥?
+ｾ錂ｰｼｭ ﾀ嵭鯊ﾌ ｰﾅｲﾙｷﾎ ｵﾚﾁﾇｭ｡ｪ｡ｪ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//撃たれる瞬間、跳躍→天井を蹴って警備兵達を飛び越えるスクルージ。
+
+//？？：ここはイベント絵あった方が良いかも。追加候補。
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE10","se戦闘_銃器_機関銃01");
+	CreateSE("SE11","se人体_動作_跳躍01");
+	CreateSE("SE12","se戦闘_攻撃_殴る01");
+	CreateSE("SE13","se戦闘_攻撃_振る04");
+	CreateSE("SE14","se戦闘_動作_突進04");
+
+	CreateSE("SE15","se戦闘_銃器_跳弾01");
+	CreateSE("SE16","se戦闘_銃器_跳弾02");
+	CreateSE("SE17","se戦闘_銃器_跳弾01");
+	CreateSE("SE18","se戦闘_銃器_跳弾02");
+
+	CreateSurface("suf",2000,0,0,false);
+	SetAlias("suf", "suf");
+	Zoom("suf",0,2000,2000,null,true);
+	Rotate("suf", 0, @0, @0, 180, null,false);
+	Fade("suf", 0, 1000, null, true);
+
+	CreateTextureEX("bg11", 2000, 0, middle, "cg/bg/bg900004_3_研究所通路ロング.jpg");
+	Zoom("bg11", 0, 1000, 1000, null, true);
+	//SetBlur("bg11", true, 3, 700, 80, false);
+	Fade("bg11", 0, 1000, null, false);
+
+	SetSurface("bg11","suf");
+
+	CreateTextureSP("ev03", 1000, center, middle, "cg/ev/ev0207スクルージ天井ジャンプ.jpg");
+	Zoom("ev03", 0, 1500, 1500, null, true);
+	SetBlur("ev03", true, 3, 700, 80, false);
+
+	MusicStart("SE10",0,700,0,1200,null,false);
+
+	$su_sp=1000;
+	Rotate("suf", $su_sp, @0, @0, 0, Axl2,false);
+	Move("bg11", $su_sp, -3700, @0, Axl3, false);
+
+	FadeDelete("black01", 200, null, true);
+
+	MusicStart("SE11",0,700,0,1100,null,false);
+	MusicStart("SE12",0,700,0,1500,null,false);
+	Wait(150);
+	MusicStart("SE15",0,700,0,1000,null,false);
+	Wait(150);
+	MusicStart("SE16",0,700,0,1000,null,false);
+	Wait(150);
+	MusicStart("SE18",0,700,0,1200,null,false);
+	Wait(50);
+	MusicStart("SE17",0,700,0,900,null,false);
+
+	Zoom("ev03", 800, 1000, 1000, Dxl2, false);
+	Fade("suf", 200, 0, null, false);
+
+	MusicStart("SE13",0,700,0,1100,null,false);
+	MusicStart("SE14",0,700,0,1500,null,false);
+	Fade("mv01", 600, 0, Axl1, true);
+
+	Wait(500);
+
+	Delete("mv01");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0360]
+//【警備兵Ｃ】
+<voice name="ｰ貅ｴ C" class="警備兵Ｃ" src="voice/LX01/0100410e18">
+「어!?」
+
+//【警備兵Ａ】
+<voice name="ｰ貅ｴ A" class="警備兵Ａ" src="voice/LX01/0100420e16">
+「뛰어넘었다고!?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0370]
+정신을 차려보니 녀석들은 내 등 뒤에 있었다&.
+허둥지둥 뒤돌아서며&, 이번에야말로 날 쏴 죽이려고&, 총을――
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+}

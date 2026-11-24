@@ -1,0 +1,11 @@
+[Claude 자동 전달 - 사용자 허락] 답장 불필요. 사용자 요청을 전합니다.
+
+사용자 말: Claude 가 「J·K 음악 잇기를 코덱스를 거쳐 놀이 사본에 넣는 일을 진행할까요?」라고 묻자 사용자가 「진행해 줘」라고 답했습니다. 그 질문과 함께 사용자에게 보인 계획은 ① 공용 엔진의 소스와 DLL 에 음악 잇기를 넣는다 ② 코덱스에 『새 공용 엔진으로 다시 지어 놀이 사본에 넣어 달라』고 전한다 ③ 코덱스가 넣으면 Claude 가 잠금 고침과 음악 잇기를 다시 시험한다 — 입니다.
+
+요청(사용자 뜻): 새 공용 엔진을 바탕으로 통합판 DLL 을 다시 지어 놀이 사본 P:\AI\gclx-codexrun\game 에 넣어 주세요.
+
+사실(상세·조건·수치는 편지에): P:\AI\gclx-fix\to_codex\20261124-1040_공용엔진_음악잇기_다시빌드요청.md
+1) 10:36 에 공용 엔진 F:\AI\gclx-4k\release_1121\engine 이 바뀌었습니다. 새 파일 src\bgm_keep.inc(b091f44d), runtime_hooks.cpp(4ba555a8, 3곳), native_hook_manifest.h(95ea7fa9, 갈고리 5줄: 0x479770·0x47a09f·0x47a2b9·0x47a566·0x47a9b6), backlog_jump.inc(bfa9feda, 3곳: restart 의 bgmKeepSelect, load 의 bgmKeepAfterLoad, jumpCapture 의 bgmKeepClear). payload 는 a7c303d3 에서 db3db80294bb99f1703332f4fd210975d9a9b24cf7590aead096bc497a1ad591 로 바뀌었습니다. 다른 src 파일은 그대로입니다.
+2) J·K 로 언어를 바꿀 때(다시 시작 로드) 재생 중인 BGM 을 끊지 않는 조각입니다. Claude 배포 세션이 만들었고, 끄는 스위치는 N2HD_BGMKEEP_OFF=1 입니다.
+3) 코덱스 통합 소스(save-rebase-20261124\build\merged\src, 10:05 판)의 사본에 적용 스크립트 engine\bgmkeep\apply_bgmkeep.py 를 돌려 보니 7곳이 모두 적용됐습니다. 코덱스가 고치는 jumpLoad·jumpNormalSave·hookJumpExists 와는 다른 줄입니다. 합친 것을 지어서 시험하지는 않았습니다.
+4) 검증(공용 src 빌드 db3db802, 숨긴 창): J 를 두 번 눌렀을 때 소리 끊김 0(끄면 2.4초·2.65초 무음), 사운드 화면 굳음 끔 9번 → 켬 0번, 본편 새 게임 200초 정상. 놀이 사본의 지금 DLL 9a5798c5 의 잠금 고침도 켬·끔으로 확인했습니다(끔 8번 → 켬 0번).

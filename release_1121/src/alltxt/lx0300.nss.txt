@@ -1,0 +1,417 @@
+
+
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0300.nss_MAIN
+{
+	$PHASE_num=4;
+	$PHASE_name="산타가 죽이러 온다";
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#bg004001_1_教会内部=true;
+	#bg004002_1_教会外観=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0301.nss";
+
+}
+
+
+scene lx0300.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+	//$SYSTEM_skip=false;
+	//$SYSTEM_menu_lock=true;
+	//$SYSTEM_menu_lock=false;
+	//#SYSTEM_skip_absolute = true;
+
+//―――――――――――――――――――――――――――――――――――――――
+
+//アイキャッチ
+
+//=====================================================
+//$SYSTEM_menu_lock=true;
+	MenuLock(true);
+
+	PrintBG("上背景１", 30000);
+
+		//定義するもの
+		CreateColor("色１", 150, 0, 0, 1024, 100, BLACK);
+		SetAlias("色１", "色１");
+		CreateColor("色２", 150, 0, 476, 1024, 100, BLACK);
+		SetAlias("色２", "色２");
+		Fade("色*", 0, 0, null, true);
+		CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg004001_1_教会内部.jpg");
+		CreateTextureSP("ev77", 100, Center, 0, "cg/bg/l/bg004002_1_教会外観_l.jpg");
+		CreateSE("SE77","se背景_ガヤ_雑踏01");
+
+	CreateTextureEX("上背景２", 30001, 0, 0, "cg/sys/phase/kr_gc_eyecatch_plate.png");
+	CreateTexture("上背景２/KRLogo", 30002, 0, 0, "cg/sys/phase/kr_gc_eyecatch_text.png");
+	SetVertex("上背景２/KRLogo", 0, 0);
+	Zoom("上背景２/KRLogo", 0, 250, 250, null, false);
+	Request("上背景２/KRLogo", Smoothing);
+	Fade("上背景２/KRLogo", 0, 0, null, false);
+	SetShade("上背景２", MEDIUM);
+
+	CreatePlainSP("上背景３", 10000);
+	Zoom("上背景３", 0, 1020, 1020, Dxl2, true);
+
+	CreateColorEX("絵色１", 30001, WHITE);
+	Request("絵色１", AddRender);
+
+	CreateColorEX("絵色２", 30001, BLACK);
+
+
+	//★徒歩：ＳＥ
+	CreateSE("SE91","seアイキャッチ__歯車_01_L");
+	CreateSE("SE92","seアイキャッチ__歯車_02_L");
+	CreateSE("SE93","seアイキャッチ__歯車_03");
+	CreateSE("SE94","seアイキャッチ__歯車_04_L");
+	CreateSE("SE95","seアイキャッチ__歯車_05");
+	CreateSE("SE96","seアイキャッチ__歯車_06");
+	CreateSE("SE97","seアイキャッチ__歯車_07");
+
+	MusicStart("SE91",0,1000,0,1000,null,true);
+	MusicStart("SE92",0,1000,0,1000,null,true);
+	MusicStart("SE93",0,1000,0,1000,null,false);
+	MusicStart("SE94",0,500,0,1000,null,false);
+
+	CreateMovie("ムービー１", 30000, 0, 0, false, false, "dx/GC_eyecatch_E.ngs");
+	Wait(2500);
+
+	Zoom("上背景２", 600, 1020, 1020, Dxl1, false);
+	Zoom("上背景２/KRLogo", 600, 255, 255, Dxl1, false);
+	Move("上背景２/KRLogo", 600, -10, -6, Dxl1, false);
+	Fade("上背景２", 300, 1000, null, true);
+
+	Fade("上背景１", 0, 0, null, false);
+	Fade("ムービー１", 0, 0, null, false);
+
+	SetVolumeEX("SE91", 100, 0, null);
+	SetVolumeEX("SE92", 100, 0, null);
+	SetVolumeEX("SE93", 100, 0, null);
+	MusicStart("SE94",100,1200,0,500,null,true);
+	MusicStart("SE95",0,1000,0,1000,null,false);
+
+	Fade("絵色１", 50, 500, null, true);
+
+	Fade("絵色１", 200, 0, null, false);
+	Zoom("上背景２", 0, 2000, 2000, Dxl1, false);
+	Zoom("上背景２/KRLogo", 0, 500, 500, Dxl1, false);
+	Move("上背景２/KRLogo", 0, -512, -288, null, false);
+	Move("上背景２", 0, @200, @100, Axl1, true);
+	BezierMove("上背景２", 300, (@0,@0){@3,@2}{@-1,@-1}(@0,@3){@-2,@1}{@1,@-1}(@0,@2){@-1,@-1}{@3,@1}(@0,@-2){@-1,@-1}{@1,@3}(@0,@0), null, false);
+	Wait(200);
+
+	MusicStart("SE96",0,1000,0,1000,null,false);
+
+	Move("上背景２", 0, @-400, @-200, Axl1, true);
+	BezierMove("上背景２", 300, (@0,@0){@-8,@-7}{@5,@5}(@5,@8), null, false);
+	Wait(100);
+
+	Fade("絵色２", 200, 1000, null, true);
+
+
+	FadeDelete("上背景２", 0, null, true);
+
+	SetVolumeEX("SE94", 200, 0, null);
+
+
+	Zoom("上背景３", 200, 1000, 1000, Dxl1, true);
+
+	//Delete("絵色*");
+	Delete("上背景*");
+	Delete("ムービー１");
+	MenuLock(false);
+
+//$SYSTEM_menu_lock=false;
+//=====================================================
+
+	Move("ev77", 15000, @0, -300, null, false);
+	MusicStart("SE77",2000,500,0,1000,null,true);
+	Fade("絵色２", 2000, 0, null, true);
+
+	Wait(2000);
+
+//テロップ
+//2029年12月24日
+
+//	SetFont("ＭＳ 明朝", 16, FFFFFF, 000000, MEDIUM, AROUND);
+//	CreateTextEX("テロップ２役職", 20000, 100, 420, Auto, Auto, "<SPAN size=10>脚本</SPAN>");
+
+	SetFont("Malgun Gothic", 32, FFFFFF, 000000, MEDIUM, AROUND);
+	CreateTextEX("긡깓긞긵괧릐덒괦", 20000, 86, 490, Auto, Auto, "<SPAN size=3>2029년 12월 24일</SPAN>");
+
+//	SetFont("ＭＳ 明朝", 8, FFFFFF, 000000, MEDIUM, AROUND);
+//	CreateTextEX("テロップ２ルビ役職", 20000, 100, 443, Auto, Auto, "<SPAN size=1>Writing</SPAN>");
+//	CreateTextEX("テロップ２ルビ人員１", 20000, 100, 508, Auto, Auto, "<SPAN size=1>Jin Haganeya</SPAN>");
+//	Move("テロップ２*", 0, @0, @-250, null, true);
+
+	Fade("色*", 1000, 1000, null, false);
+	Fade("テロップ２*", 1000, 1000, null, true);
+
+	Wait(3000);
+
+//	DrawTransition("色１", 1000, 1000, 0, 100, null, "cg/data/slide_01_00_1.png", false);
+//	DrawTransition("色２", 1000, 1000, 0, 100, null, "cg/data/slide_01_00_0.png", false);
+	Fade("色*", 1000, 0, null, false);
+	Fade("テロップ２*", 1000, 0, null, true);
+
+	SetVolumeEX("SE77", 3000, 0, null);
+	FadeDelete("ev77", 2000, Axl1, true);
+
+	Delete("テロップ*");
+	Delete("色*");
+
+//以下のやりとりはアニメ20話とまったく同じ
+
+//◆◆教会
+
+//春夏と真名
+
+	Wait(1500);
+
+	St("ML",200, @0,@60,"stマナ_通常_normal");
+	FadeSt("ML",300,true);
+
+{	Fw("fwマナ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX03/0000010b05">
+「아빠&, 늦네……」
+
+{
+	#CFGVC_MANA=1;
+	St("MR",200, @0,@40,"stハルカ_通常_normal");
+	FadeSt("MR",300,true);
+	Fw("fwハルカ_通常_normal");
+}
+//【春夏】
+<voice name="ﾇﾏｷ酘ｫ" class="春夏" src="voice/LX03/0000020b02">
+「어라? 슈는?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+#CFGVC_HARUKA=1;
+
+
+{	Fw("fwマナ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX03/0000030b05">
+「화장실 갔어요&, 하루카 씨」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+{	Fw("fwマナ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX03/0000040b05">
+「저랑 슈는 괜찮아요&.
+　그러니까 하루카 씨&, 아빠 마중 가 줘요」
+
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX03/0000050b05">
+「분명 또 약속도 잊고 연구하고 있을 거예요」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	St("MR",200, @0,@40,"stハルカ_通常_smile2");
+	FadeSt("MR",200,true);
+
+{	Fw("fwハルカ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【春夏】
+<voice name="ﾇﾏｷ酘ｫ" class="春夏" src="voice/LX03/0000060b02">
+「그럼&, 부탁해도 될까?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	CreatePlainSP("上背景", 10000);
+
+	DeleteAllSt(0,true);
+
+	CreateTextureSP("絵背景１", 100, 536, -479, "cg/bg/l/bg004001_1_教会内部_l.jpg");
+	Zoom("絵背景１", 0, 2000, 2000, Dxl2, true);
+	SetShade("絵背景１", MEDIUM);
+	St("C",200, @0,@0,"buマナ_通常_normal2");
+	FadeSt("C",0,true);
+
+	FadeDelete("上背景", 500, null, true);
+
+{	Fw("fwマナ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0041]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX03/0000070b05">
+｡ｸｳﾗ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Wait(1000);
+
+	//にっこりさぶん
+	St("C",200, @0,@0,"buマナ_通常_smile");
+	FadeSt("C",200,true);
+
+	Wait(1000);
+
+
+//◆◆教会／外
+
+//教会から出て行く春夏。
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 300, 1000, null, true);
+
+	DeleteAllSt(0,true);
+
+	CreateTextureSP("絵背景弐", 100, Center, Middle, "cg/bg/l/bg004002_1_教会外観_l.jpg");
+	Wait(500);
+
+	CreateTextureEX("絵背景参", 100, Center, -200, "cg/bg/m/bg004002_1_教会外観_m.jpg");
+	Wait(500);
+
+	//★徒歩：ＳＥ
+	CreateSE("SE02","se日常_建物_教会ドア閉");
+	MusicStart("SE02",0,750,0,1000,null,false);
+
+	Fade("絵色黒", 300, 0, null, true);
+	Wait(1000);
+
+	//★徒歩：ＳＥ
+	CreateSE("SE03","se人体_足音_走る_91");
+	CreateSE("SE77","se背景_ガヤ_雑踏01");
+
+//	CreateTextureEX("絵人", 100, 300, 320, "cg/bu/buハルカ_通常_normal.png");
+	CreateTextureEX("絵人", 100, 300, 450, "cg/bu/buハルカ_通常_normal.png");
+	Request("絵人", Smoothing);
+	Zoom("絵人", 0, 2000, 2000, Dxl2, true);
+
+	MusicStart("SE03",0,750,0,1000,null,true);
+
+	Move("絵背景参", 1500, @0, @-80, null, false);
+	Fade("絵背景参", 300, 1000, null, false);
+
+//	BezierMove("絵人", 1500, (@0,@0){@-20,@20}{@-40,@20}(@-60,@20){@-80,@60}{@-100,@60}(@-120,@60){@-140,@120}{@-160,@120}(@-180,@120){@-200,@200}{@-220,@200}(@-360,@200), null, false);
+	BezierMove("絵人", 1500, (@0,@0){@-20,@20}{@-40,@20}(@-60,@20){@-80,@60}{@-100,@60}(@-120,@60){@-140,@140}{@-160,@140}(@-180,@140){@-200,@240}{@-220,@240}(@-360,@240), null, false);
+	Zoom("絵人", 1500, 3000, 3000, Axl1, false);
+	Fade("絵人", 300, 1000, null, true);
+	Wait(100);
+//	WaitKey();
+
+//ブラックアウト等で区切りを入れてから
+	SetVolumeEX("SE03", 1500, 0, null);
+	MusicStart("SE77",2000,400,0,1000,null,true);
+	Fade("絵色黒", 500, 1000, null, true);
+	Wait(4000);
+
+	FadeDelete("絵人", 0, null, false);
+
+//	CreateTextureSP("絵背景弐", 100, Center, Middle, "cg/bg/bg004002_1_教会外観.jpg");
+	Delete("絵背景参");
+
+	//★徒歩：ＳＥ
+	CreateSE("SE01","se人体_足音_歩く_91");
+	MusicStart("SE01",0,800,0,1000,null,true);
+
+	FadeDelete("絵色黒", 1000, null, true);
+	Wait(4000);
+
+//入れ違いに教会に来るガイ。
+
+//おがみ：★ガイ立ち絵入れ替え
+	St("MR",200, @0,@0,"buガイ_通常_serious1");
+
+	//★徒歩：ＳＥ
+	CreateSE("SE01","se人体_足音_一歩_91");
+	MusicStart("SE01",0,350,0,800,null,false);
+
+	FadeSt("MR",200,true);
+
+	Wait(2000);
+
+{	Fw("fwガイ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX03/0000080b03">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+#CFGVC_GAI=1;
+//教会の中へと入っていくガイ。
+	DeleteAllSt(500,true);
+	Wait(500);
+
+	//★徒歩：ＳＥ
+	CreateSE("SE02","se日常_建物_教会ドア開閉");
+	MusicStart("SE02",0,750,0,1000,null,false);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1500, 1000, null, true);
+
+
+	SetVolumeEX("@SE*", 2000, 0, null);
+	Wait(4000);
+
+//→→LX_0301
+
+}

@@ -1,0 +1,103 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0604_00sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+
+	$lx0604_00sl選択肢=1;
+	$GameName = "lx0604_11.nss";
+
+
+}
+
+
+scene lx0604_00sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+if($PreGameName=="lx0603.nss"){
+	Wait(3000);
+}
+
+//―――――――――――――――――――――――――――――――――――――――
+
+	PrintGO("上背景", 30000);
+	CreateColorSP("絵色黒", 0, "000000");
+	FadeDelete("上背景", 0, null, true);
+
+	//★徒歩：ＳＥ
+	CreateSE("SE01","se人体_心臓_鼓動02L");
+	MusicStart("SE01",3000,1000,0,1500,null,true);
+	//SetVolumeEX("@SE*", 1000, 0, null);
+
+	Wait(2000);
+
+//<continuation number="120">
+
+//イェット・トゥー・カム視点
+//黒背景
+
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//→→生きる
+
+//選択肢、最初はひとつしかない。
+//数回（三回くらい選ぶと、次の選択肢追加）
+
+//→→諦める
+
+////////////////////////////////////////
+
+
+	$select_fade=true;
+	SetChoice01("산다");
+	WaitChoice01();
+	$FLAG_OF_STORY["生きる"]=$FLAG_OF_STORY["生きる"]+1;
+
+//	ClearFadeAll(1000, true);
+
+	Wait(1000);
+
+	SetVolumeEX("@SE01", 800, 0, null);
+
+	Wait(1000);
+
+}

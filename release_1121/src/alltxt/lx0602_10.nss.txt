@@ -1,0 +1,910 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0602_10.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0606スクルージヴォイド聖杯=true;
+	#ev0606スクルージヴォイド聖杯_a=true;
+	#ev0606スクルージヴォイド聖杯_b=true;
+	#ev0606スクルージヴォイド聖杯_c=true;
+	#ev0605イェット・トゥー・カムプレゼント殺し=true;
+	#ev0605イェット・トゥー・カムプレゼント殺し_a=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0603.nss";
+
+}
+
+
+scene lx0602_10.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+if(1){//境界////////////////////////////////////////////////////////////////
+
+//―――――――――――――――――――――――――――――――――――――――
+
+	PrintBG("上背景", 30000);
+	CreateColorSPadd("絵色１", 1000, "#FFFFFF");
+	FadeDelete("上背景", 0, null, true);
+
+	Wait(2000);
+	SoundPlay("@lx017",0,800,true);
+
+//←←アバドン
+//（合流）
+
+//キャロル（イェット・トゥー・カム）からヴォイドを取り出すスクルージ。
+//顕れたのは聖杯のヴォイド。
+
+////////////////////////////////////////////////////////////////////////////////
+	CreateColorSP("絵色２", 100, WHITE);
+
+	CreateTextureSP("絵手１", 200, 190, 52, "cg/ef/x/ef_hand07_停止.png");
+	Request("絵手１", Smoothing);
+	Move("絵手１", 0, @0, @200, null, true);
+
+	CreateTextureEX("絵手２", 200, 190, 52, "cg/ef/x/ef_hand07_停止a.png");
+	Request("絵手２", Smoothing);
+	Move("絵手２", 0, @0, @200, null, true);
+
+//	CreateTextureEXadd("絵光１", 200, 187, 234, "cg/ef/x/ef_inago01.png");
+//	CreateTextureEXadd("絵光２", 200, 320, 3, "cg/ef/x/ef_inago01.png");
+//	CreateTextureEXadd("絵光３", 200, 517, -1, "cg/ef/x/ef_inago01.png");
+//	CreateTextureEXadd("絵光４", 200, 592, 62, "cg/ef/x/ef_inago01.png");
+//	CreateTextureEXadd("絵光５", 200, 661, 224, "cg/ef/x/ef_inago01.png");
+	CreateTextureEXadd("絵光１", 200, 187, 234, "cg/ef/ef_vd_light01.png");
+	CreateTextureEXadd("絵光２", 200, 320, 3, "cg/ef/ef_vd_light01.png");
+	CreateTextureEXadd("絵光３", 200, 517, -1, "cg/ef/ef_vd_light01.png");
+	CreateTextureEXadd("絵光４", 200, 592, 62, "cg/ef/ef_vd_light01.png");
+	CreateTextureEXadd("絵光５", 200, 661, 224, "cg/ef/ef_vd_light01.png");
+	Move("絵光*", 0, @0, @200, null, true);
+	Zoom("絵光*", 0, 0, 0, Dxl1, true);
+
+	CreateTextureEX("絵雷１", 200, 400, 400, "cg/ef/x/ef_zan01.png");//ef紫電01
+	SetVertex("絵雷１", 102, InBottom);
+	Request("絵雷１", Smoothing);
+
+	CreateWindow("絵窓１", 0, 1524, 0, 1024, 576, false);
+
+	CreateColor("絵窓１/色１", 1000, 0, 0, 1424, 576, "BLACK");
+	SetAlias("絵窓１/色１", "絵窓１/色１");
+
+	CreateTextureEX("絵窓１/絵イベント１", 1500, 1000, 0, "cg/ev/l/ev0606スクルージヴォイド聖杯_l.jpg");
+	CreateTextureEX("絵イベント２", 2000, 900, -656, "cg/ev/x/ev0606スクルージヴォイド聖杯_聖杯のみ_x01.png");
+//	CreateTextureEX("絵イベント２", 2000, 426, 340, "cg/ev/x/ev0606スクルージヴォイド聖杯_聖杯のみ_x01.png");
+//	Request("絵イベント２", Smoothing);
+//	Zoom("絵イベント２", 0, 500, 500, Dxl2, true);
+	SetBlur("絵イベント２", true, 1, 300, 50, true);
+
+	CreateTextureEX("絵エフェクト１", 2000, 865, 163, "cg/ef/x/ef_瞳.png");
+	SetVertex("絵エフェクト１", 39, 49);
+	Request("絵エフェクト１", Smoothing);
+	Rotate("絵エフェクト１", 0, @0, @0, @-90, null, false);
+
+////////////////////////////////////////////////////////////////////////////////
+//ev0606スクルージヴォイド聖杯_聖杯のみ_x01
+//ev0606スクルージヴォイド聖杯_聖杯のみ手前_x01
+
+	//★徒歩：ＳＥ
+	CreateSE("SE01","seヴォイド取り出し01");
+	CreateSE("SE02","seヴォイド汎用01");
+	CreateSE("SE03","se擬音_光01");
+	CreateSE("SE04","se擬音_光02");
+	CreateSE("SE05","se擬音_光04");
+	CreateSE("SE06","se擬音_光02");
+	CreateSE("SE07","se擬音_光04");
+
+	CreateSE("SE81","se自然_風_突風01");
+	CreateSE("SE82","se擬音_通過01");
+	CreateSE("SE83","se擬音_効果_キーン01");
+
+	CreateSE("SE91","seヴォイドエフェクト_l");
+	CreateSE("SE92","se背景_特殊_地震01L");
+
+
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+	MusicStart("SE91",0,700,0,1000,null,true);
+
+	Move("絵手*", 5000, @0, @-400, Axl3, false);
+	Move("絵光*", 5000, @0, @-400, Axl3, false);
+
+	Zoom("絵光*", 6000, 4000, 4000, Axl1, false);
+	Fade("絵光*", 4000, 1000, null, false);
+
+	Fade("絵色１", 5000, 300, null, false);
+
+	WaitAction("絵手*", null);
+	SetBlur("絵手*", true, 2, 300, 100, false);
+
+	Zoom("絵雷１", 0, 4000, 4000, Axl2, false);
+	Fade("絵雷１", 500, 500, null, false);
+	Shake("絵雷１", 4000, 0, 1, 0, 100, 1000, Axl2, false);
+	Rotate("絵雷１", 4000, @0, @0, 3600, null, false);
+
+	Shake("絵光*", 4000, 0, 1, 0, 100, 1000, Axl2, false);
+
+	MusicStart("SE92",500,500,0,500,null,true);
+	MusicStart("SE81",0,500,0,500,null,false);
+	MusicStart("SE03",0,500,0,1000,null,false);
+	FadeFR("絵手１",0,1000,1100,0,0,10,Dxl1,false);
+	FadeFR("絵手２",2000,300,1100,0,0,10,Dxl1,false);
+	Wait(1000);
+	MusicStart("SE92",100,700,0,500,null,true);
+	MusicStart("SE04",0,600,0,1100,null,false);
+	FadeFR("絵手１",0,1000,2100,0,0,10,Dxl1,false);
+	FadeFR("絵手２",2000,300,2100,0,0,10,Dxl1,false);
+	Wait(1000);
+	MusicStart("SE92",100,900,0,500,null,true);
+	MusicStart("SE05",200,700,0,1200,null,false);//♪
+	FadeFR("絵手１",0,1000,1000,0,0,15,Dxl2,false);
+	FadeFR("絵手２",500,600,1000,0,0,15,Dxl2,false);
+	Wait(500);
+	MusicStart("SE92",100,1100,0,500,null,true);
+	MusicStart("SE06",0,800,0,1300,null,false);
+	Fade("絵雷１", 0, 1000, null, false);
+	FadeFR("絵手１",0,1000,1000,0,0,30,Dxl2,false);
+	FadeFR("絵手２",500,600,1000,0,0,30,Dxl2,false);
+	Wait(500);
+	MusicStart("SE92",100,1300,0,500,null,true);
+	MusicStart("SE07",200,900,0,1400,null,false);//♪
+	FadeFR("絵手１",0,1000,1000,0,0,50,Dxl3,false);
+	FadeFR("絵手２",500,1000,1000,0,0,50,Dxl3,false);
+	Wait(500);
+
+	MusicStart("SE02",0,1000,0,1000,null,false);
+	MusicStart("SE82",0,700,0,800,null,false);
+	SetVolumeEX("SE92", 2000, 0, null);
+
+	Rotate("絵手*", 300, @0, @0, 40, null, false);
+	Zoom("絵手*", 300, 2000, 2000, Axl1, false);
+	Move("絵手*", 300, @-200, @0, Axl1, false);
+	Fade("絵色１", 300, 1000, null, true);
+
+//	WaitKey();
+
+	Fade("絵イベント２", 0, 1000, null, true);
+
+//	Move("絵イベント２", 500, -833, @0, Dxl2, true);
+
+	Move("絵窓１", 500, 0, 0, Dxl2, false);
+	Move("絵窓１/絵イベント１", 600, -459, -62, Dxl2, false);
+	Move("絵イベント２", 500, -1157, -450, Dxl2, false);
+	Wait(400);
+
+	MusicStart("SE83",200,1500,0,700,null,false);
+
+	Rotate("絵エフェクト１", 200, @0, @0, 0, null, false);
+	Zoom("絵エフェクト１", 200, 10000, 100, Axl3, false);
+
+	Fade("絵エフェクト１", 200, 1000, null, false);
+	Move("絵エフェクト１", 100, 865, 163, Dxl2, false);
+	Fade("絵窓１/絵イベント１", 500, 1000, null, false);
+	Wait(200);
+	Fade("絵エフェクト１", 200, 0, null, false);
+
+	WaitAction("絵窓１/絵イベント１", null);
+	WaitAction("絵エフェクト１", null);
+
+	SetVolumeEX("SE91", 2000, 0, null);
+
+//	WaitKey();
+	Wait(1000);
+	Delete("絵光*");
+	Delete("絵エフェクト*");
+	Delete("絵手*");
+	Delete("絵雷*");
+
+	Move("絵窓１/絵イベント１", 14000, -456, -174, null, false);
+	Move("絵イベント２", 14000, -1153, 76, null, false);
+//	Move("絵窓１/絵イベント１", 10000, -379, -385, null, false);
+//	Move("絵イベント２", 10000, -640, -13, null, false);
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200470a02">
+「너희는 다 이 잔을 마시라&. 이는 나의 계약의 피니라&.
+　많은 사람을 위하여&, 죄 사함을 얻게 하려고 흘리는 것이니라」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	CreateColorEX("絵色１", 3000, 000000);
+	Fade("絵色１", 2000, 1000, null, true);
+
+	CreateTextureEX("絵イベント３", 3000, Center, Middle, "cg/ev/ev0606スクルージヴォイド聖杯.jpg");
+	Request("絵イベント３", Smoothing);
+	Zoom("絵イベント３", 0, 1050, 1050, Dxl2, true);
+
+//	CreateColorSP("絵背景１", 2000, FFFFFF);
+	CreateTextureSP("絵背景１", 2000, 0, 0, "cg/ef/efイナゴ壁面.jpg");
+	InagoSet();
+	InagoFade();
+
+	CreateTextureEX("絵エフェクト", 3000, 0, 0, "cg/data/noize_01_00_0.png");
+	SetTone("絵エフェクト", Monochrome);
+	Request("絵エフェクト", SubRender);
+	Zoom("絵エフェクト", 0, 1200, 1200, Dxl2, true);
+
+	//★徒歩：ＳＥ
+	CreateSE("SE01","seヴォイド蝗01");
+	CreateSE("SE02","seヴォイド蝗01");
+	CreateSE("SE03","se擬音_効果_ノイズ01L");
+
+	MusicStart("SE01",1000,1000,0,1000,null,true);
+	Wait(500);
+	MusicStart("SE02",1000,1000,0,1000,null,true);//1500
+
+	Fade("絵エフェクト", 0, 40, null, false);
+	Shake("絵エフェクト", 1000000, 0, 50, 0, 50, 500, null, false);
+
+	Shake("InagoPro0*", 1000000, 5, 5, 5, 5, 1000, null, false);
+	Fade("絵色１", 1000, 0, null, true);
+	Wait(5000);
+//	WaitKey();
+
+	SetVolumeEX("@SE*", 500, 0, null);
+	MusicStart("SE03",300,1200,0,500,null,true);
+
+	Fade("絵エフェクト", 300, 1000, null, true);
+
+	SetVolumeEX("@SE*", 500, 0, null);
+
+	Fade("絵イベント３", 100, 1000, null, false);
+
+	Shake("絵イベント３", 500, 0, 1000, 0, 0, 500, Dxl1, false);
+
+	Zoom("絵イベント３", 500, 1000, 1000, Dxl2, false);
+	Fade("絵エフェクト", 500, 0, null, true);
+
+	Request("InagoPro_プロセス*", Stop);
+
+	Delete("Inago*");
+	Delete("絵背景１");
+	Delete("絵エフェクト");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+｡ｦ｡ｦｶﾇｴﾙ&.
+또 머릿속에서&, 날벌레들이 웅성거리고 있다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	Wait(16);
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//移動したイナゴ
+	CreateTextureEX("絵いなご１Ａ", 3000, 439, 5, "cg/ef/efイナゴ_a_02.png");
+	CreateTextureEX("絵いなご２羽", 3000, 123, -155, "cg/ef/efイナゴ_羽のみ.png");
+	CreateTextureEX("絵いなご２Ｃ", 3000, 123, -155, "cg/ef/efイナゴ02a.png");
+	CreateTextureEX("絵いなご２Ｄ", 3000, 123, -155, "cg/ef/efイナゴ01a.png");
+	CreateTextureEX("絵いなご２Ｅ", 3000, 123, -155, "cg/ef/efイナゴ03a.png");
+	CreateTextureEX("絵いなご２Ｆ", 3000, 123, -155, "cg/ef/efイナゴ01a_体のみ.png");
+	Rotate("絵いなご２*", 0, @0, @0, 10, null, true);
+	Request("絵いなご*", Smoothing);
+	Move("絵いなご*", 0, @0, @50, Axl1, true);
+
+		Move("絵いなご*", 0, -196, -309, Axl1, false);
+		Move("絵いなご１Ａ", 0, 371, 50, Axl1, false);
+		Zoom("絵いなご１Ａ", 0, 1428, 1428, Dxl2, true);
+
+	Move("絵いなご１Ａ", 0, @0, @500, Axl1, false);
+	Move("絵いなご２Ｆ", 0, @0, @500, Axl1, true);
+	Move("絵いなご２Ｇ", 0, @0, @500, Axl1, true);
+
+	CreateTextureEX("絵いなご３Ａ", 2999, 223, 0, "cg/ef/efイナゴ_a_01.png");
+	Request("絵いなご３*", Smoothing);
+	Rotate("絵いなご３Ａ", 0, @0, @180, @0, null, true);
+	Zoom("絵いなご３Ａ", 0, 700, 700, Dxl2, true);
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//聖杯から、無数の蝗に似た何かがあふれ出る。
+
+	SetVertex("絵イベント３", 388, 238);
+
+	Move("絵窓１/絵イベント１", 0, -434, -223, Dxl1, false);
+	Move("絵イベント２", 0, -1100, 83, Dxl1, true);
+//////////////////////////////////////////////////////////////////////
+
+
+	Zoom("絵イベント３", 2000, 3000, 3000, Axl3, false);
+	Wait(1500);
+
+	Fade("絵イベント３", 500, 0, null, false);
+
+	Move("絵窓１/絵イベント１", 1000, -656, @0, Dxl3, false);
+	Move("絵イベント２", 1000, -564, @0, Dxl3, true);
+	Wait(500);
+
+	Move("絵窓１/絵イベント１", 1000, -656, -355, Dxl1, false);
+	Move("絵イベント２", 1000, -564, -110, Dxl1, true);//-564, -183
+
+	Delete("絵窓１");
+
+//////////////////////////////////////////////////////////////////////
+	CreateTextureSP("絵イベント３", 4000, -564, -110, "cg/ev/x/ev0606スクルージヴォイド聖杯_聖杯のみ手前_x01.png");
+	CreateTextureEX("絵イベント４", 4000, -386, InBottom, "cg/ev/l/ev0606スクルージヴォイド聖杯_a_l.jpg");
+	CreateTextureEX("絵イベント５", 4000, -386, InBottom, "cg/ev/l/ev0606スクルージヴォイド聖杯_b_l.jpg");
+
+	CreateColorEX("絵色１", 10000, 000000);
+
+	CreateTextureEX("絵エフェクト", 4000, 0, 0, "cg/data/noize_01_00_0.png");
+	SetTone("絵エフェクト", Monochrome);
+	Request("絵エフェクト", SubRender);
+	Zoom("絵エフェクト", 0, 1200, 1200, Dxl2, true);
+
+//いなご移動
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+//	$SYSTEM_skip=false;
+
+
+
+
+	//★徒歩：ＳＥ
+	CreateSE("SE01","seヴォイド蝗一匹03");
+	CreateSE("SE02","seヴォイド蝗一匹02");
+	CreateSE("SE03","seヴォイド蝗一匹02");
+	CreateSE("SE04","seヴォイド蝗一匹04");
+
+	CreateSE("SE11","seヴォイド蝗一匹02");
+
+	CreateSE("SE91","seヴォイド蝗02L");
+
+
+	MusicStart("SE01",500,200,0,1000,null,true);//1500
+	Wait(2000);
+	MusicStart("SE01",2000,1500,0,1000,null,true);//1500
+	Wait(2000);
+
+	Fade("絵いなご１Ａ", 0, 1000, null, false);
+
+//	ShakeINS01_Set("@絵いなご１Ａ");
+//	ShakeINS01_Fade();
+	Move("絵いなご１Ａ", 200, @0, @-510, null, false);
+	Move("絵いなご２Ｆ", 200, @0, @-510, null, true);
+
+	MusicStart("SE01",0,2000,0,1000,null,true);//1800
+
+	Shake("絵いなご*", 100, 0, 2, 0, 2, 1000, null, false);
+	Move("絵いなご１Ａ", 40, @0, @10, null, false);
+	Move("絵いなご２Ｆ", 40, @0, @10, null, false);
+	Fade("絵いなご１Ａ", 40, 0, Axl3, false);
+	Fade("絵いなご２Ｆ", 40, 1000, Dxl2, false);
+	WaitAction("絵いなご２Ｆ", null);
+
+	SetVolumeEX("SE01", 100, 0, null);
+
+	Wait(1000);
+
+//		Fade("絵いなご１Ａ", 0, 1000, Axl3, false);
+//		Fade("絵いなご２Ｆ", 0, 500, Dxl2, false);
+//	WaitKey();
+
+	MusicStart("SE02",0,2000,0,1000,null,false);//2000
+
+	Fade("絵いなご２Ｆ", 0, 0, Axl3, false);
+	Fade("絵いなご１Ａ", 0, 0, Axl3, false);
+	Fade("絵いなご２Ｃ", 0, 1000, Dxl2, true);
+	Wait(16);
+	Fade("絵いなご２*", 0, 0, null, false);
+	Fade("絵いなご２Ｇ", 0, 1000, null, false);
+	Fade("絵いなご２Ｄ", 0, 1000, null, true);
+	Wait(16);
+	SetVolumeEX("SE02", 100, 0, null);
+	Fade("絵いなご２*", 0, 0, null, false);
+	Fade("絵いなご２Ｅ", 0, 1000, null, true);
+	Wait(100);
+
+	MusicStart("SE03",0,2000,0,1000,null,false);//2000
+
+	Fade("絵いなご２*", 0, 0, null, false);
+	Fade("絵いなご２Ｆ", 0, 1000, null, false);
+	Fade("絵いなご２羽", 0, 1000, null, false);
+	Shake("絵いなご２羽", 100, 0, 3, 0, 3, 1000, null, true);
+	SetVolumeEX("SE03", 100, 0, null);
+	Fade("絵いなご２*", 0, 0, null, false);
+	Fade("絵いなご２Ｄ", 0, 1000, null, true);
+	Wait(100);
+
+	MusicStart("SE11",0,1500,0,1000,null,false);//1500
+
+	Move("絵いなご３Ａ", 0, @100, @600, null, true);
+	Fade("絵いなご３Ａ", 0, 1000, null, false);
+	BezierMove("絵いなご３Ａ", 100, (@0,@0){@-100,@-500}{@-100,@-500}(@-100,@-500), Dxl1, false);
+
+	Fade("絵いなご２*", 50, 0, Axl3, false);
+	Fade("絵いなご２Ｅ", 50, 1000, Dxl2, true);
+
+	MusicStart("SE04",0,2000,0,1000,null,false);//2000
+
+	Fade("絵いなご２*", 0, 0, null, false);
+	Fade("絵いなご２Ｆ", 0, 1000, null, false);
+	Fade("絵いなご２羽", 0, 1000, null, false);
+	Shake("絵いなご２Ｆ", 5000, 0, 1, 0, 1, 1000, null, false);
+	Shake("絵いなご２羽", 5000, 0, 2, 0, 2, 1000, null, false);
+
+	WaitAction("絵いなご３Ａ", null);
+	SetVolumeEX("SE11", 100, 0, null);
+	Wait(1000);
+
+	SetVolumeEX("SE04", 2000, 0, null);
+	MusicStart("SE91",2000,1000,0,1000,null,true);
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0021]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200480a02">
+「받아 먹으라&, 이는 나의 살이니라」
+
+</PRE>
+	SetText();
+		BezierMove("絵いなご３Ａ", 150, (@0,@0){@-150,@-320}{@-150,@-320}(@-150,@-300), null, false);
+		Move("絵イベント４", 10000, @0, -200, null, false);
+		Move("絵イベント５", 10000, @0, -200, null, false);
+		Fade("絵イベント４", 1000, 1000, null, true);
+		FadePro("@絵イベント５", 2000, 1000, null, 1000);
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//	Wait(2000);
+	WaitAction("FadeProPro", null);
+	DustFade();
+
+	//★徒歩：ＳＥ
+	CreateSE("SE03","se擬音_効果_ノイズ01L");
+	MusicStart("SE03",300,1000,0,500,null,true);
+
+	SetVolumeEX("SE91", 2000, 0, null);
+
+	Fade("絵イベント５", 0, 1000, null, true);
+	Fade("絵イベント４", 0, 0, null, true);
+
+	Zoom("絵イベント５", 0, 1100, 1100, Dxl2, false);
+	Shake("絵イベント５", 1000, 0, 2, 0, 0, 1000, null, false);
+	Shake("絵エフェクト", 1000000, 0, 50, 0, 50, 1000, null, false);
+	Fade("絵エフェクト", 500, 1000, null, true);
+
+	Fade("絵色１", 300, 1000, null, true);
+
+////////////////////////////////////////////////////////////////////////////////////
+
+	CreateTextureEX("絵イベント０", 2000, 0, 0, "cg/ef/efイナゴ壁面.jpg");
+	InagoSet2();
+////////////////////////////////////////////////////////////////////////////////////
+
+	Delete("絵イベント５");
+	Delete("絵イベント４");
+
+	//★徒歩：ＳＥ
+	CreateSE("SE01","seヴォイド蝗02L");
+	CreateSE("SE02","seヴォイド蝗02L");
+	CreateSE("SE03","seヴォイド蝗03L");
+
+	SetVolumeEX("SE*", 1000, 0, null);
+
+	MusicStart("SE01",1000,1500,0,1000,null,true);//1200
+	MusicStart("SE02",1000,1500,0,1000,null,true);//1200
+	MusicStart("SE03",3000,1200,0,1000,null,true);//1200
+
+	SetShade("絵イベント３", MEDIUM);
+	Rotate("絵イベント３", 0, @0, @0, 40, null, false);
+//	Move("絵イベント３", 0, -664, 120, Axl1, false);
+		Move("絵イベント３", 0, -264, 20, Axl1, false);
+	Zoom("絵イベント３", 0, 2000, 2000, Dxl2, false);
+	Delete("絵いなご*");
+
+	//▼固定値ランダム
+	//MoveFFP1("@絵イベント*",10000);
+	//▼Ｘ軸ランダムＹ軸均等
+	//MoveFTP1("@絵イベント*",10000,3,3);
+
+	Shake("絵エフェクト", 10000000, 0, 50, 0, 50, 200, null, false);
+
+	Zoom("絵イベント０", 0, 1200, 1200, Dxl2, true);
+	Fade("絵イベント０", 0, 1000, null, true);
+
+	InagoFade();
+		Wait(500);
+	Shake("InagoPro0*", 10000000, 1000, 1000, 1000, 1000, 1000, null, false);
+
+		Shake("InagoPro0*", 10000000, 1, 1, 1, 1, 1000, null, false);
+		Move("絵イベント３", 2000, -664, 120, null, false);
+
+//	Fade("絵エフェクト", 1000, 500, null, false);
+//	Fade("絵色１", 400, 500, null, true);
+//	Fade("絵色１", 400, 800, null, true);
+
+		Fade("絵エフェクト", 2000, 500, null, false);
+		Fade("絵色１", 400, 500, null, true);
+		Fade("絵色１", 400, 800, null, true);
+		Fade("絵色１", 400, 300, null, true);
+		Fade("絵色１", 400, 600, null, true);
+
+		Fade("絵エフェクト", 1000, 150, null, false);
+
+//	Shake("InagoPro0*", 10000000, 1, 1, 1, 1, 1000, null, false);
+	Fade("絵色１", 400, 0, null, true);
+
+		WaitAction("絵イベント３", null);
+
+		//▼固定値ランダム
+		MoveFFP1("@絵イベント*",10000);
+
+	Wait(2000);
+
+	SetBacklog("내가, 좀먹혀 간다.", null, null);
+	$SYSTEM_last_text="내가, 좀먹혀 간다.";
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+내가&, {Wait(1000);}좀먹혀 간다&.
+
+</PRE>
+	SetText();
+	Request("@text0030", NoLog);
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Fade("絵色１", 100, 1000, null, true);
+
+	//▼固定値ランダム：停止
+	MoveFFP1stop();
+	//▼Ｘ軸ランダムＹ軸均等：停止
+	//MoveFTP1stop();
+
+	Delete("Inago*");
+	Delete("絵エフェクト");
+	Delete("絵イベント*");
+
+
+
+}//境界////////////////////////////////////////////////////////////////
+
+	//★徒歩：ＳＥ
+	CreateSE("SE04","seヴォイド蝗04L");
+//	CreateSE("SE05","seヴォイド蝗04L");
+//	CreateSE("SE06","seヴォイド蝗04L");
+
+	CreateSE("SE11","seヴォイド蝗一匹02");
+	CreateSE("SE12","seヴォイド蝗一匹02");
+	CreateSE("SE13","seヴォイド蝗一匹02");
+	CreateSE("SE14","seヴォイド蝗04L");
+	CreateSE("SE15","seヴォイド蝗04L");
+
+
+//蝗がプレゼントに殺到する。
+
+	CreateTextureEX("絵イベント１", 4000, Center, Middle, "cg/ev/x/ev0606スクルージヴォイド聖杯_c_x.jpg");
+	Request("絵イベント１", Smoothing);
+	SetBlur("絵イベント１", true, 2, 500, 200, false);
+	Fade("絵イベント１", 0, 1000, null, true);
+
+	CreateTextureEX("絵いなご３", 4000, -13, 481, "cg/ef/efイナゴ_a_02.png");
+	Zoom("絵いなご３", 0, 1900, 1900, Dxl2, true);
+	Rotate("絵いなご３", 0, @0, @0, -10, null, true);
+	Move("絵いなご３", 0, @0, @500, Axl1, true);
+
+	CreateTextureEX("絵いなご１", 4000, -242, 350, "cg/ef/efイナゴ_a_02.png");
+	Zoom("絵いなご１", 0, 2000, 2000, Dxl2, true);
+	Move("絵いなご１", 0, @0, @500, Axl1, true);
+
+	CreateTextureEX("絵いなご２", 4000, 900, 250, "cg/ef/efイナゴ_a_02.png");
+	Zoom("絵いなご２", 0, 3000, 3000, Dxl2, true);
+	Rotate("絵いなご２", 0, @0, @180, -20, null, true);
+	Move("絵いなご２", 0, @0, @500, Axl1, true);
+
+	CreateTextureEX("絵いなご５", 4000, -354, 81, "cg/ef/efイナゴ_a_02.png");
+	Zoom("絵いなご５", 0, 3500, 3500, Dxl2, true);
+	Rotate("絵いなご５", 0, @0, @0, 40, null, true);
+	Move("絵いなご５", 0, @0, @500, Axl1, true);
+
+	CreateTextureEX("絵いなご４", 4000, 200, 500, "cg/ef/efイナゴ_a_02.png");
+	Zoom("絵いなご４", 0, 4000, 4000, Dxl2, true);
+	Rotate("絵いなご４", 0, @0, @0, 0, null, true);
+	Move("絵いなご４", 0, @0, @800, Axl1, true);
+
+	Request("絵いなご*", Smoothing);
+
+	CreateTextureEX("絵イベント２", 4001, -207, -27, "cg/ev/l/ev0605イェット・トゥー・カムプレゼント殺し_l.jpg");
+	Request("絵イベント２", Smoothing);
+
+	CreateTextureEX("絵イベント０", 4001, -207, -27, "cg/ev/l/ev0605イェット・トゥー・カムプレゼント殺し_a_l.jpg");
+
+	CreateTextureEX("絵イベント３", 4001, Center, Middle, "cg/ev/ev0605イェット・トゥー・カムプレゼント殺し_a.jpg");
+
+	SetVolumeEX("SE01", 1000, 0, null);
+	SetVolumeEX("SE02", 1000, 0, null);
+	SetVolumeEX("SE03", 1000, 0, null);
+
+	MusicStart("SE04",1000,2000,0,1000,null,true);//2000
+//	MusicStart("SE05",1000,1500,0,1000,null,true);//2000
+//	MusicStart("SE06",1000,1500,0,1000,null,true);//2000
+
+//////////////////////////////////////////////////////////////////////////////////////
+		Fade("絵色１", 500, 0, null, false);
+
+		Shake("絵イベント１", 2700, 0, 20, 0, 20, 300, null, false);
+//		BezierMove("絵イベント１", 1000, (-1024,0){-1024,-576}{-1024,-576}(-824,-576){0,-576}{0,-576}(0,-476){0,0}{0,0}(-100,0){-512,-100}{-512,-100}(-512,-100), null, true);
+		BezierMove("絵イベント１", 3000, (-1536,-50){-3022,-50}{-3022,-50}(-3022,-150){-3022,-1678}{-3022,-1678}(-2922,-1678){-50,-1678}{-50,-1678}(-50,-1578){-50,-50}{-50,-50}(-150,-50){-1536,-150}{-1536,-150}(-1536,-300){-1536,-864}{-1536,-864}(-1536,-864), null, false);
+	Wait(2700);
+
+	Zoom("絵イベント１", 300, 250, 250, Dxl1, true);
+
+	MusicStart("SE11",0,2000,0,1000,null,false);
+
+	Shake("絵いなご１", 200, 0, 5, 0, 0, 500, Dxl1, false);
+	Fade("絵いなご１", 100, 1000, null, false);
+	Move("絵いなご１", 100, @0, @-500, null, false);
+	Wait(50);
+
+	MusicStart("SE12",0,2000,0,1000,null,false);
+
+	Shake("絵いなご２", 200, 0, 5, 0, 0, 500, Dxl1, false);
+	Fade("絵いなご２", 100, 1000, null, false);
+	Move("絵いなご２", 100, @0, @-500, null, false);
+	Wait(50);
+
+	MusicStart("SE13",0,2000,0,1000,null,false);
+
+	Shake("絵いなご３", 200, 0, 5, 0, 0, 500, Dxl1, false);
+	Fade("絵いなご３", 100, 1000, null, false);
+	Move("絵いなご３", 100, @0, @-500, null, false);
+	Wait(16);
+
+	MusicStart("SE14",0,2000,0,1000,null,false);
+
+	Shake("絵いなご５", 200, 0, 5, 0, 0, 500, Dxl1, false);
+	Fade("絵いなご５", 100, 1000, null, false);
+	Move("絵いなご５", 100, @0, @-500, null, false);
+	Wait(16);
+
+	MusicStart("SE15",0,2000,0,1000,null,false);
+
+	Shake("絵いなご４", 200, 0, 5, 0, 0, 500, Dxl1, false);
+	Fade("絵いなご４", 100, 1000, null, true);
+	Move("絵いなご４", 100, @0, @-800, null, false);
+
+	WaitAction("絵いなご４", null);
+
+	CreatePlainSP("絵演出１", 4000);
+	Request("絵演出１", Smoothing);
+
+//	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0031]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200490a03">
+｡ｸｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆ!｡ｹ
+
+</PRE>
+	SetText();
+
+	SetVolumeEX("SE*", 4000, 0, null);
+
+	Zoom("絵演出１", 300, 4000, 4000, Dxl2, false);
+	Fade("絵色１", 300, 1000, null, false);
+
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	SetVolumeEX("@lx*", 3000, 0, null);
+
+	Wait(4000);
+
+//生きながら蝗に貪り食われるプレゼント。
+
+	//★徒歩：ＳＥ
+	CreateSE("SE01","se自然_虫01");
+	CreateSE("SE11","seヴォイド蝗02L");
+
+	MusicStart("SE01",3000,500,0,800,null,true);
+	MusicStart("SE11",3000,500,0,1000,null,true);
+
+
+	//SetVolumeEX("@SE*", 1000, 0, null);
+
+//	Fade("絵イベント２", 300, 1000, null, true);
+	Delete("絵イベント１");
+	Delete("絵いなご*");
+
+//	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200500a03">
+「어째서…… 난 그저&, 이번에야말로……」
+
+//（虫の息）
+
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200510a02">
+｡ｸｹｫﾀﾇｹﾌﾇﾘ&, ﾇﾁｷｹﾁｨﾆｮ｡ｹ
+
+//	Fw("fwキャロル_通常_normal");
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX06/0200520a02">
+「――너는 미래에게 선택받지 못했어」
+
+</PRE>
+	SetText();
+
+		Move("絵イベント０", 30000, -775, -136, null, false);
+		Move("絵イベント２", 30000, -775, -136, null, false);
+		Fade("絵イベント２", 0, 1000, null, false);
+		Fade("絵色１", 2000, 0, null, false);
+
+		Wait(2000);
+
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	Wait(2000);
+	Fade("絵イベント０", 2000, 1000, null, true);
+	Wait(2000);
+	Fade("絵イベント３", 2000, 1000, null, true);
+
+	Delete("絵イベント１");
+	Delete("絵イベント２");
+	Delete("絵イベント９");
+	Wait(1000);
+
+//	Fw("fwプレゼント_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX06/0200530a03">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ
+
+//（あきらめ。静かな絶望）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//？？：地の文ペンディング
+//状況のスプラッターさとは裏腹に、切なく演出。
+	Wait(16);
+
+	CreateTextureEX("絵いなご１", 5000, 2800, 2000, "cg/ef/efイナゴ_群れ01.png");
+	CreateTextureEX("絵いなご２", 5000, 2800, 2000, "cg/ef/efイナゴ_群れ01.png");
+	Zoom("絵いなご*", 0, 4000, 4000, Dxl2, true);
+	Rotate("絵いなご*", 0, @0, @0, 40, null, true);
+
+//	SetBlur("絵いなご*", true, 1, 500, 50, false);
+
+	CreateTextureEX("絵イナゴ１", 5000, 2800, -2000, "cg/ef/efイナゴ_群れ01.png");
+	CreateTextureEX("絵イナゴ２", 5000, 2800, -2000, "cg/ef/efイナゴ_群れ01.png");
+	Zoom("絵イナゴ*", 0, 4000, 4000, Dxl2, true);
+	Rotate("絵イナゴ*", 0, @0, @0, -40, null, true);
+
+//	SetBlur("絵イナゴ*", true, 1, 500, 50, false);
+
+	CreateTextureEX("絵イベント４", 4001, -625, -93, "cg/ev/l/ev0605イェット・トゥー・カムプレゼント殺し_a_l.jpg");
+//	Zoom("絵イベント４", 0, 2000, 2000, Dxl2, true);
+	SetBlur("絵イベント４", true, 2, 300, 50, false);
+
+	CreateTextureEX("絵イベント５", 4001, -1115, 233, "cg/ev/l/ev0605イェット・トゥー・カムプレゼント殺し_a_l.jpg");
+	Zoom("絵イベント５", 0, 2000, 2000, Dxl2, true);
+	SetBlur("絵イベント５", true, 2, 300, 50, false);
+
+	CreateColorEX("絵色１", 10000, BLACK);
+
+	CreatePlainSP("上背景", 10000);
+//////////////////////////////////////////////////////////////////////
+	//★徒歩：ＳＥ
+	CreateSE("SE02","seヴォイド蝗03L");
+	MusicStart("SE02",500,1500,0,1000,null,true);//500
+
+	SetVolumeEX("SE01", 500, 0, null);
+	SetVolumeEX("SE11", 500, 0, null);
+
+	Fade("絵イベント４", 0, 1000, null, true);
+
+	Shake("絵イベント４", 10000, 0, 3, 0, 3, 1000, null, false);
+	FadeFR4("絵イベント４",0,1000,5000,0,0,20,null, false);
+
+	//▼スクロール
+	CreateSCM1("@絵いなご１","@絵いなご２",500,@-6000,@-4000);
+
+
+	FadeDelete("上背景", 1000, null, true);
+
+	Wait(2000);
+//	WaitKey();
+
+//////////////////////////////////////////////////////////////////////
+	//★徒歩：ＳＥ
+	CreateSE("SE03","seヴォイド蝗04L");
+	MusicStart("SE03",100,2000,0,1000,null,true);
+
+	Fade("絵イベント５", 0, 1000, null, true);
+	Delete("絵イベント４");
+//	Move("絵イベント４", 0, -1115, 233, null, false);
+//	Zoom("絵イベント４", 0, 2000, 2000, null, true);
+
+	FadeFR4("絵イベント５",0,1000,5000,0,0,50,null, false);
+//	FadeFR4("絵イベント４",0,1000,5000,0,0,50,null, false);
+
+	//▼スクロール
+	//CreateSCR2("@絵イナゴ１","@絵イナゴ２",600,@-6000,@-4000);
+	CreateSCM2("@絵イナゴ１","@絵イナゴ２",300,@-6000,@4000);
+
+	Wait(1000);
+//	WaitKey();
+
+//////////////////////////////////////////////////////////////////////
+	SetVolumeEX("SE*", 100, 0, null);
+	Fade("絵色１", 100, 1000, null, true);
+
+	//▼スクロール停止
+	SCM1stop();
+	//▼スクロール停止
+	SCM2stop();
+
+//	WaitKey();
+
+	Wait(2000);
+
+
+
+	ClearFadeAll(3000, true);
+
+}

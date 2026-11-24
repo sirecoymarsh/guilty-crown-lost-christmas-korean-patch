@@ -1,0 +1,141 @@
+[
+ {
+  "run": "bl0550_native_1",
+  "mode": "native",
+  "csv_time_column": "frames.bin",
+  "presents": 5952,
+  "events": 20,
+  "reading_95_105s": {
+   "frames": 599,
+   "fps": 59.9,
+   "first_present_ms": 8,
+   "max_gap_ms": 74,
+   "gaps_over_50": 3,
+   "gaps_over_100": 0,
+   "stall_ms_over_50": 197
+  },
+  "open_first_wheel_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "scroll_wheels_2_10": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "close_wheel_down_8s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "reopen_4s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "click_jump_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "exited_early": null,
+  "dialogs": []
+ },
+ {
+  "run": "bl0550_4k_2",
+  "mode": "4k",
+  "csv_time_column": "frames.bin",
+  "presents": 12288,
+  "events": 20,
+  "reading_95_105s": {
+   "frames": 851,
+   "fps": 85.1,
+   "first_present_ms": 1,
+   "max_gap_ms": 82,
+   "gaps_over_50": 5,
+   "gaps_over_100": 0,
+   "stall_ms_over_50": 359
+  },
+  "open_first_wheel_6s": {
+   "frames": 33,
+   "fps": 5.5,
+   "first_present_ms": 3,
+   "max_gap_ms": 999,
+   "gaps_over_50": 7,
+   "gaps_over_100": 7,
+   "stall_ms_over_50": 4750
+  },
+  "scroll_wheels_2_10": {
+   "frames": 14,
+   "fps": 2.2,
+   "first_present_ms": 48,
+   "max_gap_ms": 999,
+   "gaps_over_50": 7,
+   "gaps_over_100": 6,
+   "stall_ms_over_50": 5034
+  },
+  "close_wheel_down_8s": {
+   "frames": 166,
+   "fps": 20.0,
+   "first_present_ms": 42,
+   "max_gap_ms": 1023,
+   "gaps_over_50": 8,
+   "gaps_over_100": 7,
+   "stall_ms_over_50": 6194
+  },
+  "reopen_4s": {
+   "frames": 25,
+   "fps": 6.2,
+   "first_present_ms": 2,
+   "max_gap_ms": 813,
+   "gaps_over_50": 3,
+   "gaps_over_100": 2,
+   "stall_ms_over_50": 1548
+  },
+  "click_jump_6s": {
+   "frames": 392,
+   "fps": 65.3,
+   "first_present_ms": 888,
+   "max_gap_ms": 33,
+   "gaps_over_50": 0,
+   "gaps_over_100": 0,
+   "stall_ms_over_50": 0
+  },
+  "exited_early": null,
+  "dialogs": []
+ },
+ {
+  "run": "bl0550_native_3",
+  "mode": "native",
+  "csv_time_column": "frames.bin",
+  "presents": 5920,
+  "events": 20,
+  "reading_95_105s": {
+   "frames": 594,
+   "fps": 59.4,
+   "first_present_ms": 14,
+   "max_gap_ms": 121,
+   "gaps_over_50": 4,
+   "gaps_over_100": 1,
+   "stall_ms_over_50": 318
+  },
+  "open_first_wheel_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "scroll_wheels_2_10": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "close_wheel_down_8s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "reopen_4s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "click_jump_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "exited_early": null,
+  "dialogs": []
+ }
+]

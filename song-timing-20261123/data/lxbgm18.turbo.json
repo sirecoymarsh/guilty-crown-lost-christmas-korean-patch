@@ -1,0 +1,1051 @@
+{
+  "source": "user game sound.npa",
+  "audio_sha256": "8d60df2b3dee8ffd6083eb78082269a73c6228f3860e57260a30e3621684c1b9",
+  "model": "P:\\AI\\Codex\\projects\\fatal-twelve-ko\\opening_localization_20261002\\tools\\model_cache\\models--mobiuslabsgmbh--faster-whisper-large-v3-turbo\\snapshots\\0a363e9161cbc7ed1431c9597a8ceaf0c4f78fcf",
+  "language": "de",
+  "task": "transcribe",
+  "duration": 155.5866875,
+  "segments": [
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 1.2400000000000024,
+      "end": 15.34,
+      "text": " Einer hast du dich, du, einer hast du dich, du, all der Wohl, der du mir gewöhnt hast.",
+      "tokens": [
+        50365,
+        462,
+        4564,
+        6581,
+        1581,
+        10390,
+        11,
+        1581,
+        11,
+        308,
+        4564,
+        6581,
+        1581,
+        10390,
+        11,
+        1581,
+        11,
+        439,
+        1163,
+        343,
+        12768,
+        11,
+        1163,
+        1581,
+        3149,
+        6906,
+        23817,
+        580,
+        6581,
+        13,
+        51133
+      ],
+      "avg_logprob": -0.2774784441651969,
+      "compression_ratio": 2.0,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 1.2400000000000024,
+          "end": 2.36,
+          "word": " Einer",
+          "probability": 0.60888671875
+        },
+        {
+          "start": 2.36,
+          "end": 3.1,
+          "word": " hast",
+          "probability": 0.1798095703125
+        },
+        {
+          "start": 3.1,
+          "end": 3.54,
+          "word": " du",
+          "probability": 0.88330078125
+        },
+        {
+          "start": 3.54,
+          "end": 4.3,
+          "word": " dich,",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 4.42,
+          "end": 4.68,
+          "word": " du,",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 4.84,
+          "end": 5.88,
+          "word": " einer",
+          "probability": 0.6717529296875
+        },
+        {
+          "start": 5.88,
+          "end": 6.68,
+          "word": " hast",
+          "probability": 0.998046875
+        },
+        {
+          "start": 6.68,
+          "end": 7.0,
+          "word": " du",
+          "probability": 1.0
+        },
+        {
+          "start": 7.0,
+          "end": 7.46,
+          "word": " dich,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 7.62,
+          "end": 7.94,
+          "word": " du,",
+          "probability": 0.9970703125
+        },
+        {
+          "start": 8.62,
+          "end": 9.42,
+          "word": " all",
+          "probability": 0.5908203125
+        },
+        {
+          "start": 9.42,
+          "end": 9.84,
+          "word": " der",
+          "probability": 0.215576171875
+        },
+        {
+          "start": 9.84,
+          "end": 11.14,
+          "word": " Wohl,",
+          "probability": 0.89599609375
+        },
+        {
+          "start": 11.3,
+          "end": 11.54,
+          "word": " der",
+          "probability": 0.92333984375
+        },
+        {
+          "start": 11.54,
+          "end": 11.94,
+          "word": " du",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 11.94,
+          "end": 12.94,
+          "word": " mir",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 12.94,
+          "end": 14.8,
+          "word": " gewöhnt",
+          "probability": 0.7173258463541666
+        },
+        {
+          "start": 14.8,
+          "end": 15.34,
+          "word": " hast.",
+          "probability": 0.99609375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 15.68,
+      "end": 27.88,
+      "text": " Einer hast du dich, du, einer hast du dich, du, all dem Tandem du mir.",
+      "tokens": [
+        51133,
+        462,
+        4564,
+        6581,
+        1581,
+        10390,
+        11,
+        1581,
+        11,
+        308,
+        4564,
+        6581,
+        1581,
+        10390,
+        11,
+        1581,
+        11,
+        439,
+        1371,
+        314,
+        474,
+        443,
+        1581,
+        3149,
+        13,
+        51817
+      ],
+      "avg_logprob": -0.2774784441651969,
+      "compression_ratio": 2.0,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 15.68,
+          "end": 16.8,
+          "word": " Einer",
+          "probability": 0.997802734375
+        },
+        {
+          "start": 16.8,
+          "end": 17.62,
+          "word": " hast",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 17.62,
+          "end": 18.2,
+          "word": " du",
+          "probability": 1.0
+        },
+        {
+          "start": 18.2,
+          "end": 18.82,
+          "word": " dich,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 19.0,
+          "end": 19.14,
+          "word": " du,",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 19.3,
+          "end": 20.44,
+          "word": " einer",
+          "probability": 0.9912109375
+        },
+        {
+          "start": 20.44,
+          "end": 21.22,
+          "word": " hast",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 21.22,
+          "end": 21.6,
+          "word": " du",
+          "probability": 1.0
+        },
+        {
+          "start": 21.6,
+          "end": 22.0,
+          "word": " dich,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 22.18,
+          "end": 22.46,
+          "word": " du,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 23.02,
+          "end": 23.98,
+          "word": " all",
+          "probability": 0.98583984375
+        },
+        {
+          "start": 23.98,
+          "end": 24.8,
+          "word": " dem",
+          "probability": 0.473876953125
+        },
+        {
+          "start": 24.8,
+          "end": 26.56,
+          "word": " Tandem",
+          "probability": 0.7184244791666666
+        },
+        {
+          "start": 26.56,
+          "end": 27.12,
+          "word": " du",
+          "probability": 0.63623046875
+        },
+        {
+          "start": 27.12,
+          "end": 27.88,
+          "word": " mir.",
+          "probability": 0.9853515625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 3,
+      "seek": 3000,
+      "start": 30.0,
+      "end": 36.68,
+      "text": " Der Ruin und Stad ist immer noch schön",
+      "tokens": [
+        50365,
+        5618,
+        497,
+        9445,
+        674,
+        745,
+        345,
+        1418,
+        5578,
+        3514,
+        13527,
+        50733
+      ],
+      "avg_logprob": -0.8433035578046526,
+      "compression_ratio": 1.1578947368421053,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 30.0,
+          "end": 31.02,
+          "word": " Der",
+          "probability": 0.1295166015625
+        },
+        {
+          "start": 31.02,
+          "end": 31.66,
+          "word": " Ruin",
+          "probability": 0.41229248046875
+        },
+        {
+          "start": 31.66,
+          "end": 31.96,
+          "word": " und",
+          "probability": 0.3740234375
+        },
+        {
+          "start": 31.96,
+          "end": 32.5,
+          "word": " Stad",
+          "probability": 0.30145263671875
+        },
+        {
+          "start": 32.5,
+          "end": 33.52,
+          "word": " ist",
+          "probability": 0.9384765625
+        },
+        {
+          "start": 33.52,
+          "end": 34.9,
+          "word": " immer",
+          "probability": 0.7705078125
+        },
+        {
+          "start": 34.9,
+          "end": 35.66,
+          "word": " noch",
+          "probability": 0.91015625
+        },
+        {
+          "start": 35.66,
+          "end": 36.68,
+          "word": " schön",
+          "probability": 0.2183837890625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 4,
+      "seek": 3000,
+      "start": 37.36,
+      "end": 44.76,
+      "text": " If out and long side out I need you care",
+      "tokens": [
+        50733,
+        759,
+        484,
+        293,
+        938,
+        1252,
+        484,
+        286,
+        643,
+        291,
+        1127,
+        51175
+      ],
+      "avg_logprob": -0.8433035578046526,
+      "compression_ratio": 1.1578947368421053,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 37.36,
+          "end": 38.5,
+          "word": " If",
+          "probability": 0.11358642578125
+        },
+        {
+          "start": 38.5,
+          "end": 38.92,
+          "word": " out",
+          "probability": 0.29345703125
+        },
+        {
+          "start": 38.92,
+          "end": 39.2,
+          "word": " and",
+          "probability": 0.412353515625
+        },
+        {
+          "start": 39.2,
+          "end": 39.98,
+          "word": " long",
+          "probability": 0.60400390625
+        },
+        {
+          "start": 39.98,
+          "end": 40.78,
+          "word": " side",
+          "probability": 0.260009765625
+        },
+        {
+          "start": 40.78,
+          "end": 41.88,
+          "word": " out",
+          "probability": 0.381103515625
+        },
+        {
+          "start": 41.88,
+          "end": 42.36,
+          "word": " I",
+          "probability": 0.90771484375
+        },
+        {
+          "start": 42.36,
+          "end": 42.88,
+          "word": " need",
+          "probability": 0.2169189453125
+        },
+        {
+          "start": 42.88,
+          "end": 43.94,
+          "word": " you",
+          "probability": 0.7275390625
+        },
+        {
+          "start": 43.94,
+          "end": 44.76,
+          "word": " care",
+          "probability": 0.74462890625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 5,
+      "seek": 3000,
+      "start": 46.2,
+      "end": 53.08,
+      "text": " In the heart I forget my need",
+      "tokens": [
+        51175,
+        682,
+        264,
+        1917,
+        286,
+        2870,
+        452,
+        643,
+        51615
+      ],
+      "avg_logprob": -0.8433035578046526,
+      "compression_ratio": 1.1578947368421053,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 46.2,
+          "end": 47.46,
+          "word": " In",
+          "probability": 0.90673828125
+        },
+        {
+          "start": 47.46,
+          "end": 47.86,
+          "word": " the",
+          "probability": 0.81494140625
+        },
+        {
+          "start": 47.86,
+          "end": 48.54,
+          "word": " heart",
+          "probability": 0.9228515625
+        },
+        {
+          "start": 48.54,
+          "end": 50.58,
+          "word": " I",
+          "probability": 0.87841796875
+        },
+        {
+          "start": 50.58,
+          "end": 51.24,
+          "word": " forget",
+          "probability": 0.483154296875
+        },
+        {
+          "start": 51.24,
+          "end": 52.02,
+          "word": " my",
+          "probability": 0.86376953125
+        },
+        {
+          "start": 52.02,
+          "end": 53.08,
+          "word": " need",
+          "probability": 0.736328125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 6,
+      "seek": 5308,
+      "start": 58.42,
+      "end": 64.8,
+      "text": " Lege trophies in my tränet",
+      "tokens": [
+        50365,
+        1456,
+        432,
+        45583,
+        530,
+        294,
+        452,
+        504,
+        4029,
+        302,
+        50952
+      ],
+      "avg_logprob": -1.0214286191122872,
+      "compression_ratio": 1.04,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 58.42,
+          "end": 59.82,
+          "word": " Lege",
+          "probability": 0.22214508056640625
+        },
+        {
+          "start": 59.82,
+          "end": 61.22,
+          "word": " trophies",
+          "probability": 0.4423828125
+        },
+        {
+          "start": 61.22,
+          "end": 61.82,
+          "word": " in",
+          "probability": 0.83203125
+        },
+        {
+          "start": 61.82,
+          "end": 62.5,
+          "word": " my",
+          "probability": 0.5771484375
+        },
+        {
+          "start": 62.5,
+          "end": 64.8,
+          "word": " tränet",
+          "probability": 0.2627156575520833
+        }
+      ],
+      "temperature": 1.0
+    },
+    {
+      "id": 7,
+      "seek": 5308,
+      "start": 64.8,
+      "end": 72.06,
+      "text": " Veersma de umma et alun",
+      "tokens": [
+        50952,
+        9706,
+        433,
+        1696,
+        368,
+        1105,
+        1696,
+        1030,
+        419,
+        409,
+        51341
+      ],
+      "avg_logprob": -1.0214286191122872,
+      "compression_ratio": 1.04,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 64.8,
+          "end": 67.16,
+          "word": " Veersma",
+          "probability": 0.16945393880208334
+        },
+        {
+          "start": 67.16,
+          "end": 68.94,
+          "word": " de",
+          "probability": 0.4013671875
+        },
+        {
+          "start": 68.94,
+          "end": 70.3,
+          "word": " umma",
+          "probability": 0.400634765625
+        },
+        {
+          "start": 70.3,
+          "end": 70.78,
+          "word": " et",
+          "probability": 0.5771484375
+        },
+        {
+          "start": 70.78,
+          "end": 72.06,
+          "word": " alun",
+          "probability": 0.2554931640625
+        }
+      ],
+      "temperature": 1.0
+    },
+    {
+      "id": 8,
+      "seek": 5308,
+      "start": 72.6,
+      "end": 77.6,
+      "text": " Spurgen brettes in my name",
+      "tokens": [
+        51341,
+        1738,
+        374,
+        1766,
+        1403,
+        6319,
+        279,
+        294,
+        452,
+        1315,
+        51623
+      ],
+      "avg_logprob": -1.0214286191122872,
+      "compression_ratio": 1.04,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 72.6,
+          "end": 74.44,
+          "word": " Spurgen",
+          "probability": 0.3572591145833333
+        },
+        {
+          "start": 74.44,
+          "end": 75.72,
+          "word": " brettes",
+          "probability": 0.5411783854166666
+        },
+        {
+          "start": 75.72,
+          "end": 76.28,
+          "word": " in",
+          "probability": 0.9716796875
+        },
+        {
+          "start": 76.28,
+          "end": 76.98,
+          "word": " my",
+          "probability": 0.703125
+        },
+        {
+          "start": 76.98,
+          "end": 77.6,
+          "word": " name",
+          "probability": 0.1669921875
+        }
+      ],
+      "temperature": 1.0
+    },
+    {
+      "id": 9,
+      "seek": 7760,
+      "start": 77.6,
+      "end": 85.72,
+      "text": " Denn mein Kaltbrei ist im Wurzell gejuckt.",
+      "tokens": [
+        50365,
+        19027,
+        10777,
+        591,
+        3198,
+        2672,
+        72,
+        1418,
+        566,
+        343,
+        374,
+        89,
+        898,
+        1519,
+        73,
+        47800,
+        13,
+        50765
+      ],
+      "avg_logprob": -0.7278963414634146,
+      "compression_ratio": 1.08,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 77.6,
+          "end": 80.0,
+          "word": " Denn",
+          "probability": 0.0204315185546875
+        },
+        {
+          "start": 80.0,
+          "end": 81.16,
+          "word": " mein",
+          "probability": 0.92333984375
+        },
+        {
+          "start": 81.16,
+          "end": 82.26,
+          "word": " Kaltbrei",
+          "probability": 0.36114501953125
+        },
+        {
+          "start": 82.26,
+          "end": 82.58,
+          "word": " ist",
+          "probability": 0.9462890625
+        },
+        {
+          "start": 82.58,
+          "end": 82.96,
+          "word": " im",
+          "probability": 0.3916015625
+        },
+        {
+          "start": 82.96,
+          "end": 84.26,
+          "word": " Wurzell",
+          "probability": 0.645751953125
+        },
+        {
+          "start": 84.26,
+          "end": 85.72,
+          "word": " gejuckt.",
+          "probability": 0.4890950520833333
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 10,
+      "seek": 7760,
+      "start": 86.66,
+      "end": 93.4,
+      "text": " Wenn die Jahreszeit etter ein Gott,",
+      "tokens": [
+        50841,
+        7899,
+        978,
+        44360,
+        13712,
+        1030,
+        391,
+        1343,
+        19133,
+        11,
+        51165
+      ],
+      "avg_logprob": -0.7278963414634146,
+      "compression_ratio": 1.08,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 86.66,
+          "end": 87.7,
+          "word": " Wenn",
+          "probability": 0.77490234375
+        },
+        {
+          "start": 87.7,
+          "end": 88.34,
+          "word": " die",
+          "probability": 0.61962890625
+        },
+        {
+          "start": 88.34,
+          "end": 90.9,
+          "word": " Jahreszeit",
+          "probability": 0.6513671875
+        },
+        {
+          "start": 90.9,
+          "end": 92.06,
+          "word": " etter",
+          "probability": 0.23480224609375
+        },
+        {
+          "start": 92.06,
+          "end": 92.74,
+          "word": " ein",
+          "probability": 0.27099609375
+        },
+        {
+          "start": 92.74,
+          "end": 93.4,
+          "word": " Gott,",
+          "probability": 0.483154296875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 11,
+      "seek": 7760,
+      "start": 94.52,
+      "end": 101.64,
+      "text": " wurde ich für uns geheiligt.",
+      "tokens": [
+        51231,
+        11191,
+        1893,
+        2959,
+        2693,
+        34252,
+        388,
+        5828,
+        13,
+        51565
+      ],
+      "avg_logprob": -0.7278963414634146,
+      "compression_ratio": 1.08,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 94.52,
+          "end": 95.38,
+          "word": " wurde",
+          "probability": 0.459716796875
+        },
+        {
+          "start": 95.38,
+          "end": 96.54,
+          "word": " ich",
+          "probability": 0.94140625
+        },
+        {
+          "start": 96.54,
+          "end": 97.2,
+          "word": " für",
+          "probability": 0.52587890625
+        },
+        {
+          "start": 97.2,
+          "end": 98.36,
+          "word": " uns",
+          "probability": 0.96337890625
+        },
+        {
+          "start": 98.36,
+          "end": 101.64,
+          "word": " geheiligt.",
+          "probability": 0.8260091145833334
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 12,
+      "seek": 10164,
+      "start": 101.64,
+      "end": 111.98,
+      "text": " Das, vergiss mein Lied, das du mir gegeben hast.",
+      "tokens": [
+        50365,
+        2846,
+        11,
+        20209,
+        891,
+        10777,
+        441,
+        1091,
+        11,
+        1482,
+        1581,
+        3149,
+        32572,
+        6581,
+        13,
+        50914
+      ],
+      "avg_logprob": -0.4774305323759715,
+      "compression_ratio": 0.8571428571428571,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 101.64,
+          "end": 103.7,
+          "word": " Das,",
+          "probability": 0.5556640625
+        },
+        {
+          "start": 103.7,
+          "end": 106.1,
+          "word": " vergiss",
+          "probability": 0.907958984375
+        },
+        {
+          "start": 106.1,
+          "end": 106.66,
+          "word": " mein",
+          "probability": 0.88232421875
+        },
+        {
+          "start": 106.66,
+          "end": 107.56,
+          "word": " Lied,",
+          "probability": 0.6558837890625
+        },
+        {
+          "start": 107.74,
+          "end": 108.38,
+          "word": " das",
+          "probability": 0.9599609375
+        },
+        {
+          "start": 108.38,
+          "end": 108.9,
+          "word": " du",
+          "probability": 0.90478515625
+        },
+        {
+          "start": 108.9,
+          "end": 109.76,
+          "word": " mir",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 109.76,
+          "end": 110.84,
+          "word": " gegeben",
+          "probability": 0.99609375
+        },
+        {
+          "start": 110.84,
+          "end": 111.98,
+          "word": " hast.",
+          "probability": 0.97265625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 13,
+      "seek": 11198,
+      "start": 111.98,
+      "end": 113.88,
+      "text": " You see",
+      "tokens": [
+        50365,
+        509,
+        536,
+        50465
+      ],
+      "avg_logprob": -0.8671875,
+      "compression_ratio": 0.4666666666666667,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 111.98,
+          "end": 113.28,
+          "word": " You",
+          "probability": 0.382080078125
+        },
+        {
+          "start": 113.28,
+          "end": 113.88,
+          "word": " see",
+          "probability": 0.96044921875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 14,
+      "seek": 15366,
+      "start": 154.22,
+      "end": 155.44,
+      "text": " Untertitelung des ZDF, 2020",
+      "tokens": [
+        50365,
+        12065,
+        27689,
+        338,
+        1063,
+        730,
+        1176,
+        35,
+        37,
+        11,
+        4808,
+        51864
+      ],
+      "avg_logprob": -0.25315505724686843,
+      "compression_ratio": 0.7714285714285715,
+      "no_speech_prob": 0.0,
+      "words": [
+        {
+          "start": 154.22,
+          "end": 154.62,
+          "word": " Untertitelung",
+          "probability": 0.7600250244140625
+        },
+        {
+          "start": 154.62,
+          "end": 154.64,
+          "word": " des",
+          "probability": 0.65869140625
+        },
+        {
+          "start": 154.64,
+          "end": 154.84,
+          "word": " ZDF,",
+          "probability": 0.9973958333333334
+        },
+        {
+          "start": 155.42,
+          "end": 155.44,
+          "word": " 2020",
+          "probability": 0.95263671875
+        }
+      ],
+      "temperature": 0.0
+    }
+  ],
+  "seconds": 2.977435350418091
+}

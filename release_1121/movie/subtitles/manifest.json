@@ -1,0 +1,451 @@
+{
+  "translator_model": "Codex internal",
+  "task_id": "01a17184-40ba-7560-bf68-d476ecda30a7",
+  "source_video_sha256": "b34d87e3c680c11237e7cfa9040d5bab2f2b636eb97599d0bc4ff4ff5f0b2100",
+  "fps": [
+    30000,
+    1001
+  ],
+  "source_frames": 1858,
+  "utterances": 16,
+  "cues": [
+    {
+      "id": "01",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L91"
+      ],
+      "speaker": "캐롤",
+      "text": "세피라 게노믹스.",
+      "layout": "세피라 게노믹스.",
+      "first_frame": 80,
+      "last_frame": 138,
+      "start": 2.6693333333333333,
+      "end": 4.637966666666666,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\01.png",
+      "ink_bbox": [
+        1449,
+        1920,
+        2384,
+        2060
+      ],
+      "sha256": "fefe39e7db41f9dddf289e00c75e8da4e2ea40747b4017dba606dfc8e97f427d"
+    },
+    {
+      "id": "02",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L96"
+      ],
+      "speaker": "스크루지",
+      "text": "그게 놈들 이름인가.",
+      "layout": "그게 놈들 이름인가.",
+      "first_frame": 141,
+      "last_frame": 197,
+      "start": 4.7047,
+      "end": 6.6066,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\02.png",
+      "ink_bbox": [
+        1375,
+        1920,
+        2461,
+        2060
+      ],
+      "sha256": "3289848f2e3cce977094034669d093b17061a51dcf004c4c333854a77f8165fa"
+    },
+    {
+      "id": "03",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L101"
+      ],
+      "speaker": "캐롤",
+      "text": "제약 회사 같은 거라고 생각하면 돼.",
+      "layout": "제약 회사 같은 거라고 생각하면 돼.",
+      "first_frame": 200,
+      "last_frame": 293,
+      "start": 6.673333333333333,
+      "end": 9.8098,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\03.png",
+      "ink_bbox": [
+        958,
+        1920,
+        2875,
+        2060
+      ],
+      "sha256": "ed6ceb138bfd7277d13cfd727cca2a415c26317cc1614dd5e5c50cf8bc192f5a"
+    },
+    {
+      "id": "04",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L106"
+      ],
+      "speaker": "스크루지",
+      "text": "겉으로만 그렇겠지?",
+      "layout": "겉으로만 그렇겠지?",
+      "first_frame": 298,
+      "last_frame": 360,
+      "start": 9.943266666666666,
+      "end": 12.045366666666666,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\04.png",
+      "ink_bbox": [
+        1379,
+        1920,
+        2461,
+        2060
+      ],
+      "sha256": "366f7cdc3880abe5d4ff0a3ac82fe7ca635cfad2cfafb8ef293effec3be5ca3c"
+    },
+    {
+      "id": "05a",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L112"
+      ],
+      "speaker": "캐롤",
+      "text": "하지만, 그러나!",
+      "layout": "하지만, 그러나!",
+      "first_frame": 368,
+      "last_frame": 430,
+      "start": 12.278933333333333,
+      "end": 14.381033333333333,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\05a.png",
+      "ink_bbox": [
+        1489,
+        1920,
+        2343,
+        2076
+      ],
+      "sha256": "84f105878d7f92fe0b4560af5be02aa7bb307c5c1a11cab06986f9bb51a5cfe7"
+    },
+    {
+      "id": "05b",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L113"
+      ],
+      "speaker": "캐롤",
+      "text": "그 실체는 세계 정복을 꾀하는 악의 비밀 결사인 것이다!",
+      "layout": "그 실체는 세계 정복을 꾀하는\n악의 비밀 결사인 것이다!",
+      "first_frame": 431,
+      "last_frame": 580,
+      "start": 14.381033333333333,
+      "end": 19.386033333333334,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\05b.png",
+      "ink_bbox": [
+        1120,
+        1760,
+        2721,
+        2060
+      ],
+      "sha256": "80bd0d7070ac38aa4098a6cedb949f1a8d9e34dff95c7c3e90a829f39a4ce957"
+    },
+    {
+      "id": "06",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L118"
+      ],
+      "speaker": "스크루지",
+      "text": "바보냐.",
+      "layout": "바보냐.",
+      "first_frame": 585,
+      "last_frame": 618,
+      "start": 19.5195,
+      "end": 20.653966666666665,
+      "timing": "normalized cross-correlation with exact voice asset",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\06.png",
+      "ink_bbox": [
+        1716,
+        1920,
+        2123,
+        2059
+      ],
+      "sha256": "267848c948f3b398b89f9b4e5e444a834e6acc88453aeee1593eb3c3edb5401a"
+    },
+    {
+      "id": "07",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L123"
+      ],
+      "speaker": "캐롤",
+      "text": "장단 참 안 맞춰 주네, 개조인간 1호.",
+      "layout": "장단 참 안 맞춰 주네, 개조인간 1호.",
+      "first_frame": 622,
+      "last_frame": 718,
+      "start": 20.754066666666667,
+      "end": 23.990633333333335,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "F:\\AI\\gclx-4k\\release_1121\\movie\\subtitles\\layers\\07.png",
+      "ink_bbox": [
+        946,
+        1920,
+        2887,
+        2076
+      ],
+      "sha256": "9df88ed3aa433ce2b41362c9eb2cf361e68e136df0b254ca3753b767f9d74a7c",
+      "registry_short_id": "J00651",
+      "previous_text": "장단 좀 맞춰 줘, 개조 인간 1호.",
+      "previous_layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\07.png",
+      "previous_layer_sha256": "ece0b97ce45a46dfb2e939d38ad0d0b4d03d979a7dc1ba203c3ab5817c1b7bc1",
+      "semantic_editor": "Claude (registry_1121 J00651)"
+    },
+    {
+      "id": "08",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L128"
+      ],
+      "speaker": "스크루지",
+      "text": "그럼 2호는 너냐?",
+      "layout": "그럼 2호는 너냐?",
+      "first_frame": 725,
+      "last_frame": 776,
+      "start": 24.190833333333334,
+      "end": 25.9259,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\08.png",
+      "ink_bbox": [
+        1447,
+        1920,
+        2391,
+        2060
+      ],
+      "sha256": "0473a289c7bff3aeb07d959c7550588201c88105a30de557a6271abef38bb4a6"
+    },
+    {
+      "id": "09",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L133"
+      ],
+      "speaker": "캐롤",
+      "text": "기술의 1호! 힘의 2호!",
+      "layout": "기술의 1호! 힘의 2호!",
+      "first_frame": 783,
+      "last_frame": 876,
+      "start": 26.1261,
+      "end": 29.262566666666668,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\09.png",
+      "ink_bbox": [
+        1318,
+        1919,
+        2514,
+        2060
+      ],
+      "sha256": "628410a86f8233b4bb3b21dfbe8c21648b3adc3a1846de9743e75dc3fa65d459"
+    },
+    {
+      "id": "10",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L138"
+      ],
+      "speaker": "스크루지",
+      "text": "……그거 미스캐스트잖아.",
+      "layout": "……그거 미스캐스트잖아.",
+      "first_frame": 882,
+      "last_frame": 955,
+      "start": 29.4294,
+      "end": 31.898533333333333,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\japanese-audio-retranslation-20261025\\subtitles-v1\\layers\\10.png",
+      "ink_bbox": [
+        1200,
+        1920,
+        2641,
+        2060
+      ],
+      "sha256": "588f19c2833f6c3e915bf58f62e219d99ea96c388a3e363403596213f961b0fc"
+    },
+    {
+      "id": "11",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L144",
+        "lx0201.nss::SetBacklog::L145"
+      ],
+      "speaker": "캐롤",
+      "text": "……우리 말고도 말이야. 실험체인 애들이 있었어.",
+      "layout": "……우리 말고도 말이야.\n실험체인 애들이 있었어.",
+      "first_frame": 1013,
+      "last_frame": 1151,
+      "start": 33.80043333333333,
+      "end": 38.4384,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\11.png",
+      "ink_bbox": [
+        1247,
+        1760,
+        2595,
+        2060
+      ],
+      "sha256": "edf5465c8223f76ef0f23bad0cb4ee2906bc62fd3babbcf894a903f11ed5e730"
+    },
+    {
+      "id": "12",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L152"
+      ],
+      "speaker": "스크루지",
+      "text": "……?",
+      "layout": "……?",
+      "first_frame": 1158,
+      "last_frame": 1178,
+      "start": 38.6386,
+      "end": 39.3393,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\12.png",
+      "ink_bbox": [
+        1757,
+        1929,
+        2088,
+        2050
+      ],
+      "sha256": "0a5c867f4312e9ba3615394e382de12f0d9d528c3885ae2aa71959597ff26d30"
+    },
+    {
+      "id": "13",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L157"
+      ],
+      "speaker": "캐롤",
+      "text": "어떻게 됐을지는…… 별로 생각하고 싶지 않네.",
+      "layout": "어떻게 됐을지는……\n별로 생각하고 싶지 않네.",
+      "first_frame": 1185,
+      "last_frame": 1334,
+      "start": 39.5395,
+      "end": 44.5445,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\13.png",
+      "ink_bbox": [
+        1242,
+        1760,
+        2599,
+        2060
+      ],
+      "sha256": "9f11ad88e94f9657de57507829f84074d3426171ad1862cf80e53b77b790cf14"
+    },
+    {
+      "id": "14",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L162"
+      ],
+      "speaker": "스크루지",
+      "text": "…………",
+      "layout": "…………",
+      "first_frame": 1341,
+      "last_frame": 1365,
+      "start": 44.7447,
+      "end": 45.57886666666667,
+      "timing": "normalized cross-correlation with exact voice asset",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\14.png",
+      "ink_bbox": [
+        1656,
+        1971,
+        2184,
+        2007
+      ],
+      "sha256": "9931eeb1f3d490ad91aefa1be4cac5aeaceaa3c44e7d57935c2ff62cf135fa9c"
+    },
+    {
+      "id": "15a",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L168"
+      ],
+      "speaker": "캐롤",
+      "text": "자아, 초인 스크루지.",
+      "layout": "자아, 초인 스크루지.",
+      "first_frame": 1458,
+      "last_frame": 1549,
+      "start": 48.6486,
+      "end": 51.718333333333334,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\gemini-game-integration-20261026\\movie-ruby\\subtitles\\15a-ruby.png",
+      "ink_bbox": [
+        1351,
+        1801,
+        2481,
+        2076
+      ],
+      "sha256": "cd74ac8807bbf9a17e27cead10082f2254c25f37fe10673036d965dabe47bd22",
+      "reading_text": "인크레더블",
+      "ruby_base": "초인",
+      "ruby_center_x": 1796.5,
+      "ruby_baseline_y": 1878,
+      "ruby_font_px": 84,
+      "semantic_editor": "Codex internal"
+    },
+    {
+      "id": "15b",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L169"
+      ],
+      "speaker": "캐롤",
+      "text": "그런 악마 같은 놈들하고 어떻게 싸울 거야?",
+      "layout": "그런 악마 같은 놈들하고\n어떻게 싸울 거야?",
+      "first_frame": 1556,
+      "last_frame": 1683,
+      "start": 51.918533333333336,
+      "end": 56.18946666666667,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\15b.png",
+      "ink_bbox": [
+        1258,
+        1760,
+        2583,
+        2060
+      ],
+      "sha256": "5910948f4a11dbd61bd1bc5320ebd3a496d294f69667562c54079c0e743b7c9c"
+    },
+    {
+      "id": "16",
+      "source_ids": [
+        "lx0201.nss::SetBacklog::L176"
+      ],
+      "speaker": "스크루지",
+      "text": "글쎄……",
+      "layout": "글쎄……",
+      "first_frame": 1690,
+      "last_frame": 1726,
+      "start": 56.38966666666666,
+      "end": 57.624233333333336,
+      "timing": "original baked-caption frame boundaries",
+      "layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\16.png",
+      "ink_bbox": [
+        1661,
+        1920,
+        2173,
+        2059
+      ],
+      "sha256": "6b6657cb0c936620e4e22867fcf89d8ff8ddac035e9650a8625e2c384753954e"
+    }
+  ],
+  "font": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\op\\fonts\\GCLCKoreanSubtitle.ttf",
+  "font_sha256": "54080c581619fd531af4c5f3ad82160e6221a5c36b3bd276d7984b077095af97",
+  "font_size_4k": 134,
+  "native_em_pixels": 35.733333333333334,
+  "stroke_4k": 8,
+  "status": "ONE_CUE_REBURN_07",
+  "canonical_typesetting": "RGBA layers; ASS provided as editable timeline with renderer-specific baseline metrics",
+  "changed_cues": [
+    "07"
+  ],
+  "unchanged_layers_reused": 17,
+  "clean_base_reused": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\clean-base-v2\\clean-native-ffv1.mkv",
+  "source_manifest": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\gemini-game-integration-20261026\\movie-ruby\\subtitles\\manifest.json",
+  "source_manifest_sha256": "81e3101171c0b9c42ee0899e3f29db3da68a53e6873d4f10c34e5a8247137d00",
+  "ruby_source": "超人【インクレディブル】",
+  "source_id": "lx0201.nss::text0070::p001",
+  "background_restoration_reused": true,
+  "reproduction_check_old_text": {
+    "old_layer": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\lx0201-backlog-punctuation-20261025\\subtitles-v2\\layers\\07.png",
+    "old_layer_sha256": "ece0b97ce45a46dfb2e939d38ad0d0b4d03d979a7dc1ba203c3ab5817c1b7bc1",
+    "pixel_exact": false,
+    "max_channel_diff": 45,
+    "diff_bbox": [
+      1198,
+      1953,
+      2727,
+      2042
+    ]
+  },
+  "registry": "F:\\AI\\gclx-4k\\release_1121\\registry_1121.json"
+}

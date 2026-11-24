@@ -1,0 +1,836 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0505_10.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0506.nss";
+
+}
+
+
+scene lx0505_10.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintBG("上背景", 30000);
+
+	SoundPlay("@lx003",3000,850,true);
+
+	/*
+	Delete("@Ｃ");
+
+	CreateCamera("Ｃ", -512, -130, 1000);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureSP("@Ｃ/絵背景", 0, Center, -380, "cg/bg/l/bg001016_3_高速道路崩壊_l.jpg");
+	CreateTextureSP("@Ｃ/絵演立木屋", 500, Center, Middle, "cg/st/x/stキャロル_通常_normal_x01.png");
+	Zoom("@Ｃ/絵演立木屋", 0, 500, 500, null, true);
+	Move("@Ｃ/絵演立木屋", 0, @640, @150, null, true);
+
+	MoveCamera("Ｃ", 0, 512, @0, @0, null, false);
+
+	FadeDelete("上背景", 0, null, true);
+	*/
+
+	CreateColorEX("co01", 5000, "000000");
+
+	CreateEffectDropEX("dr01", 2000, 0, 0, 1024, 576, 20, 20, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("dr01", 0, @0, @0, 25, null,true);
+	Request("dr01", AddRender);
+	Zoom("dr01", 0, 2000, 2000, null, true);
+	Fade("dr01", 0, 1000, null, true);
+
+	CreateTextureSP("bg01", 100, 30, 220, "cg/bg/bg001016_3_高速道路崩壊.jpg");
+	SetShade("bg01", SEMIHEAVY);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+
+	CreateTextureSP("bg02", 1000, -300, -100, "cg/bg/x/bg001015_3_高速道路高架下崩壊_高速道路_x02_ogami.png");
+	//SetShade("bg02", SEMIHEAVY);
+	Zoom("bg02", 0, 2500, 2500, null, true);
+	Request("bg*", Smoothing);
+
+	CreateTextureSP("ev01", 500, Center, -286, "cg/ev/x/ev0213キャロル着替え_x01_ogami.png");
+	Rotate("ev01", 0, @0, @0, 15, null,true);
+	Request("ev01", Smoothing);
+
+	CreateSE("SEキャロル振","se人体_動作_衣擦れ02");
+	CreateSE("SE90L","se背景_ガヤ_建物炎上_L");
+	MusicStart("SE90L",2000,500,0,1000,null,true);
+
+
+	FadeDelete("上背景", 500, null, false);
+
+	Move("ev01", 2000, @0, -126, Dxl1, false);
+	Move("bg01", 2000, @0, 270, Dxl1, false);
+	Move("bg02", 2000, @0, 220, Dxl1, true);
+
+
+	Wait(500);
+
+	MusicStart("SEキャロル振",0,700,0,1000,null,false);
+	Rotate("ev01", 500, @0, @0, 20, null,false);
+	Move("ev01", 500, @100, @20, Axl1, false);
+
+	Fade("co01", 500, 1000, Axl3, true);
+
+	Delete("bg*");
+	Delete("ev*");
+
+	CreateTextureSP("bg01a", 100, 12, 288, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Zoom("bg01a", 0, 2000, 2000, null, true);
+	CreateTextureSP("bg01b", 1000, -500, 0, "cg/bg/l/bg001015_3_高速道路高架下崩壊_高速道路_l.png");
+	DrawEffectSkip("bg01a", 500, "Ripple", 100, 50, null);
+
+	CreateTextureEX("ca01", 1100, 22, -100, "cg/ev/x/ev0111キャロル飛び降り_キャロル_x01.png");
+	Request("ca01", Smoothing);
+	Zoom("ca01", 0, 50, 50, null, true);
+	Rotate("ca01", 0, @0, @0, @0, null,true);
+	CreateTextureEX("ca02", 1100, 22, -100, "cg/ev/ev0111キャロル飛び降り_キャロル.png");
+	Request("ca02", Smoothing);
+	Zoom("ca02", 0, 50, 50, null, true);
+	Rotate("ca02", 0, @0, @0, @0, null,true);
+	CreateTextureSP("bg03", 90, center, middle, "cg/ev/ev0111キャロル飛び降り_背景.jpg");
+	Request("bg03", Smoothing);
+
+	Move("bg01*", 0, @-200, @0, null, true);
+	Rotate("bg01*", 0, @0, -180, -20, null,true);
+	Zoom("bg01a", 0, 4000, 4000, null, true);
+	Zoom("bg01b", 0, 2000, 2000, null, true);
+
+	CreateSE("SEキャロル飛","se人体_動作_跳躍01");
+	CreateSE("SEキャロル勢","se人体_動作_跳躍03");
+
+	MusicStart("SEキャロル飛",0,800,0,1000,null,false);
+	Fade("ca01", 0, 1000, null, true);
+	Move("bg01*", 2000, @100, @-50, Dxl3, false);
+	Move("ca01", 2000, @90, @-10, Dxl3, false);
+	Zoom("bg01a", 2000, 3000, 3000, Dxl3, false);
+	Zoom("bg01b", 2000, 1500, 1500, Dxl3, false);
+	DrawDelete("ef01", 150, 100, null, "zoom_01_00_1", false);
+	DrawDelete("co01", 200, 100, null, "zoom_01_00_1", false);
+
+	Wait(1500);
+
+	MusicStart("SEキャロル勢",0,800,0,1000,null,false);
+	$ca_z_time=500;
+	Zoom("bg01a", $ca_z_time, 30000, 30000, Dxl3, false);
+	Zoom("bg01b", $ca_z_time, 15000, 15000, Dxl3, false);
+	Zoom("bg03", $ca_z_time, 2500, 2500, Dxl3, false);
+	Zoom("ca*", $ca_z_time, 1000, 1000, Dxl3, false);
+	Move("bg01*", $ca_z_time, @-4400, @200, Dxl3, false);
+	Move("bg03", $ca_z_time, 348, -203, Dxl3, false);
+	Move("ca*", $ca_z_time, 127, -14, Dxl3, false);
+	Fade("bg01*", $ca_z_time, 0, Dxl2, false);
+	Fade("ca02", $ca_z_time, 1000, Axl2, false);
+	Fade("mv01", $ca_z_time, 0, Axl2, false);
+	Fade("dr01", $ca_z_time, 0, Axl2, false);
+
+	SetVolumeEX("SE90L", 1500, 300, null);
+
+
+	Wait(600);
+
+	MoveFTP1stop();
+	Delete("bg01*");
+	Delete("bg02");
+	Delete("ca01");
+	Delete("mv01");
+	Delete("dr01");
+
+
+//←←飛び降りるキャロル
+//分岐の合流
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500210a02">
+……모르겠어&. 미래 같은 건&.
+
+//	Fw("fwキャロル_通常_normal");
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500220a02">
+하지만 말이야&, 스크루지&.
+ﾀ釮鋙ｵ&, ｱﾗｶｧｰ｡ ｿﾃ ｶｧｱ錝ﾂ｡ｪ｡ｪ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//あきゅん「演出予定：プロローグ部分と同じような感じに」
+
+//高架下へと飛び降りるキャロル。
+
+
+
+	CreateTextureEX("ev01", 2000, -924, -100, "cg/ev/l/ev0111キャロル飛び降り_l.jpg");
+
+	Move("ev01", 2000, -765, -200, Dxl1, false);
+	Fade("ev01", 500, 1000, null, false);
+
+
+//おがみ：キャロルボイス　予告編合わせ
+//<voice name="キャロル" class="キャロル" src="voice/LX05/0500230a02">
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX00/1000300a02">
+「스크루지!」
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500240a02">
+――난 네 무기야&. 네가 이 싸움을 멈추지 않는 한&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX00/1000310a02">
+｡ｸｳｯ ｽ癸ｹ
+
+//※（収録不要。使い回し）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500260a02">
+부서질 만큼&.
+ｾ鄕ﾁﾁ｢ﾀｸｷﾎ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	SetVolumeEX("SE90L", 1500, 0, null);
+	CreateColorEX("co01", 5000, "000000");
+	Fade("co01", 500, 1000, null, true);
+
+	//★演出：先読み込み
+	//結晶生成1-----------------------------------------------------
+	CreateTextureEX("ks01", 5010, 710, 340, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("ks02", 5009, 440, 350, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEX("ks03", 5008, 160, 150, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("ks04", 5007, 0, 100, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("ks05", 5006, 0, 100, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("ks01add", 5010, 710, 340, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("ks02add", 5009, 440, 350, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("ks03add", 5008, 160, 150, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("ks04add", 5007, 0, 100, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("ks05add", 5006, 0, 100, "cg/ef/x/ef_voidrubble01_x01.png");
+
+	Rotate("ks02*", 0, @0, @0, 60, null,true);
+	Rotate("ks03*", 0, @0, 180, -90, null,true);
+
+	Request("ks0*", Smoothing);
+	Zoom("ks0*", 0, 1500, 1500, null, true);
+
+	//結晶生成2-----------------------------------------------------
+	CreateTextureEX("kt01", 5010, 710, 0, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("kt02", 5009, 640, -50, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEX("kt03", 5008, 560, 250, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("kt04", 5007, 350, 300, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("kt05", 5006, 200, 500, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("kt01add", 5010, 710, -140, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("kt02add", 5009, 640, -50,"cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("kt03add", 5008, 560, 250, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("kt04add", 5007, 350, 300,"cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("kt05add", 5006, 200, 500,"cg/ef/x/ef_voidrubble01_x01.png");
+
+	Rotate("kt01*", 0, @0, 180, -150, null,true);
+	Rotate("kt03*", 0, @0, 180, -170, null,true);
+	Rotate("kt04*", 0, @0, 180, -150, null,true);
+	Rotate("kt05*", 0, @0, 0, -150, null,true);
+
+	Request("kt0*", Smoothing);
+	Zoom("kt0*", 0, 1500, 1500, null, true);
+	//★演出：先読み込みここまで
+
+	SetVolumeEX("@lx003", 3000, 800, null);
+
+
+
+
+	//おがみ：★あとでループ素材に差し替え
+	CreateSE("SEノイズ3","seヴォイド蝗02L");
+	MusicStart("SEノイズ3",1700,500,0,1000,null,true);
+
+
+	CreateSE("SE_noize","seヴォイド蝗02L");
+	CreateSE("SE_kyoumei","se特殊_雰囲気_集中01_L");
+	CreateSE("SE_heart","se人体_心臓_鼓動01");
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreateMovieEX("no01", 5000, Center, Middle, true, false, "dx/mvnoize.ngs");
+	Zoom("no01", 0, 2000, 2000, null, true);
+
+	CreateTextureEXmul("eye", 7000, Center, Middle, "cg/data/zzex_eye_01_00_0.png");
+	Fade("eye", 0, 1000, null, true)
+
+	CreateEffectDropEX("drop01", 6350, 0, 0, 1024, 576, 256, 80, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble03_x05.png");
+	Rotate("drop01", 0, @0, @0, 5, null,true);
+	Request("drop01", SubRender);
+	Zoom("drop01", 0, 1500, 2500, null, true);
+
+	CreateEffectDropEX("drop02", 6450, 0, 0, 1024, 576, 156, 120, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble02_x03.png");
+	Rotate("drop02", 0, @0, @0, -185, null,true);
+	Request("drop02", SubRender);
+	Zoom("drop02", 0, 1500, 2500, null, true);
+
+	MusicStart("SE_kyoumei",0,1000,0,500,null,true);
+	MusicStart("SE_noize",0,1000,0,1000,null,true);
+	MusicStart("SE_heart",0,1000,0,1000,null,false);
+
+	Fade("no01", 0, 1000, null, true);
+	Fade("drop*", 0, 1000, null, true);
+	Wait(500);
+
+	Wait(150);
+	SetVolumeEX("SE_kyoumei", 0, 0, null);
+	SetVolumeEX("SE_noize", 0, 0, null);
+	SetVolumeEX("SEノイズ3", 0, 0, null);
+	SetVolumeEX("SE_heart", 0, 0, null);
+
+	Delete("no01");
+	Delete("co01");
+	Delete("drop*");
+	Delete("eye");
+	Delete("ca02");
+	Delete("bg03");
+
+
+	Wait(1000);
+
+
+////////////////////////////////////////
+//ここからスクルージの一人称。
+
+
+//渇望に俺は天を仰ぐ。
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0051]
+――그리고&, 그것이 있었다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+//★鋼屋：コメントアウト
+//――――――――――――――――――――――――――――――――――――――
+//<PRE @box0>
+//[text0060]
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX00/1000300a02">
+//「スクルージ！」
+
+//※（収録不要。使い回し）
+
+//</PRE>
+//	SetText();
+//	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0061]
+//雪の舞う白い空から、黒い烏のようにそれは舞い降りる。
+성스러운 밤에 내리는 눈처럼&, 그것은 춤추듯 내려앉는다&.
+
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+//★鋼屋：コメントアウト
+//――――――――――――――――――――――――――――――――――――――
+//<PRE @box0>
+//[text0070]
+//【キャロル】
+//<voice name="キャロル" class="キャロル" src="voice/LX00/1000310a02">
+//「わたしを、つかって」
+
+//※（収録不要。使い回し）
+
+//</PRE>
+//	SetText();
+//	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0071]
+ｼﾓﾁﾋﾀﾎｰ｡&. ﾀﾀｺｸﾀﾎｰ｡&. ｳｪｴﾂ ｱﾗ ｰ｡ｽｿｿ｡ ｼﾕﾀｻ ｻｸｴﾂｴﾙ｡ｪ｡ｪ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義---------------------------------------------------
+	CreateColorEXadd("co01", 15000, "FFFFFF");
+	CreateTextureEXadd("ef01", 2100, Center, Middle, "cg/ef/ef_vd_light01.png");
+
+	WaitPlay("ev01", null);
+	Delete("ca02");
+
+	CreateEffectSP("pl01", 2001, 0, 0, 1024, 576, "Plain");
+	CreateEffectSP("pl02", 2001, 0, 0, 1024, 576, "Plain");
+	CreateEffectSP("pl03", 2001, 0, 0, 1024, 576, "Plain");
+	SetBlur("pl01", true, 4, 500, 300, false);
+	SetBlur("pl02", true, 4, 500, 300, false);
+	SetBlur("pl03", true, 4, 500, 300, false);
+
+	CreateSE("SE_vef01","seヴォイド汎用02");
+
+
+
+	//動作---------------------------------------------------
+	SetVolumeEX("SE炎L", 3000, 0, null);
+	MusicStart("SE_vef01",0,1000,0,600,null,false);
+	$blur_time=1500;
+	Zoom("pl01", $blur_time, 1100, 1100, Axl2, false);
+	Zoom("pl02", $blur_time, 1400, 1400, Axl2, false);
+	Zoom("pl03", $blur_time, 1700, 1700, Axl2, false);
+
+	Zoom("ef01", $blur_time, 2000, 2000, Dxl1, false);
+	Fade("ef01", 600, 1000, null, false);
+
+	Fade("co01", $blur_time, 1000, Axl2, true);
+
+	Delete("pl*");
+	Delete("bg*");
+	Delete("ev*");
+	Delete("ef*");
+
+	CreateColorEXadd("white02", 15000, "FFFFFF");
+	Fade("white02", 0, 1000, null, true);
+
+	MoveFTP1stop();
+	Delete("bg01");
+	Delete("ev01");
+	Delete("ef01");
+	Delete("co*");
+
+	CreateColorEXadd("white03", 100, "FFFFFF");
+	CreateTextureEXadd("white04", 14000, Center, middle, "cg/data/slide_02_00_0.png");
+	CreateTextureEX("ev50", 3100, Center, Middle, "cg/ef/x/ef_hand05.png");
+	CreateTextureEX("ev51", 3100, 1024, Middle, "cg/ef/x/ef_hand01.png");
+
+
+	CreateTextureEX("bg52", 110, 0, 0, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Request("bg52", Smoothing);
+	Zoom("bg52", 0, 2500, 2500, null, true);
+
+	CreateTextureEX("ev52a", 3100, -500, -1400, "cg/ev/ev0102スクルージヴォイド結晶掲げ_キャラのみ.png");
+	Request("ev52a", Smoothing);
+	CreateTextureEX("ef52", 3100, 1024, Middle, "cg/ef/x/ef_hand01.png");
+
+
+	CreateCamera("Ｃ", 0, 0, 400);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureEX("Ｃ/ev01", 500, -500, middle, "cg/ev/x/ev0101スクルージヴォイド取りだし_x02_ogami.png");
+	Zoom("Ｃ/ev01", 0, 3000, 3000, null, true);
+	Request("Ｃ/ev01", Smoothing);
+	Rotate("Ｃ/ev01", 0, @0, @0, -20, null,true);
+	MoveCamera("Ｃ", 0, -500, -1070, 800, null, true);
+	MoveFTP1("@Ｃ/*",6000,10,3);
+
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0500290a01">
+｡ｸｿﾀｿﾀｿﾀｿﾀｿﾀｿﾀｿﾀ｡ｪ｡ｪ｡ｪ｡ｪ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//キャロルからヴォイドを取り出すスクルージ。バンクシーンで。
+//ホワイトアウト。
+
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//おがみ：★演出　ちょっと調整
+
+
+
+	//EV生成
+	CreateTextureEX("ev02", 3000, -244, -2600, "cg/ev/x/ev0102スクルージヴォイド結晶掲げ_x03.png");
+	Request("ev02", Smoothing);
+	CreateTextureEX("ev03", 3000, 0, -1170, "cg/ev/x/ev0102スクルージヴォイド結晶掲げ_x04.png");
+	Request("ev03", Smoothing);
+	SetBlur("ev03", true, 1, 500, 30, false);
+	CreateTextureEX("ev04", 3000, 0, -200, "cg/ev/x/ev0102スクルージヴォイド結晶掲げ_x05.jpg");
+	Request("ev04", Smoothing);
+	Zoom("ev04", 0, 2000, 2000, null, true);
+	SetBlur("ev04", true, 1, 500, 30, false);
+
+
+
+
+	CreateSE("SE50","seヴォイド汎用01");
+
+	/*
+	CreateMask("vf01_mask", 5010, center, 200, "cg/ef/x/ef_voidef02.png",false);
+	CreateTextureEXadd("vf01_mask/vf01", 5010, center, middle, "cg/ef/x/ef_voidef01.png");
+	Zoom("vf01_mask/vf01", 0, 2000, 2000, null, true);
+	DrawEffectSkip("vf01_mask/vf01", 1000, "HighWave", 0, 1000, null);
+	Zoom("vf01_mask", 0, 500, 500, null, true);
+
+	//CreateTextureEXadd("vf02", 3110, center, middle, "cg/ef/x/ef_voidef03.png");
+	//Move("vf02", 0, @-40, @0, null, true);
+	*/
+
+	Fade("white04", 0, 500, null, true);
+
+	CreateMovieEX("mv01", 500, 257, 144, true, true, "dx/mvve01.ngs");
+	Zoom("mv01", 0, 2000, 2000, null, true);
+	Fade("mv01", 0, 1000, null, true);
+	Request("mv*", Smoothing);
+
+
+//======================================================
+	Fade("ev04", 0, 1000, null, true);
+	Fade("white03", 0, 1000, null, true);
+	Move("ev04", 4500, @0, -100, AxlDxl, false);
+	Fade("white02", 500, 0, null, false);
+	Wait(1000);
+//======================================================
+
+
+	FadeDelete("ev04", 300, null, false);
+
+	MusicStart("SE50",0,1000,0,1500,null,false);
+	Zoom("ev50", 500, 4000, 4000, Axl3, false);
+	Fade("ev50", 100, 1000, null, false);
+
+	Wait(350);
+	FadeDelete("ev50", 100, null, false);
+
+	Move("ev51", 400, 0, @0, Dxl1, false);
+	Fade("ev51", 0, 1000, null, false);
+
+	Wait(300);
+	Fade("white02", 100, 1000, null, true);
+
+	Delete("ev50");
+	Delete("ev51");
+
+	Fade("white02", 1000, 1000, null, true);
+	Fade("Ｃ/ev01", 0, 1000, null, true);
+
+
+
+	CreateSE("SE_vef02","seヴォイド取り出し01");
+	CreateSE("SE_vef03","seヴォイド結晶化01a");
+	CreateSE("SE_vef04","seヴォイド結晶化01a");
+	MusicStart("SE_vef02",0,1000,0,1000,null,false);
+
+	//結晶動作----------------------------------------------------------
+	Fade("mv02", 0, 600, null, true);
+	Fade("white04", 0, 1000, null, true);
+	Fade("white02", 1000, 0, null, false);
+	MoveCamera("Ｃ", 1500, -600, -1070, 700, null, false);
+	Wait(1400);
+
+	$k_time=100;
+	$k_delete_time=500;
+
+	MusicStart("SE_vef03",0,1000,0,1000,null,false);
+
+	Shake("ks01*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks01*", 100, 1000, null, false);
+	Move("ks01*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks01*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks01add", $k_delete_time, null, false);
+
+	Shake("ks02*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks02*", 100, 1000, null, false);
+	Move("ks02*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks02*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks02add", $k_delete_time, null, false);
+
+	MusicStart("SE_vef04",0,1000,0,1000,null,false);
+
+	Shake("ks03*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks03*", 100, 1000, null, false);
+	Move("ks03*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks03*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks03add", $k_delete_time, null, false);
+
+	Shake("ks04*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks04*", 100, 1000, null, false);
+	Move("ks04*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks04*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks04add", $k_delete_time, null, false);
+
+	Shake("ks05*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("ks05*", 100, 1000, null, false);
+	Move("ks05*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("ks05*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("ks05add", $k_delete_time, null, false);
+
+
+	Fade("white02", 100, 1000, null, true);
+	Delete("ks*");
+	MoveCamera("Ｃ", 0, 600, -570, 200, null, true);
+	Fade("white02", 1500, 0, null, false);
+	MoveCamera("Ｃ", 2500, 1000, -570, 200, null, true);
+
+	//Rotate("Ｃ/ev01", 400, @0, @0, @10, Axl1,false);
+	//Move("Ｃ/ev01", 400, @100, @300, Dxl1, false);
+	MoveCamera("Ｃ", 400, -550, -670, 700, Axl3, false);
+	Fade("white02", 300, 1000, Axl2, true);
+
+
+	Fade("white03", 0, 1000, null, true);
+
+	MoveFTP1stop();
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+	Delete("ks*");
+
+	//定義--------------------------------------------------------------
+	//ムービー調整
+	Zoom("mv01", 0, 4000, 4000, null, true);
+	Zoom("mv02", 0, 3000, 3000, null, true);
+	Fade("mv02", 0, 0, null, true);
+
+	CreateSE("SE01","seヴォイド汎用01");
+	CreateSE("SE01b","seヴォイド結晶化_l");
+	CreateSE("SE02","seヴォイド取り出し02");
+	CreateSE("SE03","se人体_動作_跳躍03");
+	CreateSE("SE04","seヴォイド崩壊02");
+	CreateSE("SE05","seヴォイド斬撃02");
+	CreateSE("SE06","seヴォイド崩壊02");
+	CreateSE("SE07","se人体_動作_跳躍03");
+
+
+	//動作--------------------------------------------------------------
+	Fade("white04", 0, 500, null, true);
+	Fade("white02", 300, 0, null, false);
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Wait(300);
+
+	//結晶動作
+	$k_time=50;
+	$k_zoom=2300;
+	$k_delete_time=400;
+
+	MusicStart("SE01b",0,700,0,1000,null,true);
+	MoveCamera("Ｃ", 600, -600, -1070, 700, Dxl2, false);
+	Shake("kt01*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("kt01*", 100, 1000, null, false);
+	Move("kt01*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("kt01*", $k_time, $k_zoom, $k_zoom, Dxl1, true);
+	FadeDelete("kt01add", $k_delete_time, null, false);
+
+	Shake("kt02*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("kt02*", 100, 1000, null, false);
+	Move("kt02*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("kt02*", $k_time, $k_zoom, $k_zoom, Dxl1, true);
+	FadeDelete("kt02add", $k_delete_time, null, false);
+
+	Shake("kt03*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("kt03*", 100, 1000, null, false);
+	Move("kt03*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("kt03*", $k_time, $k_zoom, $k_zoom, Dxl1, true);
+	FadeDelete("kt03add", $k_delete_time, null, false);
+
+	Shake("kt04*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("kt04*", 100, 1000, null, false);
+	Move("kt04*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("kt04*", $k_time, $k_zoom, $k_zoom, Dxl1, true);
+	FadeDelete("kt04add", $k_delete_time, null, false);
+
+	Shake("kt05*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("kt05*", 100, 1000, null, false);
+	Move("kt05*", $k_time, @-70, @-15, Dxl1, false);
+	Zoom("kt05*", $k_time, $k_zoom, $k_zoom, Dxl1, true);
+	FadeDelete("kt05add", $k_delete_time, null, false);
+
+	Fade("dr01", 300, 1000, null, false);
+	Fade("dr02", 300, 1000, null, false);
+
+	SetVolumeEX("SE01b", 5000, 0, null);
+	MusicStart("SE02",0,700,0,1000,null,false);
+	MusicStart("SE03",0,700,0,1000,null,false);
+	MusicStart("SE04",0,700,0,1000,null,false);
+	Zoom("kt0*", 0, 3000, 3000, null, true);
+	Rotate("kt*", 1000, @0, @0, 1800, null,false);
+	Fade("kt0*", 100, 1000, null, false);
+	Move("kt0*", 1000, @100, @-1500, AxlDxl, false);
+	Wait(300);
+	Fade("ev01", 100, 0, null, false);
+	Move("ev02", 2000, @0, @1300, Dxl1, false);
+	Fade("ev02", 100, 1000, null, false);
+
+	Wait(500);
+
+	Fade("dr01", 0, 0, null, false);
+	Fade("dr02", 0, 0, null, false);
+
+
+
+	MusicStart("SE06",0,1000,0,700,null,false);
+
+	Fade("mv01", 1000, 1000, null, false);
+	Zoom("mv01", 1000, 2000, 2000, null, false);
+
+	Fade("ev02", 500, 0, null, false);
+	Fade("bg52", 500, 1000, null, false);
+	Fade("ev52*", 500, 1000, null, false);
+
+	Move("bg52*", 6000, @0, 300, Dxl1, false);
+	Move("ev52*", 6000, @0, -700, Dxl1, false);
+
+	//Fade("vf01_mask/vf01", 100, 1000, null, false);
+	//Move("vf01_mask", 800, @0, -200, null, false);
+	//Zoom("vf01_mask", 800, 2500, 1000, null, false);
+
+
+	Wait(2000);
+
+	//Zoom("vf02", 4000, 2000, 5000, Dxl1, false);
+	//Move("vf02", 4000, @0, -1500, Dxl1, false);
+	//Fade("vf02", 0, 1000, null, false);
+	Wait(1500);
+
+	MusicStart("SE05",0,1000,0,700,null,false);
+	MusicStart("SE07",0,1000,0,700,null,false);
+	SetVolumeEX("@lx*", 3000, 0, null);
+	Fade("white02", 700, 1000, Axl1, true);
+
+	Delete("ef*");
+	Delete("ev*");
+	Delete("bg*");
+	Delete("kt*");
+	Delete("vf02");
+	Delete("mv*");
+
+	Wait(1500);
+
+	SetVolumeEX("SE*", 1000, 0, null);
+	Wait(1000);
+
+
+//★鋼屋：挿入位置移動
+
+//	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+//<PRE @box0>
+//[text0080]
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX05/0500290a01">
+//「オオオオオオオ――――！」
+
+//キャロルからヴォイドを取り出すスクルージ。バンクシーンで。
+//ホワイトアウト。
+
+//</PRE>
+//	SetText();
+//	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//	TextBoxDelete();
+	CreateColorSP("絵色白", 5000, "FFFFFF");
+
+	Delete("white*");
+
+
+//→→LX0506
+
+
+//	ClearFadeAll(1000, true);
+
+}

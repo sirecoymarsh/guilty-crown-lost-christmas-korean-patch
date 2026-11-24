@@ -1,0 +1,516 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0600.nss_MAIN
+{
+	$PHASE_num=7;
+	$PHASE_name="멋진 인생!";
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#bg006002_3_六本木ヒルズ屋上=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0601.nss";
+
+}
+
+
+scene lx0600.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintBG2("上背景");
+
+	CreateColorSP("co01", 5000, "000000");
+
+	FadeDelete("上背景", 255, null, true);
+
+
+//<continuation number="230">
+
+//マナの回想
+//アニメ12話参照
+
+//黒背景に声が聞こえる。
+
+
+
+
+//【マナ】
+//<voice name="マナ" class="マナ" src="voice/LX06/0000010b05">
+//「……集」
+
+	CreateVOICEEX("vo01","LX06/0000010b05","マナ");
+	MusicStart("vo01",0,1000,0,1000,null,false);
+	SetBacklog("｡ｸ｡ｦ｡ｦｽｴ｡ｹ", "voice/LX06/0000010b05", マナ);
+
+	WaitPlay("vo01");
+
+	Wait(1000);
+
+
+//Fw("fwマナ_通常_normal");
+//【マナ】
+//<voice name="マナ" class="マナ" src="voice/LX06/0000020b05">
+//「もういいわよ、集」
+
+	CreateVOICEEX("vo02","LX06/0000020b05","マナ");
+	MusicStart("vo02",0,1000,0,1000,null,false);
+	SetBacklog("「이제 됐어, 슈」", "voice/LX06/0000020b05", �}긥);
+
+	WaitPlay("vo02");
+
+	Wait(1500);
+
+
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000030b05">
+｡ｸｽｴ!｡ｹ
+
+//	Fw("fw幼シュウ_通常_normal");
+//【幼シュウ】
+<voice name="ｾ鋕ｰ ｽｴ" class="幼シュウ" src="voice/LX06/0000040b04">
+｡ｸ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+//目を開く集
+
+//◆◆大島海辺／夕
+
+	CreateTextureSP("bg01", 100, Center, Middle, "cg/bg/bg002011_2_海辺全景.jpg");
+	CreateTextureSP("bg02", 100, Center, Middle, "cg/bg/x/bg002011_2_海辺全景_x01.png");
+	CreateTextureSPmul("ef01", 100, Center, Middle, "cg/ef/ef_blackline03.png");
+	Request("bg*", Smoothing);
+	Zoom("bg*", 0, 1300, 1300, null, true);
+	DrawEffectSkip("bg02", 2000, "Ripple", 0, 150, null);
+	SetShade("ev02", SEMIHEAVY);
+
+	CreateSE("SE01","se自然_水_波音01L");
+	MusicStart("SE01",4000,700,0,1000,null,true);
+
+
+	DrawTransition("co01", 3000, 1000, 0, 300, AxlDxl, "cg/data/slide_05_00_0.png", 2500);
+
+
+	Fade("ef01", 500, 0, null, true);
+
+	Wait(2000);
+
+//	Fw("fw幼シュウ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【幼シュウ】
+<voice name="ｾ鋕ｰ ｽｴ" class="幼シュウ" src="voice/LX06/0000050b04">
+「우와……!
+　대단해! 마나 누나!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000060b05">
+「그렇지? 누나의 비밀 장소야」
+
+//Fw("fwマナ_通常_normal");
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000070b05">
+｡ｸｽｴﾇﾑﾅﾗｸｸ ｰ｡ｸ｣ﾃﾄ ﾁﾙｰﾔ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+////////////////////////////////////////
+//◆◆六本木ヒルズ／屋上
+
+//ヒルズ屋上から空を眺める真名。
+
+//ボイス入りモノローグ。
+
+
+	TextBoxDelete();
+
+	Wait(1000);
+
+	SetVolumeEX("SE*", 3000, 0, null);
+
+	CreateColorEX("co01", 5000, "000000");
+	Fade("co01", 3000, 1000, null, true);
+
+
+	Wait(1500);
+	CreatePlainSP("pl01", 15000);
+
+	Delete("ev*");
+	Delete("ef*");
+	Delete("bg*");
+	Delete("co*");
+
+	CreateTextureEX("bg03", 200, Center, middle, "cg/bg/bg006002_3_六本木ヒルズ屋上.jpg");
+	CreateMovieEX("mv01", 200, center, middle, true, true, "dx/mvk200.ngs");
+	Zoom("mv01", 0, 2000, 2000, null, true);
+
+	CreateTextureSP("bg01a", 100, Center, 0, "cg/bg/bg005006_3_六本木ヒルズ前.jpg");
+	CreateTextureSPadd("bg01b", 100, Center, 265, "cg/bg/x/bg005006_3_六本木ヒルズ前_炎_x01_ogami.png");
+	Zoom("bg01b", 0, 2000, 2000, null, true);
+	CreateTextureSP("bg02a", 110, Center, -500, "cg/bg/l/bg005006_3_六本木ヒルズ前_l.jpg");
+	CreateTextureSPadd("bg02b", 110, Center, 400, "cg/bg/x/bg005006_3_六本木ヒルズ前_炎_x01_ogami.png");
+	Zoom("bg02b", 0, 4000, 4000, null, true);
+	Request("bg*", Smoothing);
+
+	DrawEffectSkip("bg02b", 1000, "Ripple", 150, 50, null);
+
+	CreateEffectDropEX("dr01", 150, 0, 0, 1024, 576, 40, 10, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("dr01", 0, @0, @0, 25, null,true);
+	Request("dr01", AddRender);
+	Fade("dr01", 0, 1000, null, true);
+	Zoom("dr01", 0, 2500, 2500, null, true);
+
+	CreateSE("SE01L","se背景_ガヤ_建物炎上_L");
+	MusicStart("SE01L",2000,700,0,1000,null,true);
+
+	CreateSE("SE02L","se自然_風_雰囲気92_L");
+
+	FadeDelete("pl01", 1000, null, false);
+
+	Move("bg02a", 6000, @0, 0, null, false);
+	Move("bg02b", 6000, @0, 900, null, false);
+	FadeDelete("上背景", 2000, null, true);
+
+	Wait(6000);
+
+	SetVolumeEX("SE01L", 2400, 0, null);
+	MusicStart("SE02L",2000,1000,0,1000,null,true);
+
+	Fade("mv01", 2000, 1000, null, false);
+	Fade("bg03", 2000, 1000, null, true);
+
+	Delete("bg01*");
+	Delete("bg02*");
+	Delete("dr*");
+	Wait(2000);
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000080b05">
+해는 진작에 저물어 버렸어&.
+
+//Fw("fwマナ_通常_normal");
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000090b05">
+하늘에 가까운 여기라면 조금은 나을까 싶었는데&.
+전혀 아니야&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000100b05">
+여긴 그 장소와는―― 슈와 함께 봤던 그 풍경과는 전혀 달라&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	Wait(500);
+
+	CreateTextureEX("bg01", 200, Center, -281, "cg/bg/m/bg900006_3_崩壊空汎用_m.jpg");
+
+	Move("bg01", 30000, @0, -100, null, false);
+	Fade("bg01", 1500, 1000, null, true);
+
+	Delete("bg03");
+	Delete("mv*");
+
+	Wait(1000);
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000110b05">
+――여기 하늘은&, 몹시 탁해&.
+
+//Fw("fwマナ_通常_normal");
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000120b05">
+――내게는 이제 아무것도 없어&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	Wait(500);
+	CreatePlainSP("pl01", 5000);
+
+	Delete("bg*");
+	CreateTextureSP("bg51a", 100, -1024, -300, "cg/bg/l/bg003016_3_六本木全景崩壊_l.jpg");
+	CreateTextureSP("bg51b", 100, -512, -15, "cg/bg/x/bg003016_3_六本木全景崩壊_炎_x01.png");
+	Fade("bg51b", 0, 900, null, true);
+	Zoom("bg51b", 0, 2000, 2000, null, true);
+	Move("bg51*", 0, @650, @0, null, true);
+	DrawEffectSkip("bg51b", 1000, "Ripple", 150, 50, null);
+
+	CreateSE("SE01L","se背景_ガヤ_建物炎上_L");
+	MusicStart("SE01L",2000,200,0,1000,null,true);
+
+	Move("bg51*", 60000, @-650, @0, null, false);
+
+	FadeDelete("pl01", 2000, null, true);
+
+
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000130b05">
+그때 본 풍경―― 선명한 석양에&, 반짝반짝 빛나던 바다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000140b05">
+ｳｪﾀﾇ&, ｼﾒﾁﾟﾇﾑ ｺｸｹｰ&.
+
+//Fw("fwマナ_通常_normal");
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000150b05">
+그 모든 게 내 손에서 빠져나가 버렸어&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000160b05">
+그리고 무엇보다도…… 슈&.
+네가 곁에 없어&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000170b05">
+ｾ錂ｰｼｭ?
+ｹｹｰ｡ ﾀﾟｸﾈ ｰﾅｾﾟ?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//フラッシュバック、燃える教会に佇むマナ。
+
+	TextBoxDelete();
+
+	Wait(500);
+
+	SetVolumeEX("SE01L", 500, 0, null);
+	SetVolumeEX("SE02L", 500, 1, null);
+
+	CreateColorEXadd("co01", 5000, "FFFFFF");
+	Fade("co01", 200, 1000, null, true);
+
+	Delete("bg*");
+	Delete("dr*");
+	CreateTextureSP("ev01", 200, Center, Middle, "cg/bg/bg004011_1_教会内部火災_子供たち.jpg");
+	SetTone("ev01", Monochrome);
+
+	Fade("co01", 500, 100, null, true);
+
+	Wait(500);
+
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000180b05">
+｡ｦ｡ｦｳｻｰ｡&, ｱｫｹｰﾀﾌｶｭ?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	Wait(500);
+
+	Fade("co01", 200, 1000, null, true);
+
+	Delete("ev01");
+	Delete("bg01");
+
+	CreateTextureSP("bg03", 100, Center, middle, "cg/bg/bg006002_3_六本木ヒルズ屋上.jpg");
+	CreateMovieSP("mv01", 100, center, middle, true, true, "dx/mvk200.ngs");
+	Zoom("mv01", 0, 2000, 2000, null, true);
+
+	SetVolumeEX("SE02L", 2000, 1000, null);
+
+	FadeDelete("co01", 2000, null, true);
+	Wait(500);
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+//Fw("fwマナ_通常_normal");
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000190b05">
+――내게는 이제 아무것도 없어&.
+
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000200b05">
+아무것도 없으니까――<RUBY TEXT="···">모든 게</RUBY> <RUBY TEXT="···">사라져</RUBY> <RUBY TEXT="····">버리면 돼</RUBY>&.
+
+//Fw("fwマナ_通常_normal");
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000210b05">
+ｳ｡ｳｻ ｹｮﾀﾚ&.
+전부&, 전부&, 텅 비워 버리자&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000220b05">
+새로운 세계 따윈 필요 없어&.
+ｱﾗｷ｡｡ｪ｡ｪ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreateTextureEX("bg04", 100, Center, -150, "cg/bg/l/bg006002_3_六本木ヒルズ屋上_l.jpg");
+	Request("bg04", Smoothing);
+	Zoom("bg04", 0, 1500, 1500, null, true);
+	Fade("bg04", 1000, 1000, null, true);
+	Wait(300);
+
+	//Fw("fwマナ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX06/0000230b05">
+슈가 없는 세계 따윈&, 아무 의미도 없는걸&.
+
+
+//ＳＥ：マナの歌
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+//おがみ：★演出　ファイル跨ぐため、次のスクリプトで演出します。
+
+	SetVolumeEX("SE02L", 3500, 0, null);
+
+	//Wait(1500);
+
+
+	//ClearFadeAll(3000, true);
+
+
+//→LX0601
+
+
+//	ClearFadeAll(1000, true);
+
+}

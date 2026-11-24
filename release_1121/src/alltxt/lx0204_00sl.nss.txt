@@ -1,0 +1,65 @@
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0204_00sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+
+}
+
+
+scene lx0204_00sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//解放する
+//→→LX0204a
+
+//断罪する
+//→→LX0204b
+
+////////////////////////////////////////
+
+//■選択肢
+	$select_fade=true;
+	SetChoice02("ﾇｮｾ錝ﾘｴﾙ","ｴﾜﾁﾋﾇﾑｴﾙ");
+	WaitChoice02();
+	
+	if($SetChoiceSelect==0){		$GameName = "lx0204a.nss";$lx0104a_00sl選択肢=1;$GOOD_MAN_POINT=$GOOD_MAN_POINT+1;$FLAG_OF_STORY["解放する"]=true;}
+	else if($SetChoiceSelect==1){	$GameName = "lx0204b.nss";$lx0104a_00sl選択肢=0;}
+
+}

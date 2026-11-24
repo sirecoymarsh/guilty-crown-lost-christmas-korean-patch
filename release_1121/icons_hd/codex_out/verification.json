@@ -1,0 +1,42 @@
+{
+  "canvas": [
+    104,
+    104
+  ],
+  "mode": "RGBA",
+  "crystal_frames": 34,
+  "auto_frames": 16,
+  "all_50_size_mode_names": "passed by frame-manifest generation",
+  "crystal_alpha_masks": 1,
+  "crystal_hold_and_reverse": true,
+  "webp_preview_ms": 100,
+  "webp_preview_timing": "comparison only; engine cadence not measured",
+  "new_art": "imagegen sprite atlas edits from provided original references",
+  "technical_export": "System.Drawing crop/scale/alpha/cycle interpolation; Pillow WebP encoding",
+  "runtime_integration": "Claude owns integration; game files unchanged",
+  "visual_review": "Static comparisons at 104px/40px and browser animated preview reviewed; dark and light backgrounds checked.",
+  "viewer_checks": {
+    "images_loaded": 100,
+    "console_errors": 0,
+    "actual_wheel_up": "100% to 120%, then 205%",
+    "pointer_centered_sync": "Both canvas transforms: zoom 2.0513538709100985, panX -28.64027448739435, panY 12.080351155810611",
+    "actual_wheel_down": "100% to 77%",
+    "reset": "104px / 100%",
+    "animation_after_zoom": "Frame advanced from 1 to 29; both panes equal",
+    "display_size_40px": "auto frame 008 observed"
+  },
+  "webp": {
+    "crystal": {
+      "encoded_frames": 30,
+      "duration_ms": 3400,
+      "png_frames": 34
+    },
+    "auto": {
+      "encoded_frames": 16,
+      "duration_ms": 1600,
+      "png_frames": 16
+    }
+  },
+  "loop_boundary": "Auto last-to-first premultiplied RGBA mean difference 0.14362, 0.86 x median adjacent-frame difference; no boundary-only spike.",
+  "not_tested": "Game integration/rendering/engine cadence; owned by Claude per handoff"
+}

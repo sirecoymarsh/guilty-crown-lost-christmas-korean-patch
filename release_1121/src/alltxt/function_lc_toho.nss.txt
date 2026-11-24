@@ -1,0 +1,2548 @@
+
+
+
+
+
+//	PhaseSet(2);
+//	WaitKey();
+
+//	PhaseOn();
+//	WaitKey();
+
+
+
+
+
+
+.//■音プロセス汎用
+//▽途中再生
+function MusicStartPro($CPナット名, $CP秒数, $CP音量, $CPパン, $CP再生速度, $CPテンポ, $CPループ,$CP待ち)
+{
+	Request("@ＳＥプロセス", Stop);
+	Delete("@ＳＥプロセス");
+	WaitAction("@ＳＥプロセス", null);
+
+	CreateProcess("ＳＥプロセス", 150, 0, 0, "MusicMacro");
+	SetAlias("ＳＥプロセス", "ＳＥプロセス");
+	Request("ＳＥプロセス", Start);
+	Request("ＳＥプロセス", Disused);
+}
+function MusicMacro()
+{
+	Wait($CP待ち);
+//	MusicStart($CPナット名,$CP秒数,$CP音量,$CPパン,$CP再生速度,$CPテンポ,$CPループ);
+
+	Request($CPナット名, "Play");
+
+	SetFrequency($CPナット名, 0, $CP再生速度, null);
+	SetPan($CPナット名, 0, $CPパン, null);
+	SetLoop($CPナット名, $CPループ);
+
+	//SetVolumeEX($CPナット名, $CP秒数, $CP音量, $CPテンポ);
+		$CP_DynamicRange=$CP音量/2;
+		if($CP音量==1){
+			$CP_DynamicRange=1;
+		}
+		SetVolume($CPナット名, $CP秒数, $CP_DynamicRange, $CPテンポ);
+
+	Request($CPナット名, Disused);
+
+	if($CPループ){
+		SetLoop($CPナット名, true);
+	}else{
+		SetLoop($CPナット名, false);
+	}
+}
+
+
+
+//▽継続再生
+function MusicStartPro2($CPナット名, $CP秒数１, $CP音量, $CPパン, $CP再生速度, $CPテンポ, $CPループ,$CP待ち１,$CP待ち２,$CP秒数２)
+{
+	Request("@ＳＥプロセス", Stop);
+	Delete("@ＳＥプロセス");
+	WaitAction("@ＳＥプロセス", null);
+
+	CreateProcess("ＳＥプロセス", 150, 0, 0, "MusicMacro2");
+	SetAlias("ＳＥプロセス", "ＳＥプロセス");
+	Request("ＳＥプロセス", Start);
+	Request("ＳＥプロセス", Disused);
+}
+function MusicMacro2()
+{
+	Wait($CP待ち１);
+//	MusicStart($CPナット名,$CP秒数１,$CP音量,$CPパン,$CP再生速度,$CPテンポ,$CPループ);
+
+	Request($CPナット名, "Play");
+
+	SetFrequency($CPナット名, 0, $CP再生速度, null);
+	SetPan($CPナット名, 0, $CPパン, null);
+	SetLoop($CPナット名, $CPループ);
+
+	//SetVolumeEX($CPナット名, $CP秒数１, $CP音量, $CPテンポ);
+		$CP_DynamicRange=$CP音量/2;
+		if($CP音量==1){
+			$CP_DynamicRange=1;
+		}
+		SetVolume($CPナット名, $CP秒数１, $CP_DynamicRange, $CPテンポ);
+
+
+	Request($CPナット名, Disused);
+
+	if($CPループ){
+		SetLoop($CPナット名, true);
+	}else{
+		SetLoop($CPナット名, false);
+	}
+	Wait($CP待ち２);
+	SetVolume($CPナット名, $CP秒数２, 0, NULL);
+}
+
+
+
+//▽後始末用（なくてもよし）
+function DustMusic($CPナット名,$CP秒数,$CP音量)
+{
+	Request("@ＳＥプロセス", Stop);
+	Delete("@ＳＥプロセス");
+	WaitAction("@ＳＥプロセス", null);
+
+	SetVolume($CPナット名, $CP秒数, $CP音量, NULL);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.//■シェイクプロセス汎用：
+//▽途中再生
+function ShakePro($SPナット, $SP秒数, $SPX1, $SPY1, $SPX2, $SPY2, $SP幅, $SPテンポ, $SP待ち)
+{
+	Request("@シェイクプロセス", Stop);
+	Delete("@シェイクプロセス");
+	WaitAction("@シェイクプロセス", null);
+
+	CreateProcess("シェイクプロセス", 150, 0, 0, "ShakeMacro");
+	SetAlias("シェイクプロセス", "シェイクプロセス");
+	Request("シェイクプロセス", Start);
+	Request("シェイクプロセス", Disused);
+}
+
+function ShakeMacro()
+{
+	Wait($SP待ち);
+	Shake($SPナット, $SP秒数, $SPX1, $SPY1, $SPX2, $SPY2, $SP幅, $SPテンポ, true);
+}
+
+
+//▽後始末用
+function DustShake()
+{
+	Request("@シェイクプロセス", Stop);
+	Delete("@シェイクプロセス");
+	WaitAction("@シェイクプロセス", null);
+}
+
+//■シェイクプロセス汎用：１
+//▽途中再生
+function ShakePro1($SPナット_１, $SP秒数_１, $SPX1_１, $SPY1_１, $SPX2_１, $SPY2_１, $SP幅_１, $SPテンポ_１, $SP待ち_１)
+{
+	Request("@シェイクプロセス_１", Stop);
+	Delete("@シェイクプロセス_１");
+	WaitAction("@シェイクプロセス_１", null);
+
+	CreateProcess("シェイクプロセス_１", 150, 0, 0, "ShakeMacro1");
+	SetAlias("シェイクプロセス_１", "シェイクプロセス_１");
+	Request("シェイクプロセス_１", Start);
+	Request("シェイクプロセス_１", Disused);
+}
+function ShakeMacro1()
+{
+	Wait($SP待ち_１);
+	Shake($SPナット_１, $SP秒数_１, $SPX1_１, $SPY1_１, $SPX2_１, $SPY2_１, $SP幅_１, $SPテンポ_１, true);
+}
+//▽後始末用
+function DustShake1()
+{
+	Request("@シェイクプロセス_１", Stop);
+	Delete("@シェイクプロセス_１");
+	WaitAction("@シェイクプロセス_１", null);
+}
+
+
+
+//■シェイクプロセス汎用：２
+//▽途中再生
+function ShakePro2($SPナット_２, $SP秒数_２, $SPX1_２, $SPY1_２, $SPX2_２, $SPY2_２, $SP幅_２, $SPテンポ_２, $SP待ち_２)
+{
+	Request("@シェイクプロセス_２", Stop);
+	Delete("@シェイクプロセス_２");
+	WaitAction("@シェイクプロセス_２", null);
+
+	CreateProcess("シェイクプロセス_２", 150, 0, 0, "ShakeMacro2");
+	SetAlias("シェイクプロセス_２", "シェイクプロセス_２");
+	Request("シェイクプロセス_２", Start);
+	Request("シェイクプロセス_２", Disused);
+}
+function ShakeMacro2()
+{
+	Wait($SP待ち_２);
+	Shake($SPナット_２, $SP秒数_２, $SPX1_２, $SPY1_２, $SPX2_２, $SPY2_２, $SP幅_２, $SPテンポ_２, true);
+}
+//▽後始末用
+function DustShake2()
+{
+	Request("@シェイクプロセス_２", Stop);
+	Delete("@シェイクプロセス_２");
+	WaitAction("@シェイクプロセス_２", null);
+}
+
+
+
+.//■フラッシュプロセス汎用
+//▽途中再生
+function FlashPro($FPナット, $FP表示秒数, $FP透明度１, $FP待ち１, $FP消去秒数, $FP透明度２, $FP待ち２)
+{
+	Request("@フラッシュプロセス", Stop);
+	Delete("@フラッシュプロセス");
+	WaitAction("@フラッシュプロセス", null);
+
+	CreateProcess("フラッシュプロセス", 150, 0, 0, "FlashMacro");
+	SetAlias("フラッシュプロセス", "フラッシュプロセス");
+	Request("フラッシュプロセス", Start);
+	Request("フラッシュプロセス", Disused);
+}
+
+function FlashMacro()
+{
+	Wait($FP待ち１);
+	Fade($FPナット, $FP表示秒数, $FP透明度１, null, true);
+	Wait($FP待ち２);
+	Fade($FPナット, $FP消去秒数, $FP透明度２, null, true);
+}
+
+//▽後始末用
+function DustFlash($FPナット名,$FP目標秒数,$FP目標透明度,$FPテンポ,$FP待ち)
+{
+	//★ロック設置
+	//LockVideo(true);
+
+	Request("@フラッシュプロセス", Stop);
+	Delete("@フラッシュプロセス");
+	WaitAction("@フラッシュプロセス", null);
+
+	//★ロック設置
+	//LockVideo(false);
+
+	if($FP待ち){
+		Fade($FPナット名, $FP目標秒数, $FP目標透明度, $FPテンポ, true);
+	}else if($FP待ち==false){
+		Fade($FPナット名, $FP目標秒数, $FP目標透明度, $FPテンポ, false);
+	}else{
+		Fade($FPナット名, $FP目標秒数, $FP目標透明度, $FPテンポ, $FP待ち);
+	}
+}
+
+
+.//■ムーブプロセス汎用
+//▽通常ムーブ
+function MovePro($MPナット, $MP秒数, $MPX, $MPY, $MPテンポ, $MP待ち)
+{
+	Request("@ムーブプロセス", Stop);
+	Delete("@ムーブプロセス");
+	WaitAction("@ムーブプロセス", null);
+
+	CreateProcess("ムーブプロセス", 150, 0, 0, "MoveMacro");
+	SetAlias("ムーブプロセス", "ムーブプロセス");
+	Request("ムーブプロセス", Start);
+	Request("ムーブプロセス", Disused);
+}
+
+function MoveMacro()
+{
+	Wait($MP待ち);
+	Move($MPナット, $MP秒数, $MPX, $MPY, $MPテンポ, true);
+}
+
+
+//▽後始末用
+function DustMove()
+{
+	Request("@ムーブプロセス", Stop);
+	Delete("@ムーブプロセス");
+	WaitAction("@ムーブプロセス", null);
+}
+
+
+function MovePro1($MovePro1Nut, $MovePro1Time, $MovePro1X, $MovePro1Y, $MovePro1Tempo, $MovePro1Wait)
+{
+	Request("@MovePro1Pro", Stop);
+	Delete("@MovePro1Pro");
+	WaitAction("@MovePro1Pro", null);
+
+	CreateProcess("MovePro1Pro", 150, 0, 0, "MovePro1Macro");
+	SetAlias("MovePro1Pro", "MovePro1Pro");
+	Request("MovePro1Pro", Start);
+	Request("MovePro1Pro", Disused);
+}
+
+function MovePro1Macro()
+{
+	Wait($MovePro1Wait);
+	Move($MovePro1Nut, $MovePro1Time, $MovePro1X, $MovePro1Y, $MovePro1Tempo, true);
+}
+
+
+//▽後始末用
+function DustMovePro1()
+{
+	Request("@MovePro1Pro", Stop);
+	Delete("@MovePro1Pro");
+	WaitAction("@MovePro1Pro", null);
+}
+
+
+function MovePro2($MovePro2Nut, $MovePro2Time, $MovePro2X, $MovePro2Y, $MovePro2Tempo, $MovePro2Wait)
+{
+	Request("@MovePro2Pro", Stop);
+	Delete("@MovePro2Pro");
+	WaitAction("@MovePro2Pro", null);
+
+	CreateProcess("MovePro2Pro", 150, 0, 0, "MovePro2Macro");
+	SetAlias("MovePro2Pro", "MovePro2Pro");
+	Request("MovePro2Pro", Start);
+	Request("MovePro2Pro", Disused);
+}
+
+function MovePro2Macro()
+{
+	Wait($MovePro2Wait);
+	Move($MovePro2Nut, $MovePro2Time, $MovePro2X, $MovePro2Y, $MovePro2Tempo, true);
+}
+
+
+//▽後始末用
+function DustMovePro2()
+{
+	Request("@MovePro2Pro", Stop);
+	Delete("@MovePro2Pro");
+	WaitAction("@MovePro2Pro", null);
+}
+
+
+
+
+
+
+
+
+
+
+
+.//■Zoomプロセス汎用
+//▽通常ズーム
+function ZoomPro($ZoomProNut, $ZoomProTime, $ZoomProH, $ZoomProV, $ZoomProTempo, $ZoomProWait)
+{
+	Request("@ZoomProPro", Stop);
+	Delete("@ZoomProPro");
+	WaitAction("@ZoomProPro", null);
+
+	CreateProcess("ZoomProPro", 150, 0, 0, "ZoomProMacro");
+	SetAlias("ZoomProPro", "ZoomProPro");
+	Request("ZoomProPro", Start);
+	Request("ZoomProPro", Disused);
+}
+
+function ZoomProMacro()
+{
+	Wait($ZoomProWait);
+	Zoom($ZoomProNut, $ZoomProTime, $ZoomProH, $ZoomProV, $ZoomProTempo, true);
+}
+
+
+//▽後始末用
+function DustZoom()
+{
+	Request("@ZoomProPro", Stop);
+	Delete("@ZoomProPro");
+	WaitAction("@ZoomProPro", null);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.//■スクリプト中演出マクロ：近づいてくる男
+function CreateCome1($NutCome1,$TimeCome1,$XCome1,$YCome1,$TempoCome1,$WalkCome1)
+{
+	CreateProcess("絵ProCome1", 150, 0, 0, "ProcessCome1");
+	SetAlias("絵ProCome1", "絵ProCome1");
+	Request("絵ProCome1", Start);
+	Request("絵ProCome1", Disused);
+}
+function StopCome1()
+{
+	Delete("@絵ProCome1");
+}
+function ProcessCome1()
+{
+	$X1_Come1=$XCome1/3;
+	$X2_Come1=$X1_Come1*2;
+	$Y1_Come1=$YCome1+($YCome1/4);
+	$Y2_Come1=$YCome1+($YCome1/8);
+
+	$TempCome1=0;
+	while($WalkCome1>$健脚テンプ１){
+		BezierMove($NutCome1, $TimeCome1, (@0,@0){@$X1_Come1,@$Y1_Come1}{@$X2_Come1,@@$Y2_Come1}(@$XCome1,@$YCome1), $TempoCome1, true);
+		$TempCome1++;
+	}
+}
+
+function CreateCome2($NutCome2,$TimeCome2,$XCome2,$YCome2,$TempoCome2,$WalkCome2)
+{
+	CreateProcess("絵ProCome2", 150, 0, 0, "ProcessCome2");
+	SetAlias("絵ProCome2", "絵ProCome2");
+	Request("絵ProCome2", Start);
+	Request("絵ProCome2", Disused);
+}
+function StopCome2()
+{
+	Delete("@絵ProCome2");
+}
+function ProcessCome2()
+{
+	$X1_Come2=$XCome2/3;
+	$X2_Come2=$X1_Come2*2;
+	$Y1_Come2=$YCome2+($YCome2/4);
+	$Y2_Come2=$YCome2+($YCome2/8);
+
+	$TempCome2=0;
+	while($WalkCome2>$健脚テンプ１){
+		BezierMove($NutCome2, $TimeCome2, (@0,@0){@$X1_Come2,@$Y1_Come2}{@$X2_Come2,@@$Y2_Come2}(@$XCome2,@$YCome2), $TempoCome2, true);
+		$TempCome2++;
+	}
+}
+
+//■スクリプト中演出マクロ：ザーメン
+function CreateSemen("プロセス名",$精液名)
+{
+	CreateColorEX("絵精液", 20000, FFFFFF);
+	CreateProcess("絵精液プロセス", 150, 0, 0, "プロセス名");
+	SetAlias("絵精液プロセス", "絵精液プロセス");
+
+	Request("絵精液プロセス", Start);
+	Request("絵精液プロセス", Disused);
+}
+function StopSemen()
+{
+	Delete("@絵精液*");
+}
+function SemenProcess()
+{
+	Fade("@絵精液", 0, 1000, null, true);
+	Fade("@絵精液", 200, 0, null, true);
+	Fade("@絵精液", 0, 1000, null, true);
+	Fade("@絵精液", 200, 0, null, true);
+	Wait(500);
+
+	Fade($精液名, 3000, 1000, null, false);
+
+	Fade("@絵精液", 2000, 1000, null, true);
+	Fade("@絵精液", 2000, 0, null, true);
+
+	WaitAction($精液名, null);
+}
+
+//■スクリプト中演出マクロ：エレクトたっち
+function CreateElect("プロセス名",$エレクト待ち)
+{
+	CreateColorEX("絵電気１", 20000, FFFFFF);
+	Request("絵電気１", AddRender);
+	CreateColorEX("絵電気２", 20000, fcf100);
+	Request("絵電気２", OverlayRender);
+
+	CreateProcess("絵電気プロセス", 150, 0, 0, "プロセス名");
+	SetAlias("絵電気プロセス", "絵電気プロセス");
+	Request("絵電気プロセス", Start);
+	Request("絵電気プロセス", Disused);
+}
+function StopElect()
+{
+	Delete("@絵電気*");
+}
+function ElectProcess()
+{
+	Wait($エレクト待ち);
+
+	Fade("@絵電気２", 0, 500, null, false);
+	Fade("@絵電気１", 0, 800, null, true);
+
+	Fade($temp1950, 0, 1000, null, true);
+
+	Fade("@絵電気２", 1000, 0, null, false);
+	Fade("@絵電気１", 200, 300, null, true);
+	Fade("@絵電気１", 0, 600, null, true);
+	Fade("@絵電気１", 200, 300, null, true);
+
+	Fade("@絵電気２", 0, 800, null, false);
+	Fade("@絵電気１", 0, 1000, null, true);
+
+	Fade("@絵電気２", 1000, 300, null, false);
+	Fade("@絵電気１", 600, 300, null, true);
+	Wait(200);
+	Fade("@絵電気１", 0, 600, null, true);
+	Fade("@絵電気１", 100, 300, null, true);
+	Fade("@絵電気１", 0, 800, null, true);
+	Fade("@絵電気１", 100, 300, null, true);
+
+	Fade("@絵電気２", 0, 500, null, false);
+	Fade("@絵電気１", 0, 800, null, true);
+
+	Fade("@絵電気２", 1000, 0, null, false);
+	Fade("@絵電気１", 200, 300, null, true);
+	Fade("@絵電気１", 0, 600, null, true);
+	Fade("@絵電気１", 200, 300, null, true);
+
+	Fade("@絵電気２", 0, 800, null, false);
+	Fade("@絵電気１", 0, 1000, null, true);
+
+	Fade("@絵電気２", 1000, 0, null, false);
+	Fade("@絵電気１", 600, 300, null, true);
+	Wait(200);
+	Fade("@絵電気１", 0, 600, null, true);
+	Fade("@絵電気１", 100, 300, null, true);
+	Fade("@絵電気１", 0, 800, null, true);
+	Fade("@絵電気１", 300, 0, null, true);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.//■プリントシェイク
+function PlainShake(描画優先度, 秒数, X1, Y1, X2, Y2, 震度, 速度, 待ち)
+{
+	CreateEffect("上震度", 描画優先度, 0, 0, 1024, 768, "Plain");
+	SetAlias("上震度","上震度");
+	Request("上震度",Passive);
+
+	Shake("上震度", 秒数, X1, Y1, X2, Y2, 震度, 速度, 待ち);
+	Request("上震度", Disused);
+}
+
+.//■ノーコマクロ
+function OnBG_mono(画像優先度,"画像")
+{
+	OnBG(画像優先度,"画像");
+	SetTone($bgナット, Monochrome);
+}
+
+function CreateTextureEX_mono("ナット名",画像優先度,X軸,Y軸,"画像")
+{
+	CreateTextureEX("ナット名",画像優先度,X軸,Y軸,画像);
+	SetTone("ナット名", Monochrome);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.//■フェイズマクロ
+//▽セット
+function PhaseSet($PhaseNum){
+	$PhasePrio=20000;
+
+	if(0){
+		CreateColor("章黒", $PhasePrio, 0, 0, 1024, 576, "BLACK");
+		SetAlias("章黒", "章黒");
+	}
+
+	CreateMask("章マスク", $PhasePrio, 0, 0, "cg/sys/phase/消去マスク.png", false);
+	SetAlias("章マスク", "章マスク");
+
+	//▼フェイズ//////////////////////////////////////////////////////////////////////
+	$PhaseDaiX0=97;$PhaseDaiY0=70;
+	$PhaseDaiX1=117;$PhaseDaiY1=64;
+	$PhaseDaiX2=139;$PhaseDaiY2=64;
+	$PhaseDaiX3=131;$PhaseDaiY3=55;
+	$PhaseDaiX4=145;$PhaseDaiY4=55;
+	$PhaseDaiX5=159;$PhaseDaiY5=55;
+
+	CreateTextureEX("章フェイズ", $PhasePrio, $PhaseDaiX0, $PhaseDaiY0, "cg/sys/phase/フェイズ.png");
+	SetVertex("章フェイズ", 0, 0);
+	Zoom("章フェイズ", 0, 250, 250, null, false);
+	Request("章フェイズ", Smoothing);
+	CreateTextureEX("章演出フェイズ", $PhasePrio, $PhaseDaiX0, $PhaseDaiY0, "cg/sys/phase/フェイズ.png");
+	SetVertex("章演出フェイズ", 0, 0);
+	Zoom("章演出フェイズ", 0, 250, 250, null, false);
+	Request("章演出フェイズ", Smoothing);
+	Request("章演出フェイズ", AddRender);
+
+	CreateTextureEX("章マスク/章フェイズ", $PhasePrio, $PhaseDaiX0, $PhaseDaiY0, "cg/sys/phase/フェイズ.png");
+	SetVertex("章マスク/章フェイズ", 0, 0);
+	Zoom("章マスク/章フェイズ", 0, 250, 250, null, false);
+	Request("章マスク/章フェイズ", Smoothing);
+	SetShade("章マスク/章フェイズ", HEAVY);
+	Request("章マスク/章フェイズ", AddRender);
+
+	SetFont("Noto Sans KR", 26, 258371, 000000, 100, NONE);
+	CreateTextEX("章フェイズ_パーツ_1", $PhasePrio, 103, 55, Auto, Auto, "a");
+	CreateTextEX("章フェイズ_パーツ_2", $PhasePrio, 103, 55, Auto, Auto, "b");
+	CreateTextEX("章フェイズ_パーツ_3", $PhasePrio, 103, 55, Auto, Auto, "c");
+	CreateTextEX("章フェイズ_パーツ_4", $PhasePrio, 103, 55, Auto, Auto, "d");
+	CreateTextEX("章フェイズ_パーツ_5", $PhasePrio, 103, 55, Auto, Auto, "e");
+	CreateTextEX("章フェイズ_パーツ_6", $PhasePrio, 103, 55, Auto, Auto, "f");
+	CreateTextEX("章フェイズ_パーツ_7", $PhasePrio, 103, 55, Auto, Auto, "g");
+	CreateTextEX("章フェイズ_パーツ_8", $PhasePrio, 103, 55, Auto, Auto, "h");
+	CreateTextEX("章フェイズ_パーツ_9", $PhasePrio, 103, 55, Auto, Auto, "i");
+	CreateTextEX("章フェイズ_パーツ_10", $PhasePrio, 103, 55, Auto, Auto, "j");
+	CreateTextEX("章フェイズ_パーツ_11", $PhasePrio, 103, 55, Auto, Auto, "k");
+	CreateTextEX("章フェイズ_パーツ_12", $PhasePrio, 103, 55, Auto, Auto, "l");
+	CreateTextEX("章フェイズ_パーツ_13", $PhasePrio, 103, 55, Auto, Auto, "m");
+	CreateTextEX("章フェイズ_パーツ_14", $PhasePrio, 103, 55, Auto, Auto, "n");
+	CreateTextEX("章フェイズ_パーツ_15", $PhasePrio, 103, 55, Auto, Auto, "o");
+	CreateTextEX("章フェイズ_パーツ_16", $PhasePrio, 103, 55, Auto, Auto, "p");
+	CreateTextEX("章フェイズ_パーツ_17", $PhasePrio, 103, 55, Auto, Auto, "q");
+	CreateTextEX("章フェイズ_パーツ_18", $PhasePrio, 103, 55, Auto, Auto, "r");
+	CreateTextEX("章フェイズ_パーツ_19", $PhasePrio, 103, 55, Auto, Auto, "s");
+	CreateTextEX("章フェイズ_パーツ_20", $PhasePrio, 103, 55, Auto, Auto, "t");
+	CreateTextEX("章フェイズ_パーツ_21", $PhasePrio, 103, 55, Auto, Auto, "u");
+	CreateTextEX("章フェイズ_パーツ_22", $PhasePrio, 103, 55, Auto, Auto, "v");
+	CreateTextEX("章フェイズ_パーツ_23", $PhasePrio, 103, 55, Auto, Auto, "w");
+	CreateTextEX("章フェイズ_パーツ_24", $PhasePrio, 103, 55, Auto, Auto, "x");
+	CreateTextEX("章フェイズ_パーツ_25", $PhasePrio, 103, 55, Auto, Auto, "y");
+	CreateTextEX("章フェイズ_パーツ_26", $PhasePrio, 103, 55, Auto, Auto, "z");
+	Zoom("章フェイズ_パーツ*", 0, 1000, 700, Dxl2, true);
+
+	SetFont("Noto Sans KR", 20, 258371, 000000, 100, NONE);
+	CreateTextEX("章フェイズ影１", $PhasePrio, $PhaseDaiX1, $PhaseDaiY1, Auto, Auto, "ｴﾜ");
+	CreateTextEX("뤞긲긃귽긛뎓괧", $PhasePrio, $PhaseDaiX2, $PhaseDaiY2, Auto, Auto, "계");
+	CreateTextEX("章フェイズ影３", $PhasePrio, $PhaseDaiX3, $PhaseDaiY3, Auto, Auto, " ");
+	CreateTextEX("章フェイズ影４", $PhasePrio, $PhaseDaiX4, $PhaseDaiY4, Auto, Auto, " ");
+	CreateTextEX("章フェイズ影５", $PhasePrio, $PhaseDaiX5, $PhaseDaiY5, Auto, Auto, " ");
+	Zoom("章フェイズ影*", 0, 1000, 700, Dxl2, true);
+
+	$PhaseColor="58B6A4";//258371//58B6A4//147260//8BE9D7
+	CreateColor("章フェイズ色１", $PhasePrio, 104, 77, 11, 14, $PhaseColor);
+	SetAlias("章フェイズ色１", "章フェイズ色１");
+	CreateColor("章フェイズ色２", $PhasePrio, 118, 77, 11, 14, $PhaseColor);
+	SetAlias("章フェイズ色２", "章フェイズ色２");
+	CreateColor("章フェイズ色３", $PhasePrio, 132, 77, 11, 14, $PhaseColor);
+	SetAlias("章フェイズ色３", "章フェイズ色３");
+	CreateColor("章フェイズ色４", $PhasePrio, 146, 77, 11, 14, $PhaseColor);
+	SetAlias("章フェイズ色４", "章フェイズ色４");
+	CreateColor("章フェイズ色５", $PhasePrio, 160, 77, 11, 14, $PhaseColor);
+	SetAlias("章フェイズ色５", "章フェイズ色５");
+	Request("章フェイズ色*", AddRender);
+
+	//▼数字////////////////////////////////////////////////////////////////////
+	$PhaseMathX0=97;$PhaseMathY0=92;
+	$PhaseMathX1=90;$PhaseMathY1=59;
+	$PhaseMathX2=130;$PhaseMathY2=59;
+
+	$PhaseImg="cg/sys/phase/"+$PhaseNum+"/数字.png";
+	CreateTextureEX("章数字", $PhasePrio, $PhaseMathX0, $PhaseMathY0, $PhaseImg);
+	CreateTextureEX("章演出数字", $PhasePrio, $PhaseMathX0, $PhaseMathY0, $PhaseImg);
+	Request("章演出数字", AddRender);
+
+	CreateTextureEX("章マスク/章数字", $PhasePrio, $PhaseMathX0, $PhaseMathY0, $PhaseImg);
+	SetShade("章マスク/章数字", HEAVY);
+	Request("章マスク/章数字", AddRender);
+
+	SetFont("Noto Sans KR", 60, 258371, 000000, 100, NONE);
+
+	$PhaseCount=1;
+	while($PhaseCount<=9){
+		$PhaseNumMath=$PhaseNum+$PhaseCount;
+
+		if($PhaseNumMath>9){$PhaseNumMath=$PhaseNumMath-10;}
+		if($PhaseNumMath==1){$PhaseNumB="｣ｱ";}
+		else if($PhaseNumMath==2){$PhaseNumB="｣ｲ";}
+		else if($PhaseNumMath==3){$PhaseNumB="｣ｳ";}
+		else if($PhaseNumMath==4){$PhaseNumB="｣ｴ";}
+		else if($PhaseNumMath==5){$PhaseNumB="｣ｵ";}
+		else if($PhaseNumMath==6){$PhaseNumB="｣ｶ";}
+		else if($PhaseNumMath==7){$PhaseNumB="｣ｷ";}
+		else if($PhaseNumMath==8){$PhaseNumB="｣ｸ";}
+		else if($PhaseNumMath==9){$PhaseNumB="｣ｹ";}
+		else{$PhaseNumB="｣ｰ";}
+
+		$PhaseMathNut="章数字_パーツ_"+$PhaseCount;
+		CreateTextEX($PhaseMathNut, $PhasePrio, 105, 99, Auto, Auto, $PhaseNumB);
+
+		$PhaseCount++;
+	}
+
+	CreateTextEX("章数字_パート_1", $PhasePrio, 105, 99, Auto, Auto, "｣ｱ");
+	CreateTextEX("章数字_パート_2", $PhasePrio, 105, 99, Auto, Auto, "｣ｲ");
+	CreateTextEX("章数字_パート_3", $PhasePrio, 105, 99, Auto, Auto, "｣ｳ");
+	CreateTextEX("章数字_パート_4", $PhasePrio, 105, 99, Auto, Auto, "｣ｴ");
+	CreateTextEX("章数字_パート_5", $PhasePrio, 105, 99, Auto, Auto, "｣ｵ");
+	CreateTextEX("章数字_パート_6", $PhasePrio, 105, 99, Auto, Auto, "｣ｶ");
+	CreateTextEX("章数字_パート_7", $PhasePrio, 105, 99, Auto, Auto, "｣ｷ");
+	CreateTextEX("章数字_パート_8", $PhasePrio, 105, 99, Auto, Auto, "｣ｸ");
+	CreateTextEX("章数字_パート_9", $PhasePrio, 105, 99, Auto, Auto, "｣ｹ");
+
+	if($PhaseNum==1){$PhaseNumB="｣ｱ";}
+	else if($PhaseNum==2){$PhaseNumB="｣ｲ";}
+	else if($PhaseNum==3){$PhaseNumB="｣ｳ";}
+	else if($PhaseNum==4){$PhaseNumB="｣ｴ";}
+	else if($PhaseNum==5){$PhaseNumB="｣ｵ";}
+	else if($PhaseNum==6){$PhaseNumB="｣ｶ";}
+	else if($PhaseNum==7){$PhaseNumB="｣ｷ";}
+	else if($PhaseNum==8){$PhaseNumB="｣ｸ";}
+	else if($PhaseNum==9){$PhaseNumB="｣ｹ";}
+	else{$PhaseNumB="｣ｰ";}
+
+	CreateTextEX("章数字影１", $PhasePrio, $PhaseMathX1, $PhaseMathY1, Auto, Auto, "｣ｰ");
+	CreateTextEX("章数字影２", $PhasePrio, $PhaseMathX2, $PhaseMathY2, Auto, Auto, $PhaseNumB);
+
+	$PhaseColor="58B6A4";//258371//58B6A4//147260//8BE9D7
+	CreateColor("章数字色１", $PhasePrio, 105, 99, 32, 44, $PhaseColor);
+	SetAlias("章数字色１", "章数字色１");
+	CreateColor("章数字色２", $PhasePrio, 143, 99, 32, 44, $PhaseColor);
+	SetAlias("章数字色２", "章数字色２");
+	Request("章数字色*", AddRender);
+
+	//▼文字//////////////////////////////////////////////////////////////////////
+	SetFont("Noto Sans KR", 36, 258371, 000000, 100, NONE);
+
+	$PhaseMojiH=34;$PhaseMojiV=34;
+	$PhaseMojiAddX=36;$PhaseMojiAddY=0;
+
+	$PhaseMojiAddCX=5;
+	$PhaseMojiAddCY=7;
+	$PhaseMojiAddPX=5;
+	$PhaseMojiAddPY=-12;
+
+	if($PhaseNum==1){
+		$PhaseName="전장의 메리 크리스마스";
+		$PhaseMojiCount=12;
+		$PhaseMojiX=596;$PhaseMojiY=436;
+		$PhaseMojiH=32;$PhaseMojiV=47;
+		$PhaseMojiAddX=32;$PhaseMojiAddY=0;
+		$PhaseMojiAddCX=10;$PhaseMojiAddCY=0;
+		$PhaseMojiAddPX=11;$PhaseMojiAddPY=5;
+		SetFont("Noto Sans KR", 30, 258371, 000000, 100, NONE);
+		$KR_PhaseRubyTrigger=4;
+		$SYSTEM_text_margin_column=2;
+		$PhaseName1="전젠젼";
+		$PhaseName2="장쟁쟝";
+		$PhaseName3="ﾀﾇﾀﾌﾀﾚ";
+		$PhaseName4="｡｡｡｡｡｡";
+		$PhaseName5="메며몌";
+		$PhaseName6="ｸｮｸｶｸﾅ";
+		$PhaseName7="｡｡｡｡｡｡";
+		$PhaseName8="ﾅｩｴ版ｰ";
+		$PhaseName9="ｸｮｸｶｸﾅ";
+		$PhaseName10="ｽｺ堙ｽﾃ";
+		$PhaseName11="ｸｶｸﾅｸﾏ";
+		$PhaseName12="ｽｺ堙ｽﾃ";
+	}
+	else if($PhaseNum==2){
+		$PhaseName="크리스마스의 악몽";
+		$PhaseMojiCount=9;
+		$PhaseMojiX=383;$PhaseMojiY=436;
+		$PhaseMojiH=36;$PhaseMojiV=47;
+		$PhaseMojiAddX=36;$PhaseMojiAddY=0;
+		$PhaseMojiAddCX=148;$PhaseMojiAddCY=0;
+		$PhaseMojiAddPX=149;$PhaseMojiAddPY=2;
+		SetFont("Noto Sans KR", 34, 258371, 000000, 100, NONE);
+		$KR_PhaseRubyTrigger=4;
+		$SYSTEM_text_margin_column=2;
+		$PhaseName1="ﾅｩｴ版ｰ";
+		$PhaseName2="ｸｮｸｶｸﾅ";
+		$PhaseName3="ｽｺ堙ｽﾃ";
+		$PhaseName4="ｸｶｸﾅｸﾏ";
+		$PhaseName5="ｽｺ堙ｽﾃ";
+		$PhaseName6="ﾀﾇﾀﾌﾀﾚ";
+		$PhaseName7="｡｡｡｡｡｡";
+		$PhaseName8="악액약";
+		$PhaseName9="ｸ戴";
+	}
+	else if($PhaseNum==3){
+		$PhaseName="우리는 천사가 아니다";
+		$PhaseMojiCount=11;
+		$PhaseMojiX=632;$PhaseMojiY=436;
+		$PhaseMojiH=32;$PhaseMojiV=47;
+		$PhaseMojiAddX=32;$PhaseMojiAddY=0;
+		$PhaseMojiAddCX=9;$PhaseMojiAddCY=0;
+		$PhaseMojiAddPX=10;$PhaseMojiAddPY=5;
+		SetFont("Noto Sans KR", 30, 258371, 000000, 100, NONE);
+		$KR_PhaseRubyTrigger=4;
+		$SYSTEM_text_margin_column=2;
+		$PhaseName1="우워웨";
+		$PhaseName2="ｸｮｸｶｸﾅ";
+		$PhaseName3="ｴﾂｴﾍｴﾑ";
+		$PhaseName4="｡｡｡｡｡｡";
+		$PhaseName5="ﾃｵﾃｾﾃﾅ";
+		$PhaseName6="ｻ扈";
+		$PhaseName7="ｰ｡ｰｳｰｼ";
+		$PhaseName8="｡｡｡｡｡｡";
+		$PhaseName9="ｾﾆｾﾖｾﾟ";
+		$PhaseName10="니다대";
+		$PhaseName11="다대댜";
+	}
+	else if($PhaseNum==4){
+		$PhaseName="산타가 죽이러 온다";
+		$PhaseMojiCount=10;
+		$PhaseMojiX=561;$PhaseMojiY=436;
+		$PhaseMojiH=36;$PhaseMojiV=47;
+		$PhaseMojiAddX=36;$PhaseMojiAddY=0;
+		$PhaseMojiAddCX=39;$PhaseMojiAddCY=0;
+		$PhaseMojiAddPX=40;$PhaseMojiAddPY=2;
+		SetFont("Noto Sans KR", 34, 258371, 000000, 100, NONE);
+		$KR_PhaseRubyTrigger=4;
+		$SYSTEM_text_margin_column=2;
+		$PhaseName1="산샌샨";
+		$PhaseName2="ﾅｸﾅﾂﾅﾋ";
+		$PhaseName3="ｰ｡ｰｳｰｼ";
+		$PhaseName4="｡｡｡｡｡｡";
+		$PhaseName5="ﾁﾗ｢H｢h";
+		$PhaseName6="이자재";
+		$PhaseName7="ｷｯｷｹｷﾁ";
+		$PhaseName8="｡｡｡｡｡｡";
+		$PhaseName9="ｿﾂｿﾏｿﾘ";
+		$PhaseName10="다대댜";
+	}
+	else if($PhaseNum==5){
+		$PhaseName="ｱﾗｷｽｸｰ";
+		$PhaseMojiCount=3;
+		$PhaseMojiX=815;$PhaseMojiY=436;
+		$PhaseMojiH=36;$PhaseMojiV=47;
+		$PhaseMojiAddX=36;$PhaseMojiAddY=0;
+		$PhaseMojiAddCX=39;$PhaseMojiAddCY=0;
+		$PhaseMojiAddPX=40;$PhaseMojiAddPY=2;
+		SetFont("Noto Sans KR", 34, 258371, 000000, 100, NONE);
+		$KR_PhaseRubyTrigger=3;
+		$SYSTEM_text_margin_column=2;
+		$PhaseName1="그긔기";
+		$PhaseName2="ｷｽｷﾅ蛇";
+		$PhaseName3="ｸｰｸｸｸﾇ";
+	}
+	else if($PhaseNum==6){
+		$PhaseName="다이 하드";
+		$PhaseMojiCount=5;
+		$PhaseMojiX=779;$PhaseMojiY=436;
+		$PhaseMojiH=36;$PhaseMojiV=46;
+		$PhaseMojiAddX=36;$PhaseMojiAddY=0;
+		$PhaseMojiAddCX=21;$PhaseMojiAddCY=0;
+		$PhaseMojiAddPX=22;$PhaseMojiAddPY=2;
+		SetFont("Noto Sans KR", 34, 258371, 000000, 100, NONE);
+		$KR_PhaseRubyTrigger=4;
+		$SYSTEM_text_margin_column=2;
+		$PhaseName1="다대댜";
+		$PhaseName2="이자재";
+		$PhaseName3="｡｡｡｡｡｡";
+		$PhaseName4="하해햐";
+		$PhaseName5="드듸디";
+	}
+	else if($PhaseNum==7){
+		$PhaseName="멋진 인생!";
+		$PhaseMojiCount=6;
+		$PhaseMojiX=632;$PhaseMojiY=436;
+		$PhaseMojiH=36;$PhaseMojiV=47;
+		$PhaseMojiAddX=36;$PhaseMojiAddY=0;
+		$PhaseMojiAddCX=70;$PhaseMojiAddCY=0;
+		$PhaseMojiAddPX=71;$PhaseMojiAddPY=2;
+		SetFont("Noto Sans KR", 34, 258371, 000000, 100, NONE);
+		$KR_PhaseRubyTrigger=4;
+		$SYSTEM_text_margin_column=2;
+		$PhaseName1="멋멧몃";
+		$PhaseName2="ﾁｧﾂｲ";
+		$PhaseName3="｡｡｡｡｡｡";
+		$PhaseName4="인잔잰";
+		$PhaseName5="ｻｼｧｼｬ";
+		$PhaseName6="｣｡｣｡｣｡";
+	}
+
+	$PhaseImg="cg/sys/phase/"+$PhaseNum+"/タイトル.png";
+	CreateTextureEX("章文字", $PhasePrio, $PhaseMojiX, $PhaseMojiY, $PhaseImg);
+	SetVertex("章文字", 0, 0);
+	Zoom("章文字", 0, 250, 250, null, false);
+	Request("章文字", Smoothing);//429
+	CreateTextureEX("章演出文字", $PhasePrio, $PhaseMojiX, $PhaseMojiY, $PhaseImg);
+	SetVertex("章演出文字", 0, 0);
+	Zoom("章演出文字", 0, 250, 250, null, false);
+	Request("章演出文字", Smoothing);//429
+	Request("章演出文字", AddRender);
+
+	CreateTextureEX("章マスク/章文字", $PhasePrio, $PhaseMojiX, $PhaseMojiY, $PhaseImg);
+	SetVertex("章マスク/章文字", 0, 0);
+	Zoom("章マスク/章文字", 0, 250, 250, null, false);
+	Request("章マスク/章文字", Smoothing);//429
+	SetShade("章マスク/章文字", HEAVY);
+	Request("章マスク/章文字", AddRender);
+
+	$PhaseMojiCX=$PhaseMojiX+$PhaseMojiAddCX;//窓枠や色
+	$PhaseMojiCY=$PhaseMojiY+$PhaseMojiAddCY;
+	$PhaseMojiPX=$PhaseMojiX+$PhaseMojiAddPX;//文字
+	$PhaseMojiPY=$PhaseMojiY+$PhaseMojiAddPY;
+
+	$PhaseColor="58B6A4";//258371//58B6A4//147260//8BE9D7
+	$PhaseMojiCX2=$PhaseMojiCX;
+	$PhaseMojiCY2=$PhaseMojiCY;
+	$PhaseMojiPX2=$PhaseMojiPX;
+	$PhaseMojiPY2=$PhaseMojiPY;
+	$PhaseCount=1;
+	while($PhaseMojiCount>=$PhaseCount){
+
+		$PhaseNut="章文字窓"+$PhaseCount;
+		CreateWindow($PhaseNut, 150, $PhaseMojiCX2, $PhaseMojiCY2, $PhaseMojiH, $PhaseMojiV, false);
+		SetAlias($PhaseNut, $PhaseNut);
+		$PhaseNut="章文字窓"+$PhaseCount+"/章文字";
+		$PhaseNameImg=VariableValue($,"PhaseName"+$PhaseCount);
+		CreateTextEX($PhaseNut, $PhasePrio, $PhaseMojiPX2, $PhaseMojiPY2, Auto, Auto, $PhaseNameImg);
+
+//		$PhaseNut="章文字影"+$PhaseCount;
+//		$文字=Substr($PhaseName,$PhaseCount-1,1);
+//		CreateTextEX($PhaseNut, $PhasePrio, $PhaseMojiPX2, $PhaseMojiPY2, Auto, Auto, $文字);
+
+		$PhaseNut="章文字色"+$PhaseCount;
+		CreateColor($PhaseNut, $PhasePrio, $PhaseMojiCX2, $PhaseMojiCY2, $PhaseMojiH, $PhaseMojiV, $PhaseColor);
+		SetAlias($PhaseNut, $PhaseNut);
+		Request($PhaseNut, AddRender);
+
+		$PhaseMojiCX2+=$PhaseMojiAddX;
+		$PhaseMojiCY2+=$PhaseMojiAddY;
+		$PhaseMojiPX2+=$PhaseMojiAddX;
+		$PhaseMojiPY2+=$PhaseMojiAddY;
+		$PhaseCount++;
+	}
+
+	$PhaseMojiMagin=3;
+	$PhaseMove=-$PhaseMojiAddX*$PhaseMojiMagin;
+	Move("章文字窓*/章文字", 0, @$PhaseMove, @0, Axl1, true);
+
+//	CreateColor("章文字色", $PhasePrio, $PhaseMojiCX, $PhaseMojiCY, $PhaseMojiH, $PhaseMojiV, $PhaseColor);
+//	SetAlias($PhaseNut, $PhaseNut);
+//	Request("章数字色*", AddRender);
+
+
+	//▼英字//////////////////////////////////////////////////////////////////////
+	SetFont("Noto Sans KR", 12, 258371, 000000, 100, NONE);
+
+	$PhaseEigoH=8;$PhaseEigoV=11;
+	$PhaseEigoAddX=10;$PhaseEigoAddY=0;
+	$PhaseEigoAddX2=16;
+
+	$PhaseEigoAddCX=1;
+	$PhaseEigoAddCY=2;
+	$PhaseEigoAddPX=3;
+	$PhaseEigoAddPY=-3;
+
+	if($PhaseNum==1){
+		$PhaseName="메리 크리스마스, 스크루지 씨";
+		$PhaseEigoCount=16;
+		$PhaseEigoX=708;$PhaseEigoY=482;
+		$PhaseEigoH=12;$PhaseEigoV=16;
+		$PhaseEigoAddX=12;$PhaseEigoAddY=0;
+		$PhaseEigoAddCX=43;$PhaseEigoAddCY=0;
+		$PhaseEigoAddPX=44;$PhaseEigoAddPY=2;
+		SetFont("Noto Sans KR", 10, 258371, 000000, 100, NONE);
+		$PhaseEigoAddX2=12;
+		$KR_PhaseRubySpacing=2;
+		$PhaseName1="메며";
+		$PhaseName2="ｸｮｸｶ";
+		$PhaseName3="｡｡｡｡";
+		$PhaseName4="크킈";
+		$PhaseName5="ｸｮｸｶ";
+		$PhaseName6="ｽｺ堙";
+		$PhaseName7="ｸｶｸﾅ";
+		$PhaseName8="ｽｺ堙";
+		$PhaseName9="｣ｬ｣ｬ";
+		$PhaseName10="｡｡｡｡";
+		$PhaseName11="ｽｺ堙";
+		$PhaseName12="크킈";
+		$PhaseName13="루뤄";
+		$PhaseName14="ﾁ･";
+		$PhaseName15="｡｡｡｡";
+		$PhaseName16="ｾｾｾﾆ";
+	}
+	else if($PhaseNum==2){
+		$PhaseName="크리스마스의 악몽";
+		$PhaseEigoCount=9;
+		$PhaseEigoX=688;$PhaseEigoY=482;
+		$PhaseEigoH=12;$PhaseEigoV=16;
+		$PhaseEigoAddX=12;$PhaseEigoAddY=0;
+		$PhaseEigoAddCX=95;$PhaseEigoAddCY=0;
+		$PhaseEigoAddPX=96;$PhaseEigoAddPY=2;
+		SetFont("Noto Sans KR", 10, 258371, 000000, 100, NONE);
+		$PhaseEigoAddX2=12;
+		$KR_PhaseRubySpacing=2;
+		$PhaseName1="크킈";
+		$PhaseName2="ｸｮｸｶ";
+		$PhaseName3="ｽｺ堙";
+		$PhaseName4="ｸｶｸﾅ";
+		$PhaseName5="ｽｺ堙";
+		$PhaseName6="ﾀﾇﾀﾌ";
+		$PhaseName7="｡｡｡｡";
+		$PhaseName8="ｾﾇｾﾗ";
+		$PhaseName9="ｸ";
+	}
+	else if($PhaseNum==3){
+		$PhaseName="우리는 천사가 아니다";
+		$PhaseEigoCount=11;
+		$PhaseEigoX=837;$PhaseEigoY=482;
+		$PhaseEigoH=12;$PhaseEigoV=16;
+		$PhaseEigoAddX=12;$PhaseEigoAddY=0;
+		$PhaseEigoAddCX=9;$PhaseEigoAddCY=0;
+		$PhaseEigoAddPX=10;$PhaseEigoAddPY=2;
+		SetFont("Noto Sans KR", 10, 258371, 000000, 100, NONE);
+		$PhaseEigoAddX2=12;
+		$KR_PhaseRubySpacing=2;
+		$PhaseName1="우워";
+		$PhaseName2="ｸｮｸｶ";
+		$PhaseName3="ｴﾂｴﾍ";
+		$PhaseName4="｡｡｡｡";
+		$PhaseName5="ﾃｵﾃｾ";
+		$PhaseName6="사새";
+		$PhaseName7="ｰ｡ｰｳ";
+		$PhaseName8="｡｡｡｡";
+		$PhaseName9="ｾﾆｾﾖ";
+		$PhaseName10="ｴﾏｴﾙ";
+		$PhaseName11="다대";
+	}
+	else if($PhaseNum==4){
+		$PhaseName="크리스마스 이블";
+		$PhaseEigoCount=8;
+		$PhaseEigoX=848;$PhaseEigoY=482;
+		$PhaseEigoH=12;$PhaseEigoV=14;
+		$PhaseEigoAddX=12;$PhaseEigoAddY=0;
+		$PhaseEigoAddCX=20;$PhaseEigoAddCY=0;
+		$PhaseEigoAddPX=21;$PhaseEigoAddPY=0;
+		SetFont("Noto Sans KR", 10, 258371, 000000, 100, NONE);
+		$PhaseEigoAddX2=12;
+		$KR_PhaseRubySpacing=2;
+		$PhaseName1="크킈";
+		$PhaseName2="ｸｮｸｶ";
+		$PhaseName3="ｽｺ堙";
+		$PhaseName4="ｸｶｸﾅ";
+		$PhaseName5="ｽｺ堙";
+		$PhaseName6="｡｡｡｡";
+		$PhaseName7="ﾀﾌﾀﾚ";
+		$PhaseName8="블븰";
+	}
+	else if($PhaseNum==5){
+		$PhaseName="ｱﾗｷｽｸｰ";
+		$PhaseEigoCount=3;
+		$PhaseEigoX=908;$PhaseEigoY=482;
+		$PhaseEigoH=12;$PhaseEigoV=14;
+		$PhaseEigoAddX=12;$PhaseEigoAddY=0;
+		$PhaseEigoAddCX=21;$PhaseEigoAddCY=0;
+		$PhaseEigoAddPX=22;$PhaseEigoAddPY=0;
+		SetFont("Noto Sans KR", 10, 258371, 000000, 100, NONE);
+		$PhaseEigoAddX2=12;
+		$KR_PhaseRubySpacing=2;
+		$PhaseName1="그긔";
+		$PhaseName2="ｷｽｷﾅ";
+		$PhaseName3="ｸｰｸｸ";
+	}
+	else if($PhaseNum==6){
+		$PhaseName="다이 하드";
+		$PhaseEigoCount=5;
+		$PhaseEigoX=908;$PhaseEigoY=482;
+		$PhaseEigoH=12;$PhaseEigoV=14;
+		$PhaseEigoAddX=12;$PhaseEigoAddY=0;
+		$PhaseEigoAddCX=9;$PhaseEigoAddCY=0;
+		$PhaseEigoAddPX=10;$PhaseEigoAddPY=0;
+		SetFont("Noto Sans KR", 10, 258371, 000000, 100, NONE);
+		$PhaseEigoAddX2=12;
+		$KR_PhaseRubySpacing=2;
+		$PhaseName1="다대";
+		$PhaseName2="ﾀﾌﾀﾚ";
+		$PhaseName3="｡｡｡｡";
+		$PhaseName4="ﾇﾏﾇﾘ";
+		$PhaseName5="드듸";
+	}
+	else if($PhaseNum==7){
+		$PhaseName="멋진 인생!";
+		$PhaseEigoCount=6;
+		$PhaseEigoX=780;$PhaseEigoY=482;
+		$PhaseEigoH=12;$PhaseEigoV=14;
+		$PhaseEigoAddX=12;$PhaseEigoAddY=0;
+		$PhaseEigoAddCX=67;$PhaseEigoAddCY=0;
+		$PhaseEigoAddPX=68;$PhaseEigoAddPY=0;
+		SetFont("Noto Sans KR", 10, 258371, 000000, 100, NONE);
+		$PhaseEigoAddX2=12;
+		$KR_PhaseRubySpacing=2;
+		$PhaseName1="멋멧";
+		$PhaseName2="ﾁｧ";
+		$PhaseName3="｡｡｡｡";
+		$PhaseName4="ﾀﾎﾀﾜ";
+		$PhaseName5="ｻｼｧ";
+		$PhaseName6="｣｡｣｡";
+	}
+
+	$PhaseImg="cg/sys/phase/"+$PhaseNum+"/英字.png";
+	CreateTextureEX("章英語", $PhasePrio, $PhaseEigoX, $PhaseEigoY, $PhaseImg);
+	SetVertex("章英語", 0, 0);
+	Zoom("章英語", 0, 250, 250, null, false);
+	Request("章英語", Smoothing);//429
+	CreateTextureEX("章演出英語", $PhasePrio, $PhaseEigoX, $PhaseEigoY, $PhaseImg);
+	SetVertex("章演出英語", 0, 0);
+	Zoom("章演出英語", 0, 250, 250, null, false);
+	Request("章演出英語", Smoothing);//429
+	Request("章演出英語", AddRender);
+
+	CreateTextureEX("章マスク/章英語", $PhasePrio, $PhaseEigoX, $PhaseEigoY, $PhaseImg);
+	SetVertex("章マスク/章英語", 0, 0);
+	Zoom("章マスク/章英語", 0, 250, 250, null, false);
+	Request("章マスク/章英語", Smoothing);//429
+	SetShade("章マスク/章英語", HEAVY);
+	Request("章マスク/章英語", AddRender);
+
+	$PhaseEigoCX=$PhaseEigoX+$PhaseEigoAddCX;//窓枠や色
+	$PhaseEigoCY=$PhaseEigoY+$PhaseEigoAddCY;
+	$PhaseEigoPX=$PhaseEigoX+$PhaseEigoAddPX;//英語
+	$PhaseEigoPY=$PhaseEigoY+$PhaseEigoAddPY;
+
+	$SYSTEM_text_margin_column=$KR_PhaseRubySpacing;
+
+	$PhaseColor="58B6A4";//258371//58B6A4//147260//8BE9D7
+	$PhaseEigoCX2=$PhaseEigoCX;
+	$PhaseEigoCY2=$PhaseEigoCY;
+	$PhaseEigoPX2=$PhaseEigoPX;
+	$PhaseEigoPY2=$PhaseEigoPY;
+	$PhaseCount=1;
+	while($PhaseEigoCount>=$PhaseCount){
+
+		$PhaseNut="章英語窓"+$PhaseCount;
+		CreateWindow($PhaseNut, 150, $PhaseEigoCX2, $PhaseEigoCY2, $PhaseEigoH, $PhaseEigoV, false);
+		SetAlias($PhaseNut, $PhaseNut);
+		$PhaseNut="章英語窓"+$PhaseCount+"/章英語";
+		$PhaseNameImg=VariableValue($,"PhaseName"+$PhaseCount);
+		CreateTextEX($PhaseNut, $PhasePrio, $PhaseEigoPX2, $PhaseEigoPY2, Auto, Auto, $PhaseNameImg);
+
+		$PhaseNut="章英語影"+$PhaseCount;
+		$英語=Substr($PhaseName,$PhaseCount-1,1);
+		CreateTextEX($PhaseNut, $PhasePrio, $PhaseEigoPX2, $PhaseEigoPY2, Auto, Auto, $英語);
+
+		$PhaseNut="章英語色"+$PhaseCount;
+		CreateColor($PhaseNut, $PhasePrio, $PhaseEigoCX2, $PhaseEigoCY2, $PhaseEigoH, $PhaseEigoV, $PhaseColor);
+		SetAlias($PhaseNut, $PhaseNut);
+		Request($PhaseNut, AddRender);
+
+		$PhaseEigoCX2+=$PhaseEigoAddX;
+		$PhaseEigoCY2+=$PhaseEigoAddY;
+		$PhaseEigoPX2+=$PhaseEigoAddX;
+		$PhaseEigoPY2+=$PhaseEigoAddY;
+		$PhaseCount++;
+	}
+
+	$PhaseEigoMagin=2;
+	$PhaseMove=-$PhaseEigoAddX2*$PhaseEigoMagin;
+	Move("章英語窓*/章英語", 0, @$PhaseMove, @0, Axl1, true);
+
+//	CreateColor("章英語色", $PhasePrio, $PhaseEigoCX, $PhaseEigoCY, $PhaseEigoH, $PhaseEigoV, $PhaseColor);
+//	SetAlias($PhaseNut, $PhaseNut);
+//	Request("章数字色*", AddRender);
+
+	$SYSTEM_text_margin_column=0;
+
+
+	//▼線////////////////////////////////////////////////////////////////////////
+	//線１セット
+	CreateWindow("章線窓１", 150, -1024, 0, 1024, 576, false);
+	SetAlias("章線窓１", "章線窓１");
+	CreateTextureEX("章線窓１/章線", $PhasePrio, 0, 477, "cg/sys/phase/線１.png");
+
+	CreateWindow("章線ワク１", 150, 0, 0, 5, 576, false);
+	SetAlias("章線ワク１", "章線ワク１");
+	CreateTextureEX("章線ワク１/章線", $PhasePrio, 0, 475, "cg/sys/phase/線１枠.png");
+
+	CreateMask("章線マスク１", 150, 0, 475, "cg/sys/phase/線マスク１.png", false);
+	SetAlias("章線マスク１", "章線マスク１");
+	CreateTextureEX("章線マスク１/章線", $PhasePrio, 0, 0, "cg/sys/phase/線３.png");
+
+	//線２セット
+	CreateWindow("章線窓２", 150, -1024, 0, 1024, 576, false);
+	SetAlias("章線窓２", "章線窓２");
+	CreateTextureEX("章線窓２/章線", $PhasePrio, 0, 483, "cg/sys/phase/線２.png");
+
+	CreateWindow("章線ワク２", 150, 0, 0, 4, 576, false);
+	SetAlias("章線ワク２", "章線ワク２");
+	CreateTextureEX("章線ワク２/章線", $PhasePrio, 0, 481, "cg/sys/phase/線２枠.png");
+
+	CreateMask("章線マスク２", 150, 0, 481, "cg/sys/phase/線マスク２.png", false);
+	SetAlias("章線マスク２", "章線マスク２");
+	CreateTextureEX("章線マスク２/章線", $PhasePrio, 0, 0, "cg/sys/phase/線３.png");
+
+
+	Fade("章*/*", 0, 0, null, true);
+	Fade("章*", 0, 0, null, true);
+}
+
+
+//▽開始
+function PhaseOn(){
+
+	MenuLock(true);
+//	$SYSTEM_menu_lock=true;
+
+	$counttype1=0;
+	$counttype2=0;
+	$counttype3=0;
+	$counttype4=0;
+	$counttype5=0;
+	$counttype6=0;
+	$counttype7=0;
+	$counttype8=0;
+	$counttype9=0;
+	$counttype10=0;
+	$counttype11=0;
+	$counttype12=0;
+	$counttype13=0;
+	$counttype14=0;
+	$counttype15=0;
+	$counttype16=0;
+	$counttype17=0;
+	$counttype18=0;
+	$counttype19=0;
+	$counttype20=0;
+
+	$counteigo1=0;
+	$counteigo2=0;
+	$counteigo3=0;
+	$counteigo4=0;
+	$counteigo5=0;
+	$counteigo6=0;
+	$counteigo7=0;
+	$counteigo8=0;
+	$counteigo9=0;
+	$counteigo10=0;
+	$counteigo11=0;
+	$counteigo12=0;
+	$counteigo13=0;
+	$counteigo14=0;
+	$counteigo15=0;
+	$counteigo16=0;
+	$counteigo17=0;
+	$counteigo18=0;
+	$counteigo19=0;
+	$counteigo20=0;
+	$counteigo21=0;
+	$counteigo22=0;
+	$counteigo23=0;
+	$counteigo24=0;
+	$counteigo25=0;
+	$counteigo26=0;
+	$counteigo27=0;
+	$counteigo28=0;
+	$counteigo29=0;
+	$counteigo30=0;
+
+	$章英語カウント=0;
+	$章英語ローカル=0;
+	$章英語点燈=false;
+	$章英語影出現=false;
+	$章英語開始=false;
+	$章英語終了=false;
+
+	$章文字カウント=0;
+	$章文字ローカル=0;
+	$章文字点燈=false;
+	$章文字影出現=false;
+	$章文字開始=false;
+	$章文字終了=false;
+
+	$章フェイズカウント=0;
+	$章フェイズローカル=0;
+	$章フェイズ点燈=true;
+	$章フェイズ開始=true;////////////////////////////////////
+	$章フェイズ終了=false;
+
+	$章数字カウント=0;
+	$章数字ローカル=0;
+	$章数字点燈=true;
+	$章数字開始=false;
+	$章数字終了=false;
+
+	$章線カウント=0;
+	$章線開始=false;
+	$章線終了=false;
+
+
+	$PhaseColorFade=400;
+
+//	Fade("章文字", 0, 1000, null, true);
+	Fade("章黒", 500, 500, null, true);
+
+	while(!$章文字終了||!$章英語終了){
+
+		if($章フェイズ開始){
+			if($章フェイズ点燈){
+				//Message("デバッグ用ウィンドウ","デバッグ用です",YESNOCANCE,EXCLAMATION);
+
+				$PhaseX=$章フェイズカウント*14+$PhaseDaiX1;
+				$PhaseY=$PhaseDaiY1;
+	
+				Move("章フェイズ_パーツ_*", 0, $PhaseX, $PhaseY, Axl1, true);
+
+				if($章フェイズカウント==0){
+					Fade("章フェイズ色１", 0, 1000, null, true);
+					Fade("章フェイズ色１", 64, 0, null, false);
+				}else if($章フェイズカウント==1){
+					Fade("章フェイズ色２", 0, 1000, null, true);
+					Fade("章フェイズ色２", 64, 0, null, false);
+				}else if($章フェイズカウント==2){
+					Fade("章フェイズ色３", 0, 1000, null, true);
+					Fade("章フェイズ色３", 64, 0, null, false);
+				}else if($章フェイズカウント==3){
+					Fade("章フェイズ色４", 0, 1000, null, true);
+					Fade("章フェイズ色４", 64, 0, null, false);
+				}else if($章フェイズカウント==4){
+					Fade("章フェイズ色５", 0, 1000, null, true);
+					Fade("章フェイズ色５", 64, 0, null, false);
+				}
+	
+				$章フェイズ点燈=false;
+			}
+	
+			if(!$章フェイズ点燈){
+				Fade("章フェイズ_パーツ_*", 0, 0, null, false);
+	
+				if($章フェイズローカル==0){Fade("章フェイズ_パーツ_17", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==1){Fade("章フェイズ_パーツ_16", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==2){Fade("章フェイズ影１", 0, $PhaseColorFade, null, true);}
+	
+				if($章フェイズローカル==2){Fade("章フェイズ_パーツ_10", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==3){Fade("章フェイズ_パーツ_9", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==4){Fade("章フェイズ影２", 0, $PhaseColorFade, null, true);}
+	
+				if($章フェイズローカル==4){Fade("章フェイズ_パーツ_3", 0, $PhaseColorFade, null, true);$章数字開始=true;}
+				if($章フェイズローカル==5){Fade("章フェイズ_パーツ_2", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==6){Fade("章フェイズ影３", 0, $PhaseColorFade, null, true);}
+
+				if($章フェイズローカル==6){Fade("章フェイズ_パーツ_21", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==7){Fade("章フェイズ_パーツ_20", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==8){Fade("章フェイズ影４", 0, $PhaseColorFade, null, true);}
+	
+				if($章フェイズローカル==8){Fade("章フェイズ_パーツ_7", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==9){Fade("章フェイズ_パーツ_6", 0, $PhaseColorFade, null, true);}
+				if($章フェイズローカル==10){Fade("章フェイズ影５", 0, $PhaseColorFade, null, true);}
+	
+				$章フェイズローカル++;
+	
+				$章フェイズオン=$章フェイズローカル%2;
+				if($章フェイズオン==0){
+					$章フェイズ点燈=true;
+					$章フェイズカウント++;
+				}
+	
+				if($章フェイズローカル==11){
+					$章フェイズ終了=true;
+					$章フェイズ開始=false;
+//					Fade("章フェイズ影*", 100, 0, null, false);
+//					Fade("章フェイズ", 100, 1000, null, false);
+				}
+			}
+		}
+
+
+		if($章数字開始){
+
+			if($章数字点燈){
+				//Message("デバッグ用ウィンドウ","デバッグ用です",YESNOCANCE,EXCLAMATION);
+
+				$PhaseX=$章数字カウント*40+$PhaseMathX1;
+				$PhaseY=$PhaseMathY1;
+
+				if($章数字カウント==0){
+					Move("章数字_パート_*", 0, $PhaseX, $PhaseY, Axl1, true);
+					Fade("章数字色１", 0, 1000, null, true);
+					Fade("章数字色１", 64, 0, null, false);
+				}else if($章数字カウント==1){
+					Move("章数字_パーツ_*", 0, $PhaseX, $PhaseY, Axl1, true);
+					Fade("章数字色２", 0, 1000, null, true);
+					Fade("章数字色２", 64, 0, null, false);
+				}
+	
+				$章数字点燈=false;
+			}
+
+			if(!$章数字点燈){
+				Fade("章数字_パート_*", 0, 0, null, false);
+				Fade("章数字_パーツ_*", 0, 0, null, false);
+
+				if($章数字ローカル==0){Fade("章数字_パート_9", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==1){Fade("章数字_パート_7", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==2){Fade("章数字_パート_5", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==3){Fade("章数字_パート_3", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==4){Fade("章数字_パート_1", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==5){Fade("章数字影１", 0, $PhaseColorFade, null, true);}
+
+				if($章数字ローカル==4){Fade("章数字_パーツ_9", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==5){Fade("章数字_パーツ_7", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==6){Fade("章数字_パーツ_5", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==7){Fade("章数字_パーツ_3", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==8){Fade("章数字_パーツ_1", 0, $PhaseColorFade, null, true);}
+				if($章数字ローカル==9){Fade("章数字影２", 0, $PhaseColorFade, null, true);}//$章文字開始=true;
+	
+				$章数字ローカル++;
+	
+				if($章数字ローカル==4){
+					$章数字点燈=true;
+					$章数字カウント++;
+				}
+	
+				if($章数字ローカル==10){
+					$章数字終了=true;
+					$章数字開始=false;
+//					Fade("章数字影*", 100, 0, null, false);
+//					Fade("章数字", 100, 1000, null, false);
+					$章線開始=true;
+				}
+//					WaitKey();
+			}
+		}
+
+//=============================================================================
+		if($章線開始){
+			$PhaseTime=500;//400
+			$PhaseWait=300;//400
+
+			Fade("章フェイズ影*", $PhaseTime, 0, null, false);
+			Fade("章フェイズ", $PhaseWait, 1000, null, false);
+			Fade("章数字影*", $PhaseTime, 0, null, false);
+			Fade("章数字", $PhaseWait, 1000, null, false);
+
+			Fade("章演出フェイズ", $PhaseWait, 500, null, false);
+			Fade("章演出数字", $PhaseWait, 500, null, false);
+
+			Fade("章線窓*/*", 0, 1000, null, false);
+			Fade("章線ワク１/章線", 0, 1000, null, false);
+			Fade("章線マスク１/章線", 0, 1000, null, false);
+			Move("章線窓１", $PhaseTime, 0, @0, null, false);
+			Move("章線ワク１", $PhaseTime, @1024, @0, null, false);
+			Move("章線マスク１/章線", $PhaseTime, @1024, @0, null, false);
+			Wait($PhaseWait);
+
+			Fade("章演出フェイズ", $PhaseTime, 0, null, false);
+			Fade("章演出数字", $PhaseTime, 0, null, false);
+			Zoom("章演出フェイズ", $PhaseTime, 250, 350, Dxl1, false);
+			Zoom("章演出数字", $PhaseTime, 1000, 1400, Dxl1, false);
+
+			Fade("章線ワク２/章線", 0, 1000, null, false);
+			Fade("章線マスク２/章線", 0, 1000, null, false);
+			Move("章線窓２", $PhaseTime, 0, @0, null, false);
+			Move("章線ワク２", $PhaseTime, @1024, @0, null, false);
+			Move("章線マスク２/章線", $PhaseTime, @1024, @0, null, false);
+
+			WaitAction("章線窓２", null);
+
+			$章文字開始=true;
+			$章線終了=true;
+			$章線開始=false;
+		}
+//=============================================================================
+
+
+		if($章文字開始){
+			if($章文字カウント==$KR_PhaseRubyTrigger){$章英語開始=true;}
+
+			if($章文字点燈){
+				$PhaseMojiCX2=$PhaseMojiCX+($PhaseMojiAddX*$章文字カウント);
+				if($PhaseMojiCount!=$章文字カウント){
+					//Move("章文字色", 0, $PhaseMojiCX2, $PhaseMojiCY, Axl1, true);
+					$章文字カウント２=$章文字カウント+1;
+					$PhaseNut="章文字色"+$章文字カウント２;
+					Fade($PhaseNut, 0, 1000, null, true);
+					Fade($PhaseNut, 60, 0, null, false);
+				}
+				$PhaseMojiPX2=0;
+				$章文字点燈=false;
+				$章文字ローカル=0;
+				$章文字カウント++;
+			}
+			if(!$章文字点燈){
+				$章文字内容="章文字窓"+$章文字カウント+"/章文字";
+				Fade($章文字内容, 0, 400, null, false);
+
+				if($章文字カウント>=1&&$counttype1<$PhaseMojiMagin){Move("章文字窓1/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype1++;}
+				if($章文字カウント>=2&&$counttype2<$PhaseMojiMagin){Move("章文字窓2/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype2++;}
+				if($章文字カウント>=3&&$counttype3<$PhaseMojiMagin){Move("章文字窓3/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype3++;}
+				if($章文字カウント>=4&&$counttype4<$PhaseMojiMagin){Move("章文字窓4/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype4++;}
+				if($章文字カウント>=5&&$counttype5<$PhaseMojiMagin){Move("章文字窓5/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype5++;}
+				if($章文字カウント>=6&&$counttype6<$PhaseMojiMagin){Move("章文字窓6/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype6++;}
+				if($章文字カウント>=7&&$counttype7<$PhaseMojiMagin){Move("章文字窓7/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype7++;}
+				if($章文字カウント>=8&&$counttype8<$PhaseMojiMagin){Move("章文字窓8/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype8++;}
+				if($章文字カウント>=9&&$counttype9<$PhaseMojiMagin){Move("章文字窓9/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype9++;}
+				if($章文字カウント>=10&&$counttype10<$PhaseMojiMagin){Move("章文字窓10/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype10++;}
+				if($章文字カウント>=11&&$counttype11<$PhaseMojiMagin){Move("章文字窓11/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype11++;}
+				if($章文字カウント>=12&&$counttype12<$PhaseMojiMagin){Move("章文字窓12/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype12++;}
+				if($章文字カウント>=13&&$counttype13<$PhaseMojiMagin){Move("章文字窓13/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype13++;}
+				if($章文字カウント>=14&&$counttype14<$PhaseMojiMagin){Move("章文字窓14/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype14++;}
+				if($章文字カウント>=15&&$counttype15<$PhaseMojiMagin){Move("章文字窓15/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype15++;}
+				if($章文字カウント>=16&&$counttype16<$PhaseMojiMagin){Move("章文字窓16/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype16++;}
+				if($章文字カウント>=17&&$counttype17<$PhaseMojiMagin){Move("章文字窓17/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype17++;}
+				if($章文字カウント>=18&&$counttype18<$PhaseMojiMagin){Move("章文字窓18/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype18++;}
+				if($章文字カウント>=19&&$counttype19<$PhaseMojiMagin){Move("章文字窓19/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype19++;}
+				if($章文字カウント>=20&&$counttype20<$PhaseMojiMagin){Move("章文字窓20/章文字", 0, @$PhaseMojiAddX, $PhaseMojiPY, Axl1, false);$counttype20++;}
+	
+				$章文字ローカル++;
+	
+				if($章文字ローカル>$PhaseMojiMagin-2){//$PhaseMojiMagin
+					$章文字影="章文字影"+$章文字カウント;
+					$章文字影出現=true;
+					if($章文字カウント<$PhaseMojiCount){$章文字点燈=true;}
+				}
+//				WaitKey();
+			}
+
+			if($章文字カウント==$PhaseMojiCount&&$章文字ローカル==$PhaseMojiMagin){
+
+//				Fade("章文字窓*/*", 500, 0, null, false);
+//				Fade("章文字", 500, 1000, null, false);
+
+				$章文字終了=true;
+				$章文字開始=false;
+			}
+
+			//CreateText("テキスト１", 5000000, 0, 50, 700, 500, $章文字カウント);
+			//CreateText("テキスト２", 5000000, 0, 150, 700, 500, $章文字ローカル);
+			//WaitKey();
+		}
+
+
+		if($章英語開始){
+			if($章英語点燈){
+				$PhaseEigoCX2=$PhaseEigoCX+($PhaseEigoAddX*$章英語カウント);
+				if($PhaseEigoCount!=$章英語カウント){
+					//Move("章英語色", 0, $PhaseEigoCX2, $PhaseEigoCY, Axl1, true);
+					$章英語カウント２=$章英語カウント+1;
+					$PhaseNut="章英語色"+$章英語カウント２;
+					Fade($PhaseNut, 0, 1000, null, true);
+					Fade($PhaseNut, 32, 0, null, false);
+				}
+				$PhaseEigoPX2=0;
+				$章英語点燈=false;
+				$章英語ローカル=0;
+				$章英語カウント++;
+			}
+			if(!$章英語点燈){
+				$章英語内容="章英語窓"+$章英語カウント+"/章英語";
+				Fade($章英語内容, 0, 400, null, false);
+
+				if($章英語カウント>=1&&$counteigo1<$PhaseEigoMagin){Move("章英語窓1/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo1++;}
+				if($章英語カウント>=2&&$counteigo2<$PhaseEigoMagin){Move("章英語窓2/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo2++;}
+				if($章英語カウント>=3&&$counteigo3<$PhaseEigoMagin){Move("章英語窓3/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo3++;}
+				if($章英語カウント>=4&&$counteigo4<$PhaseEigoMagin){Move("章英語窓4/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo4++;}
+				if($章英語カウント>=5&&$counteigo5<$PhaseEigoMagin){Move("章英語窓5/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo5++;}
+				if($章英語カウント>=6&&$counteigo6<$PhaseEigoMagin){Move("章英語窓6/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo6++;}
+				if($章英語カウント>=7&&$counteigo7<$PhaseEigoMagin){Move("章英語窓7/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo7++;}
+				if($章英語カウント>=8&&$counteigo8<$PhaseEigoMagin){Move("章英語窓8/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo8++;}
+				if($章英語カウント>=9&&$counteigo9<$PhaseEigoMagin){Move("章英語窓9/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo9++;}
+				if($章英語カウント>=10&&$counteigo10<$PhaseEigoMagin){Move("章英語窓10/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo10++;}
+				if($章英語カウント>=11&&$counteigo11<$PhaseEigoMagin){Move("章英語窓11/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo11++;}
+				if($章英語カウント>=12&&$counteigo12<$PhaseEigoMagin){Move("章英語窓12/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo12++;}
+				if($章英語カウント>=13&&$counteigo13<$PhaseEigoMagin){Move("章英語窓13/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo13++;}
+				if($章英語カウント>=14&&$counteigo14<$PhaseEigoMagin){Move("章英語窓14/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo14++;}
+				if($章英語カウント>=15&&$counteigo15<$PhaseEigoMagin){Move("章英語窓15/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo15++;}
+				if($章英語カウント>=16&&$counteigo16<$PhaseEigoMagin){Move("章英語窓16/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo16++;}
+				if($章英語カウント>=17&&$counteigo17<$PhaseEigoMagin){Move("章英語窓17/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo17++;}
+				if($章英語カウント>=18&&$counteigo18<$PhaseEigoMagin){Move("章英語窓18/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo18++;}
+				if($章英語カウント>=19&&$counteigo19<$PhaseEigoMagin){Move("章英語窓19/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo19++;}
+				if($章英語カウント>=20&&$counteigo20<$PhaseEigoMagin){Move("章英語窓20/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo20++;}
+				if($章英語カウント>=21&&$counteigo21<$PhaseEigoMagin){Move("章英語窓21/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo21++;}
+				if($章英語カウント>=22&&$counteigo22<$PhaseEigoMagin){Move("章英語窓22/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo22++;}
+				if($章英語カウント>=23&&$counteigo23<$PhaseEigoMagin){Move("章英語窓23/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo23++;}
+				if($章英語カウント>=24&&$counteigo24<$PhaseEigoMagin){Move("章英語窓24/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo24++;}
+				if($章英語カウント>=25&&$counteigo25<$PhaseEigoMagin){Move("章英語窓25/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo25++;}
+				if($章英語カウント>=26&&$counteigo26<$PhaseEigoMagin){Move("章英語窓26/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo26++;}
+				if($章英語カウント>=27&&$counteigo27<$PhaseEigoMagin){Move("章英語窓27/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo27++;}
+				if($章英語カウント>=28&&$counteigo28<$PhaseEigoMagin){Move("章英語窓28/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo28++;}
+				if($章英語カウント>=29&&$counteigo29<$PhaseEigoMagin){Move("章英語窓29/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo29++;}
+				if($章英語カウント>=30&&$counteigo30<$PhaseEigoMagin){Move("章英語窓30/章英語", 0, @$PhaseEigoAddX2, $PhaseEigoPY, Axl1, false);$counteigo30++;}
+	
+				$章英語ローカル++;
+	
+				if($章英語ローカル>$PhaseEigoMagin-2){//$PhaseEigoMagin
+					$章英語影="章英語影"+$章英語カウント;
+					$章英語影出現=true;
+					if($章英語カウント<$PhaseEigoCount){$章英語点燈=true;}
+				}
+//				WaitKey();
+			}
+
+			if($章英語カウント==$PhaseEigoCount&&$章英語ローカル==$PhaseEigoMagin){
+
+//				Fade("章英語窓*/*", 500, 0, null, false);
+//				Fade("章英語", 500, 1000, null, false);
+
+				$章英語終了=true;
+				$章英語開始=false;
+			}
+
+			//CreateText("テキスト１", 5000000, 0, 50, 700, 500, $章英語カウント);
+			//CreateText("テキスト２", 5000000, 0, 150, 700, 500, $章英語ローカル);
+			//WaitKey();
+		}
+//		else{
+			//Wait(32);
+//		}
+		Wait(32);
+	}
+
+
+	Fade("章文字窓*/*", $PhaseTime, 0, null, false);
+	Fade("章文字", $PhaseWait, 1000, null, false);
+	Fade("章英語窓*/*", $PhaseTime, 0, null, false);
+	Fade("章英語", $PhaseWait, 1000, null, false);
+
+	Fade("章演出文字", $PhaseWait, 500, null, false);
+	Fade("章演出英語", $PhaseWait, 500, null, false);
+
+	Move("章線窓１", $PhaseTime, 1024, @0, null, false);
+	Wait($PhaseWait);
+
+	Fade("章演出文字", $PhaseTime, 0, null, false);
+	Fade("章演出英語", $PhaseTime, 0, null, false);
+	Zoom("章演出文字", $PhaseTime, 250, 375, Dxl1, false);
+	Zoom("章演出英語", $PhaseTime, 250, 375, Dxl1, false);
+
+	Move("章線窓２", $PhaseTime, 1024, @0, null, false);
+	WaitAction("章線窓２", null);
+
+	FadeDelete("章黒", 500, null, true);
+
+	Delete("章線*");
+
+	Request("章フェイズ", Lock);
+	Request("章数字", Lock);
+	Request("章文字", Lock);
+	Request("章英語", Lock);
+
+	Delete("章フェイズ*");
+	Delete("章数字*");
+	Delete("章文字*");
+	Delete("章英語*");
+
+	Request("章フェイズ", UnLock);
+	Request("章数字", UnLock);
+	Request("章文字", UnLock);
+	Request("章英語", UnLock);
+
+//	Message("デバッグ用ウィンドウ","デバッグ用です",YESNOCANCE,EXCLAMATION);
+	MenuLock(false);
+//	$SYSTEM_menu_lock=false;
+}
+
+
+
+function PhaseOff(){
+	Zoom("章演出フェイズ", 0, 250, 250, Axl1, true);
+	Zoom("章演出数字", 0, 1000, 1000, Axl1, true);
+	Zoom("章演出文字", 0, 250, 250, Axl1, true);
+	Zoom("章演出英語", 0, 250, 250, Axl1, true);
+
+	Fade("章フェイズ", 300, 0, null, false);
+	Fade("章数字", 300, 0, null, false);
+	Fade("章文字", 300, 0, null, false);
+	Fade("章英語", 300, 0, null, false);
+
+	Zoom("章演出フェイズ", 500, 255, 250, Dxl1, false);
+	Zoom("章演出数字", 500, 1020, 1000, Dxl1, false);
+	Zoom("章演出文字", 500, 255, 250, Dxl1, false);
+	Zoom("章演出英語", 500, 255, 250, Dxl1, false);
+	Fade("章演出*", 250, 100, null, false);
+
+	Shake("章マスク", 1000, 0, 1, 0, 0, 1000, null, false);
+	Zoom("章マスク", 500, 1000, 1500, Axl1, false);
+	Fade("章マスク/*", 250, 1000, null, false);
+	Shake("章マスク/*", 1000, 1, 0, 0, 0, 800, null, false);
+
+	Wait(250);
+
+	Fade("章演出*", 250, 0, null, false);
+	Fade("章マスク/*", 250, 0, null, true);
+
+	Delete("章*");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.//■光
+..//▽設置
+function YuuLightSet(){
+
+	CreateMask("絵窓１", 200, 0, 0, "cg/ef/x/ef_yuulight03.png", false);
+
+//	CreateWindow("絵窓１", 150, 220, 0, 750, 576, false);
+//	SetAlias("絵窓１", "絵窓１");
+//	CreateWindow("絵窓２", 150, 220, 0, 750, 576, false);
+//	SetAlias("絵窓２", "絵窓２");
+//	CreateWindow("絵窓３", 150, 220, 0, 750, 576, false);
+//	SetAlias("絵窓３", "絵窓３");
+
+	CreateTexture("絵窓１/yuulight_色０", 9999, 0, 106, "cg/ef/x/ef_yuulight.png");
+	SetAlias("絵窓１/yuulight_色０", "yuulight_色０");
+	Fade("@yuulight_色０", 0, 0, null, false);
+	Request("@yuulight_色０", AddRender);
+	SetVertex("@yuulight_色０", 768, 470);
+
+	CreateTexture("絵窓１/yuulight_色１", 9999, -1000, 106, "cg/ef/x/ef_yuulight.png");
+	SetAlias("絵窓１/yuulight_色１", "yuulight_色１");
+	Fade("@yuulight_色１", 0, 0, null, false);
+	Request("@yuulight_色１", AddRender);
+	SetVertex("@yuulight_色１", 768, 470);
+
+//	CreateTexture("絵窓１/yuulight_色２", 9999, 0, 0, "cg/ef/x/ef_yuulight02.png");
+//	SetAlias("絵窓１/yuulight_色２", "yuulight_色２");
+//	Fade("@yuulight_色２", 0, 0, null, false);
+//	Request("@yuulight_色２", AddRender);
+//	SetVertex("@yuulight_色２", 512, 576);
+//	Zoom("@yuulight_色２", 0, 2000, 2000, null, true);
+
+	Zoom("@yuulight_色０", 0, 1000, 1500, null, false);
+	Zoom("@yuulight_色１", 0, 1000, 1000, null, false);
+
+	CreateProcess("yuulight_プロセス１", 150, 0, 0, "YuuLightPro01");
+	SetAlias("yuulight_プロセス１", "yuulight_プロセス１");
+}
+
+..//▽表示
+function YuuLightFade(){
+	Request("yuulight_プロセス１", Start);
+	Request("yuulight_プロセス１", Disused);
+}
+
+
+function YuuLightPro01(){
+
+	$YuuLightFade01=140;
+	$YuuLightFade02=70;
+
+begin:
+
+//	Shake("@yuulight_色１", 1000000, 10, 0, 0, 0, 1000, null, false);
+//	Shake("@yuulight_色２", 1000000, 10, 0, 0, 0, 1000, null, false);
+
+	Move("@yuulight_色０", 0, 0, @0, null, true);
+	Move("@yuulight_色１", 0, -200, @0, null, true);
+	Move("@yuulight_色１", 20000, 0, @0, null, false);
+
+	while(1){
+		Move("@yuulight_色０", 0, 0, @0, null, true);
+//		Move("@yuulight_色１", 0, -200, @0, null, true);
+
+		Zoom("@yuulight_色０", 6500, 1000, 1000, null, false);
+		Zoom("@yuulight_色１", 6500, 1000, 1500, null, false);
+
+		Move("@yuulight_色０", 20000, -200, @0, null, false);
+//		Move("@yuulight_色１", 20000, 0, @0, null, false);
+
+		Fade("@yuulight_色０", 500, $YuuLightFade01, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade01, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 1000, 0, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade02, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 500, $YuuLightFade01, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade01, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 1000, 0, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade02, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 500, $YuuLightFade01, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade01, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 1000, $YuuLightFade02, null, false);
+		Fade("@yuulight_色１", 1000, 0, null, false);
+		Wait(1000);
+
+		////////////////////////////////////////////////////////////
+//		Move("@yuulight_色０", 0, -200, @0, null, false);
+		Move("@yuulight_色１", 0, -200, @0, null, true);
+
+		Zoom("@yuulight_色０", 6500, 1000, 1500, null, false);
+		Zoom("@yuulight_色１", 6500, 1000, 1000, null, false);
+
+//		Move("@yuulight_色０", 20000, 0, @0, null, false);
+		Move("@yuulight_色１", 20000, 0, @0, null, false);
+
+		Fade("@yuulight_色０", 500, $YuuLightFade01, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade01, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 1000, 0, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade02, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 500, $YuuLightFade01, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade01, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 1000, 0, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade02, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 500, $YuuLightFade01, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade01, null, false);
+		Wait(1000);
+		Fade("@yuulight_色０", 1000, 0, null, false);
+		Fade("@yuulight_色１", 1000, $YuuLightFade02, null, false);
+		Wait(1000);
+	}
+}
+
+
+
+.//■浮かぶ手
+..//▽設置
+function HandProSet(){
+	$z1=3;
+	$z2=15;
+
+	$HND1x=0;
+	$HND1y=0;
+
+	$HND1X1 = -$HND1x;
+	$HND1X36 = Random($z1);
+	$HND1X35 = -Random($z1);
+	$HND1X34 = Random($z1);
+	$HND1X33 = -Random($z1);
+	$HND1X32 = Random($z1);
+	$HND1X31 = -Random($z1);
+	$HND1X30 = Random($z1);
+	$HND1X29 = -Random($z1);
+	$HND1X28 = Random($z1);
+	$HND1X27 = -Random($z1);
+	$HND1X26 = Random($z1);
+	$HND1X25 = -Random($z1);
+	$HND1X24 = Random($z1);
+	$HND1X23 = -Random($z1);
+	$HND1X22 = Random($z1);
+	$HND1X21 = -Random($z1);
+	$HND1X20 = Random($z1);
+	$HND1X19 = -Random($z1);
+	$HND1X18 = Random($z1);
+	$HND1X17 = -Random($z1);
+	$HND1X16 = Random($z1);
+	$HND1X15 = -Random($z1);
+	$HND1X14 = Random($z1);
+	$HND1X13 = -Random($z1);
+	$HND1X12 = Random($z1);
+	$HND1X11 = -Random($z1);
+	$HND1X10 = Random($z1);
+	$HND1X9 = -Random($z1);
+	$HND1X8 = Random($z1);
+	$HND1X7 = -Random($z1);
+	$HND1X6 = Random($z1);
+	$HND1X5 = -Random($z1);
+	$HND1X4 = Random($z1);
+	$HND1X3 = -Random($z1);
+	$HND1X2 = Random($z1);
+
+	$HND1Y1 = -$z2;
+	$HND1Y36 = -$z2;
+	$HND1Y35 = -$z2;
+	$HND1Y34 = 0;
+	$HND1Y33 = $z2;
+	$HND1Y32 = $z2;
+	$HND1Y31 = 0;
+	$HND1Y30 = -$z2;
+	$HND1Y29 = -$z2;
+	$HND1Y28 = 0;
+	$HND1Y27 = $z2;
+	$HND1Y26 = $z2;
+	$HND1Y25 = 0;
+	$HND1Y24 = -$z2;
+	$HND1Y23 = -$z2;
+	$HND1Y22 = 0;
+	$HND1Y21 = $z2;
+	$HND1Y20 = $z2;
+	$HND1Y19 = 0;
+	$HND1Y18 = -$z2;
+	$HND1Y17 = -$z2;
+	$HND1Y16 = 0;
+	$HND1Y15 = $z2;
+	$HND1Y14 = $z2;
+	$HND1Y13 = 0;
+	$HND1Y12 = -$z2;
+	$HND1Y11 = -$z2;
+	$HND1Y10 = 0;
+	$HND1Y9 = $z2;
+	$HND1Y8 = $z2;
+	$HND1Y7 = 0;
+	$HND1Y6 = -$z2;
+	$HND1Y5 = -$z2;
+	$HND1Y4 = 0;
+	$HND1Y3 = $z2;
+	$HND1Y2 = $z2;
+
+	CreateProcess("HandPro_プロセス１", 150, 0, 0, "HandPro01");
+	SetAlias("HandPro_プロセス１", "HandPro_プロセス１");
+}
+
+..//▽表示
+function HandProFade(){
+	Request("HandPro_プロセス１", Start);
+	Request("HandPro_プロセス１", Disused);
+}
+
+
+function HandPro01(){
+	$FlagNut_HND1="@絵イベント１";
+	$FlagTime_HND1=30000;
+
+	Move($FlagNut_HND1, 5000, 100, 0, Dxl1, true);
+
+	while(1){
+		BezierMove($FlagNut_HND1, $FlagTime_HND1, (@0,@0){@$HND1X2,@$HND1Y2}{@$HND1X3,@$HND1Y3}(@$HND1X4,@$HND1Y4){@$HND1X5,@$HND1Y5}{@$HND1X6,@$HND1Y6}(@$HND1X7,@$HND1Y7){@$HND1X8,@$HND1Y8}{@$HND1X9,@$HND1Y9}(@$HND1X10,@$HND1Y10){@$HND1X11,@$HND1Y11}{@$HND1X12,@$HND1Y12}(@$HND1X13,@$HND1Y13){@$HND1X14,@$HND1Y14}{@$HND1X15,@$HND1Y15}(@$HND1X16,@$HND1Y16){@$HND1X17,@$HND1Y17}{@$HND1X18,@$HND1Y18}(@$HND1X19,@$HND1Y19){@$HND1X20,@$HND1Y20}{@$HND1X21,@$HND1Y21}(@$HND1X22,@$HND1Y22){@$HND1X23,@$HND1Y23}{@$HND1X24,@$HND1Y24}(@$HND1X25,@$HND1Y25){@$HND1X26,@$HND1Y26}{@$HND1X27,@$HND1Y27}(@$HND1X28,@$HND1Y28){@$HND1X29,@$HND1Y29}{@$HND1X30,@$HND1Y30}(@$HND1X31,@$HND1Y31){@$HND1X32,@$HND1Y32}{@$HND1X33,@$HND1Y33}(@$HND1X34,@$HND1Y34){@$HND1X35,@$HND1Y35}{@$HND1X36,@$HND1Y36}(@0,@0), null, true);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.//■いなご
+..//▽設置
+function InagoSet(){
+	$InagoPro04_X=-100;$InagoPro04_Y=100;
+	CreateTextureEX("InagoPro04_1", 2000, $InagoPro04_X, $InagoPro04_Y, "cg/ef/efイナゴ_a_01e.png");
+	CreateTextureEX("InagoPro04_2", 2000, $InagoPro04_X, $InagoPro04_Y, "cg/ef/efイナゴ_a_01e02.png");
+	SetBlur("InagoPro04_*", true, 1, 500, 50, false);
+
+	$InagoPro03_X=-390;$InagoPro03_Y=150;
+	CreateTextureEX("InagoPro03_1", 2000, $InagoPro03_X, $InagoPro03_Y, "cg/ef/efイナゴ_a_01d.png");
+	CreateTextureEX("InagoPro03_2", 2000, $InagoPro03_X, $InagoPro03_Y, "cg/ef/efイナゴ_a_01d02.png");
+	SetBlur("InagoPro03_*", true, 1, 500, 50, false);
+
+	$InagoPro02_X=-350;$InagoPro02_Y=200;
+	CreateTextureEX("InagoPro02_1", 2000, $InagoPro02_X, $InagoPro02_Y, "cg/ef/efイナゴ_a_01c.png");
+	CreateTextureEX("InagoPro02_2", 2000, $InagoPro02_X, $InagoPro02_Y, "cg/ef/efイナゴ_a_01c02.png");
+	SetBlur("InagoPro02_*", true, 1, 500, 50, false);
+
+	$InagoPro05_X=-500;$InagoPro05_Y=300;
+	CreateTextureEX("InagoPro05_1", 2000, $InagoPro05_X, $InagoPro05_Y, "cg/ef/efイナゴ_a_01b.png");
+	CreateTextureEX("InagoPro05_2", 2000, $InagoPro05_X, $InagoPro05_Y, "cg/ef/efイナゴ_a_01b02.png");
+	SetBlur("InagoPro05_*", true, 1, 500, 50, false);
+
+	$InagoPro01_X=-300;$InagoPro01_Y=576;
+	CreateTextureEX("InagoPro01_1", 2000, $InagoPro01_X, $InagoPro01_Y, "cg/ef/efイナゴ_a_01a.png");
+	CreateTextureEX("InagoPro01_2", 2000, $InagoPro01_X, $InagoPro01_Y, "cg/ef/efイナゴ_a_01a02.png");
+	SetBlur("InagoPro01_*", true, 1, 500, 50, false);
+
+/*
+	CreateTextureEX("絵イナゴＢ１_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01b.png");
+	CreateTextureEX("絵イナゴＢ１_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01b.png");
+
+	CreateTextureEX("絵イナゴＢ２_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01b.png");
+	CreateTextureEX("絵イナゴＢ２_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01b.png");
+
+	CreateTextureEX("絵イナゴＣ１_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01c.png");
+	CreateTextureEX("絵イナゴＣ１_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01c.png");
+
+	CreateTextureEX("絵イナゴＣ２_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01c.png");
+	CreateTextureEX("絵イナゴＣ２_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01c.png");
+
+	CreateTextureEX("絵イナゴＤ１_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01d.png");
+	CreateTextureEX("絵イナゴＤ１_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01d.png");
+
+	CreateTextureEX("絵イナゴＤ２_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01d.png");
+	CreateTextureEX("絵イナゴＤ２_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01d.png");
+
+	CreateTextureEX("絵イナゴＥ１_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01e.png");
+	CreateTextureEX("絵イナゴＥ１_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01e.png");
+
+	CreateTextureEX("絵イナゴＥ２_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01e.png");
+	CreateTextureEX("絵イナゴＥ２_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01e.png");
+*/
+
+	CreateProcess("InagoPro_プロセス１", 150, 0, 0, "InagoPro01");
+	SetAlias("InagoPro_プロセス１", "InagoPro_プロセス１");
+	CreateProcess("InagoPro_プロセス２", 150, 0, 0, "InagoPro02");
+	SetAlias("InagoPro_プロセス２", "InagoPro_プロセス２");
+	CreateProcess("InagoPro_プロセス３", 150, 0, 0, "InagoPro03");
+	SetAlias("InagoPro_プロセス３", "InagoPro_プロセス３");
+	CreateProcess("InagoPro_プロセス４", 150, 0, 0, "InagoPro04");
+	SetAlias("InagoPro_プロセス４", "InagoPro_プロセス４");
+	CreateProcess("InagoPro_プロセス５", 150, 0, 0, "InagoPro05");
+	SetAlias("InagoPro_プロセス５", "InagoPro_プロセス５");
+}
+function InagoSet2(){
+	$InagoPro04_X=-100;$InagoPro04_Y=100;
+	CreateTextureEX("InagoPro04_1", 2000, $InagoPro04_X, $InagoPro04_Y, "cg/ef/efイナゴ_a_01e_食.png");
+	CreateTextureEX("InagoPro04_2", 2000, $InagoPro04_X, $InagoPro04_Y, "cg/ef/efイナゴ_a_01e02_食.png");
+	SetBlur("InagoPro04_*", true, 1, 500, 50, false);
+
+	$InagoPro03_X=-390;$InagoPro03_Y=150;
+	CreateTextureEX("InagoPro03_1", 2000, $InagoPro03_X, $InagoPro03_Y, "cg/ef/efイナゴ_a_01d_食.png");
+	CreateTextureEX("InagoPro03_2", 2000, $InagoPro03_X, $InagoPro03_Y, "cg/ef/efイナゴ_a_01d02_食.png");
+	SetBlur("InagoPro03_*", true, 1, 500, 50, false);
+
+	$InagoPro02_X=-350;$InagoPro02_Y=200;
+	CreateTextureEX("InagoPro02_1", 2000, $InagoPro02_X, $InagoPro02_Y, "cg/ef/efイナゴ_a_01c_食.png");
+	CreateTextureEX("InagoPro02_2", 2000, $InagoPro02_X, $InagoPro02_Y, "cg/ef/efイナゴ_a_01c02_食.png");
+	SetBlur("InagoPro02_*", true, 1, 500, 50, false);
+
+	$InagoPro05_X=-500;$InagoPro05_Y=300;
+	CreateTextureEX("InagoPro05_1", 2000, $InagoPro05_X, $InagoPro05_Y, "cg/ef/efイナゴ_a_01b_食.png");
+	CreateTextureEX("InagoPro05_2", 2000, $InagoPro05_X, $InagoPro05_Y, "cg/ef/efイナゴ_a_01b02_食.png");
+	SetBlur("InagoPro05_*", true, 1, 500, 50, false);
+
+	$InagoPro01_X=-300;$InagoPro01_Y=576;
+	CreateTextureEX("InagoPro01_1", 2000, $InagoPro01_X, $InagoPro01_Y, "cg/ef/efイナゴ_a_01a_食.png");
+	CreateTextureEX("InagoPro01_2", 2000, $InagoPro01_X, $InagoPro01_Y, "cg/ef/efイナゴ_a_01a02_食.png");
+	SetBlur("InagoPro01_*", true, 1, 500, 50, false);
+
+/*
+	CreateTextureEX("絵イナゴＢ１_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01b.png");
+	CreateTextureEX("絵イナゴＢ１_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01b.png");
+
+	CreateTextureEX("絵イナゴＢ２_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01b.png");
+	CreateTextureEX("絵イナゴＢ２_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01b.png");
+
+	CreateTextureEX("絵イナゴＣ１_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01c.png");
+	CreateTextureEX("絵イナゴＣ１_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01c.png");
+
+	CreateTextureEX("絵イナゴＣ２_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01c.png");
+	CreateTextureEX("絵イナゴＣ２_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01c.png");
+
+	CreateTextureEX("絵イナゴＤ１_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01d.png");
+	CreateTextureEX("絵イナゴＤ１_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01d.png");
+
+	CreateTextureEX("絵イナゴＤ２_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01d.png");
+	CreateTextureEX("絵イナゴＤ２_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01d.png");
+
+	CreateTextureEX("絵イナゴＥ１_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01e.png");
+	CreateTextureEX("絵イナゴＥ１_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01e.png");
+
+	CreateTextureEX("絵イナゴＥ２_1", 2000, 0, 0, "cg/ef/efイナゴ_a_01e.png");
+	CreateTextureEX("絵イナゴＥ２_2", 2000, 0, 0, "cg/ef/efイナゴ_a_01e.png");
+*/
+
+	CreateProcess("InagoPro_プロセス１", 150, 0, 0, "InagoPro01");
+	SetAlias("InagoPro_プロセス１", "InagoPro_プロセス１");
+	CreateProcess("InagoPro_プロセス２", 150, 0, 0, "InagoPro02");
+	SetAlias("InagoPro_プロセス２", "InagoPro_プロセス２");
+	CreateProcess("InagoPro_プロセス３", 150, 0, 0, "InagoPro03");
+	SetAlias("InagoPro_プロセス３", "InagoPro_プロセス３");
+	CreateProcess("InagoPro_プロセス４", 150, 0, 0, "InagoPro04");
+	SetAlias("InagoPro_プロセス４", "InagoPro_プロセス４");
+	CreateProcess("InagoPro_プロセス５", 150, 0, 0, "InagoPro05");
+	SetAlias("InagoPro_プロセス５", "InagoPro_プロセス５");
+}
+
+
+..//▽表示
+function InagoFade(){
+	Request("InagoPro_プロセス１", Start);
+	Wait(100);
+	Request("InagoPro_プロセス２", Start);
+	Wait(100);
+	Request("InagoPro_プロセス３", Start);
+	Wait(100);
+	Request("InagoPro_プロセス４", Start);
+	Wait(100);
+	Request("InagoPro_プロセス５", Start);
+	Wait(100);
+
+	Request("InagoPro_プロセス１", Disused);
+	Request("InagoPro_プロセス２", Disused);
+	Request("InagoPro_プロセス３", Disused);
+	Request("InagoPro_プロセス４", Disused);
+	Request("InagoPro_プロセス５", Disused);
+}
+
+
+function InagoPro01(){
+	$InagoPro01_X1=800;
+	$InagoPro01_X2=800;
+	$InagoPro01_X3=800;
+	$InagoPro01_Y1=-600;
+	$InagoPro01_Y2=-600;
+	$InagoPro01_Y3=-400;
+
+	$InagoPro01_F=0;
+	$InagoPro01_T=100;
+
+begin:
+
+	Fade("@InagoPro01_1", 0, 1000, null, true);
+
+	while(1){
+		////////////////////////////////////////////////////
+		Fade("@InagoPro01_2", $InagoPro01_F, 1000, Dxl2, false);
+		Fade("@InagoPro01_1", $InagoPro01_F, 0, Axl3, false);
+		BezierMove("@InagoPro01_*", $InagoPro01_T, (@0,@0){@$InagoPro01_X1,@$InagoPro01_Y1}{@$InagoPro01_X2,@$InagoPro01_Y2}(@$InagoPro01_X3,@$InagoPro01_Y3), null, true);
+
+		Fade("@InagoPro01_1", $InagoPro01_F, 1000, Dxl2, false);
+		Fade("@InagoPro01_2", $InagoPro01_F, 0, Axl3, false);
+		BezierMove("@InagoPro01_*", $InagoPro01_T, (@0,@0){@$InagoPro01_X1,@$InagoPro01_Y1}{@$InagoPro01_X2,@$InagoPro01_Y2}(@$InagoPro01_X3,@$InagoPro01_Y3), null, true);
+		////////////////////////////////////////////////////
+		Fade("@InagoPro01_2", $InagoPro01_F, 1000, Dxl2, false);
+		Fade("@InagoPro01_1", $InagoPro01_F, 0, Axl3, false);
+		BezierMove("@InagoPro01_*", $InagoPro01_T, (@0,@0){@$InagoPro01_X1,@$InagoPro01_Y1}{@$InagoPro01_X2,@$InagoPro01_Y2}(@$InagoPro01_X3,@$InagoPro01_Y3), null, true);
+
+//		Fade("@InagoPro01_2", $InagoPro01_F, 0, Axl3, false);
+//		Fade("@InagoPro01_1", $InagoPro01_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro01_*", $InagoPro01_T, (@0,@0){@$InagoPro01_X1,@$InagoPro01_Y1}{@$InagoPro01_X2,@$InagoPro01_Y2}(@$InagoPro01_X3,@$InagoPro01_Y3), null, true);
+		////////////////////////////////////////////////////
+//		Fade("@InagoPro01_1", $InagoPro01_F, 0, Axl3, false);
+//		Fade("@InagoPro01_2", $InagoPro01_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro01_*", $InagoPro01_T, (@0,@0){@$InagoPro01_X1,@$InagoPro01_Y1}{@$InagoPro01_X2,@$InagoPro01_Y2}(@$InagoPro01_X3,@$InagoPro01_Y3), null, true);
+
+//		Fade("@InagoPro01_2", $InagoPro01_F, 0, Axl3, false);
+//		Fade("@InagoPro01_1", $InagoPro01_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro01_*", $InagoPro01_T, (@0,@0){@$InagoPro01_X1,@$InagoPro01_Y1}{@$InagoPro01_X2,@$InagoPro01_Y2}(@$InagoPro01_X3,@$InagoPro01_Y3), null, true);
+		////////////////////////////////////////////////////
+
+		Wait(400);
+
+		$InagoPro01_Con++;
+		if($InagoPro01_Con==1){
+			$InagoPro01_XM=$InagoPro01_X-50;
+		}else if($InagoPro01_Con==2){
+			$InagoPro01_XM=$InagoPro01_X-100;
+		}else if($InagoPro01_Con>=3){
+			$InagoPro01_XM=$InagoPro01_X-150;
+			$InagoPro01_Con=0;
+		}
+
+		Move("@InagoPro01_*", 0, $InagoPro01_XM, $InagoPro01_Y, Axl1, true);
+	}
+}
+
+function InagoPro02(){
+	$InagoPro02_X1=600;
+	$InagoPro02_X2=600;
+	$InagoPro02_X3=600;
+	$InagoPro02_Y1=-370;
+	$InagoPro02_Y2=-370;
+	$InagoPro02_Y3=-170;
+
+	$InagoPro02_F=0;
+	$InagoPro02_T=110;
+
+begin:
+
+	Fade("@InagoPro02_1", 0, 1000, null, true);
+
+	while(1){
+		////////////////////////////////////////////////////
+		Fade("@InagoPro02_2", $InagoPro02_F, 1000, Dxl2, false);
+		Fade("@InagoPro02_1", $InagoPro02_F, 0, Axl3, false);
+		BezierMove("@InagoPro02_*", $InagoPro02_T, (@0,@0){@$InagoPro02_X1,@$InagoPro02_Y1}{@$InagoPro02_X2,@$InagoPro02_Y2}(@$InagoPro02_X3,@$InagoPro02_Y3), null, true);
+
+		Fade("@InagoPro02_1", $InagoPro02_F, 1000, Dxl2, false);
+		Fade("@InagoPro02_2", $InagoPro02_F, 0, Axl3, false);
+		BezierMove("@InagoPro02_*", $InagoPro02_T, (@0,@0){@$InagoPro02_X1,@$InagoPro02_Y1}{@$InagoPro02_X2,@$InagoPro02_Y2}(@$InagoPro02_X3,@$InagoPro02_Y3), null, true);
+		////////////////////////////////////////////////////
+		Fade("@InagoPro02_2", $InagoPro02_F, 1000, Dxl2, false);
+		Fade("@InagoPro02_1", $InagoPro02_F, 0, Axl3, false);
+		BezierMove("@InagoPro02_*", $InagoPro02_T, (@0,@0){@$InagoPro02_X1,@$InagoPro02_Y1}{@$InagoPro02_X2,@$InagoPro02_Y2}(@$InagoPro02_X3,@$InagoPro02_Y3), null, true);
+
+//		Fade("@InagoPro02_2", $InagoPro02_F, 0, Axl3, false);
+//		Fade("@InagoPro02_1", $InagoPro02_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro02_*", $InagoPro02_T, (@0,@0){@$InagoPro02_X1,@$InagoPro02_Y1}{@$InagoPro02_X2,@$InagoPro02_Y2}(@$InagoPro02_X3,@$InagoPro02_Y3), null, true);
+		////////////////////////////////////////////////////
+//		Fade("@InagoPro02_1", $InagoPro02_F, 0, Axl3, false);
+//		Fade("@InagoPro02_2", $InagoPro02_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro02_*", $InagoPro02_T, (@0,@0){@$InagoPro02_X1,@$InagoPro02_Y1}{@$InagoPro02_X2,@$InagoPro02_Y2}(@$InagoPro02_X3,@$InagoPro02_Y3), null, true);
+
+//		Fade("@InagoPro02_2", $InagoPro02_F, 0, Axl3, false);
+//		Fade("@InagoPro02_1", $InagoPro02_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro02_*", $InagoPro02_T, (@0,@0){@$InagoPro02_X1,@$InagoPro02_Y1}{@$InagoPro02_X2,@$InagoPro02_Y2}(@$InagoPro02_X3,@$InagoPro02_Y3), null, true);
+		////////////////////////////////////////////////////
+
+		Wait(300);
+
+		$InagoPro02_Con++;
+		if($InagoPro02_Con==1){
+			$InagoPro02_XM=$InagoPro02_X-50;
+		}else if($InagoPro02_Con==2){
+			$InagoPro02_XM=$InagoPro02_X-100;
+		}else if($InagoPro02_Con>=3){
+			$InagoPro02_XM=$InagoPro02_X-150;
+			$InagoPro02_Con=0;
+		}
+
+		Move("@InagoPro02_*", 0, $InagoPro02_XM, $InagoPro02_Y, Axl1, true);
+	}
+}
+
+function InagoPro03(){
+	$InagoPro03_X1=400;
+	$InagoPro03_X2=400;
+	$InagoPro03_X3=400;
+	$InagoPro03_Y1=-320;
+	$InagoPro03_Y2=-320;
+	$InagoPro03_Y3=-120;
+
+	$InagoPro03_F=0;
+	$InagoPro03_T=120;
+
+begin:
+
+	Fade("@InagoPro03_1", 0, 1000, null, true);
+
+	while(1){
+		////////////////////////////////////////////////////
+		Fade("@InagoPro03_2", $InagoPro03_F, 1000, Dxl2, false);
+		Fade("@InagoPro03_1", $InagoPro03_F, 0, Axl3, false);
+		BezierMove("@InagoPro03_*", $InagoPro03_T, (@0,@0){@$InagoPro03_X1,@$InagoPro03_Y1}{@$InagoPro03_X2,@$InagoPro03_Y2}(@$InagoPro03_X3,@$InagoPro03_Y3), null, true);
+
+		Fade("@InagoPro03_1", $InagoPro03_F, 1000, Dxl2, false);
+		Fade("@InagoPro03_2", $InagoPro03_F, 0, Axl3, false);
+		BezierMove("@InagoPro03_*", $InagoPro03_T, (@0,@0){@$InagoPro03_X1,@$InagoPro03_Y1}{@$InagoPro03_X2,@$InagoPro03_Y2}(@$InagoPro03_X3,@$InagoPro03_Y3), null, true);
+		////////////////////////////////////////////////////
+		Fade("@InagoPro03_2", $InagoPro03_F, 1000, Dxl2, false);
+		Fade("@InagoPro03_1", $InagoPro03_F, 0, Axl3, false);
+		BezierMove("@InagoPro03_*", $InagoPro03_T, (@0,@0){@$InagoPro03_X1,@$InagoPro03_Y1}{@$InagoPro03_X2,@$InagoPro03_Y2}(@$InagoPro03_X3,@$InagoPro03_Y3), null, true);
+
+//		Fade("@InagoPro03_2", $InagoPro03_F, 0, Axl3, false);
+//		Fade("@InagoPro03_1", $InagoPro03_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro03_*", $InagoPro03_T, (@0,@0){@$InagoPro03_X1,@$InagoPro03_Y1}{@$InagoPro03_X2,@$InagoPro03_Y2}(@$InagoPro03_X3,@$InagoPro03_Y3), null, true);
+		////////////////////////////////////////////////////
+//		Fade("@InagoPro03_1", $InagoPro03_F, 0, Axl3, false);
+//		Fade("@InagoPro03_2", $InagoPro03_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro03_*", $InagoPro03_T, (@0,@0){@$InagoPro03_X1,@$InagoPro03_Y1}{@$InagoPro03_X2,@$InagoPro03_Y2}(@$InagoPro03_X3,@$InagoPro03_Y3), null, true);
+
+//		Fade("@InagoPro03_2", $InagoPro03_F, 0, Axl3, false);
+//		Fade("@InagoPro03_1", $InagoPro03_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro03_*", $InagoPro03_T, (@0,@0){@$InagoPro03_X1,@$InagoPro03_Y1}{@$InagoPro03_X2,@$InagoPro03_Y2}(@$InagoPro03_X3,@$InagoPro03_Y3), null, true);
+		////////////////////////////////////////////////////
+
+		Wait(200);
+
+		$InagoPro03_Con++;
+		if($InagoPro03_Con==1){
+			$InagoPro03_XM=$InagoPro03_X-50;
+		}else if($InagoPro03_Con==2){
+			$InagoPro03_XM=$InagoPro03_X-100;
+		}else if($InagoPro03_Con>=3){
+			$InagoPro03_XM=$InagoPro03_X-150;
+			$InagoPro03_Con=0;
+		}
+
+		Move("@InagoPro03_*", 0, $InagoPro03_XM, $InagoPro03_Y, Axl1, true);
+	}
+}
+
+function InagoPro04(){
+	$InagoPro04_X1=300;
+	$InagoPro04_X2=300;
+	$InagoPro04_X3=300;
+	$InagoPro04_Y1=-300;
+	$InagoPro04_Y2=-300;
+	$InagoPro04_Y3=-100;
+
+	$InagoPro04_F=0;
+	$InagoPro04_T=130;
+
+begin:
+
+	Fade("@InagoPro04_1", 0, 1000, null, true);
+
+	while(1){
+		////////////////////////////////////////////////////
+		Fade("@InagoPro04_2", $InagoPro04_F, 1000, Dxl2, false);
+		Fade("@InagoPro04_1", $InagoPro04_F, 0, Axl3, false);
+		BezierMove("@InagoPro04_*", $InagoPro04_T, (@0,@0){@$InagoPro04_X1,@$InagoPro04_Y1}{@$InagoPro04_X2,@$InagoPro04_Y2}(@$InagoPro04_X3,@$InagoPro04_Y3), null, true);
+
+		Fade("@InagoPro04_1", $InagoPro04_F, 1000, Dxl2, false);
+		Fade("@InagoPro04_2", $InagoPro04_F, 0, Axl3, false);
+		BezierMove("@InagoPro04_*", $InagoPro04_T, (@0,@0){@$InagoPro04_X1,@$InagoPro04_Y1}{@$InagoPro04_X2,@$InagoPro04_Y2}(@$InagoPro04_X3,@$InagoPro04_Y3), null, true);
+		////////////////////////////////////////////////////
+		Fade("@InagoPro04_2", $InagoPro04_F, 1000, Dxl2, false);
+		Fade("@InagoPro04_1", $InagoPro04_F, 0, Axl3, false);
+		BezierMove("@InagoPro04_*", $InagoPro04_T, (@0,@0){@$InagoPro04_X1,@$InagoPro04_Y1}{@$InagoPro04_X2,@$InagoPro04_Y2}(@$InagoPro04_X3,@$InagoPro04_Y3), null, true);
+
+//		Fade("@InagoPro04_2", $InagoPro04_F, 0, Axl3, false);
+//		Fade("@InagoPro04_1", $InagoPro04_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro04_*", $InagoPro04_T, (@0,@0){@$InagoPro04_X1,@$InagoPro04_Y1}{@$InagoPro04_X2,@$InagoPro04_Y2}(@$InagoPro04_X3,@$InagoPro04_Y3), null, true);
+		////////////////////////////////////////////////////
+//		Fade("@InagoPro04_1", $InagoPro04_F, 0, Axl3, false);
+//		Fade("@InagoPro04_2", $InagoPro04_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro04_*", $InagoPro04_T, (@0,@0){@$InagoPro04_X1,@$InagoPro04_Y1}{@$InagoPro04_X2,@$InagoPro04_Y2}(@$InagoPro04_X3,@$InagoPro04_Y3), null, true);
+
+//		Fade("@InagoPro04_2", $InagoPro04_F, 0, Axl3, false);
+//		Fade("@InagoPro04_1", $InagoPro04_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro04_*", $InagoPro04_T, (@0,@0){@$InagoPro04_X1,@$InagoPro04_Y1}{@$InagoPro04_X2,@$InagoPro04_Y2}(@$InagoPro04_X3,@$InagoPro04_Y3), null, true);
+		////////////////////////////////////////////////////
+
+		Wait(50);
+
+		$InagoPro04_Con++;
+		if($InagoPro04_Con==1){
+			$InagoPro04_XM=$InagoPro04_X-50;
+		}else if($InagoPro04_Con==2){
+			$InagoPro04_XM=$InagoPro04_X-100;
+		}else if($InagoPro04_Con>=3){
+			$InagoPro04_XM=$InagoPro04_X-150;
+			$InagoPro04_Con=0;
+		}
+
+		Move("@InagoPro04_*", 0, $InagoPro04_XM, $InagoPro04_Y, Axl1, true);
+	}
+}
+
+
+function InagoPro05(){
+	$InagoPro05_X1=700;
+	$InagoPro05_X2=700;
+	$InagoPro05_X3=700;
+	$InagoPro05_Y1=-380;
+	$InagoPro05_Y2=-380;
+	$InagoPro05_Y3=-180;
+
+	$InagoPro05_F=0;
+	$InagoPro05_T=100;
+
+begin:
+
+	Fade("@InagoPro05_1", 0, 1000, null, true);
+
+	while(1){
+		////////////////////////////////////////////////////
+		Fade("@InagoPro05_2", $InagoPro05_F, 1000, Dxl2, false);
+		Fade("@InagoPro05_1", $InagoPro05_F, 0, Axl3, false);
+		BezierMove("@InagoPro05_*", $InagoPro05_T, (@0,@0){@$InagoPro05_X1,@$InagoPro05_Y1}{@$InagoPro05_X2,@$InagoPro05_Y2}(@$InagoPro05_X3,@$InagoPro05_Y3), null, true);
+
+		Fade("@InagoPro05_1", $InagoPro05_F, 1000, Dxl2, false);
+		Fade("@InagoPro05_2", $InagoPro05_F, 0, Axl3, false);
+		BezierMove("@InagoPro05_*", $InagoPro05_T, (@0,@0){@$InagoPro05_X1,@$InagoPro05_Y1}{@$InagoPro05_X2,@$InagoPro05_Y2}(@$InagoPro05_X3,@$InagoPro05_Y3), null, true);
+		////////////////////////////////////////////////////
+		Fade("@InagoPro05_2", $InagoPro05_F, 1000, Dxl2, false);
+		Fade("@InagoPro05_1", $InagoPro05_F, 0, Axl3, false);
+		BezierMove("@InagoPro05_*", $InagoPro05_T, (@0,@0){@$InagoPro05_X1,@$InagoPro05_Y1}{@$InagoPro05_X2,@$InagoPro05_Y2}(@$InagoPro05_X3,@$InagoPro05_Y3), null, true);
+
+//		Fade("@InagoPro05_2", $InagoPro05_F, 0, Axl3, false);
+//		Fade("@InagoPro05_1", $InagoPro05_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro05_*", $InagoPro05_T, (@0,@0){@$InagoPro05_X1,@$InagoPro05_Y1}{@$InagoPro05_X2,@$InagoPro05_Y2}(@$InagoPro05_X3,@$InagoPro05_Y3), null, true);
+		////////////////////////////////////////////////////
+//		Fade("@InagoPro05_1", $InagoPro05_F, 0, Axl3, false);
+//		Fade("@InagoPro05_2", $InagoPro05_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro05_*", $InagoPro05_T, (@0,@0){@$InagoPro05_X1,@$InagoPro05_Y1}{@$InagoPro05_X2,@$InagoPro05_Y2}(@$InagoPro05_X3,@$InagoPro05_Y3), null, true);
+
+//		Fade("@InagoPro05_2", $InagoPro05_F, 0, Axl3, false);
+//		Fade("@InagoPro05_1", $InagoPro05_F, 1000, Dxl2, false);
+//		BezierMove("@InagoPro05_*", $InagoPro05_T, (@0,@0){@$InagoPro05_X1,@$InagoPro05_Y1}{@$InagoPro05_X2,@$InagoPro05_Y2}(@$InagoPro05_X3,@$InagoPro05_Y3), null, true);
+		////////////////////////////////////////////////////
+
+		Wait(50);
+
+		$InagoPro05_Con++;
+		if($InagoPro05_Con==1){
+			$InagoPro05_XM=$InagoPro05_X-50;
+		}else if($InagoPro05_Con==2){
+			$InagoPro05_XM=$InagoPro05_X-100;
+		}else if($InagoPro05_Con>=3){
+			$InagoPro05_XM=$InagoPro05_X-150;
+			$InagoPro05_Con=0;
+		}
+
+		Move("@InagoPro05_*", 0, $InagoPro05_XM, $InagoPro05_Y, Axl1, true);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.//■いなご
+..//▽設置
+function ShakeINS01_Set($ShakeINS01_Nut){
+
+	CreateProcess("ShakeINS01_プロセス", 150, 0, 0, "ShakeINS01_Pro");
+	SetAlias("ShakeINS01_プロセス", "ShakeINS01_プロセス");
+
+}
+
+function ShakeINS01_Fade(){
+	Request("ShakeINS01_プロセス", Start);
+	Request("ShakeINS01_プロセス", Disused);
+}
+
+function ShakeINS01_Pro(){
+	while(1){
+		Shake($ShakeINS01_Nut, 500, 0, 1, 0, 0, 500, Dxl1, true);
+		Wait(1000);
+		Shake($ShakeINS01_Nut, 800, 0, 2, 0, 0, 500, Dxl1, true);
+		Wait(300);
+		Shake($ShakeINS01_Nut, 200, 0, 1, 0, 0, 500, Dxl1, true);
+		Wait(800);
+		Shake($ShakeINS01_Nut, 1000, 0, 1, 0, 0, 500, Dxl1, true);
+		Wait(1000);
+		Shake($ShakeINS01_Nut, 500, 0, 1, 0, 0, 500, Dxl1, true);
+		Wait(200);
+		Shake($ShakeINS01_Nut, 300, 0, 2, 0, 0, 500, Dxl1, true);
+		Wait(600);
+	}
+}
+
+
+
+
+
+
+.//■Fadeプロセス汎用
+//▽通常フェード
+function FadePro($FadeProNut, $FadeProTime, $FadeProF, $FadeProTempo, $FadeProWait)
+{
+	Request("@FadeProPro", Stop);
+	Delete("@FadeProPro");
+	WaitAction("@FadeProPro", null);
+
+	CreateProcess("FadeProPro", 150, 0, 0, "FadeProMacro");
+	SetAlias("FadeProPro", "FadeProPro");
+	Request("FadeProPro", Start);
+	Request("FadeProPro", Disused);
+}
+
+function FadeProMacro()
+{
+	Wait($FadeProWait);
+	Fade($FadeProNut, $FadeProTime, $FadeProF, $FadeProTempo, true);
+}
+
+//▽後始末用
+function DustFade()
+{
+	Request("@FadeProPro", Stop);
+	Delete("@FadeProPro");
+	WaitAction("@FadeProPro", null);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

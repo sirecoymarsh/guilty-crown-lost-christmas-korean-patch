@@ -1,0 +1,1135 @@
+{
+  "source": "user game sound.npa",
+  "audio_sha256": "fe81a9e0b6e1cb6f6f7925600e2dbd43b2fbd14295f36594cbd80494dd5e4eb0",
+  "model": "P:\\AI\\Codex\\projects\\drakoi-korean\\vocal-subtitles\\tools\\faster-whisper-large-v3",
+  "language": "en",
+  "task": "transcribe",
+  "duration": 235.36,
+  "segments": [
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 21.660000000000004,
+      "end": 28.98,
+      "text": " 未来 虚ろな夜 手招きだけが 闇に浮かんでる",
+      "tokens": [
+        50365,
+        220,
+        29954,
+        6912,
+        220,
+        12026,
+        248,
+        12488,
+        3203,
+        30124,
+        220,
+        11389,
+        6852,
+        249,
+        7016,
+        36215,
+        5142,
+        220,
+        8259,
+        229,
+        4108,
+        11038,
+        106,
+        3703,
+        35356,
+        4895,
+        51835
+      ],
+      "avg_logprob": -0.35398705663352176,
+      "compression_ratio": 0.8450704225352113,
+      "no_speech_prob": 0.1654052734375,
+      "words": [
+        {
+          "start": 21.660000000000004,
+          "end": 23.060000000000002,
+          "word": " 未来",
+          "probability": 0.51385498046875
+        },
+        {
+          "start": 23.060000000000002,
+          "end": 24.46,
+          "word": " 虚ろな夜",
+          "probability": 0.8019612630208334
+        },
+        {
+          "start": 24.46,
+          "end": 26.64,
+          "word": " 手招きだけが",
+          "probability": 0.9576590401785714
+        },
+        {
+          "start": 26.64,
+          "end": 28.98,
+          "word": " 闇に浮かんでる",
+          "probability": 0.9178602430555556
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 2,
+      "seek": 2898,
+      "start": 31.46,
+      "end": 36.62,
+      "text": " 秒針は冷たく 折れ抜け全て 声を掻き消す",
+      "tokens": [
+        50365,
+        220,
+        20956,
+        5873,
+        251,
+        3065,
+        32499,
+        3368,
+        6134,
+        220,
+        7235,
+        246,
+        4132,
+        7235,
+        250,
+        7625,
+        11319,
+        2996,
+        220,
+        32045,
+        5998,
+        6900,
+        119,
+        7016,
+        28837,
+        2659,
+        50760
+      ],
+      "avg_logprob": -0.3989361626036624,
+      "compression_ratio": 0.9906542056074766,
+      "no_speech_prob": 0.7275390625,
+      "words": [
+        {
+          "start": 31.46,
+          "end": 32.86,
+          "word": " 秒針は冷たく",
+          "probability": 0.7359796166419983
+        },
+        {
+          "start": 32.86,
+          "end": 34.26,
+          "word": " 折れ抜け全て",
+          "probability": 0.7707926432291666
+        },
+        {
+          "start": 34.26,
+          "end": 36.62,
+          "word": " 声を掻き消す",
+          "probability": 0.8681640625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 3,
+      "seek": 2898,
+      "start": 54.02,
+      "end": 56.82,
+      "text": " 時は破裂する まるで終わりの始まり",
+      "tokens": [
+        50760,
+        220,
+        6611,
+        3065,
+        39560,
+        8083,
+        224,
+        22570,
+        20979,
+        4895,
+        2474,
+        29371,
+        9206,
+        5095,
+        2972,
+        15476,
+        41446,
+        51772
+      ],
+      "avg_logprob": -0.3989361626036624,
+      "compression_ratio": 0.9906542056074766,
+      "no_speech_prob": 0.7275390625,
+      "words": [
+        {
+          "start": 54.02,
+          "end": 55.42,
+          "word": " 時は破裂する",
+          "probability": 0.79962158203125
+        },
+        {
+          "start": 55.42,
+          "end": 56.82,
+          "word": " まるで終わりの始まり",
+          "probability": 0.9723307291666666
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 4,
+      "seek": 5682,
+      "start": 57.82,
+      "end": 59.1,
+      "text": " Where am I?",
+      "tokens": [
+        50415,
+        2305,
+        669,
+        286,
+        30,
+        50515
+      ],
+      "avg_logprob": -0.6189904098327343,
+      "compression_ratio": 1.280701754385965,
+      "no_speech_prob": 0.53271484375,
+      "words": [
+        {
+          "start": 57.68,
+          "end": 58.2,
+          "word": " Where",
+          "probability": 0.398193359375
+        },
+        {
+          "start": 58.2,
+          "end": 58.66,
+          "word": " am",
+          "probability": 0.65625
+        },
+        {
+          "start": 58.66,
+          "end": 59.1,
+          "word": " I?",
+          "probability": 0.97607421875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 5,
+      "seek": 5682,
+      "start": 66.82,
+      "end": 68.84,
+      "text": " Now, I'm nowhere to be found",
+      "tokens": [
+        50865,
+        823,
+        11,
+        286,
+        478,
+        11159,
+        281,
+        312,
+        1352,
+        50965
+      ],
+      "avg_logprob": -0.6189904098327343,
+      "compression_ratio": 1.280701754385965,
+      "no_speech_prob": 0.53271484375,
+      "words": [
+        {
+          "start": 66.4,
+          "end": 66.92,
+          "word": " Now,",
+          "probability": 0.12109375
+        },
+        {
+          "start": 67.14,
+          "end": 67.86,
+          "word": " I'm",
+          "probability": 0.4176025390625
+        },
+        {
+          "start": 67.86,
+          "end": 67.86,
+          "word": " nowhere",
+          "probability": 0.390380859375
+        },
+        {
+          "start": 67.86,
+          "end": 68.04,
+          "word": " to",
+          "probability": 0.7802734375
+        },
+        {
+          "start": 68.04,
+          "end": 68.34,
+          "word": " be",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 68.34,
+          "end": 68.84,
+          "word": " found",
+          "probability": 0.74169921875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 6,
+      "seek": 5682,
+      "start": 68.84,
+      "end": 69.64,
+      "text": " There's no doubt",
+      "tokens": [
+        50965,
+        821,
+        311,
+        572,
+        6385,
+        51065
+      ],
+      "avg_logprob": -0.6189904098327343,
+      "compression_ratio": 1.280701754385965,
+      "no_speech_prob": 0.53271484375,
+      "words": [
+        {
+          "start": 68.84,
+          "end": 69.42,
+          "word": " There's",
+          "probability": 0.28216552734375
+        },
+        {
+          "start": 69.42,
+          "end": 69.42,
+          "word": " no",
+          "probability": 0.94482421875
+        },
+        {
+          "start": 69.42,
+          "end": 69.64,
+          "word": " doubt",
+          "probability": 0.67822265625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 7,
+      "seek": 5682,
+      "start": 70.82,
+      "end": 73.48,
+      "text": " I'm here, as you know",
+      "tokens": [
+        51065,
+        286,
+        478,
+        510,
+        11,
+        382,
+        291,
+        458,
+        51215
+      ],
+      "avg_logprob": -0.6189904098327343,
+      "compression_ratio": 1.280701754385965,
+      "no_speech_prob": 0.53271484375,
+      "words": [
+        {
+          "start": 70.74000000000001,
+          "end": 71.26,
+          "word": " I'm",
+          "probability": 0.3951416015625
+        },
+        {
+          "start": 71.26,
+          "end": 71.26,
+          "word": " here,",
+          "probability": 0.55712890625
+        },
+        {
+          "start": 71.8,
+          "end": 72.64,
+          "word": " as",
+          "probability": 0.326171875
+        },
+        {
+          "start": 72.64,
+          "end": 72.88,
+          "word": " you",
+          "probability": 0.9921875
+        },
+        {
+          "start": 72.88,
+          "end": 73.48,
+          "word": " know",
+          "probability": 0.99853515625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 8,
+      "seek": 5682,
+      "start": 73.48,
+      "end": 77.26,
+      "text": " The fact that I can be touched is the truth",
+      "tokens": [
+        51215,
+        440,
+        1186,
+        300,
+        286,
+        393,
+        312,
+        9828,
+        307,
+        264,
+        3494,
+        51415
+      ],
+      "avg_logprob": -0.6189904098327343,
+      "compression_ratio": 1.280701754385965,
+      "no_speech_prob": 0.53271484375,
+      "words": [
+        {
+          "start": 73.48,
+          "end": 74.18,
+          "word": " The",
+          "probability": 0.130126953125
+        },
+        {
+          "start": 74.18,
+          "end": 74.62,
+          "word": " fact",
+          "probability": 0.306884765625
+        },
+        {
+          "start": 74.62,
+          "end": 74.62,
+          "word": " that",
+          "probability": 0.6669921875
+        },
+        {
+          "start": 74.62,
+          "end": 74.62,
+          "word": " I",
+          "probability": 0.365478515625
+        },
+        {
+          "start": 74.62,
+          "end": 75.58,
+          "word": " can",
+          "probability": 0.7470703125
+        },
+        {
+          "start": 75.58,
+          "end": 75.62,
+          "word": " be",
+          "probability": 0.259521484375
+        },
+        {
+          "start": 75.62,
+          "end": 75.62,
+          "word": " touched",
+          "probability": 0.96435546875
+        },
+        {
+          "start": 75.62,
+          "end": 76.3,
+          "word": " is",
+          "probability": 0.63037109375
+        },
+        {
+          "start": 76.3,
+          "end": 76.72,
+          "word": " the",
+          "probability": 0.57177734375
+        },
+        {
+          "start": 76.72,
+          "end": 77.26,
+          "word": " truth",
+          "probability": 0.8369140625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 9,
+      "seek": 5682,
+      "start": 77.82,
+      "end": 79.62,
+      "text": " Even if that's the end",
+      "tokens": [
+        51415,
+        2754,
+        498,
+        300,
+        311,
+        264,
+        917,
+        51565
+      ],
+      "avg_logprob": -0.6189904098327343,
+      "compression_ratio": 1.280701754385965,
+      "no_speech_prob": 0.53271484375,
+      "words": [
+        {
+          "start": 77.76,
+          "end": 78.28,
+          "word": " Even",
+          "probability": 0.70654296875
+        },
+        {
+          "start": 78.28,
+          "end": 78.28,
+          "word": " if",
+          "probability": 0.91748046875
+        },
+        {
+          "start": 78.28,
+          "end": 79.22,
+          "word": " that's",
+          "probability": 0.4422607421875
+        },
+        {
+          "start": 79.22,
+          "end": 79.4,
+          "word": " the",
+          "probability": 0.2177734375
+        },
+        {
+          "start": 79.4,
+          "end": 79.62,
+          "word": " end",
+          "probability": 0.275146484375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 10,
+      "seek": 8682,
+      "start": 86.9,
+      "end": 89.3,
+      "text": " Show me what you've got",
+      "tokens": [
+        50365,
+        6895,
+        385,
+        437,
+        291,
+        600,
+        658,
+        50505
+      ],
+      "avg_logprob": -0.5286458092076438,
+      "compression_ratio": 1.1170212765957446,
+      "no_speech_prob": 0.65087890625,
+      "words": [
+        {
+          "start": 86.9,
+          "end": 88.2,
+          "word": " Show",
+          "probability": 0.5654296875
+        },
+        {
+          "start": 88.2,
+          "end": 88.3,
+          "word": " me",
+          "probability": 0.97119140625
+        },
+        {
+          "start": 88.3,
+          "end": 88.46,
+          "word": " what",
+          "probability": 0.76123046875
+        },
+        {
+          "start": 88.46,
+          "end": 89.0,
+          "word": " you've",
+          "probability": 0.62744140625
+        },
+        {
+          "start": 89.0,
+          "end": 89.3,
+          "word": " got",
+          "probability": 0.8681640625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 11,
+      "seek": 8682,
+      "start": 89.3,
+      "end": 90.84,
+      "text": " Cause it's pain",
+      "tokens": [
+        50505,
+        10865,
+        309,
+        311,
+        1822,
+        50634
+      ],
+      "avg_logprob": -0.5286458092076438,
+      "compression_ratio": 1.1170212765957446,
+      "no_speech_prob": 0.65087890625,
+      "words": [
+        {
+          "start": 89.3,
+          "end": 89.92,
+          "word": " Cause",
+          "probability": 0.057220458984375
+        },
+        {
+          "start": 89.92,
+          "end": 90.52,
+          "word": " it's",
+          "probability": 0.845947265625
+        },
+        {
+          "start": 90.52,
+          "end": 90.84,
+          "word": " pain",
+          "probability": 0.95458984375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 12,
+      "seek": 8682,
+      "start": 92.42,
+      "end": 96.26,
+      "text": " Ore wa kasoku suru",
+      "tokens": [
+        50634,
+        31405,
+        5406,
+        19173,
+        13275,
+        1022,
+        84,
+        50873
+      ],
+      "avg_logprob": -0.5286458092076438,
+      "compression_ratio": 1.1170212765957446,
+      "no_speech_prob": 0.65087890625,
+      "words": [
+        {
+          "start": 92.42,
+          "end": 93.72,
+          "word": " Ore",
+          "probability": 0.0220184326171875
+        },
+        {
+          "start": 93.72,
+          "end": 94.04,
+          "word": " wa",
+          "probability": 0.77490234375
+        },
+        {
+          "start": 94.04,
+          "end": 95.12,
+          "word": " kasoku",
+          "probability": 0.741455078125
+        },
+        {
+          "start": 95.12,
+          "end": 96.26,
+          "word": " suru",
+          "probability": 0.98828125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 13,
+      "seek": 8682,
+      "start": 96.98,
+      "end": 97.72,
+      "text": " Marude",
+      "tokens": [
+        50873,
+        2039,
+        2303,
+        50930
+      ],
+      "avg_logprob": -0.5286458092076438,
+      "compression_ratio": 1.1170212765957446,
+      "no_speech_prob": 0.65087890625,
+      "words": [
+        {
+          "start": 96.98,
+          "end": 97.72,
+          "word": " Marude",
+          "probability": 0.68505859375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 14,
+      "seek": 8682,
+      "start": 97.72,
+      "end": 101.32,
+      "text": " Take the cross down",
+      "tokens": [
+        50930,
+        3664,
+        264,
+        3278,
+        760,
+        51123
+      ],
+      "avg_logprob": -0.5286458092076438,
+      "compression_ratio": 1.1170212765957446,
+      "no_speech_prob": 0.65087890625,
+      "words": [
+        {
+          "start": 97.72,
+          "end": 99.24,
+          "word": " Take",
+          "probability": 0.321044921875
+        },
+        {
+          "start": 99.24,
+          "end": 99.68,
+          "word": " the",
+          "probability": 0.5908203125
+        },
+        {
+          "start": 99.68,
+          "end": 100.28,
+          "word": " cross",
+          "probability": 0.2183837890625
+        },
+        {
+          "start": 100.28,
+          "end": 101.32,
+          "word": " down",
+          "probability": 0.92333984375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 15,
+      "seek": 8682,
+      "start": 101.98,
+      "end": 103.56,
+      "text": " To my grave",
+      "tokens": [
+        51123,
+        1407,
+        452,
+        12525,
+        51262
+      ],
+      "avg_logprob": -0.5286458092076438,
+      "compression_ratio": 1.1170212765957446,
+      "no_speech_prob": 0.65087890625,
+      "words": [
+        {
+          "start": 101.71,
+          "end": 102.36,
+          "word": " To",
+          "probability": 0.468994140625
+        },
+        {
+          "start": 102.36,
+          "end": 102.88,
+          "word": " my",
+          "probability": 0.9853515625
+        },
+        {
+          "start": 102.88,
+          "end": 103.56,
+          "word": " grave",
+          "probability": 0.99658203125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 16,
+      "seek": 8682,
+      "start": 104.76,
+      "end": 110.64,
+      "text": " Come on",
+      "tokens": [
+        51262,
+        2492,
+        322,
+        51563
+      ],
+      "avg_logprob": -0.5286458092076438,
+      "compression_ratio": 1.1170212765957446,
+      "no_speech_prob": 0.65087890625,
+      "words": [
+        {
+          "start": 104.76,
+          "end": 106.08,
+          "word": " Come",
+          "probability": 0.312744140625
+        },
+        {
+          "start": 106.08,
+          "end": 110.64,
+          "word": " on",
+          "probability": 0.9833984375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 17,
+      "seek": 12536,
+      "start": 150.92,
+      "end": 155.32,
+      "text": " I'll see you next time.",
+      "tokens": [
+        50365,
+        286,
+        603,
+        536,
+        291,
+        958,
+        565,
+        13,
+        51864
+      ],
+      "avg_logprob": -0.7644531190395355,
+      "compression_ratio": 0.7419354838709677,
+      "no_speech_prob": 0.78173828125,
+      "words": [
+        {
+          "start": 150.92,
+          "end": 152.16,
+          "word": " I'll",
+          "probability": 0.0511932373046875
+        },
+        {
+          "start": 152.16,
+          "end": 152.44,
+          "word": " see",
+          "probability": 0.6357421875
+        },
+        {
+          "start": 152.44,
+          "end": 152.6,
+          "word": " you",
+          "probability": 0.98876953125
+        },
+        {
+          "start": 152.6,
+          "end": 153.56,
+          "word": " next",
+          "probability": 0.59326171875
+        },
+        {
+          "start": 153.56,
+          "end": 155.32,
+          "word": " time.",
+          "probability": 0.8701171875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 18,
+      "seek": 18536,
+      "start": 185.36,
+      "end": 189.02,
+      "text": " Where am I? Caused this pain",
+      "tokens": [
+        50365,
+        2305,
+        669,
+        286,
+        30,
+        7544,
+        4717,
+        341,
+        1822,
+        50615
+      ],
+      "avg_logprob": -0.7478197674418605,
+      "compression_ratio": 1.0808080808080809,
+      "no_speech_prob": 0.09521484375,
+      "words": [
+        {
+          "start": 185.36,
+          "end": 185.66,
+          "word": " Where",
+          "probability": 0.33251953125
+        },
+        {
+          "start": 185.66,
+          "end": 186.02,
+          "word": " am",
+          "probability": 0.44580078125
+        },
+        {
+          "start": 186.02,
+          "end": 186.6,
+          "word": " I?",
+          "probability": 0.98193359375
+        },
+        {
+          "start": 187.08,
+          "end": 188.12,
+          "word": " Caused",
+          "probability": 0.5341796875
+        },
+        {
+          "start": 188.12,
+          "end": 188.34,
+          "word": " this",
+          "probability": 0.6083984375
+        },
+        {
+          "start": 188.34,
+          "end": 189.02,
+          "word": " pain",
+          "probability": 0.9580078125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 19,
+      "seek": 18536,
+      "start": 191.36,
+      "end": 194.12,
+      "text": " Ore wa kasuki suru",
+      "tokens": [
+        50665,
+        31405,
+        5406,
+        19173,
+        11788,
+        1022,
+        84,
+        50815
+      ],
+      "avg_logprob": -0.7478197674418605,
+      "compression_ratio": 1.0808080808080809,
+      "no_speech_prob": 0.09521484375,
+      "words": [
+        {
+          "start": 191.04,
+          "end": 191.56,
+          "word": " Ore",
+          "probability": 0.045867919921875
+        },
+        {
+          "start": 191.56,
+          "end": 191.88,
+          "word": " wa",
+          "probability": 0.90380859375
+        },
+        {
+          "start": 191.88,
+          "end": 192.96,
+          "word": " kasuki",
+          "probability": 0.43267822265625
+        },
+        {
+          "start": 192.96,
+          "end": 194.12,
+          "word": " suru",
+          "probability": 0.98388671875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 20,
+      "seek": 18536,
+      "start": 195.36,
+      "end": 198.7,
+      "text": " Marude zettokousha",
+      "tokens": [
+        50865,
+        2039,
+        2303,
+        710,
+        3093,
+        453,
+        563,
+        1641,
+        51065
+      ],
+      "avg_logprob": -0.7478197674418605,
+      "compression_ratio": 1.0808080808080809,
+      "no_speech_prob": 0.09521484375,
+      "words": [
+        {
+          "start": 195.23999999999998,
+          "end": 195.76,
+          "word": " Marude",
+          "probability": 0.722412109375
+        },
+        {
+          "start": 195.76,
+          "end": 198.7,
+          "word": " zettokousha",
+          "probability": 0.4759033203125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 21,
+      "seek": 18536,
+      "start": 198.7,
+      "end": 201.14,
+      "text": " To my grave",
+      "tokens": [
+        51115,
+        1407,
+        452,
+        12525,
+        51415
+      ],
+      "avg_logprob": -0.7478197674418605,
+      "compression_ratio": 1.0808080808080809,
+      "no_speech_prob": 0.09521484375,
+      "words": [
+        {
+          "start": 198.7,
+          "end": 200.22,
+          "word": " To",
+          "probability": 0.6572265625
+        },
+        {
+          "start": 200.22,
+          "end": 200.68,
+          "word": " my",
+          "probability": 0.33154296875
+        },
+        {
+          "start": 200.68,
+          "end": 201.14,
+          "word": " grave",
+          "probability": 0.849609375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 22,
+      "seek": 18536,
+      "start": 207.9,
+      "end": 210.7,
+      "text": " Let's count the time on this",
+      "tokens": [
+        51515,
+        961,
+        311,
+        1207,
+        264,
+        565,
+        322,
+        341,
+        51665
+      ],
+      "avg_logprob": -0.7478197674418605,
+      "compression_ratio": 1.0808080808080809,
+      "no_speech_prob": 0.09521484375,
+      "words": [
+        {
+          "start": 207.9,
+          "end": 208.94,
+          "word": " Let's",
+          "probability": 0.5582275390625
+        },
+        {
+          "start": 208.94,
+          "end": 209.04,
+          "word": " count",
+          "probability": 0.1593017578125
+        },
+        {
+          "start": 209.04,
+          "end": 209.4,
+          "word": " the",
+          "probability": 0.2254638671875
+        },
+        {
+          "start": 209.4,
+          "end": 209.84,
+          "word": " time",
+          "probability": 0.051971435546875
+        },
+        {
+          "start": 209.84,
+          "end": 210.12,
+          "word": " on",
+          "probability": 0.6083984375
+        },
+        {
+          "start": 210.12,
+          "end": 210.7,
+          "word": " this",
+          "probability": 0.95458984375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 23,
+      "seek": 21070,
+      "start": 210.7,
+      "end": 213.18,
+      "text": " But you're not alone",
+      "tokens": [
+        50365,
+        583,
+        291,
+        434,
+        406,
+        3312,
+        50515
+      ],
+      "avg_logprob": -0.8325195237994194,
+      "compression_ratio": 0.7142857142857143,
+      "no_speech_prob": 0.5517578125,
+      "words": [
+        {
+          "start": 210.7,
+          "end": 211.72,
+          "word": " But",
+          "probability": 0.0499267578125
+        },
+        {
+          "start": 211.72,
+          "end": 212.52,
+          "word": " you're",
+          "probability": 0.878662109375
+        },
+        {
+          "start": 212.52,
+          "end": 212.74,
+          "word": " not",
+          "probability": 0.986328125
+        },
+        {
+          "start": 212.74,
+          "end": 213.18,
+          "word": " alone",
+          "probability": 0.94677734375
+        }
+      ],
+      "temperature": 0.0
+    }
+  ],
+  "seconds": 13.30215334892273
+}

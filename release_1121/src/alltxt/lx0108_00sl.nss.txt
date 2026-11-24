@@ -1,0 +1,97 @@
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0108_00sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+}
+
+
+scene lx0108_00sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//	$SYSTEM_skip=false;
+//	$SYSTEM_menu_lock=true;
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	//おがみ：曲借入
+	SoundPlay("@lx013",0,800,true);
+
+	PrintBG("上背景", 25000);
+
+	CreatePlainEX("pl01", 25000);
+	SetTone("pl01", Monochrome);
+
+	CreateMovieEX("selmovie01", 29500, Center, Middle, true, true, "dx/mvselect01.ngs");
+	Request("selmovie01", SubRender);
+	Zoom("selmovie01", 0, 3500, 3500, null, true);
+
+
+	//動作---------------------------------------------------
+
+	Fade("pl01", 500, 1000, null, true);
+
+	FadeDelete("上背景", 0, null, true);
+
+	CreatePlainSP("selpl01", 25100);
+	Delete("pl*");
+	Fade("selmovie01", 1000, 500, null, false);
+
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//→→自分を取り戻す
+//→→奴らに報いを
+
+////////////////////////////////////////
+
+//■選択肢
+	$select_fade=true;
+	SetChoice02("ﾀﾚｽﾅﾀｻ ｵﾇﾃ｣ｴﾂｴﾙ","ｳ狆ｮｵ鯀｡ｰﾔ ﾀﾀｺｸｸｦ");
+	WaitChoice02();
+	
+	if($SetChoiceSelect==0){		$GameName = "lx0108_01.nss";$lx0108_00sl選択肢=1;$GOOD_MAN_POINT=$GOOD_MAN_POINT+1;$FLAG_OF_STORY["自分を取り戻す"]=true;}
+	else if($SetChoiceSelect==1){	$GameName = "lx0108_02.nss";$lx0108_00sl選択肢=0;}
+
+
+	SetVolumeEX("SE*", 500, 0, null);
+	Wait(500);
+
+
+}

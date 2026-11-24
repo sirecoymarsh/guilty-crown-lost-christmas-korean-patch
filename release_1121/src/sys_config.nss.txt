@@ -1,0 +1,4090 @@
+//=============================================================================//
+.//걾긓깛긲귻긐걾
+//=============================================================================//
+#include "nss/function_dialog.nss"
+#include "nss/function.nss"
+
+chapter main{
+	Wait(16);
+	
+	//걳멟믯빾릶
+	$SYSTEM_menu_config_enable=true;
+
+	//걳뮪뫊궔귞궻빾멙뾭
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_buttondown_close=false;
+
+	#SYSTEM_interrupt_play_speed=3;
+	$SYSTEM_backlog_lock=true;
+
+	//걳멟믯빾릶
+	if($Title_Config){
+		//걳갌�^귽긣깑궻긒�[��긚긯�[긤뺎듖
+		#play_speed_plus2 = #SYSTEM_play_speed;
+		//�^귽긣깑궸궓궋궲궻긓깛긲귻긐궻긒�[��긚긯�[긤
+		#SYSTEM_play_speed=3;
+	}else{
+		#play_speed_plus=#SYSTEM_play_speed;
+	}
+
+	//긡긌긚긣긵깒긮깄�[
+	SetFont("Noto Sans KR",21,#00000,#FFFFFF,500,NONE);
+
+	//걾��뷈걏긚긏깏�[깛걐//겍�^귽긣깑궴궔긽긦깄�[궔귞갎궩귢궴귖갎
+//	if(!$PLACE_title&&!$SYSTEM_menu_enable&&!$SYSTEM_menu_lock)
+	if(IsInterrupt())
+	{
+		LoadImage("C_video",VIDEO);
+	}else
+	{
+		LoadImage("C_video",SCREEN);
+	}
+	CreateTexture("video_config01",110000,center,middle,"C_video");
+	Wait(1);
+	Delete("@TITLE_둋Snow");
+
+	$CF_Page = 1;
+	CreateSound("뙂믦돶",SE,"sound/se/SE_긘긚긡��_긽긦깄�[_뙂믦.ogg");
+//	CreateProcess("PRCCF_TextPreview", 150, 0, 0, "TextPreview");
+	initConfig();
+	Fade("video_config01",300,0,null,true);
+	WaitAction("video_config01", null);
+
+	//걾둎럑걏긓깛긲귻긐됪뽋걐
+	$SYSTEM_menu_config_enable=true;
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_r_button_down=false;$SYSTEM_XBOX360_button_b_down=false;
+	$SYSTEM_keydown_c=false;
+	while($SYSTEM_menu_config_enable)
+	{
+		if($CF_Page==1)
+		{
+			select
+			{
+				//걳긌�[�_긂깛똭
+				if(($SYSTEM_keydown_esc||$SYSTEM_buttondown_close)&&!$Title_Config)
+				{
+					call_chapter nss/sys_close.nss;
+				}
+				if($SYSTEM_r_button_down||$SYSTEM_keydown_c)
+				{
+					$SYSTEM_menu_config_enable=false;
+					$SYSTEM_keydown_c=false;
+					break;
+				}
+				case "CF_Default"
+				{
+					Request("뙂믦돶",Play);
+					ConfigDefaultInit();
+					cf_sethilight();
+					$SYSTEM_menu_config_enable=true;
+				}
+				case "CF_Message_ON"
+				{
+					Request("뙂믦돶",Play);
+					#no_ask = false;
+					cf_sethilight();
+				}
+				case "CF_Message_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#no_ask = true;
+					cf_sethilight();
+				}
+				case "CF_MovieSkip_ON"
+				{
+					Request("뙂믦돶",Play);
+					#LOCAL_break_play_movie = true;
+					cf_sethilight();
+				}
+				case "CF_MovieSkip_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#LOCAL_break_play_movie = false;
+					cf_sethilight();
+				}
+				case "CF_NotReadSkip_ON"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_skip_absolute=true;
+					cf_sethilight();
+				}
+				case "CF_NotReadSkip_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_skip_absolute=false;
+					cf_sethilight();
+				}
+				case "CF_StopSkipChapter_ON"
+				{
+					Request("뙂믦돶",Play);
+					#keep_auto_and_skip = false;
+					cf_sethilight();
+				}
+				case "CF_StopSkipChapter_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#keep_auto_and_skip = true;
+					cf_sethilight();
+				}
+				case "CF_VoiceStop_ON"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_click_break_voice = true;
+					cf_sethilight();
+				}
+				case "CF_VoiceStop_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_click_break_voice = false;
+					cf_sethilight();
+				}
+				case "CF_VoiceSynchro_ON"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sync_voice_and_text=true;
+					cf_sethilight();
+				}
+				case "CF_VoiceSynchro_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sync_voice_and_text=false;
+					cf_sethilight();
+				}
+				case "CF_AutoClickExit_ON"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_ignore_key_cancel = false;
+					cf_sethilight();
+				}
+				case "CF_AutoClickExit_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_ignore_key_cancel = true;
+					cf_sethilight();
+				}
+				case "CF_WaitVoice_ON"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_text_break_voice=false;
+					cf_sethilight();
+				}
+				case "CF_WaitVoice_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_text_break_voice=true;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_01"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 100;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_02"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 95;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_03"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 90;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_04"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 85;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_05"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 80;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_06"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 75;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_07"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 70;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_08"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 65;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_09"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 60;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_10"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 55;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_11"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 50;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_12"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 45;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_13"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 40;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_14"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 35;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_15"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 30;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_16"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 25;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_17"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 20;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_18"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 15;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_19"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 10;
+					cf_sethilight();
+				}
+				case "CF_AutoSpeed_SELECT_20"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_auto_wait_per_character = 5;
+					cf_sethilight();
+				}
+				case "CF_MSGSpeed_SELECT_01"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 990;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_02"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 950;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_03"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 900;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_04"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 850;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_05"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 800;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_06"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 750;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_07"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 700;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_08"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 650;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_09"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 600;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_10"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 550;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_11"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 500;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_12"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 450;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_13"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 400;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_14"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 350;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_15"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 300;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_16"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 250;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_17"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 200;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_18"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 150;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_19"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 100;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_MSGSpeed_SELECT_20"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_text_speed = 50;
+					cf_sethilight();
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_previewbutton"
+				{
+					Fade("CF_Preview",150,0,null,true);
+					TextPreview();
+				}
+				case "CF_NEXT"
+				{
+					Request("뙂믦돶",Play);
+					$CF_Page = 2;
+					initConfig();
+				}
+				case "CF_EXIT"
+				{
+					Request("뙂믦돶",Play);
+					$SYSTEM_menu_config_enable=false;
+				}
+			}
+		}
+		else if($CF_Page==2)
+		{
+			select
+			{
+				//걳긌�[�_긂깛똭
+				if(($SYSTEM_keydown_esc||$SYSTEM_buttondown_close)&&!$Title_Config){
+					call_chapter nss/sys_close.nss;
+				}
+				if($SYSTEM_r_button_down||$SYSTEM_keydown_c){
+					$SYSTEM_menu_config_enable=false;
+					$SYSTEM_keydown_c=false;
+					break;
+				}
+				case "CF_BGM띋맯먠믦_ON"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_bgm = true;
+					cf_sethilight();
+				}
+				case "CF_BGM띋맯먠믦_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_bgm = false;
+					cf_sethilight();
+				}
+				case "CF_SE띋맯먠믦_ON"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_se = true;
+					cf_sethilight();
+				}
+				case "CF_SE띋맯먠믦_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_se = false;
+					cf_sethilight();
+				}
+				case "CF_돶맳띋맯먠믦_ON"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_voice = true;
+					cf_sethilight();
+				}
+				case "CF_돶맳띋맯먠믦_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_voice = false;
+					cf_sethilight();
+				}
+				case "CF_귺긚긻긏긣붶렔벍먠믦_ON"
+				{
+					Request("뙂믦돶",Play);
+					#LOCAL_aspect_auto = true;
+					if(!EnableDirect3DHAL())
+					{
+						#SYSTEM_video_aspect_fixed=2;
+					}
+					else
+					{
+						#SYSTEM_video_aspect_fixed=1;
+					}
+					cf_sethilight();
+				}
+				case "CF_귺긚긻긏긣붶렔벍먠믦_OFF"
+				{
+					Request("뙂믦돶",Play);
+					#LOCAL_aspect_auto = false;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_01"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 50;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_02"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 100;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_03"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 150;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_04"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 200;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_05"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 250;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_06"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 300;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_07"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 350;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_08"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 400;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_09"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 450;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_10"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 500;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_11"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 550;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_12"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 600;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_13"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 650;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_14"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 700;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_15"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 750;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_16"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 800;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_17"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 850;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_18"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 900;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_19"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 950;
+					cf_sethilight();
+				}
+				case "CF_BGMVOL_SELECT_20"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_bgm = 1000;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_01"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 50;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_02"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 100;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_03"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 150;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_04"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 200;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_05"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 250;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_06"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 300;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_07"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 350;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_08"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 400;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_09"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 450;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_10"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 500;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_11"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 550;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_12"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 600;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_13"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 650;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_14"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 700;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_15"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 750;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_16"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 800;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_17"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 850;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_18"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 900;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_19"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 950;
+					cf_sethilight();
+				}
+				case "CF_SEVOL_SELECT_20"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_se = 1000;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_01"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 50;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_02"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 100;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_03"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 150;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_04"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 200;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_05"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 250;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_06"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 300;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_07"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 350;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_08"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 400;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_09"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 450;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_10"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 500;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_11"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 550;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_12"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 600;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_13"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 650;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_14"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 700;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_15"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 750;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_16"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 800;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_17"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 850;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_18"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 900;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_19"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 950;
+					cf_sethilight();
+				}
+				case "CF_VOICEVOL_SELECT_20"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_sound_volume_voice = 1000;
+					cf_sethilight();
+				}
+				case "CF_SE�{깏깄�[��긡긚긣"
+				{
+					CreateSound("CF_se_test",SE,"sound/se/se깞긅귽긤뺯됹01.ogg");
+					SetVolume("CF_se_test", 0, 350, NULL);
+					Request("CF_se_test",Play);
+				}
+				case "CF_돶맳�{깏깄�[��긡긚긣"
+				{
+					$i=Random(20);
+					if($i<=5){
+						CreateSound("CF_voice_test",VOICE,"sound/se/test_voice01.ogg");
+					}else if($i<=10){
+						CreateSound("CF_voice_test",VOICE,"sound/se/test_voice02.ogg");
+					}else if($i<=15){
+						CreateSound("CF_voice_test",VOICE,"sound/se/test_voice03.ogg");
+					}else{
+						CreateSound("CF_voice_test",VOICE,"sound/se/test_voice04.ogg");
+					}
+					Request("CF_voice_test",Play);
+				}
+				case "CF_긌긿깋빶�{귽긚먠믦"
+				{
+					Request("뙂믦돶",Play);
+					cf_voiceset();
+					Fade("CF_CH*",0,1000,null,false);
+					Fade("CF_CH_*",0,0,null,false);
+					cf_voicehilight();
+					Move("CF_CH*",500,@0,@-1000,Dxl1,true);
+					cf_voiceview();
+					Move("CF_CH*",500,@0,@1000,Axl1,true);
+					Delete("CF_vo*");
+					Delete("CF_CH*");
+				}
+				case "CF_긲깑긚긏깏�[깛먠믦"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_window_full=true;
+					cf_sethilight();
+				}
+				case "CF_긂귻깛긤긂먠믦"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_window_full=false;
+					cf_sethilight();
+				}
+				case "CF_긢귻긚긵깒귽댨뫔"
+				{
+					Request("뙂믦돶",Play);
+					#LOCAL_aspect_auto = false;
+					#SYSTEM_video_aspect_fixed=0;
+					cf_sethilight();
+				}
+				case "CF_뚂믦"
+				{
+					Request("뙂믦돶",Play);
+					#LOCAL_aspect_auto = false;
+					if(!EnableDirect3DHAL())
+					{
+						#SYSTEM_video_aspect_fixed=2;
+					}
+					else
+					{
+						#SYSTEM_video_aspect_fixed=1;
+					}
+					cf_sethilight();
+				}
+				case "CF_긪�[긤긂긃귺뺚듩"
+				{
+					Request("뙂믦돶",Play);
+					if(!EnableDirect3DHAL())
+					{
+						Message("안내","현재 환경에서는 하드웨어 보간을 사용할 수 없습니다.",OK,EXCLAMATION);
+					}
+					else
+					{
+						#LOCAL_aspect_auto = false;
+						#SYSTEM_video_aspect_fixed=1;
+						cf_sethilight();
+					}
+				}
+				case "CF_긦귺깒긚긣긨귽긫�["
+				{
+					Request("뙂믦돶",Play);
+					#LOCAL_aspect_auto = false;
+					#SYSTEM_video_aspect_fixed=2;
+					cf_sethilight();
+				}
+				case "CF_긫귽깏긦귺"
+				{
+					Request("뙂믦돶",Play);
+					#LOCAL_aspect_auto = false;
+					#SYSTEM_video_aspect_fixed=3;
+					cf_sethilight();
+				}
+				case "CF_깇�[긗뱋�^"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_window_full=false;
+					System("OPEN:https://www.nitroplus.co.jp/userentry/2301/", "", "");
+					Fade("CF_긲깑긚긏깏�[깛",0,0,null,false);
+					Fade("CF_긂귻깛긤긂",0,1000,null,false);
+				}
+				case "CF_HP"
+				{
+					Request("뙂믦돶",Play);
+					#SYSTEM_window_full=false;
+					System("OPEN:http://www.nitroplus.co.jp/", "", "");
+					Fade("CF_긲깑긚긏깏�[깛",0,0,null,false);
+					Fade("CF_긂귻깛긤긂",0,1000,null,false);
+				}
+				case "CF_BACK"
+				{
+					Request("뙂믦돶",Play);
+					$CF_Page = 1;
+					initConfig();
+				}
+				case "CF_EXIT"
+				{
+					Request("뙂믦돶",Play);
+					$SYSTEM_menu_config_enable=false;
+				}
+			}
+		}
+		Wait(32);
+	}
+
+	//겈뱆뺖믁돿============================================
+	CreateSound("ConfigOK01", SE, "sound/se/SE_긘긚긡��_긄긌긚긣깋_뢎뿹.ogg");
+	Request("ConfigOK01", Play);
+	Request("ConfigOK01", Disused);
+
+//	CreateTexture("video_config02",300000,center,middle,"CF_video");
+//	Fade("video_config02",0,0,null,true);
+//	Fade("video_config02",300,1000,null,true);
+	//======================================================
+
+	//긄깛긢귻깛긐뫮돒
+	#LOCAL_text_speed=#SYSTEM_text_speed;
+
+	//걳뢎뿹벍띿걏�`됪걐
+	CreateTexture("긘긚긡��봶똧CF", 20100, 0, 0, SCREEN);
+
+	if($Title_Config){
+		Fade("video_config01", 0, 0, null, true);
+	}
+//	Request("PRCCF_TextPreview", Stop);
+//	Delete("PRCCF_TextPreview");
+	Delete("CF_*");
+
+	$SYSTEM_menu_config_enable=false;
+	$SYSTEM_r_button_down=false;
+	$SYSTEM_XBOX360_button_b_down=false;
+	#SYSTEM_interrupt_play_speed=3;
+	$SYSTEM_backlog_lock=false;
+
+
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+//	WaitPlay("ConfigOK01");
+	Request("@TITLE_둋Snow",Resume);
+	Fade("긘긚긡��봶똧CF",300,0,null,true);
+}
+function initConfig(){
+//	LockVideo(true);
+	Delete("CF_*");
+
+	CreateTexture("CF_봶똧02", 101000, 0, 0, "cg/sys/config/긓깛긲귻긐봶똧.png");
+	SetVertex("CF_봶똧02", 0, 0);
+	Zoom("CF_봶똧02", 0, 250, 250, null, false);
+	Request("CF_봶똧02", Smoothing);
+	CreateTexture("CF_봶똧01", 101000, 0, 0, "cg/sys/config/긓깛긲귻긐봶똧page-01.png");
+	SetVertex("CF_봶똧01", 0, 0);
+	Zoom("CF_봶똧01", 0, 250, 250, null, false);
+	Request("CF_봶똧01", Smoothing);
+	CreateTexture("CF_Waku",101100,center,middle,"cg/sys/config/쁤.png");
+//	Fade("CF_봶똧*",0,0,null,false);
+//	Fade("CF_Waku",0,1000,null,false);
+
+	LoadImage("OFF먛귟","cg/sys/config/OFF-먛귟.png");
+	LoadImage("OFF볺귟","cg/sys/config/OFF-볺귟.png");
+	LoadImage("ON먛귟","cg/sys/config/on-먛귟.png");
+	LoadImage("ON볺귟","cg/sys/config/on-볺귟.png");
+	LoadImage("PUSH_OFF","cg/sys/config/PUSH-001.png");
+	LoadImage("PUSH_ON","cg/sys/config/PUSH-002.png");
+	LoadImage("CF_VOL","cg/sys/config/깞긅깏깄�[��궰귏귒.png");
+
+//	Request("PRCCF_TextPreview",Stop);
+	if($CF_Page==1)
+	{
+		CreateChoice("CF_Default");
+		CreateTexture("CF_Default/MouseUsual/img",0,682,43,"PUSH_OFF");
+		CreateTexture("CF_Default/MouseOver/img",101000,682,43,"PUSH_OFF");
+		CreateTexture("CF_Default/MouseClick/img",101000,682,43,"PUSH_ON");
+
+		CreateChoice("CF_Message_ON");
+		CreateTexture("CF_Message_ON/MouseUsual/img",0,682,79,"ON먛귟");
+		CreateTexture("CF_Message_ON/MouseOver/img",0,682,79,"ON볺귟");
+		CreateTexture("CF_Message_ON/MouseClick/img",101000,682,79,"ON볺귟");
+		CreateTexture("CF_AscMessage_ON",101001,682,79,"ON볺귟");
+		Fade("CF_AscMessage_ON",0,0,null,false);
+
+		CreateChoice("CF_Message_OFF");
+		CreateTexture("CF_Message_OFF/MouseUsual/img",0,733,79,"OFF먛귟");
+		CreateTexture("CF_Message_OFF/MouseOver/img",0,733,79,"OFF볺귟");
+		CreateTexture("CF_Message_OFF/MouseClick/img",101000,733,79,"OFF볺귟");
+		CreateTexture("CF_AscMessage_OFF",101001,733,79,"OFF볺귟");
+		Fade("CF_AscMessage_OFF",0,0,null,false);
+
+		CreateChoice("CF_MovieSkip_ON");
+		CreateTexture("CF_MovieSkip_ON/MouseUsual/img",0,682,115,"ON먛귟");
+		CreateTexture("CF_MovieSkip_ON/MouseOver/img",0,682,115,"ON볺귟");
+		CreateTexture("CF_MovieSkip_ON/MouseClick/img",101000,682,115,"ON볺귟");
+		CreateTexture("CF_ClickMovieSkip_ON",101001,682,115,"ON볺귟");
+		Fade("CF_ClickMovieSkip_ON",0,0,null,false);
+
+		CreateChoice("CF_MovieSkip_OFF");
+		CreateTexture("CF_MovieSkip_OFF/MouseUsual/img",0,733,115,"OFF먛귟");
+		CreateTexture("CF_MovieSkip_OFF/MouseOver/img",0,733,115,"OFF볺귟");
+		CreateTexture("CF_MovieSkip_OFF/MouseClick/img",101000,733,115,"OFF볺귟");
+		CreateTexture("CF_ClickMovieSkip_OFF",101001,733,115,"OFF볺귟");
+		Fade("CF_ClickMovieSkip_OFF",0,0,null,false);
+
+		CreateChoice("CF_NotReadSkip_ON");
+		CreateTexture("CF_NotReadSkip_ON/MouseUsual/img",0,682,187,"ON먛귟");
+		CreateTexture("CF_NotReadSkip_ON/MouseOver/img",0,682,187,"ON볺귟");
+		CreateTexture("CF_NotReadSkip_ON/MouseClick/img",101000,682,187,"ON볺귟");
+		CreateTexture("CF_absoluteSkip_ON",101001,682,187,"ON볺귟");
+		Fade("CF_absoluteSkip_ON",0,0,null,false);
+
+		CreateChoice("CF_NotReadSkip_OFF");
+		CreateTexture("CF_NotReadSkip_OFF/MouseUsual/img",0,733,187,"OFF먛귟");
+		CreateTexture("CF_NotReadSkip_OFF/MouseOver/img",0,733,187,"OFF볺귟");
+		CreateTexture("CF_NotReadSkip_OFF/MouseClick/img",101000,733,187,"OFF볺귟");
+		CreateTexture("CF_absoluteSkip_OFF",101001,733,187,"OFF볺귟");
+		Fade("CF_absoluteSkip_OFF",0,0,null,false);
+
+		CreateChoice("CF_StopSkipChapter_ON");
+		CreateTexture("CF_StopSkipChapter_ON/MouseUsual/img",0,682,223,"ON먛귟");
+		CreateTexture("CF_StopSkipChapter_ON/MouseOver/img",0,682,223,"ON볺귟");
+		CreateTexture("CF_StopSkipChapter_ON/MouseClick/img",101000,682,223,"ON볺귟");
+		CreateTexture("CF_StopChapter_ON",101001,682,223,"ON볺귟");
+		Fade("CF_StopChapter_ON",0,0,null,false);
+
+		CreateChoice("CF_StopSkipChapter_OFF");
+		CreateTexture("CF_StopSkipChapter_OFF/MouseUsual/img",0,733,223,"OFF먛귟");
+		CreateTexture("CF_StopSkipChapter_OFF/MouseOver/img",0,733,223,"OFF볺귟");
+		CreateTexture("CF_StopSkipChapter_OFF/MouseClick/img",101000,733,223,"OFF볺귟");
+		CreateTexture("CF_StopChapter_OFF",101001,733,223,"OFF볺귟");
+		Fade("CF_StopChapter_OFF",0,0,null,false);
+
+		CreateChoice("CF_VoiceStop_ON");
+		CreateTexture("CF_VoiceStop_ON/MouseUsual/img",0,682,259,"ON먛귟");
+		CreateTexture("CF_VoiceStop_ON/MouseOver/img",0,682,259,"ON볺귟");
+		CreateTexture("CF_VoiceStop_ON/MouseClick/img",101000,682,259,"ON볺귟");
+		CreateTexture("CF_ClickVoiceStop_ON",101001,682,259,"ON볺귟");
+		Fade("CF_ClickVoiceStop_ON",0,0,null,false);
+
+		CreateChoice("CF_VoiceStop_OFF");
+		CreateTexture("CF_VoiceStop_OFF/MouseUsual/img",0,733,259,"OFF먛귟");
+		CreateTexture("CF_VoiceStop_OFF/MouseOver/img",0,733,259,"OFF볺귟");
+		CreateTexture("CF_VoiceStop_OFF/MouseClick/img",101000,733,259,"OFF볺귟");
+		CreateTexture("CF_ClickVoiceStop_OFF",101001,733,259,"OFF볺귟");
+		Fade("CF_ClickVoiceStop_OFF",0,0,null,false);
+
+		CreateChoice("CF_VoiceSynchro_ON");
+		CreateTexture("CF_VoiceSynchro_ON/MouseUsual/img",0,682,295,"ON먛귟");
+		CreateTexture("CF_VoiceSynchro_ON/MouseOver/img",0,682,295,"ON볺귟");
+		CreateTexture("CF_VoiceSynchro_ON/MouseClick/img",101000,682,295,"ON볺귟");
+		CreateTexture("CF_SynchroVoice_ON",101001,682,295,"ON볺귟");
+		Fade("CF_SynchroVoice_ON",0,0,null,false);
+
+		CreateChoice("CF_VoiceSynchro_OFF");
+		CreateTexture("CF_VoiceSynchro_OFF/MouseUsual/img",0,733,295,"OFF먛귟");
+		CreateTexture("CF_VoiceSynchro_OFF/MouseOver/img",0,733,295,"OFF볺귟");
+		CreateTexture("CF_VoiceSynchro_OFF/MouseClick/img",101000,733,295,"OFF볺귟");
+		CreateTexture("CF_SynchroVoice_OFF",101001,733,295,"OFF볺귟");
+		Fade("CF_SynchroVoice_OFF",0,0,null,false);
+
+		CreateChoice("CF_WaitVoice_ON");
+		CreateTexture("CF_WaitVoice_ON/MouseUsual/img",0,682,331,"ON먛귟");
+		CreateTexture("CF_WaitVoice_ON/MouseOver/img",0,682,331,"ON볺귟");
+		CreateTexture("CF_WaitVoice_ON/MouseClick/img",101000,682,331,"ON볺귟");
+		CreateTexture("CF_VoiceWait_ON",101001,682,331,"ON볺귟");
+		Fade("CF_VoiceWait_ON",0,0,null,false);
+
+		CreateChoice("CF_WaitVoice_OFF");
+		CreateTexture("CF_WaitVoice_OFF/MouseUsual/img",0,733,331,"OFF먛귟");
+		CreateTexture("CF_WaitVoice_OFF/MouseOver/img",0,733,331,"OFF볺귟");
+		CreateTexture("CF_WaitVoice_OFF/MouseClick/img",101000,733,331,"OFF볺귟");
+		CreateTexture("CF_VoiceWait_OFF",101001,733,331,"OFF볺귟");
+		Fade("CF_VoiceWait_OFF",0,0,null,false);
+
+		CreateChoice("CF_AutoClickExit_ON");
+		CreateTexture("CF_AutoClickExit_ON/MouseUsual/img",0,682,403,"ON먛귟");
+		CreateTexture("CF_AutoClickExit_ON/MouseOver/img",0,682,403,"ON볺귟");
+		CreateTexture("CF_AutoClickExit_ON/MouseClick/img",101000,682,403,"ON볺귟");
+		CreateTexture("CF_AutoExit_ON",101001,682,403,"ON볺귟");
+		Fade("CF_AutoExit_ON",0,0,null,false);
+
+		CreateChoice("CF_AutoClickExit_OFF");
+		CreateTexture("CF_AutoClickExit_OFF/MouseUsual/img",0,733,403,"OFF먛귟");
+		CreateTexture("CF_AutoClickExit_OFF/MouseOver/img",0,733,403,"OFF볺귟");
+		CreateTexture("CF_AutoClickExit_OFF/MouseClick/img",101000,733,403,"OFF볺귟");
+		CreateTexture("CF_AutoExit_OFF",101001,733,403,"OFF볺귟");
+		Fade("CF_AutoExit_OFF",0,0,null,false);
+
+		// 긽긞긜�[긙뫊뱗
+		$basex = 575;
+		$addx = 16;
+		CreateTexture("CF_MSGSpeed_01",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_01");
+		CreateTexture("CF_MSGSpeed_SELECT_01/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_01/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_01/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_02",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_02");
+		CreateTexture("CF_MSGSpeed_SELECT_02/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_02/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_02/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_03",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_03");
+		CreateTexture("CF_MSGSpeed_SELECT_03/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_03/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_03/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_04",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_04");
+		CreateTexture("CF_MSGSpeed_SELECT_04/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_04/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_04/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_05",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_05");
+		CreateTexture("CF_MSGSpeed_SELECT_05/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_05/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_05/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_06",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_06");
+		CreateTexture("CF_MSGSpeed_SELECT_06/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_06/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_06/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_07",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_07");
+		CreateTexture("CF_MSGSpeed_SELECT_07/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_07/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_07/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_08",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_08");
+		CreateTexture("CF_MSGSpeed_SELECT_08/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_08/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_08/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_09",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_09");
+		CreateTexture("CF_MSGSpeed_SELECT_09/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_09/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_09/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_10",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_10");
+		CreateTexture("CF_MSGSpeed_SELECT_10/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_10/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_10/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_11",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_11");
+		CreateTexture("CF_MSGSpeed_SELECT_11/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_11/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_11/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_12",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_12");
+		CreateTexture("CF_MSGSpeed_SELECT_12/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_12/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_12/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_13",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_13");
+		CreateTexture("CF_MSGSpeed_SELECT_13/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_13/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_13/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_14",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_14");
+		CreateTexture("CF_MSGSpeed_SELECT_14/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_14/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_14/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_15",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_15");
+		CreateTexture("CF_MSGSpeed_SELECT_15/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_15/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_15/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_16",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_16");
+		CreateTexture("CF_MSGSpeed_SELECT_16/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_16/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_16/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_17",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_17");
+		CreateTexture("CF_MSGSpeed_SELECT_17/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_17/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_17/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_18",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_18");
+		CreateTexture("CF_MSGSpeed_SELECT_18/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_18/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_18/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_19",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_19");
+		CreateTexture("CF_MSGSpeed_SELECT_19/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_19/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_19/MouseClick/img",0,$basex,149,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_MSGSpeed_20",101000,$basex,149,"CF_VOL");
+		CreateChoice("CF_MSGSpeed_SELECT_20");
+		CreateTexture("CF_MSGSpeed_SELECT_20/MouseUsual/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_20/MouseOver/img",0,$basex,149,"CF_VOL");
+		CreateTexture("CF_MSGSpeed_SELECT_20/MouseClick/img",0,$basex,149,"CF_VOL");
+		Fade("CF_MSGSpeed_*",0,0,null,false);
+		
+		// Auto뫊뱗
+		$basex = 575;
+		CreateTexture("CF_AutoSpeed_01",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_01");
+		CreateTexture("CF_AutoSpeed_SELECT_01/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_01/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_01/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_02",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_02");
+		CreateTexture("CF_AutoSpeed_SELECT_02/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_02/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_02/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_03",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_03");
+		CreateTexture("CF_AutoSpeed_SELECT_03/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_03/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_03/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_04",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_04");
+		CreateTexture("CF_AutoSpeed_SELECT_04/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_04/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_04/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_05",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_05");
+		CreateTexture("CF_AutoSpeed_SELECT_05/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_05/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_05/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_06",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_06");
+		CreateTexture("CF_AutoSpeed_SELECT_06/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_06/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_06/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_07",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_07");
+		CreateTexture("CF_AutoSpeed_SELECT_07/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_07/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_07/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_08",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_08");
+		CreateTexture("CF_AutoSpeed_SELECT_08/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_08/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_08/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_09",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_09");
+		CreateTexture("CF_AutoSpeed_SELECT_09/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_09/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_09/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_10",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_10");
+		CreateTexture("CF_AutoSpeed_SELECT_10/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_10/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_10/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_11",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_11");
+		CreateTexture("CF_AutoSpeed_SELECT_11/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_11/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_11/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_12",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_12");
+		CreateTexture("CF_AutoSpeed_SELECT_12/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_12/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_12/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_13",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_13");
+		CreateTexture("CF_AutoSpeed_SELECT_13/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_13/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_13/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_14",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_14");
+		CreateTexture("CF_AutoSpeed_SELECT_14/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_14/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_14/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_15",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_15");
+		CreateTexture("CF_AutoSpeed_SELECT_15/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_15/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_15/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_16",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_16");
+		CreateTexture("CF_AutoSpeed_SELECT_16/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_16/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_16/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_17",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_17");
+		CreateTexture("CF_AutoSpeed_SELECT_17/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_17/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_17/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_18",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_18");
+		CreateTexture("CF_AutoSpeed_SELECT_18/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_18/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_18/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_19",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_19");
+		CreateTexture("CF_AutoSpeed_SELECT_19/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_19/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_19/MouseClick/img",0,$basex,364,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_AutoSpeed_20",101000,$basex,364,"CF_VOL");
+		CreateChoice("CF_AutoSpeed_SELECT_20");
+		CreateTexture("CF_AutoSpeed_SELECT_20/MouseUsual/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_20/MouseOver/img",0,$basex,364,"CF_VOL");
+		CreateTexture("CF_AutoSpeed_SELECT_20/MouseClick/img",0,$basex,364,"CF_VOL");
+		Fade("CF_AutoSpeed*",0,0,null,false);
+
+		CreateChoice("CF_previewbutton");
+		LoadColor("CF_previewbutton_col",450,20,"WHITE");
+		CreateTexture("CF_previewbutton/MouseUsual/img",111000,535,438,"CF_previewbutton_col");
+		CreateTexture("CF_previewbutton/MouseOver/img",111000,535,438,"CF_previewbutton_col");
+		CreateTexture("CF_previewbutton/MouseClick/img",111000,535,438,"CF_previewbutton_col");
+		Request("CF_previewbutton/*/*",Erase);
+		
+		CreateChoice("CF_NEXT");
+		CreateTexture("CF_NEXT/MouseUsual/img", 0, 798, 516, "cg/sys/config/ko_hit_next.png");
+	CreateTexture("CF_VIS_NEXT", 101000, 798, 516, "cg/sys/config/next-001.png");
+		SetVertex("CF_VIS_NEXT", 0, 0);
+		Zoom("CF_VIS_NEXT", 0, 250, 250, null, false);
+	Request("CF_VIS_NEXT", Smoothing);
+		CreateTexture("CF_NEXT/MouseOver/img", 101001, 798, 516, "cg/sys/config/next-002.png");
+		SetVertex("CF_NEXT/MouseOver/img", 0, 0);
+		Zoom("CF_NEXT/MouseOver/img", 0, 250, 250, null, false);
+	Request("CF_NEXT/MouseOver/img", Smoothing);
+		CreateTexture("CF_NEXT/MouseClick/img", 101001, 798, 516, "cg/sys/config/next-003.png");
+		SetVertex("CF_NEXT/MouseClick/img", 0, 0);
+		Zoom("CF_NEXT/MouseClick/img", 0, 250, 250, null, false);
+	Request("CF_NEXT/MouseClick/img", Smoothing);
+
+		CreateTexture("CF_BACK_Dummy", 101000, 700, 516, "cg/sys/config/back-001.png");
+		SetVertex("CF_BACK_Dummy", 0, 0);
+		Zoom("CF_BACK_Dummy", 0, 250, 250, null, false);
+	Request("CF_BACK_Dummy", Smoothing);
+//		Request("PRCCF_TextPreview",Start);
+		TextPreview();
+	}
+	else
+	{
+
+		CreateChoice("CF_BGM띋맯먠믦_ON");
+		CreateTexture("CF_BGM띋맯먠믦_ON/MouseUsual/img",0,682,43,"ON먛귟");
+		CreateTexture("CF_BGM띋맯먠믦_ON/MouseOver/img",0,682,43,"ON볺귟");
+		CreateTexture("CF_BGM띋맯먠믦_ON/MouseClick/img",101000,682,43,"ON볺귟");
+
+		CreateTexture("CF_BGM띋맯_ON",101001,682,43,"ON볺귟");
+		Fade("CF_BGM띋맯_ON",0,0,null,false);
+
+		CreateChoice("CF_BGM띋맯먠믦_OFF");
+		CreateTexture("CF_BGM띋맯먠믦_OFF/MouseUsual/img",0,733,43,"OFF먛귟");
+		CreateTexture("CF_BGM띋맯먠믦_OFF/MouseOver/img",0,733,43,"OFF볺귟");
+		CreateTexture("CF_BGM띋맯먠믦_OFF/MouseClick/img",101000,733,43,"OFF볺귟");
+
+		CreateTexture("CF_BGM띋맯_OFF",101001,733,43,"OFF볺귟");
+		Fade("CF_BGM띋맯_OFF",0,0,null,false);
+
+		CreateChoice("CF_SE띋맯먠믦_ON");
+		CreateTexture("CF_SE띋맯먠믦_ON/MouseUsual/img",0,682,115,"ON먛귟");
+		CreateTexture("CF_SE띋맯먠믦_ON/MouseOver/img",0,682,115,"ON볺귟");
+		CreateTexture("CF_SE띋맯먠믦_ON/MouseClick/img",101000,682,115,"ON볺귟");
+
+		CreateTexture("CF_SE띋맯_ON",101001,682,115,"ON볺귟");
+		Fade("CF_SE띋맯_ON",0,0,null,false);
+
+		CreateChoice("CF_SE띋맯먠믦_OFF");
+		CreateTexture("CF_SE띋맯먠믦_OFF/MouseUsual/img",0,733,115,"OFF먛귟");
+		CreateTexture("CF_SE띋맯먠믦_OFF/MouseOver/img",0,733,115,"OFF볺귟");
+		CreateTexture("CF_SE띋맯먠믦_OFF/MouseClick/img",101000,733,115,"OFF볺귟");
+
+		CreateTexture("CF_SE띋맯_OFF",101001,733,115,"OFF볺귟");
+		Fade("CF_SE띋맯_OFF",0,0,null,false);
+
+		CreateChoice("CF_돶맳띋맯먠믦_ON");
+		CreateTexture("CF_돶맳띋맯먠믦_ON/MouseUsual/img",0,682,223,"ON먛귟");
+		CreateTexture("CF_돶맳띋맯먠믦_ON/MouseOver/img",0,682,223,"ON볺귟");
+		CreateTexture("CF_돶맳띋맯먠믦_ON/MouseClick/img",101000,682,223,"ON볺귟");
+
+		CreateTexture("CF_돶맳띋맯_ON",101001,682,223,"ON볺귟");
+		Fade("CF_돶맳띋맯_ON",0,0,null,false);
+
+		CreateChoice("CF_돶맳띋맯먠믦_OFF");
+		CreateTexture("CF_돶맳띋맯먠믦_OFF/MouseUsual/img",0,733,223,"OFF먛귟");
+		CreateTexture("CF_돶맳띋맯먠믦_OFF/MouseOver/img",0,733,223,"OFF볺귟");
+		CreateTexture("CF_돶맳띋맯먠믦_OFF/MouseClick/img",101000,733,223,"OFF볺귟");
+
+		CreateTexture("CF_돶맳띋맯_OFF",101001,733,223,"OFF볺귟");
+		Fade("CF_돶맳띋맯_OFF",0,0,null,false);
+
+		CreateChoice("CF_귺긚긻긏긣붶렔벍먠믦_ON");
+		CreateTexture("CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img",0,682,403,"ON먛귟");
+		CreateTexture("CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseOver/img",0,682,403,"ON볺귟");
+		CreateTexture("CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseClick/img",101000,682,403,"ON볺귟");
+
+		CreateTexture("CF_귺긚긻긏긣_ON",101001,682,403,"ON볺귟");
+		Fade("CF_귺긚긻긏긣_ON",0,0,null,false);
+
+		CreateChoice("CF_귺긚긻긏긣붶렔벍먠믦_OFF");
+		CreateTexture("CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseUsual/img",0,733,403,"OFF먛귟");
+		CreateTexture("CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseOver/img",0,733,403,"OFF볺귟");
+		CreateTexture("CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseClick/img",101000,733,403,"OFF볺귟");
+
+		CreateTexture("CF_귺긚긻긏긣_OFF",101001,733,403,"OFF볺귟");
+		Fade("CF_귺긚긻긏긣_OFF",0,0,null,false);
+
+		// BGM�{깏깄�[��
+		$basex = 575;
+		$addx = 16;
+
+		CreateTexture("CF_BGMVOL_01",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_01");
+		CreateTexture("CF_BGMVOL_SELECT_01/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_01/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_01/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_02",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_02");
+		CreateTexture("CF_BGMVOL_SELECT_02/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_02/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_02/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_03",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_03");
+		CreateTexture("CF_BGMVOL_SELECT_03/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_03/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_03/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_04",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_04");
+		CreateTexture("CF_BGMVOL_SELECT_04/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_04/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_04/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_05",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_05");
+		CreateTexture("CF_BGMVOL_SELECT_05/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_05/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_05/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_06",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_06");
+		CreateTexture("CF_BGMVOL_SELECT_06/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_06/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_06/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_07",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_07");
+		CreateTexture("CF_BGMVOL_SELECT_07/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_07/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_07/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_08",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_08");
+		CreateTexture("CF_BGMVOL_SELECT_08/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_08/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_08/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_09",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_09");
+		CreateTexture("CF_BGMVOL_SELECT_09/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_09/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_09/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_10",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_10");
+		CreateTexture("CF_BGMVOL_SELECT_10/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_10/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_10/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_11",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_11");
+		CreateTexture("CF_BGMVOL_SELECT_11/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_11/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_11/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_12",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_12");
+		CreateTexture("CF_BGMVOL_SELECT_12/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_12/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_12/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_13",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_13");
+		CreateTexture("CF_BGMVOL_SELECT_13/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_13/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_13/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_14",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_14");
+		CreateTexture("CF_BGMVOL_SELECT_14/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_14/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_14/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_15",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_15");
+		CreateTexture("CF_BGMVOL_SELECT_15/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_15/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_15/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_16",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_16");
+		CreateTexture("CF_BGMVOL_SELECT_16/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_16/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_16/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_17",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_17");
+		CreateTexture("CF_BGMVOL_SELECT_17/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_17/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_17/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_18",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_18");
+		CreateTexture("CF_BGMVOL_SELECT_18/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_18/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_18/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_19",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_19");
+		CreateTexture("CF_BGMVOL_SELECT_19/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_19/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_19/MouseClick/img",0,$basex,76,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_BGMVOL_20",101000,$basex,76,"CF_VOL");
+		CreateChoice("CF_BGMVOL_SELECT_20");
+		CreateTexture("CF_BGMVOL_SELECT_20/MouseUsual/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_20/MouseOver/img",0,$basex,76,"CF_VOL");
+		CreateTexture("CF_BGMVOL_SELECT_20/MouseClick/img",0,$basex,76,"CF_VOL");
+		Fade("CF_BGMVOL_*",0,0,null,false);
+
+		// SE�{깏깄�[��
+		$basex = 575;
+		CreateTexture("CF_SEVOL_01",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_01");
+		CreateTexture("CF_SEVOL_SELECT_01/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_01/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_01/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_02",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_02");
+		CreateTexture("CF_SEVOL_SELECT_02/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_02/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_02/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_03",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_03");
+		CreateTexture("CF_SEVOL_SELECT_03/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_03/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_03/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_04",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_04");
+		CreateTexture("CF_SEVOL_SELECT_04/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_04/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_04/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_05",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_05");
+		CreateTexture("CF_SEVOL_SELECT_05/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_05/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_05/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_06",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_06");
+		CreateTexture("CF_SEVOL_SELECT_06/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_06/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_06/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_07",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_07");
+		CreateTexture("CF_SEVOL_SELECT_07/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_07/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_07/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_08",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_08");
+		CreateTexture("CF_SEVOL_SELECT_08/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_08/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_08/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_09",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_09");
+		CreateTexture("CF_SEVOL_SELECT_09/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_09/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_09/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_10",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_10");
+		CreateTexture("CF_SEVOL_SELECT_10/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_10/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_10/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_11",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_11");
+		CreateTexture("CF_SEVOL_SELECT_11/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_11/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_11/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_12",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_12");
+		CreateTexture("CF_SEVOL_SELECT_12/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_12/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_12/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_13",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_13");
+		CreateTexture("CF_SEVOL_SELECT_13/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_13/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_13/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_14",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_14");
+		CreateTexture("CF_SEVOL_SELECT_14/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_14/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_14/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_15",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_15");
+		CreateTexture("CF_SEVOL_SELECT_15/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_15/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_15/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_16",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_16");
+		CreateTexture("CF_SEVOL_SELECT_16/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_16/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_16/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_17",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_17");
+		CreateTexture("CF_SEVOL_SELECT_17/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_17/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_17/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_18",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_18");
+		CreateTexture("CF_SEVOL_SELECT_18/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_18/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_18/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_19",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_19");
+		CreateTexture("CF_SEVOL_SELECT_19/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_19/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_19/MouseClick/img",0,$basex,148,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_SEVOL_20",101000,$basex,148,"CF_VOL");
+		CreateChoice("CF_SEVOL_SELECT_20");
+		CreateTexture("CF_SEVOL_SELECT_20/MouseUsual/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_20/MouseOver/img",0,$basex,148,"CF_VOL");
+		CreateTexture("CF_SEVOL_SELECT_20/MouseClick/img",0,$basex,148,"CF_VOL");
+		Fade("CF_SEVOL*",0,0,null,false);
+
+		// 돶맳�{깏깄�[��
+		$basex = 575;
+		CreateTexture("CF_VOICEVOL_01",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_01");
+		CreateTexture("CF_VOICEVOL_SELECT_01/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_01/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_01/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_02",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_02");
+		CreateTexture("CF_VOICEVOL_SELECT_02/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_02/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_02/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_03",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_03");
+		CreateTexture("CF_VOICEVOL_SELECT_03/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_03/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_03/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_04",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_04");
+		CreateTexture("CF_VOICEVOL_SELECT_04/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_04/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_04/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_05",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_05");
+		CreateTexture("CF_VOICEVOL_SELECT_05/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_05/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_05/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_06",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_06");
+		CreateTexture("CF_VOICEVOL_SELECT_06/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_06/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_06/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_07",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_07");
+		CreateTexture("CF_VOICEVOL_SELECT_07/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_07/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_07/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_08",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_08");
+		CreateTexture("CF_VOICEVOL_SELECT_08/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_08/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_08/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_09",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_09");
+		CreateTexture("CF_VOICEVOL_SELECT_09/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_09/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_09/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_10",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_10");
+		CreateTexture("CF_VOICEVOL_SELECT_10/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_10/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_10/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_11",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_11");
+		CreateTexture("CF_VOICEVOL_SELECT_11/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_11/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_11/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_12",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_12");
+		CreateTexture("CF_VOICEVOL_SELECT_12/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_12/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_12/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_13",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_13");
+		CreateTexture("CF_VOICEVOL_SELECT_13/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_13/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_13/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_14",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_14");
+		CreateTexture("CF_VOICEVOL_SELECT_14/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_14/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_14/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_15",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_15");
+		CreateTexture("CF_VOICEVOL_SELECT_15/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_15/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_15/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_16",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_16");
+		CreateTexture("CF_VOICEVOL_SELECT_16/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_16/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_16/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_17",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_17");
+		CreateTexture("CF_VOICEVOL_SELECT_17/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_17/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_17/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_18",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_18");
+		CreateTexture("CF_VOICEVOL_SELECT_18/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_18/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_18/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_19",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_19");
+		CreateTexture("CF_VOICEVOL_SELECT_19/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_19/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_19/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		$basex = $basex + $addx;
+		CreateTexture("CF_VOICEVOL_20",101000,$basex,256,"CF_VOL");
+		CreateChoice("CF_VOICEVOL_SELECT_20");
+		CreateTexture("CF_VOICEVOL_SELECT_20/MouseUsual/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_20/MouseOver/img",0,$basex,256,"CF_VOL");
+		CreateTexture("CF_VOICEVOL_SELECT_20/MouseClick/img",0,$basex,256,"CF_VOL");
+
+		Fade("CF_VOICEVOL*",0,0,null,false);
+
+		CreateChoice("CF_긲깑긚긏깏�[깛먠믦");
+		CreateTexture("CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img",0,612,367,"cg/sys/config/FULLSCREEN-먛귟.png");
+		CreateTexture("CF_긲깑긚긏깏�[깛먠믦/MouseOver/img",0,612,367,"cg/sys/config/FULLSCREEN-볺귟.png");
+		CreateTexture("CF_긲깑긚긏깏�[깛먠믦/MouseClick/img",101000,612,367,"cg/sys/config/FULLSCREEN-볺귟.png");
+
+		CreateTexture("CF_긲깑긚긏깏�[깛",101000,612,367,"cg/sys/config/FULLSCREEN-볺귟.png");
+		Fade("CF_긲깑긚긏깏�[깛",0,0,null,false);
+
+		CreateChoice("CF_긂귻깛긤긂먠믦");
+		CreateTexture("CF_긂귻깛긤긂먠믦/MouseUsual/img",0,765,367,"cg/sys/config/WINDOW-먛귟.png");
+		CreateTexture("CF_긂귻깛긤긂먠믦/MouseOver/img",0,765,367,"cg/sys/config/WINDOW-볺귟.png");
+		CreateTexture("CF_긂귻깛긤긂먠믦/MouseClick/img",101000,765,367,"cg/sys/config/WINDOW-볺귟.png");
+
+		CreateTexture("CF_긂귻깛긤긂",101000,765,367,"cg/sys/config/WINDOW-볺귟.png");
+		Fade("CF_긂귻깛긤긂",0,0,null,false);
+
+		CreateChoice("CF_긢귻긚긵깒귽댨뫔");
+		CreateTexture("CF_긢귻긚긵깒귽댨뫔/MouseUsual/img",0,510,439,"cg/sys/config/긢귻긚긵깒귽댨뫔-먛귟.png");
+		CreateTexture("CF_긢귻긚긵깒귽댨뫔/MouseOver/img",0,510,439,"cg/sys/config/긢귻긚긵깒귽댨뫔-볺귟.png");
+		CreateTexture("CF_긢귻긚긵깒귽댨뫔/MouseClick/img",101000,510,439,"cg/sys/config/긢귻긚긵깒귽댨뫔-볺귟.png");
+
+		CreateTexture("CF_귺긚긻긏긣_긢귻긚긵깒귽",101001,510,439,"cg/sys/config/긢귻긚긵깒귽댨뫔-볺귟.png");
+		Fade("CF_귺긚긻긏긣_긢귻긚긵깒귽",0,0,null,false);
+
+		CreateChoice("CF_뚂믦");
+		CreateTexture("CF_뚂믦/MouseUsual/img",0,661,439,"cg/sys/config/뚂믦-먛귟.png");
+		CreateTexture("CF_뚂믦/MouseOver/img",0,661,439,"cg/sys/config/뚂믦-볺귟.png");
+		CreateTexture("CF_뚂믦/MouseClick/img",101000,661,439,"cg/sys/config/뚂믦-볺귟.png");
+
+		CreateTexture("CF_귺긚긻긏긣_긢귻긚긵깒귽뚂믦",101001,661,439,"cg/sys/config/뚂믦-볺귟.png");
+		Fade("CF_귺긚긻긏긣_긢귻긚긵깒귽뚂믦",0,0,null,false);
+
+		CreateChoice("CF_긪�[긤긂긃귺뺚듩");
+		CreateTexture("CF_긪�[긤긂긃귺뺚듩/MouseUsual/img",0,546,475,"cg/sys/config/긪�[긤긂긃귺뺚듩-먛귟.png");
+		CreateTexture("CF_긪�[긤긂긃귺뺚듩/MouseOver/img",0,546,475,"cg/sys/config/긪�[긤긂긃귺뺚듩-볺귟.png");
+		CreateTexture("CF_긪�[긤긂긃귺뺚듩/MouseClick/img",101000,546,475,"cg/sys/config/긪�[긤긂긃귺뺚듩-볺귟.png");
+
+		CreateTexture("CF_귺긚긻긏긣_뺚듩",101001,546,475,"cg/sys/config/긪�[긤긂긃귺뺚듩-볺귟.png");
+		Fade("CF_귺긚긻긏긣_뺚듩",0,0,null,false);
+
+		CreateChoice("CF_긦귺깒긚긣긨귽긫�[");
+		CreateTexture("CF_긦귺깒긚긣긨귽긫�[/MouseUsual/img",0,671,475,"cg/sys/config/긦귺깒긚긣긨귽긫�[-먛귟.png");
+		CreateTexture("CF_긦귺깒긚긣긨귽긫�[/MouseOver/img",0,671,475,"cg/sys/config/긦귺깒긚긣긨귽긫�[-볺귟.png");
+		CreateTexture("CF_긦귺깒긚긣긨귽긫�[/MouseClick/img",101000,671,475,"cg/sys/config/긦귺깒긚긣긨귽긫�[-볺귟.png");
+
+		CreateTexture("CF_귺긚긻긏긣_긦귺깒긚긣",101001,671,475,"cg/sys/config/긦귺깒긚긣긨귽긫�[-볺귟.png");
+		Fade("CF_귺긚긻긏긣_긦귺깒긚긣",0,0,null,false);
+
+		CreateChoice("CF_긫귽깏긦귺");
+		CreateTexture("CF_긫귽깏긦귺/MouseUsual/img",0,821,475,"cg/sys/config/긫귽깏긦귺-먛귟.png");
+		CreateTexture("CF_긫귽깏긦귺/MouseOver/img",0,821,475,"cg/sys/config/긫귽깏긦귺-볺귟.png");
+		CreateTexture("CF_긫귽깏긦귺/MouseClick/img",101000,821,475,"cg/sys/config/긫귽깏긦귺-볺귟.png");
+
+		CreateTexture("CF_귺긚긻긏긣_긫귽깏긦귺�@",101001,821,475,"cg/sys/config/긫귽깏긦귺-볺귟.png");
+		Fade("CF_귺긚긻긏긣_긫귽깏긦귺�@",0,0,null,false);
+
+		CreateChoice("CF_SE�{깏깄�[��긡긚긣");
+		CreateTexture("CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",0,682,187,"PUSH_OFF");
+		CreateTexture("CF_SE�{깏깄�[��긡긚긣/MouseOver/img",101000,682,187,"PUSH_OFF");
+		CreateTexture("CF_SE�{깏깄�[��긡긚긣/MouseClick/img",101000,682,187,"PUSH_ON");
+
+		CreateChoice("CF_돶맳�{깏깄�[��긡긚긣");
+		CreateTexture("CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",0,682,295,"PUSH_OFF");
+		CreateTexture("CF_돶맳�{깏깄�[��긡긚긣/MouseOver/img",101000,682,295,"PUSH_OFF");
+		CreateTexture("CF_돶맳�{깏깄�[��긡긚긣/MouseClick/img",101000,682,295,"PUSH_ON");
+
+		CreateChoice("CF_긌긿깋빶�{귽긚먠믦");
+		CreateTexture("CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img",0,682,331,"PUSH_OFF");
+		CreateTexture("CF_긌긿깋빶�{귽긚먠믦/MouseOver/img",101000,682,331,"PUSH_OFF");
+		CreateTexture("CF_긌긿깋빶�{귽긚먠믦/MouseClick/img",101000,682,331,"PUSH_ON");
+
+		CreateChoice("CF_깇�[긗뱋�^");
+		CreateTexture("CF_깇�[긗뱋�^/MouseUsual/img",0,120,475,"cg/sys/config/깇�[긗�[뱋�^�{�^깛001.png");
+		CreateTexture("CF_깇�[긗뱋�^/MouseOver/img",101000,120,475,"cg/sys/config/깇�[긗�[뱋�^�{�^깛001.png");
+		CreateTexture("CF_깇�[긗뱋�^/MouseClick/img",101000,120,475,"cg/sys/config/깇�[긗�[뱋�^�{�^깛002.png");
+
+		CreateChoice("CF_HP");
+		CreateTexture("CF_HP/MouseUsual/img",0,256,475,"cg/sys/config/HP.png");
+		CreateTexture("CF_HP/MouseOver/img",0,256,475,"cg/sys/config/HP.png");
+		CreateTexture("CF_HP/MouseClick/img",0,256,475,"cg/sys/config/HP.png");
+
+		CreateTexture("CF_NEXT_Dummy", 101000, 798, 516, "cg/sys/config/next-001.png");
+		SetVertex("CF_NEXT_Dummy", 0, 0);
+		Zoom("CF_NEXT_Dummy", 0, 250, 250, null, false);
+	Request("CF_NEXT_Dummy", Smoothing);
+
+		CreateChoice("CF_BACK");
+		CreateTexture("CF_BACK/MouseUsual/img", 0, 700, 516, "cg/sys/config/ko_hit_back.png");
+	CreateTexture("CF_VIS_BACK", 101000, 700, 516, "cg/sys/config/back-001.png");
+		SetVertex("CF_VIS_BACK", 0, 0);
+		Zoom("CF_VIS_BACK", 0, 250, 250, null, false);
+	Request("CF_VIS_BACK", Smoothing);
+		CreateTexture("CF_BACK/MouseOver/img", 101001, 700, 516, "cg/sys/config/back-002.png");
+		SetVertex("CF_BACK/MouseOver/img", 0, 0);
+		Zoom("CF_BACK/MouseOver/img", 0, 250, 250, null, false);
+	Request("CF_BACK/MouseOver/img", Smoothing);
+		CreateTexture("CF_BACK/MouseClick/img", 101001, 700, 516, "cg/sys/config/back-003.png");
+		SetVertex("CF_BACK/MouseClick/img", 0, 0);
+		Zoom("CF_BACK/MouseClick/img", 0, 250, 250, null, false);
+	Request("CF_BACK/MouseClick/img", Smoothing);
+	}
+
+	CreateChoice("CF_EXIT");
+	CreateTexture("CF_EXIT/MouseUsual/img", 0, 896, 516, "cg/sys/config/ko_hit_exit.png");
+	CreateTexture("CF_VIS_EXIT", 101000, 896, 516, "cg/sys/config/exit-001.png");
+	SetVertex("CF_VIS_EXIT", 0, 0);
+	Zoom("CF_VIS_EXIT", 0, 250, 250, null, false);
+	Request("CF_VIS_EXIT", Smoothing);
+	CreateTexture("CF_EXIT/MouseOver/img", 101001, 896, 516, "cg/sys/config/exit-002.png");
+	SetVertex("CF_EXIT/MouseOver/img", 0, 0);
+	Zoom("CF_EXIT/MouseOver/img", 0, 250, 250, null, false);
+	Request("CF_EXIT/MouseOver/img", Smoothing);
+	CreateTexture("CF_EXIT/MouseClick/img", 101001, 896, 516, "cg/sys/config/exit-003.png");
+	SetVertex("CF_EXIT/MouseClick/img", 0, 0);
+	Zoom("CF_EXIT/MouseClick/img", 0, 250, 250, null, false);
+	Request("CF_EXIT/MouseClick/img", Smoothing);
+
+	cf_setfocus();
+
+	Fade("*/MouseUsual/*",0,0,null,false);
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+
+//	LockVideo(false);
+	//
+//	Fade("CF_봶똧",100,1000,null,false);
+	cf_sethilight();
+}
+
+function cf_sethilight(){
+	Fade("CF_*"0,0,null,false);
+	if($CF_Page == 1)
+	{
+		Fade("CF_봶똧01",0,1000,null,false);
+		if(#no_ask){
+			Fade("CF_AscMessage_ON",0,0,null,false);
+			Fade("CF_AscMessage_OFF",0,1000,null,false);
+		}else{
+			Fade("CF_AscMessage_ON",0,1000,null,false);
+			Fade("CF_AscMessage_OFF",0,0,null,false);
+		}
+		if(#LOCAL_break_play_movie){
+			Fade("CF_ClickMovieSkip_ON",0,1000,null,false);
+			Fade("CF_ClickMovieSkip_OFF",0,0,null,false);
+		}else{
+			Fade("CF_ClickMovieSkip_ON",0,0,null,false);
+			Fade("CF_ClickMovieSkip_OFF",0,1000,null,false);
+		}
+//		if(#SceneSkip)
+//		{
+//			Fade("CF_StopChapter_ON",0,1000,null,false);
+//			Fade("CF_StopChapter_OFF",0,0,null,false);
+//		}
+//		else
+//		{
+//			Fade("CF_StopChapter_ON",0,0,null,false);
+//			Fade("CF_StopChapter_OFF",0,1000,null,false);
+//		}
+		if(#SYSTEM_sync_voice_and_text){
+			Fade("CF_SynchroVoice_ON",0,1000,null,false);
+			Fade("CF_SynchroVoice_OFF",0,0,null,false);
+		}else{
+			Fade("CF_SynchroVoice_ON",0,0,null,false);
+			Fade("CF_SynchroVoice_OFF",0,1000,null,false);
+		}
+		if(#SYSTEM_skip_absolute){
+			Fade("CF_absoluteSkip_ON",0,1000,null,false);
+			Fade("CF_absoluteSkip_OFF",0,0,null,false);
+		}else{
+			Fade("CF_absoluteSkip_ON",0,0,null,false);
+			Fade("CF_absoluteSkip_OFF",0,1000,null,false);
+		}
+		if(#SYSTEM_read_text_color_change){
+			Fade("CF_딓벶륡빾뛛_on",0,1000,null,false);
+			Fade("CF_딓벶륡빾뛛_off",0,0,null,false);
+		}else{
+			Fade("CF_딓벶륡빾뛛_on",0,0,null,false);
+			Fade("CF_딓벶륡빾뛛_off",0,1000,null,false);
+		}
+		if(#SYSTEM_click_break_voice){
+			Fade("CF_ClickVoiceStop_ON",0,1000,null,false);
+			Fade("CF_ClickVoiceStop_OFF",0,0,null,false);
+		}else{
+			Fade("CF_ClickVoiceStop_ON",0,0,null,false);
+			Fade("CF_ClickVoiceStop_OFF",0,1000,null,false);
+		}
+		if(#SYSTEM_auto_ignore_key_cancel){
+			Fade("CF_AutoExit_ON",0,0,null,false);
+			Fade("CF_AutoExit_OFF",0,1000,null,false);
+		}else{
+			Fade("CF_AutoExit_ON",0,1000,null,false);
+			Fade("CF_AutoExit_OFF",0,0,null,false);
+		}
+		if(#keep_auto_and_skip){
+			Fade("CF_StopChapter_ON",0,0,null,false);
+			Fade("CF_StopChapter_OFF",0,1000,null,false);
+		}else{
+			Fade("CF_StopChapter_ON",0,1000,null,false);
+			Fade("CF_StopChapter_OFF",0,0,null,false);
+		}
+		Fade("CF_AutoSpeed_*",0,0,null,false);
+		if(#SYSTEM_auto_wait_per_character<=5){Fade("CF_AutoSpeed_20",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=10){Fade("CF_AutoSpeed_19",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=15){Fade("CF_AutoSpeed_18",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=20){Fade("CF_AutoSpeed_17",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=25){Fade("CF_AutoSpeed_16",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=30){Fade("CF_AutoSpeed_15",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=35){Fade("CF_AutoSpeed_14",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=40){Fade("CF_AutoSpeed_13",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=45){Fade("CF_AutoSpeed_12",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=50){Fade("CF_AutoSpeed_11",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=55){Fade("CF_AutoSpeed_10",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=60){Fade("CF_AutoSpeed_09",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=65){Fade("CF_AutoSpeed_08",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=70){Fade("CF_AutoSpeed_07",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=75){Fade("CF_AutoSpeed_06",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=80){Fade("CF_AutoSpeed_05",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=85){Fade("CF_AutoSpeed_04",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=90){Fade("CF_AutoSpeed_03",0,1000,null,false);}
+		if(#SYSTEM_auto_wait_per_character<=95){Fade("CF_AutoSpeed_02",0,1000,null,false);}
+		Fade("CF_AutoSpeed_01",0,1000,null,false);
+		if(#SYSTEM_auto_text_break_voice){
+			Fade("CF_VoiceWait_ON",0,0,null,false);
+			Fade("CF_VoiceWait_OFF",0,1000,null,false);
+		}else{
+			Fade("CF_VoiceWait_ON",0,1000,null,false);
+			Fade("CF_VoiceWait_OFF",0,0,null,false);
+		}
+		Fade("CF_MSGSpeed_*",0,0,null,false);
+		if(#SYSTEM_text_speed<=50){Fade("CF_MSGSpeed_20",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=100){Fade("CF_MSGSpeed_19",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=150){Fade("CF_MSGSpeed_18",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=200){Fade("CF_MSGSpeed_17",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=250){Fade("CF_MSGSpeed_16",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=300){Fade("CF_MSGSpeed_15",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=350){Fade("CF_MSGSpeed_14",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=400){Fade("CF_MSGSpeed_13",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=450){Fade("CF_MSGSpeed_12",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=500){Fade("CF_MSGSpeed_11",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=550){Fade("CF_MSGSpeed_10",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=600){Fade("CF_MSGSpeed_09",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=650){Fade("CF_MSGSpeed_08",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=700){Fade("CF_MSGSpeed_07",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=750){Fade("CF_MSGSpeed_06",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=800){Fade("CF_MSGSpeed_05",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=850){Fade("CF_MSGSpeed_04",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=900){Fade("CF_MSGSpeed_03",0,1000,null,false);}
+		if(#SYSTEM_text_speed<=950){Fade("CF_MSGSpeed_02",0,1000,null,false);}
+		Fade("CF_MSGSpeed_01",0,1000,null,false);
+		Fade("CF_Preview",0,1000,null,false);
+
+		Fade("CF_NEXT/MouseUsual/img",0,1000,null,false);
+	Fade("CF_VIS_NEXT",0,1000,null,false);
+		Fade("CF_BACK_Dummy",0,500,null,false);
+	}
+	else
+	{
+		Fade("CF_봶똧02",0,1000,null,false);
+		if(#SYSTEM_sound_bgm){
+			Fade("CF_BGM띋맯_ON",0,1000,null,false);
+			Fade("CF_BGM띋맯_OFF",0,0,null,false);
+		}else{
+			Fade("CF_BGM띋맯_ON",0,0,null,false);
+			Fade("CF_BGM띋맯_OFF",0,1000,null,false);
+		}
+		Fade("CF_BGMVOL_*",0,0,null,false);
+		if(#SYSTEM_sound_volume_bgm>950){Fade("CF_BGMVOL_20",0,1000,null,false);#SYSTEM_sound_volume_bgm=1000;}
+		if(#SYSTEM_sound_volume_bgm>900){Fade("CF_BGMVOL_19",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>850){Fade("CF_BGMVOL_18",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>800){Fade("CF_BGMVOL_17",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>750){Fade("CF_BGMVOL_16",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>700){Fade("CF_BGMVOL_15",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>650){Fade("CF_BGMVOL_14",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>600){Fade("CF_BGMVOL_13",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>550){Fade("CF_BGMVOL_12",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>500){Fade("CF_BGMVOL_11",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>450){Fade("CF_BGMVOL_10",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>400){Fade("CF_BGMVOL_09",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>350){Fade("CF_BGMVOL_08",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>300){Fade("CF_BGMVOL_07",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>250){Fade("CF_BGMVOL_06",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>200){Fade("CF_BGMVOL_05",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>150){Fade("CF_BGMVOL_04",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>100){Fade("CF_BGMVOL_03",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_bgm>50){Fade("CF_BGMVOL_02",0,1000,null,false);}
+		Fade("CF_BGMVOL_01",0,1000,null,false);
+		if(#SYSTEM_sound_se){
+			Fade("CF_SE띋맯_ON",0,1000,null,false);
+			Fade("CF_SE띋맯_OFF",0,0,null,false);
+		}else{
+			Fade("CF_SE띋맯_ON",0,0,null,false);
+			Fade("CF_SE띋맯_OFF",0,1000,null,false);
+		}
+		Fade("CF_SEVOL_*",0,0,null,false);
+		if(#SYSTEM_sound_volume_se>950){Fade("CF_SEVOL_20",0,1000,null,false);#SYSTEM_sound_volume_se=1000;}
+		if(#SYSTEM_sound_volume_se>900){Fade("CF_SEVOL_19",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>850){Fade("CF_SEVOL_18",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>800){Fade("CF_SEVOL_17",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>750){Fade("CF_SEVOL_16",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>700){Fade("CF_SEVOL_15",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>650){Fade("CF_SEVOL_14",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>600){Fade("CF_SEVOL_13",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>550){Fade("CF_SEVOL_12",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>500){Fade("CF_SEVOL_11",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>450){Fade("CF_SEVOL_10",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>400){Fade("CF_SEVOL_09",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>350){Fade("CF_SEVOL_08",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>300){Fade("CF_SEVOL_07",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>250){Fade("CF_SEVOL_06",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>200){Fade("CF_SEVOL_05",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>150){Fade("CF_SEVOL_04",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>100){Fade("CF_SEVOL_03",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_se>50){Fade("CF_SEVOL_02",0,1000,null,false);}
+		Fade("CF_SEVOL_01",0,1000,null,false);
+		if(#SYSTEM_sound_voice){
+			Fade("CF_돶맳띋맯_ON",0,1000,null,false);
+			Fade("CF_돶맳띋맯_OFF",0,0,null,false);
+		}else{
+			Fade("CF_돶맳띋맯_ON",0,0,null,false);
+			Fade("CF_돶맳띋맯_OFF",0,1000,null,false);
+		}
+		Fade("CF_VOICEVOL_*",0,0,null,false);
+		if(#SYSTEM_sound_volume_voice>950){Fade("CF_VOICEVOL_20",0,1000,null,false);#SYSTEM_sound_volume_voice=1000;}
+		if(#SYSTEM_sound_volume_voice>900){Fade("CF_VOICEVOL_19",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>850){Fade("CF_VOICEVOL_18",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>800){Fade("CF_VOICEVOL_17",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>750){Fade("CF_VOICEVOL_16",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>700){Fade("CF_VOICEVOL_15",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>650){Fade("CF_VOICEVOL_14",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>600){Fade("CF_VOICEVOL_13",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>550){Fade("CF_VOICEVOL_12",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>500){Fade("CF_VOICEVOL_11",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>450){Fade("CF_VOICEVOL_10",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>400){Fade("CF_VOICEVOL_09",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>350){Fade("CF_VOICEVOL_08",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>300){Fade("CF_VOICEVOL_07",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>250){Fade("CF_VOICEVOL_06",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>200){Fade("CF_VOICEVOL_05",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>150){Fade("CF_VOICEVOL_04",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>100){Fade("CF_VOICEVOL_03",0,1000,null,false);}
+		if(#SYSTEM_sound_volume_voice>50){Fade("CF_VOICEVOL_02",0,1000,null,false);}
+		Fade("CF_VOICEVOL_01",0,1000,null,false);
+//		Fade("CF_긌긿깋긏�^�[뼹귏궴귕",0,1000,null,false);
+//		Fade("CF_긌긿깋긏�^�[긹�[긚*",0,1000,null,false);
+//		Fade("CF_긌긿깋긏�^�[ON*",0,0,null,false);
+//		if(Strstr(#SYSTEM_voice_enable_list,"몥뾲")){Fade("CF_긌긿깋긏�^�[ON_1_1",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"뛤맃")){Fade("CF_긌긿깋긏�^�[ON_1_2",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긩귽긛")){Fade("CF_긌긿깋긏�^�[ON_1_3",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"�~깛긏")){Fade("CF_긌긿깋긏�^�[ON_1_4",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긏깏귺")){Fade("CF_긌긿깋긏�^�[ON_1_5",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"�^긄")){Fade("CF_긌긿깋긏�^�[ON_1_6",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"�~긛긌")){Fade("CF_긌긿깋긏�^�[ON_2_1",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"덳됯")){Fade("CF_긌긿깋긏�^�[ON_2_2",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긌긆")){Fade("CF_긌긿깋긏�^�[ON_2_3",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긥긆")){Fade("CF_긌긿깋긏�^�[ON_2_4",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"�~긆")){Fade("CF_긌긿깋긏�^�[ON_2_5",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"닽뱡")){Fade("CF_긌긿깋긏�^�[ON_2_6",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긂귽깑긚")){Fade("CF_긌긿깋긏�^�[ON_3_1",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긣깏긞긵")){Fade("CF_긌긿깋긏�^�[ON_3_2",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"�@")){Fade("CF_긌긿깋긏�^�[ON_3_3",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긹긦")){Fade("CF_긌긿깋긏�^�[ON_3_4",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긂긖긎긾긤긌")){Fade("CF_긌긿깋긏�^�[ON_3_5",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"뮰")){Fade("CF_긌긿깋긏�^�[ON_3_6",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"덷릣")){Fade("CF_긌긿깋긏�^�[ON_4_1",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"뿳뺭")){Fade("CF_긌긿깋긏�^�[ON_4_2",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"귺깑긲�@")){Fade("CF_긌긿깋긏�^�[ON_4_3",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"긜귽")){Fade("CF_긌긿깋긏�^�[ON_4_4",0,1000,null,false);}
+//		if(Strstr(#SYSTEM_voice_enable_list,"뱦�]")){Fade("CF_긌긿깋긏�^�[ON_4_5",0,1000,null,false);}
+//		if(#SYSTEM_voice_enable_another){Fade("CF_긌긿깋긏�^�[ON_4_6",0,1000,null,false);}
+//		if(#CFGVC_RYUHO==1){
+//			Fade("CF_긌긿깋긏�^�[ON_4_2_name",0,1000,null,false);
+//		}else{
+//			Fade("CF_긌긿깋긏�^�[ON_4_2",0,0,null,false);
+//		}
+//		if(#CFGVC_CLEARALPHA==1){
+//			Fade("CF_긌긿깋긏�^�[ON_4_3_name",0,1000,null,false);
+//		}else{
+//			Fade("CF_긌긿깋긏�^�[ON_4_3",0,0,null,false);
+//		}
+//		if(#CFGVC_SEI==1){
+//			Fade("CF_긌긿깋긏�^�[ON_4_4_name",0,1000,null,false);
+//		}else{
+//			Fade("CF_긌긿깋긏�^�[ON_4_4",0,0,null,false);
+//		}
+//		if(#CFGVC_TOUE==1){
+//			Fade("CF_긌긿깋긏�^�[ON_4_5_name",0,1000,null,false);
+//		}else{
+//			Fade("CF_긌긿깋긏�^�[ON_4_5",0,0,null,false);
+//		}
+		Fade("CF_긚긏깏�[깛긾�[긤_*",0,0,null,false);
+		if(#SYSTEM_window_full){
+			Fade("CF_긲깑긚긏깏�[깛",0,1000,null,false);
+			Fade("CF_긂귻깛긤긂",0,0,null,false);
+		}else{
+			Fade("CF_긲깑긚긏깏�[깛",0,0,null,false);
+			Fade("CF_긂귻깛긤긂",0,1000,null,false);
+		}
+		Fade("CF_귺긚긻긏긣*",0,0,null,false);
+		if(#LOCAL_aspect_auto){
+			Fade("CF_귺긚긻긏긣_ON",0,1000,null,false);
+			Fade("CF_귺긚긻긏긣_OFF",0,0,null,false);
+		}else{
+			Fade("CF_귺긚긻긏긣_ON",0,0,null,false);
+			Fade("CF_귺긚긻긏긣_OFF",0,1000,null,false);
+			if(#SYSTEM_video_aspect_fixed==0){
+				Fade("CF_귺긚긻긏긣_긢귻긚긵깒귽",0,1000,null,false);
+				Fade("CF_귺긚긻긏긣_긢귻긚긵깒귽뚂믦",0,0,null,false);
+			}else{
+				Fade("CF_귺긚긻긏긣_긢귻긚긵깒귽",0,0,null,false);
+				Fade("CF_귺긚긻긏긣_긢귻긚긵깒귽뚂믦",0,1000,null,false);
+				if(#SYSTEM_video_aspect_fixed==1){
+					Fade("CF_귺긚긻긏긣_뺚듩",0,1000,null,false);
+					Fade("CF_귺긚긻긏긣_긦귺깒긚긣",0,0,null,false);
+					Fade("CF_귺긚긻긏긣_긫귽깏긦귺�@",0,0,null,false);
+				}else if(#SYSTEM_video_aspect_fixed==2){
+					Fade("CF_귺긚긻긏긣_뺚듩",0,0,null,false);
+					Fade("CF_귺긚긻긏긣_긦귺깒긚긣",0,1000,null,false);
+					Fade("CF_귺긚긻긏긣_긫귽깏긦귺�@",0,0,null,false);
+				}else if(#SYSTEM_video_aspect_fixed==3){
+					Fade("CF_귺긚긻긏긣_뺚듩",0,0,null,false);
+					Fade("CF_귺긚긻긏긣_긦귺깒긚긣",0,0,null,false);
+					Fade("CF_귺긚긻긏긣_긫귽깏긦귺�@",0,1000,null,false);
+				}
+			}
+		}
+		Fade("CF_NEXT_Dummy",0,500,null,false);
+		Fade("CF_BACK/MouseUsual/img",0,1000,null,false);
+	Fade("CF_VIS_BACK",0,1000,null,false);
+	}
+	Fade("CF_Waku",0,1000,null,false);
+	Fade("CF_EXIT/MouseUsual/img",0,1000,null,false);
+	Fade("CF_VIS_EXIT",0,1000,null,false);
+}
+
+
+function TextPreview()
+{
+	CreateText("CF_Preview", 101000, 536, 428, Auto, Auto, <FONT face="Noto Sans KR" size="21" incolor="WHITE" outcolor="BLACK" weight="500" type="LEFTDOWN">길티 크라운 로스트 크리스마스</FONT>);
+	Request("CF_Preview", NoIcon);
+	Request("CF_Preview", NoLog);
+	if(#SYSTEM_text_speed<100){
+		Request("CF_Preview", PushText);
+	}
+}
+
+..//걶쁀몒믦�`걏괷굑돶맳룊딖믦�`걐
+function VoiceResetSet()
+{
+	Array(#VoiceName,     긚긏깑�[긙,긌긿깓깑,긬긚긣,긵깒�[깛긣,깇긂,뙷뢂,긑귽긤긂,뢶됂,�}긥,뾠긘깄긂,뾠긊귽,궩궻뫜);
+	AssocArray(#VoiceName,긚긏깑�[긙,긌긿깓깑,긬긚긣,긵깒�[깛긣,깇긂,뙷뢂,긑귽긤긂,뢶됂,�}긥,뾠긘깄긂,뾠긊귽,궩궻뫜);
+	#VoiceSetCount=Count(#VoiceName);
+
+	//뙰갌
+	//괥갌깏긚긣궸믁돿궥귡class뼹
+	//괦갌걁뼻딯궠귢궲궋궶궋궕걂뼿귞궥궔뼿귞궠궶궋궔
+	Array(#ConfigCV_긚긏깑�[긙,"긚긏깑�[긙");
+	Array(#ConfigCV_긌긿깓깑,"긌긿깓깑");
+	Array(#ConfigCV_긬긚긣,"긬긚긣");
+	Array(#ConfigCV_긵깒�[깛긣,"긵깒�[깛긣");
+	Array(#ConfigCV_깇긂,"깇긂");
+	Array(#ConfigCV_랎뼖뙷뢂,"뙷뢂");
+	Array(#ConfigCV_똲벞뢇덇쁚,"긑귽긤긂");
+	Array(#ConfigCV_랎뼖뢶됂,"뢶됂");
+	Array(#ConfigCV_랎뼖�^뼹,"�}긥");
+	Array(#ConfigCV_랎뼖뢜,"뾠긘깄긂");
+	Array(#ConfigCV_쐷�_둝,"뾠긊귽");
+	Array(#ConfigCV_궩궻뫜,"궩궻뫜");
+}
+.//걳�}긏깓걏긌긿깋�{귽긚빾릶둴봃걐
+//VoiceReset궴벏뱳뷼
+function ConfigCharacterVoice()
+{
+	#SYSTEM_voice_enable_list="";
+
+	$ConfigCV_While=0;
+	while(#VoiceSetCount>$ConfigCV_While){
+		if(VariableValue(#,"ConfigCV_"+#VoiceName[$ConfigCV_While]+"[1]")==false){
+			#SYSTEM_voice_enable_list=#SYSTEM_voice_enable_list+VariableValue(#,"ConfigCV_"+#VoiceName[$ConfigCV_While]+"[0]");
+		}
+		$ConfigCV_While++;
+	}
+
+	if(!#ConfigCV_궩궻뫜뭞맳[1]&&!#ConfigCV_궩궻뫜룛맳[1]){
+		#SYSTEM_voice_enable_another=true;
+	}
+}
+..//걶�\렑걏괷굑걐
+function ConfigVoiceFade($ConfigCV_While)
+{
+	//	$flg=VariableValue(#,"ConfigCV_"+#ConfigCV_Name[$ConfigCV_While][0]);
+	//	$flg0=VariableValue(#,"ConfigCV_"+#ConfigCV_Name[$ConfigCV_While][0]);
+	//	$flg1=VariableValue(#,"ConfigCV_"+#ConfigCV_Name[$ConfigCV_While][1]);
+	//	$txt=":"+#ConfigCV_Name[$ConfigCV_While]+":"+$flg0+":"+$flg1;
+	//	CreateText("rr",10020,0,0,auto,auto,$txt);
+
+	//if(VariableValue(#,"voice_on_"+#ConfigCV_Name[$ConfigCV_While])){
+		$nutpre=String("Config1a_ChrVC%02d",$ConfigCV_While);
+		$cnut=$nutpre+"/01";
+	
+	$num=$ConfigCV_While-1;
+
+	//	$flg=#VoiceName[$num];
+	//	$flg0=VariableValue(#,"ConfigCV_"+#VoiceName[$num]+"[0]");
+	//	$flg1=VariableValue(#,"ConfigCV_"+#VoiceName[$num]+"[1]");
+	//	$txt=":"+$ConfigCV_While+":"+$flg+"("+$flg0+":"+$flg1+")"+$nutpre;
+	//	CreateText("rr",10020,0,0,auto,auto,$txt);
+
+		//if(!VariableValue(#,"ConfigCV_"+#ConfigCV_Name[$ConfigCV_While]+"[1]")){
+		//	VariableValue(#,"ConfigCV_"+#ConfigCV_Name[$ConfigCV_While]+"[1]",true);
+		//if(!VariableValue(#,"ConfigCV_"+#VoiceName[$num]+"[1]")){
+		if(VariableValue(#,"ConfigCV_"+#VoiceName[$num]+"[1]")){
+			VariableValue(#,"ConfigCV_"+#VoiceName[$num]+"[1]",false);
+			Request($cnut,Enter);//Fade($cnut, 0, 1000, null, false);
+		}else{
+			//VariableValue(#,"ConfigCV_"+#ConfigCV_Name[$ConfigCV_While]+"[1]",false);
+			VariableValue(#,"ConfigCV_"+#VoiceName[$num]+"[1]",true);//뼿귞궠궶궋
+			Request($cnut,Erase);//Fade($cnut, 0, 0, null, false);
+		}
+
+		if(!#ConfigCV_궩궻뫜뭞맳[1]&&!#ConfigCV_궩궻뫜룛맳[1]){
+			#SYSTEM_voice_enable_another=true;
+		}
+
+		ConfigCharacterVoice();
+	//}
+}
+//=============================================================================//
+.//걳�}긏깓걏룊딖돸걐
+function ConfigDefaultInit()
+{
+	//#no_ask=false;
+
+	//걳뱆뺖갌�^귽긣깑궔귞뚁귂뢯궠귢궫뤾뜃걏$OnDialog걐귩true궸갏
+	//걏sys_close듫똚걐볫뢣궸�_귽귺깓긐궕뢯귡궻귩뻞�~궥귡댴궳궥
+	if($PLACE_title){
+		$OnDialog=true;
+	}
+
+	//걳릕궺궶궋
+	if(!#no_ask){
+		$go=false;
+
+		//걾믦�`걏긽긞긜�[긙긂귽깛긤긂띿맟걐
+		CreateName("MSGWND");
+	
+		//걽딈멳�\뭱
+		DialogBase("멣궲궻��뽞귩룊딖먠믦궸뽣궢귏궥궔갎");
+	
+		//걳멗묖럥둎럑
+		$SYSTEM_r_button_down=false;
+		select{
+			if($SYSTEM_r_button_down){break;}
+	
+			case MSGWND/MSG_no{
+				Request("MSGWND/MSG_no/se", Play);
+			}case MSGWND/MSG_yes{
+				//룋믦궻벍띿
+				$go=true;
+				Request("MSGWND/MSG_yes/se", Play);
+			}
+	
+			//걳긌�[�_긂깛똭
+			if($SYSTEM_keydown_f){
+				DialogFull();
+			}else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close){
+				DialogClose();
+			}else if($SYSTEM_keydown_t&&!$SYSTEM_menu_lock&&!$SYSTEM_title_lock){
+				DialogTitle();
+			}else if($SYSTEM_keydown_r&&!$SYSTEM_menu_lock&&!$SYSTEM_backselect_lock&&ExistSave(9999)){
+				DialogBack();
+			}
+		}
+		$SYSTEM_r_button_down=false;
+		$SYSTEM_menu_config_enable=true;
+
+		if(!$go){
+			//걾뢎뿹떎믅뎶뢯
+			DialogEnd();
+
+			//걳뱆뺖갌걏sys_close듫똚걐�^귽긣깑궔귞뚁귂뢯궠귢궫뤾뜃
+			$OnDialog=false;
+			//MoveCursor($ConfigDefaultX_M,$ConfigDefaultY_M);
+			return;
+		}
+	}
+
+	//걳룊딖돸볙뾢
+	ConfigFormat();
+
+	$SYSTEM_menu_config_enable=false;
+	DialogEnd();
+	$OnDialog=false;
+}
+.//걳�}긏깓걏긓깛긲귻긐긲긅�[�}긞긣걐
+function ConfigFormat()
+{
+	//�`괹굑궻긒�[��긚긯�[긤
+	#SYSTEM_play_speed=3;
+	#play_speed_plus=#SYSTEM_play_speed;
+	if($Title_Config){
+		//�^귽긣깑궸궓궋궲궻긓깛긲귻긐궻긒�[��긚긯�[긤
+		#play_speed_plus2 = #SYSTEM_play_speed;
+		#SYSTEM_play_speed=3;
+	}
+	#SYSTEM_text_speed=800;//긡긌긚긣�\렑뫊뱗
+	#SYSTEM_break_play_movie=false;//���[긮�[귩긌긿깛긜깑궳궖귡귝궎궸궥귡
+	#LOCAL_break_play_movie=false;//���[긮�[귩긌긿깛긜깑궳궖귡귝궎궸궥귡깓�[긇깑
+	#keep_auto_and_skip=false;//멗묖럥뚣귖긚긌긞긵궴긆�[긣긾�[긤귩똯뫏궥귡
+	#no_ask=false;//둴봃�_귽귺깓긐궼뢯궥갎
+	#SYSTEM_skip_absolute=false;//뼟벶궳귖긚긌긞긵궥귡
+	#SYSTEM_click_break_voice=false;//긏깏긞긏궳뷅궽궢궫귞돶맳귖긚긣긞긵궥귡
+	#SYSTEM_sound_bgm=true;//괶괽굃귩띋맯궥귡
+	#SYSTEM_sound_se=true;//굍괺귩띋맯궥귡
+	#SYSTEM_sound_voice=true;//돶맳귩띋맯궥귡
+	#SYSTEM_auto_wait_per_character=100;//렔벍빒럻몭귟긚긯�[긤
+	#SYSTEM_auto_text_break_voice=false;//긆�[긣긾�[긤렄궸긡긌긚긣궕뷅궽궠귢궫귞돶맳귖뷅궽궥
+	#SYSTEM_auto_ignore_key_cancel=false;//긆�[긣긾�[긤렄궸긏깏긞긏귩돓궥궴긡긌긚긣궕뷅귆궬궚
+	#SYSTEM_sound_volume_bgm=#SYSTEM_sound_volume_bgm_default;//괶괽굃궻�{깏깄�[��//700;//
+	#SYSTEM_sound_volume_se=#SYSTEM_sound_volume_se_default;//굍괺궻�{깏깄�[��//1000;//
+	#SYSTEM_sound_volume_voice=#SYSTEM_sound_volume_voice_default;//돶맳궻�{깏깄�[��//600;//
+	#SYSTEM_movie_audio_volume=500;//DirectX���[긮�[궻�{깏깄�[��
+	#donot_ask_overwrite_savedata=false;//뜞궼귖궎럊뾭궠귢궲궋궶궋귝궎궬
+	#donot_ask_load_savedata=false;//뜞궼귖궎럊뾭궠귢궲궋궶궋귝궎궬
+	#LOCAL_window_fade=602;//�{긞긏긚벁뼻뱗
+	#SYSTEM_sync_voice_and_text=false;//돶맳벏딖
+	#LOCAL_aspect_auto=true;//귺긚긻긏긣붶렔벍먠믦궥귡
+
+	#PreSaveFlag=false;
+
+	//쁀몒봹쀱
+	VoiceResetSet();
+
+	//겇귺긗긥긄깑걁맕뙽됶룣걂
+	//$DebugMode=true;
+	//ConfigVoiceArray()
+	//$DebugMode=false;
+	//겇긤깋�}�_걁멗묖럥궳렔벍긏귽긞긏긜�[긳걂
+	#quick_save_enabled=true;
+
+	#SYSTEM_read_text_color_change=false;//딓벶됒룋궻빒럻륡귩빾뛛(true궳빾뛛궥귡)
+	#SYSTEM_read_text_incolor=#41b3ff;//빾뛛빒럻륡걁볙븫걂//긤깋�}�_딓벶궞귢궳궓딂궋궢귏궥걁먪묆럔
+	#SYSTEM_read_text_outcolor=#222222;//빾뛛빒럻륡걁둖븫걂
+	#SYSTEM_read_text_skip=false;//딓벶됒룋귩렔벍밒궸긚긌긞긵(true궳긚긌긞긵궥귡)
+
+	#SceneSkip=false;//뤞궻뗦먛귟궳긚긌긞긵믠�~궥귡
+	//false궳믠�~궢궶궋
+
+	$ConfigCV_While=0;
+	while(#VoiceSetCount>$ConfigCV_While){
+		VariableValue(#,"ConfigCV_"+#VoiceName[$ConfigCV_While]+"[1]",false);
+		$ConfigCV_While++;
+	}
+	ConfigCharacterVoice();
+	#SYSTEM_voice_enable_list="긚긏깑�[긙긌긿깓깑긬긚긣긵깒�[깛긣깇긂뙷뢂긑귽긤긂뢶됂�}긥뾠긘깄긂뾠긊귽";
+	#SYSTEM_voice_enable_another=true;
+
+	//긢긲긅깑긣귩긆�[긣뵽빶궸빾뛛
+	//#SYSTEM_video_aspect_fixed=0;
+	if(EnableDirect3DHAL()){
+		#SYSTEM_video_aspect_fixed=1;
+		#old_video_aspect_fixed=1;
+	}else{
+		#SYSTEM_video_aspect_fixed=3;
+		#old_video_aspect_fixed=3;
+	}
+
+	$SYSTEM_text_waitkey=true;
+
+	#SYSTEM_window_full=false;
+}
+function cf_setfocus(){
+	if( $CF_Page == 1 )
+	{
+		SetNextFocus("CF_Default/MouseUsual/img","CF_Message_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_Default/MouseUsual/img","CF_NEXT/MouseUsual/img",UP);
+		SetNextFocus("CF_Default/MouseUsual/img","CF_NEXT/MouseUsual/img",LEFT);
+		SetNextFocus("CF_Default/MouseUsual/img","CF_Message_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_Message_ON/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_Message_ON/MouseUsual/img","CF_Default/MouseUsual/img",UP);
+		SetNextFocus("CF_Message_ON/MouseUsual/img","CF_Message_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_Message_ON/MouseUsual/img","CF_Message_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_Message_OFF/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_Message_OFF/MouseUsual/img","CF_Default/MouseUsual/img",UP);
+		SetNextFocus("CF_Message_OFF/MouseUsual/img","CF_Message_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_Message_OFF/MouseUsual/img","CF_Message_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MovieSkip_ON/MouseUsual/img","CF_MSGSpeed_SELECT_08/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MovieSkip_ON/MouseUsual/img","CF_Message_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MovieSkip_ON/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MovieSkip_ON/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MovieSkip_OFF/MouseUsual/img","CF_MSGSpeed_SELECT_12/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MovieSkip_OFF/MouseUsual/img","CF_Message_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MovieSkip_OFF/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MovieSkip_OFF/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_01/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_01/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_01/MouseUsual/img","CF_MSGSpeed_SELECT_20/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_01/MouseUsual/img","CF_MSGSpeed_SELECT_02/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_02/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_02/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_02/MouseUsual/img","CF_MSGSpeed_SELECT_01/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_02/MouseUsual/img","CF_MSGSpeed_SELECT_03/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_03/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_03/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_03/MouseUsual/img","CF_MSGSpeed_SELECT_02/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_03/MouseUsual/img","CF_MSGSpeed_SELECT_04/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_04/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_04/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_04/MouseUsual/img","CF_MSGSpeed_SELECT_03/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_04/MouseUsual/img","CF_MSGSpeed_SELECT_05/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_05/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_05/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_05/MouseUsual/img","CF_MSGSpeed_SELECT_04/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_05/MouseUsual/img","CF_MSGSpeed_SELECT_06/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_06/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_06/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_06/MouseUsual/img","CF_MSGSpeed_SELECT_05/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_06/MouseUsual/img","CF_MSGSpeed_SELECT_07/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_07/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_07/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_07/MouseUsual/img","CF_MSGSpeed_SELECT_06/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_07/MouseUsual/img","CF_MSGSpeed_SELECT_08/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_08/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_08/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_08/MouseUsual/img","CF_MSGSpeed_SELECT_07/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_08/MouseUsual/img","CF_MSGSpeed_SELECT_09/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_09/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_09/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_09/MouseUsual/img","CF_MSGSpeed_SELECT_08/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_09/MouseUsual/img","CF_MSGSpeed_SELECT_10/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_10/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_10/MouseUsual/img","CF_MovieSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_10/MouseUsual/img","CF_MSGSpeed_SELECT_09/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_10/MouseUsual/img","CF_MSGSpeed_SELECT_11/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_11/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_11/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_11/MouseUsual/img","CF_MSGSpeed_SELECT_10/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_11/MouseUsual/img","CF_MSGSpeed_SELECT_12/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_12/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_12/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_12/MouseUsual/img","CF_MSGSpeed_SELECT_11/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_12/MouseUsual/img","CF_MSGSpeed_SELECT_13/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_13/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_13/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_13/MouseUsual/img","CF_MSGSpeed_SELECT_12/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_13/MouseUsual/img","CF_MSGSpeed_SELECT_14/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_14/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_14/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_14/MouseUsual/img","CF_MSGSpeed_SELECT_13/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_14/MouseUsual/img","CF_MSGSpeed_SELECT_15/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_15/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_15/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_15/MouseUsual/img","CF_MSGSpeed_SELECT_14/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_15/MouseUsual/img","CF_MSGSpeed_SELECT_16/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_16/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_16/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_16/MouseUsual/img","CF_MSGSpeed_SELECT_15/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_16/MouseUsual/img","CF_MSGSpeed_SELECT_17/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_17/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_17/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_17/MouseUsual/img","CF_MSGSpeed_SELECT_16/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_17/MouseUsual/img","CF_MSGSpeed_SELECT_18/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_18/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_18/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_18/MouseUsual/img","CF_MSGSpeed_SELECT_17/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_18/MouseUsual/img","CF_MSGSpeed_SELECT_19/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_19/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_19/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_19/MouseUsual/img","CF_MSGSpeed_SELECT_18/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_19/MouseUsual/img","CF_MSGSpeed_SELECT_20/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_MSGSpeed_SELECT_20/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_MSGSpeed_SELECT_20/MouseUsual/img","CF_MovieSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_MSGSpeed_SELECT_20/MouseUsual/img","CF_MSGSpeed_SELECT_19/MouseUsual/img",LEFT);
+		SetNextFocus("CF_MSGSpeed_SELECT_20/MouseUsual/img","CF_MSGSpeed_SELECT_01/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_NotReadSkip_ON/MouseUsual/img","CF_StopSkipChapter_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_NotReadSkip_ON/MouseUsual/img","CF_MSGSpeed_SELECT_08/MouseUsual/img",UP);
+		SetNextFocus("CF_NotReadSkip_ON/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_NotReadSkip_ON/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_NotReadSkip_OFF/MouseUsual/img","CF_StopSkipChapter_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_NotReadSkip_OFF/MouseUsual/img","CF_MSGSpeed_SELECT_12/MouseUsual/img",UP);
+		SetNextFocus("CF_NotReadSkip_OFF/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_NotReadSkip_OFF/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_StopSkipChapter_ON/MouseUsual/img","CF_VoiceStop_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_StopSkipChapter_ON/MouseUsual/img","CF_NotReadSkip_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_StopSkipChapter_ON/MouseUsual/img","CF_StopSkipChapter_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_StopSkipChapter_ON/MouseUsual/img","CF_StopSkipChapter_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_StopSkipChapter_OFF/MouseUsual/img","CF_VoiceStop_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_StopSkipChapter_OFF/MouseUsual/img","CF_NotReadSkip_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_StopSkipChapter_OFF/MouseUsual/img","CF_StopSkipChapter_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_StopSkipChapter_OFF/MouseUsual/img","CF_StopSkipChapter_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VoiceStop_ON/MouseUsual/img","CF_VoiceSynchro_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VoiceStop_ON/MouseUsual/img","CF_StopSkipChapter_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VoiceStop_ON/MouseUsual/img","CF_VoiceStop_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VoiceStop_ON/MouseUsual/img","CF_VoiceStop_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VoiceStop_OFF/MouseUsual/img","CF_VoiceSynchro_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VoiceStop_OFF/MouseUsual/img","CF_StopSkipChapter_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VoiceStop_OFF/MouseUsual/img","CF_VoiceStop_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VoiceStop_OFF/MouseUsual/img","CF_VoiceStop_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VoiceSynchro_ON/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VoiceSynchro_ON/MouseUsual/img","CF_VoiceStop_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VoiceSynchro_ON/MouseUsual/img","CF_VoiceSynchro_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VoiceSynchro_ON/MouseUsual/img","CF_VoiceSynchro_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VoiceSynchro_OFF/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VoiceSynchro_OFF/MouseUsual/img","CF_VoiceStop_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VoiceSynchro_OFF/MouseUsual/img","CF_VoiceSynchro_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VoiceSynchro_OFF/MouseUsual/img","CF_VoiceSynchro_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_WaitVoice_ON/MouseUsual/img","CF_AutoSpeed_SELECT_08/MouseUsual/img",DOWN);
+		SetNextFocus("CF_WaitVoice_ON/MouseUsual/img","CF_VoiceSynchro_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_WaitVoice_ON/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_WaitVoice_ON/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_WaitVoice_OFF/MouseUsual/img","CF_AutoSpeed_SELECT_12/MouseUsual/img",DOWN);
+		SetNextFocus("CF_WaitVoice_OFF/MouseUsual/img","CF_VoiceSynchro_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_WaitVoice_OFF/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_WaitVoice_OFF/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_01/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_01/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_01/MouseUsual/img","CF_AutoSpeed_SELECT_20/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_01/MouseUsual/img","CF_AutoSpeed_SELECT_02/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_02/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_02/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_02/MouseUsual/img","CF_AutoSpeed_SELECT_01/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_02/MouseUsual/img","CF_AutoSpeed_SELECT_03/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_03/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_03/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_03/MouseUsual/img","CF_AutoSpeed_SELECT_02/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_03/MouseUsual/img","CF_AutoSpeed_SELECT_04/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_04/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_04/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_04/MouseUsual/img","CF_AutoSpeed_SELECT_03/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_04/MouseUsual/img","CF_AutoSpeed_SELECT_05/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_05/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_05/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_05/MouseUsual/img","CF_AutoSpeed_SELECT_04/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_05/MouseUsual/img","CF_AutoSpeed_SELECT_06/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_06/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_06/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_06/MouseUsual/img","CF_AutoSpeed_SELECT_05/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_06/MouseUsual/img","CF_AutoSpeed_SELECT_07/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_07/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_07/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_07/MouseUsual/img","CF_AutoSpeed_SELECT_06/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_07/MouseUsual/img","CF_AutoSpeed_SELECT_08/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_08/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_08/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_08/MouseUsual/img","CF_AutoSpeed_SELECT_07/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_08/MouseUsual/img","CF_AutoSpeed_SELECT_09/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_09/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_09/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_09/MouseUsual/img","CF_AutoSpeed_SELECT_08/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_09/MouseUsual/img","CF_AutoSpeed_SELECT_10/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_10/MouseUsual/img","CF_AutoClickExit_ON",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_10/MouseUsual/img","CF_WaitVoice_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_10/MouseUsual/img","CF_AutoSpeed_SELECT_09/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_10/MouseUsual/img","CF_AutoSpeed_SELECT_11/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_11/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_11/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_11/MouseUsual/img","CF_AutoSpeed_SELECT_10/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_11/MouseUsual/img","CF_AutoSpeed_SELECT_12/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_12/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_12/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_12/MouseUsual/img","CF_AutoSpeed_SELECT_11/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_12/MouseUsual/img","CF_AutoSpeed_SELECT_13/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_13/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_13/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_13/MouseUsual/img","CF_AutoSpeed_SELECT_12/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_13/MouseUsual/img","CF_AutoSpeed_SELECT_14/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_14/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_14/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_14/MouseUsual/img","CF_AutoSpeed_SELECT_13/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_14/MouseUsual/img","CF_AutoSpeed_SELECT_15/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_15/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_15/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_15/MouseUsual/img","CF_AutoSpeed_SELECT_14/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_15/MouseUsual/img","CF_AutoSpeed_SELECT_16/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_16/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_16/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_16/MouseUsual/img","CF_AutoSpeed_SELECT_15/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_16/MouseUsual/img","CF_AutoSpeed_SELECT_17/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_17/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_17/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_17/MouseUsual/img","CF_AutoSpeed_SELECT_16/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_17/MouseUsual/img","CF_AutoSpeed_SELECT_18/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_18/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_18/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_18/MouseUsual/img","CF_AutoSpeed_SELECT_17/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_18/MouseUsual/img","CF_AutoSpeed_SELECT_19/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_19/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_19/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_19/MouseUsual/img","CF_AutoSpeed_SELECT_18/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_19/MouseUsual/img","CF_AutoSpeed_SELECT_20/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoSpeed_SELECT_20/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoSpeed_SELECT_20/MouseUsual/img","CF_WaitVoice_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoSpeed_SELECT_20/MouseUsual/img","CF_AutoSpeed_SELECT_19/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoSpeed_SELECT_20/MouseUsual/img","CF_AutoSpeed_SELECT_01/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoClickExit_ON/MouseUsual/img","CF_previewbutton/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoClickExit_ON/MouseUsual/img","CF_AutoSpeed_SELECT_08/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoClickExit_ON/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoClickExit_ON/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_AutoClickExit_OFF/MouseUsual/img","CF_previewbutton/MouseUsual/img",DOWN);
+		SetNextFocus("CF_AutoClickExit_OFF/MouseUsual/img","CF_AutoSpeed_SELECT_12/MouseUsual/img",UP);
+		SetNextFocus("CF_AutoClickExit_OFF/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_AutoClickExit_OFF/MouseUsual/img","CF_AutoClickExit_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_previewbutton/MouseUsual/img","CF_NEXT/MouseUsual/img",DOWN);
+		SetNextFocus("CF_previewbutton/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_previewbutton/MouseUsual/img","CF_previewbutton/MouseUsual/img",LEFT);
+		SetNextFocus("CF_previewbutton/MouseUsual/img","CF_previewbutton/MouseUsual/img",RIGHT);
+		
+		SetNextFocus("CF_NEXT/MouseUsual/img","CF_Default/MouseUsual/img",DOWN);
+		SetNextFocus("CF_NEXT/MouseUsual/img","CF_previewbutton/MouseUsual/img",UP);
+		SetNextFocus("CF_NEXT/MouseUsual/img","CF_EXIT/MouseUsual/img",LEFT);
+		SetNextFocus("CF_NEXT/MouseUsual/img","CF_EXIT/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_EXIT/MouseUsual/img","CF_Default/MouseUsual/img",DOWN);
+		SetNextFocus("CF_EXIT/MouseUsual/img","CF_AutoClickExit_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_EXIT/MouseUsual/img","CF_NEXT/MouseUsual/img",LEFT);
+		SetNextFocus("CF_EXIT/MouseUsual/img","CF_NEXT/MouseUsual/img",RIGHT);
+	}
+	else
+	{
+		SetNextFocus("CF_BGM띋맯먠믦_ON/MouseUsual/img","CF_BGMVOL_SELECT_09/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGM띋맯먠믦_ON/MouseUsual/img","CF_BACK/MouseUsual/img",UP);
+		SetNextFocus("CF_BGM띋맯먠믦_ON/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGM띋맯먠믦_ON/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGM띋맯먠믦_OFF/MouseUsual/img","CF_BGMVOL_SELECT_12/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGM띋맯먠믦_OFF/MouseUsual/img","CF_BACK/MouseUsual/img",UP);
+		SetNextFocus("CF_BGM띋맯먠믦_OFF/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGM띋맯먠믦_OFF/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_01/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_01/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_01/MouseUsual/img","CF_BGMVOL_SELECT_20/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_01/MouseUsual/img","CF_BGMVOL_SELECT_02/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_02/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_02/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_02/MouseUsual/img","CF_BGMVOL_SELECT_01/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_02/MouseUsual/img","CF_BGMVOL_SELECT_03/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_03/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_03/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_03/MouseUsual/img","CF_BGMVOL_SELECT_02/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_03/MouseUsual/img","CF_BGMVOL_SELECT_04/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_04/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_04/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_04/MouseUsual/img","CF_BGMVOL_SELECT_03/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_04/MouseUsual/img","CF_BGMVOL_SELECT_05/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_05/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_05/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_05/MouseUsual/img","CF_BGMVOL_SELECT_04/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_05/MouseUsual/img","CF_BGMVOL_SELECT_06/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_06/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_06/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_06/MouseUsual/img","CF_BGMVOL_SELECT_05/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_06/MouseUsual/img","CF_BGMVOL_SELECT_07/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_07/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_07/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_07/MouseUsual/img","CF_BGMVOL_SELECT_06/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_07/MouseUsual/img","CF_BGMVOL_SELECT_08/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_08/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_08/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_08/MouseUsual/img","CF_BGMVOL_SELECT_07/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_08/MouseUsual/img","CF_BGMVOL_SELECT_09/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_09/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_09/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_09/MouseUsual/img","CF_BGMVOL_SELECT_08/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_09/MouseUsual/img","CF_BGMVOL_SELECT_10/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_10/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_10/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_10/MouseUsual/img","CF_BGMVOL_SELECT_09/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_10/MouseUsual/img","CF_BGMVOL_SELECT_11/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_11/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_11/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_11/MouseUsual/img","CF_BGMVOL_SELECT_10/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_11/MouseUsual/img","CF_BGMVOL_SELECT_12/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_12/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_12/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_12/MouseUsual/img","CF_BGMVOL_SELECT_11/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_12/MouseUsual/img","CF_BGMVOL_SELECT_13/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_13/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_13/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_13/MouseUsual/img","CF_BGMVOL_SELECT_12/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_13/MouseUsual/img","CF_BGMVOL_SELECT_14/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_14/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_14/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_14/MouseUsual/img","CF_BGMVOL_SELECT_13/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_14/MouseUsual/img","CF_BGMVOL_SELECT_15/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_15/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_15/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_15/MouseUsual/img","CF_BGMVOL_SELECT_14/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_15/MouseUsual/img","CF_BGMVOL_SELECT_16/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_16/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_16/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_16/MouseUsual/img","CF_BGMVOL_SELECT_15/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_16/MouseUsual/img","CF_BGMVOL_SELECT_17/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_17/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_17/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_17/MouseUsual/img","CF_BGMVOL_SELECT_16/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_17/MouseUsual/img","CF_BGMVOL_SELECT_18/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_18/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_18/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_18/MouseUsual/img","CF_BGMVOL_SELECT_17/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_18/MouseUsual/img","CF_BGMVOL_SELECT_19/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_19/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_19/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_19/MouseUsual/img","CF_BGMVOL_SELECT_18/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_19/MouseUsual/img","CF_BGMVOL_SELECT_20/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BGMVOL_SELECT_20/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BGMVOL_SELECT_20/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_BGMVOL_SELECT_20/MouseUsual/img","CF_BGMVOL_SELECT_19/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BGMVOL_SELECT_20/MouseUsual/img","CF_BGMVOL_SELECT_01/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SE띋맯먠믦_ON/MouseUsual/img","CF_SEVOL_SELECT_09/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SE띋맯먠믦_ON/MouseUsual/img","CF_BGMVOL_SELECT_09/MouseUsual/img",UP);
+		SetNextFocus("CF_SE띋맯먠믦_ON/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SE띋맯먠믦_ON/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SE띋맯먠믦_OFF/MouseUsual/img","CF_SEVOL_SELECT_12/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SE띋맯먠믦_OFF/MouseUsual/img","CF_BGMVOL_SELECT_12/MouseUsual/img",UP);
+		SetNextFocus("CF_SE띋맯먠믦_OFF/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SE띋맯먠믦_OFF/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_01/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_01/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_01/MouseUsual/img","CF_SEVOL_SELECT_20/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_01/MouseUsual/img","CF_SEVOL_SELECT_02/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_02/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_02/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_02/MouseUsual/img","CF_SEVOL_SELECT_01/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_02/MouseUsual/img","CF_SEVOL_SELECT_03/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_03/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_03/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_03/MouseUsual/img","CF_SEVOL_SELECT_02/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_03/MouseUsual/img","CF_SEVOL_SELECT_04/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_04/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_04/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_04/MouseUsual/img","CF_SEVOL_SELECT_03/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_04/MouseUsual/img","CF_SEVOL_SELECT_05/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_05/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_05/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_05/MouseUsual/img","CF_SEVOL_SELECT_04/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_05/MouseUsual/img","CF_SEVOL_SELECT_06/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_06/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_06/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_06/MouseUsual/img","CF_SEVOL_SELECT_05/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_06/MouseUsual/img","CF_SEVOL_SELECT_07/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_07/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_07/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_07/MouseUsual/img","CF_SEVOL_SELECT_06/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_07/MouseUsual/img","CF_SEVOL_SELECT_08/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_08/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_08/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_08/MouseUsual/img","CF_SEVOL_SELECT_07/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_08/MouseUsual/img","CF_SEVOL_SELECT_09/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_09/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_09/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_09/MouseUsual/img","CF_SEVOL_SELECT_08/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_09/MouseUsual/img","CF_SEVOL_SELECT_10/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_10/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_10/MouseUsual/img","CF_SE띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_10/MouseUsual/img","CF_SEVOL_SELECT_09/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_10/MouseUsual/img","CF_SEVOL_SELECT_11/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_11/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_11/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_11/MouseUsual/img","CF_SEVOL_SELECT_10/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_11/MouseUsual/img","CF_SEVOL_SELECT_12/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_12/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_12/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_12/MouseUsual/img","CF_SEVOL_SELECT_11/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_12/MouseUsual/img","CF_SEVOL_SELECT_13/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_13/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_13/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_13/MouseUsual/img","CF_SEVOL_SELECT_12/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_13/MouseUsual/img","CF_SEVOL_SELECT_14/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_14/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_14/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_14/MouseUsual/img","CF_SEVOL_SELECT_13/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_14/MouseUsual/img","CF_SEVOL_SELECT_15/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_15/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_15/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_15/MouseUsual/img","CF_SEVOL_SELECT_14/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_15/MouseUsual/img","CF_SEVOL_SELECT_16/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_16/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_16/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_16/MouseUsual/img","CF_SEVOL_SELECT_15/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_16/MouseUsual/img","CF_SEVOL_SELECT_17/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_17/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_17/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_17/MouseUsual/img","CF_SEVOL_SELECT_16/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_17/MouseUsual/img","CF_SEVOL_SELECT_18/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_18/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_18/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_18/MouseUsual/img","CF_SEVOL_SELECT_17/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_18/MouseUsual/img","CF_SEVOL_SELECT_19/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_19/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_19/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_19/MouseUsual/img","CF_SEVOL_SELECT_18/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_19/MouseUsual/img","CF_SEVOL_SELECT_20/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SEVOL_SELECT_20/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SEVOL_SELECT_20/MouseUsual/img","CF_SE띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_SEVOL_SELECT_20/MouseUsual/img","CF_SEVOL_SELECT_19/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SEVOL_SELECT_20/MouseUsual/img","CF_SEVOL_SELECT_01/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_SE�{깏깄�[��긡긚긣/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_SE�{깏깄�[��긡긚긣/MouseUsual/img","CF_SEVOL_SELECT_10/MouseUsual/img",UP);
+		SetNextFocus("CF_SE�{깏깄�[��긡긚긣/MouseUsual/img","CF_SEVOL_SELECT_10/MouseUsual/img",LEFT);
+		SetNextFocus("CF_SE�{깏깄�[��긡긚긣/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_돶맳띋맯먠믦_ON/MouseUsual/img","CF_VOICEVOL_SELECT_09/MouseUsual/img",DOWN);
+		SetNextFocus("CF_돶맳띋맯먠믦_ON/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",UP);
+		SetNextFocus("CF_돶맳띋맯먠믦_ON/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_돶맳띋맯먠믦_ON/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_돶맳띋맯먠믦_OFF/MouseUsual/img","CF_VOICEVOL_SELECT_12/MouseUsual/img",DOWN);
+		SetNextFocus("CF_돶맳띋맯먠믦_OFF/MouseUsual/img","CF_SE�{깏깄�[��긡긚긣/MouseUsual/img",UP);
+		SetNextFocus("CF_돶맳띋맯먠믦_OFF/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_돶맳띋맯먠믦_OFF/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_01/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_01/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_01/MouseUsual/img","CF_VOICEVOL_SELECT_20/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_01/MouseUsual/img","CF_VOICEVOL_SELECT_02/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_02/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_02/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_02/MouseUsual/img","CF_VOICEVOL_SELECT_01/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_02/MouseUsual/img","CF_VOICEVOL_SELECT_03/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_03/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_03/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_03/MouseUsual/img","CF_VOICEVOL_SELECT_02/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_03/MouseUsual/img","CF_VOICEVOL_SELECT_04/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_04/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_04/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_04/MouseUsual/img","CF_VOICEVOL_SELECT_03/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_04/MouseUsual/img","CF_VOICEVOL_SELECT_05/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_05/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_05/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_05/MouseUsual/img","CF_VOICEVOL_SELECT_04/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_05/MouseUsual/img","CF_VOICEVOL_SELECT_06/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_06/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_06/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_06/MouseUsual/img","CF_VOICEVOL_SELECT_05/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_06/MouseUsual/img","CF_VOICEVOL_SELECT_07/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_07/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_07/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_07/MouseUsual/img","CF_VOICEVOL_SELECT_06/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_07/MouseUsual/img","CF_VOICEVOL_SELECT_08/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_08/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_08/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_08/MouseUsual/img","CF_VOICEVOL_SELECT_07/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_08/MouseUsual/img","CF_VOICEVOL_SELECT_09/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_09/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_09/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_09/MouseUsual/img","CF_VOICEVOL_SELECT_08/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_09/MouseUsual/img","CF_VOICEVOL_SELECT_10/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_10/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_10/MouseUsual/img","CF_돶맳띋맯먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_10/MouseUsual/img","CF_VOICEVOL_SELECT_09/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_10/MouseUsual/img","CF_VOICEVOL_SELECT_11/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_11/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_11/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_11/MouseUsual/img","CF_VOICEVOL_SELECT_10/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_11/MouseUsual/img","CF_VOICEVOL_SELECT_12/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_12/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_12/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_12/MouseUsual/img","CF_VOICEVOL_SELECT_11/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_12/MouseUsual/img","CF_VOICEVOL_SELECT_13/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_13/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_13/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_13/MouseUsual/img","CF_VOICEVOL_SELECT_12/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_13/MouseUsual/img","CF_VOICEVOL_SELECT_14/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_14/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_14/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_14/MouseUsual/img","CF_VOICEVOL_SELECT_13/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_14/MouseUsual/img","CF_VOICEVOL_SELECT_15/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_15/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_15/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_15/MouseUsual/img","CF_VOICEVOL_SELECT_14/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_15/MouseUsual/img","CF_VOICEVOL_SELECT_16/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_16/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_16/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_16/MouseUsual/img","CF_VOICEVOL_SELECT_15/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_16/MouseUsual/img","CF_VOICEVOL_SELECT_17/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_17/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_17/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_17/MouseUsual/img","CF_VOICEVOL_SELECT_16/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_17/MouseUsual/img","CF_VOICEVOL_SELECT_18/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_18/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_18/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_18/MouseUsual/img","CF_VOICEVOL_SELECT_17/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_18/MouseUsual/img","CF_VOICEVOL_SELECT_19/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_19/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_19/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_19/MouseUsual/img","CF_VOICEVOL_SELECT_18/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_19/MouseUsual/img","CF_VOICEVOL_SELECT_20/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_VOICEVOL_SELECT_20/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",DOWN);
+		SetNextFocus("CF_VOICEVOL_SELECT_20/MouseUsual/img","CF_돶맳띋맯먠믦_OFF/MouseUsual/img",UP);
+		SetNextFocus("CF_VOICEVOL_SELECT_20/MouseUsual/img","CF_VOICEVOL_SELECT_19/MouseUsual/img",LEFT);
+		SetNextFocus("CF_VOICEVOL_SELECT_20/MouseUsual/img","CF_VOICEVOL_SELECT_01/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img","CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img",DOWN);
+		SetNextFocus("CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img","CF_VOICEVOL_SELECT_10/MouseUsual/img",UP);
+		SetNextFocus("CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img","CF_VOICEVOL_SELECT_10/MouseUsual/img",LEFT);
+		SetNextFocus("CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img","CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img","CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img",DOWN);
+		SetNextFocus("CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",UP);
+		SetNextFocus("CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img","CF_돶맳�{깏깄�[��긡긚긣/MouseUsual/img",LEFT);
+		SetNextFocus("CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img","CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img","CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img","CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img",UP);
+		SetNextFocus("CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img","CF_긂귻깛긤긂먠믦/MouseUsual/img",LEFT);
+		SetNextFocus("CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img","CF_긂귻깛긤긂먠믦/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_긂귻깛긤긂먠믦/MouseUsual/img","CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_긂귻깛긤긂먠믦/MouseUsual/img","CF_긌긿깋빶�{귽긚먠믦/MouseUsual/img",UP);
+		SetNextFocus("CF_긂귻깛긤긂먠믦/MouseUsual/img","CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img",LEFT);
+		SetNextFocus("CF_긂귻깛긤긂먠믦/MouseUsual/img","CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img","CF_뚂믦/MouseUsual/img",DOWN);
+		SetNextFocus("CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img","CF_긲깑긚긏깏�[깛먠믦/MouseUsual/img",UP);
+		SetNextFocus("CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img","CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseUsual/img",LEFT);
+		SetNextFocus("CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img","CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseUsual/img","CF_뚂믦/MouseUsual/img",DOWN);
+		SetNextFocus("CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseUsual/img","CF_긂귻깛긤긂먠믦/MouseUsual/img",UP);
+		SetNextFocus("CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseUsual/img","CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img",LEFT);
+		SetNextFocus("CF_귺긚긻긏긣붶렔벍먠믦_OFF/MouseUsual/img","CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_긢귻긚긵깒귽댨뫔/MouseUsual/img","CF_긪�[긤긂긃귺뺚듩/MouseUsual/img",DOWN);
+		SetNextFocus("CF_긢귻긚긵깒귽댨뫔/MouseUsual/img","CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_긢귻긚긵깒귽댨뫔/MouseUsual/img","CF_뚂믦/MouseUsual/img",LEFT);
+		SetNextFocus("CF_긢귻긚긵깒귽댨뫔/MouseUsual/img","CF_뚂믦/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_뚂믦/MouseUsual/img","CF_긦귺깒긚긣긨귽긫�[/MouseUsual/img",DOWN);
+		SetNextFocus("CF_뚂믦/MouseUsual/img","CF_귺긚긻긏긣붶렔벍먠믦_ON/MouseUsual/img",UP);
+		SetNextFocus("CF_뚂믦/MouseUsual/img","CF_긢귻긚긵깒귽댨뫔/MouseUsual/img",LEFT);
+		SetNextFocus("CF_뚂믦/MouseUsual/img","CF_긢귻긚긵깒귽댨뫔/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_긪�[긤긂긃귺뺚듩/MouseUsual/img","CF_BACK/MouseUsual/img",DOWN);
+		SetNextFocus("CF_긪�[긤긂긃귺뺚듩/MouseUsual/img","CF_긢귻긚긵깒귽댨뫔/MouseUsual/img",UP);
+		SetNextFocus("CF_긪�[긤긂긃귺뺚듩/MouseUsual/img","CF_HP/MouseUsual/img",LEFT);
+		SetNextFocus("CF_긪�[긤긂긃귺뺚듩/MouseUsual/img","CF_긦귺깒긚긣긨귽긫�[/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_긦귺깒긚긣긨귽긫�[/MouseUsual/img","CF_BACK/MouseUsual/img",DOWN);
+		SetNextFocus("CF_긦귺깒긚긣긨귽긫�[/MouseUsual/img","CF_뚂믦/MouseUsual/img",UP);
+		SetNextFocus("CF_긦귺깒긚긣긨귽긫�[/MouseUsual/img","CF_긪�[긤긂긃귺뺚듩/MouseUsual/img",LEFT);
+		SetNextFocus("CF_긦귺깒긚긣긨귽긫�[/MouseUsual/img","CF_긫귽깏긦귺/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_긫귽깏긦귺/MouseUsual/img","CF_BACK/MouseUsual/img",DOWN);
+		SetNextFocus("CF_긫귽깏긦귺/MouseUsual/img","CF_뚂믦/MouseUsual/img",UP);
+		SetNextFocus("CF_긫귽깏긦귺/MouseUsual/img","CF_긦귺깒긚긣긨귽긫�[/MouseUsual/img",LEFT);
+		SetNextFocus("CF_긫귽깏긦귺/MouseUsual/img","CF_깇�[긗뱋�^/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_BACK/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_BACK/MouseUsual/img","CF_긫귽깏긦귺/MouseUsual/img",UP);
+		SetNextFocus("CF_BACK/MouseUsual/img","CF_EXIT/MouseUsual/img",LEFT);
+		SetNextFocus("CF_BACK/MouseUsual/img","CF_EXIT/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_EXIT/MouseUsual/img","CF_BGM띋맯먠믦_OFF/MouseUsual/img",DOWN);
+		SetNextFocus("CF_EXIT/MouseUsual/img","CF_긫귽깏긦귺/MouseUsual/img",UP);
+		SetNextFocus("CF_EXIT/MouseUsual/img","CF_BACK/MouseUsual/img",LEFT);
+		SetNextFocus("CF_EXIT/MouseUsual/img","CF_BACK/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_HP/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_HP/MouseUsual/img","CF_긢귻긚긵깒귽댨뫔/MouseUsual/img",UP);
+		SetNextFocus("CF_HP/MouseUsual/img","CF_깇�[긗뱋�^/MouseUsual/img",LEFT);
+		SetNextFocus("CF_HP/MouseUsual/img","CF_긪�[긤긂긃귺뺚듩/MouseUsual/img",RIGHT);
+
+		SetNextFocus("CF_깇�[긗뱋�^/MouseUsual/img","CF_BGM띋맯먠믦_ON/MouseUsual/img",DOWN);
+		SetNextFocus("CF_깇�[긗뱋�^/MouseUsual/img","CF_긢귻긚긵깒귽댨뫔/MouseUsual/img",UP);
+		SetNextFocus("CF_깇�[긗뱋�^/MouseUsual/img","CF_긫귽깏긦귺/MouseUsual/img",LEFT);
+		SetNextFocus("CF_깇�[긗뱋�^/MouseUsual/img","CF_HP/MouseUsual/img",RIGHT);
+
+	}
+}
+
+
+function cf_voiceset()
+{
+	LoadImage("CF_vo�`긃긞긏","cg/sys/config/�{귽긚멗묖data/�`긃긞긏.png");
+	LoadImage("CF_vo갎갎","cg/sys/config/�{귽긚멗묖data/갎갎.png");
+
+	CreateTexture("CF_CH봶똧", 101001, 0, 0, "cg/sys/config/�{귽긚멗묖data/봶똧.png");
+	SetVertex("CF_CH봶똧", 0, 0);
+	Zoom("CF_CH봶똧", 0, 250, 250, null, false);
+	Request("CF_CH봶똧", Smoothing);
+
+	$CF_vox_01 = 200-2;
+	$CF_vox_02 = 326;
+	$CF_vox_03 = 434;
+	$CF_vox_04 = 526;
+	$CF_vox_05 = 650;
+	$CF_vox_06 = 722;
+	$CF_vox_07 = 200;
+	$CF_vox_08 = 326;
+	$CF_vox_09 = 434;
+	$CF_vox_10 = 542;
+	$CF_vox_11 = 632;
+	$CF_vox_12 = 722;
+
+	$CF_voy_1 = 405;
+	$CF_voy_2 = 437;
+
+	$CF_vo01 = Strstr(#SYSTEM_voice_enable_list,"긚긏깑�[긙");
+	$CF_vo02 = Strstr(#SYSTEM_voice_enable_list,"긌긿깓깑");
+	$CF_vo03 = Strstr(#SYSTEM_voice_enable_list,"긬긚긣");
+	$CF_vo04 = Strstr(#SYSTEM_voice_enable_list,"긵깒�[깛긣");
+	$CF_vo05 = Strstr(#SYSTEM_voice_enable_list,"깇긂");
+	$CF_vo06 = Strstr(#SYSTEM_voice_enable_list,"뙷뢂");
+	$CF_vo07 = Strstr(#SYSTEM_voice_enable_list,"긑귽긤긂");
+	$CF_vo08 = Strstr(#SYSTEM_voice_enable_list,"뢶됂");
+	$CF_vo09 = Strstr(#SYSTEM_voice_enable_list,"�}긥");
+	$CF_vo10 = Strstr(#SYSTEM_voice_enable_list,"뾠긘깄긂");
+	$CF_vo11 = Strstr(#SYSTEM_voice_enable_list,"뾠긊귽");
+	$CF_vo12 = #SYSTEM_voice_enable_another;
+	CreateChoice("CF_vo긚긏깑�[긙");
+	CreateTexture("CF_vo긚긏깑�[긙/MouseUsual/img",0,$CF_vox_01,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긚긏깑�[긙hit.png");
+	CreateTexture("CF_vo긚긏깑�[긙/MouseUsual/hit",0,$CF_vox_01,$CF_voy_1,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo긚긏깑�[긙/MouseOver/img",0,$CF_vox_01,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긚긏깑�[긙hit.png");
+	CreateTexture("CF_vo긚긏깑�[긙/MouseClick/img",0,$CF_vox_01,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긚긏깑�[긙hit.png");
+	CreateTexture("CF_CH_긚긏깑�[긙",101001,200,$CF_voy_1,"CF_vo�`긃긞긏");
+	if(#CFGVC_SCROOGE != 1)
+	{
+		CreateTexture("CF_CH긚긏깑�[긙",101001,$CF_vox_01,$CF_voy_1,"CF_vo갎갎");
+		Request("CF_vo긚긏깑�[긙/*/img", Erase);
+		Request("CF_vo긚긏깑�[긙",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH긚긏깑�[긙", 101001, $CF_vox_01, $CF_voy_1, "cg/sys/config/�{귽긚멗묖data/긚긏깑�[긙.png");
+		SetVertex("CF_CH긚긏깑�[긙", 0, 0);
+		Zoom("CF_CH긚긏깑�[긙", 0, 250, 250, null, false);
+	Request("CF_CH긚긏깑�[긙", Smoothing);
+	}
+
+	CreateChoice("CF_vo긌긿깓깑");
+	CreateTexture("CF_vo긌긿깓깑/MouseUsual/img",0,$CF_vox_02,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긌긿깓깑hit.png");
+	CreateTexture("CF_vo긌긿깓깑/MouseUsual/hit",0,$CF_vox_02,$CF_voy_1,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo긌긿깓깑/MouseOver/img",0,$CF_vox_02,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긌긿깓깑hit.png");
+	CreateTexture("CF_vo긌긿깓깑/MouseClick/img",0,$CF_vox_02,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긌긿깓깑hit.png");
+	CreateTexture("CF_CH_긌긿깓깑",101001,$CF_vox_02,$CF_voy_1,"CF_vo�`긃긞긏");
+	if(#CFGVC_CAROL != 1)
+	{
+		CreateTexture("CF_CH긌긿깓깑",101001,$CF_vox_02,$CF_voy_1,"CF_vo갎갎");
+		Request("CF_vo긌긿깓깑/*/img", Erase);
+		Request("CF_vo긌긿깓깑",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH긌긿깓깑", 101001, $CF_vox_02, $CF_voy_1, "cg/sys/config/�{귽긚멗묖data/긌긿깓깑.png");
+		SetVertex("CF_CH긌긿깓깑", 0, 0);
+		Zoom("CF_CH긌긿깓깑", 0, 250, 250, null, false);
+	Request("CF_CH긌긿깓깑", Smoothing);
+	}
+
+	CreateChoice("CF_vo긬긚긣");
+	CreateTexture("CF_vo긬긚긣/MouseUsual/img",0,$CF_vox_03,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긬긚긣hit.png");
+	CreateTexture("CF_vo긬긚긣/MouseUsual/hit",0,$CF_vox_03,$CF_voy_1,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo긬긚긣/MouseOver/img",0,$CF_vox_03,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긬긚긣hit.png");
+	CreateTexture("CF_vo긬긚긣/MouseClick/img",0,$CF_vox_03,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긬긚긣hit.png");
+	CreateTexture("CF_CH_긬긚긣",101001,$CF_vox_03,$CF_voy_1,"CF_vo�`긃긞긏");
+	if(#CFGVC_PAST != 1)
+	{
+		CreateTexture("CF_CH긬긚긣",101001,$CF_vox_03,$CF_voy_1,"CF_vo갎갎");
+		Request("CF_vo긬긚긣/*/img", Erase);
+		Request("CF_vo긬긚긣",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH긬긚긣", 101001, $CF_vox_03, $CF_voy_1, "cg/sys/config/�{귽긚멗묖data/긬긚긣.png");
+		SetVertex("CF_CH긬긚긣", 0, 0);
+		Zoom("CF_CH긬긚긣", 0, 250, 250, null, false);
+	Request("CF_CH긬긚긣", Smoothing);
+	}
+
+	CreateChoice("CF_vo긵깒�[깛긣");
+	CreateTexture("CF_vo긵깒�[깛긣/MouseUsual/img",0,$CF_vox_04,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긵깒�[깛긣hit.png");
+	CreateTexture("CF_vo긵깒�[깛긣/MouseUsual/hit",0,$CF_vox_04,$CF_voy_1,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo긵깒�[깛긣/MouseOver/img",0,$CF_vox_04,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긵깒�[깛긣hit.png");
+	CreateTexture("CF_vo긵깒�[깛긣/MouseClick/img",0,$CF_vox_04,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/긵깒�[깛긣hit.png");
+	CreateTexture("CF_CH_긵깒�[깛긣",101001,$CF_vox_04,$CF_voy_1,"CF_vo�`긃긞긏");
+	if(#CFGVC_PRESENT != 1)
+	{
+		CreateTexture("CF_CH긵깒�[깛긣",101001,$CF_vox_04,$CF_voy_1,"CF_vo갎갎");
+		Request("CF_vo긵깒�[깛긣/*/img", Erase);
+		Request("CF_vo긵깒�[깛긣",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH긵깒�[깛긣", 101001, $CF_vox_04, $CF_voy_1, "cg/sys/config/�{귽긚멗묖data/긵깒�[깛긣.png");
+		SetVertex("CF_CH긵깒�[깛긣", 0, 0);
+		Zoom("CF_CH긵깒�[깛긣", 0, 250, 250, null, false);
+	Request("CF_CH긵깒�[깛긣", Smoothing);
+	}
+
+	CreateChoice("CF_vo깇긂");
+	CreateTexture("CF_vo깇긂/MouseUsual/img",0,$CF_vox_05,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/깇긂hit.png");
+	CreateTexture("CF_vo깇긂/MouseUsual/hit",0,$CF_vox_05,$CF_voy_1,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo깇긂/MouseOver/img",0,$CF_vox_05,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/깇긂hit.png");
+	CreateTexture("CF_vo깇긂/MouseClick/img",0,$CF_vox_05,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/깇긂hit.png");
+	CreateTexture("CF_CH_깇긂",101001,$CF_vox_05,$CF_voy_1,"CF_vo�`긃긞긏");
+	if(#CFGVC_YUU != 1)
+	{
+		CreateTexture("CF_CH깇긂",101001,$CF_vox_05,$CF_voy_1,"CF_vo갎갎");
+		Request("CF_vo깇긂/*/img", Erase);
+		Request("CF_vo깇긂",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH깇긂", 101001, $CF_vox_05, $CF_voy_1, "cg/sys/config/�{귽긚멗묖data/깇긂.png");
+		SetVertex("CF_CH깇긂", 0, 0);
+		Zoom("CF_CH깇긂", 0, 250, 250, null, false);
+	Request("CF_CH깇긂", Smoothing);
+	}
+
+	CreateChoice("CF_vo랎뼖뙷뢂");
+	CreateTexture("CF_vo랎뼖뙷뢂/MouseUsual/img",0,$CF_vox_06,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/랎뼖뙷뢂hit.png");
+	CreateTexture("CF_vo랎뼖뙷뢂/MouseUsual/hit",0,$CF_vox_06,$CF_voy_1,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo랎뼖뙷뢂/MouseOver/img",0,$CF_vox_06,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/랎뼖뙷뢂hit.png");
+	CreateTexture("CF_vo랎뼖뙷뢂/MouseClick/img",0,$CF_vox_06,$CF_voy_1,"cg/sys/config/�{귽긚멗묖data/랎뼖뙷뢂hit.png");
+	CreateTexture("CF_CH_랎뼖뙷뢂",101001,$CF_vox_06,$CF_voy_1,"CF_vo�`긃긞긏");
+	if(#CFGVC_CROSS != 1)
+	{
+		CreateTexture("CF_CH랎뼖뙷뢂",101001,$CF_vox_06,$CF_voy_1,"CF_vo갎갎");
+		Request("CF_vo랎뼖뙷뢂/*/img", Erase);
+		Request("CF_vo랎뼖뙷뢂",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH랎뼖뙷뢂", 101001, $CF_vox_06, $CF_voy_1, "cg/sys/config/�{귽긚멗묖data/랎뼖뙷뢂.png");
+		SetVertex("CF_CH랎뼖뙷뢂", 0, 0);
+		Zoom("CF_CH랎뼖뙷뢂", 0, 250, 250, null, false);
+	Request("CF_CH랎뼖뙷뢂", Smoothing);
+	}
+
+	CreateChoice("CF_vo똲벞뢇덇쁚");
+	CreateTexture("CF_vo똲벞뢇덇쁚/MouseUsual/img",0,$CF_vox_07,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/똲벞뢇덇쁚hit.png");
+	CreateTexture("CF_vo똲벞뢇덇쁚/MouseUsual/hit",0,$CF_vox_07,$CF_voy_2,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo똲벞뢇덇쁚/MouseOver/img",0,$CF_vox_07,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/똲벞뢇덇쁚hit.png");
+	CreateTexture("CF_vo똲벞뢇덇쁚/MouseClick/img",0,$CF_vox_07,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/똲벞뢇덇쁚hit.png");
+	CreateTexture("CF_CH_똲벞뢇덇쁚",101001,$CF_vox_07,$CF_voy_2,"CF_vo�`긃긞긏");
+	if(#CFGVC_KEIDOU != 1)
+	{
+		CreateTexture("CF_CH똲벞뢇덇쁚",101001,$CF_vox_07,$CF_voy_2,"CF_vo갎갎");
+		Request("CF_vo똲벞뢇덇쁚/*/img", Erase);
+		Request("CF_vo똲벞뢇덇쁚",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH똲벞뢇덇쁚", 101001, $CF_vox_07, $CF_voy_2, "cg/sys/config/�{귽긚멗묖data/똲벞뢇덇쁚.png");
+		SetVertex("CF_CH똲벞뢇덇쁚", 0, 0);
+		Zoom("CF_CH똲벞뢇덇쁚", 0, 250, 250, null, false);
+	Request("CF_CH똲벞뢇덇쁚", Smoothing);
+	}
+
+	CreateChoice("CF_vo랎뼖뢶됂");
+	CreateTexture("CF_vo랎뼖뢶됂/MouseUsual/img",0,$CF_vox_08,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖뢶됂hit.png");
+	CreateTexture("CF_vo랎뼖뢶됂/MouseUsual/hit",0,$CF_vox_08,$CF_voy_2,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo랎뼖뢶됂/MouseOver/img",0,$CF_vox_08,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖뢶됂hit.png");
+	CreateTexture("CF_vo랎뼖뢶됂/MouseClick/img",0,$CF_vox_08,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖뢶됂hit.png");
+	CreateTexture("CF_CH_랎뼖뢶됂",101001,$CF_vox_08,$CF_voy_2,"CF_vo�`긃긞긏");
+	if(#CFGVC_HARUKA != 1)
+	{
+		CreateTexture("CF_CH랎뼖뢶됂",101001,$CF_vox_08,$CF_voy_2,"CF_vo갎갎");
+		Request("CF_vo랎뼖뢶됂/*/img", Erase);
+		Request("CF_vo랎뼖뢶됂",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH랎뼖뢶됂", 101001, $CF_vox_08, $CF_voy_2, "cg/sys/config/�{귽긚멗묖data/랎뼖뢶됂.png");
+		SetVertex("CF_CH랎뼖뢶됂", 0, 0);
+		Zoom("CF_CH랎뼖뢶됂", 0, 250, 250, null, false);
+	Request("CF_CH랎뼖뢶됂", Smoothing);
+	}
+
+	CreateChoice("CF_vo랎뼖�^뼹");
+	CreateTexture("CF_vo랎뼖�^뼹/MouseUsual/img",0,$CF_vox_09,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖�^뼹hit.png");
+	CreateTexture("CF_vo랎뼖�^뼹/MouseUsual/hit",0,$CF_vox_09,$CF_voy_2,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo랎뼖�^뼹/MouseOver/img",0,$CF_vox_09,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖�^뼹hit.png");
+	CreateTexture("CF_vo랎뼖�^뼹/MouseClick/img",0,$CF_vox_09,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖�^뼹hit.png");
+	CreateTexture("CF_CH_랎뼖�^뼹",101001,$CF_vox_09,$CF_voy_2,"CF_vo�`긃긞긏");
+	if(#CFGVC_MANA != 1)
+	{
+		CreateTexture("CF_CH랎뼖�^뼹",101001,$CF_vox_09,$CF_voy_2,"CF_vo갎갎");
+		Request("CF_vo랎뼖�^뼹/*/img", Erase);
+		Request("CF_vo랎뼖�^뼹",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH랎뼖�^뼹", 101001, $CF_vox_09, $CF_voy_2, "cg/sys/config/�{귽긚멗묖data/랎뼖�^뼹.png");
+		SetVertex("CF_CH랎뼖�^뼹", 0, 0);
+		Zoom("CF_CH랎뼖�^뼹", 0, 250, 250, null, false);
+	Request("CF_CH랎뼖�^뼹", Smoothing);
+	}
+
+	CreateChoice("CF_vo랎뼖뢜");
+	CreateTexture("CF_vo랎뼖뢜/MouseUsual/img",0,$CF_vox_10,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖뢜hit.png");
+	CreateTexture("CF_vo랎뼖뢜/MouseUsual/hit",0,$CF_vox_10,$CF_voy_2,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo랎뼖뢜/MouseOver/img",0,$CF_vox_10,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖뢜hit.png");
+	CreateTexture("CF_vo랎뼖뢜/MouseClick/img",0,$CF_vox_10,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/랎뼖뢜hit.png");
+	CreateTexture("CF_CH_랎뼖뢜",101001,$CF_vox_10,$CF_voy_2,"CF_vo�`긃긞긏");
+	if(#CFGVC_SYU != 1)
+	{
+		CreateTexture("CF_CH랎뼖뢜",101001,$CF_vox_10,$CF_voy_2,"CF_vo갎갎");
+		Request("CF_vo랎뼖뢜/*/img", Erase);
+		Request("CF_vo랎뼖뢜",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH랎뼖뢜", 101001, $CF_vox_10, $CF_voy_2, "cg/sys/config/�{귽긚멗묖data/랎뼖뢜.png");
+		SetVertex("CF_CH랎뼖뢜", 0, 0);
+		Zoom("CF_CH랎뼖뢜", 0, 250, 250, null, false);
+	Request("CF_CH랎뼖뢜", Smoothing);
+	}
+
+	CreateChoice("CF_vo쐷�_둝");
+	CreateTexture("CF_vo쐷�_둝/MouseUsual/img",0,$CF_vox_11,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/쐷�_둝hit.png");
+	CreateTexture("CF_vo쐷�_둝/MouseUsual/hit",0,$CF_vox_11,$CF_voy_2,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo쐷�_둝/MouseOver/img",0,$CF_vox_11,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/쐷�_둝hit.png");
+	CreateTexture("CF_vo쐷�_둝/MouseClick/img",0,$CF_vox_11,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/쐷�_둝hit.png");
+	CreateTexture("CF_CH_쐷�_둝",101001,$CF_vox_11,$CF_voy_2,"CF_vo�`긃긞긏");
+	if(#CFGVC_GAI != 1)
+	{
+		CreateTexture("CF_CH쐷�_둝",101001,$CF_vox_11,$CF_voy_2,"CF_vo갎갎");
+		Request("CF_vo쐷�_둝/*/img", Erase);
+		Request("CF_vo쐷�_둝",UnClickable);
+	}
+	else
+	{
+		CreateTexture("CF_CH쐷�_둝", 101001, $CF_vox_11, $CF_voy_2, "cg/sys/config/�{귽긚멗묖data/쐷�_둝.png");
+		SetVertex("CF_CH쐷�_둝", 0, 0);
+		Zoom("CF_CH쐷�_둝", 0, 250, 250, null, false);
+	Request("CF_CH쐷�_둝", Smoothing);
+	}
+
+	CreateChoice("CF_vo궩궻뫜");
+	CreateTexture("CF_vo궩궻뫜/MouseUsual/img",0,$CF_vox_12,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/궩궻뫜hit.png");
+	CreateTexture("CF_vo궩궻뫜/MouseUsual/hit",0,$CF_vox_12,$CF_voy_2,"CF_vo�`긃긞긏");
+	CreateTexture("CF_vo궩궻뫜/MouseOver/img",0,$CF_vox_12,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/궩궻뫜hit.png");
+	CreateTexture("CF_vo궩궻뫜/MouseClick/img",0,$CF_vox_12,$CF_voy_2,"cg/sys/config/�{귽긚멗묖data/궩궻뫜hit.png");
+	CreateTexture("CF_CH_궩궻뫜",101001,$CF_vox_12,$CF_voy_2,"CF_vo�`긃긞긏");
+	CreateTexture("CF_CH궩궻뫜2", 101001, $CF_vox_12, $CF_voy_2, "cg/sys/config/�{귽긚멗묖data/궩궻뫜.png");
+	SetVertex("CF_CH궩궻뫜2", 0, 0);
+	Zoom("CF_CH궩궻뫜2", 0, 250, 250, null, false);
+	Request("CF_CH궩궻뫜2", Smoothing);
+
+	Fade("CF_CH_*",0,0,null,false);
+	Fade("CF_vo*",0,0,null,false);
+	Move("CF_CH*",0,@0,@1000,null,true);
+	cf_voicefocus();
+}
+
+function cf_voicefocus()
+{
+	SetNextFocus("CF_vo긚긏깑�[긙/MouseUsual/hit","CF_vo똲벞뢇덇쁚/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo긚긏깑�[긙/MouseUsual/hit","CF_vo똲벞뢇덇쁚/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo긚긏깑�[긙/MouseUsual/hit","CF_vo랎뼖뙷뢂/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo긚긏깑�[긙/MouseUsual/hit","CF_vo긌긿깓깑/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo긌긿깓깑/MouseUsual/hit","CF_vo랎뼖뢶됂/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo긌긿깓깑/MouseUsual/hit","CF_vo랎뼖뢶됂/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo긌긿깓깑/MouseUsual/hit","CF_vo긚긏깑�[긙/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo긌긿깓깑/MouseUsual/hit","CF_vo긬긚긣/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo긬긚긣/MouseUsual/hit","CF_vo랎뼖�^뼹/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo긬긚긣/MouseUsual/hit","CF_vo랎뼖�^뼹/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo긬긚긣/MouseUsual/hit","CF_vo긌긿깓깑/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo긬긚긣/MouseUsual/hit","CF_vo긵깒�[깛긣/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo긵깒�[깛긣/MouseUsual/hit","CF_vo랎뼖뢜/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo긵깒�[깛긣/MouseUsual/hit","CF_vo랎뼖뢜/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo긵깒�[깛긣/MouseUsual/hit","CF_vo긬긚긣/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo긵깒�[깛긣/MouseUsual/hit","CF_vo깇긂/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo깇긂/MouseUsual/hit","CF_vo쐷�_둝/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo깇긂/MouseUsual/hit","CF_vo쐷�_둝/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo깇긂/MouseUsual/hit","CF_vo긵깒�[깛긣/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo깇긂/MouseUsual/hit","CF_vo랎뼖뙷뢂/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo랎뼖뙷뢂/MouseUsual/hit","CF_vo궩궻뫜/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo랎뼖뙷뢂/MouseUsual/hit","CF_vo궩궻뫜/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo랎뼖뙷뢂/MouseUsual/hit","CF_vo깇긂/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo랎뼖뙷뢂/MouseUsual/hit","CF_vo긚긏깑�[긙/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo똲벞뢇덇쁚/MouseUsual/hit","CF_vo긚긏깑�[긙/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo똲벞뢇덇쁚/MouseUsual/hit","CF_vo긚긏깑�[긙/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo똲벞뢇덇쁚/MouseUsual/hit","CF_vo궩궻뫜/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo똲벞뢇덇쁚/MouseUsual/hit","CF_vo랎뼖뢶됂/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo랎뼖뢶됂/MouseUsual/hit","CF_vo긌긿깓깑/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo랎뼖뢶됂/MouseUsual/hit","CF_vo긌긿깓깑/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo랎뼖뢶됂/MouseUsual/hit","CF_vo똲벞뢇덇쁚/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo랎뼖뢶됂/MouseUsual/hit","CF_vo랎뼖�^뼹/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo랎뼖�^뼹/MouseUsual/hit","CF_vo긬긚긣/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo랎뼖�^뼹/MouseUsual/hit","CF_vo긬긚긣/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo랎뼖�^뼹/MouseUsual/hit","CF_vo랎뼖뢶됂/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo랎뼖�^뼹/MouseUsual/hit","CF_vo랎뼖뢜/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo랎뼖뢜/MouseUsual/hit","CF_vo긵깒�[깛긣/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo랎뼖뢜/MouseUsual/hit","CF_vo긵깒�[깛긣/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo랎뼖뢜/MouseUsual/hit","CF_vo랎뼖�^뼹/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo랎뼖뢜/MouseUsual/hit","CF_vo쐷�_둝/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo쐷�_둝/MouseUsual/hit","CF_vo깇긂/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo쐷�_둝/MouseUsual/hit","CF_vo깇긂/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo쐷�_둝/MouseUsual/hit","CF_vo랎뼖뢜/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo쐷�_둝/MouseUsual/hit","CF_vo궩궻뫜/MouseUsual/hit",RIGHT);
+
+	SetNextFocus("CF_vo궩궻뫜/MouseUsual/hit","CF_vo랎뼖뙷뢂/MouseUsual/hit",DOWN);
+	SetNextFocus("CF_vo궩궻뫜/MouseUsual/hit","CF_vo랎뼖뙷뢂/MouseUsual/hit",UP);
+	SetNextFocus("CF_vo궩궻뫜/MouseUsual/hit","CF_vo쐷�_둝/MouseUsual/hit",LEFT);
+	SetNextFocus("CF_vo궩궻뫜/MouseUsual/hit","CF_vo똲벞뢇덇쁚/MouseUsual/hit",RIGHT);
+}
+
+
+function cf_voiceview()
+{
+	$LOCAL_config_voice_enable=true;
+	while($LOCAL_config_voice_enable)
+	{
+		select
+		{
+			//걳긌�[�_긂깛똭
+			if($SYSTEM_r_button_down)
+			{
+				$LOCAL_config_voice_enable = false;
+				break;
+			}
+			case "CF_vo긚긏깑�[긙"
+			{
+				if(#CFGVC_SCROOGE == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo01 != 0)
+					{
+						$CF_vo01 = 0;
+					}
+					else
+					{
+						$CF_vo01 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo긌긿깓깑"
+			{
+				if(#CFGVC_CAROL == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo02 != 0)
+					{
+						$CF_vo02 = 0;
+					}
+					else
+					{
+						$CF_vo02 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo긬긚긣"
+			{
+				if(#CFGVC_PAST == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo03 != 0)
+					{
+						$CF_vo03 = 0;
+					}
+					else
+					{
+						$CF_vo03 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo긵깒�[깛긣"
+			{
+				if(#CFGVC_PRESENT == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo04 != 0)
+					{
+						$CF_vo04 = 0;
+					}
+					else
+					{
+						$CF_vo04 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo깇긂"
+			{
+				if(#CFGVC_YUU == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo05 != 0)
+					{
+						$CF_vo05 = 0;
+					}
+					else
+					{
+						$CF_vo05 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo랎뼖뙷뢂"
+			{
+				if(#CFGVC_CROSS == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo06 != 0)
+					{
+						$CF_vo06 = 0;
+					}
+					else
+					{
+						$CF_vo06 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo똲벞뢇덇쁚"
+			{
+				if(#CFGVC_KEIDOU == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo07 != 0)
+					{
+						$CF_vo07 = 0;
+					}
+					else
+					{
+						$CF_vo07 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo랎뼖뢶됂"
+			{
+				if(#CFGVC_HARUKA == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo08 != 0)
+					{
+						$CF_vo08 = 0;
+					}
+					else
+					{
+						$CF_vo08 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo랎뼖�^뼹"
+			{
+				if(#CFGVC_MANA == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo09 != 0)
+					{
+						$CF_vo09 = 0;
+					}
+					else
+					{
+						$CF_vo09 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo랎뼖뢜"
+			{
+				if(#CFGVC_SYU == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo10 != 0)
+					{
+						$CF_vo10 = 0;
+					}
+					else
+					{
+						$CF_vo10 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo쐷�_둝"
+			{
+				if(#CFGVC_GAI == 1)
+				{
+					Request("뙂믦돶",Play);
+					if($CF_vo11 != 0)
+					{
+						$CF_vo11 = 0;
+					}
+					else
+					{
+						$CF_vo11 = 1;
+					}
+					cf_voicehilight();
+				}
+			}
+			case "CF_vo궩궻뫜"
+			{
+				Request("뙂믦돶",Play);
+				$CF_vo12 = !$CF_vo12;
+				cf_voicehilight();
+			}
+			if($SYSTEM_l_button_down)
+			{
+				CursorPosition($x,$y);
+				if($x < 161 || $x > 862)
+				{
+					$LOCAL_config_voice_enable = false;
+					break;
+				}
+				else if($y < 361)
+				{
+					$LOCAL_config_voice_enable = false;
+					break;
+				}
+			}
+			//걳긌�[�_긂깛똭
+			if(($SYSTEM_keydown_esc||$SYSTEM_buttondown_close)&&!$Title_Config){
+				call_chapter nss/sys_close.nss;
+			}
+		}
+	}
+}
+
+function cf_voicehilight()
+{
+	#SYSTEM_voice_enable_list="";
+	if($CF_vo01 != 0)
+	{
+		Fade("CF_CH_긚긏깑�[긙",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "긚긏깑�[긙";
+	}
+	else
+	{
+		Fade("CF_CH_긚긏깑�[긙",0,1000,null,false);
+	}
+
+	if($CF_vo02 != 0)
+	{
+		Fade("CF_CH_긌긿깓깑",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "긌긿깓깑";
+	}
+	else
+	{
+		Fade("CF_CH_긌긿깓깑",0,1000,null,false);
+	}
+
+	if($CF_vo03 != 0)
+	{
+		Fade("CF_CH_긬긚긣",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "긬긚긣";
+	}
+	else
+	{
+		Fade("CF_CH_긬긚긣",0,1000,null,false);
+	}
+
+	if($CF_vo04 != 0)
+	{
+		Fade("CF_CH_긵깒�[깛긣",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "긵깒�[깛긣";
+	}
+	else
+	{
+		Fade("CF_CH_긵깒�[깛긣",0,1000,null,false);
+	}
+
+	if($CF_vo05 != 0)
+	{
+		Fade("CF_CH_깇긂",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "깇긂";
+	}
+	else
+	{
+		Fade("CF_CH_깇긂",0,1000,null,false);
+	}
+
+	if($CF_vo06 != 0)
+	{
+		Fade("CF_CH_랎뼖뙷뢂",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "뙷뢂";
+	}
+	else
+	{
+		Fade("CF_CH_랎뼖뙷뢂",0,1000,null,false);
+	}
+
+	if($CF_vo07 != 0)
+	{
+		Fade("CF_CH_똲벞뢇덇쁚",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "긑귽긤긂";
+	}
+	else
+	{
+		Fade("CF_CH_똲벞뢇덇쁚",0,1000,null,false);
+	}
+
+	if($CF_vo08 != 0)
+	{
+		Fade("CF_CH_랎뼖뢶됂",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "뢶됂";
+	}
+	else
+	{
+		Fade("CF_CH_랎뼖뢶됂",0,1000,null,false);
+	}
+
+	if($CF_vo09 != 0)
+	{
+		Fade("CF_CH_랎뼖�^뼹",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "�}긥";
+	}
+	else
+	{
+		Fade("CF_CH_랎뼖�^뼹",0,1000,null,false);
+	}
+
+	if($CF_vo10 != 0)
+	{
+		Fade("CF_CH_랎뼖뢜",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "뾠긘깄긂";
+	}
+	else
+	{
+		Fade("CF_CH_랎뼖뢜",0,1000,null,false);
+	}
+
+	if($CF_vo11 != 0)
+	{
+		Fade("CF_CH_쐷�_둝",0,0,null,false);
+		#SYSTEM_voice_enable_list = #SYSTEM_voice_enable_list + "뾠긊귽";
+	}
+	else
+	{
+		Fade("CF_CH_쐷�_둝",0,1000,null,false);
+	}
+
+	if($CF_vo12)
+	{
+		Fade("CF_CH_궩궻뫜",0,0,null,false);
+		#SYSTEM_voice_enable_another = true;
+	}
+	else
+	{
+		Fade("CF_CH_궩궻뫜",0,1000,null,false);
+		#SYSTEM_voice_enable_another = false;
+	}
+}
+

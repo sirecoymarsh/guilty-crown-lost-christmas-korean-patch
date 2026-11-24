@@ -1,0 +1,37 @@
+﻿[Script Info]
+Title: Guilty Crown Lost Christmas lx0201 Korean
+ScriptType: v4.00+
+PlayResX: 3840
+PlayResY: 2160
+ScaledBorderAndShadow: yes
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KO,GCLC Korean Subtitle,134,&H00FFFFFF,&H00FFFFFF,&H10000000,&H80000000,0,0,0,0,100,100,0,0,1,8,1,2,120,120,120,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:02.67,0:00:04.64,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}세피라 게노믹스.
+Dialogue: 0,0:00:04.70,0:00:06.61,KO,스크루지,0,0,0,,{\an2\pos(1920,2040)}그게 놈들 이름인가.
+Dialogue: 0,0:00:06.67,0:00:09.81,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}제약 회사 같은 거라고 생각하면 돼.
+Dialogue: 0,0:00:09.94,0:00:12.05,KO,스크루지,0,0,0,,{\an2\pos(1920,2040)}겉으로만 그렇겠지?
+Dialogue: 0,0:00:12.28,0:00:14.38,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}하지만, 그러나!
+Dialogue: 0,0:00:14.38,0:00:19.39,KO,캐롤,0,0,0,,{\an2\pos(1920,1880)}그 실체는 세계 정복을 꾀하는
+Dialogue: 0,0:00:14.38,0:00:19.39,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}악의 비밀 결사인 것이다!
+Dialogue: 0,0:00:19.52,0:00:20.65,KO,스크루지,0,0,0,,{\an2\pos(1920,2040)}바보냐.
+Dialogue: 0,0:00:20.75,0:00:23.99,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}장단 참 안 맞춰 주네, 개조인간 1호.
+Dialogue: 0,0:00:24.19,0:00:25.93,KO,스크루지,0,0,0,,{\an2\pos(1920,2040)}그럼 2호는 너냐?
+Dialogue: 0,0:00:26.13,0:00:29.26,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}기술의 1호! 힘의 2호!
+Dialogue: 0,0:00:29.43,0:00:31.90,KO,스크루지,0,0,0,,{\an2\pos(1920,2040)}……그거 미스캐스트잖아.
+Dialogue: 0,0:00:33.80,0:00:38.44,KO,캐롤,0,0,0,,{\an2\pos(1920,1880)}……우리 말고도 말이야.
+Dialogue: 0,0:00:33.80,0:00:38.44,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}실험체인 애들이 있었어.
+Dialogue: 0,0:00:38.64,0:00:39.34,KO,스크루지,0,0,0,,{\an2\pos(1920,2040)}……?
+Dialogue: 0,0:00:39.54,0:00:44.54,KO,캐롤,0,0,0,,{\an2\pos(1920,1880)}어떻게 됐을지는……
+Dialogue: 0,0:00:39.54,0:00:44.54,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}별로 생각하고 싶지 않네.
+Dialogue: 0,0:00:44.74,0:00:45.58,KO,스크루지,0,0,0,,{\an2\pos(1920,2040)}…………
+Dialogue: 0,0:00:48.65,0:00:51.72,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}자아, 초인 스크루지.
+Dialogue: 1,0:00:48.65,0:00:51.72,KO,캐롤,0,0,0,,{\an2\pos(1796.500,1878)\fs84\bord6}인크레더블
+Dialogue: 0,0:00:51.92,0:00:56.19,KO,캐롤,0,0,0,,{\an2\pos(1920,1880)}그런 악마 같은 놈들하고
+Dialogue: 0,0:00:51.92,0:00:56.19,KO,캐롤,0,0,0,,{\an2\pos(1920,2040)}어떻게 싸울 거야?
+Dialogue: 0,0:00:56.39,0:00:57.62,KO,스크루지,0,0,0,,{\an2\pos(1920,2040)}글쎄……

@@ -1,0 +1,137 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0604_11.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+	$lx0604_11Pass++;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+
+	if($FLAG_OF_STORY["生きる"]>=3){
+		if(!$lx0604_10bgm){
+			$GameName = "lx0604_10bgm.nss";
+			$lx0604_10bgm=true;
+		}else{
+			$GameName = "lx0604_10sl.nss";
+		}
+	}else{
+		$GameName = "lx0604_00sl.nss";
+	}
+}
+
+
+scene lx0604_11.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+//◆◆ヴォイド空間
+	PrintGO("上背景", 30000);
+
+	CreateColorSP("絵色黒", 0, "000000");
+
+	if(!$LoopCome){$LoopCome=1;}
+
+	if($LoopCome==1){$LoopComeName="dx/mvve01.ngs";}
+	else if($LoopCome==2){$LoopComeName="dx/mvve02.ngs";}
+	else if($LoopCome==3){$LoopComeName="dx/mvve03横.ngs";}
+	$LoopCome++;
+
+	if($LoopCome>=4){$LoopCome=1;}
+
+
+	CreateMovie("絵ムービー１", 100, Center, Middle, true, true, $LoopComeName);
+	SetAlias("絵ムービー１", "絵ムービー１");
+	Zoom("絵ムービー１", 0, 2000, 2000, Dxl2, true);
+
+	CreateColorEX("絵色１", 10000, "000000");
+
+	//★徒歩：ＳＥ
+	CreateSE("SE02","seヴォイドエフェクト_l");
+	CreateSE("SE03","seヴォイド取り出し01");
+	MusicStart("SE02",500,1000,0,1000,null,false);
+	MusicStart("SE03",0,700,0,1000,null,false);
+
+	FadeDelete("上背景", 300, null, true);
+
+	Wait(1000);
+
+//	WaitKey();
+//	CreateMovie("絵ムービー２", 100, 512, 288, true, true, "dx/mvve02.ngs",500);
+//	WaitKey();
+//	CreateMovie("絵ムービー３", 100, 512, 0, true, true, "dx/mvve03横.ngs",500);
+//	WaitKey();
+
+//	CreateMovie("絵ムービー４", 100, 0, 288, true, true, "dx/mv結晶ループ.ngs",500);
+//	WaitKey();
+
+
+//←←生きる
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+ｳﾊﾀﾇ ｼｱﾅﾃﾀｺ <WAIT time=1000>ｸﾎ ｹｫﾀﾇｹﾌﾇﾏｴﾙ&.
+</PRE>
+	SetTextM();
+	TypeBeginTN(0);//―――――――――――――――――――――――――――
+
+	Wait(2000);
+	TextBoxDelete(2000);
+	Wait(2000);
+
+//砕けるヴォイド。
+	//★徒歩：ＳＥ
+	CreateSE("SE04","seヴォイド崩壊03");
+
+	SetVolumeEX("@SE*", 100, 0, null);
+	MusicStart("SE04",0,700,0,1000,null,false);
+
+	Fade("絵色１", 1000, 1000, null, true);
+	Delete("絵ムービー１");
+
+	Wait(1000);
+
+//イェット・トゥー・カムは死ぬ。
+
+//→→選択肢に戻る
+
+//	ClearFadeAll(1000, true);
+
+}

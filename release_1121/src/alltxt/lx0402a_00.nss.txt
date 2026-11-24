@@ -1,0 +1,190 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0402a_00.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	if($lx0302_00sl選択肢==1){	$GameName = "lx0402a_01.nss";
+	}else{	$GameName = "lx0402a_02.nss";
+//確認用
+//	$GameName = "lx0402a_01.nss";
+	}
+
+}
+
+
+scene lx0402a_00.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+
+
+//キャロルさよなら
+	CreateMovieEX("絵動画", 500, 480, -200, true, true, "dx/mv0003集中線01_黒.ngs");
+	CreateTextureSP("絵背景", 100, -200, Middle, "cg/bg/l/bg003002_1_天王洲大学外観_l.jpg");
+	CreateTextureSP("絵立絵", 800, 268, -90, "cg/st/x/stキャロル_通常_normal_x01.png");
+	CreateTextureEX("絵背景揺", 100, -200, Middle, "cg/bg/l/bg003002_1_天王洲大学外観_l.jpg");
+	CreateTextureEX("絵立絵揺", 800, 268, -90, "cg/st/x/stキャロル_通常_normal_x01.png");
+
+	Request("絵*", Smoothing);
+
+	Zoom("絵立絵*", 0, 840, 840, null, true);
+	Zoom("絵動画*", 0, 6000, 6000, null, true);
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+
+
+//スクルージカッコつけダッシュ
+	CreateMovieEX("絵動画弐", 5000, 0, -200, true, true, "dx/mv0003集中線01_黒.ngs");
+	CreateTextureEX("絵霞", 1000, -315, 432, "cg/bg/bg003002_1_天王洲大学外観.jpg");
+	CreateTextureEX("絵霞揺", 1001, -315, 432, "cg/bg/bg003002_1_天王洲大学外観.jpg");
+	CreateTextureEX("絵主人公", 2000, -380, -2000, "cg/ev/x/ev9000スクルージ着地汎用_x01.png");
+	CreateTextureEX("絵主人公揺", 2000, -380, -2000, "cg/ev/x/ev9000スクルージ着地汎用_x01.png");
+	CreateTextureSP("絵裾", 1500, -1000, -400, "cg/ef/x/ef_coat01.png");
+	Request("絵主人公*", Smoothing);
+	Request("絵霞*", Smoothing);
+	Request("絵裾", Smoothing);
+	SetVertex("絵主人公*", center, 0);
+	SetVertex("絵霞*", 0, bottom);
+	SetVertex("絵裾", right, 1500);
+	SetShade("絵霞*", HEAVY);
+	SetBlur("絵裾", true, 2, 300, 100, false);
+
+	Zoom("絵動画*", 0, 6000, 6000, null, true);
+	Zoom("絵主人公*", 0, 6200, 6200, null, true);
+	Zoom("絵霞*", 0, 750, 750, null, true);
+	Zoom("絵裾", 0, 0, 0, null, false);
+	Rotate("絵主人公*", 0, @0, @0, -14, null,true);
+	Rotate("絵霞*", 0, @0, @0, -10, null,true);
+	Rotate("絵裾", 0, @0, @0, 180, null,true);
+
+
+
+//★★★ロック注意★★★
+	Request("@絵動画*", Lock);
+	Request("@絵背景*", Lock);
+	Request("@絵立絵*", Lock);
+	Request("@NutFTP*", Lock);
+	Request("@絵霞*", Lock);
+	Request("@絵主人公*", Lock);
+	Request("@絵裾*", Lock);
+//★★★ロック注意★★★
+
+
+
+//SEまとめ
+	CreateSE("SE00","se戦闘_動作_突進01");
+
+
+
+	FadeDelete("上背景", 0, null, false);
+
+	MusicStart("SE00",0,1000,0,800,null,false);
+	Zoom("絵背景*", 300, 2100, 2100, Dxl2, false);
+	Zoom("絵立絵*", 300, 640, 640, Dxl2, false);
+
+	Wait(16);
+
+	Fade("絵動画", 230, 300, Axl3, false);
+	Rotate("絵背景*", 200, @0, @0, -20, Axl2,false);
+	Rotate("絵立絵*", 200, @0, @0, -20, Axl2,false);
+	Zoom("絵背景*", 200, 800, 800, Axl2, false);
+	Zoom("絵立絵*", 200, 200, 200, Axl2, false);
+	Fade("絵立絵揺", 330, 400, Axl3, false);
+	Fade("絵背景揺", 330, 400, Axl3, false);
+	Move("絵背景*", 200, -430, -315, Axl2, false);
+	Move("絵立絵*", 200, 477, -460, Axl1, true);
+
+//←←災いを止める
+	MoveFTP1("@絵背景揺",5000,5,10);
+	MoveFTP2("@絵立絵揺",4000,5,5);
+
+
+
+//キャロルを置いて駆け出すスクルージ
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX04/02a00010a02">
+「스크루지!?」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX04/02a00020a01">
+｡ｸｵｵｸﾁﾃﾄ&, ﾄｳｷﾑ! ｰ｡ｴﾉﾇﾑ ﾇﾑ ｸﾖｸｮ ｰ｡!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX04/02a00030a02">
+｡ｸｽｺﾅｩｷ鄰ﾂ!?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+//スクルージ答えずに、教会に向かって猛ダッシュ
+
+////////////////////////////////////////
+//♂♀：フラグ分岐
+//LX0302での選択
+
+//→→玄周を助ける
+//→→世界を救う
+
+////////////////////////////////////////
+
+
+//	ClearFadeAll(1000, true);
+
+}

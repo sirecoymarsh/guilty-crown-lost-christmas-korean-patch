@@ -1,0 +1,85 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0605b_90ed.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼アニメ伏線エンディング
+	#ENDING_OF_TOBECONTINUED=true;
+
+//おめでとう
+	CatchImageOfCongratulation();
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameCircle=false;
+
+}
+
+
+scene lx0605b_90ed.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+//	PrintGO("上背景", 30000);
+//	OnBG(10,"bg006003_3_コキュートス空間");
+//	FadeBG(0,true);
+//	FadeDelete("上背景", 255, null, true);
+
+////////////////////////////////////////
+
+//スタッフロール
+	TheEND(1);
+
+
+////////////////////////////////////////
+
+//	CreateTextureSP("絵演試作", 20000, Center, 576, "cg/bg/bg900001_3_空汎用.jpg");
+//	$YScale=576-ImageVertical("絵演試作");
+//	Move("絵演試作", 500, @0, $YScale, null, true);
+
+//	WaitKey();//――――――――――――――――――――――――――――――――――――――――
+
+//END
+
+//	ClearFadeAll(4000, true);
+	Wait(2000);
+
+}

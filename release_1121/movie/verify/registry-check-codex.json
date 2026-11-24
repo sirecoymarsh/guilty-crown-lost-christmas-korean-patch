@@ -1,0 +1,342 @@
+{
+  "manifest": "P:\\AI\\Codex\\projects\\guilty-crown-lost-christmas-ui-opening\\work\\revisions\\gemini-game-integration-20261026\\movie-ruby\\subtitles\\manifest.json",
+  "registry": "F:\\AI\\gclx-4k\\release_1121\\registry_1121.json",
+  "cues": 18,
+  "matches": 16,
+  "mismatches": [
+    "07",
+    "15a"
+  ],
+  "rows": [
+    {
+      "cue": "01",
+      "short_ids": [
+        "J00644"
+      ],
+      "frames": [
+        80,
+        138
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "세피라 게노믹스.",
+      "registry_movie_form": "세피라 게노믹스.",
+      "registry_target_display": [
+        "「세피라 게노믹스」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "02",
+      "short_ids": [
+        "J00645"
+      ],
+      "frames": [
+        141,
+        197
+      ],
+      "speaker_movie": "스크루지",
+      "speaker_registry": "스크루지",
+      "movie_text": "그게 놈들 이름인가.",
+      "registry_movie_form": "그게 놈들 이름인가.",
+      "registry_target_display": [
+        "「그게 놈들 이름인가」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "03",
+      "short_ids": [
+        "J00646"
+      ],
+      "frames": [
+        200,
+        293
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "제약 회사 같은 거라고 생각하면 돼.",
+      "registry_movie_form": "제약 회사 같은 거라고 생각하면 돼.",
+      "registry_target_display": [
+        "「제약 회사 같은 거라고 생각하면 돼」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "04",
+      "short_ids": [
+        "J00647"
+      ],
+      "frames": [
+        298,
+        360
+      ],
+      "speaker_movie": "스크루지",
+      "speaker_registry": "스크루지",
+      "movie_text": "겉으로만 그렇겠지?",
+      "registry_movie_form": "겉으로만 그렇겠지?",
+      "registry_target_display": [
+        "「겉으로만 그렇겠지?」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "05a",
+      "short_ids": [
+        "J00648"
+      ],
+      "frames": [
+        368,
+        430
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "하지만, 그러나!",
+      "registry_movie_form": "하지만, 그러나!",
+      "registry_target_display": [
+        "「하지만, 그러나!"
+      ],
+      "match": true
+    },
+    {
+      "cue": "05b",
+      "short_ids": [
+        "J00649"
+      ],
+      "frames": [
+        431,
+        580
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "그 실체는 세계 정복을 꾀하는 악의 비밀 결사인 것이다!",
+      "registry_movie_form": "그 실체는 세계 정복을 꾀하는 악의 비밀 결사인 것이다!",
+      "registry_target_display": [
+        "　그 실체는 세계 정복을 꾀하는 악의 비밀 결사인 것이다!」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "06",
+      "short_ids": [
+        "J00650"
+      ],
+      "frames": [
+        585,
+        618
+      ],
+      "speaker_movie": "스크루지",
+      "speaker_registry": "스크루지",
+      "movie_text": "바보냐.",
+      "registry_movie_form": "바보냐.",
+      "registry_target_display": [
+        "「바보냐」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "07",
+      "short_ids": [
+        "J00651"
+      ],
+      "frames": [
+        622,
+        718
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "장단 좀 맞춰 줘, 개조 인간 1호.",
+      "registry_movie_form": "장단 참 안 맞춰 주네, 개조인간 1호.",
+      "registry_target_display": [
+        "「장단 참 안 맞춰 주네, 개조인간 1호」"
+      ],
+      "match": false
+    },
+    {
+      "cue": "08",
+      "short_ids": [
+        "J00652"
+      ],
+      "frames": [
+        725,
+        776
+      ],
+      "speaker_movie": "스크루지",
+      "speaker_registry": "스크루지",
+      "movie_text": "그럼 2호는 너냐?",
+      "registry_movie_form": "그럼 2호는 너냐?",
+      "registry_target_display": [
+        "「그럼 2호는 너냐?」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "09",
+      "short_ids": [
+        "J00653"
+      ],
+      "frames": [
+        783,
+        876
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "기술의 1호! 힘의 2호!",
+      "registry_movie_form": "기술의 1호! 힘의 2호!",
+      "registry_target_display": [
+        "「기술의 1호! 힘의 2호!」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "10",
+      "short_ids": [
+        "J00654"
+      ],
+      "frames": [
+        882,
+        955
+      ],
+      "speaker_movie": "스크루지",
+      "speaker_registry": "스크루지",
+      "movie_text": "……그거 미스캐스트잖아.",
+      "registry_movie_form": "……그거 미스캐스트잖아.",
+      "registry_target_display": [
+        "「……그거 미스캐스트잖아.」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "11",
+      "short_ids": [
+        "J00655",
+        "J00656"
+      ],
+      "frames": [
+        1013,
+        1151
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "……우리 말고도 말이야. 실험체인 애들이 있었어.",
+      "registry_movie_form": "……우리 말고도 말이야. 실험체인 애들이 있었어.",
+      "registry_target_display": [
+        "「……우리 말고도 말이야.",
+        "　실험체인 애들이 있었어」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "12",
+      "short_ids": [
+        "J00657"
+      ],
+      "frames": [
+        1158,
+        1178
+      ],
+      "speaker_movie": "스크루지",
+      "speaker_registry": "스크루지",
+      "movie_text": "……?",
+      "registry_movie_form": "……?",
+      "registry_target_display": [
+        "「……?」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "13",
+      "short_ids": [
+        "J00658"
+      ],
+      "frames": [
+        1185,
+        1334
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "어떻게 됐을지는…… 별로 생각하고 싶지 않네.",
+      "registry_movie_form": "어떻게 됐을지는…… 별로 생각하고 싶지 않네.",
+      "registry_target_display": [
+        "「어떻게 됐을지는…… 별로 생각하고 싶지 않네」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "14",
+      "short_ids": [
+        "J00659"
+      ],
+      "frames": [
+        1341,
+        1365
+      ],
+      "speaker_movie": "스크루지",
+      "speaker_registry": "스크루지",
+      "movie_text": "…………",
+      "registry_movie_form": "…………",
+      "registry_target_display": [
+        "「…………」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "15a",
+      "short_ids": [
+        "J00660"
+      ],
+      "frames": [
+        1458,
+        1549
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "자아, 초인 스크루지.",
+      "registry_movie_form": "자아, 인크레더블 스크루지.",
+      "registry_target_display": [
+        "「자아, 인크레더블 스크루지."
+      ],
+      "match": false,
+      "movie_ruby": {
+        "base": "초인",
+        "reading": "인크레더블"
+      }
+    },
+    {
+      "cue": "15b",
+      "short_ids": [
+        "J00661"
+      ],
+      "frames": [
+        1556,
+        1683
+      ],
+      "speaker_movie": "캐롤",
+      "speaker_registry": "캐롤",
+      "movie_text": "그런 악마 같은 놈들하고 어떻게 싸울 거야?",
+      "registry_movie_form": "그런 악마 같은 놈들하고 어떻게 싸울 거야?",
+      "registry_target_display": [
+        "　그런 악마 같은 놈들하고 어떻게 싸울 거야?」"
+      ],
+      "match": true
+    },
+    {
+      "cue": "16",
+      "short_ids": [
+        "J00662"
+      ],
+      "frames": [
+        1690,
+        1726
+      ],
+      "speaker_movie": "스크루지",
+      "speaker_registry": "스크루지",
+      "movie_text": "글쎄……",
+      "registry_movie_form": "글쎄……",
+      "registry_target_display": [
+        "「글쎄……」"
+      ],
+      "match": true
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+[
+ {
+  "run": "bl0524_4k_1",
+  "mode": "4k",
+  "csv_time_column": "TimeInDateTime",
+  "presents": 4109,
+  "events": 19,
+  "reading_95_105s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "open_first_wheel_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "scroll_wheels_2_10": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "close_wheel_down_8s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "reopen_4s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "click_jump_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "exited_early": null,
+  "dialogs": []
+ },
+ {
+  "run": "bl0524_native_1",
+  "mode": "native",
+  "csv_time_column": null,
+  "presents": 0,
+  "events": 20,
+  "reading_95_105s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "open_first_wheel_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "scroll_wheels_2_10": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "close_wheel_down_8s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "reopen_4s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "click_jump_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "exited_early": null,
+  "dialogs": []
+ },
+ {
+  "run": "bl0524_4k_2",
+  "mode": "4k",
+  "csv_time_column": "TimeInDateTime",
+  "presents": 12395,
+  "events": 20,
+  "reading_95_105s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "open_first_wheel_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "scroll_wheels_2_10": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "close_wheel_down_8s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "reopen_4s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "click_jump_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "exited_early": null,
+  "dialogs": []
+ },
+ {
+  "run": "bl0524_native_2",
+  "mode": "native",
+  "csv_time_column": null,
+  "presents": 0,
+  "events": 20,
+  "reading_95_105s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "open_first_wheel_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "scroll_wheels_2_10": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "close_wheel_down_8s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "reopen_4s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "click_jump_6s": {
+   "frames": 0,
+   "max_gap_ms": null
+  },
+  "exited_early": null,
+  "dialogs": []
+ }
+]

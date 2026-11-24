@@ -1,0 +1,128 @@
+[
+ {
+  "run": "bl0606_4k_1",
+  "mode": "4k",
+  "csv_time_column": "frames.bin",
+  "presents": 11744,
+  "events": 20,
+  "reading_95_105s": {
+   "frames": 802,
+   "fps": 80.2,
+   "first_present_ms": 8,
+   "max_gap_ms": 83,
+   "gaps_over_50": 6,
+   "gaps_over_100": 0,
+   "stall_ms_over_50": 425
+  },
+  "open_first_wheel_6s": {
+   "frames": 34,
+   "fps": 5.7,
+   "first_present_ms": 10,
+   "max_gap_ms": 898,
+   "gaps_over_50": 8,
+   "gaps_over_100": 8,
+   "stall_ms_over_50": 5480
+  },
+  "scroll_wheels_2_10": {
+   "frames": 16,
+   "fps": 2.3,
+   "first_present_ms": 34,
+   "max_gap_ms": 898,
+   "gaps_over_50": 7,
+   "gaps_over_100": 7,
+   "stall_ms_over_50": 5621
+  },
+  "close_wheel_down_8s": {
+   "frames": 16,
+   "fps": 2.0,
+   "first_present_ms": 32,
+   "max_gap_ms": 910,
+   "gaps_over_50": 7,
+   "gaps_over_100": 7,
+   "stall_ms_over_50": 5807
+  },
+  "reopen_4s": {
+   "frames": 4,
+   "fps": 1.0,
+   "first_present_ms": 25,
+   "max_gap_ms": 883,
+   "gaps_over_50": 1,
+   "gaps_over_100": 1,
+   "stall_ms_over_50": 883
+  },
+  "click_jump_6s": {
+   "frames": 361,
+   "fps": 60.2,
+   "first_present_ms": 968,
+   "max_gap_ms": 34,
+   "gaps_over_50": 0,
+   "gaps_over_100": 0,
+   "stall_ms_over_50": 0
+  },
+  "exited_early": null,
+  "dialogs": []
+ },
+ {
+  "run": "bl0606_4k_2",
+  "mode": "4k",
+  "csv_time_column": "frames.bin",
+  "presents": 12256,
+  "events": 20,
+  "reading_95_105s": {
+   "frames": 731,
+   "fps": 73.1,
+   "first_present_ms": 8,
+   "max_gap_ms": 88,
+   "gaps_over_50": 6,
+   "gaps_over_100": 0,
+   "stall_ms_over_50": 453
+  },
+  "open_first_wheel_6s": {
+   "frames": 35,
+   "fps": 5.8,
+   "first_present_ms": 9,
+   "max_gap_ms": 975,
+   "gaps_over_50": 8,
+   "gaps_over_100": 8,
+   "stall_ms_over_50": 5423
+  },
+  "scroll_wheels_2_10": {
+   "frames": 14,
+   "fps": 2.3,
+   "first_present_ms": 36,
+   "max_gap_ms": 975,
+   "gaps_over_50": 6,
+   "gaps_over_100": 6,
+   "stall_ms_over_50": 4878
+  },
+  "close_wheel_down_8s": {
+   "frames": 154,
+   "fps": 19.2,
+   "first_present_ms": 31,
+   "max_gap_ms": 1141,
+   "gaps_over_50": 8,
+   "gaps_over_100": 7,
+   "stall_ms_over_50": 6048
+  },
+  "reopen_4s": {
+   "frames": 25,
+   "fps": 6.2,
+   "first_present_ms": 8,
+   "max_gap_ms": 751,
+   "gaps_over_50": 3,
+   "gaps_over_100": 2,
+   "stall_ms_over_50": 1357
+  },
+  "click_jump_6s": {
+   "frames": 311,
+   "fps": 51.8,
+   "first_present_ms": 1039,
+   "max_gap_ms": 35,
+   "gaps_over_50": 0,
+   "gaps_over_100": 0,
+   "stall_ms_over_50": 0
+  },
+  "exited_early": null,
+  "dialogs": []
+ }
+]

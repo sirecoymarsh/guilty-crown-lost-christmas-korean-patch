@@ -1,0 +1,287 @@
+#include "nss/function_dialog.nss"
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx9999.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0101.nss";
+//	$GameCircle=false;
+}
+
+
+scene lx9999.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+	MenuLock(true);
+	CreateColor("OPCOL",30000,center,middle,1024,576,WHITE);
+	Request("OPCOL",Lock);
+	ClearFadeAll(500, true);
+	CreateMovie("OP",20000,center,middle,false,false,"dx/mv_op.ngs");
+	Fade("OPCOL",500,0,null,true);
+	Request("OPCOL",UnLock);
+	Delete("OPCOL");
+	if(#mvOPplay&&#LOCAL_break_play_movie){
+		$i=DurationTime("OP");
+		WaitKey($i);
+	}else{
+		WaitPlay("OP");
+		#mvOPplay=true;
+	}
+	ClearFadeAll(3000, true);
+	MenuLock(false);
+	return;
+//	WaitKey();
+
+//	$SYSTEM_menu_lock = true;
+	MenuLock(true);
+
+
+	CreatePlainSP("pl01", 25000);
+
+	Delete("@bg*");
+	Delete("@ks*");
+	Delete("@ev*");
+	Delete("@mv*");
+	Delete("@dr*");
+	Delete("@ef*");
+	Delete("@white*");
+	Delete("@black*");
+
+//========================================
+//★徒歩
+	$cm_move_x=300;
+	CreateColorEX("予告色１", 18000, 0, 0, 1024, 576, "BLACK");
+//	CreateTextureEX("予告１", 18000, 0, 288, "cg/sys/title/予告編info01a.png");
+//	CreateTextureEX("予告２", 18000, $cm_move_x, 288, "cg/sys/title/予告編info02a.png");
+//	CreateTextureEX("予告３", 18000, $cm_move_x, 288, "cg/sys/title/予告編info03a.png");
+//	CreateTextureEX("予告４", 18000, $cm_move_x, 288, "cg/sys/title/予告編info04a.png");
+//	CreateTextureEX("予告５", 18000, $cm_move_x, 288, "cg/sys/title/予告編info05a.png");
+//
+	CreateTextureEX("予告０", 20000, Center, middle, "cg/sys/title/予告編info00.png");
+//	CreateTextureEX("予告６", 18000, 1024, 0, "cg/sys/title/予告編info06.jpg");
+
+	Request("予告０", Smoothing);
+	Zoom("予告０", 0, 1600, 1600, null, true);
+
+	Request("予告*", Lock);
+//========================================
+
+
+	CreateColorSPadd("white", 5000, "FFFFFF");
+
+	Delete("pl01");
+
+	CreateColorEX("black", 19999, "000000");
+
+	CreateEffectDropSP("dr01", 2000, 0, 0, 1024, 576, 10, 10, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("dr01", 0, @0, @0, 25, null,true);
+	Request("dr01", AddRender);
+	Fade("dr01", 0, 1000, null, true);
+	Zoom("dr01", 0, 2500, 2500, null, true);
+
+	CreateTextureSP("bg01a", 100, 512, 288, "cg/bg/bg001015_3_高速道路高架下崩壊.jpg");
+	Zoom("bg01a", 0, 2000, 2000, null, true);
+	CreateTextureSP("bg01b", 1000, 0, 0, "cg/bg/l/bg001015_3_高速道路高架下崩壊_高速道路_l.png");
+	DrawEffectSkip("bg01a", 500, "Ripple", 100, 50, null);
+	Move("bg01*", 0, @0, @-100, null, true);
+
+
+	//CreateTextureEX("title01", 15000, Center, middle, "cg/sys/title/title01.png");//★徒歩
+	//CreateTextureEX("title02", 15000, Center, middle, "cg/sys/title/title02.png");//★徒歩
+//	CreateTextureEX("title01", 15000, Center, middle, "cg/sys/title/予告編info00a.png");//★徒歩
+//	CreateTextureEX("title02", 15000, Center, middle, "cg/sys/title/予告編info00.png");//★徒歩
+
+	Request("title*", Smoothing);
+	Zoom("title*", 0, 1600, 1600, null, true);//Zoom("title*", 0, 1400, 1400, null, true);//★徒歩
+
+	CreateMovieEX("movie01", 15000, Center, Middle, true, true, "dx/mvselect01.ngs");
+	Request("movie01", SubRender);
+	Zoom("movie01", 0, 2000, 3500, null, true);
+
+
+	//動作---------------------------------------------------
+
+//	SetVolumeEX("@lx*", 5000, 0, null);//★徒歩
+
+	Zoom("予告０", 13000, 1000, 1000, null, false);//★徒歩
+	Zoom("title*", 13000, 1000, 1000, null, false);
+	Fade("title01", 3000, 1000, null, false);
+	Wait(3000);
+
+	Fade("movie01", 3000, 1000, Axl2, false);
+	Wait(3000);
+	Fade("title02", 3000, 1000, null, false);
+	FadeDelete("white", 2000, null, false);
+	Move("bg01*", 10000, @-200, @0, null, false);
+
+	Fade("black", 7000, 1000, Axl2, false);//Fade("black", 7000, 1000, Axl2, true);//★徒歩
+
+
+
+
+
+.//■作業範囲：徒歩■↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+//おがみ：演出　タイトルロゴを映画の予告編風に出してください
+//おがみ：演出　スペック表示　告知画像を出してください
+//おがみ：演出　最初に戻ります
+
+//タイトルロゴ
+
+
+	Wait(2000);
+
+	Fade("予告０", 4000, 1000, null, true);
+	WaitAction("black", null);
+	Fade("予告色１", 0, 1000, null, true);
+
+	ClearFadeAll(0, true);
+//―――――――――――――――――――――――――――――――――――――――
+	WaitZoom("予告０", null);
+
+//	Wait(3500);
+
+	Fade("予告０", 500, 1000, null, true);
+	WaitKey();
+	SetVolume_Loop("@lx001b",3000,0,null);
+	Fade("予告０", 3000, 0, null, true);
+	Wait(500);
+//	Move("予告０", 2000, 0, 0, AxlDxl, true);
+	CreateMovie("mvOP",20000,center,middle,false,false,"dx/mv_op.ngs");
+	Fade("mvOP",0,0,null,false);
+	Fade("mvOP",500,1000,null,true);
+	if(#mvOPplay&&#LOCAL_break_play_movie){
+		$i=DurationTime("mvOP");
+		WaitKey($i);
+	}else{
+		WaitPlay("mvOP");
+		#mvOPplay=true;
+	}
+	Request("予告*", UnLock);
+	ClearFadeAll(500, true);
+	Wait(3000);
+	MenuLock(false);
+//	$SYSTEM_menu_lock=false;
+/*
+	$cm_move_x2=-300;
+	$cm__speed=300;
+	Fade("予告１", 800, 1000, null, true);
+	lx9999macro();//WaitKey();
+	Fade("予告１", $cm__speed, 0, Dxl1, false);
+	Fade("予告２", $cm__speed, 1000, Axl1, false);
+	Move("予告１", $cm__speed, $cm_move_x2, @0, Axl1, false);
+	Move("予告２", $cm__speed, 0, @0, Dxl1, true);
+	lx9999macro();//WaitKey();
+	Fade("予告２", $cm__speed, 0, Dxl1, false);
+	Fade("予告３", $cm__speed, 1000, Axl1, false);
+	Move("予告２", $cm__speed, $cm_move_x2, @0, Axl1, false);
+	Move("予告３", $cm__speed, 0, @0, Dxl1, true);
+	lx9999macro();//WaitKey();
+	Fade("予告３", $cm__speed, 0, Dxl1, false);
+	Fade("予告４", $cm__speed, 1000, Axl1, false);
+	Move("予告３", $cm__speed, $cm_move_x2, @0, Axl1, false);
+	Move("予告４", $cm__speed, 0, @0, Dxl1, true);
+	lx9999macro();//WaitKey();
+	Fade("予告４", $cm__speed, 0, Dxl1, false);
+	Fade("予告５", $cm__speed, 1000, Axl1, false);
+	Move("予告４", $cm__speed, $cm_move_x2, @0, Axl1, false);
+	Move("予告５", $cm__speed, 0, @0, Dxl1, true);
+	lx9999macro();//WaitKey();
+
+	//▽特殊ループ停止
+	SetVolume_Loop("@lx001b",3000,0,null);
+
+//	Move("予告５", 200, -1024, @0, Axl1, false);
+//	Move("予告０", 200, -1024, @0, Axl1, true);
+	Fade("予告５", 3000, 0, null, false);
+	Fade("予告０", 3000, 0, null, true);
+	Wait(1000);
+
+
+//★徒歩
+	//BGM変えれば？
+	//SetStream("@lx001", 18500);
+	//SoundPlay("@lx001",2000,1000,true);
+
+	Move("予告６", 0, 0, @0, Dxl1, true);
+	Fade("予告６", 2000, 1000, null, true);
+	lx9999macro();//WaitKey();
+
+
+	//SetVolumeEX("@lx*", 5000, 0, null);
+
+	Request("予告*", UnLock);
+	ClearFadeAll(3000, true);
+
+	Wait(3000);
+
+
+
+
+	CreateColor("BLACK",1111999,center,middle,32,32,BLACK);
+	Zoom("BLACK",0,100000,100000,null,false);
+	Fade("BLACK", 0, 0, null, true);
+	Fade("BLACK", 100, 1000, null, true);
+
+	if(Message("ギルティクラウン ロストクリスマス TRAILER","予告編はここまでとなります。\nゲームを終了しますか？",YESNO,QUESTION)==2){
+		$GameCircle=false;//終了無し
+
+		//●総プレイ時間：合計
+		#ALL_PLAY_TIME=#ALL_PLAY_TIME+(Time()-#BEGIN_TIME);
+
+		Exit();
+	}else{
+
+	}
+*/
+}
+
+
+function lx9999macro(){
+		//★選択肢開始
+		$SYSTEM_l_button_down=false;$SYSTEM_keydown_enter=false;
+		select{
+			if($SYSTEM_l_button_down||$SYSTEM_keydown_enter){break;}
+	
+			//★キーダウン系
+			if($SYSTEM_keydown_f){
+				DialogFull();
+			}
+			$SYSTEM_l_button_down=false;$SYSTEM_keydown_enter=false;
+		}
+		$SYSTEM_r_button_down=false;
+}
+

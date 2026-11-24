@@ -1,0 +1,1029 @@
+//<continuation number="320">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0202.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#bg003001_1_研究室=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0203_00sl.nss";
+
+}
+
+
+scene lx0202.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+
+
+
+
+//―――――――――――――――――――――――――――――――――――――――
+//◆◆製薬会社／廊下
+
+//セフィラゲノミクスのダミー会社のひとつ。
+//夜中の社内を研究者Ｃが歩いている。
+
+
+
+
+
+	PrintBG("上背景", 30000);
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg003001_1_研究室.jpg");
+	CreateTextureEX("絵背景弐", 2000, 0, InBottom, "cg/bg/l/bg003001_1_研究室_l.jpg");
+	CreateTextureEX("絵霞", 150, 810, Middle, "cg/bg/bg003001_1_研究室.jpg");
+	CreateColorSPsub("絵色黒", 5000, "WHITE");
+
+	SetShade("絵霞", HEAVY);
+	SetVertex("絵背景弐", 1862, middle);
+	Zoom("絵霞", 0, 3000, 3000, null, true);
+
+	Wait(1000);
+
+	CreateSE("SE01","se人体_足音_歩く01L");
+	MusicStart("SE01",2000,700,0,1000,null,true);
+
+
+	Wait(2000);
+
+
+
+
+	FadeDelete("上背景", 0, null, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200010e33">
+｡ｸﾇﾏｾﾆｾﾏ｡ｦ｡ｦ ｿﾀｴﾃｵｵ ｿｩｱ箴ｭ ﾀﾚｾﾟ ﾇﾏｳｪ｡ｹ
+
+//（アクビをしつつ）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	//先読み
+	CreateTextureEX("絵主手", 2500, Center, Middle, "cg/ef/x/ef_hand05.png");
+	CreateTextureEX("絵演背景", 2000, Center, Middle, "cg/ef/x/ef_zoom01.jpg");
+
+	//定義-----------
+	CreateTextureEX("絵立絵", 600, 10, -186, "cg/bu/bu研究員2_通常_normal.png");
+	CreateTextureEX("絵立絵ぼかし", 600, 10, -186, "cg/bu/bu研究員2_通常_normal.png");
+	CreateTextureEX("絵主人公", 530, 330, -40, "cg/bu/buスクルージ_通常_normal.png");
+	CreateTextureEX("絵主人公影", 510, 330, -40, "cg/bu/buスクルージ_通常_normal.png");
+	SetShade("絵立絵ぼかし", SEMIHEAVY);
+	SetShade("絵主人公影", SEMIHEAVY);
+
+	Request("絵主*", Smoothing);
+	Request("絵立*", Smoothing);
+
+	SetVertex("絵主人*", center, 0);
+	SetVertex("絵立*", center, 0);
+
+	Zoom("絵立*", 0, 1500, 1500, null, true);
+	//Zoom("絵主人*", 0, 1800, 1800, null, true);
+
+
+	CreateSE("SE02","se物体_ドア研究所_開く01");
+	CreateSE("SE03","se日常_建物_電気スイッチ");
+	CreateSE("SE04","se日常_建物_機械駆動音");
+
+	//動作-----------
+	SetVolumeEX("SE01", 200, 0, null);
+
+	Wait(1000);
+
+	MusicStart("SE02",0,500,0,1000,null,false);
+	MusicStart("SE04",2000,700,0,500,null,true);
+
+	Wait(1500);
+
+	MusicStart("SE03",0,1000,0,1000,null,false);
+
+	Wait(300);
+
+	Fade("絵色黒", 0, 0, null, true);
+	Fade("絵色黒", 100, 1000, null, true);
+	Fade("絵色黒", 100, 0, null, true);
+
+	Wait(1000);
+
+
+//◆◆製薬会社／研究室
+
+//研究室に入り、電気をつける
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200020e33">
+「……어?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+	Wait(16);
+
+	Move("絵背景弐", 0, -200, -400, null, true);
+	Fade("絵背景弐", 500, 1000, null, false);
+	Move("絵背景弐", 2000, 0, @0, AxlDxl, true);
+
+	CreatePlainSP("pl01", 5000);
+	Move("絵背景弐", 0, -712, -300, null, true);
+	FadeDelete("pl01", 500, Axl1, false);
+	Move("絵背景弐", 2000, -1024, -300, AxlDxl, true);
+
+	Fade("絵霞", 0, 1000, null, true);
+	Fade("絵背景弐", 300, 0, null, true);
+	Wait(50);
+
+	Zoom("絵立*", 300, 1400, 1400, Axl3, false);
+	Wait(200);
+	Fade("絵立絵", 100, 1000, Axl3, true);
+
+
+//部屋の中が荒らされている
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200030e33">
+｡ｸﾄｧﾀﾔﾀﾚ!?｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	SetVolumeEX("SE04", 200, 1, null);
+
+	$sp=250;
+	Move("絵主人公*", $sp, @5, @0, Dxl3, false);
+	Fade("絵主人公影", $sp, 1000, null, false);
+	Fade("絵立絵ぼかし", $sp, 1000, null, false);
+	Fade("絵主人公", $sp, 1000, Axl2, false);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200040a01">
+「산타클로스야」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreatePlainSP("絵板写", 5000);
+	CreatePlainSP("絵板下", 4000);
+
+	Delete("絵主人公*");
+	Delete("絵立絵*");
+
+	Fade("絵霞", 0, 0, null, true);
+	Move("絵霞", 0, -700, 240, null, true);
+
+	CreateSE("SE01","se人体_足音_着地01");
+	CreateSE("SE02","se人体_動作_衣擦れ01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+
+	Shake("絵板写", 100, 5, 5, 0, 0, 500, Dxl1, false);
+	FadeDelete("絵板*", 100, Axl1,false);
+
+	CreateTextureEX("絵背景上", 5000, Center, Middle, "cg/bg/bg003001_1_研究室.jpg");
+	CreateTextureEX("絵背景上大", 5000, Center, Middle, "cg/bg/l/bg003001_1_研究室_l.jpg");
+	CreateTextureEX("絵霞", 100, 240, InBottom, "cg/bg/bg003001_1_研究室.jpg");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200050e33">
+｡ｸ｡ｦ｡ｦ!?｡ｹ
+
+//（悲鳴を呑み込む感じで）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	//定義---------------------
+	CreateTextureEX("絵立絵", 600, -30, InBottom, "cg/st/x/st研究員2_通常_normal_x01.png");
+	CreateTextureEX("絵主人公", 600, 770, -1385, "cg/st/x/stスクルージ_通常_normal_x01.png");
+	CreateColorEX("絵色黒", 5000, "000000");
+
+	SetVertex("絵霞", center, bottom);
+	//SetShade("絵霞", MEDIUM);
+
+	Request("絵霞", Smoothing);
+	Request("絵立*", Smoothing);
+
+	Zoom("絵立*", 0, 1500, 1500, null, true);
+	Zoom("絵主人公", 0, 2000, 2000, null, true);
+	Zoom("絵霞", 0, 5000, 5000, null, true);
+
+	Rotate("絵主手", 0, @0, @180, @20, null,true);
+	Zoom("絵主手", 0, 600, 600, Axl3, true);
+
+	CreateSE("SE01","se人体_動作_跳躍01");
+	CreateSE("SE02","se戦闘_攻撃_殴る01");
+	CreateSE("SE03","se人体_動作_衣擦れ02");
+	CreateSE("SE05","se人体_足音_着地01");
+
+
+	//動作---------------------
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+	Zoom("絵主手", 400, 2500, 2500, Axl3, false);
+	Wait(100);
+	Zoom("絵演背景", 400, 2500, 2500, Dxl3, false);
+	Fade("絵演背景", 100, 1000, Dxl2, true);
+	Fade("絵主手", 150, 1000, Axl1, true);
+	Fade("絵色黒", 0, 1000, null, true);
+	DrawTransition("絵色黒", 100, 0, 1000, 100, Dxl1, "cg/data/zoom_01_00_0.png", true);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	Delete("絵主手");
+	Delete("絵演背景");
+
+	Fade("絵霞", 0, 1000, Axl1, true);
+	Fade("絵主人公", 0, 1000, null, true);
+	Fade("絵立絵", 0, 1000, null, true);
+
+
+	MusicStart("SE03",0,700,0,1000,null,false);
+
+	Shake("絵立絵", 800, 0, 10, 0, 0, 1000, null, false);
+	Move("絵主人公", 1000, @0, @250, null, false);
+	Move("絵霞", 1000, @0, @200, AxlDxl, false);
+	FadeDelete("絵色黒", 100, null, true);
+	Rotate("絵立絵", 500, @0, @0, @5, Dxl1,false);
+	Move("絵立絵", 1000, @0, @-100, AxlDxl, false);
+	Fade("絵立絵", 500, 1000, Axl2, false);
+	Wait(300);
+	Rotate("絵立絵", 500, @0, @0, @-5, null,false);
+	//Rotate("絵立絵", 200, @0, @0, @2, null,false);
+
+	Wait(200);
+
+	Fade("絵背景上大", 300, 1000, null, true);
+	Fade("絵背景上", 0, 1000, null, true);
+
+	Delete("絵背景弐");
+
+	SetVolumeEX("SE04", 2500, 500, null);
+
+	MusicStart("SE05",0,700,0,1000,null,false);
+
+	St("C",5740, @0,@0,"buキャロル_通常_smile6");
+	Move("@StNameC/C*", 0, @10, @100, null, true);
+	Move("@StNameC/C*", 300, @-10, @-100, Dxl2, false);
+	FadeSt("C",300,true);
+
+
+//左手で研究者Ｃの胸ぐらを掴み、軽々と持ち上げるスクルージ。
+//その横からひょっこりと顔を出すキャロル。
+
+
+
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0200060a02">
+「덜렁이라서 크리스마스 전에 찾아와 버렸답니다」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0063]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200070e33">
+「네놈! 그 실험체……!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+	Wait(16);
+	CreatePlainSP("絵板写", 10000);
+	DeleteSt("C", 0,true);
+
+	Delete("絵背景上大");
+	Delete("絵立絵");
+	Delete("絵霞");
+
+	FadeDelete("絵板写", 500, null, true);
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0065]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200080a01">
+「오랜만이군&. 만나고 싶었다고」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200090e33">
+｡ｸ｡ｦ｡ｦｸ釥ﾌ ｹｹｳﾄ!?｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200100a01">
+「친구가 되고 싶어서 말이지」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200110e33">
+｡ｸ｡ｦ｡ｦﾇﾏ?｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200120a01">
+｡ｸｼ﨣箒ﾂ ｰﾍ ｾﾂ ﾁﾇﾇﾑ ﾄ｣ｱｸﾁｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200130a01">
+「……세피라 게노믹스에 대해 불어 줘야겠다」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0095]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200140e33">
+「……불고 자시고 할 게 어딨어&, 나는 그저 아포칼립스 바이러스의 치료법을 연구하고 있었을 뿐인데……」
+
+//（とぼけている）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200150a01">
+｡ｸﾁ彧ｮﾀﾌ ﾀﾟｸﾆｱｺ&. ｴﾙｽﾃ ｹｯﾁｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	//定義-----------
+	CreateColorEX("絵色黒", 5000, "000000");
+
+	CreateWindowEX("絵窓", 0, 0, 1024, 576, false);
+	CreateTextureEX("絵窓/絵主人公", 5100, Center, -150, "cg/st/x/stスクルージ_通常_angry4_x01.png");
+	CreateTextureEX("絵窓/絵霞", 5000, 240, Middle, "cg/bg/bg003001_1_研究室.jpg");
+	SetVertex("絵窓/絵主人公", center, 0);
+	Request("絵窓/絵主人公", Smoothing);
+	Zoom("絵窓/絵主人公", 0, 2250, 2250, null, true);
+
+
+	//DrawTransition("絵窓/絵*", 0, 0, 600, 100, null, "cg/data/slide_05_00_1.png", true);
+
+
+	SetShade("絵窓/絵霞", MEDIUM);
+
+	Zoom("絵窓/絵霞", 0, 3000, 3000, null, true);
+
+	CreateSE("SE01","se人体_動作_絞める01");
+
+	SetVolumeEX("SE04", 500, 0, null);
+
+	//動作-----------
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	//Move("絵立絵", 300, @100, @-50, Dxl2, false);
+	//Fade("絵背景上", 300, 0, null, false);
+	//Rotate("絵立絵", 200, @0, @0, @7, Dxl1,true);
+	//Rotate("絵立絵", 100, @0, @0, @-7, Dxl1,true);
+
+	Fade("絵色黒", 500, 500, Axl1, false);
+	Zoom("絵窓/絵主人公", 300, 2300, 2300, Axl3, false);
+	Zoom("絵窓/絵霞", 300, 3050, 3050, Dxl2, false);
+	Fade("絵窓/絵主人公", 300, 1000, Axl1, false);
+	Fade("絵窓/絵霞", 300, 1000, Axl1, true);
+
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//（トーンを変えて）
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200160a01">
+「――다아트에 대해 말해라」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0115]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200170e33">
+｡ｸ｡ｦ｡ｦ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	CreateColorEX("絵黒幕", 7000, "000000");
+	Fade("絵黒幕", 1500, 1000, null, true);
+
+	Delete("絵立*");
+	Delete("絵主*");
+	Delete("絵霞");
+	Delete("絵背*");
+	Delete("絵窓*");
+	Delete("絵色黒");
+
+////////////////////////////////////////
+//ここからスクルージの一人称に。
+
+//♪♪：4.Ready to Go（02:01から）
+//？？：ちょっと違う？　悪趣味にしたいので楽しげな曲にしたい。
+
+
+	//★特殊ループＢＧＭセット
+	CreateBGM_Loop("lx004b");
+	//▽特殊ループ再生
+	SoundPlay_Loop("lx004b",0,800,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+｡ｪ｡ｪｴﾙｾﾆﾆｮ&.
+
+그게 세피라 게노믹스의 실체다&. 캐롤의 말을 빌리자면 악의 비밀결사라는 거지&.
+
+놈들이 아포칼립스 바이러스로 무엇을 꾸미고 있는지&, 그건 알 수 없다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+그래서 이렇게 부지런히 <RUBY TEXT="····">탐문 조사</RUBY>를 하고 있는 셈이다&. 세피라 게노믹스의 입김이 닿은 놈들을 샅샅이 뒤져서 <RUBY TEXT="······">선의의 협력자</RUBY>에게 정보를 제공받는 거지&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+시설에서 탈출한 뒤 몇 달 동안 이 짓을 되풀이했다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+지금까지 얻어낸 정보는 적다&.
+하지만 이번에는 오랜만에 제대로 걸려든 모양이다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateColorEXadd("fl01", 15000, "FFFFFF");
+	Fade("fl01", 100, 1000, null, true);
+
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg003001_1_研究室.jpg");
+	CreateTextureSP("絵過去", 1000, Center, Middle, "cg/ev/ev0201冒頭研究員.jpg");
+	CreateTextureSP("絵過去弐", 900, 0, -390, "cg/ev/l/ev0201冒頭研究員_l.jpg");
+	//CreateColorSPover("絵過去色", 2000, "6B4A2B");
+	//SetTone("絵背景", Monochrome);
+	SetTone("絵過去", Monochrome);
+	SetTone("絵過去弐", Monochrome);
+
+	FadeDelete("絵黒幕", 0, null, true);
+
+
+	Fade("fl01", 300, 0, null, true);
+
+	Wait(300);
+
+	Move("絵過去弐", 300, @-50, @0, Dxl1, false);
+
+	FadeDelete("絵過去", 300, null, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0155]
+얼굴을 기억하고 있다&.
+이 녀석은 그때 있었던 연구자 중 한 명이다&.
+
+그 연구 시설에 있던 인간이라면 더 자세한 내막을 알고 있을 터다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Fade("fl01", 100, 1000, null, true);
+
+	CreatePlainSP("絵板写", 5000);
+
+	Delete("絵過*");
+
+	FadeDelete("絵板写", 0, null, true);
+
+	FadeDelete("fl01", 300, null, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200180e33">
+「……몰라!
+　나는 아무것도 모른다고!」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+다들 처음에는 그렇게 대답한다&.
+
+ｹｮﾁｦｾﾙ&.
+나는 <RUBY TEXT="···">조르기</RUBY>가 특기거든&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	CreateTextureSP("絵演背景", 1000, 0, -200, "cg/bg/bg003001_1_研究室.jpg");
+	SetVertex("絵演背景", 0, 0);
+	SetShade("絵演背景", LIGHT);
+	Request("絵演背景", Smoothing);
+
+	Zoom("絵演背景", 0, 3000, 3000, null, true);
+
+	CreateSE("SE00","se人体_動作_跳躍02");
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	CreateSE("SE02","se人体_衝撃_転倒03");
+	CreateSE("SE02b","se戦闘_金属_破壊01");
+
+	MusicStart("SE00",0,1000,0,1000,null,false);
+	MusicStart("SE01",0,1000,0,1200,null,false);
+
+	Fade("絵演背景", 200, 1000, Dxl2, false);
+	Move("絵演背景", 200, @0, @200, Dxl3, false);
+	Wait(10);
+	Move("絵演背景", 500, @0, -1152, Axl2, false);
+	Wait(100);
+	Fade("絵色黒", 0, 1000, null, true);
+	DrawTransition("絵色黒", 150, 0, 1000, 100, Dxl2, "cg/data/slide_02_01_1.png", true);
+	DrawDelete("絵色黒", 150, 100, Dxl2, "slide_02_01_0", true);
+
+	MusicStart("SE02",0,1000,0,1100,null,false);
+	BGPlainShake(200, 300, 0, 10, 0, 0, 1000, Dxl3, false);
+	FadeDelete("絵演背景", 100, null, true);
+	MusicStart("SE02b",0,500,0,1300,null,false);
+
+
+//スクルージ、研究者Ｃを床に投げ飛ばす。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0180]
+묻지도 따지지도 않고 남자를 바닥에 내동댕이친다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0190]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200190e33">
+｡ｸﾅｩｾﾇ!｡ｹ
+
+
+{	St("C",740, @0,@0,"stキャロル_通常_cry3");
+	FadeSt("C",200,true);
+	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0200200a02">
+「어이―&, 너무 소란 피우지 마―&.
+｡｡ｵ鯒ｰﾀﾝｾﾆ｡ｪ｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200210a01">
+｡ｸｰ｡ｺｱｰﾔ ﾀ蟲ｭ ﾁｻ ﾄ｣ ｰﾍｻﾓﾀﾌｴﾙ&.
+｡｡ﾄ｣ｱｸｴﾏｱ釭ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	DeleteSt("C", 200,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0200]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200220e33">
+「네놈&, 이런 짓을 하고 대가도 안 치를 줄…… 읍!」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	CreateSE("SE01","se人体_動作_絞める01");
+	CreateSE("SE02","se人体_動作_掴む02");
+	MusicStart("SE01",0,800,0,800,null,false);
+	MusicStart("SE02",0,800,0,800,null,false);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0210]
+군소리는 질색이다&. 남자의 입에 왼손을 쑤셔 넣어 입을 다물게 한다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0220]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200230a01">
+｡ｸ<RUBY TEXT="｡､｡､">ｰ･</RUBY>ｷﾎ ｳ｡ｳｾ ｰﾅｾﾟ&. ｳｭ ｱｸｵﾎｼ隹ﾅｵ遑ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//スクルージ、研究者Ｃの歯を力尽くで引っこ抜く。
+
+	CreateColorEXsub("絵色赤", 5000, "00FFFF");
+
+
+	CreateSE("SE00","se人体_衝撃_弾ける");
+	CreateSE("SE01","se人体_血_出血02");
+	CreateSE("SE02","se人体_体_骨複数砕ける01");
+
+	MusicStart("SE02",0,800,0,1000,null,false);
+
+	Wait(1500);
+
+	MusicStart("SE00",0,700,0,1000,null,false);
+	Fade("絵色赤", 100, 1000, Dxl3, true);
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+	FadeDelete("絵色赤", 200, Dxl3, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0230]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200240e33">
+｡ｸ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦ｢ｦﾀｿ!｡ｹ
+
+//（絶叫。口に手を突っ込まれているので声が出せない）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	St("C",740, @0,@0,"stキャロル_通常_cry2");
+	FadeSt("C",200,true);
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0240]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0200250a02">
+「우와&, 지독해라~」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	DeleteSt("C", 200,false);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0250]
+ｾﾆｾﾆ&, ｴｴｱｺ&.
+ｿﾞｼﾕﾀｺ ﾇﾇｿﾍ ﾄｧﾀｸｷﾎ ｲ軏鉎ﾏｴﾙ&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	//定義-------------
+	CreateTextureSP("絵演歯", 2000, -150, -450, "cg/ef/ef_tooth01.png");
+	CreateTextureEX("絵霞", 1000, 0, InBottom, "cg/bg/bg003001_1_研究室.jpg");
+	CreateTextureEX("ef01", 1000, center, middle, "cg/ef/x/ef_bloodshower01.png");
+
+	SetVertex("絵霞", 0, bottom);
+	SetShade("絵霞", MEDIUM);
+
+	Request("絵霞", Smoothing);
+	Request("絵立*", Smoothing);
+	Request("ef01", Smoothing);
+
+	Zoom("ef01", 0, 3000, 3000, null, true);
+	Zoom("絵霞", 0, 5000, 5000, null, true);
+	Rotate("絵演歯", 0, @0, @0, @-70, null,true);
+
+	CreateSE("SE01","se人体_血_出血02");
+	CreateSE("SE02","se日常_歯_落ちる01");
+
+
+	//動作-------------
+	MusicStart("SE01",0,1100,0,1100,null,false);
+
+	Fade("絵霞", 200, 1000, null, true);
+
+
+	Rotate("絵演歯", 1000, @0, @0, @270, null,false);
+	BezierMove("絵演歯", 300, (@0,@0){100,200}{350,300}(400,700), Axl1, true);
+
+	MusicStart("SE02",0,850,0,1000,null,false);
+
+	Move("ef01", 1000, @200, @500, Dxl1, false);
+	Zoom("ef01", 1000, 5000, 5000, Dxl2, false);
+	Fade("ef01", 0, 1000, null, true);
+
+	Rotate("絵演歯", 600, @0, @0, @1870, Dxl1,false);
+	BezierMove("絵演歯", 300, (580,600){550,450}{700,500}(750,650), Dxl1, true);
+
+	FadeDelete("ef01", 300, null, false);
+	FadeDelete("絵霞", 300, null, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0255]
+뽑아낸 것을 그 주변에 던져 버리고&, 남자의 흰 가운으로 손을 닦는다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	St("C",740, @0,@0,"stキャロル_通常_smile1");
+	FadeSt("C",200,true);
+
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0260]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0200260a02">
+｡ｸｾﾆｷｧｴﾏｴﾂ ﾁﾘ ﾀｧｿ｡ ｴﾂ ｰﾅｾﾟ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	DeleteSt("C", 200,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0265]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200270e33">
+｡ｸﾀｸｱﾗｱﾘ! ｲｸﾀｸﾀｹ!｡ｹ
+
+//（口を押さえて苦しんでいる）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0270]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200280a01">
+｡ｸﾈ｣ｵ魏ｩ ｶｳｱ箒ﾂ&.
+｡｡ｰ暲ﾛ ﾃ貽｡ ﾄ｡ｷ眤ﾝｾﾆ｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200290a01">
+「이러면 좀 더 말하기 편해졌겠지?」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreatePlainSP("pl01", 5000);
+
+	CreateTextureEX("bg01", 100, Center, Middle, "cg/bg/x/bg003001_1_研究室_x01床.jpg");
+	CreateTextureEX("st00", 100, 350, -100, "cg/st/x/st研究員2_通常吐血_normal_x03.png");
+	CreateTextureEX("st01", 100, 400, 0, "cg/st/x/st研究員2_通常吐血_normal_x02.png");
+	Zoom("st*", 0, 2000, 2000, null, true);
+	Rotate("st*", 0, @0, @0, -10, null,true);
+
+	Request("st*", Smoothing);
+
+
+	Fade("st00", 0, 800, null, true);
+	Fade("st01", 0, 1000, null, true);
+	Fade("bg01", 0, 1000, null, true);
+
+	FadeDelete("pl01", 400, null, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0280]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/0200300e33">
+｡ｸｳﾗｳｦ｡ｦ! <RUBY TEXT="ｸ｣ｸｮ">ｽﾇﾇ襍ｿｹｰ</RUBY> ﾁﾖﾁｦｿ｡｡ｦ｡ｦ!｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0290]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0200310a01">
+「……아직 마음을 열어 주지 않는 모양이군」
+
+//（少しイラッときた感じで）
+
+{
+//	St("C",740, @0,@0,"stキャロル_通常_smile4");
+//	FadeSt("C",200,true);
+	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0200320a02">
+「<RUBY TEXT="샤이해서">부끄럼쟁이라서</RUBY> 그런 거야&, 분명」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//紳士的に接する
+//→→LX0203a
+
+//親睦を深める
+//→→LX0203b
+}

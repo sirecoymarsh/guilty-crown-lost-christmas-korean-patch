@@ -1,0 +1,58 @@
+{
+ "run": "P:\\AI\\Codex\\projects\\gclx-song-20261123\\timing-20261124\\runs\\measure-millitimer",
+ "art_off": true,
+ "wmi_rc": "0",
+ "started": "08:46:31",
+ "events": [],
+ "t0_epoch": 1795477591.6443021,
+ "window_rect": [
+  4136,
+  120,
+  5166,
+  725
+ ],
+ "primary_width": 4096,
+ "focus_returned": true,
+ "window_seconds": 2.03,
+ "audio_peak": {
+  "2": 0.0,
+  "3": 0.0,
+  "4": 0.0,
+  "5": 0.0,
+  "6": 0.0,
+  "7": 0.0,
+  "8": 0.0
+ },
+ "muted_at": [],
+ "windows_at_end": [
+  [
+   "N2System",
+   "길티 크라운 로스트 크리스마스 Ver.1.0",
+   true
+  ],
+  [
+   "IME",
+   "Default IME",
+   false
+  ],
+  [
+   "MSCTFIME UI",
+   "MSCTFIME UI",
+   false
+  ]
+ ],
+ "closed_by": "terminate",
+ "shots": 0,
+ "launcher_log": "test_mutex_isolated 55764\nstarted_pid 55764\n",
+ "fonts_log": "NotoSansCJKjp-Medium.otf added=2\nNotoSansKR-VF.ttf added=14\nNotoSerifKR-VF.ttf added=14\n",
+ "dialogs_closed": [
+  [
+   "08:46:32",
+   "main window was on screen at 1533,777 -> moved off"
+  ],
+  [
+   "08:46:33",
+   "main window was on screen at 3150,1380 -> moved off"
+  ]
+ ]
+}

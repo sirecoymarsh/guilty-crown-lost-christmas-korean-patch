@@ -1,0 +1,706 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0500.nss_MAIN
+{
+	$PHASE_num=5;
+	$PHASE_name="ｱﾗｷｽｸｰ";
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0517ガイ演説=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0501.nss";
+
+}
+
+
+scene lx0500.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+	CreateColorSP("絵色黒", 5000, "000000");
+
+
+
+
+	FadeDelete("上背景", 0, null, true);
+
+	Wait(3000);
+
+
+
+
+//黒背景に幼ガイのモノローグ。
+
+//※※：カギ括弧はないが、ボイス入りのモノローグ。
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000010b03">
+｡ｦ｡ｦｿﾂｸﾌ ｾﾆﾇﾁｴﾙ&.
+나는 어떻게 되어 버린 걸까?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000020b03">
+ｳｪｴﾂ｡ｦ｡ｦ ｱｳﾈｸｿ｡ ｿﾍｼｭ｡ｦ｡ｦ&.
+ｱﾗｸｮｰ悅ｦ｡ｦ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000030b03">
+그래…… 마나가 울고 있었다&.
+무섭다고&, 무섭다며 겁에 질려 있었다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000040b03">
+나는…… 마나를 구해 내지 못했다&.
+
+{	DeleteFw();}
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000050b03">
+그러다 눈부신 빛이 우리를 삼켰고…… 그다음엔…… 그래&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000060b03">
+｡ｪ｡ｪｽｴ&.
+ｳｻ ｼﾒﾁﾟﾇﾑ ﾄ｣ｱｸ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000070b03">
+슈는 무사할까?
+그 애는 언제나 나를 이끌어 주었다&.
+ﾀﾌｹ｡ｴﾂ ｳｻｰ｡ ｽｴｸｦ ﾁﾑｾﾟ ﾇﾘ｡ｦ｡ｦ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete(200);
+
+
+//ゆっくりと目を開けるガイ。
+
+//◆◆六本木／教会瓦礫
+
+//ガイ視点。ぼやけた視界に、自分を見下ろすスクルージの姿。
+
+
+
+	Wait(1000);
+
+	CreateTextureSP("絵演", 1110, Center, Middle, "cg/ev/ev0590スクルージガイ視点.jpg");
+	SetShade("絵演", Middle);
+	CreateTextureSPmul("ef01", 1200, Center, Middle, "cg/ef/ef_blackline03.png");
+	FadeDelete("絵色黒", 2000, null, true);
+
+	//おがみ：追加
+
+
+	Wait(1000);
+
+	SoundPlay("@lx006",0,600,true);
+
+
+
+
+	//Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0000080a01">
+｡ｸ｡ｦ｡ｦｸ釥ｺ ｰﾇﾁｳｱｺ&, ｲｿｸﾍｾﾆ｡ｹ
+
+{	DeleteFw();}
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000090b03">
+｡ｦ｡ｦｴｩｱｸｾﾟ? ｳｯ ﾁﾑ ﾁﾘ ｰﾅｾﾟ?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0000100a01">
+「내가 지켜 준 게 아니다&. 네가 알아서 살아남았을 뿐이지」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0000110a01">
+「――네 <RUBY TEXT="힘">능력</RUBY>이다」
+
+{	DeleteFw();}
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000120b03">
+……내&, 힘?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	//Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0000130a01">
+｡ｸｼｼｰ雍ﾂ ｴﾃ ｼｱﾅﾃﾀｻ ｰｭｿ萇ﾑｴﾙ&.
+　살아남느냐&, 도태되느냐다」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000140b03">
+무슨 말을 하려는 건지 잘 몰랐다&.
+
+{	DeleteFw();}
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000150b03">
+그런데 왜 그럴까? 그 사람 마음이 꼭 내 마음 같았다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000160b03">
+그와 나는 <RUBY TEXT="·····">같은 세계를</RUBY> <RUBY TEXT="······">바라보고 있다</RUBY>&.
+ﾀﾚｲﾙｸｸ ｱﾗｷｱ ｻｰ｢ﾀﾌ ｵ邏ﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//意識が薄れてゆくガイ。
+
+
+
+	CreatePlainSP("絵板写", 5000);
+	SetShade("絵演",HEAVY);
+	FadeDelete("絵板写", 2000, null, false);
+
+
+
+/*
+//あきゅん「演出：瞳を見せるために顔アップ入れたけどちょっと愉快だったので退避」
+	CreateTextureEX("絵演淑", 1210, 110, 190, "cg/st/x/stスクルージ_通常_normal_x01cut01.png");
+	Zoom("絵演淑", 0, 2000, 2000, null, true);
+	Rotate("絵演淑", 0, @0, @0, -16, null,true);
+	Request("絵演淑", Smoothing);
+	Move("絵演淑", 7000, @30, @0, null, false);
+	Fade("絵演淑", 1000, 1000, null, false);
+*/
+
+
+
+
+	//Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/0000170a01">
+「도태되고 싶지 않다면&, 싸워라」
+
+{	DeleteFw();}
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000180b03">
+｡ｦ｡ｦｽﾎｿ鋗ﾙ&.
+그래&, 난 강해질 거야&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	SetVolumeEX("@lx*", 3000, 0, null);
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX05/0000190b03">
+――이번에야말로 지켜 내겠어&.
+
+
+//再び意識を失うガイ。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+	CreateColorEX("絵色黒", 9900, "000000");
+	Fade("絵色黒", 2000, 1000, null, true);
+
+
+	Delete("ef01");
+	Wait(2500);
+
+////////////////////////////////////////
+//◆◆六本木フォート／2039年
+
+//黒背景に17歳のガイのモノローグ。
+
+	PrintGO("上背景", 10000);
+	CreateColorSP("絵色黒", 4900, "000000");
+	FadeDelete("上背景", 0, null, true);
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+//【ガイ】
+<voice name="ｰ｡ﾀﾌ" class="ガイ" src="voice/LX05/0000200b07">
+그날 만난 코트 차림의 남자가 누구였는지 아직도 모른다&. 앞으로도 알 일은 없겠지&. 어쩌면 누구였든 상관없을지도&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	CreateSE("SE01","se人体_足音_歩く鉄板01L");
+	SoundEffect("SE01","QUARRY");
+	MusicStart("SE01",3000,1200,0,800,null,true);
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+//【ガイ】
+<voice name="ｰ｡ﾀﾌ" class="ガイ" src="voice/LX05/0000210b07">
+――도태되고 싶지 않다면&, 싸워라&.
+고통을 참는 듯한 눈으로 말했던 그 말&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+//【ガイ】
+<voice name="ｰ｡ﾀﾌ" class="ガイ" src="voice/LX05/0000220b07">
+ｱﾗ ｳ狆ｮﾀﾌ ﾇﾑ ｸｻﾀｺ ﾁﾇﾀﾌｾ嶸ﾙ&.
+ｿﾖｳﾄﾇﾏｸ鬘ｪ｡ｪ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(200);
+
+//目を開くガイ。
+
+//？？：ここで葬儀社ガイのイベント絵欲しい。
+//アニメ２話のアンチボディズの前に単身姿を現すシーン。
+
+	CreateColorSP("絵色白", 4000, "FFFFFF");
+	CreateTextureSPadd("絵演太陽光", 110, Center, Middle, "cg/data/circle_04_00_1.png");
+	Zoom("絵演太陽光", 0, 2000, 2000, null, true);
+	CreateTextureSP("絵演空", 100, Center, Middle, "cg/bg/bg900000_1_空汎用.jpg");
+
+	Delete("絵色黒");
+
+	SetVolumeEX("SE*", 300, 0, null);
+
+	CreateSE("SE01","se人体_足音_着地02");
+	MusicStart("SE01",0,1000,0,1000,null,false);
+
+	Wait(200);
+
+	FadeDelete("絵色白", 1000, null, false);
+	Move("絵演太陽光", 6000, @0, -128, null, false);
+	Zoom("絵演太陽光", 6000, 1000, 1000, null, false);
+	FadeDelete("絵演太陽光", 3000, null, true);
+
+
+
+
+	//おがみ：BGM仮入れ
+	//SoundPlay("@lx011",0,850,true);
+
+	//★鋼屋：BGM修正　この曲使いたかった。
+	SoundPlay("@lx005",0,850,true);
+
+
+	Wait(500);
+
+	CreateVOICE("ガイ１","LX05/0000230b07");
+	CreateVOICE("ガイ２","LX05/0000240b07");
+	$SETime01 = RemainTime("ガイ１");
+	$SETime02 = RemainTime("ガイ２");
+	Delete("ガイ１");
+	Delete("ガイ２");
+
+	$SETime10 = $SETime01 + $SETime02 - 1000;
+	if($SETime10 <= 0){
+		$SETime10 = 10000;
+	}
+
+	CreateTextureEX("絵専", 1110, -510, InBottom, "cg/ev/l/ev0517ガイ演説_l.jpg");
+	Move("絵専", $SETime10, @0, -166, DxlAuto, false);
+	Fade("絵専", 2000, 1000, null, true);
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0180]
+//【ガイ】
+<voice name="ｰ｡ﾀﾌ" class="ガイ" src="voice/LX05/0000230b07">
+｡ｸｼｼｰ雍ﾂ ｴﾃ ｼｱﾅﾃﾀｻ ｰｭｿ萇ﾑｴﾙ｡ｹ
+
+{	DeleteFw();}
+//【ガイ】
+<voice name="ｰ｡ﾀﾌ" class="ガイ" src="voice/LX05/0000240b07">
+｡ｸ｡ｪ｡ｪﾀ釥ﾚｻﾁｸ&.
+｡｡ｱﾗｰﾍﾀﾌ ﾀﾌ ｼｼｰ霏ﾇ ｼｷｸｮｴﾙ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//？？：ここで何か演出入れたいけど、ひらめかん。
+
+//	CreateTextureSP("絵専二", 1105, Center, Middle, "cg/ev/l/ev0517ガイ演説_l.jpg");
+//	Request("絵専二", Smoothing);
+//	Move("絵専二", 0, -850, 400, null, true);
+//	Zoom("絵専二", 0, 2000, 2000, null, true);
+
+//おがみ：★演出　ゆえに
+
+
+	CreatePlainSP("pl01", 9900);
+	Delete("絵専");
+
+	CreateTextureEX("ev11", 1110, center, -200, "cg/ev/x/ev0517ガイ演説_x01_背景のみ.jpg");
+	CreateTextureEX("ev12", 1110, center, -1800, "cg/ev/x/ev0517ガイ演説_x01_ガイ原寸.png");
+	CreateTextureEX("ev13", 1110, center, 100, "cg/ev/x/ev0517ガイ演説_x01_手前.png");
+	Zoom("ev11", 0, 2000, 2000, null, true);
+	Request("ev11", Smoothing);
+
+	Fade("ev1*", 0, 1000, null, true);
+
+
+
+	//あきゅん「演出予定：故に葬儀社、のところで顔アップ」
+	CreateProcessEX("プロセス", "LProcAK_lx0500_01Act");
+
+	FadeDelete("pl01", 500, null, false);
+
+	Request("プロセス", Start);
+
+
+
+
+
+
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0190]
+//【ガイ】
+<voice name="ｰ｡ﾀﾌ" class="ガイ" src="voice/LX05/0000250b07">
+「우리는 도태되는 자들을 언제까지고 장송의 노래로 떠나보낸다&. ――그래서 장의사다」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	if(!$LProcAK_lx0500_01Act){
+
+	//CreatePlainSP("絵板写", 9900);
+	//FadeDelete("絵板写", 200, null, true);
+	$LProcAK_lx0500_01Act=true;
+	Request("プロセス", Stop);
+
+	$sp=300;
+	Move("@ev11", $sp, @0, 270, AxlDxl, false);
+	Move("@ev12", $sp, @0, -120, AxlDxl, false);
+	Move("@ev13", $sp, @0, 2300, AxlDxl, true);
+	$sp=10000;
+	Move("@ev11", $sp, @0, 300, null, false);
+	Move("@ev12", $sp, @0, -50, null, false);
+	Move("@ev13", $sp, @0, 2300, null, false);
+
+	}
+	Delete("プロセス");
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0200]
+//【ガイ】
+<voice name="ｰ｡ﾀﾌ" class="ガイ" src="voice/LX05/0000260b07">
+「그 이름은 우리가 언제나 떠나보내는 쪽임을―― 끝까지 살아남는 존재임을 뜻한다!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	Wait(500);
+
+	//おがみ：★演出　全体を見せる絵を追加
+	CreateColorEX("co01", 5000, "000000");
+
+	CreateTextureEX("ev01", 1110, center, middle, "cg/ev/ev0517ガイ演説.jpg");
+	Zoom("ev01", 0, 1100, 1100, null, true);
+	Request("ev01", Smoothing);
+
+	Fade("ev01", 1500, 1000, null, false);
+	Zoom("ev01", 3000, 1000, 1000, Dxl1, true);
+
+	Wait(1500);
+
+	Fade("co01", 1500, 1000, null, true);
+
+	Wait(500);
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0210]
+//【ガイ】
+<voice name="ｰ｡ﾀﾌ" class="ガイ" src="voice/LX05/0000270b07">
+누군가에게 기대어 보호받아도 되는 건 어린아이뿐이다&.
+ｱﾗｳｯ&, ｳｻ ｾ鋕ｰ ｽﾃﾀﾀｺ ｳ｡ｳｵｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//アイキャッチ
+
+	TextBoxDelete();
+
+	SetVolumeEX("@lx*", 3000, 0, null);
+
+	Wait(3000);
+
+//=====================================================
+//$SYSTEM_menu_lock=true;
+	MenuLock(true);
+	PrintBG("上背景１", 30000);
+
+		//定義するもの
+		CreateColor("色１", 150, 0, 0, 1024, 100, BLACK);
+		SetAlias("色１", "色１");
+		CreateColor("色２", 150, 0, 476, 1024, 100, BLACK);
+		SetAlias("色２", "色２");
+		Fade("色*", 0, 0, null, true);
+		//CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg004001_1_教会内部.jpg");
+
+	CreateTextureEX("上背景２", 30001, 0, 0, "cg/sys/phase/kr_gc_eyecatch_plate.png");
+	CreateTexture("上背景２/KRLogo", 30002, 0, 0, "cg/sys/phase/kr_gc_eyecatch_text.png");
+	SetVertex("上背景２/KRLogo", 0, 0);
+	Zoom("上背景２/KRLogo", 0, 250, 250, null, false);
+	Request("上背景２/KRLogo", Smoothing);
+	Fade("上背景２/KRLogo", 0, 0, null, false);
+	SetShade("上背景２", MEDIUM);
+
+	CreatePlainSP("上背景３", 10000);
+	Zoom("上背景３", 0, 1020, 1020, Dxl2, true);
+
+	CreateColorEX("絵色１", 30001, WHITE);
+	Request("絵色１", AddRender);
+
+	CreateColorEX("絵色２", 30001, BLACK);
+
+
+	//★徒歩：ＳＥ
+	CreateSE("SE91","seアイキャッチ__歯車_01_L");
+	CreateSE("SE92","seアイキャッチ__歯車_02_L");
+	CreateSE("SE93","seアイキャッチ__歯車_03");
+	CreateSE("SE94","seアイキャッチ__歯車_04_L");
+	CreateSE("SE95","seアイキャッチ__歯車_05");
+	CreateSE("SE96","seアイキャッチ__歯車_06");
+	CreateSE("SE97","seアイキャッチ__歯車_07");
+
+	MusicStart("SE91",0,1000,0,1000,null,true);
+	MusicStart("SE92",0,1000,0,1000,null,true);
+	MusicStart("SE93",0,1000,0,1000,null,false);
+	MusicStart("SE94",0,500,0,1000,null,false);
+
+	CreateMovie("ムービー１", 30000, 0, 0, false, false, "dx/GC_eyecatch_E.ngs");
+	Wait(2500);
+
+	Zoom("上背景２", 600, 1020, 1020, Dxl1, false);
+	Zoom("上背景２/KRLogo", 600, 255, 255, Dxl1, false);
+	Move("上背景２/KRLogo", 600, -10, -6, Dxl1, false);
+	Fade("上背景２", 300, 1000, null, true);
+
+	Fade("上背景１", 0, 0, null, false);
+	Fade("ムービー１", 0, 0, null, false);
+
+	SetVolumeEX("SE91", 100, 0, null);
+	SetVolumeEX("SE92", 100, 0, null);
+	SetVolumeEX("SE93", 100, 0, null);
+	MusicStart("SE94",100,1200,0,500,null,true);
+	MusicStart("SE95",0,1000,0,1000,null,false);
+
+	Fade("絵色１", 50, 500, null, true);
+
+	Fade("絵色１", 200, 0, null, false);
+	Zoom("上背景２", 0, 2000, 2000, Dxl1, false);
+	Zoom("上背景２/KRLogo", 0, 500, 500, Dxl1, false);
+	Move("上背景２/KRLogo", 0, -512, -288, null, false);
+	Move("上背景２", 0, @200, @100, Axl1, true);
+	BezierMove("上背景２", 300, (@0,@0){@3,@2}{@-1,@-1}(@0,@3){@-2,@1}{@1,@-1}(@0,@2){@-1,@-1}{@3,@1}(@0,@-2){@-1,@-1}{@1,@3}(@0,@0), null, false);
+	Wait(200);
+
+	MusicStart("SE96",0,1000,0,1000,null,false);
+
+	Move("上背景２", 0, @-400, @-200, Axl1, true);
+	BezierMove("上背景２", 300, (@0,@0){@-8,@-7}{@5,@5}(@5,@8), null, false);
+	Wait(100);
+
+	Fade("絵色２", 200, 1000, null, true);
+
+
+	FadeDelete("上背景２", 0, null, true);
+
+	SetVolumeEX("SE94", 200, 0, null);
+
+	Fade("絵色２", 200, 0, null, false);
+	Zoom("上背景３", 200, 1000, 1000, Dxl1, true);
+
+	Delete("絵色*");
+	Delete("上背景*");
+	Delete("ムービー１");
+
+	MenuLock(false);
+
+//$SYSTEM_menu_lock=false;
+//=====================================================
+
+	ClearFadeAll(500, true);
+
+
+//→→LX0501
+
+
+//	ClearFadeAll(1000, true);
+
+}

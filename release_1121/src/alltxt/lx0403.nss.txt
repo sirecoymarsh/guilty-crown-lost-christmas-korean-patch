@@ -1,0 +1,1956 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0403.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev9004スクルージバックステップ汎用=true;
+
+	#ev0414マナ砕ける=true;
+	#ev0414マナ砕ける_a=true;
+	#bg004011_1_教会内部火災=true;
+	#bg004011_1_教会内部火災_子供たち=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0500.nss";
+
+}
+
+
+scene lx0403.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+//スクルージダッシュ
+	CreateCameraEX("Ｃ", 0, 0, 1000);
+
+	CreateColorEX("上色黒", 5000, "000000");
+	CreateTextureEX("絵教会", 3000, -1843, -291, "cg/bg/l/bg004012_1_教会外観ドア開き_l.jpg");
+
+
+	CreateMovieEX("絵動画", 2000, 257, 144, true, true, "dx/mv0003集中線04_白.ngs");
+	CreateTextureEX("Ｃ/絵主人公", 5, 1220, 310, "cg/ev/ev9002スクルージダッシュ汎用_キャラのみ_a.png");
+
+	CreateTextureEX("絵演効果壱", 100, -1590, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+	CreateTextureEX("絵演効果弐", 100, -1590, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+	CreateTextureEX("絵演効果参", 1000, -1590, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+	CreateTextureEX("絵演効果四", 1000, -1590, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+
+
+	Request("Ｃ/絵主人公", Smoothing);
+	Request("絵教会", Smoothing);
+	SetVertex("Ｃ/絵主人公", right, 400);
+	SetVertex("絵教会", center, 628);
+	SetBlur("Ｃ/絵主人公", true, 1, 300, 50, false);
+
+	Zoom("Ｃ/絵主人公", 0, 2500, 2500, null, true);
+	Zoom("絵演効果*", 0, 1700, 1700, null, true);
+	Zoom("絵教会", 0, 600, 600, null, true);
+	Zoom("絵動画", 0, 5000, 5000, null, true);
+	MoveFTP1("@Ｃ/絵主人公",1500,5,3);
+
+	Fade("絵動画", 0, 300, null, true);
+	DrawTransition("絵動画", 0, 0, 400, 200, null, "cg/data/slide_01_03_1.png", true);
+
+
+//教会内部
+	CreateTextureEX("絵演背景", 100, Center, Middle, "cg/bg/bg004011_1_教会内部火災_炎なし.jpg");
+	CreateTextureEXadd("絵演背景炎", 100, Center, Middle, "cg/bg/bg004011_1_教会内部火災_炎.png");
+
+	CreateTextureEX("絵背景", 100, 0, 435, "cg/bg/bg004011_1_教会内部火災.jpg");
+	CreateTextureEX("絵背景上", 1000, 15, Middle, "cg/bg/bg004011_1_教会内部火災.jpg");
+	CreateTextureEX("絵姉", 1100, 115, -472, "cg/st/x/stマナ_通常_normal2_x01.png");
+	CreateTextureEX("絵集", 500, 200, 30, "cg/st/x/stシュウ_通常_fear_x01.png");
+	SetShade("絵背景*", MEDIUM);
+	Request("絵背景*", Smoothing);
+	SetVertex("絵背景上", right, 300);
+	SetVertex("絵背景", 0, bottom);
+
+	Zoom("絵背景*", 0, 4000, 4000, null, true);
+
+	CreateEffectDropEX("絵火粉", 1500, 0, 0, 1024, 576, 40, 10, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("絵火粉", 0, @0, @0, 25, null,true);
+	Request("絵火粉", AddRender);
+	Zoom("絵火粉", 0, 2500, 2500, null, true);
+	Zoom("絵演背*", 0, 1700, 1700, null, true);
+
+
+	Request("絵演背*", Smoothing);
+
+
+
+//動作
+//覇：BGM借入
+	//★特殊ループＢＧＭセット
+	CreateBGM_Loop("lx015b");
+	//▽特殊ループ再生
+	SoundPlay_Loop("lx015b",0,800,true);
+
+
+//SEまとめ
+	CreateSE("SE90","se背景_ガヤ_建物炎上_L");
+	CreateSE("SE00","se人体_動作_跳躍02");
+	CreateSE("SE01","se戦闘_動作_突進01");
+	CreateSE("SE02","se戦闘_動作_突進02_L");
+	CreateSE("SE03","se戦闘_動作_突進04");
+	CreateSE("SE04","se戦闘_動作_突進03");
+
+
+
+	CreateSCR1("@絵演効果壱","@絵演効果弐",400,@1500,@0);
+	MusicStart("SE00",0,1000,0,1200,null,false);
+	DrawDelete("上背景", 200, 100, null, "slide_01_03_1", true);
+
+	Wait(200);
+	MusicStart("SE01",0,1000,0,1000,null,false);
+	Fade("Ｃ/絵主人公", 300, 1000, Dxl2, false);
+	Move("Ｃ/絵主人公", 500, 220, 310, Dxl3, false);
+	Zoom("絵動画", 500, 3000, 3000, Axl2, false);
+	Zoom("絵演効果*", 500, 1200, 1200, Axl2, false);
+	Zoom("Ｃ/絵主人公", 500, 1200, 1200, Axl2, true);
+	Zoom("絵演効果*", 1000, 1100, 1100, null, false);
+	Zoom("Ｃ/絵主人公", 1000, 1100, 1100, null, false);
+	MoveCamera("Ｃ", 1000, -150, @0, 1000, null, false);
+	SetBlur("Ｃ/絵主人公", null);
+	MusicStart("SE02",0,700,0,1000,null,true);
+
+	Wait(1500);
+
+
+	Fade("絵動画", 300, 600, null, false);
+	DrawTransition("絵動画", 300, 400, 1000, 200, null, "cg/data/slide_01_03_1.png", false);
+	Zoom("絵演効果*", 300, 2500, 2500, Axl3, false);
+	SetVolumeEX("SE02", 1000, 0, null);
+	MoveCamera("Ｃ", 800, -1500, @0, 1000, Dxl3, false);
+	CreateSCR2("@絵演効果参","@絵演効果四",200,@1500,@0);
+
+	Wait(100);
+	MusicStart("SE03",0,1000,0,1000,null,false);
+	Wait(400);
+	Move("絵教会", 400, -510, -291, Dxl3, false);
+//	Zoom("絵教会", 400, 800, 800, Axl3, false);
+	Fade("絵教会", 200, 1000, null, true);
+
+	Wait(200);
+
+	Delete("Ｃ/絵*");
+	Delete("Ｃ*");
+	Delete("絵演効*");
+	Delete("絵動画");
+	MoveFTP1stop();
+	SCR1stop();
+	SCR2stop();
+	Fade("絵演背景", 0, 1000, null, true);
+	Fade("絵演背景炎", 0, 800, null, true);
+	DrawEffectSkip("絵演背景炎", 1000, "Ripple", 0, 200, null);
+
+
+
+//	Rotate("絵背景", 200, @0, @0, -30, Axl2,false);
+	MusicStart("SE04",0,1000,0,1500,null,false);
+	Zoom("絵教会", 500, 20000, 20000, Axl3, false);
+//	DrawDelete("絵教会", 300, 100, Axl3, "zoom_01_00_0", true);
+	Zoom("絵演*", 8000, 1000, 1000, null, false);
+	FadeDelete("絵教会", 300, Axl2, true);
+	MusicStart("SE90",500,1500,0,1000,Axl1,true);
+	Wait(2000);
+	SetVolumeEX("SE90", 2500, 600, null);
+	Wait(1000);
+
+
+
+//◆◆六本木／燃える教会
+
+//？？：演出ペンディング。
+//走るスクルージの視点→その先に燃える教会→カメラが教会内部に突入、みたいな。勢いよく。
+//教会の扉は開きっぱなし。
+
+////////////////////////////////////////
+//◆◆六本木／燃える教会内部
+
+//燃えるクリスマスツリーのアップ。アニメ12話参照。
+//以下のやり取り、12話そのまま。
+
+
+{	DeleteFw();}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX04/0300010b05">
+｡ｸｹﾌｾﾈﾇﾘ｡ｦ｡ｦ ｹﾌｾﾈﾇﾘ&, ｽｴ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	CreateSE("SE01","se人体_足音_石床一歩");
+
+
+	Fade("絵火粉", 500, 1000, null, false);
+	Fade("絵背景上", 500, 1000, null, true);
+	Move("絵姉", 200, 85, @0, Dxl1, false);
+	MusicStart("SE01",0,1000,0,1000,null,false);
+	Fade("絵姉", 200, 1000, Dxl1, true);
+
+{	DeleteFw();}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0015]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX04/0300020b05">
+「……무서워하지 마」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+{	DeleteFw();}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX04/0300030b05">
+｡ｸｴｩｳｪｵｵ ｹｫｼｷｴﾜ ｸｻﾀﾌｾﾟ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//	CreateSE("SE01","se戦闘_銃器_落とす");
+	Move("絵背景上", 500, 100, 0, Dxl2, false);
+	Move("絵姉", 200, 27, -435, Dxl3, false);
+	FadeDelete("絵姉", 200, Axl2, true);
+//	MusicStart("SE01",0,1000,0,1000,null,false);
+	CreatePlainSP("絵板写", 5000);
+	Delete("絵背景上");
+	Delete("絵姉");
+	Delete("絵演*");
+	Fade("絵背景", 0, 1000, null, true);
+
+
+	FadeDelete("絵板写", 200, null, true);
+	Shake("絵集", 200, 5, 5, 0, 0, 500, Dxl1, false);
+	Move("絵集", 250, 240, 48, Axl3, false);
+	Fade("絵集", 200, 1000, Axl2, true);
+	CreateSE("SE02","se人体_衝撃_転倒05");
+	MusicStart("SE02",0,1000,0,1000,null,false);
+
+{	DeleteFw();}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【幼シュウ】
+<voice name="ｾ鋕ｰ ｽｴ" class="幼シュウ" src="voice/LX04/0300040b04">
+｡ｸ｡ｦ｡ｦﾀｹ!｡ｹ
+
+//（怯えて後ずさり、教会の椅子に背中を強くぶつける）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+#CFGVC_SYU=1;
+
+
+
+
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	SetVolumeEX("SE90", 1500, 0, null);
+	Fade("絵色黒", 1500, 1000, null, true);
+	Delete("絵背景");
+	Delete("絵集");
+	Delete("絵火粉");
+
+	CreateMovieEX("絵動画", 4000, Center, 390, true, true, "dx/mv0003集中線01_黒.ngs");
+
+	CreateTextureEX("絵演背外側", 3001, -420, 500, "cg/bg/l/bg004012_1_教会外観ドア開き_l.jpg");
+	CreateTextureEX("絵背外側上", 1001, Center, -650, "cg/bg/l/bg004012_1_教会外観ドア開き_l.jpg");
+	CreateTextureSP("絵背外側", 1000, Center, -860, "cg/bg/x/bg004012_1_教会外観ドア開き_x01_中抜き.png");
+	CreateTextureSP("絵霞", 100, Center, Middle, "cg/bg/l/bg004011_1_教会内部火災_子供たち_l.jpg");
+	CreateTextureEX("絵背景", 700, Center, InBottom, "cg/bg/l/bg004011_1_教会内部火災_子供たち_l.jpg");
+	CreateSurfaceEX("絵表面",500,1000,"@絵霞");
+	Request("絵霞", Smoothing);
+	Request("絵表面", Smoothing);
+	Request("絵背景", Smoothing);
+	Request("絵背外側*", Smoothing);
+	Request("絵動画*", Smoothing);
+	SetShade("絵背外側", LIGHT);
+	SetShade("絵霞", HEAVY);
+	SetVertex("絵動画*", center, bottom);
+	Zoom("絵霞", 0, 600, 600, null, true);
+	Zoom("絵背景", 0, 600, 600, null, true);
+	Zoom("絵背外側*", 0, 1500, 1500, null, true);
+	Zoom("絵動画*", 0, 4000, 4000, null, true);
+
+	Fade("絵表面", 0, 1000, null, true);
+	Fade("絵動画", 0, 1000, Dxl3, true);
+
+//	WaitKey();
+
+//	Delete("絵色黒");
+
+//SEまとめ
+	CreateSE("SE00","se戦闘_動作_突進03");
+	CreateSE("SE01","se戦闘_動作_突進04");
+	CreateSE("SE02","se戦闘_動作_突進02_L");
+	CreateSE("SE03","se人体_動作_跳躍02");
+
+
+
+
+
+//	WaitKey();
+	Move("絵背景外側", 300, @0, -650, null, false);
+	Zoom("絵背外側", 300, 3000, 3000, null, false);
+	FadeDelete("絵色黒", 200, null, true);
+
+//	WaitKey();
+
+	MusicStart("SE00",0,1000,0,1000,null,false);
+	Move("絵霞", 500, @0, @-50, AxlDxl, false);
+	Move("絵表面", 500, @0, -137, AxlDxl, false);
+	Zoom("絵表面", 500, 1500, 1500, AxlDxl, false);
+	Zoom("絵背景", 500, 1500, 1500, AxlDxl, false);
+	Zoom("絵背外側", 500, 15000, 15000, Dxl1, false);
+	Fade("絵背外側", 500, 0, Axl3, false);
+	Fade("絵動画", 200, 0, Axl3, false);
+	Fade("絵背景", 200, 1000, null, true);
+
+
+	Wait(500);
+	Zoom("絵背外側*", 0, 5000, 5000, Dxl3, true);
+
+////////////////////////////////////////
+//◆◆六本木／燃える教会
+
+//スクルージ視点に。
+
+//開いた扉から内部を確認するスクルージ。
+
+//？？：状況描写のため、ロングでの一枚絵必要かも。
+//燃えるクリスマスツリーの横にマナ。後ずさるシュウ。倒れているガイ。
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030a]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX04/0300050a01">
+「――찾았다! 오우마 마나!」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	CreateColorEXadd("絵色白", 5000, "WHITE");
+	Fade("絵色白", 300, 1000, Dxl2, true);
+	Delete("絵動画");
+
+
+	CreateMovieEX("絵動画", 4002, Center, 390, true, true, "dx/mv0003集中線01_黒.ngs");
+	CreateMovieEX("絵動画弐", 4001, 112, 890, true, true, "dx/mv0003集中線01_白.ngs");
+	CreateTextureSP("絵過去", 2000, -100, -210, "cg/ev/l/ev0305マナ写真_l.jpg");
+	CreateTextureEX("絵背外側揺", 1500, Center, -450, "cg/bg/l/bg004012_1_教会外観ドア開き_l.jpg");
+	CreateTextureEX("絵霞揺", 800, Center, -100, "cg/bg/bg004011_1_教会内部火災_子供たち.jpg");
+
+
+	SetVertex("絵動画*", center, bottom);
+	Request("絵動画*", Smoothing);
+	Request("絵背外側揺", Smoothing);
+	Zoom("絵動画*", 0, 4000, 4000, null, true);
+	Zoom("絵霞揺", 0, 500, 500, null, true);
+	Zoom("絵背外側揺", 0, 800, 800, AxlDxl, true);
+
+	SetTone("絵過去", Monochrome);
+
+
+	Fade("絵色白", 300, 0, Dxl2, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030b]
+ﾆｲｸｲｾﾙ&.
+오우마 쿠로스의 연구실에서 본 사진 속 소녀다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+	Fade("絵色白", 300, 1000, Dxl2, true);
+	Delete("絵過去");
+
+//パスト登場
+	CreateTextureSP("絵機械", 2000, -2124, -365, "cg/ma/x/フライシュマン_スライド_斜め前_右向_x01.png");
+	CreateTextureSP("絵瓦礫", 2100, 80, 612, "cg/ef/x/ef_rubble01_x90.png");
+	CreateTextureSP("絵瓦礫弐", 2100, 280, 842, "cg/ef/x/ef_rubble02_x04.png");
+	CreateTextureSP("絵瓦礫参", 2100, 860, 890, "cg/ef/x/ef_rubble01_x90.png");
+	CreateTextureSP("絵煙", 2000, -150, InBottom, "cg/ef/ef_smoke05black.png");
+
+
+	Request("絵煙", Smoothing);
+	Request("絵機械", Smoothing);
+	Request("絵瓦礫*", Smoothing);
+	Request("絵上*", Smoothing);
+	SetVertex("絵瓦礫", center, bottom);
+	SetVertex("絵瓦礫弐", right, middle);
+	SetVertex("絵瓦礫参", center, bottom);
+	SetVertex("絵煙", right, bottom);
+
+	Rotate("絵瓦礫", 0, @0, @0, -20, null,true);
+	Rotate("絵瓦礫弐", 0, @0, @0, 40, null,true);
+	Rotate("絵瓦礫参", 0, @0, @0, -40, null,true);
+
+	Zoom("絵瓦礫*", 0, 0, 0, null, true);
+	Zoom("絵煙", 0, 0, 0, null, true);
+	Zoom("絵機械", 0, 1300, 1300, null, true);
+	SetBlur("絵機械", true, 2, 300, 200, false);
+
+
+
+
+//フライシュマン咆哮
+	CreateTextureEX("絵咆哮", 3002, 305, 420, "cg/ma/x/フライシュマン_ジャンプ_正面_x01b.png");
+	CreateTextureEX("絵咆哮外側", 3001, -500, -463, "cg/bg/l/bg004012_1_教会外観ドア開き_l.jpg");
+
+
+	Request("絵咆哮*", Smoothing);
+	SetVertex("絵咆哮*", center, 0);
+
+	Zoom("絵咆哮", 0, 2200, 2200, null, true);
+	Zoom("絵咆哮外側", 0, 3000, 3000, null, true);
+	SetBlur("絵咆哮", true, 1, 300, 100, false);
+
+	Fade("絵煙", 0, 900, null, true);
+
+
+//スクルージ跳び退き
+	CreateTextureEX("絵主人公", 2501, -1100, 650, "cg/ev/m/ev9004スクルージバックステップ汎用_m.png");
+	CreateTextureEX("絵主人背景", 2500, Center, Middle, "cg/ef/x/ef_zoom03.jpg");
+	CreateTextureEXsub("絵主人背景暗", 2500, 50, 50, "cg/ef/x/ef_zoom03.jpg");
+
+	Zoom("絵主人背景暗", 0, 1100, 1200, null, true);
+
+	Rotate("絵主人背景*", 0, @0, @180, @0, null,true);
+
+//SEまとめ
+	CreateSE("SE04","se戦闘_破壊_コンクリート01");
+	CreateSE("SE05","se戦闘_メカ_移動02");
+	CreateSE("SE06","se人体_動作_跳躍01");
+	CreateSE("SE06a","se戦闘_攻撃_振る04");
+	CreateSE("SE07","se戦闘_メカ_一歩02");
+	CreateSE("SE08","se戦闘_メカ_駆動06");
+
+
+	FadeDelete("絵色白", 300, Dxl2, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+마주 서 있는 아이는 아마도 저 소녀의 남동생&.
+
+다른 한 명은…… 본 기억이 없다&.
+그 아이의 친구일까?
+
+ｻ鄰､ﾀｺ ｸ｣ｰﾚﾁｸ&, ｾﾆｹｫｷ｡ｵｵ ｻｲﾀﾌ ｱﾞｹﾚﾇﾑ ｸ鄲ﾌｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+
+
+	MusicStart("SE01",0,1000,0,1000,null,false);
+	Fade("絵動画", 200, 600, Dxl3, false);
+	Fade("絵背景", 200, 0, Dxl3, false);
+	Zoom("絵霞", 200, 500, 500, null, false);
+	Zoom("絵表面", 300, 300, 300, AxlDxl, false);
+	Zoom("絵背外側", 300, 800, 800, AxlDxl, false);
+	Zoom("絵背外側上", 300, 800, 800, AxlDxl, false);
+	Move("絵表面", 300, @0, -75, Dxl2, false);
+	Move("絵背外側*", 300, @0, -405, Dxl2, false);
+	Fade("絵背外側", 300, 1000, Dxl1, false);
+	Fade("絵霞揺", 300, 500, Axl3, false);
+	Fade("絵背外側上", 300, 1000, Axl3, true);
+	Fade("絵背外側揺", 0, 500, Axl3, true);
+
+	MusicStart("SE02",0,700,0,1000,null,true);
+	MoveFTP1("@絵背外側揺",5000,5,10);
+	Delete("絵表面");
+	Delete("絵背外側");
+	Delete("絵霞");
+	Delete("絵背景");
+	Delete("絵演*");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+상관없다&.
+이대로 오우마 마나를――!
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//ダッシュで駆けつけ、マナを殺そうとするスクルージ。
+//そのとき間に割り込む巨大な影＝パストの軍用エンドレイヴ。
+	SetVolumeEX("SE02", 300, 0, null);
+	MusicStart("SE03",0,1000,0,1000,null,false);
+	MusicStart("SE04",0,1200,0,1000,null,false);
+	MusicStart("SE05",0,900,0,1000,null,false);
+	FadeDelete("絵背外側揺", 300, Dxl3, false);
+	Zoom("絵動画", 300, 5000, 5000, Dxl3, false);
+	Move("絵動画", 300, @0, @400, Dxl3, false);
+	Fade("絵動画", 300, 800, Dxl3, false);
+	Zoom("絵背*", 300, 2000, 2000, Dxl3, false);
+	Shake("絵機械", 350, 5, 40, 0, 0, 500, Axl3, false);
+	Move("絵機械", 300, -124, @0, Axl2, false);
+	Move("絵煙", 300, 150, @0, Axl3, false);
+	Zoom("絵煙", 300, 1800, 4800, Axl3, false);
+	Move("絵瓦礫", 300, 60, 412, Axl3, false);
+	Zoom("絵瓦礫", 200, 1800, 1800, Axl2, false);
+	Wait(16);
+	Move("絵瓦礫弐", 300, 200, 542, Axl3, false);
+	Zoom("絵瓦礫弐", 300, 2300, 2300, Axl2, false);
+	Wait(16);
+	Move("絵瓦礫参", 350, 700, 490, Axl3, false);
+	Zoom("絵瓦礫参", 300, 2100, 2100, Axl2, true);
+
+	MoveFTP1stop();
+	Fade("絵煙", 6000, 600, null, false);
+	Move("絵機械", 6000, -100, @0, null, false);
+	Move("絵瓦礫", 6000, @-20, @30, null, false);
+	Move("絵瓦礫弐", 6000, @-30, @-40, null, false);
+	Move("絵瓦礫参", 6000, @-10, @-50, null, false);
+	Zoom("絵背外側上", 6000, 2100, 2100, null, false);
+	Zoom("絵煙", 8000, 1900, 5000, null, false);
+
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060a]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX04/0300060a01">
+｡ｸ｡ｪ｡ｪ!?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	FadeDelete("絵動画", 200, Dxl3, false);
+//	Move("絵*", 300, @-200, @500, Dxl3, false);
+//	Zoom("絵機械", 300, 2000, 2000, Dxl2, false);
+//	Zoom("絵瓦礫*", 300, 2000, 2000, Dxl2, false);
+//	Zoom("絵背外*", 300, 2000, 2000, Dxl2, false);
+	Fade("絵主人背景暗", 0, 300, null, false);
+	Fade("絵主人背景", 0, 1000, null, true);
+	DrawTransition("絵主人背景*", 200, 0, 1000, 100, Dxl3, "cg/data/slide_04_01_1.png", false);
+	Wait(50);
+	MusicStart("SE06",0,700,0,1000,null,false);
+	MusicStart("SE06a",0,1000,0,800,null,false);
+	Move("絵主人公", 400, 430, -730, Dxl2, false);
+	Fade("絵主人公", 200, 1000, Dxl1, true);
+
+	Delete("絵機械");
+	Delete("絵瓦礫*");
+
+	Fade("絵咆哮", 300, 1000, Axl2, false);
+	MusicStart("SE07",0,1000,0,1200,null,false);
+	Rotate("絵咆哮", 300, @0, @0, @-10, Dxl3,false);
+	Move("絵咆哮", 300, -160, -152, Axl3, false);
+	Move("絵咆哮外側", 300, @0, -150, Dxl2, false);
+	Fade("絵咆哮外側", 0, 1000, null, true);
+	DrawTransition("絵咆哮外側", 200, 0, 1000, 100, Dxl2, "cg/data/slide_03_01_1.png", true);
+
+	Delete("絵主人*");
+
+
+	Zoom("絵咆哮外側", 200, 2000, 2000, Dxl3, false);
+	Zoom("絵咆哮", 200, 1600, 1600, Dxl3, true);
+	Zoom("絵咆哮外側", 1000, 1850, 1850, Dxl3, false);
+	Zoom("絵咆哮", 1000, 1650, 1650, Dxl3, false);
+	MusicStart("SE08",0,1000,0,800,null,false);
+
+	Ara_Bika_loop("絵輝輝",4000,500,1050,300,200);
+	CreateVOICE("パスト","LX04/0300070a04");
+	MusicStart("パスト",0,2000,0,1000,null,false);
+	Shake("絵咆哮*", 5000, 10, 10, 0, 0, 500, null, false);
+	Zoom("@絵輝輝*", 1000, 1350, 1350, Dxl3, false);
+	Fade("絵動画弐", 300, 200, Dxl3, false);
+	Ara_Bika_loop_Start();
+
+	Wait(3000);
+
+	CreatePlainSP("絵板写", 6000);
+	SetVertex("絵板写", 200, 0);
+	SetBlur("絵板写", true, 2, 300, 100, false);
+
+	Delete("絵咆哮*");
+	Delete("絵機械*");
+	Delete("絵霞*");
+	Delete("絵動画*");
+	Delete("絵上*");
+	Delete("絵煙*");
+	Delete("絵背*");
+	Ara_Bika_loop_Stop();
+
+
+
+
+
+//	Fw("fwパスト_通常_normal");
+//【パスト】
+//<voice name="パスト" class="パスト" src="voice/LX04/0300070a04">
+//「うわあああああああ！」
+//（怒り。「させない！」「殺させない！」のニュアンス）
+//（ボイスをハウリング加工）
+
+//？？：パスト、集の名前は知らないかも。要検証。
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX04/0300080a01">
+｡ｸﾅｪ! ｳﾗｳｦ｡ｦ!｡ｹ
+
+//？？：地の文。こんなところに！的な。
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+
+	CreateTextureSPsub("絵主人公背景上", 101, Center, 57, "cg/ef/x/ef_zoom02.jpg");
+	CreateTextureSP("絵主人公背景", 100, Center, Middle, "cg/ef/x/ef_zoom02.jpg");
+	CreateTextureEX("絵主人公", 1000, -740, 150, "cg/ev/l/ev9004スクルージバックステップ汎用_l.png");
+	Request("絵主人公*", Smoothing);
+	SetVertex("絵主人公", right, 0);
+	Zoom("絵主人公", 0, 2000, 2000, null, true);
+	Zoom("絵主人公背景上", 0, 1200, 1200, null, true);
+	SetBlur("絵主人公", true, 1, 200, 100, false);
+
+	Fade("絵主人公背景上", 0, 400, null, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070a]
+//★★★
+
+패스트의 엔드레이브!
+하필이면 이런 곳에!
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//SEまとめ
+	CreateSE("SE01","se戦闘_メカ_駆動04");
+	CreateSE("SE02","se戦闘_動作_突進04");
+	CreateSE("SE03","se戦闘_動作_突進01");
+
+
+	MusicStart("SE01",0,800,0,1000,null,false);
+	MusicStart("SE02",0,1000,0,1000,null,false);
+	CreateVOICE("パスト","LX04/0300090a04");
+	MusicStart("パスト",0,2000,0,1000,null,false);
+	Zoom("絵板写", 400, 3000, 3000, Dxl3, false);
+	Wait(100);
+	Move("絵主人公", 250, -40, -250, Dxl2, false);
+	Fade("絵主人公", 250, 1000, Dxl2, false);
+	DrawDelete("絵板写", 200, 100, Dxl2, "slide_01_03_1", true);
+	MusicStart("SE03",0,800,0,1000,null,false);
+
+
+
+
+//	Fw("fwパスト_通常_normal");
+//【パスト】
+//<voice name="パスト" class="パスト" src="voice/LX04/0300090a04">
+//「アアアアアァァァァァ――――！」
+//（泣き叫びながら怒る。子供をスクルージから守ろうとしている）
+//（ボイスをハウリング加工）
+
+//スクルージの動きにぴったりとくっついて離れないパスト機。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070b]
+//★★★
+
+날카로운 비명을 지르며 엔드레이브가 덤벼든다&.
+뿌리치려 해도 딱 달라붙어 떨어지지 않는다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+	CreatePlainSP("絵板写", 5000);
+//	SetVertex("絵板写", 0, 0);
+
+
+	Delete("絵主人公背*");
+	CreateCameraEX("Ｃ", 0, 0, 1000);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+
+//スクルージダッシュ
+	CreateTextureEX("絵演効果壱", 100, 0, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+	CreateTextureEX("絵演効果弐", 100, 0, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+	CreateTextureEX("絵演効果参", 500, -1590, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+	CreateTextureEX("絵演効果四", 500, -1590, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+	CreateTextureEX("絵上効果", 2000, 0, 0, "cg/bg/bg004013_1_教会外観_林ロング.jpg");
+
+	CreateTextureEX("絵煙", 2300, -1350, InBottom, "cg/ef/ef_smoke05black.png");
+
+	CreateTextureEX("絵主人公弐", 2200, 250, -100, "cg/ev/x/ev9002スクルージダッシュ汎用_a_x01カット01.png");
+	CreateTextureEX("絵主人公参", 2300, 740, 600, "cg/ev/l/ev9001スクルージジャンプ汎用_キャラのみ_l.png");
+
+	CreateTextureEX("Ｃ/絵主人公", 100, 400, 150, "cg/ev/ev9002スクルージダッシュ汎用_キャラのみ_a.png");
+
+	Request("絵主人公*", Smoothing);
+	Request("Ｃ/絵*", Smoothing);
+	SetVertex("絵煙", 0, bottom);
+	SetVertex("絵主人公弐", 100, middle);
+	SetVertex("絵主人公参", right, 0);
+	SetVertex("Ｃ/絵主人公", center, 0);
+
+
+
+//	Rotate("絵主人公弐", 0, @0, @0, @-25, null,true);
+	Rotate("絵主人公弐", 0, @0, @0, @23, null,true);
+	Rotate("絵主人公参", 0, @0, @0, @20, null,true);
+	Zoom("絵主人公弐", 0, 1200, 1200, null, true);
+	Zoom("Ｃ/絵主人公", 0, 1500, 1500, null, true);
+
+	SetBlur("Ｃ/絵主人公", true, 1, 300, 50, false);
+
+	Zoom("絵演効果*", 0, 2000, 2000, null, true);
+	Zoom("絵上効果", 0, 1500, 1500, Axl2, true);
+	Zoom("絵煙", 0, 1500, 0, Axl2, true);
+
+
+//パスト追撃
+	CreateTextureEX("絵機械", 2250, -2630, -2690, "cg/ma/x/フライシュマン_通常_斜め後_右向2_x01.png");
+	CreateTextureEX("絵機械弐", 2250, -100, -370, "cg/ma/x/フライシュマン_攻撃_正面_x01.png");
+	CreateTextureEX("絵煙弐", 2260, Center, InBottom, "cg/ef/ef_smoke05black.png");
+
+	Request("絵機械*", Smoothing);
+	SetVertex("絵煙弐", 1000, bottom);
+
+	Rotate("絵機械", 0, @0, @0, @10, null,true);
+	SetBlur("絵機械弐", true, 1, 300, 100, false);
+	Zoom("絵機械", 0, 1500, 1500, null, true);
+	Zoom("絵煙弐", 0, 1500, 0, null, true);
+
+
+
+
+//パスト突進
+	CreateMovieEX("絵機械動画", 4000, 212, Middle, true, true, "dx/mv0003集中線01_白.ngs");
+	CreateTextureEX("絵教会", 2100, Center, Middle, "cg/bg/l/bg004012_1_教会外観ドア開き_l.jpg");
+	CreateTextureEX("絵教会速", 2100, Center, Middle, "cg/bg/x/bg004012_1_教会外観ドア開き_l_x11_ブラー.jpg");
+	CreateTextureEX("絵機械横", 2000, 1800, -443, "cg/ma/x/フライシュマン_攻撃_横_左向_x01.png");
+	CreateTextureEX("絵機械後", 2200, -590, -360, "cg/ma/x/フライシュマン_通常_斜め後_右向2_x01.png");
+	CreateTextureEX("絵機械前", 2200, -660, -169, "cg/ma/x/フライシュマン_スライド_正面_x01.png");
+	CreateTextureEX("絵機械前弐", 2205, -165, -50, "cg/ma/x/フライシュマン_通常_正面_x11_ブラー.png");
+	CreateTextureEX("絵機械煙", 2200, -420, InBottom, "cg/ef/ef_smoke05black.png");
+
+
+	Request("絵動画*", Smoothing);
+	Request("絵機械*", Smoothing);
+	SetVertex("絵機械前", right, middle);
+	SetVertex("絵機械後", 772, 750);
+	SetVertex("絵機械煙", right, bottom);
+
+
+	SetShade("絵機械横", LIGHT);
+
+	Request("絵機械*", Smoothing);
+	Request("絵教会", Smoothing);
+	Request("絵教会", Smoothing);
+	SetVertex("絵教会", center, 628);
+	Zoom("絵教会", 0, 2000, 2000, null, true);
+
+	Zoom("絵機械横", 0, 2500, 2500, null, true);
+	Rotate("絵機械横", 0, @0, @0, -10, null,true);
+
+	Zoom("絵機械後", 0, 6000, 6000, null, true);
+	Zoom("絵機械前", 0, 800, 800, null, true);
+	Zoom("絵機械前弐", 0, 300, 300, null, true);
+	Zoom("絵機械動画", 0, 3500, 3500, null, true);
+	Zoom("絵機械煙", 0, 0, 0, null, true);
+
+	SetBlur("絵機械横", true, 2, 400, 100, false);
+	SetBlur("絵機械後", true, 1, 300, 100, false);
+	SetBlur("絵機械前", true, 1, 300, 100, false);
+	SetBlur("絵教会", true, 1, 200, 100, false);
+
+
+//SEまとめ
+	CreateSE("SE00","se自然_風_暴風");
+	CreateSE("SE01","se戦闘_動作_突進01");
+	CreateSE("SE02","se人体_足音_着地03");
+	CreateSE("SE03","se人体_足音_着地01");
+
+	CreateSE("SE04","se人体_足音_着地08");
+	CreateSE("SE05","se戦闘_破壊_コンクリート01");
+	CreateSE("SE06","se人体_足音_着地03");
+
+	CreateSE("SE07","se戦闘_動作_突進03");
+	CreateSE("SE08","se戦闘_メカ_駆動05");
+	CreateSE("SE08a","se戦闘_メカ_駆動03");
+
+	CreateSE("SE09","se戦闘_動作_突進04");
+//	CreateSE("SE10","se人体_動作_跳躍02");
+	CreateSE("SE11","se戦闘_動作_突進02_L");
+
+	CreateSE("SE12","se戦闘_メカ_重機移動02L");
+	SetPan("SE12", 0, 1000, Dxl3);
+	CreateSE("SE13","se戦闘_メカ_移動01");
+
+	CreateSE("SE14","se戦闘_破壊_コンクリート01");
+	CreateSE("SE14a","se戦闘_破壊_コンクリート04");
+	CreateSE("SE15","se戦闘_破壊_コンクリート02");
+	SetPan("SE14", 0, 1000, Dxl3);
+	SetPan("SE14a", 0, 1000, Dxl3);
+	SetPan("SE15", 0, 1000, Dxl3);
+
+	CreateSE("SE16","se戦闘_メカ_駆動03");
+	CreateSE("SE17","se戦闘_動作_突進04");
+
+
+	MusicStart("SE00",0,1000,0,800,null,false);
+	CreateSCR1("@絵演効果壱","@絵演効果弐",300,@-1500,@0);
+	Move("絵主人公", 3000, 0, @0, null, false);
+	FadeDelete("絵板写", 200, Axl2, true);
+	Wait(1000);
+	SetVolumeEX("SE00", 0, 0, null);
+
+	MusicStart("SE01",0,1300,0,1000,null,false);
+	Move("絵主人公", 300, -170, -705, Dxl2, false);
+	Zoom("絵演効果*", 300, 1100, 1100, Axl2, false);
+	Zoom("絵主人公", 300, 400, 400, Dxl2, false);
+
+	Wait(500);
+
+	Move("絵上効果", 1000, -1500, @0, Dxl2, false);
+	Fade("絵上効果", 1000, 1000, Dxl2, false);
+
+	Wait(300);
+
+
+	MusicStart("SE02",0,1000,0,800,null,false);
+	Move("絵煙", 500, -850, @0, Dxl1, false);
+	Zoom("絵煙", 500, 2000, 3000, Dxl2, false);
+	Fade("絵煙", 500, 300, Dxl2, false);
+	Shake("絵主人公弐", 500, 10, 10, 0, 0, 500, Axl1, false);
+	Move("絵主人公弐", 500, 540, 60, Dxl2, false);
+	Fade("絵主人公弐", 500, 1000, Dxl1, true);
+	Zoom("絵煙", 3000, 2100, 3200, null, false);
+	Fade("絵煙", 500, 0, null, false);
+
+	Wait(300);
+	SCR1stop();
+
+	MusicStart("SE03",0,1000,0,1000,null,false);
+	Zoom("絵上効果", 800, 1100, 1100, AxlDxl, false);
+	Zoom("絵主人公弐", 800, 800, 800, AxlDxl, false);
+	Wait(300);
+
+	MusicStart("SE05",0,1200,0,1200,null,false);
+	Wait(200);
+	MusicStart("SE04",0,800,0,800,null,false);
+	Move("絵機械", 200, -130, -390, Axl3, false);
+	Zoom("絵機械", 500, 1400, 1400, null, false);
+	Fade("絵機械", 200, 1000, Dxl2, false);
+
+	Fade("絵主人公弐", 200, 0, Dxl3, false);
+	Fade("絵煙弐", 300, 1000, Dxl3, false);
+	Zoom("絵煙弐", 300, 2000, 5000, Axl3, false);
+	Zoom("絵主人公参", 400, 3000, 3000, Dxl3, false);
+	Fade("絵主人公参", 200, 1000, Dxl2, true);
+	Shake("絵機械", 200, 20, 50, 0, 0, 1000, Axl1, false);
+	Shake("絵上効果*", 200, 10, 20, 0, 0, 1000, Dxl2, false);
+	Fade("絵主人公参", 200, 0, Dxl2, true);
+
+
+	MusicStart("SE06",0,1000,0,800,null,false);
+	MusicStart("SE07",0,1300,0,1300,null,false);
+	MusicStart("SE08a",0,800,0,1500,null,false);
+	Fade("絵煙弐", 400, 0, Axl1, false);
+	Zoom("絵煙弐", 400, 3000, 6000, Axl1, false);
+	Zoom("絵機械弐", 500, 3500, 3500, Dxl2, false);
+	Move("絵機械", 400, -230, -360, Axl2, false);
+	Fade("絵機械", 200, 0, Axl2, false);
+	Fade("絵機械弐", 200, 1000, Axl3, true);
+	FadeDelete("絵機械弐", 200, Axl2, true);
+
+	Delete("絵効果壱");
+	Delete("絵効果弐");
+
+	MusicStart("SE08",0,800,0,1200,null,false);
+	CreateSCR1("@絵演効果参","@絵演効果四",250,@1500,@0);
+	Zoom("絵演効果*", 0, 1500, 1500, null, true);
+
+	MoveFTP1("@Ｃ/絵主人公",1200,10,5);
+
+
+	MusicStart("SE09",0,1000,0,1200,null,false);
+	Zoom("絵上効果", 300, 2000, 2000, Axl2, false);
+	Move("絵上効果", 500, @1000, @0, Axl2, false);
+	Fade("絵色黒", 0, 1000, null, true);
+	DrawTransition("絵色黒", 300, 0, 1000, 100, Axl2, "cg/data/slide_01_03_0.png", true);
+
+
+	Delete("絵上効果");
+	Wait(100);
+
+	DrawDelete("絵色黒", 300, 100, Dxl3, "slide_01_03_1", true);
+	MusicStart("SE11",0,800,0,1000,null,true);
+
+//	FadeDelete("絵上効果", 300, Axl1, true);
+//	DrawDelete("絵上効果", 300, 100, Axl2, "slide_01_03_1", true);
+	Wait(200);
+
+	Move("Ｃ/絵主人公", 200, 250, 150, Dxl1, false);
+	Fade("Ｃ/絵主人公", 200, 1000, Dxl1, true);
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0075]
+젠장…… 이러고 놀 때가 아닌데!
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+	MusicStart("SE12",1000,1000,0,1500,null,true);
+	SetPan("SE12", 1000, 0, null);
+	SetVolumeEX("SE11", 1000, 200, null);
+	Zoom("絵演効果*", 2000, 1100, 1100, DxlAxl, false);
+	MoveCamera("Ｃ", 2000, -350, -220, 500, DxlAxl, false);
+
+	Wait(1200);
+	SetVolumeEX("SE11", 1000, 0, null);
+	SetVolumeEX("SE12", 1500, 0, Axl3);
+//	SetPan("SE13", 2000, -1000, Dxl3);
+
+	Shake("絵機械横", 2000, 5, 10, 0, 0, 1000, null, false);
+	Zoom("絵機械横", 600, 1500, 1500, Axl1, false);
+	Move("絵機械横", 1000, 0, @0, null, false);
+	Fade("絵機械横", 300, 1000, Axl3, false);
+
+	Wait(500);
+
+	MusicStart("SE13",0,1300,0,1200,null,false);
+	Rotate("絵機械横", 200, @0, @0, -20, Dxl3,true);
+	Move("絵機械横", 300, -1800, @0, Dxl3, false);
+
+	Wait(200);
+
+
+	Zoom("絵教会", 400, 1000, 1000, Axl3, false);
+	Move("絵教会", 400, -510, -291, Axl3, false);
+	MoveCamera("Ｃ", 400, -850, @0, 500, Dxl1, false);
+	Fade("絵教会", 300, 1000, Axl1, true);
+	SCR1stop();
+	MoveFTP1stop();
+	Delete("絵演*");
+
+
+	Fade("絵背景", 0, 1000, null, true);
+
+	MusicStart("SE14a",500,1500,0,800,Axl1,false);
+	MusicStart("SE14",0,600,0,800,null,false);
+	MusicStart("SE15",0,600,0,800,null,false);
+	SetPan("SE14a", 500, 0, Dxl1);
+	SetPan("SE14", 500, 0, Dxl1);
+	SetPan("SE15", 500, 0, Dxl1);
+	Zoom("絵機械煙", 200, 2000, 5000, Dxl2, false);
+	Fade("絵機械煙", 200, 1000, Dxl2, false);
+	Zoom("絵機械後", 250, 500, 500, Dxl2, false);
+	Fade("絵機械後", 100, 1000, Axl2, true);
+	Move("絵機械煙", 200, -265, @0, Dxl2, false);
+	Zoom("絵機械煙", 800, 2500, 1000, Dxl2, false);
+	Fade("絵機械煙", 200, 900, Axl2, false);
+	Move("絵機械後", 300, -400, 30, Dxl1, false);
+	Move("絵機械前", 400, -550, @0, Dxl1, false);
+	Zoom("絵機械前", 400, 380, 380, Dxl1, false);
+	Zoom("絵教会*", 400, 600, 600, Dxl1, false);
+	Fade("絵機械後", 200, 0, Dxl2, false);
+	Shake("絵機械前", 400, 5, 10, 0, 0, 1000, Dxl1, false);
+	Fade("絵機械前", 200, 1000, Dxl2, false);
+
+	Wait(50);
+	MusicStart("SE16",0,1300,0,1500,null,false);
+	Wait(150);
+
+	Wait(120);
+	SetVolumeEX("SE14", 200, 0, null);
+	SetVolumeEX("SE15", 200, 0, null);
+
+	MusicStart("SE17",0,1500,0,900,null,false);
+	FadeDelete("絵機械煙", 500, null, false);
+	Fade("絵機械動画", 200, 800, Dxl3, false);
+	Rotate("絵教会*", 300, @0, @0, -25, Dxl2,false);
+	Rotate("絵機械前弐", 300, @0, @0, -30, Dxl2,false);
+	Zoom("絵教会*", 300, 1500, 1500, Dxl3, false);
+	Zoom("絵機械前", 300, 2000, 2000, Dxl3, false);
+	Zoom("絵機械前弐", 300, 2000, 2000, Dxl3, false);
+	Fade("絵教会速", 200, 1000, Axl3, false);
+	Fade("絵機械前", 200, 0, Dxl2, false);
+	Fade("絵機械前弐", 200, 1000, Dxl2, false);
+
+	Wait(280);
+	CreatePlainEXadd("絵光", 7000);
+	Zoom("絵光", 200, 1200, 1200, Dxl3, false);
+	Fade("絵光", 100, 1000, Dxl3, false);
+	CreatePlainSP("絵板写", 6000);
+	Wait(100);
+	Zoom("絵光", 500, 1000, 1000, Dxl3, false);
+	FadeDelete("絵光", 500, Axl3, false);
+
+	SetVertex("絵板写", 350, 320);
+
+
+	Delete("絵機械*");
+	Delete("絵煙*");
+	Delete("絵教会*");
+	Delete("Ｃ*");
+	Delete("Ｃ/絵*");
+	Delete("絵主人*");
+
+
+//（「させない！」）
+//（ボイスとハウリング半々）
+//	Fw("fwパスト_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX04/0300100a04">
+｡ｶｱﾗｷｸｰﾔｴﾂ ｾﾈ ｵﾖｾ﨨﨨釭ｪ｡ｪ!｡ｷ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//？？：地の文。ダァトだからイヴを守るのか。それどころじゃないだろうに。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080a]
+//★★★
+
+조금 전까지의 폭주와는 다르다&.
+지금 엔드레이브의 움직임에는 분명하게 나를 방해하려는 의도가 느껴진다&.
+
+――이브를 지키고 있는 건가&.
+
+확실히 다아트에게 이브는 계획의 핵심…… 아니&, 존재 이유 그 자체라 해도 과언이 아니다&.
+
+ｱﾗｷｸｴﾙｰ昻ﾂ ﾇﾘｵｵ&, ﾁﾝ ｱﾗｷｲ ｶｧｰ｡ ｾﾆｴﾒ ﾅﾙｵ･!
+진화고 나발이고&, 세계가 멸망해 버리면 아무 의미도 없다!
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//深堀：台詞の間に地の文が追加されていました。
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX04/0300110a01">
+「방해하지 마!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	CreateSE("SE01","se戦闘_動作_突進01");
+
+
+	CreateTextureSP("絵主人公", 2500, 800, 1210, "cg/ev/m/ev0210スクルージキャロルダッシュ_m.png");
+	Request("絵主人公", Smoothing);
+	Zoom("絵主人公", 0, 2500, 2500, null, true);
+	Rotate("絵主人公", 0, @0, @0, 30, null,true);
+	SetBlur("絵主人公", true, 1, 500, 100, false);
+	CreateTextureSP("絵効果", 2000, center, middle, "cg/ef/x/ef_zoom01.jpg");
+	Zoom("絵効果", 0, 1000, 1000, null, true);
+	CreateMovieSP("絵動画", 2600, Center, middle, true, true, "dx/mv0003集中線01_黒.ngs");
+	Request("絵動画", Smoothing);
+	Zoom("絵動画", 0, 4000, 4000, null, true);
+
+	Fade("絵動画", 0, 600, null, true);
+
+
+	Zoom("絵板写", 200, 2000, 2000, Axl3, false);
+	MusicStart("SE01",0,1000,0,1000,null,false);
+	FadeDelete("絵板写", 200, Axl1, false);
+	Zoom("絵主人公", 200, 4000, 4000, Dxl3, false);
+	Zoom("絵効果", 200, 1200, 1200, Dxl3, true);
+
+
+//★★★
+
+//★鋼屋：演出追加。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0093]
+모 아니면 도다&. 이쪽에서 먼저 엔드레이브의 품으로 뛰어든다&. 아슬아슬하게 피한 뒤 단숨에 교회까지 내달리는 수밖에 없다!
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+
+//一瞬の攻防。エンドレイヴを踏み台にして、教会へと飛び込むスクルージ。
+
+	CreatePlainSP("絵板写", 5000);
+	Delete("絵主人*");
+	Delete("絵動画*");
+	Delete("絵効果*");
+
+
+//SEまとめ
+	CreateSE("SE02","se人体_心臓_鼓動02L");
+	CreateSE("SE03","se人体_足音_着地03");
+	CreateSE("SE04","se人体_動作_跳躍01");
+	CreateSE("SE05","se人体_足音_着地03");
+
+
+	CreateColorEXadd("絵色白", 5000, "WHITE");
+	CreateTextureEX("絵地面", 100, Center, Middle, "cg/bg/x/bg004012_1_教会外観地面_x01.jpg");
+	CreateTextureEX("絵外套", 200, -130, -140, "cg/ev/x/ev9000スクルージ着地汎用_マント_x01.png");
+	CreateTextureEX("絵足左", 1000, 440, -20, "cg/ef/x/ef_蹴りb.png");
+	CreateTextureEX("絵足右", 1000, -100, -480, "cg/ef/x/ef_蹴りa.png");
+	CreateTextureEX("絵主人公", 101, -150, -620, "cg/ev/x/ev9000スクルージ着地汎用_x05.png");
+	Rotate("絵足右", 0, @0, @0, 15, null,true);
+	Rotate("絵足左", 0, @0, @0, -5, null,true);
+
+//	SetBlur("絵足右", true, 1, 300, 100, false);
+//	SetBlur("絵足左", true, 1, 300, 100, false);
+	SetBlur("絵外套", true, 1, 300, 100, false);
+
+	SetVertex("絵足右", right, bottom);
+	SetVertex("絵足左", 200, middle);
+	SetVertex("絵地面", center,0);
+
+
+
+//	CreateCameraEX("Ｃ", 0, 0, 800);
+	CreateMovieEX("絵動画", 110, Center, Middle, true, true, "dx/mv0003集中線03_白.ngs");
+	CreateTextureSP("絵教会", 100, 512, 80, "cg/bg/bg004012_1_教会外観ドア開き.jpg");
+	CreateTextureSP("絵機械", 120, 205, -410, "cg/ma/x/フライシュマン_攻撃_正面_x01.png");
+	CreateTextureSP("絵立絵", 150, -360, 287, "cg/ev/x/ev0205重機エンドレイヴ登場_x01_キャラのみ.png");
+
+
+	Request("絵立絵", Smoothing);
+	Request("絵教会", Smoothing);
+	SetVertex("絵動画", 200, 150);
+	SetVertex("絵機械", 1000, 870);
+	SetVertex("絵立絵", 700, 0);
+	SetShade("絵教会", MEDIUM);
+	SetShade("絵機械", LIGHT);
+
+	Zoom("絵動画", 0, 4000, 4000, null, true);
+	Zoom("絵立絵", 0, 1700, 1700, null, true);
+	Zoom("絵教会", 0, 2000, 2000, null, true);
+	Rotate("絵機械", 0, @0, @0, @-10, null,true);
+	Rotate("絵立絵", 0, @0, @0, @40, null,true);
+
+	SetBlur("絵機械", true, 2, 300, 200, false);
+	SetBlur("絵立絵", true, 2, 300, 300, false);
+	SetBlur("絵教会", true, 1, 300, 300, false);
+
+	SetVolume_Loop("@lx015b",2500,1,null);
+//	SetVolumeEX("@lx0*", 500, 1, null);
+	MusicStart("SE02",500,700,0,1000,null,true);
+
+	Fade("絵動画", 0, 300, null, true);
+	DrawTransition("絵動画", 0, 0, 300, 400, null, "cg/data/circle_10_00_1.png", true);
+
+
+	MoveFTP1("@絵立絵",20000,6,40);
+	MoveFTP2("@絵機械",10000,3,5);
+	MoveFTP3("@絵教会",35000,2,3);
+
+
+
+
+	Zoom("絵教会", 5000, 2100, 2100, null, false);
+	Zoom("絵機械", 5000, 1300, 1300, null, false);
+	Zoom("絵立絵", 5000, 1400, 1400, null, false);
+
+	Zoom("絵板写", 300, 2000, 2000, Dxl3, false);
+	FadeDelete("絵板写", 300, Dxl2, true);
+
+
+	Wait(2000);
+
+	CreatePlainSP("絵板写", 5000);
+	Delete("絵動画");
+	Delete("絵立絵");
+	Delete("絵教会");
+	Delete("絵機械");
+	MoveFTP1stop();
+	MoveFTP2stop();
+	MoveFTP3stop();
+	Fade("絵地面", 0, 1000, null, true);
+	Fade("絵主人公", 0, 1000, null, true);
+	CreatePlainSP("絵拡大", 3000);
+	SetBlur("絵拡大", true, 1, 300, 100, false);
+	SetVertex("絵拡大", center,bottom);
+	Delete("絵主人公");
+	MusicStart("SE03",0,1000,0,1000,null,false);
+	Fade("絵足*", 0, 1000, null, true);
+	Fade("絵外套", 0, 1000, null, true);
+	Zoom("絵拡大", 500, 1500, 1500, Dxl3, false);
+	FadeDelete("絵板写", 150, Axl3, true);
+	SetVolumeEX("SE03", 200, 0, null);
+	SetVolumeEX("SE02", 0, 0, null);
+	MusicStart("SE04",0,1300,0,1000,null,false);
+	Zoom("絵地面", 400, 1500, 1500, Axl2, false);
+	Zoom("絵足左", 200, 2000, 2000, Dxl3, false);
+	Zoom("絵足右", 200, 2000, 2000, Dxl3, false);
+	Zoom("絵外套", 300, 2000, 2000, Dxl2, false);
+	Move("絵外套", 300, @0, -1340, Axl3, false);
+	Move("絵足左", 300, @0, -1840, Axl2, false);
+	Move("絵足右", 200, @0, -2180, Axl2, false);
+	FadeDelete("絵拡大", 150, Axl3, true);
+	Fade("絵色白", 300, 1000, Axl3, true);
+
+
+	CreateTextureEX("絵背景", 1500, Center, -80, "cg/bg/l/bg004012_1_教会外観ドア開き_l.jpg");
+	CreateTextureSP("絵跳躍背景", 100, -490, -10, "cg/bg/x/bg004012_1_教会外観ドア開き_x01.jpg");
+	CreateTextureSP("絵機械", 500, 100, 90, "cg/ma/x/フライシュマン_通常_斜め後_右向2_x01.png");
+	CreateTextureSP("絵主人公", 1000, -160, -80, "cg/ev/ev9001スクルージジャンプ汎用_キャラのみ.png");
+	Request("絵背景", Smoothing);
+	Request("絵跳躍背景", Smoothing);
+	Request("絵機械", Smoothing);
+	Request("絵主人公", Smoothing);
+	SetShade("絵跳躍背景", HEAVY);
+	SetShade("絵機械", LIGHT);
+
+	Zoom("絵主人公", 0, 1500, 1500, null, true);
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+
+	Wait(200);
+
+	Move("絵跳躍背景", 3000, -500, @0, null, false);
+	Move("絵機械", 3000, 150, 100, null, false);
+	Move("絵主人公", 3000, -210, -70, null, false);
+	FadeDelete("絵色白", 1000, null, true);
+
+	Wait(1500);
+	SetVolume_Loop("@lx015b",200,1000,null);
+
+//	SetVolumeEX("@lx0*", 200, 1000, null);
+	MusicStart("SE05",0,1000,0,1000,null,false);
+	Move("絵跳躍背景", 300, -510, @0, Dxl2, false);
+	Move("絵機械", 300, 250, 150, Dxl2, false);
+	Move("絵主人公", 300, -310, -20, Dxl2, false);
+	Move("絵背景", 200, @0, -340, Axl2, false);
+	Fade("絵背景", 200, 1000, Dxl2, true);
+	Shake("絵背景", 200, 0, 15, 0, 0, 1000, Dxl2, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0095]
+……좋아! 이제 오우마 마나를……!
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+
+//☆☆☆
+	CreatePlainSP("絵板写", 5000);
+	CreatePlainEXadd("絵光", 6000);
+	CreateColorEXadd("絵色白", 5000, "WHITE");
+	CreateTextureEX("絵炎背景", 1000, 550, Middle, "cg/bg/bg004011_1_教会内部火災.jpg");
+	CreateTextureEX("絵姉", 1100, 60, -910, "cg/st/x/stマナ_通常_normal2_x01.png");
+	CreateTextureEX("絵姉上", 2000, -130, -200, "cg/ev/x/ev0407マナ暴走_x01_マナ叫び.png");
+	CreateTextureEXadd("絵姉上明", 2000, -130, -200, "cg/ev/x/ev0407マナ暴走_x01_マナ叫び.png");
+
+
+
+	CreateEffectDropSP("絵火粉", 1500, 0, 0, 1024, 576, 40, 10, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("絵火粉", 0, @0, @0, 25, null,true);
+	Request("絵火粉", AddRender);
+	Zoom("絵火粉", 0, 2500, 2500, null, true);
+	Zoom("絵演背*", 0, 1700, 1700, null, true);
+
+
+	Request("絵姉*", Smoothing);
+	Request("絵炎背景", Smoothing);
+	SetVertex("絵炎背景", right, 300);
+	SetVertex("絵姉", center, 0);
+	Zoom("絵炎背景", 0, 4000, 4000, null, true);
+	Zoom("絵姉", 0, 1500, 1500, null, true);
+
+
+//SEまとめ
+	CreateSE("SE01","se擬音_光01");
+	CreateSE("SE02","se擬音_光04");
+	CreateSE("SE03","se擬音_効果_ハウリング01");
+	CreateSE("SE04","se戦闘_動作_突進01");
+
+
+	Delete("絵地面");
+	Delete("絵外套");
+	Delete("絵足*");
+//	Delete("絵背景");
+	Delete("絵跳躍*");
+	Delete("絵機械");
+	Delete("絵主人公");
+
+	MusicStart("SE01",0,1300,0,1800,Dxl3,false);
+	MusicStart("SE03",0,1000,0,1800,Dxl3,false);
+	Shake("絵光", 300, 50, 50, 0, 0, 500, Dxl2, false);
+	Zoom("絵光", 300, 1200, 1200, Dxl2, false);
+	Fade("絵光", 200, 1000, Dxl2, false);
+	Fade("絵色白", 200, 1000, Axl2, true);
+	Wait(100);
+	MusicStart("SE02",0,1800,0,1500,Dxl3,false);
+	SetVolumeEX("SE03", 500, 0, Dxl2);
+	Fade("絵色白", 200, 0, Dxl2, false);
+	Shake("絵板写", 300, 50, 50, 0, 0, 500, Dxl2, false);
+	FadeDelete("絵光", 200, Axl2, false);
+
+	Wait(300);
+
+//マナの力が一段と高まる。
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0097]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX04/0300120a01">
+｡ｸ｡ｦ｡ｦﾀｧﾇ霽ﾘ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//パスト機を何とか避けて、教会の中へ飛び込むスクルージ。
+	SetVolume_Loop("@lx015b",500,0,null);
+	Delete("絵背景");
+	Fade("絵炎背景", 0, 1000, null, true);
+
+	MusicStart("SE04",0,1000,0,1100,Dxl3,false);
+	Zoom("絵板写", 300, 2000, 2000, Dxl3, false);
+	Wait(100);
+	FadeDelete("絵板写", 200, Dxl2, true);
+	CreateSE("SE90","se背景_ガヤ_建物炎上_L");
+	CreateSE("SE01","se擬音_光04");
+	MusicStart("SE90",0,500,0,1000,null,true);
+
+	Move("絵姉", 300, -67, @0, Dxl1, false);
+	Fade("絵姉", 300, 1000, Dxl1, true);
+
+
+
+////////////////////////////////////////
+//◆◆六本木／燃える教会内部
+
+//シーン切り替えはシームレスに。
+
+{	DeleteFw();}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX04/0300130b05">
+「이대로라면……」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+	SetVolumeEX("SE90", 1000, 0, null);
+	Zoom("絵炎背景", 300, 4300, 4300, AxlDxl, false);
+	Zoom("絵姉", 300, 2000, 2000, Dxl2, false);
+	Move("絵炎背景", 300, @0, 200, AxlDxl, false);
+	Move("絵姉", 300, @0, -500, Dxl3, false);
+	Move("絵姉上*", 300, -200, 0, Axl3, false);
+	Fade("絵姉", 300, 0, Axl1, false);
+	Fade("絵姉上", 300, 1000, Dxl3, true);
+	Wait(100);
+	MusicStart("SE01",0,1500,0,1100,null,false);
+	Zoom("絵姉上明", 500, 1050, 1050, Dxl1, false);
+	Fade("絵姉上明", 300, 500, Axl3, false);
+	Fade("絵色白", 500, 1000, Dxl3, true);
+
+
+{	DeleteFw();}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0115]
+//【マナ】
+<voice name="ｸｶｳｪ" class="マナ" src="voice/LX04/0300140b05">
+｡ｸ｡ｪ｡ｪｳｻｰ｡ ｳｻｰ｡ ｾﾆｴﾏｰﾔ ｵﾅ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	Delete("絵姉*");
+	Delete("絵炎*");
+
+	CreateTextureSP("絵背景", 100, 0, 435, "cg/bg/bg004011_1_教会内部火災.jpg");
+	CreateTextureSP("絵集", 505, 110, 370, "cg/st/x/stシュウ_通常_fear_x01.png");
+	CreateTextureEX("絵涯", 500, 370, 430, "cg/st/x/stガイ_通常_serious2.png");
+	SetShade("絵背景*", MEDIUM);
+	Request("絵*", Smoothing);
+	SetVertex("絵背景", 0, bottom);
+
+	Zoom("絵背景", 0, 3900, 3900, null, true);
+	Zoom("絵集*", 0, 1300, 1300, null, true);
+	Zoom("絵涯*", 0, 1500, 1500, null, true);
+
+	CreateSE("SE02","se人体_足音_着地03");
+	CreateSE("SE02a","se人体_動作_掴む01");
+	CreateSE("SE03","se戦闘_動作_突進04");
+	CreateSE("SE04","se人体_足音_着地02");
+	CreateSE("SE05","se擬音_光02");
+	CreateSE("SE05b","se擬音_光02");
+
+
+	MusicStart("SE02a",0,800,0,1300,null,false);
+	Zoom("絵背景", 200, 4000, 4000, Dxl2, false);
+	Zoom("絵集*", 200, 1500, 1500, Dxl2, false);
+	Move("絵涯", 200, 520, 400, Axl2, false);
+	Fade("絵色白", 200, 0, Dxl1, false);
+	Fade("絵涯", 200, 1000, Axl2, true);
+	MusicStart("SE02",0,800,0,1300,null,false);
+	Move("絵涯", 300, @0, 1000, Dxl3, false);
+	Move("絵集", 300, @0, 1020, Dxl3, false);
+	Zoom("絵集", 400, 1000, 1000, Dxl2, false);
+	Zoom("絵涯", 400, 1000, 1000, Dxl2, false);
+	Fade("絵色白", 200, 1000, Dxl1, true);
+	Delete("絵火粉*");
+
+
+//強い光を放つマナ。
+
+{	DeleteFw();}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【幼ガイ】
+<voice name="ｾ鋕ｰ ｰ｡ﾀﾌ" class="幼ガイ" src="voice/LX04/0300150b03">
+｡ｸ｡ｪ｡ｪﾀｹ!｡ｹ
+
+//（シュウを庇う）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+//ガイがシュウを庇う。光に飲まれていく。
+
+
+
+////////////////////////////////////////
+//◆◆六本木／燃える教会
+	CreateTextureSPadd("絵光", 1000, Center, Middle, "cg/data/circle_17_00_1.png");
+	CreateTextureSPadd("絵光弐", 1000, Center, Middle, "cg/data/circle_17_00_1.png");
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/m/bg004011_1_教会内部火災_m.jpg");
+	Request("絵*", Smoothing);
+
+	Zoom("絵背景", 0, 800, 800, Dxl2, true);
+
+	Fade("絵光弐", 0, 200, null, true);
+
+	MusicStart("SE03",0,1000,0,1000,null,false);
+	Zoom("絵背景", 200, 1000, 1000, Dxl2, false);
+//	Fade("絵色白", 0, 0, null, false);
+	DrawTransition("絵色白", 200, 1000, 0, 100, Dxl1, "cg/data/zoom_01_00_1.png", false);
+	Wait(150);
+	Shake("絵背景", 200, 20, 20, 0, 0, 1000, Dxl2, true);
+	MusicStart("SE04",0,800,0,1300,null,false);
+
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120a]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX04/0300160a01">
+｡ｸ｡ｪ｡ｪﾀｹ!?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+	CreatePlainSP("絵板写", 3000);
+	SetBlur("絵板写", true, 2, 300, 100, false);
+
+	CreateColorEXadd("絵色白", 5000, "WHITE");
+
+	Delete("絵集");
+	Delete("絵涯");
+	Delete("絵光*");
+	Delete("絵背景");
+
+
+	MusicStart("SE05",1000,1200,0,1300,null,false);
+	MusicStart("SE05b",1000,1800,0,1100,null,false);
+	Zoom("絵板写", 1500, 2000, 2000, null, false);
+	Wait(500);
+	Fade("絵色白", 0, 1000, null, false);
+	DrawTransition("絵色白", 500, 0, 1000, 200, Axl3, "cg/data/circle_17_00_0.png", true);
+	Delete("絵板写");
+
+//★★★：深堀：！⇒!?に修正対応
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120b]
+｡ｦ｡ｦｴﾊｾ嵭ｪ!?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete();
+
+
+	CreateColorEXadd("絵爆白", 2000, "WHITE");
+	CreateTextureEXadd("絵入口明", 105, Center, Middle, "cg/bg/x/bg004012_1_教会外観ドア開き_x02.jpg");
+	CreateTextureEXadd("絵入口爆", 105, Center, Middle, "cg/bg/x/bg004002_9_教会外観マナ暴走_x01.jpg");
+	CreateTextureSP("絵入口", 100, Center, Middle, "cg/bg/x/bg004012_1_教会外観ドア開き_x02.jpg");
+	CreateTextureEXadd("絵機械明", 1005, -450, 0, "cg/ma/x/フライシュマン_通常_斜め後_右向2_x01.png");
+	CreateTextureSP("絵機械", 1000, -450, 0, "cg/ma/x/フライシュマン_通常_斜め後_右向2_x01.png");
+
+	CreateMovieSP("絵機動画", 400, 312, Middle, true, true, "dx/mv0003集中線01_黒.ngs");
+
+	Request("絵機*", Smoothing);
+	SetVertex("絵機械*", 1200, 300);
+
+
+
+	Request("絵入口*", Smoothing);
+	Zoom("絵入口*", 0, 1520, 1550, null, true);
+	Zoom("絵入口", 0, 1500, 1500, null, true);
+	Zoom("絵機械*", 0, 1800, 1800, null, true);
+	Zoom("絵機動画", 0, 3500, 3500, null, true);
+	Rotate("絵入口*", 0, @0, @0, @15, null,true);
+	Rotate("絵機械*", 0, @0, @0, @15, null,true);
+	Fade("絵入口明", 0, 800, null, true);
+	Fade("絵機械明", 0, 800, null, true);
+
+	SetBlur("絵機械", true, 1, 300, 100, false);
+	SetBlur("絵入口", true, 1, 300, 100, false);
+
+
+	MoveFTP1("@絵入口爆",2000,10,10);
+	MoveFTP2("@絵入口明",2000,10,10);
+	MoveFTP3("@絵機械明",2000,10,15);
+
+
+
+
+
+	Zoom("絵入口", 1800, 2000, 2000, null, false);
+	Zoom("絵入口爆", 1800, 2000, 2000, null, false);
+	Zoom("絵入口明", 1800, 2000, 2000, null, false);
+	Fade("絵色白", 300, 0, null, true);
+	Fade("絵爆白", 500, 300, null, false);
+	Fade("絵機械", 500, 1000, null, false);
+	Fade("絵機械明", 500, 600, null, false);
+	Fade("絵入口爆", 500, 1000, null, false);
+
+	Wait(500);
+	CreateVOICE("パスト","LX04/0300170a04");
+	MusicStart("パスト",0,2000,0,1000,null,false);
+	Zoom("絵機械*", 300, 1000, 1000, Dxl3, false);
+	Zoom("絵入口", 300, 3000, 3000, Dxl3, false);
+	Zoom("絵入口爆", 300, 3000, 3000, Dxl3, false);
+	Zoom("絵入口明", 300, 3000, 3000, Dxl3, false);
+	Fade("絵色白", 0, 1000, null, true);
+	DrawTransition("絵色白", 250, 0, 1000, 300, Axl1, "cg/data/circle_02_00_0.png", true);
+
+	Delete("絵機*");
+	Delete("絵入*");
+	Delete("絵爆*");
+	MoveFTP1stop();
+	MoveFTP2stop();
+	MoveFTP3stop();
+
+
+//	Fw("fwパスト_通常_normal");
+//【パスト】
+//<voice name="パスト" class="パスト" src="voice/LX04/0300170a04">
+//「マナァァァァァァァ！　シュウゥゥゥゥゥゥゥ！」
+//（子供たちの名前を叫ぶパスト）
+//（ボイスをハウリング加工。セリフがわからないくらいに）
+
+//？？パスト、集の名前は知らないかも。要検証。
+
+//スクルージとパストも光に飲まれる。
+
+	Wait(2500);
+
+
+//覇：対象範囲
+//★★★★★★★★★ここから★★★★★★★★★
+
+	CreateColorEXadd("絵上白", 5000, "FFFFFF");
+
+	Fade("絵上白", 0, 1000, null, true);
+	Delete("絵色白");
+
+	CreateTextureSP("絵bg00", 200, Center, Middle, "cg/bg/bg001007_1_六本木公園.jpg");
+	CreateTextureSP("絵bg01", 200, Center, Middle, "cg/bg/bg001007_1_六本木公園.jpg");
+
+	Shake("絵bg01", 10000, 0, 1, 0, 0, 500, null, false);
+
+	Wait(1000);
+
+	Fade("絵上白", 100, 1000, null, false);
+
+	DrawTransition("絵上白", 500, 0, 1000, 300, null, "cg/data/circle_11_01_0.png", true);
+
+	Delete("絵bg01");
+
+
+	CreateTextureSP("絵bg01", 200, Center, Middle, "cg/bg/x/bg街並_shima.jpg");
+	CreateTextureadd("絵bg02", 200, Center, Middle, "cg/bg/x/bg街並_shima.jpg");
+	CreateTextureEXadd("絵bg03", 200, Center, Middle, "cg/ef/ef_vd_light01.png");
+	Move("絵bg03", 0, 412, 402, null, true);
+	SetBlur("絵bg03", true, 3, 500, 50, false);
+
+	CreateSE("SE10","se背景_特殊_地震01L");
+	CreateSE("SE01","se擬音_効果_ハウリング01");
+	CreateSE("SE02","se戦闘_破壊_爆発09");
+
+
+
+	CreateTextureSPadd("絵bg00", 1000, Center, Middle, "cg/bg/x/bg006005_3_六本木惨劇_爆発のみ_shima.png");
+	SetVertex("絵bg00", center, bottom);
+	Zoom("絵bg00", 0, 500, 500, null, true);
+	SetBlur("絵bg00", true, 3, 500, 50, false);
+
+	CreateTextureSP("絵bg12", 1000, Center, Middle, "cg/bg/x/bg街並_手前_shima.png");
+
+	CreateTextureEXadd("絵bg13", 1000, Center, Middle, "cg/bg/x/bg街並_手前_shima.png");
+	CreateTextureEX("絵bg14", 1100, Center, Middle, "cg/bg/x/bg街並_手前_shimax02.png");
+	CreateTextureEX("絵bg15", 1100, Center, Middle, "cg/bg/x/bg街並_手前_shimax02.png");
+	SetVertex("絵bg15", center, bottom);
+
+	Zoom("絵bg00", 3000, 1200, 1200, null, false);
+	Fade("絵bg03", 1000, 300, null, false);
+	Fade("絵bg02", 3000, 700, null, false);
+	Fade("絵bg13", 3000, 500, null, false);
+	Fade("絵bg14", 3000, 1000, null, false);
+	Rotate("絵bg03", 6000, @0, @0, 36000, null,false);
+	Zoom("絵bg03", 3000, 6000, 6000, null, false);
+
+	MusicStart("SE01",500,700,0,1000,null,false);
+	MusicStart("SE10",500,700,0,1000,null,true);
+
+	Fade("絵上白", 300, 0, null, true);
+
+	Wait(2700);
+
+	MusicStart("SE02",500,700,0,1000,null,false);
+	SetVolumeEX("SE10", 1000, 1000, null);
+
+	Zoom("絵bg15", 1000, 1000, 3000, Dxl1, false);
+	Fade("絵bg15", 500, 1000, Dxl2, false);
+	Fade("絵上白", 1500, 1000, Dxl2, false);
+	Zoom("絵bg03", 1500, 10000, 10000, Dxl2, true);
+
+	SetVolumeEX("SE02", 1000, 0, null);
+	SetVolumeEX("SE10", 2000, 700, null);
+
+	Delete("絵bg*");
+
+
+//	WaitKey();
+
+
+//本体
+
+	$SYSTEM_effect_drop_image = "cg/ef/x/ef_glass03_x05_shima.png";
+	$SYSTEM_effect_drop_dencity = 30;
+	$SYSTEM_effect_drop_speed = 5;
+	$SYSTEM_effect_drop_swing = 45;
+	$SYSTEM_effect_drop_rotate_z = 90;
+
+	CreateEffect("絵効果火粉", 2000, Center, Middle, 1024, 576, "Drop");
+	SetAlias("絵効果火粉","絵効果火粉");
+
+	Fade("絵効果火粉", 0, 1000, null, true);
+	Rotate("絵効果火粉", 0, @0, @0, 180, null,true);
+
+	$SYSTEM_effect_drop_image = "cg/ef/x/ef_glass03_x05_shima03.png";
+	$SYSTEM_effect_drop_dencity = 90;
+	$SYSTEM_effect_drop_speed = 10;
+	$SYSTEM_effect_drop_swing = 250;
+
+	CreateEffect("絵効果火粉2", 110, Center, Middle, 1024, 576, "Drop");
+	SetAlias("絵効果火粉2","絵効果火粉2");
+	Fade("絵効果火粉2", 0, 1000, null, true);
+	Rotate("絵効果火粉2", 0, @0, @0, 180, null,true);
+
+	CreateTextureSP("絵s100", 120, -187, -362, "cg/ev/x/ev0414マナ砕ける_キャラのみ_x01.png");
+	Request("絵s100",Smoothing);
+	SetBlur("絵s100", true, 3, 500, 50, false);
+	Fade("絵s100", 0, 1000, null, true);
+
+//add
+	CreateTextureEXadd("絵void00", 200, Center, Middle, "cg/ev/x/ev0414マナ砕ける_a_キャラのみ_x08.png");
+	Zoom("絵void00", 0, 500, 500, null, true);
+	Move("絵void00", 0, -193, -374, null, true);
+
+//add
+//	CreateTextureEXadd("絵void10", 200, Center, Middle, "cg/ev/x/ev0414マナ砕ける_a_キャラのみ_x08.png");
+//	Zoom("絵void10", 0, 500, 500, null, true);
+//	Move("絵void10", 0, -193, -374, null, true);
+
+	CreateTextureEXadd("絵void20", 120, -187, -362, "cg/ev/x/ev0414マナ砕ける_キャラのみ_x01.png");
+	Request("絵void20",Smoothing);
+	Zoom("絵void20", 0, 500, 500, null, true);
+	Move("絵void20", 0, -193, -374, null, true);
+
+	CreateColorEX("絵色白",100, "FFFFFF");
+	Fade("絵色白", 0, 1000, null, true);
+
+	CreateTextureEX("絵void01", 500, Center, Middle, "cg/ev/x/ev0414マナ砕ける_a_キャラのみ_x07.png");
+	CreateTextureEX("絵void02", 500, Center, Middle, "cg/ev/x/ev0414マナ砕ける_a_キャラのみ_x08.png");
+	CreateTextureEX("絵void03", 200, Center, Middle, "cg/ev/x/ev0414マナ砕ける_a_キャラのみ_x03.png");
+	CreateTextureEX("絵void04", 200, Center, Middle, "cg/ev/x/ev0414マナ砕ける_a_キャラのみ_x05.png");
+	CreateTextureEX("絵void05", 200, Center, Middle, "cg/ev/x/ev0414マナ砕ける_a_キャラのみ_x06.png");
+
+	Move("絵void01", 0, -193, -374, null, true);
+	Move("絵void02", 0, -193, -374, null, true);
+	Move("絵void03", 0, -193, -374, null, true);
+	Move("絵void04", 0, -193, -374, null, true);
+	Move("絵void05", 0, -193, -374, null, true);
+
+	Zoom("絵void*", 0, 500, 500, null, true);
+
+	lx0406_Flash(200);
+
+	Shake("絵s100", 500000, 0, 1, 0, 0, 1000, null, false);
+
+//	CreateColorSPadd("絵上白", 5000, "FFFFFF");
+//	WaitKey();
+
+	CreateSE("SE91","seヴォイド結晶化_l");
+	MusicStart("SE91",2000,300,0,1000,null,true);
+	CreateSE("SE92","seヴォイド崩壊02");
+
+
+	Move("絵s100", 3000, -253, -242, Dxl1, false);
+	Fade("絵上白", 2000, 0, null, true);
+
+	Wait(2000);
+
+	Fade("絵上白", 300, 1000, null, true);
+	Move("絵s100", 0, -186, -392, null, false);
+	Zoom("絵s100", 0, 500, 500, null, true);
+
+	Shake("絵s100", 500000, 0, 1, 0, 0, 1000, null, false);
+	Shake("絵void00", 500000, 1, 2, 0, 0, 1000, null, false);
+	Shake("絵void20", 500000, 0, 2, 0, 0, 1000, null, false);
+
+	Fade("絵上白", 500, 0, null, true);
+
+	SetVolumeEX("SE91", 2500, 700, null);
+
+	Wait(1000);
+
+	SetBlur("絵void00", true, 3, 500, 50, false);
+	Zoom("絵void00", 3000, 600, 600, null, false);
+	Fade("絵void00", 2000, 1000, null, false);
+	Fade("絵void20", 1000, 1000, null, true);
+
+	Wait(1000);
+
+	Delete("絵s100");
+	Delete("絵void10");
+	Delete("絵void00");
+
+	Fade("絵上白", 10, 1000, null, true);
+
+	Zoom("絵void03", 0, 300, 300, Dxl1, false);
+	Zoom("絵void04", 0, 300, 300, Dxl1, false);
+	Zoom("絵void05", 0, 300, 300, Dxl1, false);
+
+	Fade("絵void0*", 0, 1000, null, true);
+	Move("絵void01", 4500, @+30, @-50, AxlAuto, false);
+	Move("絵void02", 4300, @+30, @-60, AxlAuto, false);
+
+	Move("絵void03", 4100, @+400, @-900, AxlAuto, false);
+	Move("絵void04", 3400, @+450, @-1000, AxlAuto, false);
+	Move("絵void05", 4200, @+350, @-800, AxlAuto, false);
+
+	Zoom("絵void03", 400, 500, 500, Dxl1, false);
+	Zoom("絵void04", 400, 500, 500, Dxl1, false);
+	Zoom("絵void05", 400, 500, 500, Dxl1, false);
+
+	SetVolumeEX("SE91", 200, 0, null);
+	MusicStart("SE92",0,1000,0,1000,null,false);
+	Fade("絵上白", 300, 0, null, true);
+
+	Wait(2300);
+
+	Fade("絵上白", 1000, 1000, null, true);
+
+	CreateSE("SE77","se戦闘_破壊_爆発09");
+	MusicStart("SE77",0,800,0,1000,null,false);
+
+
+	Delete("絵効果*");
+	Delete("絵void*");
+	Delete("@lx0406_*");
+
+	CreateColorEX("絵色黒", 5000, "000000");
+
+	Fade("絵色黒", 3000, 1000, null, true);
+	SetVolumeEX("SE10", 2000, 0, null);
+	Delete("絵上白");
+	Delete("絵色白");
+
+	SetVolumeEX("SE77", 7000, 0, null);
+
+	Wait(2000);
+
+////////////////////////////////////////
+//◆◆六本木
+
+//六本木全体が光に包まれる。
+
+//キャンサー化して砕けていく六本木の住人たち。
+
+//光の中、砕けてゆくマナ。
+
+//？？：砕けるマナ、一枚絵欲しいです。
+
+//アニメ12話の描写参照
+
+////////////////////////////////////////
+//黒バックに文字だけ浮かぶ。
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+보라&, 창백한 말이 있더라&.
+이에 탄 자의 이름을 죽음이라 하니&, 황천이 그 뒤를 따르더라&.
+
+</PRE>
+	SetTextM();
+	TypeBeginTN(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	SetVolumeEX("SE*", 3000, 0, null);
+	Wait(2000);
+
+	ClearFadeAll(1000, true);
+
+	Wait(3000);
+
+//覇：対象範囲
+//★★★★★★★★★ここまで★★★★★★★★★
+
+
+//→→LX0500
+
+}

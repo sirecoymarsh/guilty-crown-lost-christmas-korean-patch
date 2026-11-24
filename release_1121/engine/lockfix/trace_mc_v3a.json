@@ -1,0 +1,120 @@
+{
+ "run": "lk_mc_v3a_081045",
+ "clicks": [
+  {
+   "click": "46:200:71",
+   "sent": 46.9,
+   "first": "s8",
+   "react_ms": 110,
+   "s8_s9": 531,
+   "s3_s4": 63,
+   "s4_s7": 484,
+   "ready_ms": 1188
+  },
+  {
+   "click": "52:200:159",
+   "sent": 53.3,
+   "first": "s8",
+   "react_ms": 54,
+   "s8_s9": 1015,
+   "s3_s4": 63,
+   "s4_s7": 406,
+   "ready_ms": 1554
+  },
+  {
+   "click": "58:200:115",
+   "sent": 58.9,
+   "first": "s8",
+   "react_ms": 48,
+   "s8_s9": 375,
+   "s3_s4": 47,
+   "s4_s7": 391,
+   "ready_ms": 876
+  },
+  {
+   "click": "64:200:203",
+   "sent": 64.9,
+   "first": "s8",
+   "react_ms": 110,
+   "s8_s9": 688,
+   "s3_s4": 78,
+   "s4_s7": 406,
+   "ready_ms": 1282
+  },
+  {
+   "click": "70:512:559",
+   "sent": 71.1,
+   "first": "s3",
+   "react_ms": 19,
+   "s3_s4": 63,
+   "s4_s7": 422,
+   "ready_ms": 504
+  },
+  {
+   "click": "76:700:115",
+   "sent": 76.9,
+   "first": "s8",
+   "react_ms": 32,
+   "s8_s9": 594,
+   "s3_s4": 32,
+   "s4_s7": 406,
+   "ready_ms": 1079
+  },
+  {
+   "click": "82:200:247",
+   "sent": 83.1,
+   "first": "s8",
+   "react_ms": 98,
+   "s8_s9": 375,
+   "s3_s4": 62,
+   "s4_s7": 438,
+   "ready_ms": 973
+  },
+  {
+   "click": "88:700:379",
+   "sent": 88.9,
+   "first": "s8",
+   "react_ms": 94,
+   "s8_s9": 641,
+   "s3_s4": 63,
+   "s4_s7": 406,
+   "ready_ms": 1204
+  },
+  {
+   "click": "94:700:423",
+   "sent": 95.0,
+   "first": "s8",
+   "react_ms": 104,
+   "s8_s9": 719,
+   "s3_s4": 46,
+   "s4_s7": 375,
+   "ready_ms": 1244
+  },
+  {
+   "click": "100:200:291",
+   "sent": 101.1,
+   "first": "s8",
+   "react_ms": 98,
+   "s8_s9": 375,
+   "s3_s4": 62,
+   "s4_s7": 422,
+   "ready_ms": 957
+  },
+  {
+   "click": "106:512:559",
+   "sent": 106.9,
+   "first": "s3",
+   "react_ms": 110,
+   "s3_s4": 31,
+   "s4_s7": 375,
+   "ready_ms": 516
+  }
+ ],
+ "locks": {
+  "stepped-aside": 6,
+  "delete-stopped": 3
+ },
+ "frame_gaps": [],
+ "exited_early": null,
+ "dialogs": []
+}

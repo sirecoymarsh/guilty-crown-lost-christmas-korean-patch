@@ -1,0 +1,126 @@
+{
+ "run": "lk_mc_cand_old_084736",
+ "clicks": [
+  {
+   "click": "46:200:71",
+   "sent": 47.1,
+   "first": "s8",
+   "react_ms": 2,
+   "s8_s9": 469,
+   "s3_s4": 31,
+   "s4_s7": 344,
+   "ready_ms": 846
+  },
+  {
+   "click": "52:200:159",
+   "sent": 52.9,
+   "first": "s8",
+   "react_ms": 77,
+   "s8_s9": 860,
+   "s3_s4": 46,
+   "s4_s7": 391,
+   "ready_ms": 1374
+  },
+  {
+   "click": "58:200:115",
+   "sent": 58.9,
+   "first": "s8",
+   "react_ms": 77,
+   "s8_s9": 375,
+   "s3_s4": 47,
+   "s4_s7": 391,
+   "ready_ms": 890
+  },
+  {
+   "click": "64:200:203",
+   "sent": 64.9,
+   "first": "s8",
+   "react_ms": 187,
+   "s8_s9": 703,
+   "s3_s4": 47,
+   "s4_s7": 375,
+   "ready_ms": 1312
+  },
+  {
+   "click": "70:512:559",
+   "sent": 70.9,
+   "first": "s3",
+   "react_ms": 108,
+   "s3_s4": 47,
+   "s4_s7": 375,
+   "ready_ms": 530
+  },
+  {
+   "click": "76:700:115",
+   "sent": 76.9,
+   "first": "s8",
+   "react_ms": 46,
+   "s8_s9": 562,
+   "s3_s4": 16,
+   "s4_s7": 359,
+   "ready_ms": 983
+  },
+  {
+   "click": "82:200:247",
+   "sent": 82.9,
+   "first": "s8",
+   "react_ms": 62,
+   "s8_s9": 359,
+   "s3_s4": 46,
+   "s4_s7": 344,
+   "ready_ms": 827
+  },
+  {
+   "click": "88:700:379",
+   "sent": 88.9,
+   "first": "s8",
+   "react_ms": 30,
+   "s8_s9": 625,
+   "s3_s4": 47,
+   "s4_s7": 344,
+   "ready_ms": 1046
+  },
+  {
+   "click": "94:700:423",
+   "sent": 95.0,
+   "first": "s8",
+   "react_ms": 40,
+   "s8_s9": 593,
+   "s3_s4": 31,
+   "s4_s7": 344,
+   "ready_ms": 1024
+  },
+  {
+   "click": "100:200:291",
+   "sent": 100.9,
+   "first": "s8",
+   "react_ms": 46,
+   "s8_s9": 359,
+   "s3_s4": 63,
+   "s4_s7": 375,
+   "ready_ms": 843
+  },
+  {
+   "click": "106:512:559",
+   "sent": 107.1,
+   "first": "s3",
+   "react_ms": 33,
+   "s3_s4": 47,
+   "s4_s7": 375,
+   "ready_ms": 455
+  }
+ ],
+ "locks": {
+  "stop-asked": 4,
+  "stepped-aside": 4,
+  "delete-stopped": 3
+ },
+ "frame_gaps": [
+  [
+   53.0,
+   0.79
+  ]
+ ],
+ "exited_early": null,
+ "dialogs": []
+}

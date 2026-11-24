@@ -1,0 +1,181 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0604_12.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0604_20.nss";
+
+}
+
+
+scene lx0604_12.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+if($PreGameName!="lx0604_10sl.nss"){
+	//WaitKey();
+	//★特殊ループＢＧＭセット
+	CreateBGM_Loop("lx018a");
+	//▽特殊ループ再生
+	SoundPlay_Loop("lx018a",0,1000,true);
+}
+
+
+	PrintGO("上背景", 30000);
+
+//←←諦める
+
+//◆◆ヴォイド空間
+
+	CreateColorEX("絵上", 10001, BLACK);
+
+	//★徒歩：ＳＥ
+	//CreateSE("SE02","seヴォイドエフェクト_l");
+	//CreateSE("SE03","seヴォイド取り出し01");
+	//MusicStart("SE02",500,1000,0,1000,null,false);
+	//MusicStart("SE03",0,700,0,1000,null,false);
+
+	//★徒歩：ＳＥ
+	CreateSE("SE04","seヴォイド崩壊02");
+	MusicStart("SE04",0,700,0,1000,null,false);
+
+	CreateMovie("絵ムービー１", 100, Center, Middle, true, true, "dx/mv結晶ループ.ngs");
+	SetAlias("絵ムービー１", "絵ムービー１");
+	Zoom("絵ムービー１", 0, 2000, 2000, Dxl2, true);
+
+	FadeDelete("上背景", 300, null, true);
+
+	Wait(3000);
+
+	Fade("絵上", 1000, 1000, null, true);
+	Delete("絵ムービー１");
+//	WaitKey();
+
+
+//死ぬ直前、イェット・トゥー・カムは父スクルージの顔を見る。
+
+	CreateTextureSP("絵穴１", 1000, Center, Middle, "cg/ef/x/ef_穴.png");
+	Request("絵穴１", Smoothing);
+	CreateColorSP("絵色１", 100, WHITE);
+	CreateTextureSP("絵背景１", 100, -100, -100, "cg/bg/l/bg900000_1_空汎用_l.jpg");
+	CreateTextureSPadd("絵背景２", 100, -100, -100, "cg/bg/l/bg900000_1_空汎用_l.jpg");
+	SetShade("絵背景２", LIGHT);
+	SetBlur("絵背景２", true, 1, 300, 50, false);
+
+//	CreateTextureSP("絵人物１", 100, 1024, 0, "cg/ev/x/ev9002スクルージダッシュ汎用_a_x01カット01.png");
+	CreateTextureSP("絵人物１", 100, 386, 576, "cg/ev/x/ev9002スクルージダッシュ汎用_a_x01カット01.png");
+	SetVertex("絵人物１", 100, 150);
+	Request("絵人物１", Smoothing);
+
+	CreateTextureSP("絵結晶１", 100, 204, -60, "cg/ef/ef_結晶割れ01.png");
+	CreateTextureSP("絵結晶２", 100, 359, 4, "cg/ef/ef_結晶割れ07.png");
+	Zoom("絵結晶１", 0, 2000, 2000, Dxl2, true);
+	Zoom("絵結晶２", 0, 2000, 2000, Dxl2, true);
+	Request("絵結晶１", Smoothing);
+	Request("絵結晶２", Smoothing);
+
+//	Fade("絵穴１", 0, 0, null, false);
+//	Fade("絵上", 0, 0, null, false);
+//	WaitKey();
+
+	FadeFR("絵背景２",0,1000,6000,0,0,50,null,false);
+	Zoom("絵背景１", 6000, 1000, 1000, null, false);
+	Zoom("絵背景２", 6000, 1000, 1000, null, false);
+
+//	Rotate("絵結晶１", 6000, @0, @0, 10, null, false);
+//	Rotate("絵結晶２", 6000, @0, @0, 20, null, false);
+	Zoom("絵結晶１", 6000, 500, 500, null, false);
+	Zoom("絵結晶２", 6000, 800, 800, null, false);
+	Zoom("絵穴１", 6000, 800, 800, null, false);
+	Move("絵人物１", 6000, 386, 65, null, false);
+	Fade("絵上", 1000, 0, null, false);
+
+	WaitAction("絵人物１", null);
+
+	CreatePlainEX("絵実像１", 10000);
+	SetShade("絵実像１", MEDIUM);
+
+	Fade("絵実像１", 2000, 1000, null, false);
+	Zoom("絵実像１", 2000, 1100, 1100, null, false);
+	Fade("絵上", 2000, 1000, null, true);
+//	WaitKey();
+
+/*
+	Move("絵人物１", 200, 426, 65, Dxl1, true);
+
+	Move("絵背景２", 0, @0, @0, null, false);
+	Zoom("絵背景１", 0, @0, @0, null, false);
+	Zoom("絵背景２", 0, @0, @0, null, false);
+	Rotate("絵結晶１", 0, @0, @0, @0, null, false);
+	Rotate("絵結晶２", 0, @0, @0, @0, null, false);
+	Zoom("絵結晶１", 0, @0, @0, null, false);
+	Zoom("絵結晶２", 0, @0, @0, null, false);
+	Zoom("絵穴１", 0, @0, @0, null, false);
+//	WaitKey();
+
+	Wait(2000);
+
+//	CreatePlainSP("上背景", 10001);
+	CreateColorEXmul("絵色赤", 10000, RED);
+
+	Move("絵人物１", 0, @0, @-100, Axl1, false);
+	Zoom("絵人物１", 0, 4000, 4000, Axl1, false);
+	Zoom("絵穴１", 0, 3000, 3000, Axl1, false);
+//	Fade("絵色赤", 0, 300, null, false);
+//	SetBlur("絵人物１", true, 1, 300, 200, false);
+//	FadeDelete("上背景", 0, null, false);
+
+	Shake("絵背景*", 500, 0, 1, 0, 0, 500, null, false);
+	Shake("絵穴１", 500, 0, 1, 0, 0, 500, null, false);
+//	FadeF4("絵人物１",0,1000,500,0,0,Dxl1,false);
+	Move("絵人物１", 500, @-40, @0, null, false);
+
+	Wait(300);
+	Fade("絵上", 0, 1000, null, true);
+*/
+
+//→→最後の選択
+
+//	ClearFadeAll(1000, true);
+
+}

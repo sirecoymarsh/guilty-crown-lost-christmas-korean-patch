@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "seek": 0,
+    "start": 103.53999999999999,
+    "end": 104.94,
+    "text": " Musik",
+    "tokens": [
+      50365,
+      14156,
+      50565
+    ],
+    "avg_logprob": -0.8740234673023224,
+    "compression_ratio": 0.38461538461538464,
+    "no_speech_prob": 0.87060546875,
+    "words": [
+      {
+        "start": 9.54,
+        "end": 10.94,
+        "word": " Musik",
+        "probability": 0.135498046875
+      }
+    ],
+    "temperature": 0.0
+  },
+  {
+    "id": 2,
+    "seek": 3000,
+    "start": 133.2,
+    "end": 134.6,
+    "text": " Musik",
+    "tokens": [
+      50365,
+      14156,
+      51615
+    ],
+    "avg_logprob": -1.0541539192199707,
+    "compression_ratio": 0.38461538461538464,
+    "no_speech_prob": 0.047882080078125,
+    "words": [
+      {
+        "start": 39.2,
+        "end": 40.6,
+        "word": " Musik",
+        "probability": 0.070068359375
+      }
+    ],
+    "temperature": 1.0
+  }
+]

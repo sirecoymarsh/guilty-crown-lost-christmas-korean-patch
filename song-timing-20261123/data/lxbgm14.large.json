@@ -1,0 +1,1626 @@
+{
+  "source": "user game sound.npa",
+  "audio_sha256": "f2575241b62eae6ef426ce1abea3b231a7d1820608beaae79221966c30ca3aca",
+  "model": "P:\\AI\\Codex\\projects\\drakoi-korean\\vocal-subtitles\\tools\\faster-whisper-large-v3",
+  "language": "en",
+  "task": "transcribe",
+  "duration": 251.413375,
+  "segments": [
+    {
+      "id": 1,
+      "seek": 3000,
+      "start": 30.78,
+      "end": 35.38,
+      "text": " They were so bad to fight at all",
+      "tokens": [
+        50365,
+        814,
+        645,
+        370,
+        1578,
+        281,
+        2092,
+        412,
+        439,
+        50765
+      ],
+      "avg_logprob": -0.41082974960064067,
+      "compression_ratio": 1.1724137931034482,
+      "no_speech_prob": 0.5166015625,
+      "words": [
+        {
+          "start": 30.78,
+          "end": 32.04,
+          "word": " They",
+          "probability": 0.4853515625
+        },
+        {
+          "start": 32.04,
+          "end": 32.2,
+          "word": " were",
+          "probability": 0.88232421875
+        },
+        {
+          "start": 32.2,
+          "end": 32.62,
+          "word": " so",
+          "probability": 0.98828125
+        },
+        {
+          "start": 32.62,
+          "end": 33.1,
+          "word": " bad",
+          "probability": 0.498779296875
+        },
+        {
+          "start": 33.1,
+          "end": 33.54,
+          "word": " to",
+          "probability": 0.927734375
+        },
+        {
+          "start": 33.54,
+          "end": 34.02,
+          "word": " fight",
+          "probability": 0.64306640625
+        },
+        {
+          "start": 34.02,
+          "end": 34.7,
+          "word": " at",
+          "probability": 0.70166015625
+        },
+        {
+          "start": 34.7,
+          "end": 35.38,
+          "word": " all",
+          "probability": 0.9931640625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 2,
+      "seek": 3000,
+      "start": 40.74,
+      "end": 45.68,
+      "text": " No matter seems to find their cause",
+      "tokens": [
+        50915,
+        883,
+        1871,
+        2544,
+        281,
+        915,
+        641,
+        3082,
+        51215
+      ],
+      "avg_logprob": -0.41082974960064067,
+      "compression_ratio": 1.1724137931034482,
+      "no_speech_prob": 0.5166015625,
+      "words": [
+        {
+          "start": 40.74,
+          "end": 42.0,
+          "word": " No",
+          "probability": 0.471923828125
+        },
+        {
+          "start": 42.0,
+          "end": 42.42,
+          "word": " matter",
+          "probability": 0.8837890625
+        },
+        {
+          "start": 42.42,
+          "end": 42.92,
+          "word": " seems",
+          "probability": 0.80810546875
+        },
+        {
+          "start": 42.92,
+          "end": 43.5,
+          "word": " to",
+          "probability": 0.984375
+        },
+        {
+          "start": 43.5,
+          "end": 44.08,
+          "word": " find",
+          "probability": 0.8955078125
+        },
+        {
+          "start": 44.08,
+          "end": 44.88,
+          "word": " their",
+          "probability": 0.79150390625
+        },
+        {
+          "start": 44.88,
+          "end": 45.68,
+          "word": " cause",
+          "probability": 0.7919921875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 3,
+      "seek": 3000,
+      "start": 51.84,
+      "end": 57.16,
+      "text": " Raindrops were falling all around",
+      "tokens": [
+        51465,
+        7591,
+        471,
+        49715,
+        645,
+        7440,
+        439,
+        926,
+        51815
+      ],
+      "avg_logprob": -0.41082974960064067,
+      "compression_ratio": 1.1724137931034482,
+      "no_speech_prob": 0.5166015625,
+      "words": [
+        {
+          "start": 51.84,
+          "end": 53.1,
+          "word": " Raindrops",
+          "probability": 0.95263671875
+        },
+        {
+          "start": 53.1,
+          "end": 53.64,
+          "word": " were",
+          "probability": 0.931640625
+        },
+        {
+          "start": 53.64,
+          "end": 55.08,
+          "word": " falling",
+          "probability": 0.982421875
+        },
+        {
+          "start": 55.08,
+          "end": 56.06,
+          "word": " all",
+          "probability": 0.759765625
+        },
+        {
+          "start": 56.06,
+          "end": 57.16,
+          "word": " around",
+          "probability": 0.98974609375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 4,
+      "seek": 6000,
+      "start": 61.21999999999999,
+      "end": 66.98,
+      "text": " Let me skate this place, be untouchable",
+      "tokens": [
+        50365,
+        961,
+        385,
+        18237,
+        341,
+        1081,
+        11,
+        312,
+        1701,
+        2220,
+        712,
+        50782
+      ],
+      "avg_logprob": -0.33515625,
+      "compression_ratio": 1.2393162393162394,
+      "no_speech_prob": 0.73486328125,
+      "words": [
+        {
+          "start": 61.21999999999999,
+          "end": 62.3,
+          "word": " Let",
+          "probability": 0.39013671875
+        },
+        {
+          "start": 62.3,
+          "end": 62.64,
+          "word": " me",
+          "probability": 0.96484375
+        },
+        {
+          "start": 62.64,
+          "end": 63.04,
+          "word": " skate",
+          "probability": 0.74267578125
+        },
+        {
+          "start": 63.04,
+          "end": 63.64,
+          "word": " this",
+          "probability": 0.91943359375
+        },
+        {
+          "start": 63.64,
+          "end": 64.28,
+          "word": " place,",
+          "probability": 0.779296875
+        },
+        {
+          "start": 64.72,
+          "end": 65.06,
+          "word": " be",
+          "probability": 0.56884765625
+        },
+        {
+          "start": 65.06,
+          "end": 66.98,
+          "word": " untouchable",
+          "probability": 0.9798177083333334
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 5,
+      "seek": 6000,
+      "start": 69.69999999999999,
+      "end": 76.62,
+      "text": " Here comes Kelly Light and it shadows me through my dreams",
+      "tokens": [
+        50782,
+        1692,
+        1487,
+        12345,
+        8279,
+        293,
+        309,
+        14740,
+        385,
+        807,
+        452,
+        7505,
+        51271
+      ],
+      "avg_logprob": -0.33515625,
+      "compression_ratio": 1.2393162393162394,
+      "no_speech_prob": 0.73486328125,
+      "words": [
+        {
+          "start": 69.69999999999999,
+          "end": 70.78,
+          "word": " Here",
+          "probability": 0.5947265625
+        },
+        {
+          "start": 70.78,
+          "end": 71.2,
+          "word": " comes",
+          "probability": 0.98291015625
+        },
+        {
+          "start": 71.2,
+          "end": 72.2,
+          "word": " Kelly",
+          "probability": 0.157958984375
+        },
+        {
+          "start": 72.2,
+          "end": 72.68,
+          "word": " Light",
+          "probability": 0.60595703125
+        },
+        {
+          "start": 72.68,
+          "end": 73.32,
+          "word": " and",
+          "probability": 0.465087890625
+        },
+        {
+          "start": 73.32,
+          "end": 73.58,
+          "word": " it",
+          "probability": 0.78369140625
+        },
+        {
+          "start": 73.58,
+          "end": 74.38,
+          "word": " shadows",
+          "probability": 0.69580078125
+        },
+        {
+          "start": 74.38,
+          "end": 75.16,
+          "word": " me",
+          "probability": 0.9951171875
+        },
+        {
+          "start": 75.16,
+          "end": 75.72,
+          "word": " through",
+          "probability": 0.626953125
+        },
+        {
+          "start": 75.72,
+          "end": 76.08,
+          "word": " my",
+          "probability": 0.9892578125
+        },
+        {
+          "start": 76.08,
+          "end": 76.62,
+          "word": " dreams",
+          "probability": 0.295166015625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 6,
+      "seek": 6000,
+      "start": 78.12,
+      "end": 82.74,
+      "text": " My world feels gone, we can't follow the rules",
+      "tokens": [
+        51271,
+        1222,
+        1002,
+        3417,
+        2780,
+        11,
+        321,
+        393,
+        380,
+        1524,
+        264,
+        4474,
+        51512
+      ],
+      "avg_logprob": -0.33515625,
+      "compression_ratio": 1.2393162393162394,
+      "no_speech_prob": 0.73486328125,
+      "words": [
+        {
+          "start": 77.97999999999999,
+          "end": 78.52,
+          "word": " My",
+          "probability": 0.8408203125
+        },
+        {
+          "start": 78.52,
+          "end": 79.02,
+          "word": " world",
+          "probability": 0.85205078125
+        },
+        {
+          "start": 79.02,
+          "end": 79.58,
+          "word": " feels",
+          "probability": 0.7421875
+        },
+        {
+          "start": 79.58,
+          "end": 80.2,
+          "word": " gone,",
+          "probability": 0.69287109375
+        },
+        {
+          "start": 80.48,
+          "end": 80.76,
+          "word": " we",
+          "probability": 0.95556640625
+        },
+        {
+          "start": 80.76,
+          "end": 81.26,
+          "word": " can't",
+          "probability": 0.973388671875
+        },
+        {
+          "start": 81.26,
+          "end": 81.88,
+          "word": " follow",
+          "probability": 0.9873046875
+        },
+        {
+          "start": 81.88,
+          "end": 82.26,
+          "word": " the",
+          "probability": 0.951171875
+        },
+        {
+          "start": 82.26,
+          "end": 82.74,
+          "word": " rules",
+          "probability": 0.9384765625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 7,
+      "seek": 8274,
+      "start": 82.74,
+      "end": 87.74,
+      "text": " But forever now we're climbing up",
+      "tokens": [
+        50365,
+        583,
+        5680,
+        586,
+        321,
+        434,
+        14780,
+        493,
+        50615
+      ],
+      "avg_logprob": -0.5280330882352942,
+      "compression_ratio": 0.9016393442622951,
+      "no_speech_prob": 0.36767578125,
+      "words": [
+        {
+          "start": 82.74,
+          "end": 83.32,
+          "word": " But",
+          "probability": 0.82958984375
+        },
+        {
+          "start": 83.32,
+          "end": 83.86,
+          "word": " forever",
+          "probability": 0.318603515625
+        },
+        {
+          "start": 83.86,
+          "end": 85.38,
+          "word": " now",
+          "probability": 0.86767578125
+        },
+        {
+          "start": 85.38,
+          "end": 86.18,
+          "word": " we're",
+          "probability": 0.758056640625
+        },
+        {
+          "start": 86.18,
+          "end": 87.08,
+          "word": " climbing",
+          "probability": 0.92431640625
+        },
+        {
+          "start": 87.08,
+          "end": 87.74,
+          "word": " up",
+          "probability": 0.8955078125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 8,
+      "seek": 8274,
+      "start": 87.74,
+      "end": 90.0,
+      "text": " On the hill of sorrow",
+      "tokens": [
+        50615,
+        1282,
+        264,
+        10997,
+        295,
+        23027,
+        50815
+      ],
+      "avg_logprob": -0.5280330882352942,
+      "compression_ratio": 0.9016393442622951,
+      "no_speech_prob": 0.36767578125,
+      "words": [
+        {
+          "start": 87.74,
+          "end": 88.16,
+          "word": " On",
+          "probability": 0.1629638671875
+        },
+        {
+          "start": 88.16,
+          "end": 88.62,
+          "word": " the",
+          "probability": 0.70849609375
+        },
+        {
+          "start": 88.62,
+          "end": 88.98,
+          "word": " hill",
+          "probability": 0.0863037109375
+        },
+        {
+          "start": 88.98,
+          "end": 89.54,
+          "word": " of",
+          "probability": 0.98193359375
+        },
+        {
+          "start": 89.54,
+          "end": 90.0,
+          "word": " sorrow",
+          "probability": 0.95849609375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 9,
+      "seek": 11274,
+      "start": 125.22,
+      "end": 127.18,
+      "text": " We'll see you next time.",
+      "tokens": [
+        50365,
+        492,
+        603,
+        536,
+        291,
+        958,
+        565,
+        13,
+        51864
+      ],
+      "avg_logprob": -0.8140625059604645,
+      "compression_ratio": 0.75,
+      "no_speech_prob": 0.78369140625,
+      "words": [
+        {
+          "start": 125.22,
+          "end": 126.08,
+          "word": " We'll",
+          "probability": 0.13936233520507812
+        },
+        {
+          "start": 126.08,
+          "end": 126.6,
+          "word": " see",
+          "probability": 0.53369140625
+        },
+        {
+          "start": 126.6,
+          "end": 126.94,
+          "word": " you",
+          "probability": 0.97998046875
+        },
+        {
+          "start": 126.94,
+          "end": 127.08,
+          "word": " next",
+          "probability": 0.5849609375
+        },
+        {
+          "start": 127.08,
+          "end": 127.18,
+          "word": " time.",
+          "probability": 0.787109375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 10,
+      "seek": 14274,
+      "start": 153.60000000000002,
+      "end": 158.38,
+      "text": " We're going to hell, it's what we want to be",
+      "tokens": [
+        50365,
+        492,
+        434,
+        516,
+        281,
+        4921,
+        11,
+        309,
+        311,
+        437,
+        321,
+        528,
+        281,
+        312,
+        51185
+      ],
+      "avg_logprob": -0.36990490296612616,
+      "compression_ratio": 1.316831683168317,
+      "no_speech_prob": 0.53564453125,
+      "words": [
+        {
+          "start": 153.60000000000002,
+          "end": 154.52,
+          "word": " We're",
+          "probability": 0.4539794921875
+        },
+        {
+          "start": 154.52,
+          "end": 154.84,
+          "word": " going",
+          "probability": 0.40234375
+        },
+        {
+          "start": 154.84,
+          "end": 155.26,
+          "word": " to",
+          "probability": 0.98828125
+        },
+        {
+          "start": 155.26,
+          "end": 155.76,
+          "word": " hell,",
+          "probability": 0.841796875
+        },
+        {
+          "start": 155.82,
+          "end": 156.52,
+          "word": " it's",
+          "probability": 0.847900390625
+        },
+        {
+          "start": 156.52,
+          "end": 156.68,
+          "word": " what",
+          "probability": 0.65087890625
+        },
+        {
+          "start": 156.68,
+          "end": 157.32,
+          "word": " we",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 157.32,
+          "end": 157.76,
+          "word": " want",
+          "probability": 0.6767578125
+        },
+        {
+          "start": 157.76,
+          "end": 158.12,
+          "word": " to",
+          "probability": 0.98779296875
+        },
+        {
+          "start": 158.12,
+          "end": 158.38,
+          "word": " be",
+          "probability": 0.9990234375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 11,
+      "seek": 14274,
+      "start": 159.14000000000001,
+      "end": 163.74,
+      "text": " What can you say, is that the way you are?",
+      "tokens": [
+        51185,
+        708,
+        393,
+        291,
+        584,
+        11,
+        307,
+        300,
+        264,
+        636,
+        291,
+        366,
+        30,
+        51432
+      ],
+      "avg_logprob": -0.36990490296612616,
+      "compression_ratio": 1.316831683168317,
+      "no_speech_prob": 0.53564453125,
+      "words": [
+        {
+          "start": 159.01999999999998,
+          "end": 159.48,
+          "word": " What",
+          "probability": 0.73486328125
+        },
+        {
+          "start": 159.48,
+          "end": 159.84,
+          "word": " can",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 159.84,
+          "end": 160.18,
+          "word": " you",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 160.18,
+          "end": 160.68,
+          "word": " say,",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 160.76,
+          "end": 161.5,
+          "word": " is",
+          "probability": 0.97021484375
+        },
+        {
+          "start": 161.5,
+          "end": 161.78,
+          "word": " that",
+          "probability": 0.96923828125
+        },
+        {
+          "start": 161.78,
+          "end": 162.18,
+          "word": " the",
+          "probability": 0.55029296875
+        },
+        {
+          "start": 162.18,
+          "end": 162.74,
+          "word": " way",
+          "probability": 0.97998046875
+        },
+        {
+          "start": 162.74,
+          "end": 163.22,
+          "word": " you",
+          "probability": 0.95751953125
+        },
+        {
+          "start": 163.22,
+          "end": 163.74,
+          "word": " are?",
+          "probability": 0.95068359375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 12,
+      "seek": 14274,
+      "start": 164.06,
+      "end": 169.14,
+      "text": " Why don't you just tell how easy it won't be?",
+      "tokens": [
+        51432,
+        1545,
+        500,
+        380,
+        291,
+        445,
+        980,
+        577,
+        1858,
+        309,
+        1582,
+        380,
+        312,
+        30,
+        51760
+      ],
+      "avg_logprob": -0.36990490296612616,
+      "compression_ratio": 1.316831683168317,
+      "no_speech_prob": 0.53564453125,
+      "words": [
+        {
+          "start": 164.06,
+          "end": 164.48,
+          "word": " Why",
+          "probability": 0.9892578125
+        },
+        {
+          "start": 164.48,
+          "end": 165.02,
+          "word": " don't",
+          "probability": 0.9912109375
+        },
+        {
+          "start": 165.02,
+          "end": 165.14,
+          "word": " you",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 165.14,
+          "end": 165.66,
+          "word": " just",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 165.66,
+          "end": 166.42,
+          "word": " tell",
+          "probability": 0.9052734375
+        },
+        {
+          "start": 166.42,
+          "end": 166.68,
+          "word": " how",
+          "probability": 0.57958984375
+        },
+        {
+          "start": 166.68,
+          "end": 167.62,
+          "word": " easy",
+          "probability": 0.96728515625
+        },
+        {
+          "start": 167.62,
+          "end": 167.94,
+          "word": " it",
+          "probability": 0.71337890625
+        },
+        {
+          "start": 167.94,
+          "end": 168.48,
+          "word": " won't",
+          "probability": 0.59075927734375
+        },
+        {
+          "start": 168.48,
+          "end": 169.14,
+          "word": " be?",
+          "probability": 0.99951171875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 13,
+      "seek": 16914,
+      "start": 171.68,
+      "end": 173.64,
+      "text": " Why does it scare me more?",
+      "tokens": [
+        50365,
+        1545,
+        775,
+        309,
+        17185,
+        385,
+        544,
+        30,
+        50606
+      ],
+      "avg_logprob": -0.6173780487804879,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.5380859375,
+      "words": [
+        {
+          "start": 171.68,
+          "end": 172.38,
+          "word": " Why",
+          "probability": 0.271240234375
+        },
+        {
+          "start": 172.38,
+          "end": 172.52,
+          "word": " does",
+          "probability": 0.233154296875
+        },
+        {
+          "start": 172.52,
+          "end": 172.78,
+          "word": " it",
+          "probability": 0.54296875
+        },
+        {
+          "start": 172.78,
+          "end": 173.02,
+          "word": " scare",
+          "probability": 0.7939453125
+        },
+        {
+          "start": 173.02,
+          "end": 173.18,
+          "word": " me",
+          "probability": 0.986328125
+        },
+        {
+          "start": 173.18,
+          "end": 173.64,
+          "word": " more?",
+          "probability": 0.317138671875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 14,
+      "seek": 16914,
+      "start": 182.60000000000002,
+      "end": 187.8,
+      "text": " It can't carry light and it's shadowing me",
+      "tokens": [
+        51030,
+        467,
+        393,
+        380,
+        3985,
+        1442,
+        293,
+        309,
+        311,
+        8576,
+        278,
+        385,
+        51308
+      ],
+      "avg_logprob": -0.6173780487804879,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.5380859375,
+      "words": [
+        {
+          "start": 182.60000000000002,
+          "end": 183.3,
+          "word": " It",
+          "probability": 0.419921875
+        },
+        {
+          "start": 183.3,
+          "end": 183.76,
+          "word": " can't",
+          "probability": 0.8212890625
+        },
+        {
+          "start": 183.76,
+          "end": 184.06,
+          "word": " carry",
+          "probability": 0.69873046875
+        },
+        {
+          "start": 184.06,
+          "end": 185.2,
+          "word": " light",
+          "probability": 0.94140625
+        },
+        {
+          "start": 185.2,
+          "end": 185.82,
+          "word": " and",
+          "probability": 0.369873046875
+        },
+        {
+          "start": 185.82,
+          "end": 186.14,
+          "word": " it's",
+          "probability": 0.628662109375
+        },
+        {
+          "start": 186.14,
+          "end": 187.46,
+          "word": " shadowing",
+          "probability": 0.58251953125
+        },
+        {
+          "start": 187.46,
+          "end": 187.8,
+          "word": " me",
+          "probability": 0.875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 15,
+      "seek": 16914,
+      "start": 187.8,
+      "end": 192.72,
+      "text": " Hiding in the stars, we fall to my world, fear's gone",
+      "tokens": [
+        51308,
+        389,
+        2819,
+        294,
+        264,
+        6105,
+        11,
+        321,
+        2100,
+        281,
+        452,
+        1002,
+        11,
+        4240,
+        311,
+        2780,
+        51555
+      ],
+      "avg_logprob": -0.6173780487804879,
+      "compression_ratio": 1.1826923076923077,
+      "no_speech_prob": 0.5380859375,
+      "words": [
+        {
+          "start": 187.8,
+          "end": 188.64,
+          "word": " Hiding",
+          "probability": 0.964111328125
+        },
+        {
+          "start": 188.64,
+          "end": 189.16,
+          "word": " in",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 189.16,
+          "end": 189.48,
+          "word": " the",
+          "probability": 0.71484375
+        },
+        {
+          "start": 189.48,
+          "end": 189.84,
+          "word": " stars,",
+          "probability": 0.306640625
+        },
+        {
+          "start": 189.96,
+          "end": 190.1,
+          "word": " we",
+          "probability": 0.453369140625
+        },
+        {
+          "start": 190.1,
+          "end": 190.48,
+          "word": " fall",
+          "probability": 0.11224365234375
+        },
+        {
+          "start": 190.48,
+          "end": 190.72,
+          "word": " to",
+          "probability": 0.70263671875
+        },
+        {
+          "start": 190.72,
+          "end": 191.0,
+          "word": " my",
+          "probability": 0.2205810546875
+        },
+        {
+          "start": 191.0,
+          "end": 191.46,
+          "word": " world,",
+          "probability": 0.6015625
+        },
+        {
+          "start": 191.62,
+          "end": 192.46,
+          "word": " fear's",
+          "probability": 0.540283203125
+        },
+        {
+          "start": 192.46,
+          "end": 192.72,
+          "word": " gone",
+          "probability": 0.9912109375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 16,
+      "seek": 19272,
+      "start": 192.72,
+      "end": 196.9,
+      "text": " We can't follow their rules, but so ever",
+      "tokens": [
+        50365,
+        492,
+        393,
+        380,
+        1524,
+        641,
+        4474,
+        11,
+        457,
+        370,
+        1562,
+        50615
+      ],
+      "avg_logprob": -0.6126760345109752,
+      "compression_ratio": 1.3850931677018634,
+      "no_speech_prob": 0.50732421875,
+      "words": [
+        {
+          "start": 192.72,
+          "end": 193.28,
+          "word": " We",
+          "probability": 0.640625
+        },
+        {
+          "start": 193.28,
+          "end": 193.72,
+          "word": " can't",
+          "probability": 0.907470703125
+        },
+        {
+          "start": 193.72,
+          "end": 194.36,
+          "word": " follow",
+          "probability": 0.794921875
+        },
+        {
+          "start": 194.36,
+          "end": 194.86,
+          "word": " their",
+          "probability": 0.29443359375
+        },
+        {
+          "start": 194.86,
+          "end": 195.38,
+          "word": " rules,",
+          "probability": 0.7509765625
+        },
+        {
+          "start": 195.42,
+          "end": 195.74,
+          "word": " but",
+          "probability": 0.6787109375
+        },
+        {
+          "start": 195.74,
+          "end": 196.0,
+          "word": " so",
+          "probability": 0.8720703125
+        },
+        {
+          "start": 196.0,
+          "end": 196.9,
+          "word": " ever",
+          "probability": 0.8720703125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 17,
+      "seek": 19272,
+      "start": 197.72,
+      "end": 202.58,
+      "text": " Now we're climbing up on the hill of sorrow",
+      "tokens": [
+        50615,
+        823,
+        321,
+        434,
+        14780,
+        493,
+        322,
+        264,
+        10997,
+        295,
+        23027,
+        50965
+      ],
+      "avg_logprob": -0.6126760345109752,
+      "compression_ratio": 1.3850931677018634,
+      "no_speech_prob": 0.50732421875,
+      "words": [
+        {
+          "start": 197.46,
+          "end": 197.96,
+          "word": " Now",
+          "probability": 0.5908203125
+        },
+        {
+          "start": 197.96,
+          "end": 198.72,
+          "word": " we're",
+          "probability": 0.7568359375
+        },
+        {
+          "start": 198.72,
+          "end": 199.76,
+          "word": " climbing",
+          "probability": 0.2349853515625
+        },
+        {
+          "start": 199.76,
+          "end": 200.3,
+          "word": " up",
+          "probability": 0.98974609375
+        },
+        {
+          "start": 200.3,
+          "end": 200.82,
+          "word": " on",
+          "probability": 0.7783203125
+        },
+        {
+          "start": 200.82,
+          "end": 201.12,
+          "word": " the",
+          "probability": 0.97802734375
+        },
+        {
+          "start": 201.12,
+          "end": 201.62,
+          "word": " hill",
+          "probability": 0.345947265625
+        },
+        {
+          "start": 201.62,
+          "end": 201.98,
+          "word": " of",
+          "probability": 0.947265625
+        },
+        {
+          "start": 201.98,
+          "end": 202.58,
+          "word": " sorrow",
+          "probability": 0.71533203125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 18,
+      "seek": 19272,
+      "start": 204.66,
+      "end": 207.18,
+      "text": " There is a red-flagged tower",
+      "tokens": [
+        50965,
+        821,
+        307,
+        257,
+        2182,
+        12,
+        3423,
+        559,
+        3004,
+        10567,
+        51115
+      ],
+      "avg_logprob": -0.6126760345109752,
+      "compression_ratio": 1.3850931677018634,
+      "no_speech_prob": 0.50732421875,
+      "words": [
+        {
+          "start": 204.66,
+          "end": 205.66,
+          "word": " There",
+          "probability": 0.34814453125
+        },
+        {
+          "start": 205.66,
+          "end": 206.0,
+          "word": " is",
+          "probability": 0.76318359375
+        },
+        {
+          "start": 206.0,
+          "end": 206.0,
+          "word": " a",
+          "probability": 0.91455078125
+        },
+        {
+          "start": 206.0,
+          "end": 206.32,
+          "word": " red",
+          "probability": 0.1693115234375
+        },
+        {
+          "start": 206.32,
+          "end": 206.88,
+          "word": "-flagged",
+          "probability": 0.51043701171875
+        },
+        {
+          "start": 206.88,
+          "end": 207.18,
+          "word": " tower",
+          "probability": 0.2568359375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 19,
+      "seek": 19272,
+      "start": 207.72,
+      "end": 210.28,
+      "text": " With blessings to find your house",
+      "tokens": [
+        51115,
+        2022,
+        19296,
+        281,
+        915,
+        428,
+        1782,
+        51265
+      ],
+      "avg_logprob": -0.6126760345109752,
+      "compression_ratio": 1.3850931677018634,
+      "no_speech_prob": 0.50732421875,
+      "words": [
+        {
+          "start": 207.72,
+          "end": 208.22,
+          "word": " With",
+          "probability": 0.190673828125
+        },
+        {
+          "start": 208.22,
+          "end": 208.82,
+          "word": " blessings",
+          "probability": 0.29931640625
+        },
+        {
+          "start": 208.82,
+          "end": 209.14,
+          "word": " to",
+          "probability": 0.81591796875
+        },
+        {
+          "start": 209.14,
+          "end": 209.5,
+          "word": " find",
+          "probability": 0.76025390625
+        },
+        {
+          "start": 209.5,
+          "end": 209.72,
+          "word": " your",
+          "probability": 0.3447265625
+        },
+        {
+          "start": 209.72,
+          "end": 210.28,
+          "word": " house",
+          "probability": 0.7373046875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 20,
+      "seek": 19272,
+      "start": 210.28,
+      "end": 213.7,
+      "text": " The world rages so far, you realize",
+      "tokens": [
+        51265,
+        440,
+        1002,
+        367,
+        1660,
+        370,
+        1400,
+        11,
+        291,
+        4325,
+        51465
+      ],
+      "avg_logprob": -0.6126760345109752,
+      "compression_ratio": 1.3850931677018634,
+      "no_speech_prob": 0.50732421875,
+      "words": [
+        {
+          "start": 210.28,
+          "end": 210.98,
+          "word": " The",
+          "probability": 0.07769775390625
+        },
+        {
+          "start": 210.98,
+          "end": 211.44,
+          "word": " world",
+          "probability": 0.3916015625
+        },
+        {
+          "start": 211.44,
+          "end": 212.14,
+          "word": " rages",
+          "probability": 0.7705078125
+        },
+        {
+          "start": 212.14,
+          "end": 212.56,
+          "word": " so",
+          "probability": 0.2056884765625
+        },
+        {
+          "start": 212.56,
+          "end": 212.88,
+          "word": " far,",
+          "probability": 0.935546875
+        },
+        {
+          "start": 212.88,
+          "end": 213.12,
+          "word": " you",
+          "probability": 0.6689453125
+        },
+        {
+          "start": 213.12,
+          "end": 213.7,
+          "word": " realize",
+          "probability": 0.47509765625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 21,
+      "seek": 19272,
+      "start": 214.72,
+      "end": 216.62,
+      "text": " When he escapes, he slays",
+      "tokens": [
+        51465,
+        1133,
+        415,
+        43769,
+        11,
+        415,
+        1061,
+        3772,
+        51615
+      ],
+      "avg_logprob": -0.6126760345109752,
+      "compression_ratio": 1.3850931677018634,
+      "no_speech_prob": 0.50732421875,
+      "words": [
+        {
+          "start": 214.58,
+          "end": 215.08,
+          "word": " When",
+          "probability": 0.72412109375
+        },
+        {
+          "start": 215.08,
+          "end": 215.4,
+          "word": " he",
+          "probability": 0.8271484375
+        },
+        {
+          "start": 215.4,
+          "end": 215.68,
+          "word": " escapes,",
+          "probability": 0.66845703125
+        },
+        {
+          "start": 215.88,
+          "end": 216.0,
+          "word": " he",
+          "probability": 0.64404296875
+        },
+        {
+          "start": 216.0,
+          "end": 216.62,
+          "word": " slays",
+          "probability": 0.681884765625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 22,
+      "seek": 19272,
+      "start": 216.62,
+      "end": 219.24,
+      "text": " And it's true",
+      "tokens": [
+        51615,
+        400,
+        309,
+        311,
+        2074,
+        51815
+      ],
+      "avg_logprob": -0.6126760345109752,
+      "compression_ratio": 1.3850931677018634,
+      "no_speech_prob": 0.50732421875,
+      "words": [
+        {
+          "start": 216.62,
+          "end": 217.32,
+          "word": " And",
+          "probability": 0.10638427734375
+        },
+        {
+          "start": 217.32,
+          "end": 218.96,
+          "word": " it's",
+          "probability": 0.28204345703125
+        },
+        {
+          "start": 218.96,
+          "end": 219.24,
+          "word": " true",
+          "probability": 0.94775390625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 23,
+      "seek": 21924,
+      "start": 220.85999999999999,
+      "end": 223.14,
+      "text": " I am Sarah",
+      "tokens": [
+        50365,
+        286,
+        669,
+        9519,
+        50571
+      ],
+      "avg_logprob": -0.9127603967984518,
+      "compression_ratio": 0.5555555555555556,
+      "no_speech_prob": 0.2403564453125,
+      "words": [
+        {
+          "start": 220.85999999999999,
+          "end": 222.1,
+          "word": " I",
+          "probability": 0.385986328125
+        },
+        {
+          "start": 222.1,
+          "end": 222.52,
+          "word": " am",
+          "probability": 0.3427734375
+        },
+        {
+          "start": 222.52,
+          "end": 223.14,
+          "word": " Sarah",
+          "probability": 0.50439453125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 24,
+      "seek": 24924,
+      "start": 249.44,
+      "end": 249.98,
+      "text": " Thank you.",
+      "tokens": [
+        50365,
+        1044,
+        291,
+        13,
+        51864
+      ],
+      "avg_logprob": -0.2931315203507741,
+      "compression_ratio": 0.5555555555555556,
+      "no_speech_prob": 0.79736328125,
+      "words": [
+        {
+          "start": 249.44,
+          "end": 249.96,
+          "word": " Thank",
+          "probability": 0.180419921875
+        },
+        {
+          "start": 249.96,
+          "end": 249.98,
+          "word": " you.",
+          "probability": 0.9990234375
+        }
+      ],
+      "temperature": 0.0
+    }
+  ],
+  "seconds": 14.014529943466187
+}

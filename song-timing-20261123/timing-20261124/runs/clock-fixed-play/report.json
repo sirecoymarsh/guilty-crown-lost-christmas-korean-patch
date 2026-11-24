@@ -1,0 +1,87 @@
+{
+ "run": "P:\\AI\\Codex\\projects\\gclx-song-20261123\\timing-20261124\\runs\\clock-fixed-play",
+ "art_off": true,
+ "wmi_rc": "0",
+ "started": "08:50:23",
+ "events": [],
+ "t0_epoch": 1795477823.3462574,
+ "window_rect": [
+  4136,
+  120,
+  5166,
+  725
+ ],
+ "primary_width": 4096,
+ "focus_returned": false,
+ "window_seconds": 2.0,
+ "audio_peak": {
+  "2": 0.0,
+  "3": 0.0,
+  "4": 0.0,
+  "5": 0.0,
+  "6": 0.222,
+  "7": 0.222,
+  "8": 0.222,
+  "9": 0.221,
+  "10": 0.221,
+  "11": 0.223,
+  "12": 0.222,
+  "13": 0.22,
+  "14": 0.095,
+  "15": 0.093,
+  "16": 0.095,
+  "17": 0.095,
+  "18": 0.092,
+  "19": 0.094,
+  "20": 0.019,
+  "21": 0.0,
+  "22": 0.0,
+  "23": 0.0,
+  "24": 0.0,
+  "25": 0.0,
+  "26": 0.0,
+  "27": 0.0,
+  "28": 0.0,
+  "29": 0.0,
+  "30": 0.0,
+  "31": 0.0,
+  "32": 0.0,
+  "33": 0.0,
+  "34": 0.0,
+  "35": 0.0,
+  "36": 0.0,
+  "37": 0.0
+ },
+ "muted_at": [],
+ "windows_at_end": [
+  [
+   "N2System",
+   "길티 크라운 로스트 크리스마스 Ver.1.0",
+   true
+  ],
+  [
+   "IME",
+   "Default IME",
+   false
+  ],
+  [
+   "MSCTFIME UI",
+   "MSCTFIME UI",
+   false
+  ]
+ ],
+ "closed_by": "terminate",
+ "shots": 0,
+ "launcher_log": "test_mutex_isolated 14148\nstarted_pid 14148\n",
+ "fonts_log": "NotoSansCJKjp-Medium.otf added=2\nNotoSansKR-VF.ttf added=14\nNotoSerifKR-VF.ttf added=14\n",
+ "dialogs_closed": [
+  [
+   "08:50:24",
+   "main window was on screen at 1533,777 -> moved off"
+  ],
+  [
+   "08:50:25",
+   "main window was on screen at 3150,1380 -> moved off"
+  ]
+ ]
+}

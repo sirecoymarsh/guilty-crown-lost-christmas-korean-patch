@@ -1,0 +1,2072 @@
+
+//ＤＭ試し打ち用
+
+function TAMESHIUCHI()
+{
+	Array($bgary,"bg101051_5_旧住民区通り裏路地06","bg101011_1_旧住民区通り表",
+	             "bg102031_1_平凡前通り","bg104001_1_蒼葉宅前通り",
+	             "bg104011_5_蒼葉宅玄関","bg104021_5_蒼葉宅台所",
+	             "bg104041_3_蒼葉宅ベランダ","bg104051_5_蒼葉宅居間",
+	             "bg107011_1_病院個室","bg301021_5_プラチナジェイル中通り",
+	             "bg304031_5_東江タワー廊下01","bg304051_5_東江タワー研究エリア廊下01",
+	             "bg304052_5_東江タワー研究エリア廊下02","bg304053_5_東江タワー研究エリア廊下03",
+	             "bg304041_5_東江タワー研究エリア研究室","bg304121_5_東江タワー東江の間",
+	             "bg304131_5_東江タワー東江の間前廊下","bg304061_5_東江タワー階段",
+	             "bg306011_5_倉庫外観通り","bg307011_5_パーツ屋店内",
+	             "bg304141_5_東江タワーパーティホール","bg304161_5_東江タワーセイ自室前",
+	             "bg202011_3_暴露紅雀実家居間","bg202021_3_暴露紅雀実家小部屋","bg202031_3_暴露紅雀実家前外観");
+	$rnd=Random(25);
+	$TAMESHI=true;
+	while($TAMESHI){
+
+		PrintGO("上背景", 10000);
+		
+		$rnd++;if($rnd>24){$rnd=0;}//=Random(13);
+		$bgimg="cg/bg/"+$bgary[$rnd]+".jpg";//"bg001011_1_碧島全景.jpg";//
+		CreateTextureEX("絵背景", 100, Center, Middle, $bgimg);
+		Fade("絵背景", 0, 1000, null, true);
+
+		SetFont("Malgun Gothic", 18, FFFFFF, 222222, 500, AROUND);//SetMainTextFont();
+		$w=300;$h=22;$xplus=10;$yplus=-6;
+		$x1=20;
+		tCreateChoices("tt01",$x1, 25,"サンプル");
+		tCreateChoices("tt02",$x1, 50,"ｂｇｍ");
+		tCreateChoices("tt03",$x1, 75,"dm0010(冒頭から)");
+		tCreateChoices("tt04",$x1,100,"ＣＯＮＦＩＧ");//dm0020(※蓮ルート開きません)
+		tCreateChoices("tt05",$x1,125,"ＬＯＡＤ");
+		//tCreateChoices("tt11",$x1, 50,"雨");//雨//06蒼葉を襲う紅雀.txt//dm1230.nss
+		//tCreateChoices("tt11",$x1, 50,"集中線");
+		tCreateChoices("tt20",$x1,525,"タイトル画面へ");
+
+		$x2=360;
+		tCreateChoices("tt21",$x2, 25,"他、特殊選択肢など");
+		tCreateChoices("tt21b",$x2, 50,"選択肢");
+		tCreateChoices("ttxm",$x2, 75,"メディア");
+		tCreateChoices("ttxr",$x2,100,"回想");
+		tCreateChoices("ttxc",$x2,125,"ＣＧ");
+		tCreateChoices("ttgl",$x2,150,"用語解説");
+		
+		$x3=700;
+
+		FadeDelete("上背景", 16, null, true);
+		
+		$TEST_SEL="";
+		select{
+			case tt01:{$TEST_SEL="SAMPLE";}//サンプル
+			case tt02:{$TEST_SEL="BGM";}//ｂｇｍ
+			case tt03:{$GameName = "dm0010.nss";}
+			case tt04:{$TEST_SEL="CONFIG";}//dm0020.nss
+			case tt05:{$TEST_SEL="LOAD";}
+			case tt20:{$TAMESHI=false;}//タイトル画面へ
+			
+			case tt21:{$TEST_SEL="CHKOTHER";}//他
+			case tt21b:{$TEST_SEL="CHKSELECT";}//選択肢
+			case ttxm:{$TEST_SEL="MEDIALIB";}//メディア
+			case ttxr:{$TEST_SEL="RECOLIB";}//回想
+			case ttxc:{$TEST_SEL="CGLIB";}//ＣＧ
+			case ttgl:{$TEST_SEL="GLOSSARY";}//用語解説
+		}
+		
+		PrintGO("上背景", 10000);
+		Delete("tt*");
+		FadeDelete("上背景", 16, null, true);
+		
+		if($TEST_SEL=="BGM"){CheckBGM();}
+		else if($TEST_SEL=="SAMPLE"){
+			CheckSAMPLE();
+			if($GameName != ""){call_chapter nss/0_boot_開始スクリプト.nss;}
+		}else if($TEST_SEL=="CHKOTHER"){CheckOTHER();}
+		else if($TEST_SEL=="CHKSELECT"){ChecSELECT();}
+		else if($TAMESHI==false){$TAMESHI=false;}
+		else if($TEST_SEL=="MEDIALIB"){call_chapter nss/extra_media.nss;
+			//SetVolumeEX("@dm*", 1000, 0, null);
+		}else if($TEST_SEL=="RECOLIB"){call_chapter nss/extra_reco.nss;
+			//SetVolumeEX("@dm*", 1000, 0, null);
+		}else if($TEST_SEL=="CGLIB"){call_chapter nss/extra_gallery.nss;
+			//SetVolumeEX("@dm*", 1000, 0, null);
+		}else if($TEST_SEL=="GLOSSARY"){
+			call_chapter nss/sys_glossary.nss;
+		}else if($TEST_SEL=="CONFIG"){
+			call_chapter nss/sys_config.nss;
+		}else if($TEST_SEL=="LOAD"){
+			call_chapter nss/sys_save.nss;
+		}else{
+			call_chapter nss/0_boot_開始スクリプト.nss;
+		}
+	
+		//ClearWaitAll(0, 500);
+	}
+}
+
+function tCreateChoices($nut_hd,$x,$y,$txt)
+{
+	CreateChoice($nut_hd);
+	$nut_name=$nut_hd+"/MouseUsual/img";
+//	$w=300;$h=30;$xplus=10;$yplus=-8;
+	CreateColor($nut_name,150, $x,$y, $w,$h, #999999);
+	$nut_name=$nut_hd+"/MouseOver/img";
+	CreateColor($nut_name,150, $x,$y, $w,$h, FFFFFF);
+	Fade($nut_name,0,0,null,false);
+	$nut_name=$nut_hd+"/MouseClick/img";
+	CreateColor($nut_name,150, $x,$y, $w,$h, FFFFFF);
+	Fade($nut_name,0,0,null,false);
+	$nut_name=$nut_hd+"/txt";
+	$tx=$x+$xplus;
+	$ty=$y+$yplus;
+	CreateText($nut_name,150, $tx,$ty, auto,auto, $txt);
+	Request($nut_name,PushText);
+	Request($nut_name,NoLog);
+}
+
+function CheckBGM()
+{
+	//SetMainTextFont();
+	PrintGO("上背景", 10000);
+
+		$w=330;$h=22;$xplus=10;$yplus=-6;
+		$x1=10;
+	tCreateChoices("tt01",$x1, 25,"001:日常曲(旧住民区)");//dmbgm001
+	tCreateChoices("tt02",$x1, 50,"002:日常曲その２");//dmbgm002
+	tCreateChoices("tt03",$x1, 75,"003:愉快な空気(おどけ系)");//dmbgm003
+	tCreateChoices("tt04",$x1,100,"004:プラチナジェイル");//dmbgm004
+	tCreateChoices("tt05",$x1,125,"005:不穏");//dmbgm005
+	tCreateChoices("tt06",$x1,150,"006:不穏その２");//dmbgm006
+	tCreateChoices("tt07",$x1,175,"007:緊迫感");//dmbgm007
+	tCreateChoices("tt08",$x1,200,"008:疾走感");//dmbgm008
+	tCreateChoices("tt09",$x1,225,"009:バトル(肉弾戦)");//dmbgm009
+	tCreateChoices("tt10",$x1,250,"010:ライムバトル(電脳空間／通常)");//dmbgm010
+	tCreateChoices("tt11",$x1,275,"011:ライムバトル(歪み)");//dmbgm011
+	tCreateChoices("tt12",$x1,300,"012:静けさ");//dmbgm012
+	tCreateChoices("tt13",$x1,325,"013:穏やかな空気");//dmbgm013
+	tCreateChoices("tt14",$x1,350,"014:ラブなシーン");//dmbgm014
+	tCreateChoices("tt15",$x1,375,"015:心情吐露");//dmbgm015
+	tCreateChoices("tt16",$x1,400,"016:蒼葉の決意");//dmbgm016
+	tCreateChoices("tt17",$x1,425,"017:暴露空間");//dmbgm017
+	tCreateChoices("tt18",$x1,450,"018:オーバルタワー");//dmbgm018
+	tCreateChoices("tt19",$x1,475,"019:東江のテーマ(洗脳BGM)");//dmbgm019
+	tCreateChoices("tt20",$x1,500,"020:クリアαの歌(洗脳BGM)");//dmbgm020
+		$x2=347;
+	tCreateChoices("tt21",$x2, 25,"020a:クリアの歌(対クリアα)");//
+	tCreateChoices("tt22",$x2, 50,"020b:クリアの歌(癒し)");//
+	tCreateChoices("tt23",$x2, 75,"021:東江と対決");//dmbgm021
+	tCreateChoices("tt24",$x2,100,"022:クラブ");//dmbgm022
+	tCreateChoices("tt25",$x2,125,"023:疾走感その２");//dmbgm023
+	
+	tCreateChoices("tt31",$x2,150,"OP『AI CATCH』");
+	tCreateChoices("tt32",$x2,175,"蓮GOOD(真相END)『PARA MIDIA』");
+	tCreateChoices("tt33",$x2,200,"共通GOOD『Only finally there is the free end』");
+	
+	tCreateChoices("tt34",$x2,225,"紅雀BAD『tears』");
+	tCreateChoices("tt35",$x2,250,"ノイズBAD『feel your noise』");
+	tCreateChoices("tt36",$x2,275,"ミンクBAD『Sandy Weeds』");
+	tCreateChoices("tt37",$x2,300,"クリアBAD『Immer Sie』");
+	tCreateChoices("tt38",$x2,325,"蓮BAD『deSLASH』");
+	tCreateChoices("tt39",$x2,350,"ウイトリBAD『MASCULINE DEVIL』");
+	
+	tCreateChoices("tt40",$x2,375,"8bit日常曲(旧住民区)");
+	tCreateChoices("tt41",$x2,400,"8bitバトル(肉弾戦)");
+	tCreateChoices("tt42",$x2,425,"8bitバトル(電脳空間／通常)");
+	tCreateChoices("tt43",$x2,450,"8bitノイズBAD");
+	
+		$x3=684;
+	tCreateChoices("tt61",$x3, 25,"007:緊迫感(冒頭空白カット版)");
+	tCreateChoices("tt62",$x3, 50,"023:疾走感その２(冒頭コミカルカット版)");
+	tCreateChoices("tt51",$x3,150,"(ｼｮｰﾄ)OP『AI CATCH』");
+	tCreateChoices("tt52",$x3,175,"(ｼｮｰﾄ)蓮GOOD(真相END)『PARA MIDIA』");
+	tCreateChoices("tt53",$x3,200,"(ｼｮｰﾄ)共通GOOD『Only finally there is the free end』");
+	
+	tCreateChoices("tt54",$x3,225,"(ｼｮｰﾄ)紅雀BAD『tears』");
+	tCreateChoices("tt55",$x3,250,"(ｼｮｰﾄ)ノイズBAD『feel your noise』");
+	tCreateChoices("tt56",$x3,275,"(ｼｮｰﾄ)ミンクBAD『Sandy Weeds』");
+	tCreateChoices("tt57",$x3,300,"(ｼｮｰﾄ)クリアBAD『Immer Sie』");
+	tCreateChoices("tt58",$x3,325,"(ｼｮｰﾄ)蓮BAD『deSLASH』");
+	tCreateChoices("tt59",$x3,350,"(ｼｮｰﾄ)ウイトリBAD『MASCULINE DEVIL』");
+	
+	tCreateChoices("tt91",$x2, 535,"STOP");
+	tCreateChoices("tt92",$x3, 535,"EXIT");
+
+	FadeDelete("上背景", 16, null, true);
+
+	$WHILEIN=true;
+	while($WHILEIN){
+		select{
+			case tt01:{	TestBGM("@dm001");}
+			case tt02:{	TestBGM("@dm002");}
+			case tt03:{	TestBGM("@dm003");}
+			case tt04:{	TestBGM("@dm004");}
+			case tt05:{	TestBGM("@dm005");}
+			case tt06:{	TestBGM("@dm006");}
+			case tt07:{	TestBGM("@dm007");}
+			case tt08:{	TestBGM("@dm008");}
+			case tt09:{	TestBGM("@dm009");}
+			case tt10:{	TestBGM("@dm010");}
+			case tt11:{	TestBGM("@dm011");}
+			case tt12:{	TestBGM("@dm012");}
+			
+			case tt13:{	TestBGM("@dm013");}
+			case tt14:{	TestBGM("@dm014");}
+			case tt15:{	TestBGM("@dm015");}
+			case tt16:{	TestBGM("@dm016");}
+			case tt17:{	TestBGM("@dm017");}
+			case tt18:{	TestBGM("@dm018");}
+			case tt19:{	TestBGM("@dm019");}
+			case tt20:{	TestBGM("@dm020");}
+			case tt21:{	TestBGM("@dm020a");}
+			case tt22:{	TestBGM("@dm020b");}
+			case tt23:{	TestBGM("@dm021");}
+			case tt24:{	TestBGM("@dm022");}
+			case tt25:{	TestBGM("@dm023");}
+			
+			case tt31:{	TestBGM("@dmop");}
+			case tt32:{	TestBGM("@dmedgrand");}
+			case tt33:{	TestBGM("@dmedgood");}
+			
+			case tt34:{	TestBGM("@dmedbd01");}
+			case tt35:{	TestBGM("@dmedbd02");}
+			case tt36:{	TestBGM("@dmedbd03");}
+			case tt37:{	TestBGM("@dmedbd04");}
+			case tt38:{	TestBGM("@dmedbd05");}
+			case tt39:{	TestBGM("@dmedbd06");}
+			
+			case tt40:{	TestBGM("@dm8bit001");}
+			case tt41:{	TestBGM("@dm8bit009");}
+			case tt42:{	TestBGM("@dm8bit010");}
+			case tt43:{	TestBGM("@dm8bitedbd02");}
+			
+			case tt61:{	TestBGM("@dm007a");}
+			case tt62:{	TestBGM("@dm023a");}
+			
+			case tt51:{	TestBGM("@dmop_s");}
+			case tt52:{	TestBGM("@dmedgrand_s");}
+			case tt53:{	TestBGM("@dmedgood_s");}
+			
+			case tt54:{	TestBGM("@dmedbd01_s");}
+			case tt55:{	TestBGM("@dmedbd02_s");}
+			case tt56:{	TestBGM("@dmedbd03_s");}
+			case tt57:{	TestBGM("@dmedbd04_s");}
+			case tt58:{	TestBGM("@dmedbd05_s");}
+			case tt59:{	TestBGM("@dmedbd06_s");}
+			
+			case tt91:{	SetVolumeEX("@dm*", 1000, 0, null);}
+			case tt92:{$WHILEIN=false;}
+		}
+	}
+
+	//ClearFadeAll(200, true);
+	SetVolumeEX("@dm*", 200, 0, null);
+	PrintGO("絵背景", 10000);
+	Delete("tt*");
+	FadeDelete("絵背景", 16, null, true);
+
+}
+//http://www.youtube.com/watch?v=YDkYx5c9VqU
+function TestBGM($BGMNAME){
+	SetVolumeEX("@dm*", 100, 0, null);
+	Wait(150);
+	SoundPlay($BGMNAME,0,450,true);
+}
+//４曲チェック※※
+//0,450,true);→0,750,true);
+
+function CheckOTHER()
+{
+	PrintGO("上背景", 10000);
+
+	SetFont("Malgun Gothic", 18, FFFFFF, 222222, 500, AROUND);//SetMainTextFont();
+	$w=300;$h=22;$xplus=10;$yplus=-6;
+	$x1=50;
+	tCreateChoices("tt01",$x1, 25,"dm1460sl(紅雀特殊選択肢３ツ時)");
+	tCreateChoices("tt02",$x1, 50,"dm1460sl(紅雀特殊選択肢２ツ時)");
+	tCreateChoices("tt03",$x1, 75,"dm1460sl(紅雀特殊選択肢１ツ時)");
+	tCreateChoices("tt04",$x1,100,"dm1460sl(紅雀特殊選択肢０時)");
+
+	tCreateChoices("tt05",$x1,125,"dm2440sl00(ノイズ特殊選択肢３ツ時)");
+	tCreateChoices("tt06",$x1,150,"dm2440sl00(ノイズ特殊選択肢２ツ時)");
+	tCreateChoices("tt07",$x1,175,"dm2440sl00(ノイズ特殊選択肢１ツ時)");
+	tCreateChoices("tt08",$x1,200,"dm2440sl00(ノイズ特殊選択肢０時)");
+
+	tCreateChoices("tt09",$x1,225,"dm4480sl(クリア特殊選択肢３ツ時)");
+	tCreateChoices("tt10",$x1,250,"dm4480sl(クリア特殊選択肢２ツ時)");
+	tCreateChoices("tt11",$x1,275,"dm4480sl(クリア特殊選択肢１ツ時)");
+	tCreateChoices("tt12",$x1,300,"dm4480sl(クリア特殊選択肢０時)");
+
+	tCreateChoices("tt13",$x1,325,"dm5510sl(蓮特殊選択肢３ツ時)");
+	tCreateChoices("tt14",$x1,350,"dm5510sl(蓮特殊選択肢２ツ時)");
+	tCreateChoices("tt15",$x1,375,"dm5510sl(蓮特殊選択肢１ツ時)");
+	tCreateChoices("tt16",$x1,400,"dm5510sl(蓮特殊選択肢０時)");
+
+	$x2=360;
+	tCreateChoices("tt21",$x2, 25,"dm3572scr(ミンク特殊選択肢３ツ時)");
+	tCreateChoices("tt22",$x2, 50,"dm3572scr(ミンク特殊選択肢２ツ時)");
+	tCreateChoices("tt23",$x2, 75,"dm3572scr(ミンク特殊選択肢１ツ時)");
+	tCreateChoices("tt24",$x2,100,"dm3572scr(ミンク特殊選択肢０時)");
+
+	tCreateChoices("tt25",$x2,125,"dm3582scr(ミンク特殊選択肢３ツ時)");
+	tCreateChoices("tt26",$x2,150,"dm3582scr(ミンク特殊選択肢２ツ時)");
+	tCreateChoices("tt27",$x2,175,"dm3582scr(ミンク特殊選択肢１ツ時)");
+	tCreateChoices("tt28",$x2,200,"dm3582scr(ミンク特殊選択肢０時)");
+
+	tCreateChoices("tt29",$x2,225,"dm3592scr(ミンク特殊選択肢３ツ時)");
+	tCreateChoices("tt30",$x2,250,"dm3592scr(ミンク特殊選択肢２ツ時)");
+	tCreateChoices("tt31",$x2,275,"dm3592scr(ミンク特殊選択肢１ツ時)");
+	tCreateChoices("tt32",$x2,300,"dm3592scr(ミンク特殊選択肢０時)");
+
+	tCreateChoices("tt33",$x2,325,"dm3602scr(ミンク特殊選択肢３ツ時)");
+	tCreateChoices("tt34",$x2,350,"dm3602scr(ミンク特殊選択肢２ツ時)");
+	tCreateChoices("tt35",$x2,375,"dm3602scr(ミンク特殊選択肢１ツ時)");
+	tCreateChoices("tt36",$x2,400,"dm3602scr(ミンク特殊選択肢０時)");
+
+	$x3=670;
+	tCreateChoices("tt60",$x3, 520,"EXIT");
+
+	FadeDelete("上背景", 200, null, true);
+
+	$WHILEIN=true;
+	//while($WHILEIN){
+		select{
+			case tt01:{	$GameName = "dm1460sl.nss";$紅雀選択肢5=1;$紅雀選択肢6=1;$紅雀選択肢7=1;}//紅雀特殊選択肢３ツ時
+			case tt02:{	$GameName = "dm1460sl.nss";$紅雀選択肢5=1;$紅雀選択肢6=1;$紅雀選択肢7=0;}//紅雀特殊選択肢２ツ時
+			case tt03:{	$GameName = "dm1460sl.nss";$紅雀選択肢5=1;$紅雀選択肢6=0;$紅雀選択肢7=0;}//紅雀特殊選択肢１ツ時
+			case tt04:{	$GameName = "dm1460sl.nss";$紅雀選択肢5=0;$紅雀選択肢6=0;$紅雀選択肢7=0;}//紅雀特殊選択肢０時
+			
+			case tt05:{	$GameName = "dm2440sl00.nss";$ノイズ選択肢5=1;$ノイズ選択肢6=1;$ノイズ選択肢7=1;}//ノイズ特殊選択肢３ツ時
+			case tt06:{	$GameName = "dm2440sl00.nss";$ノイズ選択肢5=1;$ノイズ選択肢6=1;$ノイズ選択肢7=0;}//ノイズ特殊選択肢２ツ時
+			case tt07:{	$GameName = "dm2440sl00.nss";$ノイズ選択肢5=1;$ノイズ選択肢6=0;$ノイズ選択肢7=0;}//ノイズ特殊選択肢１ツ時
+			case tt08:{	$GameName = "dm2440sl00.nss";$ノイズ選択肢5=0;$ノイズ選択肢6=0;$ノイズ選択肢7=0;}//ノイズ特殊選択肢０時
+			
+			case tt09:{	$GameName = "dm4480sl.nss";$クリア選択肢5=1;$クリア選択肢6=1;$クリア選択肢7=1;}//クリア特殊選択肢３ツ時
+			case tt10:{	$GameName = "dm4480sl.nss";$クリア選択肢5=1;$クリア選択肢6=1;$クリア選択肢7=0;}//クリア特殊選択肢２ツ時
+			case tt11:{	$GameName = "dm4480sl.nss";$クリア選択肢5=1;$クリア選択肢6=0;$クリア選択肢7=0;}//クリア特殊選択肢１ツ時
+			case tt12:{	$GameName = "dm4480sl.nss";$クリア選択肢5=0;$クリア選択肢6=0;$クリア選択肢7=0;}//クリア特殊選択肢０時
+			
+			case tt13:{	$GameName = "dm5510sl.nss";$蓮選択肢5=1;$蓮選択肢6=1;$蓮選択肢7=1;}//蓮特殊選択肢３ツ時
+			case tt14:{	$GameName = "dm5510sl.nss";$蓮選択肢5=1;$蓮選択肢6=1;$蓮選択肢7=0;}//蓮特殊選択肢２ツ時
+			case tt15:{	$GameName = "dm5510sl.nss";$蓮選択肢5=1;$蓮選択肢6=0;$蓮選択肢7=0;}//蓮特殊選択肢１ツ時
+			case tt16:{	$GameName = "dm5510sl.nss";$蓮選択肢5=0;$蓮選択肢6=0;$蓮選択肢7=0;}//蓮特殊選択肢０時
+			
+			case tt21:{$GameName = "dm3572scr.nss";$DM_ROUTE=3;$pMINK=3;}//"dm3572scr.nss"(ミンク特殊選択肢３ツ時)
+			case tt22:{$GameName = "dm3572scr.nss";$DM_ROUTE=3;$pMINK=2;}//"dm3572scr.nss"(ミンク特殊選択肢２ツ時)
+			case tt23:{$GameName = "dm3572scr.nss";$DM_ROUTE=3;$pMINK=1;}//"dm3572scr.nss"(ミンク特殊選択肢１ツ時)
+			case tt24:{$GameName = "dm3572scr.nss";$DM_ROUTE=3;$pMINK=0;}//"dm3572scr.nss"(ミンク特殊選択肢０時)
+
+			case tt25:{$GameName = "dm3582scr.nss";$DM_ROUTE=3;$pMINK=3;}//"dm3582scr.nss"(ミンク特殊選択肢３ツ時)
+			case tt26:{$GameName = "dm3582scr.nss";$DM_ROUTE=3;$pMINK=2;}//"dm3582scr.nss"(ミンク特殊選択肢２ツ時)
+			case tt27:{$GameName = "dm3582scr.nss";$DM_ROUTE=3;$pMINK=1;}//"dm3582scr.nss"(ミンク特殊選択肢１ツ時)
+			case tt28:{$GameName = "dm3582scr.nss";$DM_ROUTE=3;$pMINK=0;}//"dm3582scr.nss"(ミンク特殊選択肢０時)
+
+			case tt29:{$GameName = "dm3592scr.nss";$DM_ROUTE=3;$pMINK=3;}//"dm3592scr.nss"(ミンク特殊選択肢３ツ時)
+			case tt30:{$GameName = "dm3592scr.nss";$DM_ROUTE=3;$pMINK=2;}//"dm3592scr.nss"(ミンク特殊選択肢２ツ時)
+			case tt31:{$GameName = "dm3592scr.nss";$DM_ROUTE=3;$pMINK=1;}//"dm3592scr.nss"(ミンク特殊選択肢１ツ時)
+			case tt32:{$GameName = "dm3592scr.nss";$DM_ROUTE=3;$pMINK=0;}//"dm3592scr.nss"(ミンク特殊選択肢０時)
+
+			case tt33:{$GameName = "dm3602scr.nss";$DM_ROUTE=3;$pMINK=3;}//"dm3602scr.nss"(ミンク特殊選択肢３ツ時)
+			case tt34:{$GameName = "dm3602scr.nss";$DM_ROUTE=3;$pMINK=2;}//"dm3602scr.nss"(ミンク特殊選択肢２ツ時)
+			case tt35:{$GameName = "dm3602scr.nss";$DM_ROUTE=3;$pMINK=1;}//"dm3602scr.nss"(ミンク特殊選択肢１ツ時)
+			case tt36:{$GameName = "dm3602scr.nss";$DM_ROUTE=3;$pMINK=0;}//"dm3602scr.nss"(ミンク特殊選択肢０時)
+			
+			case tt60:{$WHILEIN=false;}
+		}
+	//}
+
+	PrintGO("絵背景", 10000);
+	Delete("tt*");
+	FadeDelete("絵背景", 200, null, true);
+
+	if($WHILEIN==false){}
+	else{call_chapter nss/0_boot_開始スクリプト.nss;}
+
+	$WHILEIN=false;
+
+}
+function ChecSELECT()
+{
+	PrintGO("上背景", 10000);
+
+	SetFont("Malgun Gothic", 18, FFFFFF, 222222, 500, AROUND);//SetMainTextFont();
+	$w=300;$h=22;$xplus=10;$yplus=-6;
+	$x1=50;
+		$x2=360;
+		tCreateChoices("tt22",$x2, 50,"dm0190_vs(蓮ルートオープン時)");
+		tCreateChoices("tt23",$x2, 75,"dm0260(蓮ルートオープン時)");
+		tCreateChoices("tt24",$x2,100,"dm0380(「屋根から何か音がした」を選んだ場合)");
+		tCreateChoices("tt25",$x2,125,"dm0560(蓮ルートオープン時)");
+		tCreateChoices("tt26",$x2,150,"dm0630(蓮ルートオープン時)");
+		tCreateChoices("tt27",$x2,175,"dm0720(蓮ルート時)");
+		tCreateChoices("tt28",$x2,200,"dm0730(蓮ルート時)");
+		tCreateChoices("tt29",$x2,225,"dm0750(蓮ルート時)");
+		tCreateChoices("tt30",$x2,250,"dm0770(蓮ルート時)");
+		
+		tCreateChoices("tt31",$x2,275,"dm0800(蓮ルート時)");
+		tCreateChoices("tt32",$x2,300,"dm0820(４キャラ競合時)");
+		tCreateChoices("tt33",$x2,325,"dm0820(紅雀ルート時)");
+		tCreateChoices("tt34",$x2,350,"dm0820(ノイズルート時)");
+		tCreateChoices("tt35",$x2,375,"dm0820(ミンクルート時)");
+		tCreateChoices("tt36",$x2,400,"dm0820(クリアルート時)");
+		tCreateChoices("tt37",$x2,425,"dm0820(蓮ルート時)");
+		tCreateChoices("tt38",$x2,450,"dm0840(４キャラ競合)");
+		tCreateChoices("tt39",$x2,475,"dm0840(紅雀ルート時)");
+		tCreateChoices("tt40",$x2,500,"dm0840(ノイズルート時)");
+
+		$x3=700;
+		tCreateChoices("tt41",$x3, 25,"dm0840(ミンクルート時)");
+		tCreateChoices("tt42",$x3, 50,"dm0840(クリアルート時)");
+		tCreateChoices("tt43",$x3, 75,"dm0840(蓮ルート時)");
+		tCreateChoices("tt44",$x3,100,"dm0860(紅雀ルート時)");
+		tCreateChoices("tt45",$x3,125,"dm0860(ノイズルート時)");
+		tCreateChoices("tt46",$x3,150,"dm0860(ミンクルート時)");
+		tCreateChoices("tt47",$x3,175,"dm0860(クリアルート時)");
+		tCreateChoices("tt48",$x3,200,"dm0860(蓮ルート時)");
+		tCreateChoices("tt49",$x3,225,"dm3571scr(ミンク特殊選択肢３ツ時)");
+		tCreateChoices("tt50",$x3,250,"dm3571scr(ミンク特殊選択肢２ツ時)");
+		
+		tCreateChoices("tt51",$x3,275,"dm3571scr(ミンク特殊選択肢１ツ時)");
+		tCreateChoices("tt52",$x3,300,"dm3571scr(ミンク特殊選択肢０時)");
+		tCreateChoices("tt53",$x3,325,"dm4490_vs(クリア特殊選択肢選択時)");
+		tCreateChoices("tt54",$x3,350,"dm5401(ウイトリ選択肢が２ツ時)");
+		tCreateChoices("tt55",$x3,375,"dm5402(ウイトリ選択肢が２ツ時)");
+//	$x3=670;
+	tCreateChoices("tt60",$x3, 520,"EXIT");
+
+	FadeDelete("上背景", 200, null, true);
+
+	$WHILEIN=true;
+	//while($WHILEIN){
+		select{
+			case tt22:{$GameName = "dm0190_vs.nss";$START0010=1;}//"dm0190_vs.nss"(蓮ルートオープン時)
+			case tt23:{$GameName = "dm0260.nss";$START0010=1;}//"dm0260.nss"(蓮ルートオープン時)
+			case tt24:{$GameName = "dm0380.nss";$クリア選択肢2=1;}//"dm0380.nss"(「屋根から何か音がした」を選んだ場合)
+			case tt25:{$GameName = "dm0560.nss";$START0010=1;}//"dm0560.nss"(蓮ルートオープン時)
+			case tt26:{$GameName = "dm0630.nss";$START0010=1;}//"dm0630.nss"(蓮ルートオープン時)
+			case tt27:{$GameName = "dm0720.nss";$START0010=1;$蓮選択肢1=1;$蓮選択肢2=1;$蓮選択肢3=1;$蓮選択肢4=1;}//"dm0720.nss"(蓮ルート時)
+			case tt28:{$GameName = "dm0730.nss";$DM_ROUTE=5;}//"dm0730.nss"(蓮ルート時)
+			case tt29:{$GameName = "dm0750.nss";$DM_ROUTE=5;}//"dm0750.nss"(蓮ルート時)
+			case tt30:{$GameName = "dm0770.nss";$DM_ROUTE=5;}//"dm0770.nss"(蓮ルート時)
+			
+			case tt31:{$GameName = "dm0800.nss";$DM_ROUTE=5;}//"dm0800.nss"(蓮ルート時)
+			case tt32:{$GameName = "dm0820.nss";$DM_ROUTE=0;
+			$紅雀選択肢1=1;$紅雀選択肢2=1;$紅雀選択肢3=0;$紅雀選択肢4=0;
+			$ノイズ選択肢1=0;$ノイズ選択肢2=1;$ノイズ選択肢3=1;$ノイズ選択肢4=0;
+			$ミンク選択肢1=0;$ミンク選択肢2=1;$ミンク選択肢3=1;$ミンク選択肢4=0;
+			$クリア選択肢1=1;$クリア選択肢2=0;$クリア選択肢3=0;$クリア選択肢4=1;
+			}//"dm0820.nss"(４キャラ競合時)
+			case tt33:{$GameName = "dm0820.nss";$DM_ROUTE=1;}//"dm0820.nss"(紅雀ルート時)
+			case tt34:{$GameName = "dm0820.nss";$DM_ROUTE=2;}//"dm0820.nss"(ノイズルート時)
+			case tt35:{$GameName = "dm0820.nss";$DM_ROUTE=3;}//"dm0820.nss"(ミンクルート時)
+			case tt36:{$GameName = "dm0820.nss";$DM_ROUTE=4;}//"dm0820.nss"(クリアルート時)
+			case tt37:{$GameName = "dm0820.nss";$DM_ROUTE=5;}//"dm0820.nss"(蓮ルート時)
+			case tt38:{$GameName = "dm0840.nss";Array($DM_ROUTE_SEL,4, 1,1,1,1);$DM_ROUTE=40;}//"dm0840.nss"(４キャラ競合)
+			case tt39:{$GameName = "dm0840.nss";$DM_ROUTE=1;}//"dm0840.nss"(紅雀ルート時)
+			case tt40:{$GameName = "dm0840.nss";$DM_ROUTE=2;}//"dm0840.nss"(ノイズルート時)
+			
+			case tt41:{$GameName = "dm0840.nss";$DM_ROUTE=3;}//"dm0840.nss"(ミンクルート時)
+			case tt42:{$GameName = "dm0840.nss";$DM_ROUTE=4;}//"dm0840.nss"(クリアルート時)
+			case tt43:{$GameName = "dm0840.nss";$DM_ROUTE=5;}//"dm0840.nss"(蓮ルート時)
+			case tt44:{$GameName = "dm0860.nss";$DM_ROUTE=1;}//"dm0860.nss"(紅雀ルート時)
+			case tt45:{$GameName = "dm0860.nss";$DM_ROUTE=2;}//"dm0860.nss"(ノイズルート時)
+			case tt46:{$GameName = "dm0860.nss";$DM_ROUTE=3;}//"dm0860.nss"(ミンクルート時)
+			case tt47:{$GameName = "dm0860.nss";$DM_ROUTE=4;}//"dm0860.nss"(クリアルート時)
+			case tt48:{$GameName = "dm0860.nss";$DM_ROUTE=5;}//"dm0860.nss"(蓮ルート時)
+			case tt49:{$GameName = "dm3571scr.nss";$DM_ROUTE=3;$pMINK=3;}//"dm3571scr.nss"(ミンク特殊選択肢３ツ時)
+			case tt50:{$GameName = "dm3571scr.nss";$DM_ROUTE=3;$pMINK=2;}//"dm3571scr.nss"(ミンク特殊選択肢２ツ時)
+			
+			case tt51:{$GameName = "dm3571scr.nss";$DM_ROUTE=3;$pMINK=1;}//"dm3571scr.nss"(ミンク特殊選択肢１ツ時)
+			case tt52:{$GameName = "dm3571scr.nss";$DM_ROUTE=3;$pMINK=0;}//"dm3571scr.nss"(ミンク特殊選択肢０時)
+			case tt53:{$GameName = "dm4490_vs.nss";$DM_ROUTE=3;$クリア選択肢8=1;}//"dm4490_vs.nss"(クリアルート特殊選択肢選択時)
+			case tt54:{$GameName = "dm5401.nss";$DM_ROUTE=5;$ウイトリ選択肢=2;}//"dm5401.nss"(ウイトリ選択肢が２ツ時)
+			case tt55:{$GameName = "dm5402.nss";$DM_ROUTE=5;$ウイトリ選択肢=2;}//"dm5402.nss"(ウイトリ選択肢が２ツ時)
+
+			case tt60:{$WHILEIN=false;}
+		}
+
+	PrintGO("絵背景", 10000);
+	Delete("tt*");
+	FadeDelete("絵背景", 200, null, true);
+
+	if($WHILEIN==false){}
+	else{call_chapter nss/0_boot_開始スクリプト.nss;}
+
+	$WHILEIN=false;
+
+}
+
+function CheckSAMPLE()
+{
+	SetFont("Malgun Gothic", 18, FFFFFF, 222222, 500, AROUND);//SetMainTextFont();
+	PrintGO("上背景", 10000);
+
+	$w=300;$h=22;$xplus=10;$yplus=-6;
+	$x1=50;
+	tCreateChoices("tt02",$x1, 25,"立ち絵");
+	tCreateChoices("tt24",$x1, 50,"立ち絵のじらり");
+	tCreateChoices("tt15",$x1, 75,"タエ叫ぶ");
+	tCreateChoices("tt13",$x1,100,"マスク");
+	tCreateChoices("tt03",$x1,125,"ｅｖ婆ちゃんと皆でごはん");
+	tCreateChoices("tt12",$x1,150,"回想");
+	tCreateChoices("tt10",$x1,175,"ｅｆ漫符飛び汗");
+	tCreateChoices("tt14",$x1,200,"白蒼葉の語りかけ(0_sample14)");
+	tCreateChoices("tt07",$x1,225,"蒼葉頭痛");
+	tCreateChoices("tt05",$x1,250,"セイの力");
+	tCreateChoices("tt99c",$x1,300,"コイルサンプル(0_sample99_coil)");
+	tCreateChoices("tt99",$x1,325,"コイルサンプル(0_sample99)");
+	tCreateChoices("tt21",$x1,350,"蓮メンテサンプル(0_sample21)");
+	$x2=360;
+	tCreateChoices("tt19",$x2, 25,"チームロゴ");
+	tCreateChoices("tt16",$x2, 50,"開発中画面");
+	tCreateChoices("tt17",$x2, 75,"マップ間違いタワー_クリア");
+	tCreateChoices("tt20",$x2,100,"クリア特選(左右矢印キー押しっぱで抜ける)");
+	tCreateChoices("tt22",$x2,150,"エンドロール");
+	$x3=670;
+	tCreateChoices("tt01",$x3, 25,"ムービー/コイル(0_sample01)");//コイル：ゲームサイズの決定
+	tCreateChoices("tt06",$x3, 50,"暴露成功");
+	tCreateChoices("tt08",$x3, 75,"クリアαの歌声");
+	tCreateChoices("tt09",$x3,100,"クリアの歌声");
+	tCreateChoices("tt11",$x3,125,"モノトーン人間の妨害");
+	tCreateChoices("tt18",$x3,150,"ノイズセリフ");
+	tCreateChoices("tt04",$x3,175,"ｅｖ卯水、影卯水");
+	
+	tCreateChoices("tt52",$x3, 520,"EXIT");
+
+	FadeDelete("上背景", 16, null, true);
+
+//	$WHILEIN=true;
+//	while($WHILEIN){
+		select{
+			case tt01:{$GameName = "0_sample01.nss";}//ムービー
+			case tt02:{$GameName = "0_sample02.nss";}//立ち絵
+			case tt03:{$GameName = "0_sample03.nss";}//ｅｖ婆ちゃんと皆でごはん
+			case tt04:{$GameName = "0_sample04.nss";}//ｅｖ卯水、影卯水
+			case tt05:{$GameName = "0_sample05.nss";}//ｅｆセイの力
+			case tt06:{$GameName = "0_sample06.nss";}//ｅｆ暴露成功
+			case tt07:{$GameName = "0_sample07.nss";}//ｅｆ蒼葉頭痛
+			case tt08:{$GameName = "0_sample08.nss";}//ｅｆクリアαの歌声
+			case tt09:{$GameName = "0_sample09.nss";}//ｅｆクリアの歌声
+			case tt10:{$GameName = "0_sample10.nss";}//ｅｆ漫符飛び汗
+			
+			case tt11:{$GameName = "0_sample11.nss";}//モノトーン人間の妨害
+			case tt12:{$GameName = "0_sample12.nss";}//回想
+			case tt13:{$GameName = "0_sample13.nss";}//マスク
+			case tt14:{$GameName = "0_sample14.nss";}//白蒼葉の語りかけ
+			case tt15:{$GameName = "0_sample15.nss";}//タエ叫ぶ//"dm0362_vs.nss"
+			case tt16:{$GameName = "0_sample16.nss";}//開発中画面
+			case tt17:{$GameName = "0_sample17.nss";}//マップ間違いタワー_クリア
+			case tt18:{$GameName = "0_sample18.nss";}//ノイズセリフチームロゴ
+			case tt19:{$GameName = "0_sample19.nss";}//チームロゴ
+			case tt20:{$GameName = "0_sample20.nss";}//クリア特選
+			case tt22:{$GameName = "0_sample22.nss";}//エンドロール
+			case tt24:{$GameName = "0_sample24.nss";}//立ち絵のじらり
+			
+			case tt99c:{$GameName = "0_sample99_coil.nss";}//コイルサンプル(0_sample99_coil)
+			case tt99:{$GameName = "0_sample99.nss";}//コイルサンプル(0_sample99)
+			case tt21:{$GameName = "0_sample21.nss";}//蓮メンテサンプル(0_sample21)
+			//羽賀目きらーん
+			//紅雀暴露
+			case tt52:{$GameName = "";}
+		}
+/*
+		if($WHILEIN==false){$WHILEIN=false;}
+		else{
+			PrintGO("絵背景", 10000);
+			Delete("tt*");
+			FadeDelete("絵背景", 16, null, true);
+			call_chapter nss/0_boot_開始スクリプト.nss;
+		}
+	}
+*/
+	//ClearFadeAll(200, true);
+	PrintGO("絵背景", 10000);
+	Delete("tt*");
+	FadeDelete("絵背景", 16, null, true);
+
+}
+
+/////このたびは↓/////
+function Create0190moji()
+{
+	Array($mojiary,0,8,20,17);
+	Array($mojiaryW);Array($mojiaryW[0],330,430);
+	Array($mojiaryW[1],20, 38,38,41,32,16, 24,12, 38);
+	Array($mojiaryW[2],20, 38,38,41,32,16, 24,24,18,38,44, 20,32,28,20,18, 28,32,52,26, 38);
+	Array($mojiaryW[3],20, 28,28,48,24,30, 40,22,25,56,50, 58,24,42,28,30, 30, 38);
+	Array($mojiaryW[4],16, 16,16,16,16,16, 16,16, 1);
+	Array($mojiaryW[5],16, 16,16,16,16,16, 16,16,16,16,16, 16,16,16,16,16, 16,16,16,16, 1);
+	Array($mojiaryW[6],16, 16,16,16,16,16, 16,16,16,16,16, 16,16,16,16,16, 16,1);
+	$i=1;
+	while($i<4){
+		$j=0;
+		$jmax=$mojiary[$i];
+		$mojix=$mojiaryW[0][0];
+		while($j<=$jmax){
+			$fname=String("cg/ef/txノイズセリフ%01d%02d.png",$i,$j);
+			$nname=String("絵字%01d%02d",$i,$j);
+			CreateTextureSP($nname, 19010, $mojix, -100, $fname);
+			Request($nname,Hideable);
+			$mojix=$mojix+$mojiaryW[$i][$j];
+			$j++;
+		}
+		$i++;
+	}
+	Fade("絵字*",0,0,null,true);
+	$mojiy=$mojiaryW[0][1];
+	Move("絵字*",0,@0,$mojiy,null,true);
+	
+}
+function Start0190moji01($vtxt,$vfile)
+{
+/*
+	$pname="絵字1プロセス0190";
+	CreateProcess($pname, 150, 0, 0, "Move0190moji01");
+	SetAlias($pname,$pname);
+	Request($pname,Start);
+*/
+	Move0190moji01();
+	SetBacklog($vtxt,$vfile,ノイズ);
+}
+function Move0190moji01()
+{
+	//begin:
+	$y1901=$mojiaryW[0][1];
+	$j1901=0;
+	//	Shake("@絵字1*",128,2,2,null,false);
+	while($j1901<=8){
+		$nn1901=String("@絵字1%02d",$j1901);
+		//Move($nn1901,0,@0,$y1901,null,true);
+		Fade($nn1901,0,1000,null,true);
+		Wait($mojiaryW[4][$j1901]);
+		$j1901++;
+	}
+}
+function Show0190moji01(){
+	//Delete("絵字1プロセス0190");
+	//Move("@絵字1*",0,@0,$y1901,null,true);
+	Fade("@絵字1*",0,1000,null,true);
+	//if($j1901<8){WaitKey();}
+}
+function Delete0190moji01(){Delete("@絵字1*");}
+function Start0190moji02($vtxt,$vfile)
+{
+/*
+	$pname="絵字2プロセス0190";
+	CreateProcess($pname, 150, 0, 0, "Move0190moji02");
+	SetAlias($pname,$pname);
+	Request($pname,Start);
+*/
+	Move0190moji02();
+	SetBacklog($vtxt,$vfile,ノイズ);
+}
+function Move0190moji02()
+{
+	//begin:
+	$y1901=$mojiaryW[0][1];
+	$j1901=0;
+	while($j1901<=20){
+		$nn1901=String("@絵字2%02d",$j1901);
+		//Move($nn1901,0,@0,$y1901,null,true);
+		Fade($nn1901,0,1000,null,true);
+		Wait($mojiaryW[5][$j1901]);
+		$j1901++;
+	}
+}
+function Show0190moji02(){
+	//Delete("絵字2プロセス0190");
+	//Move("@絵字2*",0,@0,$y1901,null,true);
+	Fade("@絵字2*",0,1000,null,true);
+	//if($j1901<20){WaitKey();}
+}
+function Delete0190moji02(){Delete("@絵字2*");}
+function Start0190moji03($vtxt,$vfile)
+{
+/*
+	$pname="絵字3プロセス0190";
+	CreateProcess($pname, 150, 0, 0, "Move0190moji03");
+	SetAlias($pname,$pname);
+	Request($pname,Start);
+*/
+	Move0190moji03();
+	SetBacklog($vtxt,$vfile,ノイズ);
+}
+function Move0190moji03()
+{
+	//begin:
+	$y1901=$mojiaryW[0][1];
+	$j1901=0;
+	while($j1901<=17){
+		$nn1901=String("@絵字3%02d",$j1901);
+		//Move($nn1901,0,@0,$y1901,null,true);
+		Fade($nn1901,0,1000,null,true);
+		Wait($mojiaryW[6][$j1901]);
+		$j1901++;
+	}
+}
+function Show0190moji03(){
+	//Delete("絵字3プロセス0190");
+	//Move("@絵字3*",0,@0,$y1901,null,true);
+	Fade("@絵字3*",0,1000,null,true);
+	//if($j1901<17){WaitKey();}
+}
+function Delete0190moji03(){Delete("@絵字3*");}
+
+/////このたびは↑/////
+
+
+/*
+46
+"dm0190_vs.nss"
+"dm0260.nss"
+"dm0380.nss"
+"dm0560.nss"
+"dm0630.nss"
+"dm0720.nss"
+"dm0730.nss"
+"dm0750.nss"
+"dm0770.nss"
+"dm0800.nss"
+"dm0820.nss"
+"dm0840.nss"
+"dm0860.nss"
+"dm3571scr.nss"
+"dm3572scr.nss"
+"dm3582scr.nss"
+"dm3592scr.nss"
+"dm3602scr.nss"
+"dm4490_vs.nss"
+"dm5401.nss"
+"dm5402.nss"
+
+"dm1460sl.nss"
+"dm2440sl00.nss"
+"dm4480sl.nss"
+"dm5510sl.nss"
+*/
+/*
+$TEXTBOX_TYPE="";
+ライム
+$TEXTBOX_TYPE="ライム";
+"dm0190_vs.nss"
+"dm0190sl.nss"
+"dm0191_vs.nss"
+"dm0192_vs.nss"
+"dm0200_vs.nss"
+"dm2020_vs.nss"
+"dm2380_vs.nss"
+"dm2570_vs.nss"
+"dm0725_vs.nss"
+"dm5020_vs.nss"
+"dm5450_vs.nss"
+"dm5460.nss"
+"dm5470_vs.nss"
+"dm5480_vs.nss"
+"dm5490_vs.nss"
+"dm5540_vs.nss"
+"dm5590_vs.nss"
+
+$TEXTBOX_TYPE="暴露";
+暴露
+"dm0699_scr.nss"
+"dm0700_scr.nss"
+"dm0710_scr.nss"
+
+"dm1390.nss"
+"dm1400.nss"
+"dm1410.nss"
+"dm1420.nss"
+"dm1430.nss"
+"dm1440scr.nss"
+"dm1450scr.nss"
+"dm1470scr.nss"
+"dm1480scr.nss"
+"dm1461.nss"
+
+"dm2410scr.nss"
+"dm2420scr.nss"
+"dm2430scr.nss"
+"dm2470scr.nss"
+"dm2451.nss"
+"dm2452ed.nss"
+"dm2460ed.nss"
+
+"dm3550scr.nss"
+"dm3560scr.nss"
+"dm3560sl.nss"
+"dm3561scr.nss"
+"dm3562scr.nss"
+"dm3570scr.nss"
+"dm3570sl.nss"
+"dm3571scr.nss"
+"dm3572scr.nss"
+"dm3580scr.nss"
+"dm3580sl.nss"
+"dm3581scr.nss"
+"dm3582scr.nss"
+"dm3590scr.nss"
+"dm3590sl.nss"
+"dm3591scr.nss"
+"dm3592scr.nss"
+"dm3600scr.nss"
+"dm3600sl.nss"
+"dm3601scr.nss"
+"dm3602scr.nss"
+"dm3620scr.nss"
+"dm3630scr.nss"
+"dm3640scr.nss"
+"dm3611.nss"
+"dm3613.nss"
+"dm3614ed.nss"
+
+"dm4470scr.nss"
+
+"dm5500scr.nss"
+"dm5510sl.nss"
+"dm5530scr.nss"
+"dm5521.nss"
+"dm5522ed.nss"
+
+白蒼葉の表出テキストボックス
+"dm5350.nss"
+
+$TEXTBOX_TYPE="暴露白";
+セイの精神世界
+"dm5620.nss"
+"dm5630.nss"
+"dm5640.nss"
+"dm5650.nss"
+"dm5660h.nss"
+"dm5670.nss"
+"dm5680.nss"
+
+特選
+"dm1460sl.nss"
+
+"dm2440sl00.nss"
+"dm2440sl01.nss"
+"dm2440sl02.nss"
+"dm2440sl03.nss"
+"dm2440sl04.nss"
+"dm2440sl05.nss"
+"dm2440sl06.nss"
+"dm2440sl07.nss"
+"dm2440sl11.nss"
+"dm2440sl12.nss"
+"dm2440sl13.nss"
+"dm2440sl14.nss"
+"dm2440sl21.nss"
+"dm2440sl22.nss"
+"dm2440sl23.nss"
+"dm2440sl24.nss"
+"dm2440sl31.nss"
+"dm2440sl32.nss"
+"dm2440sl33.nss"
+"dm2440sl34.nss"
+
+"dm4480sl.nss"
+"dm5510sl.nss"
+*/
+/*
+02/04
+6	@dm001
+61	@dm002"
+20	@dm003
+54	@dm004
+33	@dm005
+109	@dm006
+76	@dm007
+19	@dm008//疾走
+27	@dm009
+7	@dm010//電脳バトル
+
+49	@dm012
+45	@dm013
+15	@dm014
+39	@dm015
+18	@dm016
+9	@dm017//暴露
+24	@dm018
+9	@dm019
+1	@dm020
+1	@dm020a
+22	@dm020b
+6	@dm022
+*/
+/*
+0030：ef羽賀怒りの業火
+（００６０：ハートアニメ）
+0070：デリバリーワークスのｂｇｍ
+efヨシエキラキラがない
+クララのせりふが「」『』になってない
+0090：ｂｇｍミズキ会話中変える
+0100vs：セイ、卯水で接触未組み込み？ｂｇｍ変える
+0110vs：ウイトリ同時音声時、前の蒼葉のボイス消す
+0120vs：未：ミンク登場
+0130：婆ちゃん登場テンポ悪い、ｂｇｍ変える
+0140：２階へあがってきたらｂｇｍ変える
+碧島の説明時のｂｇｍ、あってない
+蓮の足音おかしい
+0140：レトロゲーム入ってない（姫たすけて）
+（０１５０：羽賀のバカ力わかりずらい、凡人浮遊できれば）
+0150→0160時、ｂｇｍ変える
+	bg101022_5_旧住民区通り裏路地02_lがダミー
+0250：fu紅雀太刀ありのじらり
+（０２６０：姫のたすけてくださいから最新型オールメイトまで、メール来なくてｏｋ？）
+0260：蓮起動音、ここは入っているが、ここより前、入っていないところがあった
+（０２９０：凡人くん逃げる）
+0290：３人の同時音声鳴ってない
+（０３１０：凡人くん）
+0320：未：電話：デリバリーワークス
+0330：移動時の風切音、なくていいような
+0330：タエ第一声、顔窓なくていいかも、おんぶ時の歩く音、多い気が
+0330：歩く音、途中でフェードアウト早めに
+（０３４０：病院、裏路地反転）
+0340：紅雀からのメール、テンポ悪い
+0340：未：電話：ミズキ
+0350：蒼葉の部屋あける音ってアレだっけ？？
+（０３８０：クリアのアートアニメ、ビミョウ）
+0380：戻り時の蒼葉自室荒らし、点灯に
+0384：うっすら風の音、あれば
+（０３９０：凡人くん）
+0400：凡人くん機械音…あったか？？
+0420：ライムガヤ、…。
+0420：紅雀登場、テンポ悪い
+0420：ｅｖでガヤ歓声あれば
+0430：小競り合い、フラッシュだけでなくシェイクも多少
+0430：悪島登場でいったんｂｇｍ止める
+（0430vs：悪島）
+0440：未：電話：平凡（羽賀）、ここはなくてもいいような…通しで入れたらわからんが
+0440：歩く音、画面切り替え時にフェードアウトさせる
+0450：モルヒネロゴ表示より、背景のけされたタグアートにフォーカス、モルヒネロゴ、早めに消す
+0450：ミズキ思い出す際には、背景ドライのものを
+0450：２度目のモルヒネロゴ表示、なくていいと思うが（惨状にフォーカスでは）
+0460：トリップの足音１歩はなくていいような
+0460：ウイトリ同時音声、ファイル違う
+0470：トリップ「退散一択」でウイルスｓｔちらつき
+0470：紅雀と逃げるの足音、画面切り替えでフェードアウト
+0480：帰るときにはｂｇｍ変える（メールまでｂｇｍなくていい）
+0480：姫メール組み込み後のシナリオ要調整
+0480：姫メール連続着信、テンポ悪い
+0480：みればいいんだろ、でメール開いて、ダウンロード開始？流れ要調整
+0480：未：レトロゲーム（婆さん誘拐）
+0490：足音、ちょっと聞かせたらフェードアウトで
+0490：電話、音、クリックスキップ＆フェードアウト
+0490：ドライの惨状思い出すときは、イメージ血ぶしゃじゃなくてモルヒネ血だまりのほうで
+0500：走るループ音、0490から続きにしたほうがいいような
+0500：婆ちゃんはどこだ、の前に謎の間がある
+0500：話せ、のセリフ間のWait、音の後に入れるとかで。ここのWait意味不明
+0500：ｂｇｍ、暗くなるのと同期してフェードアウト
+0500、0510間の間、要調節
+0510：銃構えの音入れる？
+（０５３０：蒼葉力発動）
+（０５３０；アンタの声が聞きたいだけなんだよの後の頭痛、テンポ悪い）
+0530：ドアオープン時のシェイク、なくていいのでは
+0540：歩く音、ひきずる音、微妙
+0540：ev後のミンク「おまえはこっちだ」前後のミンクの歩く音、微妙
+0540：そいつらの首みてみろのミンクの歩く音、重いブーツの音とか…ないか…
+0540：ドライのロゴ表示、なくていい…ような…
+0552：頭痛薬投げる音、重すぎじゃね？？
+0560：オウムが入ってきた、の時、テンポ悪い
+0560：ミンクの肩にとまってた、の回想、マクロがないが
+0560：オウムが出て行くとき、テンポ悪い。se終わってからテキスト表示じゃなくて、seフェードアウトさせつつテキスト表示へ
+0570：未：電話履歴紅雀連続着信、紅雀へリダイヤル
+0580：冒頭の歩くse、なくていいと思う
+だいぶ歩くseの入れるタイミングと使い分けのテンポが悪い
+0581：ミンク歩き出す、テンポ悪い
+se聞かせる際にWait入れるの、悪いとは言わないが、テンポが悪くなってる場合がある
+0590:入りでのｂｇｍフェードアウト、もうちょっと前からフェードアウトさせる
+0590～0600までｂｇｍが001の連続なので調整したい。平凡へ入ってきた時に別のｂｇｍへ切り替え
+0600：きれいなオウムですね、の前にしゃべらずともオウム表示しないとわかりずらい
+（０６１０：この話で～のところでミンクev半カットにしたほうが、ミンクにフォーカスできるかと（クリアを表示しない）
+0610：fu紅雀太刀なしのじらり、ちらつき
+0610：おい、の後、トリ羽ばたきseの後のwaitはなくていいのでは
+0610：のまきこめのシェイク、ゆらしすぎな気が
+0620：未：ノイズコイルマップ表示
+0620：fwマスクのev、ちょいズレてる感がある
+0620：おまえらいいかげんにしろ、のse、ギャグすぎるので差し替えかトル
+0620：どなった後は、ev表示じゃなくて、静かになったで背景戻してｓｔ、fwの通常進行に戻したほうが変わった感が出るかと
+0620→0630の移動の間、もうちょい欲しい
+0630：ノイズコイルマップ表示する？
+0630：クリアがまっすぐ歩いていくの、seもなくていような…
+0650vs：の冒頭、紅雀戦闘素手とミンク戦闘ｓｔ使うとか。つーかここの一連で使わなくてどうする
+0650vs：「紅雀さん」のあとの入ってくるse、軽いな…。Waitなくていいここ
+0650vs：蒼葉汎用蹴りのev、もっとかっこよく出す（蒼葉の見せ場なので一応）
+0660vs：暴力はいけませんの前、テキストボックス消す
+0660vs：暴力はやめてください、SetBackLogする？
+0690vs：未：暴露インムービー
+0720：未：暴露アウトムービー
+0770：意識手放す
+0770→0780間、間あける
+0780、0790のｂｇｍが００１なのがビミョウ…
+0800：ｂｇｍびみょう
+0810：スクラップの回想、テンポ悪い
+「ミズキには東江から罠と呼ぶべき刷りこみが行われているはずだ。たとえば核心に迫る話をしようとすると頭が割れるように痛む、とかね」
+このセリフ、
+「……これは結果論だから、決してお前を責めるわけじゃない。ただ……」
+の前にさしこんだほうがいいような気がするんだが
+0810：頭を下げるのseに違和感。ここもwaitなくていい
+0830：「過去を思い出したっていってたね」の前の間、なんなの？waitトル
+0830：入院着の過去回想、、回想だけど、既存再現の回想ではなく、みせるための回想だから、マクロじゃない。紅雀1200と同じ扱いに
+0836→0840間、もうちょい間ほしい
+0850：ウイルス電話表示する？
+0850：悪島家の前出て来いを消すのがテンポ悪い
+0860：冒頭大人数表示、テンポ悪い
+0860：警官たちの複数足音のseびみょうだな…素材ないか
+0860：第分岐から各ルートへのつなぎ、要調整
+
+1030：未：レトロゲーム：光あれ、招待状
+1030：羽賀の合流マップはスルーだったような
+1070：ＰＪゲート前は立ち絵のせるようには作っていないんだが…
+1070→1080：切り替え要調整？
+1080：未：紅雀からのメール
+1080：紅雀立ち去るse、入れるならフェードアウトを、でなければトル
+1110：グリッタ中検分のトランジ、整理？
+1110：まあ別にいんだけどさ、のところで紅雀stちらつきと前後のｂｇｍ要整理
+1130：髪に刺激で電撃画像表示に違和感が…音だけでいいような…
+1130：竜峰第一声後、「え」で立ち絵stちらつく
+1150：壊せ、の前のｂｇｍ、疾走じゃなくて洗脳ｂｇｍ使う？？
+1180：枕の音、硬くね？ベッドきしむ音とかのほうがいいような
+1200：「蒼葉」の前のSEwaitが長い
+1210：紅雀の部屋に入るときの真っ黒、なくて直接部屋内背景表示でいいような
+1210：「紅雀さがしにいくぞ」直前のwait意味不明
+1240h：紅雀太刀ありのじらり
+（1270：黒フェードに違和感）
+1280：冒頭、頭痛、…？
+1290：紅雀、刺青差分を使う
+1290：腕つかむのあと、st紅雀、bu紅雀に違和感、はじめからbu統一？
+1300：頭痛エフェクトいれ、若干テンポ悪い
+1300：謝らねえと、のあとの紅雀bu、消えちらつく
+1300：紅雀メンバー到着、扉の向こうの足音に聞こえないなあ…
+1310lv：ロック解除時に足音se…？
+1360：東江タワーエレベータ、例のスクロール入れる？
+1360：中ホールまでは一般廊下だっけ？
+1370：未：紅雀メンバー洗脳fw、枠、紅雀ev他
+1380：未：白蒼葉の語りかけ、タエ回想、暴露インムービー他
+1380：ファイル末尾の蒼葉の「紅雀」、ボイス鳴らない
+1450scr：紅雀太刀ありのじらり
+1470scr：未：暴露成功、ここじゃない他
+1480scr：未：暴露成功他
+1490：白蒼葉の語りかけ、他の部分と演出統一を（共通の砂？あるやつにあわせ？）
+1490：紅雀バーサク正気fuのじらり
+1490：アイツは俺なんだ、の白蒼葉、アレでｏｋ？？
+1490：未：ファイル末にセイモニター
+1500：未：紅雀が一瞬見る人影、セイ、クリオネじゃないほうだよね？？
+1510：未
+1520：未：ｂｇｍ入れる他
+1550h：同時音声、声が小さいが
+1550h：bu紅雀太刀あり？のじらり（太刀なしじゃなくていいんだっけ）
+1550h：「こんなふうにふれたかった」text0150でbu紅雀の消えちらつき
+1550h：ｅｖで立ち絵フェード使ってるので整理を
+
+2100：共通からのつなぎ要確認
+2020：未
+2030：未：レトロゲーム：光あれ、招待状
+（2040vs：悪島転倒時のシェイク）
+（2040vs：合流へ向かうとき、フェードからトランジへ）
+2080：コイルメールマップ、seのみでスルーであってる
+2090：「お前なあ」でノイズ立ち絵bu消えちらつき
+2110：頭痛エフェクト、ちょいテンポ悪い
+2140：「それはお前に関係ねえだろ」でノイズｓｔ消えちらつき
+2150：の１９発言てだいじょぶなんだっけ？
+2160：転倒でのシェイク入れ
+2160：ある程度進んでから、のwait…。
+2170：「みせろ」でノイズbu、消えちらつき
+2200：のｂｇｍ、013じゃないほうがいいような
+2220vs：「だからそういっただろう」でノイズst消えちらつき
+（2220vs：蹴り汎用とノイズなぐｒ、かっこよく出せたら）
+2230vs：警官複数の走るse、軽いな…素材がないか
+2230vs：text0069前のノイズ、ｓｔとｆｗのダブル表示なので、要整理（どっちか消す）
+2240：白蒼葉の語りかけ
+2240：「沈め」カットの枠つける
+2260：未：姫メール（タワーあいてる）
+2270：東江タワー前、モブのほうだが、この次期にイベントあるんだっけ？
+（２２８０：息をひそめる時は真っ黒じゃなくて廊下のＬ画像とかで）
+2280：東江タワーエレベータ、音いれる
+2280:エレベータ、スクロール演出入れる
+（2280:エレベータ止まるときの真っ黒なくていいような）
+2290:研究室廊下、扉正面使うならココで
+2302：選択肢からのつなぎ要確認
+2320lv：冒頭つなぎ要確認
+2370、2380vs、2390vs：未
+2400：白蒼葉の語りかけ
+2400：未：暴露インムービー
+2410scr：未
+2480：白蒼葉の語りかけ
+2480：力自覚のくだり、もちょいなんとかしたい
+2490：fuノイズ通常のじらり
+2520：東江タワーエレベータ
+2530：ファイル末にタワー崩壊あり
+2570vs：未
+（2600：凡人くん）
+2600：未：羽賀の怒りの業火
+2610：「そういうのいろいろ～」でbuノイズED、消えちらつき
+（2630ed：ミオの「ふん」、evの顔マスクでもいいかも）
+
+3010：つなぎだいじょぶそう、というかこれにあわせたほうがいいかも
+3030：未：レトロゲーム：光あれ、招待状
+3030：羽賀のマップって…あれ
+3080：コイルマップseのみであってる
+（3100：回想？…。）
+3140：白蒼葉、ちらつく
+（3170：回想、ev位置調整）
+（3210：東江ロゴ、…。）
+3220vs：「他に方法があるなら言え」でミンクst、消えちらつき
+（3220vs：倉庫側煙幕下背景、できればＬで）
+（3230sl：直前のボックス、他とちがってスグ消えしてる）
+3240：ミンクbuのじらり、ちらつき
+3270：ミンク通常正面fuのじらり
+3310：ミンク通常buのじらり
+3340：0052で階段あがる、のse、waitなくていいのでは
+（3340：やな想像のくだり、…。）
+3350：ＰＪ路地、０２も使う
+3360：ミンク通常fuのじらり
+3450：東江通常のじらり
+3470vs：未：ミンクバイク
+3480vs：未：ミンクバイク
+3500：未
+～暴露終了まで：未、火の粉が残っている…
+（3700vs：研究エリア廊下、扉正面使うなら）
+3720vs：頭痛エフェクト入れる？
+3611：ファイル末に暴露アウトムービー？
+
+4030：未：レトロゲーム：光あれ、招待状
+4030：羽賀のマップ…
+4080：コイルマップseのみであってる
+4080：クリアの立ち絵とｆｗの２重、立ち絵を消す？
+4090：ファイル末ボックス残り
+4110：東江buのじらり
+4120：キッチンへかけこみ…の風切り音、なくていい
+（4130：キッチンをうつすなら、そのまえの真っ黒…）
+4200：おかめ
+4210：未：電話、クリア
+4210：コイル、クリアのマップ、間違いタワー
+4220末、4230冒頭の歩くseなくていいかと
+4230：未：電話、クリア
+4230：未：efクリア間違いフキダシ
+（4240冒頭と、逃げる？の歩くseなくていいかと）
+4250：転倒のシェイク入れる
+4330：クリアマスク正面のじらり
+4350：クリアα歌テレビから、テレビ消すまで流しておいたほうがいいような
+4380：歌が途切れた、の前テンポ悪い
+（4390：火花、…）
+4390：fuクリア正面マスクなしのじらり
+4400lv：立ち絵の消えちらつき
+（4410：招待状セイ）
+4420：ファイル末の歩くseなくていいかも
+4430：東江タワーエレベーター、上昇演出入れる？
+4430：buクリア通常マスクなしのじらり
+（4430：エレベータインアウトの黒画面が若干テンポ悪い）
+4430：２階目のエレベータは東江の間エレベータ
+4440：東江の間、扉開く、わかりずらい
+（4450vs：対クリアα戦、ＱＵする）
+クリアの体の破片飛び散る音
+立ち絵の上に攻撃efのせない
+4460vs：血にオイルのにおいがするとあるが、その前にクリアが血を流しているときには記述がないが…
+（口端を引き上げて笑った、クリア２重表示に違和感、ｓｔの顔を隠す位置にカットを移動する）
+4460vs：fuクリア通常マスクなしのじらり
+4460vs：白蒼葉、暴露イン？
+4490vs：立ち絵の上に攻撃efのせない
+（4500：転倒シェイク？）
+4500：セイモニター
+4510：東江タワーアラートの統一
+（4550：凡人くん）
+4491：頭のつなぎ要確認
+
+/////02/11↓/////
+（0730：急に体が重くなった後、重くなった演出入れる）
+0730：……の次第に力が抜けていく、がびみょうすぎる
+0780：何度か瞬きをするうちに、～がびみょうだ
+0790：冒頭、しゃべらない３人立ち絵わざわざ表示しなくていいような。若干テンポ悪い
+0810：婆ちゃんが何かを確かめる～、テンポ悪めてる気がする
+0830：蒼葉病院着、回想…
+0860：居間には婆ちゃん～がいたの前の立ち絵
+0860：入れ替わるように、の振動、wait要るのか…？
+5100：部屋の中は～の前のトランジ、？
+5100：蓮をさわるときのse、waitとボックス消しが
+（5110：蓮いや）
+5110：真剣に言い聞かせて～前のse、waitなくていような
+5130：連がかカバンから頭を出す、…。
+5130：ＰＪポスターフォーカス場所、変えるか拡大なしで。つーかフォーカスできる場所が無い
+5130：発言の意図が～、se＋wait＋ボックス消し
+5130：「蓮」のあとのザっ、足音、なくていいような
+5140：「蓮」のあとのザっ、足音、なくていいような
+5140：オールメイトは～の立ち絵、なくていいような。表示前またせすぎ。表示終了まで切り替えテンポ悪い
+5140：あれこれ考え～のザっ、足音
+5150：そこは、他の～の前、間あきすぎ
+5150：セイｅｖ前の路地、ｅｖとあまりに合わなさすぎだなあ…
+5150：声をかけると～前のseが合ってない
+5150：セイの演出入れる
+5150：吸い込まれそうな、始まりがもったりしてる
+5150：雷みたいな～、前、白蒼葉とセイの幻影、入れるらしい
+5150：「あれ」「……」の前後のwait、トル、背景移動とかに差し替えたいが
+5150：呆然と～の前のse＋wait、waitなくていいような
+5152：蓮登場evに蒼葉ｆｗ、ナシじゃないが、なんだかふしぎだ
+選択肢の前後、ｂｇｍ入っていない
+5160：「お前さ～」の前の背景パンがふしぎ
+5160：あまり深くの前のフェード、長く感じる
+5170：冒頭、ボックスなし＋ｓｅ＋ｗａｉｔ、なくていいような…
+→エラー音まで一気にやってるのがシナリオと合ってない。無理。その演出なんだかわからない。
+5160～5170間の切り替え、トランジにしたい気がする
+5170：ｂｇｍがないので入れる、この近辺無音長すぎる
+5170：「目を閉じた」でフェードってナシじゃないけど上下からのブラインド、使いすぎてるところとのバランスが悪すぎる
+5180：ファイルの前後、ファイルのつなぎもう若干、間がほしいかも
+5190：テレビモニター、ここで東江ださないんだ…バランス悪いなあ。こっちは出したほうがいいと思うんだけどなあ…
+5200：冒頭のガヤとｂｇｍのバランスが悪い。ガヤ入れるならフェードで入れる
+5200：でも……必死になってるのは～のｂｇｍ、落とすくらいなら別のｂｇｍに変えるとか
+5200：歓声でシェイクの意味がわからない…
+5200：たいへんおまたせしました、ではセイがないほうを使う
+5200：歓声のseはループさせないループさせない
+5200：静まり返った。でseフェードアウトさせてんのか～…、、、
+5200：東江のセリフでdm019ってアリなんだっけ？東江洗脳ｂｇｍ
+5200：大喝采でのシェイクに違和感
+5200：人物をよびよせる、の前後、バランス悪いというかテンポ悪いというか
+5200：群衆が～テンポ悪い
+5200：まただ。の前、セイの力入っていない
+5200：でも、今度は～、フェード長いというか
+5200：セイの目が～なんかふしぎ演出だな…
+5200：頭痛演出でぶったぎるあたりまで、テンポよくどうにかしたい
+5200：ありがとう、までフェードが長く感じる
+5200：旧住民区あとのフェード長く感じる
+5200：広場に集まった～までテンポ悪い
+5200：さっき東江は、までフェードが長く感じる
+5200：モニターを凝視した、あと演出厚すぎじゃ
+5200：ミズキ前後もテンポ悪い
+5200：頭痛演出、モニターにかぶるのに違和感。もう何が違和感かわからなくなってきた
+5220：ブラックフェードタエ、４人、びみょうすぎる、テンポはとりあえず悪い
+5220：東江の広場に～のシェイクに違和感
+5220：東江が人の心を～のカラのテキストボックスに違和感
+5220：旧住民区ばんざいの前のフェードが長く感じる
+5220：おちつけ蒼葉、のタイミングで背景切り替えが入るのがよくわからない
+5220：se+wait
+5220：ここにいるのに～ブラックフェード、テンポ悪い
+5220：しゃべってんのに真っ黒背景はないわ
+5230：冒頭、背景０切り替えで位置がずれているように見えた
+5230：コイル着信音が入っていない。羽賀からの電話、未組み込みか
+5230：俺は人ゴミを～トランジに違和感。背景フェードでいいような…
+5230：「先ほども～ｂｇｍとｓｅ歓声がだぶってる。すっきりさせたい
+5230：東江は微笑み、前のフェード長く感じる
+5230：東江が去ったあと～までテンポ悪い
+5230：足が重い、までのボックスのこり＋wait…。いやこれSetVolumeEXが悪さしてる？
+5230：ファイル末の足音、なくていいような…
+5240：まず、～、…エ
+5240：回想じゃない。テンポ悪い
+5240：蓮カット枠どうしよう
+5240：逸る気持ちを～待たされ感がある
+5240：目のくだりテンポ悪い
+5240：ミズキ、表示長い気が。つーかここでミズキ表示すんなら壊してしまった、まででは…
+5250：俺はソファーの～se＋wait
+5260：テレビまわり、テンポ悪い、ｓｅとｂｇｍ、どっちか整理
+5260：俺はほとんど～se＋wait
+5260：繋がらない～se＋wait
+5270：冒頭のｂｇｍ、入りが遅い気が。トランジかける前へ
+5270：大通りまでフェードにwaitがある？
+5270：通用口へ向かうフェードでの足音、なくていいような
+5270：ｂｇｍ音量少
+5270：俺は中腰で～前、またされ感
+5270：スタンガンは音で。この光だったらなくていいような
+5270：転倒時のシェイク、方向がおかしい気が
+5270：背景、一回ノーマルに戻す意図がわからない
+5270～5280：きりかえ、廊下表示まで、テンポ悪い気がする
+5280：エレベータまわり、整理できれば。テンポ悪い
+5280：エレベータがかすかにゆれて～エレベータ上昇演出入れられれば
+5280：エレベータ内テンポ悪い
+5280：軽い振動が軽くない
+5290：抜け出すときのシェイクはいらない
+
+
+//
+初期起動のエクストラでnewがへんなところにいる
+//
+コンフィグのユーザー登録飛び先がまだ鬼哭街
+
+
+"dm5380sl.nss"、"dm0730.nss"
+なげこみでｂｇｍ鳴ってないが
+
+/////02/11↑/////
+
+"dm1380.nss"：白蒼葉の語りかけ、レベル確認。
+txt0094前の蒼葉の「紅雀」ボイスなってない
+ファイル末尾、暴露インムービー
+【シナリオ２D】
+・ｄｍ5290
+最新データではこの辺り読み込めないのですが、確か警備員が黒蒼葉に話しかけて
+スクラップ？されて倒れるシーンがあったと思うんですが、
+《st黒蒼葉》の目の色が通常時の色なのが気になりました。
+能力を使っているので金系になってないとおかしいのではないかと思います。
+
+【他】
+・ｄｍ5380
+バグとは違うんですが、
+ウイルス「それにしても、あなたがた兄弟の能力はすばらしい～」
+で表示されるｓｔですが、セイは無表情か、ほげ～とした表情のほうが
+ラスト付近のセイの笑顔が引き立つのではないかと思いました。
+
+"dm0650_vs.nss"
+モルヒネｅｆ表示後、強化できれば
+モルヒネｅｆ表示後の立ち絵、紅雀、ミンク？、素手戦闘へ＋返り討ち入れられれば
+蒼葉蹴り汎用、動かす（ノイズルートからぱくる）
+"dm0660_vs.nss"
+暴力はやめてくださーい
+はテキストボックス表示しないんだっけ？
+SetBackLogはしたい
+"dm0661_vs.nss"
+蒼葉蹴り汎用、もうちょいとだけテンポ早く
+
+"dm0050.nss"
+背景、紅時雨の縄張りから
+がらのわるい連中が多い通りへ
+
+"dm0510.nss"
+マシンガン構える男、銃構えse
+
+"dm4160.nss"
+大通りから裏路地へ背景変更
+
+/////
+"dm3650.nss"
+（ミンクｂｕ⇒ｓｔ、背景もＭ？Ｌ？⇒ノーマルできれば）
+
+"dm3660.nss"
+蒼葉の力使うのさりげなさ感がいい
+
+
+今度から素材終結日はマスターの１ヶ月前じゃなくてβ版開始日にしようよ
+*/
+
+/*
+"dm3120.nss"
+部屋出たら
+グリッター前通り→中通りブラック→路地１か２
+"dm3130.nss"
+ミンクのキャッツカード
+"dm3140.nss.nss"
+光麻薬、セイの力
+"dm3250_vs.nss"
+力発動後の頭痛エフェクト、どっかに入れたいんだが
+"dm3350.nss"
+ＰＪ路地は２種
+"dm3460.nss"
+大通り表示してから「あそこに東江いる」ってしたほうがいいような
+グリッタ前通りの背景次第だが、おそらくグリッタ前には東江タワー入れてこないだろ
+"dm4120.nss"
+冒頭、どっかにある蒼葉目パチの目覚めトランジ、入れてもらえれば
+"dm4150.nss"
+中通りアクアと大通りアクア（オーバルタワーが背景内にある）で
+"dm4220.nss"
+中通りアクア
+"dm4230.nss"
+大通りアクア（オーバルタワーが背景内にある）で
+*/
+
+
+//////////////////////////////////////////////////////////////////////
+//1850千秋_フウリ.nss
+function yure1850()
+{
+	while(1){
+		Shake("@絵ゆれ", 100000, 0, 5, 0, 10, 500, null, true);
+	}
+}
+
+
+function ina1850()
+{
+	Fade("@絵色", 0, 300, null, true);
+	Fade("@絵色", 200, 0, null, true);
+	Fade("@絵色", 0, 400, null, true);
+	Fade("@絵色", 200, 0, null, true);
+	Fade("@絵色", 0, 500, null, true);
+	SetVolume("@SE01", 500, 0, null);
+	Fade("@絵色", 500, 0, null, true);
+	Delete("@絵色");
+
+}
+function ina1850b()
+{
+	Fade("@絵色", 0, 600, null, true);
+	Fade("@絵色", 200, 0, null, true);
+	Fade("@絵色", 0, 700, null, true);
+	Fade("@絵色", 200, 0, null, true);
+	Fade("@絵色", 0, 800, null, true);
+	Fade("@絵色", 200, 0, null, true);
+	Fade("@絵色", 0, 900, null, true);
+	Fade("@絵色", 200, 0, null, true);
+	Fade("@絵色", 0, 1000, null, true);
+	SetVolume("@SE01", 500, 0, null);
+	Fade("@絵色", 500, 0, null, true);
+	Delete("@絵色");
+
+}
+function ina1850c()
+{
+	$ina1850cF=true;
+	begin:
+	while($ina1850cF)
+	{
+		Fade("@絵色", 0, 400, null, true);
+		Fade("@絵色", 200, 0, null, true);
+		Fade("@絵色", 0, 500, null, true);
+		Fade("@絵色", 200, 0, null, true);
+		Fade("@絵色", 0, 600, null, true);
+		Fade("@絵色", 200, 0, null, true);
+	}
+}
+
+function ina1850d()
+{
+	while(1)
+	{
+		Shake("@絵カメラ/絵*", 20000, 2, 2, 4, 6, 500, Axl3, true);
+	}
+}
+
+//#voice_on_ミリＰ//VOICE
+function tv2040
+{
+	while(1){
+	Request("@tvミリＰ1", Play);
+	SetVolumeEX("@tvミリＰ1", 2000, 700, null);
+	WaitPlay("@tvミリＰ1");
+	Delete("@tvミリＰ1");
+	Wait(500);
+	Request("@tvミリＰ2", Play);
+	SetVolumeEX("@tvミリＰ2", 0, 700, null);
+	WaitPlay("@tvミリＰ2");
+	Delete("@tvミリＰ2");
+	Wait(500);
+	Request("@tvミリＰ3", Play);
+	SetVolumeEX("@tvミリＰ3", 0, 700, null);
+	WaitPlay("@tvミリＰ3");
+	Delete("@tvミリＰ3");
+	break;
+	}
+}
+
+function yurukakuStart()
+{
+	CreateProcess("ゆるp", 150, 0, 0, "yurukaku");
+	Request("ゆるp",Start);
+}
+function yurukakuDelete()
+{
+	$yurukaku_f=false;
+	Request("ゆるp",Stop);
+	Delete("ゆるp");
+
+	SetVolume("@サウンドゆるカクカク音01", 200, 0, null);
+	Request("@サウンドゆるカクカク音01",Disused);
+
+	Move("ゆる*", 200, @-40, @0, Dxl2, false);
+	Move("ゆる窓/ゆる*", 200, @-40, @0, Dxl2, false);
+	FadeDelete("@ゆる*",  200, null, true);
+	Delete("@サウンドゆるカクカク音01");
+
+}
+function yurukaku()
+{
+	begin:
+	
+	$yurukaku_f=true;
+	while($yurukaku_f)
+	{
+		Fade("@ゆる窓/ゆる絵１", 0, 1000, null, true);
+		Fade("@ゆる窓/ゆる絵２", 0, 0, null, true);
+		if($yurukaku_f){
+//		CreateSE("SE01","se擬音_ギャグ_腰振り");
+//		MusicStart("SE01",0,600,0,1000,null,false);
+			Request("@サウンドゆるカクカク音01", Stop);
+			Request("@サウンドゆるカクカク音01", Play);
+		}
+		Fade("@ゆる窓/ゆる絵２", 0, 1000, null, true);
+		Fade("@ゆる窓/ゆる絵１", 0, 0, null, true);
+		Wait(100);
+		Fade("@ゆる窓/ゆる絵１", 0, 1000, null, true);
+		Fade("@ゆる窓/ゆる絵２", 0, 0, null, true);
+		Wait(100);
+		Fade("@ゆる窓/ゆる絵２", 0, 1000, null, true);
+		Fade("@ゆる窓/ゆる絵１", 0, 0, null, true);
+		Wait(500);
+	}
+}
+function yurukakuPrepare($背景1,$画像1,$画像2)
+{
+	$背景1p="cg/yur/"+$背景1+".png";
+	$画像1p="cg/yur/"+$画像1+".png";
+	$画像2p="cg/yur/"+$画像2+".png";
+
+	CreateSound("サウンドゆるカクカク音01", SE, "sound/se/se擬音_ギャグ_腰振り.ogg");
+	SetAlias("サウンドゆるカクカク音01","サウンドゆるカクカク音01");
+	SetVolume("サウンドゆるカクカク音01", 0, 300, null);
+
+	CreateMask("ゆる窓", 0, Center, Middle, "cg/yur/yurIF背景マスク.png", false);
+	SetAlias("ゆる窓","ゆる窓");
+
+	CreateTextureEX("ゆる枠", 110, Center, Middle, "cg/yur/yurIF枠.png");
+	CreateTextureEX("ゆる窓/ゆる背景", 100, Center, Middle, $背景1p);
+	CreateTextureEX("ゆる窓/ゆる絵１", 100, Center, Middle, $画像1p);
+	CreateTextureEX("ゆる窓/ゆる絵２", 100, Center, Middle, $画像2p);
+	Move("ゆる*", 0, @40, @0, null, true);
+	Move("ゆる窓/ゆる*", 0, @40, @0, null, true);
+
+	Move("ゆる*", 200, @-40, @0, Dxl2, false);
+	Move("ゆる窓/ゆる*", 200, @-40, @0, Dxl2, false);
+	Fade("@ゆる枠",  200, 1000, null, false);
+	Fade("@ゆる窓/ゆる背景",  200, 1000, null, false);
+	Fade("@ゆる窓/ゆる絵１",  200, 1000, null, true);
+}
+
+
+function yurutinStart()
+{
+
+	CreateSound("SE01", SE, "sound/se/se動作_掴み損ねる.ogg");
+	SetAlias("SE01","SE01");
+	CreateSound("SE02", SE, "sound/se/se動作_掴み損ねる.ogg");
+	SetAlias("SE02","SE02");
+	CreateSound("SE03", SE, "sound/se/se動作_掴み損ねる.ogg");
+	SetAlias("SE03","SE03");
+	SetVolume("SE01", 0, 350, null);
+	SetVolume("SE02", 0, 350, null);
+	SetVolume("SE03", 0, 350, null);
+
+
+	CreateProcess("ゆるp", 150, 0, 0, "yurutin");
+	Request("ゆるp",Start);
+}
+function yurutinDelete()
+{
+	$yurukaku_f=false;
+	Request("ゆるp",Stop);
+	Delete("ゆるp");
+
+}
+
+function yurutin()
+{
+//	CreateSE("SE01","se動作_掴み損ねる");
+//	CreateSE("SE02","se動作_掴み損ねる");
+//	CreateSE("SE03","se動作_掴み損ねる");
+
+	begin:
+	
+	$yurukaku_f=true;
+	while($yurukaku_f)
+	{
+		Fade("@ゆる窓/絵ゆるs*",  0, 0, null, false);
+
+		Rotate("@ゆる窓/絵ゆるm*", 0, 0,180,0, null, false);
+		Move("@ゆる窓/絵ゆるm千秋", 0, 363,130, null, false);
+		Move("@ゆる窓/絵ゆるm恵那", 0, 193,124, null, false);
+		Fade("@ゆる窓/絵ゆるm*",  0, 1000, null, true);
+		
+	if($yurukaku_f){
+		Request("@SE01", Play);
+		Request("@SE01", Disused);
+//		MusicStart("SE01",0,700,0,1000,null,false);
+	}
+	WaitKey(200);
+		BezierMove("@ゆる窓/絵ゆるm千秋", 200, (363,130){353,103}{343,133}{353,143}(353,133), Dxl3, false);//60
+		BezierMove("@ゆる窓/絵ゆるm恵那", 200, (193,124){273,133}{283,133}(293,133), Dxl3, false);//120
+	WaitKey(400);
+
+		Fade("@ゆる窓/絵ゆるm*",  0, 0, null, false);
+		Rotate("@ゆる窓/絵ゆるm*", 0, 0,0,0, null, false);
+		Move("@ゆる窓/絵ゆるm千秋", 0, 226,130, null, false);
+		Move("@ゆる窓/絵ゆるm恵那", 0, 388,124, null, false);
+		Fade("@ゆる窓/絵ゆるm*",  0, 1000, null, true);
+		
+	if($yurukaku_f){
+		Request("@SE02", Play);
+		Request("@SE02", Disused);
+//		MusicStart("SE02",0,700,0,1000,null,false);
+	}
+	WaitKey(200);
+		BezierMove("@ゆる窓/絵ゆるm千秋", 200, (223,130){233,103}{243,133}{253,153}(233,133), Dxl3, false);//60
+		BezierMove("@ゆる窓/絵ゆるm恵那", 200, (383,124){333,133}{313,153}(303,133), Dxl3, false);//120
+	
+	WaitKey(400);
+	
+		Fade("@ゆる窓/絵ゆるm*",  0, 0, null, false);
+		Rotate("@ゆる窓/絵ゆるm*", 0, 0,180,0, null, false);
+		Move("@ゆる窓/絵ゆるm千秋", 0, 363,130, null, false);
+		Move("@ゆる窓/絵ゆるm恵那", 0, 193,124, null, false);
+		Fade("@ゆる窓/絵ゆるm*",  0, 1000, null, true);
+		
+	if($yurukaku_f){
+		Request("@SE03", Play);
+		Request("@SE03", Disused);
+//		MusicStart("SE03",0,700,0,1000,null,false);
+	}
+	WaitKey(200);
+		BezierMove("@ゆる窓/絵ゆるm千秋", 300, (363,130){353,103}{343,133}{353,153}(383,133), Dxl3, false);//60
+		BezierMove("@ゆる窓/絵ゆるm恵那", 300, (143,124){223,133}{233,153}{253,173}(273,133), Dxl3, false);//120
+		$yurukaku_f=false;
+	WaitKey(300);
+		break;
+	}
+
+}
+function yurutin2Start()
+{
+	CreateSound("SE01", SE, "sound/se/se擬音_ギャグ_ぷに.ogg");
+	SetAlias("SE01","SE01");
+	CreateSound("SE02", SE, "sound/se/se動作_掴み損ねる.ogg");
+	SetAlias("SE02","SE02");
+	SetVolume("SE01", 0, 350, null);
+	SetVolume("SE02", 0, 350, null);
+
+	CreateProcess("ゆるp2", 150, 0, 0, "yurutin2");
+	Request("ゆるp2",Start);
+}
+function yurutin2Delete()
+{
+	$yurukaku_f=false;
+	Request("ゆるp2",Stop);
+	Delete("ゆるp2");
+
+	SetVolume("@SE01", 200, 0, null);
+	SetVolume("@SE02", 200, 0, null);
+	Move("@ゆる*", 200, @-40, @0, Dxl2, false);
+	Move("@ゆる窓/絵*", 200, @-40, @0, Dxl2, false);
+	FadeDelete("@ゆる*",  200, null, true);
+	Delete("@SE01");
+	Delete("@SE02");
+}
+
+function yurutin2()
+{
+	begin:
+
+	$yurukaku_f=true;
+	while($yurukaku_f)
+	{
+		Fade("@ゆる窓/絵ゆるm*",  0, 0, null, false);
+		Rotate("@ゆる窓/絵ゆるm*", 0, 0,0,0, null, false);
+		Move("@ゆる窓/絵ゆるm千秋", 0, 226,130, null, false);
+		Move("@ゆる窓/絵ゆるm恵那", 0, 388,124, null, false);
+		Fade("@ゆる窓/絵ゆるm*",  0, 1000, null, true);
+	
+	if($yurukaku_f){
+//		CreateSE("SE02","se動作_掴み損ねる");
+//		MusicStart("SE02",0,700,0,1000,null,false);
+		Request("@SE02", Play);
+		Request("@SE02", Disused);
+	}
+	WaitKey(200);
+		BezierMove("@ゆる窓/絵ゆるm千秋", 200, (223,130){233,103}{243,133}{253,173}(233,133), Dxl3, false);//60
+		BezierMove("@ゆる窓/絵ゆるm恵那", 200, (383,124){333,133}{313,153}(313,133), Dxl3, false);//120
+	WaitKey(300);
+
+	if($yurukaku_f){
+//		CreateSE("SE01","se擬音_ギャグ_ぷに");
+//		MusicStart("SE01",0,700,0,1000,null,false);
+		Request("@SE01", Play);
+		Request("@SE01", Disused);
+	}
+	WaitKey(200);
+		SetVertex("@ゆる窓/絵ゆるm恵那",250,270);
+		Request("@ゆる窓/絵ゆるm恵那",Smoothing);
+		Rotate("@ゆる窓/絵ゆるm恵那", 100, 0,0,10, DxlAuto, false);
+	WaitKey(100);
+		Shake("@ゆる窓/絵ゆるm千秋", 100, 0, 2, 0, 0, 500, null, false);
+		$yurukaku_f=false;
+	WaitKey(100);
+		break;
+	}
+
+}
+
+//ＣＧ、ルート、変数全開放
+function ChkCGLibVar()
+{
+	SetChkCGLibAry();
+	$ary_max=Count($EV_TMP);
+	
+	$i=0;
+	while($i<$ary_max){
+		VariableValue(#,$EV_TMP[$i],true);
+		$i++;
+	}
+	
+	//変数全開放
+	#GDED1=1;#GDED2=1;#GDED3=1;#GDED4=1;#GDED4CLEAR=1;
+	#GDED5=1;#GDEDALL=1;
+	#GDEDALL=1;#BDED1=1;#BDED2=1;#BDED2f=1;#BDED3=1;#BDED4=1;#BDED5=1;#BDED6=1;
+	#EVALL=1;
+	
+	#CFGVC_RYUHO=1;#CFGVC_CLEARALPHA=1;#CFGVC_SEI=1;#CFGVC_TOUE=1;
+	#RECLIB01=1;#RECLIB02=1;#RECLIB03=1;#RECLIB04=1;#RECLIB05=1;
+	#RECLIB06=1;#RECLIB07=1;#RECLIB08=1;#RECLIB09=1;#RECLIB10=1;
+	
+	//エンドロール既読
+	#ClearRoll00=1;#ClearRoll01=1;#ClearRoll02=1;#ClearRoll03=1;#ClearRoll04=1;
+	#ClearRoll05=1;#ClearRoll06=1;#ClearRoll07=1;#ClearRoll08=1;
+}
+
+
+
+
+
+
+
+
+function SetChkCGLibAry()
+{
+$EV_TMP[0]="ev002蒼葉登場";
+$EV_TMP[1]="ev002蒼葉登場a";
+$EV_TMP[2]="ev004犬蓮起動";
+$EV_TMP[3]="ev004犬蓮起動a";
+$EV_TMP[4]="ev004犬蓮起動b";
+$EV_TMP[5]="ev006紅雀登場";
+$EV_TMP[6]="ev006紅雀登場a";
+$EV_TMP[7]="ev010ライムの様子";
+$EV_TMP[8]="ev010卯水";
+$EV_TMP[9]="ev010卯水a";
+$EV_TMP[10]="ev011ウイトリ登場";
+$EV_TMP[11]="ev011ウイトリ登場a";
+$EV_TMP[12]="ev022蒼葉音楽効果";
+$EV_TMP[13]="ev022蒼葉音楽効果a";
+$EV_TMP[14]="ev025煙草を吸う紅雀";
+$EV_TMP[15]="ev025煙草を吸う紅雀a";
+$EV_TMP[16]="ev026蓮メンテ";
+$EV_TMP[17]="ev026蓮メンテa";
+$EV_TMP[18]="ev026蓮メンテb";
+$EV_TMP[19]="ev026蓮メンテc";
+$EV_TMP[20]="ev026蓮メンテd";
+$EV_TMP[21]="ev026蓮メンテe";
+$EV_TMP[22]="ev030クリア登場";
+$EV_TMP[23]="ev033婆ちゃんをおんぶ";
+$EV_TMP[24]="ev035ノイズ登場";
+$EV_TMP[25]="ev035ノイズ登場a";
+$EV_TMP[26]="ev038婆ちゃんとみんなでご飯";
+$EV_TMP[27]="ev038婆ちゃんとみんなでご飯a";
+$EV_TMP[28]="ev042ノイズＶＳ紅雀";
+$EV_TMP[29]="ev051ミンク登場";
+$EV_TMP[30]="ev051ミンク登場a";
+$EV_TMP[31]="ev052蒼葉モブ強姦";
+$EV_TMP[32]="ev052蒼葉モブ強姦a";
+$EV_TMP[33]="ev052蒼葉モブ強姦b";
+$EV_TMP[34]="ev054ミンクぶん殴る";
+$EV_TMP[35]="ev054ミンクぶん殴るa";
+$EV_TMP[36]="ev061全員集合";
+$EV_TMP[37]="ev061全員集合a";
+$EV_TMP[38]="ev066クリア暴力反対";
+$EV_TMP[39]="ev069ミズキ人質を取る";
+$EV_TMP[40]="ev071ミズキ苦しむ";
+$EV_TMP[41]="ev083蒼葉病院着";
+$EV_TMP[42]="ev084ベランダのクリアと蒼葉";
+$EV_TMP[43]="ev117紅雀、蒼葉をおんぶ";
+$EV_TMP[44]="ev118紅雀の刺青";
+$EV_TMP[45]="ev120幼少時の紅雀と蒼葉";
+$EV_TMP[46]="ev124紅雀強姦未遂";
+$EV_TMP[47]="ev124紅雀強姦未遂a";
+$EV_TMP[48]="ev124紅雀強姦未遂b";
+$EV_TMP[49]="ev129紅雀、顔の刺青を見せる";
+$EV_TMP[50]="ev137紅雀無双";
+$EV_TMP[51]="ev137紅雀無双a";
+$EV_TMP[52]="ev137紅雀無双b";
+$EV_TMP[53]="ev142幼少紅雀と刺青";
+$EV_TMP[54]="ev142幼少紅雀と刺青a";
+$EV_TMP[55]="ev145紅雀妄想の蒼葉";
+$EV_TMP[56]="ev146覚醒紅雀と覚醒蒼葉";
+$EV_TMP[57]="ev152紅雀大立ち回り";
+$EV_TMP[58]="ev155紅雀ＥＤラブＨ前戯";
+$EV_TMP[59]="ev155紅雀ＥＤラブＨ前戯a";
+$EV_TMP[60]="ev155紅雀ＥＤラブＨ挿入";
+$EV_TMP[61]="ev155紅雀ＥＤラブＨ挿入a";
+$EV_TMP[62]="ev155紅雀ＥＤラブＨ挿入b";
+$EV_TMP[63]="ev155紅雀ＥＤラブＨ挿入c";
+$EV_TMP[64]="ev155蒼葉の手を握る紅雀";
+$EV_TMP[65]="ev156紅雀GOODＥＤ";
+$EV_TMP[66]="ev215ノイズとフードコート";
+$EV_TMP[67]="ev215ノイズとフードコートa";
+$EV_TMP[68]="ev215ノイズとフードコートb";
+$EV_TMP[69]="ev215ノイズとフードコートc";
+$EV_TMP[70]="ev217蒼葉、ノイズを手当てする";
+$EV_TMP[71]="ev218ノイズディープキス";
+$EV_TMP[72]="ev218ノイズディープキスa";
+$EV_TMP[73]="ev218ノイズディープキスb";
+$EV_TMP[74]="ev219ノイズ戯れフェラ";
+$EV_TMP[75]="ev219ノイズ戯れフェラa";
+$EV_TMP[76]="ev219ノイズ戯れフェラb";
+$EV_TMP[77]="ev219ノイズ戯れ手コキ";
+$EV_TMP[78]="ev219ノイズ戯れ手コキa";
+$EV_TMP[79]="ev233ノイズを抱き寄せる";
+$EV_TMP[80]="ev239殺人マシーンノイズvs蒼葉";
+$EV_TMP[81]="ev241うずくまるノイズ";
+$EV_TMP[82]="ev241うずくまるノイズa";
+$EV_TMP[83]="ev245ノイズBADＥＤ";
+$EV_TMP[84]="ev253蒼葉、ノイズをお姫様抱っこ";
+$EV_TMP[85]="ev255ノイズラブＨ前戯";
+$EV_TMP[86]="ev255ノイズラブＨ前戯a";
+$EV_TMP[87]="ev255ノイズラブＨ挿入";
+$EV_TMP[88]="ev255ノイズラブＨ挿入a";
+$EV_TMP[89]="ev255ノイズラブＨ挿入b";
+$EV_TMP[90]="ev263ノイズGOODED";
+$EV_TMP[91]="ev315蒼葉発情状態";
+$EV_TMP[92]="ev316ミンク駅弁前戯";
+$EV_TMP[93]="ev316ミンク駅弁挿入";
+$EV_TMP[94]="ev316ミンク駅弁挿入a";
+$EV_TMP[95]="ev326蒼葉の胸倉を掴むミンク";
+$EV_TMP[96]="ev339首を絞められる蒼葉";
+$EV_TMP[97]="ev341黒蒼葉、ミンクに抵抗";
+$EV_TMP[98]="ev343ミンク、頭を撫でる";
+$EV_TMP[99]="ev343ミンク、頭を撫でるa";
+$EV_TMP[100]="ev343ミンク、頭を撫でるb";
+$EV_TMP[101]="ev361ミンクBADED";
+$EV_TMP[102]="ev364ミンク捕縛";
+$EV_TMP[103]="ev364ミンク捕縛a";
+$EV_TMP[104]="ev375ミンクの祈り";
+$EV_TMP[105]="ev375ミンクの祈りa";
+$EV_TMP[106]="ev380ミンクラブＨ前戯";
+$EV_TMP[107]="ev380ミンクラブＨ前戯a";
+$EV_TMP[108]="ev380ミンクラブＨ挿入";
+$EV_TMP[109]="ev380ミンクラブＨ挿入a";
+$EV_TMP[110]="ev380ミンクラブＨ挿入b";
+$EV_TMP[111]="ev381ミンクGOODED";
+$EV_TMP[112]="ev413クリア裸エプロン";
+$EV_TMP[113]="ev429蒼葉ぺたぺたクリア";
+$EV_TMP[114]="ev429蒼葉ぺたぺたクリアa";
+$EV_TMP[115]="ev440クリアとキス";
+$EV_TMP[116]="ev449クリアBADＥＤ";
+$EV_TMP[117]="ev449セーフティ外し";
+$EV_TMP[118]="ev453クリアとH前戯";
+$EV_TMP[119]="ev453クリアとH前戯a";
+$EV_TMP[120]="ev453クリアとH挿入";
+$EV_TMP[121]="ev453クリアとH挿入a";
+$EV_TMP[122]="ev453クリアとH挿入b";
+$EV_TMP[123]="ev453クリアとH挿入前";
+$EV_TMP[124]="ev453停止するクリア";
+$EV_TMP[125]="ev453停止するクリアa";
+$EV_TMP[126]="ev457クリアGOODＥＤ";
+$EV_TMP[127]="ev515うずくまるセイ";
+$EV_TMP[128]="ev515うずくまるセイa";
+$EV_TMP[129]="ev520東江演説";
+$EV_TMP[130]="ev520東江演説a";
+$EV_TMP[131]="ev541ウイルストリップED前戯";
+$EV_TMP[132]="ev541ウイルストリップED挿入";
+$EV_TMP[133]="ev541ウイルストリップED挿入a";
+$EV_TMP[134]="ev541ウイルストリップED挿入b";
+$EV_TMP[135]="ev552蓮ＢＡＤＥＤ";
+$EV_TMP[136]="ev553蒼葉を抱きしめる蓮";
+$EV_TMP[137]="ev554蓮目元アップ";
+$EV_TMP[138]="ev554蓮目元アップa";
+$EV_TMP[139]="ev556仲間と再会の誓い";
+$EV_TMP[140]="ev559蓮、卯水亜種を撃破";
+$EV_TMP[141]="ev561いじめられるセイ";
+$EV_TMP[142]="ev561いじめられるセイa";
+$EV_TMP[143]="ev564蒼葉、黒を認める";
+$EV_TMP[144]="ev564蒼葉、黒を認めるa";
+$EV_TMP[145]="ev566蓮とＨ前戯";
+$EV_TMP[146]="ev566蓮とＨ前戯a";
+$EV_TMP[147]="ev566蓮とＨ挿入";
+$EV_TMP[148]="ev566蓮とＨ挿入a";
+$EV_TMP[149]="ev566蓮とＨ挿入b";
+$EV_TMP[150]="ev569蒼葉、犬蓮を抱き締める";
+$EV_TMP[151]="ev569倒壊したタワーを見つめる";
+$EV_TMP[152]="ev573蓮GOODＥＤ";
+$EV_TMP[153]="ev900もう１人の蒼葉";
+$EV_TMP[154]="ev900ライム対戦蒼葉VSウサギ頭";
+$EV_TMP[155]="ev900ライム対戦蒼葉VSノイズ洗脳";
+$EV_TMP[156]="ev900ライム対戦蒼葉VSノイズ通常";
+$EV_TMP[157]="ev900ライム対戦蒼葉VSバグ蓮";
+$EV_TMP[158]="ev900ライム対戦蒼葉VS中毒者";
+$EV_TMP[159]="ev900ライム対戦蒼葉VS東江1";
+$EV_TMP[160]="ev900ライム対戦蒼葉VS東江2";
+$EV_TMP[161]="ev900昔の荒れてた蒼葉";
+$EV_TMP[162]="ev900蒼葉蹴り汎用";
+$EV_TMP[163]="ev900白蒼葉化";
+$EV_TMP[164]="ev920ノイズ突進";
+$EV_TMP[165]="ev920ノイズ突進a";
+$EV_TMP[166]="ev920ミンク、バイク疾走";
+$EV_TMP[167]="ev920ミンクと蒼葉バイク";
+$EV_TMP[168]="ev940歌うクリア";
+$EV_TMP[169]="ev940歌うクリアa";
+$EV_TMP[170]="ev950蓮、武器発現";
+$EV_TMP[171]="ev950蓮の剣砲構え";
+$EV_TMP[172]="ev950蓮の剣砲構えa";
+$EV_TMP[173]="ev950蓮バトル汎用攻撃";
+$EV_TMP[174]="ev950蓮バトル汎用攻撃a";
+$EV_TMP[175]="ev950蓮バトル汎用突進";
+$EV_TMP[176]="ev950蓮バトル汎用突進a";
+$EV_TMP[177]="ev950蓮バトル汎用防御_効果";
+$EV_TMP[178]="ev950蓮バトル汎用防御a_効果";
+$EV_TMP[179]="ev960ウサギモドキ戦闘構え";
+$EV_TMP[180]="ev960ウサギモドキ戦闘突進";
+$EV_TMP[181]="ev960クリアα力行使";
+$EV_TMP[182]="ev960クリアα力行使a";
+$EV_TMP[183]="ev999コングラチュレーション";
+$EV_TMP[184]="evf08蒼葉出生の秘密";
+$EV_TMP[185]="evf08蒼葉出生の秘密a";
+$EV_TMP[186]="evf08蒼葉出生の秘密b";
+$EV_TMP[187]="bg001011_1_碧島全景";
+
+
+$EV_TMP[188]="bg002011_1_旧住民区全景";
+$EV_TMP[189]="bg002012_1_旧住民区全景";
+$EV_TMP[190]="bg101011_1_旧住民区通り表";
+$EV_TMP[191]="bg101011_3_旧住民区通り表";
+$EV_TMP[192]="bg101021_1_旧住民区通り裏路地01";
+$EV_TMP[193]="bg101021_5_旧住民区通り裏路地01ドライジュース";
+$EV_TMP[194]="bg101021_5_旧住民区通り裏路地01モルヒネ";
+$EV_TMP[195]="bg101022_5_旧住民区通り裏路地02";
+$EV_TMP[196]="bg101023_5_旧住民区通り裏路地03";
+$EV_TMP[197]="bg101031_1_旧住民区通り裏路地紅時雨";
+$EV_TMP[198]="bg101041_1_旧住民区通り裏路地05";
+$EV_TMP[199]="bg101041_3_旧住民区通り裏路地05";
+$EV_TMP[200]="bg101051_5_旧住民区通り裏路地06";
+$EV_TMP[201]="bg101051_5_旧住民区通り裏路地06ライム喧騒モブ";
+$EV_TMP[202]="bg102011_5_平凡店内";
+$EV_TMP[203]="bg102021_5_平凡地下室";
+$EV_TMP[204]="bg102031_1_平凡前通り";
+$EV_TMP[205]="bg103011_5_デリバリーワークス店内";
+$EV_TMP[206]="bg104001_1_蒼葉宅前通り";
+$EV_TMP[207]="bg104001_3_蒼葉宅前通り";
+$EV_TMP[208]="bg104001_3_蒼葉宅前通り玄関消灯";
+$EV_TMP[209]="bg104011_5_蒼葉宅玄関";
+$EV_TMP[210]="bg104011_5_蒼葉宅玄関消灯";
+$EV_TMP[211]="bg104021_5_蒼葉宅台所";
+$EV_TMP[212]="bg104031_5_蒼葉宅自室";
+$EV_TMP[213]="bg104031_5_蒼葉宅自室消灯";
+$EV_TMP[214]="bg104031_5_蒼葉宅自室消灯荒らし";
+$EV_TMP[215]="bg104031_5_蒼葉宅自室点灯荒らし";
+$EV_TMP[216]="bg104041_3_蒼葉宅ベランダ";
+$EV_TMP[217]="bg104051_5_蒼葉宅居間";
+$EV_TMP[218]="bg105011_1_刺青スタジオロビー";
+$EV_TMP[219]="bg106011_5_廃ビル広間";
+$EV_TMP[220]="bg106021_5_廃ビル部屋";
+$EV_TMP[221]="bg107011_1_病院個室";
+$EV_TMP[222]="bg107021_1_病院病室前";
+$EV_TMP[223]="bg108011_1_北地区外れの通り";
+$EV_TMP[224]="bg201011_0_ライムパブリックフィールド";
+$EV_TMP[225]="bg201012_0_ライムパブリックフィールド";
+$EV_TMP[226]="bg201021_0_ライムノイズ01";
+$EV_TMP[227]="bg201021_0_ライムノイズ01洗脳";
+$EV_TMP[228]="bg201022_0_ライムノイズ02";
+$EV_TMP[229]="bg201022_0_ライムノイズ02洗脳";
+$EV_TMP[230]="bg201023_0_ライムノイズ03";
+$EV_TMP[231]="bg201023_0_ライムノイズ03洗脳";
+$EV_TMP[232]="bg201031_0_ライム中毒者";
+$EV_TMP[233]="bg201032_0_ライム中毒者";
+$EV_TMP[234]="bg201051_0_ライム東江";
+$EV_TMP[235]="bg201052_0_ライム東江";
+$EV_TMP[236]="bg202011_3_暴露紅雀実家居間";
+$EV_TMP[237]="bg202021_3_暴露紅雀実家小部屋";
+$EV_TMP[238]="bg202031_3_暴露紅雀実家前外観";
+$EV_TMP[239]="bg203011_0_暴露ノイズ";
+$EV_TMP[240]="bg203011_0_暴露ノイズ穴";
+$EV_TMP[241]="bg204011_3_暴露ミンク故郷草原炎上";
+$EV_TMP[242]="bg204021_0_暴露ミンク倉庫天井";
+$EV_TMP[243]="bg204031_0_暴露ミンク倉庫個室";
+$EV_TMP[244]="bg205011_0_暴露クリア";
+$EV_TMP[245]="bg206011_0_暴露蓮";
+$EV_TMP[246]="bg209011_0_暴露蒼葉教会外観見上げ";
+$EV_TMP[247]="bg209011_2_暴露蒼葉教会外観見上げ";
+$EV_TMP[248]="bg210011_2_暴露海と砂浜";
+$EV_TMP[249]="bg211011_0_精神世界セイ";
+$EV_TMP[250]="bg301011_5_プラチナジェイル大通り";
+$EV_TMP[251]="bg301011_5_プラチナジェイル大通り1赤";
+$EV_TMP[252]="bg301011_5_プラチナジェイル大通り2ゲーセン";
+$EV_TMP[253]="bg301011_5_プラチナジェイル大通り3ブラック";
+$EV_TMP[254]="bg301011_5_プラチナジェイル大通り4アクア";
+$EV_TMP[255]="bg301011_5_プラチナジェイル大通りセイ";
+$EV_TMP[256]="bg301021_5_プラチナジェイル中通り";
+$EV_TMP[257]="bg301021_5_プラチナジェイル中通り1赤";
+$EV_TMP[258]="bg301021_5_プラチナジェイル中通り1赤セイ";
+$EV_TMP[259]="bg301021_5_プラチナジェイル中通り2ゲーセン";
+$EV_TMP[260]="bg301021_5_プラチナジェイル中通り2ゲーセンセイ";
+$EV_TMP[261]="bg301021_5_プラチナジェイル中通り3ブラック";
+$EV_TMP[262]="bg301021_5_プラチナジェイル中通り4アクア";
+$EV_TMP[263]="bg301021_5_プラチナジェイル中通り4アクアセイ";
+$EV_TMP[264]="bg301031_5_プラチナジェイル通り路地01";
+$EV_TMP[265]="bg301041_5_プラチナジェイル通り路地02";
+$EV_TMP[266]="bg301061_5_別タワー前";
+$EV_TMP[267]="bg301062_5_別タワー前タワー見上げ";
+$EV_TMP[268]="bg301071_5_プラチナジェイル屋台通り";
+$EV_TMP[269]="bg301081_5_プラチナジェイル水場通り";
+$EV_TMP[270]="bg302011_5_グリッター部屋01";
+$EV_TMP[271]="bg302011_5_グリッター部屋01ベッド角";
+$EV_TMP[272]="bg302011_5_グリッター部屋01天井";
+$EV_TMP[273]="bg302012_5_グリッター部屋02";
+$EV_TMP[274]="bg302021_5_グリッター居間";
+$EV_TMP[275]="bg302021_5_グリッター居間天井";
+$EV_TMP[276]="bg302031_5_グリッターバーカウンター";
+$EV_TMP[277]="bg302041_5_グリッター廊下";
+$EV_TMP[278]="bg302051_5_グリッターエントランス";
+$EV_TMP[279]="bg302051_5_グリッターエントランス壁側";
+$EV_TMP[280]="bg302051_5_グリッター前通り";
+$EV_TMP[281]="bg302052_5_グリッター前通りグリッター看板";
+$EV_TMP[282]="bg302061_5_グリッター階段";
+$EV_TMP[283]="bg302071_5_グリッター脱衣所";
+$EV_TMP[284]="bg303011_5_娯楽施設外観入り口ブラック";
+$EV_TMP[285]="bg303011_5_娯楽施設外観入り口レッド";
+$EV_TMP[286]="bg303021_5_娯楽施設クラブフロア";
+$EV_TMP[287]="bg303022_5_娯楽施設クラブフロア";
+$EV_TMP[288]="bg303023_5_娯楽施設クラブフロア";
+$EV_TMP[289]="bg303024_5_娯楽施設クラブフロア";
+$EV_TMP[290]="bg303031_5_娯楽施設竜峰の部屋";
+$EV_TMP[291]="bg303041_5_娯楽施設ＶＩＰルーム";
+$EV_TMP[292]="bg303042_5_娯楽施設ＶＩＰルーム";
+$EV_TMP[293]="bg303051_5_娯楽施設入り口フロア";
+$EV_TMP[294]="bg303061_5_娯楽施設クラブフロア横通路";
+$EV_TMP[295]="bg304011_5_東江タワー全景";
+$EV_TMP[296]="bg304012_1_東江タワー全景崩壊後";
+$EV_TMP[297]="bg304012_1_東江タワー全景崩壊後空";
+$EV_TMP[298]="bg304012_5_東江タワー全景崩壊後";
+$EV_TMP[299]="bg304021_5_東江タワー前通り";
+$EV_TMP[300]="bg304021_5_東江タワー前通りセイ";
+$EV_TMP[301]="bg304021_5_東江タワー前通りモブ";
+$EV_TMP[302]="bg304022_1_東江タワー前通り崩壊後";
+$EV_TMP[303]="bg304022_5_東江タワー前通り崩壊中";
+$EV_TMP[304]="bg304023_5_東江タワー通用口";
+$EV_TMP[305]="bg304031_5_東江タワー廊下01";
+$EV_TMP[306]="bg304031_5_東江タワー廊下01セイ";
+$EV_TMP[307]="bg304031_5_東江タワー廊下01崩壊中";
+$EV_TMP[308]="bg304031_5_東江タワー廊下隔壁閉じ";
+$EV_TMP[309]="bg304032_5_東江タワー廊下02";
+$EV_TMP[310]="bg304033_5_東江タワー廊下03";
+$EV_TMP[311]="bg304041_5_東江タワー研究エリア研究室";
+$EV_TMP[312]="bg304051_5_東江タワー研究エリア廊下01";
+$EV_TMP[313]="bg304052_5_東江タワー研究エリア廊下02";
+$EV_TMP[314]="bg304053_5_東江タワー研究エリア廊下03";
+$EV_TMP[315]="bg304061_5_東江タワー階段";
+$EV_TMP[316]="bg304062_5_東江タワー階段別アングル";
+$EV_TMP[317]="bg304072_5_東江タワーエレベーター";
+$EV_TMP[318]="bg304081_5_東江タワー物置部屋";
+$EV_TMP[319]="bg304091_5_東江タワー中ホール";
+$EV_TMP[320]="bg304091_5_東江タワー中ホールセイ";
+$EV_TMP[321]="bg304102_5_東江タワー中ホールアングル別";
+$EV_TMP[322]="bg304112_5_東江タワー中ホール扉前";
+$EV_TMP[323]="bg304121_5_東江タワー東江の間";
+$EV_TMP[324]="bg304121_5_東江タワー東江の間セイ";
+$EV_TMP[325]="bg304122_5_東江タワー東江の間";
+$EV_TMP[326]="bg304131_5_東江タワー東江の間前廊下";
+$EV_TMP[327]="bg304141_5_東江タワーパーティホール";
+$EV_TMP[328]="bg304141_5_東江タワーパーティホール無人";
+$EV_TMP[329]="bg304151_5_東江タワー東江の間エレベータ";
+$EV_TMP[330]="bg304151_5_東江タワー東江の間エレベータ閉じ";
+$EV_TMP[331]="bg304161_5_東江タワーセイ自室前";
+$EV_TMP[332]="bg304171_5_東江タワーウイルス自室";
+$EV_TMP[333]="bg304181_5_東江タワー白い部屋";
+$EV_TMP[334]="bg305021_5_プラチナジェイルゲート前";
+$EV_TMP[335]="bg306011_5_倉庫外観通り";
+$EV_TMP[336]="bg306021_5_倉庫内部入り口側";
+$EV_TMP[337]="bg306031_5_倉庫内部荷物側";
+$EV_TMP[338]="bg307011_5_パーツ屋店内";
+$EV_TMP[339]="bg307011_5_バイクビル前通り";
+$EV_TMP[340]="bg307021_5_バイクビルエレベーター";
+$EV_TMP[341]="bg307031_5_バイクビル屋上";
+$EV_TMP[342]="bg307041_5_バイクビル屋上バイク";
+$EV_TMP[343]="bg308021_3_ホテル部屋";
+$EV_TMP[344]="bg308021_3_ホテル部屋アングル変え";
+$EV_TMP[345]="bg308021_3_ホテル部屋カーテン閉じ";
+$EV_TMP[346]="bg390011_5_プラチナジェイル汎用空";
+$EV_TMP[347]="bg401011_5_放棄区域地下通路";
+$EV_TMP[348]="bg402011_1_立ち入り禁止区域通り";
+$EV_TMP[349]="bg402021_1_立ち入り禁止区域工場外観";
+$EV_TMP[350]="bg402031_1_立ち入り禁止区域工場部屋01";
+$EV_TMP[351]="bg402041_1_立ち入り禁止区域工場通路";
+$EV_TMP[352]="bg402051_1_立ち入り禁止区域裏通り";
+$EV_TMP[353]="bg501011_1_過去旧住民区蒼葉宅近所の公園";
+$EV_TMP[354]="bg502011_4_ミンクの故郷空";
+$EV_TMP[355]="bg502021_4_ミンクの故郷草原";
+$EV_TMP[356]="bg503011_1_紅雀自宅紅雀自室";
+
+$EV_TMP[357]="bg108012_1_北地区外れの通り";
+
+}

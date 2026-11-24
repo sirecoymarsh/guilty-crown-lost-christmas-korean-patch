@@ -1,0 +1,17 @@
+{
+  "play": {
+    "source": "P:\\AI\\gclx-codexrun\\game\\nss.npa",
+    "source_hash": "333a6a6762a604885a3a50a06ab809bfc9e3debe57ce03400b0bd8dbce6c84a8",
+    "target_hash": "333a6a6762a604885a3a50a06ab809bfc9e3debe57ce03400b0bd8dbce6c84a8",
+    "unchanged_entries": 558
+  },
+  "latest": {
+    "source": "F:\\AI\\gclx-4k\\release_1121\\staging\\nss_play.npa",
+    "source_hash": "333a6a6762a604885a3a50a06ab809bfc9e3debe57ce03400b0bd8dbce6c84a8",
+    "target_hash": "333a6a6762a604885a3a50a06ab809bfc9e3debe57ce03400b0bd8dbce6c84a8",
+    "unchanged_entries": 558
+  },
+  "old_table_source": "d08735fc8a265bfdec9f4973c9662c900cb6602e94dd6a3b3350133589b9605d",
+  "new_table_source": "fc7097ce6925096ef63783ff17d24536887a0fa7771fe37eb57271de8e198f17",
+  "stable_ids": 366
+}

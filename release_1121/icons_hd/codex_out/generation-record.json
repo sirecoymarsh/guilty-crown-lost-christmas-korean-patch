@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-24",
+  "author": "Codex internal",
+  "translator_model": "Codex internal",
+  "handoff": "P:\\AI\\Codex\\projects\\gclx-end-icons-20261124\\source\\claude-handoff.md",
+  "source_inventory": "P:\\AI\\Codex\\projects\\gclx-end-icons-20261124\\source\\inventory.json",
+  "art_tool": "image_gen.imagegen",
+  "transparent_background": true,
+  "generated_sources": [
+    {
+      "kind": "crystal",
+      "original": "P:/AI/Codex/generated_images/01a207c2-31f5-7053-a150-e265962f42ff/exec-3e25d74b-4ff8-488f-96f8-3e2d65f84aaf.png",
+      "working_copy": "P:\\AI\\Codex\\projects\\gclx-end-icons-20261124\\work\\crystal-generated-v1.png",
+      "reference": "P:\\AI\\Codex\\projects\\gclx-end-icons-20261124\\work\\crystal-reference-dark.png"
+    },
+    {
+      "kind": "auto",
+      "original": "P:/AI/Codex/generated_images/01a207c2-31f5-7053-a150-e265962f42ff/exec-0b949919-51de-48f6-bb03-b94795caa352.png",
+      "working_copy": "P:\\AI\\Codex\\projects\\gclx-end-icons-20261124\\work\\dna-generated-v1.png",
+      "reference": "P:\\AI\\Codex\\projects\\gclx-end-icons-20261124\\work\\dna-reference-dark.png"
+    }
+  ],
+  "reference_research": {
+    "project": "Real-ESRGAN",
+    "license": "BSD-3-Clause",
+    "sources": [
+      "https://github.com/xinntao/Real-ESRGAN/blob/master/README.md",
+      "https://github.com/xinntao/Real-ESRGAN/blob/master/inference_realesrgan.py",
+      "https://raw.githubusercontent.com/xinntao/Real-ESRGAN/master/LICENSE"
+    ],
+    "reviewed": "Alpha handling and anime/video models were considered as a conventional upscale baseline. The original low-resolution forms and rejected procedural redraws informed using reference-guided imagegen art instead.",
+    "adopted_code_or_runtime": "none; Real-ESRGAN was not executed for these deliverables"
+  },
+  "export_script": "P:\\AI\\Codex\\projects\\gclx-end-icons-20261124\\export_frames.ps1",
+  "export_script_sha256": "cefb7e43082a49a2fcdeea0e4c6bb5e3228e8c3f87c21d278c595615224a7336",
+  "integration_owner": "Claude",
+  "game_files_modified": false,
+  "prompts": {
+    "crystal": "Restore this tiny original game animation sprite into faithful high-resolution hand-painted game UI art. This is an edit of the attached sprite atlas, NOT a redesign. Output a transparent RGBA sprite sheet, landscape 3:2 aspect, exactly 3 equal columns by 2 equal rows, six equal square cells, no labels or borders. Keep every crystal centered at the exact location and relative scale in its existing cell, inside an approximately 81% square drawing area. All six cells must depict EXACTLY THE SAME crystal silhouette and internal geometry, differing ONLY in lighting/color as in the reference: row 1 white icy glow, cyan icy glow, jade/teal; row 2 dimmer jade/blue, dark navy/green, the same dark navy/green. Restore smooth crisp antialiased contours and fine translucent ice reflections from the pixelated reference. Preserve the squat irregular roughly triangular silhouette with a rounded top, asymmetrical angular outer icy ridges, small blue facets around the rim, luminous aqua/green translucent center, and the subtle S-shaped swirling inclusion inside. It is a softly luminous mystical ice crystal, not a cut gemstone, not a flat stone, not a Voronoi cracked polygon mosaic. Preserve the reference's soft luminous painted appearance and restrained blue/green palette. Sharp readable details for a final 104x104-pixel game icon, with graceful flowing reflections instead of numerous hard black outlines. No ground plane, no cast shadow, no surroundings, no opaque backing, no extra glow outside the original silhouette. The charcoal in the reference is only a viewing background and must become true alpha transparency in the output. Preserve the six equal-cell layout precisely.",
+    "auto": "Faithfully restore this original pixelated visual-novel auto-mode animation sprite sheet into smooth high-resolution game UI art. Edit the provided sheet, retaining EXACTLY the same 16 individual frame poses and their exact row-major order. Output one SQUARE transparent RGBA PNG atlas with exactly FOUR equal columns and FOUR equal rows. Keep each sprite centered in its original equal cell, same relative footprint and margins, no labels and no borders. Each cell is the next rotational phase of the same extremely fine luminous blue-white double-helix ribbon: two long, thin twisting light strands rise vertically, changing their crossings exactly as the reference shows, and a compact horizontal twisted light filigree/helix occupies the lower third. The vertical strands vary between crossing X, open U, V and inverted-V forms in the exact 16 reference poses. In every cell keep the slim luminous horizontal rungs and two rippling horizontal contours at the bottom in their reference positions. Restore graceful tapered flowing filaments, bright pearly-white front edges, dim desaturated blue rear edges, delicate cyan bloom and transparent empty space between strands. These should look like mysterious thin light trails/icy light filaments from an anime game, NOT a biology textbook diagram, NOT thick plastic tubes, NOT a regular ladder, NOT atom diagrams. The visual mass must stay thin and airy, all 16 silhouettes must closely follow the corresponding reference frame. Preserve frame-to-frame continuity and equal scale. No particles, no extra rings, no new structures, no panel backings. The dark gray backdrop in the source is only for reference viewing: remove it entirely and use TRUE transparent alpha. No atmospheric background or outside haze."
+  }
+}

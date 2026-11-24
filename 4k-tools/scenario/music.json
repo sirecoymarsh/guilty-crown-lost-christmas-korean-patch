@@ -1,0 +1,170 @@
+[
+ {
+  "alias": "lx001",
+  "file": "lxbgm01",
+  "comment": "戦闘曲：Ω",
+  "disabled": true,
+  "uses": 1,
+  "first_scene": "lx9999.nss"
+ },
+ {
+  "alias": "lx002",
+  "file": "lxbgm02",
+  "comment": "体験版ラスト：セットループポイントの調整のため個別で指定",
+  "disabled": true,
+  "uses": 0,
+  "first_scene": null
+ },
+ {
+  "alias": "lx001",
+  "file": "lxbgm01",
+  "comment": "1. βios",
+  "disabled": false,
+  "uses": 1,
+  "first_scene": "lx9999.nss"
+ },
+ {
+  "alias": "lx002",
+  "file": "lxbgm02",
+  "comment": "2. α",
+  "disabled": true,
+  "uses": 0,
+  "first_scene": null
+ },
+ {
+  "alias": "lx003",
+  "file": "lxbgm03",
+  "comment": "3. Ω",
+  "disabled": false,
+  "uses": 13,
+  "first_scene": "lx0010.nss"
+ },
+ {
+  "alias": "lx004",
+  "file": "lxbgm04",
+  "comment": "4. Ready to Go",
+  "disabled": false,
+  "uses": 0,
+  "first_scene": null
+ },
+ {
+  "alias": "lx005",
+  "file": "lxbgm05",
+  "comment": "5. friends",
+  "disabled": false,
+  "uses": 5,
+  "first_scene": "lx0402a_01.nss"
+ },
+ {
+  "alias": "lx006",
+  "file": "lxbgm06",
+  "comment": "6. VOiD",
+  "disabled": false,
+  "uses": 7,
+  "first_scene": "lx0101.nss"
+ },
+ {
+  "alias": "lx007",
+  "file": "lxbgm07",
+  "comment": "7. gエ19",
+  "disabled": false,
+  "uses": 2,
+  "first_scene": "lx0104a.nss"
+ },
+ {
+  "alias": "lx008",
+  "file": "lxbgm08",
+  "comment": "8. θεοι",
+  "disabled": false,
+  "uses": 1,
+  "first_scene": "lx0602.nss"
+ },
+ {
+  "alias": "lx009",
+  "file": "lxbgm09",
+  "comment": "9. close your eyes",
+  "disabled": true,
+  "uses": 0,
+  "first_scene": null
+ },
+ {
+  "alias": "lx010",
+  "file": "lxbgm10",
+  "comment": "10. Βασιλευζ",
+  "disabled": false,
+  "uses": 0,
+  "first_scene": null
+ },
+ {
+  "alias": "lx011",
+  "file": "lxbgm11",
+  "comment": "11. π",
+  "disabled": false,
+  "uses": 2,
+  "first_scene": "lx0401.nss"
+ },
+ {
+  "alias": "lx012",
+  "file": "lxbgm12",
+  "comment": "12. Release My Soul",
+  "disabled": false,
+  "uses": 1,
+  "first_scene": "lx0605a.nss"
+ },
+ {
+  "alias": "lx013",
+  "file": "lxbgm13",
+  "comment": "13. κrOnё",
+  "disabled": false,
+  "uses": 5,
+  "first_scene": "lx0102.nss"
+ },
+ {
+  "alias": "lx014",
+  "file": "lxbgm14",
+  "comment": "14. Hill Of Sorrow",
+  "disabled": false,
+  "uses": 2,
+  "first_scene": "lx0101.nss"
+ },
+ {
+  "alias": "lx015",
+  "file": "lxbgm15",
+  "comment": "15. Αποκσλυψιζ",
+  "disabled": false,
+  "uses": 1,
+  "first_scene": "lx0506.nss"
+ },
+ {
+  "alias": "lx016",
+  "file": "lxbgm16",
+  "comment": "16. Home ~in this corner~",
+  "disabled": false,
+  "uses": 2,
+  "first_scene": "lx0205.nss"
+ },
+ {
+  "alias": "lx017",
+  "file": "lxbgm17",
+  "comment": "17. Genesi§",
+  "disabled": false,
+  "uses": 7,
+  "first_scene": "lx0401.nss"
+ },
+ {
+  "alias": "lx018",
+  "file": "lxbgm18",
+  "comment": "18. βιοζ-δ",
+  "disabled": false,
+  "uses": 0,
+  "first_scene": null
+ },
+ {
+  "alias": "lx019",
+  "file": "lxbgm19",
+  "comment": "19. Rё∀L",
+  "disabled": false,
+  "uses": 1,
+  "first_scene": "lx0605b.nss"
+ }
+]

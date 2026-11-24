@@ -1,0 +1,114 @@
+#include "nss/function_dialog.nss"
+
+//=============================================================================//
+//■バックセレクト■
+//=============================================================================//
+chapter main
+{
+	Wait(16);
+
+	//★ロックの場合
+	if(!ExistSave(9999)||$SYSTEM_backselect_lock||$Title_Config||$Title_Load){
+		return;
+	}
+
+	//★前提変数
+	$SYSTEM_backselect_enable = true;
+
+	//★超速からの変遷用
+	$SYSTEM_keydown_esc=false;
+	$SYSTEM_buttondown_close=false;
+
+	//■定義「ビデオ設置」
+	if(IsInterrupt()){
+		CreateTexture("video", 1010000, center, middle, "VIDEO");
+	}
+
+	//■定義「ビデオ設置」
+//	if(!$SYSTEM_menu_config_enable && !$SYSTEM_menu_save_enable && !$SYSTEM_menu_load_enable && !$SYSTEM_menu_enable && !$SYSTEM_backlog_enable&&!$LOCAL_hmode_enable){
+//		if(!$InDialog){
+//			CreateTexture("video", 1010000, center, middle, "VIDEO");
+//		}
+//	}
+
+	//★尋ねない
+	if(#no_ask){
+		//所定の動作
+		CreateColor("BLACK",1112000,center,middle,1024,768,BLACK);
+		Fade("BLACK",0,0,null,true);
+		CreateTexture("MSG_msg",99999999,56,184,"cg/sys/dialog/ベース2.png");
+		CreateTexture("MSG_load",99999999,293,248,"cg/sys/dialog/読み込んでいます.png");
+		Fade("BLACK",300,1000,null,true);
+
+		#PreSaveFlag=false;
+		Save(0);
+		Load(9999);
+	}
+
+	//■定義「メッセージウインドウ作成」
+	CreateName("MSGWND");
+
+	//□基礎構築
+	DialogBase("選択肢まで");
+
+	//★選択肢開始
+	$SYSTEM_keydown_r=false;
+	$SYSTEM_r_button_down=false;
+	select{
+		if($SYSTEM_keydown_r||$SYSTEM_r_button_down){break;}
+
+		case MSGWND/MSG_no{
+			Request("MSGWND/MSG_no/se", Play);
+		}
+		case MSGWND/MSG_yes{
+			//所定の動作
+			Request("MSGWND/MSG_yes/se", Play);
+			CreateColor("BLACK",1112000,center,middle,1024,768,BLACK);
+			Fade("BLACK",0,0,null,true);
+			CreateTexture("MSGWND/MSG_msg",99999999,56,184,"cg/sys/dialog/ベース2.png");
+			CreateTexture("MSG_load",99999999,293,248,"cg/sys/dialog/読み込んでいます.png");
+			Fade("BLACK",300,1000,null,true);
+
+			//#InitCV=false;
+			#PreSaveFlag=false;
+			Save(0);
+			Load(9999);
+		}
+
+		//★キーダウン系
+		if($SYSTEM_keydown_f){
+			DialogFull();
+		}else if($SYSTEM_keydown_esc||$SYSTEM_buttondown_close){
+			DialogClose();
+		}
+	}
+
+	//■終了共通演出
+	DialogEnd();
+
+	$SYSTEM_r_button_down=false;
+	$SYSTEM_keydown_r=false;
+	$SYSTEM_backselect_enable=false;
+
+	$SYSTEM_mousewheel_up=false;
+	$SYSTEM_mousewheel_down=false;
+}
+
+
+
+//■マクロ「前の選択肢まで戻る確認ダイアログ」
+function TitleDialogTrial()
+{
+//◆体験版専用
+	#ResetMessage="前の選択肢まで戻りますか？";
+
+	if(Message("선택지로 돌아가기",#ResetMessage,OKCANCEL)==1){
+		CreateColor("BLACK", 1112000, center, middle, 800, 600, BLACK);
+		Fade("BLACK", 0, 0, null, true);
+		Fade("BLACK", 500, 1000, null, true);
+
+		Load(9999);
+	}
+
+}
+

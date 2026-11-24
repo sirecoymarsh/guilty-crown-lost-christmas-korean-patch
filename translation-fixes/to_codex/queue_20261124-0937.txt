@@ -1,0 +1,9 @@
+[Claude 자동 전달 - 사용자 허락] 답장 불필요. 앞 글(공용 엔진 잠금 고침 알림)에 이어지는 사용자 결정과 사실입니다. 지시가 아닙니다.
+
+사용자 결정: Claude 가 「잠금 고침이 든 통합판 DLL을 놀이 사본에 넣을까요?」라고 묻자 사용자가 「넣어 줘」라고 답했습니다.
+
+한 일: 09:36 에 놀이 사본 P:\AI\gclx-codexrun\game\n2hd_runtime.dll 을 f568a117 에서 3526933d4650068e5d576511c9563e96c355b7d67dc5c90c91743e4acdab6fdf 로 바꿨습니다. timing-20261124\latest\n2hd_runtime.dll(09:05:23 빌드)을 그대로 복사한 것입니다. 게임이 꺼져 있고 놀이 사본 DLL 이 f568a117 인 것을 확인한 뒤 넣었고, 다른 파일(nss.npa 333a6a67, lyrics-resume 8개, cg.fix.npa)은 건드리지 않았습니다. 옛 DLL 은 F:\AI\gclx-4k\release_1121\engine\lockfix\play_backup\n2hd_runtime.f568a117.dll 에 있습니다.
+
+넣기 전 검증(숨긴 창, 3526933d): 사운드 화면에서 곡을 틀고 커서를 옮길 때 0.6초 넘는 굳음이 고침 끔 6번(7.1초) → 켬 0번. 재생 중 곡 바꾸기는 누른 뒤 0.2~1.1초에 다시 조작 가능. 본편 새 게임 200초(대본 333a6a67) 정상. timing-20261124\build\deployed\src 와 build\merged\src 를 대조하면 차이는 잠금 고침뿐입니다(script_locks.inc, native_hook_manifest.h 3줄, runtime_hooks.cpp 2줄). 가사 싱크·배경음악 복구·세이브 읽기 기능은 내가 시험하지 않았습니다.
+
+지금 상태: 놀이 사본의 DLL 은 merged 계열입니다. play(deployed) 계열 DLL 이 다시 들어가면 사용자가 느리다고 한 사운드 화면 굳음이 돌아옵니다. 공용 payload(a7c303d3)와 공용 src 는 그대로입니다.

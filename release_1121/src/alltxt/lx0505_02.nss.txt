@@ -1,0 +1,161 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0505_02.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0505_10.nss";
+
+}
+
+
+scene lx0505_02.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+	//おがみ：★演出　とりあえずオミット
+	/*
+	Delete("@Ｃ");
+
+	CreateCamera("Ｃ", -512, -130, 1000);
+	SetAlias("Ｃ","Ｃ");
+
+	CreateTextureSP("@Ｃ/絵背景", 0, Center, -380, "cg/bg/l/bg001016_3_高速道路崩壊_l.jpg");
+	CreateTextureSP("@Ｃ/絵演立木屋", 500, Center, Middle, "cg/st/x/stキャロル_通常_normal_x01.png");
+	Zoom("@Ｃ/絵演立木屋", 0, 500, 500, null, true);
+	Move("@Ｃ/絵演立木屋", 0, @640, @150, null, true);
+
+	MoveCamera("Ｃ", 0, 512, @0, @0, null, false);
+
+	if(!$LProcAK_lx0505_00Act){
+
+	Request("@プロセス", Stop);
+	FadeDelete("上背景", 300, null, true);
+	$LProcAK_lx0505_00Act=true;
+
+	}
+
+	Delete("@プロセス");
+	*/
+
+	CreateEffectDropEX("dr01", 2000, 0, 0, 1024, 576, 20, 20, 4, 5, 5, 5, "cg/ef/efDro_火の粉003.png");
+	Rotate("dr01", 0, @0, @0, 25, null,true);
+	Request("dr01", AddRender);
+	Zoom("dr01", 0, 2000, 2000, null, true);
+	Fade("dr01", 0, 1000, null, true);
+
+
+
+	CreateTextureSP("bg01", 100, 30, 270, "cg/bg/bg001016_3_高速道路崩壊.jpg");
+	SetShade("bg01", SEMIHEAVY);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	//DrawEffectSkip("bg01", 1000, "Ripple", 150, 50, null);
+
+	CreateTextureSP("bg02", 100, -100, -100, "cg/bg/x/bg001015_3_高速道路高架下崩壊_高速道路_x01_ogami.png");
+
+
+
+	CreateTextureEXadd("ef01", 100, -500, -250, "cg/ef/x/ef_light_bomb01_ogami.png");
+	Zoom("ef01", 0, 2000, 2000, null, true);
+
+	LastfireOGMIX("@ef01","ef01_pro");
+
+	CreateSE("SE01L","se背景_ガヤ_戦場の風景02");
+	MusicStart("SE01L",0,500,0,1000,null,true);
+
+
+
+	Move("bg01", 30000, -120, 238, null, false);
+	Move("bg02", 30000, -270, -270, null, false);
+
+	FadeDelete("上背景", 1000, null, true);
+
+	Wait(500);
+
+
+//←←奴らに報いを
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500180a02">
+ﾀﾚｽﾅﾀｻ ｱﾃﾁﾎ ｸﾆｳﾖﾀｺ ｳ鯊ｻ ﾇ簓ﾘ ｺｹｼｦ ｸﾍｼｼﾇﾏｴﾂ ｳﾊ&.
+
+//	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500190a02">
+증오의 끝에서 기다리는 허무를&, 넌 견뎌낼 수 있으려나?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+//	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/0500200a02">
+아니면&, 스크루지?
+역시 너도&, 부서져 버리는 걸까?
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+	Wait(16);
+
+	SetVolumeEX("SE*", 700, 0, null);
+	Wait(700);
+
+//→→飛び降りるキャロル
+
+
+//	ClearFadeAll(1000, true);
+
+}

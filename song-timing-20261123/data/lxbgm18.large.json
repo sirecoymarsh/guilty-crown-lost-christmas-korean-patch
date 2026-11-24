@@ -1,0 +1,1021 @@
+{
+  "source": "user game sound.npa",
+  "audio_sha256": "8d60df2b3dee8ffd6083eb78082269a73c6228f3860e57260a30e3621684c1b9",
+  "model": "P:\\AI\\Codex\\projects\\drakoi-korean\\vocal-subtitles\\tools\\faster-whisper-large-v3",
+  "language": "de",
+  "task": "transcribe",
+  "duration": 155.5866875,
+  "segments": [
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 1.9399999999999995,
+      "end": 15.3,
+      "text": " Erinnerst du dich, du, erinnerst du dich, du, an das Wohl, das du mir gewonnen hast?",
+      "tokens": [
+        50365,
+        3300,
+        19166,
+        372,
+        1581,
+        10390,
+        11,
+        1581,
+        11,
+        1189,
+        19166,
+        372,
+        1581,
+        10390,
+        11,
+        1581,
+        11,
+        364,
+        1482,
+        343,
+        12768,
+        11,
+        1482,
+        1581,
+        3149,
+        6906,
+        34269,
+        6581,
+        30,
+        51132
+      ],
+      "avg_logprob": -0.3213900903175617,
+      "compression_ratio": 1.8658536585365855,
+      "no_speech_prob": 0.2548828125,
+      "words": [
+        {
+          "start": 1.9399999999999995,
+          "end": 2.92,
+          "word": " Erinnerst",
+          "probability": 0.6881510416666666
+        },
+        {
+          "start": 2.92,
+          "end": 3.14,
+          "word": " du",
+          "probability": 0.9794921875
+        },
+        {
+          "start": 3.14,
+          "end": 4.16,
+          "word": " dich,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 4.16,
+          "end": 4.52,
+          "word": " du,",
+          "probability": 0.98291015625
+        },
+        {
+          "start": 4.58,
+          "end": 6.34,
+          "word": " erinnerst",
+          "probability": 0.9962565104166666
+        },
+        {
+          "start": 6.34,
+          "end": 6.76,
+          "word": " du",
+          "probability": 1.0
+        },
+        {
+          "start": 6.76,
+          "end": 7.3,
+          "word": " dich,",
+          "probability": 1.0
+        },
+        {
+          "start": 7.32,
+          "end": 7.86,
+          "word": " du,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 7.86,
+          "end": 8.74,
+          "word": " an",
+          "probability": 0.5703125
+        },
+        {
+          "start": 8.74,
+          "end": 9.48,
+          "word": " das",
+          "probability": 0.1561279296875
+        },
+        {
+          "start": 9.48,
+          "end": 10.8,
+          "word": " Wohl,",
+          "probability": 0.958740234375
+        },
+        {
+          "start": 10.8,
+          "end": 11.24,
+          "word": " das",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 11.24,
+          "end": 11.76,
+          "word": " du",
+          "probability": 1.0
+        },
+        {
+          "start": 11.76,
+          "end": 12.22,
+          "word": " mir",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 12.22,
+          "end": 14.2,
+          "word": " gewonnen",
+          "probability": 0.4495849609375
+        },
+        {
+          "start": 14.2,
+          "end": 15.3,
+          "word": " hast?",
+          "probability": 1.0
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 16.42,
+      "end": 27.6,
+      "text": " Erinnerst du dich, du, erinnerst du dich, du, an den Tandem, du mir?",
+      "tokens": [
+        51193,
+        3300,
+        19166,
+        372,
+        1581,
+        10390,
+        11,
+        1581,
+        11,
+        1189,
+        19166,
+        372,
+        1581,
+        10390,
+        11,
+        1581,
+        11,
+        364,
+        1441,
+        314,
+        474,
+        443,
+        11,
+        1581,
+        3149,
+        30,
+        51762
+      ],
+      "avg_logprob": -0.3213900903175617,
+      "compression_ratio": 1.8658536585365855,
+      "no_speech_prob": 0.2548828125,
+      "words": [
+        {
+          "start": 16.42,
+          "end": 17.4,
+          "word": " Erinnerst",
+          "probability": 0.9954427083333334
+        },
+        {
+          "start": 17.4,
+          "end": 17.68,
+          "word": " du",
+          "probability": 1.0
+        },
+        {
+          "start": 17.68,
+          "end": 18.62,
+          "word": " dich,",
+          "probability": 1.0
+        },
+        {
+          "start": 18.7,
+          "end": 19.04,
+          "word": " du,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 19.18,
+          "end": 20.96,
+          "word": " erinnerst",
+          "probability": 0.9998372395833334
+        },
+        {
+          "start": 20.96,
+          "end": 21.28,
+          "word": " du",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 21.28,
+          "end": 21.8,
+          "word": " dich,",
+          "probability": 1.0
+        },
+        {
+          "start": 21.86,
+          "end": 22.18,
+          "word": " du,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 22.46,
+          "end": 23.18,
+          "word": " an",
+          "probability": 0.8857421875
+        },
+        {
+          "start": 23.18,
+          "end": 24.14,
+          "word": " den",
+          "probability": 0.74560546875
+        },
+        {
+          "start": 24.14,
+          "end": 26.34,
+          "word": " Tandem,",
+          "probability": 0.79443359375
+        },
+        {
+          "start": 26.4,
+          "end": 26.7,
+          "word": " du",
+          "probability": 0.978515625
+        },
+        {
+          "start": 26.7,
+          "end": 27.6,
+          "word": " mir?",
+          "probability": 0.59521484375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 3,
+      "seek": 3000,
+      "start": 30.0,
+      "end": 36.26,
+      "text": " Der Ruinenstadt ist immer noch schön",
+      "tokens": [
+        50365,
+        5618,
+        15702,
+        5636,
+        34511,
+        1418,
+        5578,
+        3514,
+        13527,
+        50715
+      ],
+      "avg_logprob": -0.5833333333333334,
+      "compression_ratio": 1.0294117647058822,
+      "no_speech_prob": 0.66455078125,
+      "words": [
+        {
+          "start": 30.0,
+          "end": 30.76,
+          "word": " Der",
+          "probability": 0.1875
+        },
+        {
+          "start": 30.76,
+          "end": 32.08,
+          "word": " Ruinenstadt",
+          "probability": 0.6116739908854166
+        },
+        {
+          "start": 32.08,
+          "end": 33.14,
+          "word": " ist",
+          "probability": 0.990234375
+        },
+        {
+          "start": 33.14,
+          "end": 34.48,
+          "word": " immer",
+          "probability": 0.830078125
+        },
+        {
+          "start": 34.48,
+          "end": 35.36,
+          "word": " noch",
+          "probability": 0.96875
+        },
+        {
+          "start": 35.36,
+          "end": 36.26,
+          "word": " schön",
+          "probability": 0.65283203125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 4,
+      "seek": 3000,
+      "start": 37.0,
+      "end": 44.2,
+      "text": " Ich warte lange Zeit auf deine Lücke",
+      "tokens": [
+        50715,
+        3141,
+        261,
+        11026,
+        18131,
+        9394,
+        2501,
+        28395,
+        441,
+        37383,
+        51165
+      ],
+      "avg_logprob": -0.5833333333333334,
+      "compression_ratio": 1.0294117647058822,
+      "no_speech_prob": 0.66455078125,
+      "words": [
+        {
+          "start": 37.0,
+          "end": 38.16,
+          "word": " Ich",
+          "probability": 0.037628173828125
+        },
+        {
+          "start": 38.16,
+          "end": 38.84,
+          "word": " warte",
+          "probability": 0.43743896484375
+        },
+        {
+          "start": 38.84,
+          "end": 39.58,
+          "word": " lange",
+          "probability": 0.55859375
+        },
+        {
+          "start": 39.58,
+          "end": 40.8,
+          "word": " Zeit",
+          "probability": 0.9814453125
+        },
+        {
+          "start": 40.8,
+          "end": 41.44,
+          "word": " auf",
+          "probability": 0.83642578125
+        },
+        {
+          "start": 41.44,
+          "end": 42.38,
+          "word": " deine",
+          "probability": 0.89990234375
+        },
+        {
+          "start": 42.38,
+          "end": 44.2,
+          "word": " Lücke",
+          "probability": 0.6019287109375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 5,
+      "seek": 3000,
+      "start": 45.92,
+      "end": 52.76,
+      "text": " In der Hand, I forget my name",
+      "tokens": [
+        51165,
+        682,
+        1163,
+        8854,
+        11,
+        286,
+        2870,
+        452,
+        1315,
+        51615
+      ],
+      "avg_logprob": -0.5833333333333334,
+      "compression_ratio": 1.0294117647058822,
+      "no_speech_prob": 0.66455078125,
+      "words": [
+        {
+          "start": 45.92,
+          "end": 47.32,
+          "word": " In",
+          "probability": 0.90625
+        },
+        {
+          "start": 47.32,
+          "end": 47.6,
+          "word": " der",
+          "probability": 0.744140625
+        },
+        {
+          "start": 47.6,
+          "end": 48.94,
+          "word": " Hand,",
+          "probability": 0.97119140625
+        },
+        {
+          "start": 49.24,
+          "end": 50.28,
+          "word": " I",
+          "probability": 0.7861328125
+        },
+        {
+          "start": 50.28,
+          "end": 50.98,
+          "word": " forget",
+          "probability": 0.45751953125
+        },
+        {
+          "start": 50.98,
+          "end": 51.72,
+          "word": " my",
+          "probability": 0.97119140625
+        },
+        {
+          "start": 51.72,
+          "end": 52.76,
+          "word": " name",
+          "probability": 0.52294921875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 6,
+      "seek": 5276,
+      "start": 57.68,
+      "end": 62.94,
+      "text": " Leckere Trophäe sind meine Tränen",
+      "tokens": [
+        50365,
+        1456,
+        547,
+        323,
+        314,
+        11741,
+        737,
+        68,
+        3290,
+        10946,
+        1765,
+        737,
+        2866,
+        50965
+      ],
+      "avg_logprob": -0.6577381080105191,
+      "compression_ratio": 1.148936170212766,
+      "no_speech_prob": 0.8154296875,
+      "words": [
+        {
+          "start": 57.68,
+          "end": 59.08,
+          "word": " Leckere",
+          "probability": 0.15146382649739584
+        },
+        {
+          "start": 59.08,
+          "end": 60.48,
+          "word": " Trophäe",
+          "probability": 0.8748779296875
+        },
+        {
+          "start": 60.48,
+          "end": 61.5,
+          "word": " sind",
+          "probability": 0.95166015625
+        },
+        {
+          "start": 61.5,
+          "end": 62.12,
+          "word": " meine",
+          "probability": 0.279052734375
+        },
+        {
+          "start": 62.12,
+          "end": 62.94,
+          "word": " Tränen",
+          "probability": 0.9637044270833334
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 7,
+      "seek": 5276,
+      "start": 64.75999999999999,
+      "end": 71.18,
+      "text": " Wie ein Schmerz, der um meine Türen",
+      "tokens": [
+        50965,
+        9233,
+        1343,
+        2065,
+        936,
+        89,
+        11,
+        1163,
+        1105,
+        10946,
+        314,
+        774,
+        1095,
+        51315
+      ],
+      "avg_logprob": -0.6577381080105191,
+      "compression_ratio": 1.148936170212766,
+      "no_speech_prob": 0.8154296875,
+      "words": [
+        {
+          "start": 64.61999999999999,
+          "end": 65.32,
+          "word": " Wie",
+          "probability": 0.0282745361328125
+        },
+        {
+          "start": 65.32,
+          "end": 66.3,
+          "word": " ein",
+          "probability": 0.27587890625
+        },
+        {
+          "start": 66.3,
+          "end": 68.16,
+          "word": " Schmerz,",
+          "probability": 0.6354573567708334
+        },
+        {
+          "start": 68.16,
+          "end": 68.52,
+          "word": " der",
+          "probability": 0.986328125
+        },
+        {
+          "start": 68.52,
+          "end": 69.24,
+          "word": " um",
+          "probability": 0.84814453125
+        },
+        {
+          "start": 69.24,
+          "end": 70.18,
+          "word": " meine",
+          "probability": 0.315673828125
+        },
+        {
+          "start": 70.18,
+          "end": 71.18,
+          "word": " Türen",
+          "probability": 0.4632161458333333
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 8,
+      "seek": 5276,
+      "start": 71.75999999999999,
+      "end": 78.14,
+      "text": " Spannende Brüder sind meine Hände",
+      "tokens": [
+        51315,
+        1738,
+        969,
+        5445,
+        1603,
+        774,
+        1068,
+        3290,
+        10946,
+        389,
+        26973,
+        51665
+      ],
+      "avg_logprob": -0.6577381080105191,
+      "compression_ratio": 1.148936170212766,
+      "no_speech_prob": 0.8154296875,
+      "words": [
+        {
+          "start": 71.75999999999999,
+          "end": 73.98,
+          "word": " Spannende",
+          "probability": 0.4246622721354167
+        },
+        {
+          "start": 73.98,
+          "end": 75.14,
+          "word": " Brüder",
+          "probability": 0.7892252604166666
+        },
+        {
+          "start": 75.14,
+          "end": 75.82,
+          "word": " sind",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 75.82,
+          "end": 76.96,
+          "word": " meine",
+          "probability": 0.98974609375
+        },
+        {
+          "start": 76.96,
+          "end": 78.14,
+          "word": " Hände",
+          "probability": 0.985107421875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 9,
+      "seek": 7814,
+      "start": 78.14,
+      "end": 86.4,
+      "text": " Denn mein Kreis ist in Wurzeln gejubt.",
+      "tokens": [
+        50365,
+        19027,
+        10777,
+        23625,
+        271,
+        1418,
+        294,
+        343,
+        374,
+        89,
+        9878,
+        1519,
+        73,
+        836,
+        83,
+        13,
+        50765
+      ],
+      "avg_logprob": -0.6977163392763871,
+      "compression_ratio": 1.1531531531531531,
+      "no_speech_prob": 0.8994140625,
+      "words": [
+        {
+          "start": 78.14,
+          "end": 79.78,
+          "word": " Denn",
+          "probability": 0.02679443359375
+        },
+        {
+          "start": 79.78,
+          "end": 80.76,
+          "word": " mein",
+          "probability": 0.982421875
+        },
+        {
+          "start": 80.76,
+          "end": 81.94,
+          "word": " Kreis",
+          "probability": 0.499481201171875
+        },
+        {
+          "start": 81.94,
+          "end": 82.42,
+          "word": " ist",
+          "probability": 0.603515625
+        },
+        {
+          "start": 82.42,
+          "end": 82.7,
+          "word": " in",
+          "probability": 0.43310546875
+        },
+        {
+          "start": 82.7,
+          "end": 83.64,
+          "word": " Wurzeln",
+          "probability": 0.8048095703125
+        },
+        {
+          "start": 83.64,
+          "end": 86.4,
+          "word": " gejubt.",
+          "probability": 0.702423095703125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 10,
+      "seek": 7814,
+      "start": 86.42,
+      "end": 93.04,
+      "text": " Wenn die Jahreszeit ettert kommt,",
+      "tokens": [
+        50792,
+        7899,
+        978,
+        44360,
+        13712,
+        1030,
+        391,
+        83,
+        10047,
+        11,
+        51176
+      ],
+      "avg_logprob": -0.6977163392763871,
+      "compression_ratio": 1.1531531531531531,
+      "no_speech_prob": 0.8994140625,
+      "words": [
+        {
+          "start": 86.42,
+          "end": 87.14,
+          "word": " Wenn",
+          "probability": 0.79443359375
+        },
+        {
+          "start": 87.14,
+          "end": 87.84,
+          "word": " die",
+          "probability": 0.7236328125
+        },
+        {
+          "start": 87.84,
+          "end": 90.4,
+          "word": " Jahreszeit",
+          "probability": 0.69287109375
+        },
+        {
+          "start": 90.4,
+          "end": 92.0,
+          "word": " ettert",
+          "probability": 0.2953694661458333
+        },
+        {
+          "start": 92.0,
+          "end": 93.04,
+          "word": " kommt,",
+          "probability": 0.5986328125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 11,
+      "seek": 7814,
+      "start": 94.92,
+      "end": 101.0,
+      "text": " wird der Ehefrau sich geeinigt.",
+      "tokens": [
+        51204,
+        4578,
+        1163,
+        462,
+        675,
+        69,
+        48907,
+        3041,
+        24105,
+        259,
+        5828,
+        13,
+        51574
+      ],
+      "avg_logprob": -0.6977163392763871,
+      "compression_ratio": 1.1531531531531531,
+      "no_speech_prob": 0.8994140625,
+      "words": [
+        {
+          "start": 94.36,
+          "end": 95.06,
+          "word": " wird",
+          "probability": 0.5185546875
+        },
+        {
+          "start": 95.06,
+          "end": 95.52,
+          "word": " der",
+          "probability": 0.415771484375
+        },
+        {
+          "start": 95.52,
+          "end": 97.24,
+          "word": " Ehefrau",
+          "probability": 0.45257568359375
+        },
+        {
+          "start": 97.24,
+          "end": 98.3,
+          "word": " sich",
+          "probability": 0.6884765625
+        },
+        {
+          "start": 98.3,
+          "end": 101.0,
+          "word": " geeinigt.",
+          "probability": 0.794921875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 12,
+      "seek": 7814,
+      "start": 101.92,
+      "end": 107.48,
+      "text": " Das Berg ist mein Nied,",
+      "tokens": [
+        51574,
+        2846,
+        27511,
+        1418,
+        10777,
+        426,
+        1091,
+        11,
+        51836
+      ],
+      "avg_logprob": -0.6977163392763871,
+      "compression_ratio": 1.1531531531531531,
+      "no_speech_prob": 0.8994140625,
+      "words": [
+        {
+          "start": 101.92,
+          "end": 103.32,
+          "word": " Das",
+          "probability": 0.97265625
+        },
+        {
+          "start": 103.32,
+          "end": 105.5,
+          "word": " Berg",
+          "probability": 0.39892578125
+        },
+        {
+          "start": 105.5,
+          "end": 105.96,
+          "word": " ist",
+          "probability": 0.9970703125
+        },
+        {
+          "start": 105.96,
+          "end": 106.34,
+          "word": " mein",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 106.34,
+          "end": 107.48,
+          "word": " Nied,",
+          "probability": 0.5433349609375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 13,
+      "seek": 10748,
+      "start": 107.48,
+      "end": 116.64,
+      "text": " Dass du mir gegeben hast, hier seh'n",
+      "tokens": [
+        50365,
+        22306,
+        1581,
+        3149,
+        32572,
+        6581,
+        11,
+        3296,
+        369,
+        71,
+        6,
+        77,
+        50815
+      ],
+      "avg_logprob": -0.5697544515132904,
+      "compression_ratio": 0.8181818181818182,
+      "no_speech_prob": 0.16845703125,
+      "words": [
+        {
+          "start": 107.48,
+          "end": 108.12,
+          "word": " Dass",
+          "probability": 0.33740234375
+        },
+        {
+          "start": 108.12,
+          "end": 108.52,
+          "word": " du",
+          "probability": 0.86181640625
+        },
+        {
+          "start": 108.52,
+          "end": 109.32,
+          "word": " mir",
+          "probability": 0.99169921875
+        },
+        {
+          "start": 109.32,
+          "end": 110.36,
+          "word": " gegeben",
+          "probability": 0.99072265625
+        },
+        {
+          "start": 110.36,
+          "end": 111.36,
+          "word": " hast,",
+          "probability": 0.95263671875
+        },
+        {
+          "start": 111.7,
+          "end": 113.12,
+          "word": " hier",
+          "probability": 0.460693359375
+        },
+        {
+          "start": 113.12,
+          "end": 113.72,
+          "word": " seh",
+          "probability": 0.56365966796875
+        },
+        {
+          "start": 113.72,
+          "end": 116.64,
+          "word": "'n",
+          "probability": 0.83251953125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 14,
+      "seek": 13748,
+      "start": 137.48,
+      "end": 141.38,
+      "text": " Hey, hey, hey, hey",
+      "tokens": [
+        50365,
+        1911,
+        11,
+        4177,
+        11,
+        4177,
+        11,
+        4177,
+        50565
+      ],
+      "avg_logprob": -0.6480468571186065,
+      "compression_ratio": 1.2,
+      "no_speech_prob": 0.464111328125,
+      "words": [
+        {
+          "start": 137.48,
+          "end": 137.92,
+          "word": " Hey,",
+          "probability": 0.31982421875
+        },
+        {
+          "start": 137.96,
+          "end": 138.78,
+          "word": " hey,",
+          "probability": 0.84033203125
+        },
+        {
+          "start": 138.78,
+          "end": 139.42,
+          "word": " hey,",
+          "probability": 0.9853515625
+        },
+        {
+          "start": 139.42,
+          "end": 141.38,
+          "word": " hey",
+          "probability": 0.982421875
+        }
+      ],
+      "temperature": 0.0
+    }
+  ],
+  "seconds": 5.724518299102783
+}

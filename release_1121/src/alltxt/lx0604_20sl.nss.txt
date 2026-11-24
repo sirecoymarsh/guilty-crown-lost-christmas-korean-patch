@@ -1,0 +1,94 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0604_20sl.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+
+}
+
+
+scene lx0604_20sl.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+	CreateTextureSP("絵背景１", 10, -20, -164, "cg/bg/m/bg006003_3_コキュートス空間_m.jpg");
+	CreateTextureSP("絵人物１", 2000, 183, -12, "cg/ev/l/ev0604イェット・トゥー・カム登場_smile口開け_l.png");
+
+	FadeDelete("上背景", 0, null, true);
+
+
+////////////////////////////////////////
+//♂♀：選択肢
+
+//償いを
+//→→LX0605a
+
+//報いを
+//→→LX0605b
+
+////////////////////////////////////////
+
+
+	if($GOOD_MAN_POINT>=7){
+		$select_fade=true;
+		SetChoice02("ｼﾓﾁﾋｸｦ","ﾀﾀｺｸｸｦ");
+		WaitChoice02();
+		if($SetChoiceSelect==0){		$GameName = "lx0605a.nss";$lx0604_20sl選択肢=1;}
+		else if($SetChoiceSelect==1){	$GameName = "lx0605b.nss";$lx0604_20sl選択肢=0;}
+	}else{
+		$select_fade=true;
+		SetChoice01("ﾀﾀｺｸｸｦ");
+		WaitChoice01();
+		$GameName = "lx0605b.nss";
+	}
+
+	//▽特殊ループ停止
+	SetVolume_Loop("@lx018a",2000,0,null);
+
+	Wait(2000);
+
+//	ClearFadeAll(1000, true);
+
+}

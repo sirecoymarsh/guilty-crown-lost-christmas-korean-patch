@@ -1,0 +1,35 @@
+
+function RedFlash($2510_pri){
+
+	CreateColorSPmul("絵dm2510", $2510_pri, CC0033);
+	Fade("絵dm2510", 0, 0, null, true);
+
+	CreateProcess("絵dm2510プロセス", 150, 0, 0, "RedFlashProcess");
+	SetAlias("絵dm2510プロセス","絵dm2510プロセス");
+	Request("絵dm2510プロセス", Start);
+
+
+}
+
+function RedFlashProcess(){
+
+	begin:
+
+	while(1){
+		Fade("@絵dm2510", 500, 1000, null, true);
+		Fade("@絵dm2510", 100, 800, null, true);
+	}
+
+}
+
+
+function RedFlashDelete(){
+
+	Request("@絵dm2510プロセス",Stop);
+	Fade("@絵dm2510", 0, 0, null, true);
+	Delete("@絵dm2510プロセス");
+	Delete("@絵dm2510");
+
+
+}
+

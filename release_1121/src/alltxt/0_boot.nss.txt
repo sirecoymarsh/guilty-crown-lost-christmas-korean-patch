@@ -1,0 +1,1173 @@
+#include "nss/function.nss"
+#include "nss/sys_config.nss"
+#include "nss/function_select.nss"
+
+//=============================================================================//
+//◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+.//★遊戯円環★バージョン1.00
+//◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆◆
+//=============================================================================//
+chapter main
+{
+	//★タイトルの状態
+	$SYSTEM_menu_lock = true;
+
+	//■初期設定
+	#GameNumber=0;
+	#SYSTEM_product_code="GIRU_KURA";
+	#SCRIPT_VERSION="TRIAL";
+//	#SYSTEM_loading_image="cg/sys/save/nowloading.jpg";
+//	#SYSTEM_loading_image_x=0;
+//	#SYSTEM_loading_image_y=0;
+	#SYSTEM_skip_express_image="cg/sys/skip/skip-%03d.jpg#2";
+	#SYSTEM_interrupt_play_speed=3;
+	#SYSTEM_express_skip_animation_fps=100;
+	#SYSTEM_voice_person_class="";
+
+	//■アップデート画面
+	if(!#Updata110){
+//		CreateColor("タイトル描画", 1, 0, 0, 1024, 768, "BLACK");
+
+//		Message("アップデートファイル Ver.1.10","以下の項目が実装されました。\n\n・事刻表時「途中から読む」機能を追加\n・環境設定に「既読箇所の文字色を変更」機能を追加\n・一部演出の調整\n\n詳細は弊社WEBサイトにてご確認ください。\nhttp://www.nitroplus.co.jp/support/",OK,INFORMATION);
+//		#Updata110=true;
+
+//		Fade("タイトル描画", 100, 0, null, true);
+//		Delete("タイトル描画");
+	}
+
+	//★ローディング設定画面
+//	CreateTexture("Roading", 10000000, 0, 0, "cg/sys/adv/ローディング背景.png");
+//	SetAlias("Roading", "Roading");
+//	Request("Roading", Lock);
+//	Fade("Roading", 0, 0, null, true);
+
+	//▼初回起動時or継続起動
+	if($Logo){
+		//▽なうろーでぃんぐ
+//		Fade("@Roading", 200, 1000, null, true);
+	}else{
+		#GameArray=true;//■配列読み出しは？
+		#auto_log=false;//■オートログ解除
+		$PressAnyKey=true;
+
+		//■フルスクリーンチェック
+		if(#SYSTEM_window_full){
+			#SYSTEM_window_full=true;
+		}
+	}
+
+	//▼ショートカット設定
+	//メニュー
+	SetShortcut("M", "nss/sys_menu.nss");
+	//セーブメニュー
+	SetShortcut("S", "nss/sys_save.nss");
+	//ロードメニュー
+	SetShortcut("L", "nss/sys_load.nss");
+	//リセット確認
+	SetShortcut("T", "nss/sys_reset.nss");
+	//バックセレクト
+//	SetShortcut("R", "nss/sys_backselect.nss");
+	//コンフィグ
+	SetShortcut("C", "nss/sys_config.nss");
+	//バックログ
+	SetShortcut("B", "nss/sys_backlog.nss");
+	//自動文字送り
+	SetShortcut("A", "nss/sys_auto.nss");
+	//全画面表示
+	SetShortcut("F", "nss/sys_screen.nss");
+	//超速
+//	SetShortcut("N", "nss/sys_skip.nss");
+	//クイックセーブ
+//	SetShortcut("S", "nss/sys_quicksave.nss");
+	//クイックロード
+//	SetShortcut("L", "nss/sys_quickload.nss");
+	//Tips
+//	SetShortcut("G", "nss/sys_glossary.nss");
+	//Twitter
+	//SetShortcut("E", "nss/sys_twitter.nss");
+	//事刻表
+	//SetShortcut("J", "nss/sys_backselect.nss");
+	//デバッグ
+	//SetShortcut("X", "nss/x_debug.nss");
+	
+	// イメージロード
+	LoadFile("cg/sys/adv/window01.png",true);
+	LoadFile("cg/sys/adv/window01_mask.png",true);
+	LoadFile("cg/sys/adv/window02.png",true);
+	LoadFile("cg/sys/adv/window03.png",true);
+	LoadFile("cg/fw/fwイェット・トゥー・カム_通常_normal.png",true);
+	LoadFile("cg/fw/fwガイ_通常_normal.png",true);
+	LoadFile("cg/fw/fwキャロル_通常_normal.png",true);
+	LoadFile("cg/fw/fwキャロル_通常帽子無し_normal.png",true);
+	LoadFile("cg/fw/fwクロス_通常_normal.png",true);
+	LoadFile("cg/fw/fwケイドウ_通常_normal.png",true);
+	LoadFile("cg/fw/fwシュウ_通常_normal.png",true);
+	LoadFile("cg/fw/fwスクルージ_通常_normal.png",true);
+	LoadFile("cg/fw/fwスクルージ_通常フード無し_normal.png",true);
+	LoadFile("cg/fw/fwハルカ_通常_normal.png",true);
+	LoadFile("cg/fw/fwプレゼント_通常_normal.png",true);
+	LoadFile("cg/fw/fwマナ_通常_normal.png",true);
+	LoadFile("cg/fw/fwユウ_通常_normal.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/info/MENU.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/CANCEL-001.png",true);
+	LoadFile("cg/sys/menu/CANCEL-002.png",true);
+	LoadFile("cg/sys/menu/info/CANCEL.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/CANCEL-003.png",true);
+	LoadFile("cg/sys/menu/info/CANCEL.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/DELETE MESSAGE-001.png",true);
+	LoadFile("cg/sys/menu/DELETE MESSAGE-002.png",true);
+	LoadFile("cg/sys/menu/info/DELETE MESSAGE.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/DELETE MESSAGE-003.png",true);
+	LoadFile("cg/sys/menu/info/DELETE MESSAGE.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/DELETE MESSAGE-001.png",true);
+	LoadFile("cg/sys/menu/info/DELETE MESSAGE_UnClick.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/DELETE MESSAGE-001.png",true);
+	LoadFile("cg/sys/menu/info/DELETE MESSAGE_UnClick.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/AUTO-001.png",true);
+	LoadFile("cg/sys/menu/AUTO-002.png",true);
+	LoadFile("cg/sys/menu/AUTO-003.png",true);
+	LoadFile("cg/sys/menu/info/AUTO.png",true);
+	LoadFile("cg/sys/menu/info/AUTO.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/AUTO-001.png",true);
+	LoadFile("cg/sys/menu/AUTO-001.png",true);
+	LoadFile("cg/sys/menu/info/AUTO_UnClick.png",true);
+	LoadFile("cg/sys/menu/info/AUTO_UnClick.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/SKIP-001.png",true);
+	LoadFile("cg/sys/menu/SKIP-002.png",true);
+	LoadFile("cg/sys/menu/info/SKIP.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/SKIP-003.png",true);
+	LoadFile("cg/sys/menu/info/SKIP.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/SKIP-001.png",true);
+	LoadFile("cg/sys/menu/info/SKIP_UnClick.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/SKIP-001.png",true);
+	LoadFile("cg/sys/menu/info/SKIP_UnClick.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/BACK LOG-001.png",true);
+	LoadFile("cg/sys/menu/BACK LOG-002.png",true);
+	LoadFile("cg/sys/menu/info/BACK LOG.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/BACK LOG-003.png",true);
+	LoadFile("cg/sys/menu/info/BACK LOG.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/SAVE-001.png",true);
+	LoadFile("cg/sys/menu/SAVE-002.png",true);
+	LoadFile("cg/sys/menu/info/SAVE.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/SAVE-003.png",true);
+	LoadFile("cg/sys/menu/info/SAVE.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/LOAD-001.png",true);
+	LoadFile("cg/sys/menu/LOAD-002.png",true);
+	LoadFile("cg/sys/menu/info/LOAD.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/LOAD-003.png",true);
+	LoadFile("cg/sys/menu/info/LOAD.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/CONFIG-001.png",true);
+	LoadFile("cg/sys/menu/CONFIG-002.png",true);
+	LoadFile("cg/sys/menu/info/CONFIG.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/CONFIG-003.png",true);
+	LoadFile("cg/sys/menu/info/CONFIG.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/BACK TO TITLE-001.png",true);
+	LoadFile("cg/sys/menu/BACK TO TITLE-002.png",true);
+	LoadFile("cg/sys/menu/info/BACK TO TITLE.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/BACK TO TITLE-003.png",true);
+	LoadFile("cg/sys/menu/info/BACK TO TITLE.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/Hit_Focus.png",true);
+	LoadFile("cg/sys/menu/GAME EXIT-001.png",true);
+	LoadFile("cg/sys/menu/GAME EXIT-002.png",true);
+	LoadFile("cg/sys/menu/info/GAME EXIT.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	LoadFile("cg/sys/menu/GAME EXIT-003.png",true);
+	LoadFile("cg/sys/menu/info/GAME EXIT.png",true);
+	LoadFile("cg/sys/menu/info/INFO_00base.png",true);
+	//■：最初のお約束
+	if(!#N2Start){
+		//●設定リセット
+		ConfigFormat();
+		if(Message("전체 화면으로 실행할까요?","F 키로 전체 화면과 창 모드를 전환할 수 있습니다.",YESNO,QUESTION)==2){
+			#SYSTEM_window_full=!#SYSTEM_window_full;
+		}else{
+		}
+		#N2Start=true;
+	}
+
+	if(!#Updata001){
+		#Updata001=true;
+		#LOCAL_text_speed=#SYSTEM_text_speed;
+	}
+
+	#START_FLAG=true;//プロローグファイルは終了しているか
+	#TitleOn=true;//タイトルを表示するか
+
+	//●円環開始●●●●●●●●●●●●●●●●●●●
+	while(1)
+	{
+		$スクリプトバージョン = "  Version $Revision: 60 $";
+
+		//■シーンの頭に必ず記述
+		$構成名 = ModuleFileName();
+		SystemInit();
+
+		//★ロック設置
+		LockVideo(false);
+
+		//▽なうろーでぃんぐ
+		if($Logo&&!$ClearNoLoading&&!$エキストラタイトル){
+			//Fade("@Roading", 200, 1000, null, true);
+			//$ClearNoLoading=false;
+		}
+
+		//★：ゲームがスタートしたことを明示する変数
+		$GameStart = 1;
+
+		//★：ゲームスピード
+		#play_speed_plus = #SYSTEM_play_speed;
+
+		//★：テキストスピード
+		#SYSTEM_text_speed = #LOCAL_text_speed;
+
+
+		//▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		//▼デバッグ用
+		//#ClearTrue = true;
+		//#GameClear = true;
+		//#SYSTEM_skip_absolute = true;
+		//#SYSTEM_skip_express = true;
+		//$Logo=true;
+		//▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
+
+		//■投げ込んだ場合＆終了演出時
+		if($GameContiune==1||$GameClose){
+			//★：結果
+			$GameContiune = 0;
+			Delete("*");
+
+			//ろーでぃんぐ解除
+			//Fade("@Roading", 200, 0, null, true);
+
+			//―――――――――――――――――――――――――
+			//投げ込んだ場合（デバッグ時のみ通過可能）
+			if(!$GameClose){
+				//●総プレイ時間：計測開始
+				#BEGIN_TIME=Time();
+
+				//デバッグ用変数設定場所
+				#GameArray=true;
+			}
+			//―――――――――――――――――――――――――
+			call_chapter nss/0_boot_開始スクリプト.nss;
+
+			//☆タイトルクリア変数制御
+			TitleClear();
+
+			//■シーンの頭に必ず記述
+			$構成名 = ModuleFileName();
+			SystemInit();
+
+			//★ロック設置
+			LockVideo(false);
+
+			//▽なうろーでぃんぐ
+			if($Logo&&!$ClearNoLoading&&!$エキストラタイトル){
+				//Fade("@Roading", 200, 1000, null, true);
+				//$ClearNoLoading=false;
+			}
+
+			//★：ゲームがスタートしたことを明示する変数
+			$GameStart = 1;
+
+			//★：ゲームスピード
+			#play_speed_plus = #SYSTEM_play_speed;
+
+			//★：テキストスピード
+			#SYSTEM_text_speed = #LOCAL_text_speed;
+		}
+
+		//★：システム変数系のクリア
+		$GameName=false;
+		$TitleSelect=false;
+
+		$PLACE_badend=false;
+		$PLACE_title=true;
+
+		#SYSTEM_play_speed=3;
+		$SYSTEM_skip=false;
+		#SYSTEM_skip_express=false;
+		$SYSTEM_text_auto=false;
+		$SYSTEM_menu_lock=true;
+		#SYSTEM_skip_express_minimum_time=0;
+		$SYSTEM_text_waitkey=true;
+		$SYSTEM_full_scene_update=false;
+
+		//試し打ち（千代子）後で消してください
+		//TAMESHIUCHI();
+
+		if(#TitleOn){
+			$TitleBGM="@dm001";
+			$TitleBGMex="001";
+			$TitleBGMvol=1000;//SoundPlay準拠
+			$TitleBGMvolR=500;//ダイナミックレンジ準拠
+
+			$TitleOverSE="sound/se/SE_システム_タイトル_選択";
+			$TitleClickSE="SE_システム_タイトル_決定02";//その他選択後
+			$TitleClickSE2="SE_システム_タイトル_決定01";//スタート選択後
+			$TitleClickSE3="SE_システム_タイトル_決定02";//エキストラ選択後
+			$TitleClickSE4="SE_システム_タイトル_決定02";//PressAnyKey
+			$TitleClickSE5="SE_システム_タイトル_決定02";//エキストラ一覧
+			$TitleClickSE6="SE_システム_タイトル_決定02";//エキストラ一覧
+			$TitleClickSE7="SE_システム_タイトル_決定01";//スタート
+
+			$TitleClickSE8="se_title01";//タイトルムービー音
+
+
+			#auto_log=false;//オートログ解除
+
+			//■エキストラ読み出し（ファンクションで読み出すと死ぬほど重いので絶対にここ）
+			if(#GameArray){
+				//call_chapter nss/extra_gallery.nss->main2;
+				//call_chapter nss/extra_media.nss->main2;
+				#GameArray=false;
+			}
+
+			Save(0);
+			DeleteSaveFile(9999);
+
+			//■カラー定義
+			TitleColor();
+			//■フルスクプロセス
+			TitleScreen();
+			//■：ロゴ
+			TitleLogo();
+			//■：タイトル定義
+			TitleSet();
+			//■：タイトル動作
+			TitleFade();
+			//■：タイトルセレクト
+			TitleSelect();
+		}else{
+			$TitleSelect=1;
+		}
+
+		//★：シナリオ閲覧（Claude 11-02）
+		if($TitleSelect==3){
+			Request("タイトル*", UnLock);
+			Request("決定サウンド", UnLock);
+			Delete("*");
+			Wait(300);
+			call_chapter nss/kr_scenario.nss;
+			TitleClear();
+			$TitleSelect=false;
+		}
+		//★：サウンド（Claude 11-02）
+		if($TitleSelect==4){
+			Request("タイトル*", UnLock);
+			Request("決定サウンド", UnLock);
+			Delete("*");
+			Wait(300);
+			call_chapter nss/kr_sound.nss;
+			TitleClear();
+			$TitleSelect=false;
+		}
+		//★：結果
+		if($TitleSelect==1){
+			//▽ゲームスタート
+			Request("タイトル*", UnLock);
+//			Request("タイトルニトロプラス", Lock);
+			Delete("*");
+			Request("決定サウンド", Disused);
+			Request("決定サウンド", UnLock);
+			Wait(1000);
+
+			if(!#START_FLAG){
+				//☆：最初のプロローグファイルが終了していない場合
+				//なし
+
+			}else{
+				call_chapter nss/0_boot_開始スクリプト.nss;
+
+				//☆タイトルクリア変数制御
+				TitleClear();
+			}
+
+		}
+
+	}
+	//->end while
+}
+//->end chapter main
+//=============================================================================//
+
+
+//============================================================================//
+..//■クリア後処理■
+//============================================================================//
+function TitleClear()
+{
+	//#GameClear=true;
+
+	//クリア処理
+	ClearScore(LOCAL);
+	ClearBacklog();
+	DeleteSaveFile(9999);
+
+	//★タイトルの状態
+	$SYSTEM_menu_lock = true;
+
+	//☆タイトル変更
+	//#TitleChange=true;
+
+	//★「ClearScore」で消されたスクリプト的なもの再定義
+	$BOX_Init = true;
+	$BGM_Init = true;
+	$Logo = true;
+	$GameStart = 1;
+
+	#GameArray=true;//ＣＧ読み込み
+	#auto_log=false;//オートログ解除
+
+	//●総プレイ時間：合計
+	#ALL_PLAY_TIME=#ALL_PLAY_TIME+(Time()-#BEGIN_TIME);
+	//●総プレイ時間：計測開始
+	#BEGIN_TIME=Time();
+
+	Save(0);
+}
+//============================================================================//
+
+
+
+
+//============================================================================//
+..//■タイトルカラー判定■
+//============================================================================//
+function TitleColor()
+{
+	if(!$エキストラタイトル){//★新規追加箇所★
+		CreateColor("タイトルカラー", 1020, 0, 0, 1024, 576, "BLACK");
+		SetAlias("タイトルカラー", "タイトルカラー");
+		Fade("タイトルカラー", 0, 0, null, true);
+
+		CreateColor("タイトルカラー２", 250, 0, 0, 1024, 576, "WHITE");
+		SetAlias("タイトルカラー２", "タイトルカラー２");
+		Fade("タイトルカラー２", 0, 0, null, true);
+		//Request("タイトルカラー２", AddRender);
+	}else{
+		Move("タイトルカラー", 0, 0, 0, null, true);
+		Move("タイトルカラー２", 0, 0, 0, null, true);
+	}
+}
+//============================================================================//
+
+
+
+
+
+//============================================================================//
+..//■タイトルフルスクプロセス■
+//============================================================================//
+function TitleScreen()
+{
+	if(!$エキストラタイトル){
+		CreateProcess("タイトルフルスクプロセス", 150, 0, 0, "TitleFull");
+		SetAlias("タイトルフルスクプロセス", "タイトルフルスクプロセス");
+		Request("タイトルフルスクプロセス", Start);
+	}
+}
+function TitleFull(){
+	select{
+		//★キーダウン系
+		if($SYSTEM_keydown_f){
+			if(!#SYSTEM_window_full_lock){
+				#SYSTEM_window_full=!#SYSTEM_window_full;
+				#SYSTEM_window_full_lock=false;
+				Wait(300);
+				$SYSTEM_keydown_f=false;
+			}
+		}
+	}
+}
+//============================================================================//
+
+
+
+
+
+//============================================================================//
+..//■ロゴ判定■
+//============================================================================//
+function TitleLogo()
+{
+//★：一度観たらゲーム中は出さないようにする判定
+	if(!$Logo){
+		//●総プレイ時間：計測開始
+		#BEGIN_TIME=Time();
+
+		TitleLogoBase();
+	}
+
+//	TitleLogoBase();
+}
+//============================================================================//
+
+function TitleLogoBase()
+{
+	CreateColor("タイトルカラー３", 100, 0, 0, 1024, 576, "BLACK");
+//	CreateTexture("タイトルメディア１", 100, 0, 0, "cg/sys/title/CSA_a.jpg");
+//	CreateTexture("タイトルメディア２", 100, 0, 0, "cg/sys/title/CSA_b.jpg");
+	CreateTexture("タイトルニトロプラス", 100, 0, 0, "cg/sys/title/nitroplus.jpg");
+	SetVertex("タイトルニトロプラス", 0, 0);
+	Zoom("タイトルニトロプラス", 0, 250, 250, null, false);
+	Request("タイトルニトロプラス", Smoothing);
+	CreateTexture("タイトル注意", 100, 0, 0, "cg/sys/title/Attention.jpg");
+	SetVertex("タイトル注意", 0, 0);
+	Zoom("タイトル注意", 0, 250, 250, null, false);
+	Request("タイトル注意", Smoothing);
+	CreateTexture("タイトル警告", 100, 0, 0, "cg/sys/title/Caution.jpg");
+	SetVertex("タイトル警告", 0, 0);
+	Zoom("タイトル警告", 0, 250, 250, null, false);
+	Request("タイトル警告", Smoothing);
+	Fade("タイトル*", 0, 0, null, true);
+/*
+	Fade("タイトルメディア１",1000,1000,null,true);
+	Wait(2000);
+	Fade("タイトルメディア２",1000,1000,null,true);
+	Wait(2000);
+	Fade("タイトルメディア１",0,0,null,false);
+	Fade("タイトルメディア*",500,0,null,true);
+*/
+	Fade("タイトルカラー３",1000,1000,null,true);
+	Wait(500);
+	Fade("タイトルニトロプラス", 1000, 1000, null, true);
+	Wait(500);
+	WaitKey(3000);
+	Fade("タイトルニトロプラス", 1000, 0, null, true);
+	Delete("タイトルニトロプラス");
+
+	Wait(500);
+	Fade("タイトル注意", 500, 1000, null, true);
+	Wait(500);
+	WaitKey(6000);
+	Fade("タイトル注意", 500, 0, null, true);
+	Wait(1000);
+
+	Fade("タイトル警告", 500, 1000, null, true);
+	Wait(500);
+	WaitKey(6000);
+	Fade("タイトル警告", 500, 0, null, true);
+	Wait(1000);
+
+
+	Delete("タイトル注意");
+	Delete("タイトルカラー３");
+	Delete("タイトル警告");
+}
+
+
+
+
+
+//=============================================================================//
+..//■タイトル定義■
+//=============================================================================//
+function TitleSet()
+{
+	
+...	//■ロード
+	//LoadImage("タイトルイメージ０", "cg/sys/title/hit.png");
+	//SetAlias("タイトルイメージ０", "タイトルイメージ０");
+
+//	LoadImage("タイトルイメージ１", "cg/sys/title/背景.png");//重要
+//	SetAlias("タイトルイメージ１", "タイトルイメージ１");
+//	LoadImage("タイトルイメージ２", "cg/sys/title/タイトル上下枠.png");//重要
+//	SetAlias("タイトルイメージ２", "タイトルイメージ２");
+//	LoadImage("タイトルイメージ３", "cg/sys/title/logo白ボカシ影.png");//重要
+//	SetAlias("タイトルイメージ３", "タイトルイメージ３");
+
+
+	CreateTexture("タイトル背景", 998, 0, 0, "cg/sys/title/背景.png");
+	SetAlias("タイトル背景", "タイトル背景");
+	CreateTexture("タイトルロゴ", 1000, 0, 0, "cg/sys/title/logo.png");
+	SetVertex("タイトルロゴ", 0, 0);
+	Zoom("タイトルロゴ", 0, 250, 250, null, false);
+	Request("タイトルロゴ", Smoothing);
+	SetAlias("タイトルロゴ", "タイトルロゴ");
+	CreateTexture("タイトルロゴ_影", 999, 0, 0, "cg/sys/title/logo白ボカシ影.png");
+	SetVertex("タイトルロゴ_影", 0, 0);
+	Zoom("タイトルロゴ_影", 0, 250, 250, null, false);
+	Request("タイトルロゴ_影", Smoothing);
+	SetAlias("タイトルロゴ_影", "タイトルロゴ_影");
+	CreateTexture("タイトル_枠", 1001, 0, 0, "cg/sys/title/タイトル上下枠.png");
+	SetAlias("タイトル_枠", "タイトル_枠");
+	CreateTexture("タイトル版権", 1000, 0, 0, "cg/sys/title/コピーライト.png");
+	SetVertex("タイトル版権", 0, 0);
+	Zoom("タイトル版権", 0, 250, 250, null, false);
+	Request("タイトル版権", Smoothing);
+	SetAlias("タイトル版権", "タイトル版権");
+
+	//★ロック設置
+	LockVideo(true);
+
+	// Start
+	CreateChoice("Title_Start");
+	CreateTexture("Title_Start/MouseUsual/hit", 0, 416, 290, "cg/sys/title/start-000.png");
+	CreateTexture("Title_Start/MouseUsual/img", 1000, 416, 290, "cg/sys/title/start-001.png");
+	SetVertex("Title_Start/MouseUsual/img", 0, 0);
+	Zoom("Title_Start/MouseUsual/img", 0, 250, 250, null, false);
+	Request("Title_Start/MouseUsual/img", Smoothing);
+	CreateTexture("Title_Start/MouseOver/img", 1000, 416, 290, "cg/sys/title/start-002.png");
+	SetVertex("Title_Start/MouseOver/img", 0, 0);
+	Zoom("Title_Start/MouseOver/img", 0, 250, 250, null, false);
+	Request("Title_Start/MouseOver/img", Smoothing);
+	CreateTexture("Title_Start/MouseClick/img", 1000, 416, 290, "cg/sys/title/start-003.png");
+	SetVertex("Title_Start/MouseClick/img", 0, 0);
+	Zoom("Title_Start/MouseClick/img", 0, 250, 250, null, false);
+	Request("Title_Start/MouseClick/img", Smoothing);
+
+	// LOAD
+	CreateChoice("Title_LOAD");
+	CreateTexture("Title_LOAD/MouseUsual/hit", 0, 416, 326, "cg/sys/title/load-000.png");
+	CreateTexture("Title_LOAD/MouseUsual/img", 1000, 416, 326, "cg/sys/title/load-001.png");
+	SetVertex("Title_LOAD/MouseUsual/img", 0, 0);
+	Zoom("Title_LOAD/MouseUsual/img", 0, 250, 250, null, false);
+	Request("Title_LOAD/MouseUsual/img", Smoothing);
+	CreateTexture("Title_LOAD/MouseOver/img", 1000, 416, 326, "cg/sys/title/load-002.png");
+	SetVertex("Title_LOAD/MouseOver/img", 0, 0);
+	Zoom("Title_LOAD/MouseOver/img", 0, 250, 250, null, false);
+	Request("Title_LOAD/MouseOver/img", Smoothing);
+	CreateTexture("Title_LOAD/MouseClick/img", 1000, 416, 326, "cg/sys/title/load-003.png");
+	SetVertex("Title_LOAD/MouseClick/img", 0, 0);
+	Zoom("Title_LOAD/MouseClick/img", 0, 250, 250, null, false);
+	Request("Title_LOAD/MouseClick/img", Smoothing);
+
+	//■シナリオ閲覧（Claude 11-02）
+	CreateChoice("Title_Scenario");
+	CreateTexture("Title_Scenario/MouseUsual/hit", 0, 416, 362, "nss/kr_title_scenario-000.png");
+	CreateTexture("Title_Scenario/MouseUsual/img", 1000, 416, 362, "nss/kr_title_scenario-001.png");
+	SetVertex("Title_Scenario/MouseUsual/img", 0, 0);
+	Zoom("Title_Scenario/MouseUsual/img", 0, 250, 250, null, false);
+	Request("Title_Scenario/MouseUsual/img", Smoothing);
+	CreateTexture("Title_Scenario/MouseOver/img", 1000, 416, 362, "nss/kr_title_scenario-002.png");
+	SetVertex("Title_Scenario/MouseOver/img", 0, 0);
+	Zoom("Title_Scenario/MouseOver/img", 0, 250, 250, null, false);
+	Request("Title_Scenario/MouseOver/img", Smoothing);
+	CreateTexture("Title_Scenario/MouseClick/img", 1000, 416, 362, "nss/kr_title_scenario-003.png");
+	SetVertex("Title_Scenario/MouseClick/img", 0, 0);
+	Zoom("Title_Scenario/MouseClick/img", 0, 250, 250, null, false);
+	Request("Title_Scenario/MouseClick/img", Smoothing);
+
+	//■サウンド（Claude 11-02）
+	CreateChoice("Title_Sound");
+	CreateTexture("Title_Sound/MouseUsual/hit", 0, 416, 398, "nss/kr_title_sound-000.png");
+	CreateTexture("Title_Sound/MouseUsual/img", 1000, 416, 398, "nss/kr_title_sound-001.png");
+	SetVertex("Title_Sound/MouseUsual/img", 0, 0);
+	Zoom("Title_Sound/MouseUsual/img", 0, 250, 250, null, false);
+	Request("Title_Sound/MouseUsual/img", Smoothing);
+	CreateTexture("Title_Sound/MouseOver/img", 1000, 416, 398, "nss/kr_title_sound-002.png");
+	SetVertex("Title_Sound/MouseOver/img", 0, 0);
+	Zoom("Title_Sound/MouseOver/img", 0, 250, 250, null, false);
+	Request("Title_Sound/MouseOver/img", Smoothing);
+	CreateTexture("Title_Sound/MouseClick/img", 1000, 416, 398, "nss/kr_title_sound-003.png");
+	SetVertex("Title_Sound/MouseClick/img", 0, 0);
+	Zoom("Title_Sound/MouseClick/img", 0, 250, 250, null, false);
+	Request("Title_Sound/MouseClick/img", Smoothing);
+
+
+	// CGLIBRARY
+	if(#ENDING_OF_XMAS||#ENDING_OF_TOBECONTINUED)
+	{
+		CreateChoice("Title_CG");
+		CreateTexture("Title_CG/MouseUsual/hit", 0, 416, 362, "cg/sys/title/CGL-000.png");
+		CreateTexture("Title_CG/MouseUsual/img", 1000, 416, 362, "cg/sys/title/CGL-001.png");
+		SetVertex("Title_CG/MouseUsual/img", 0, 0);
+		Zoom("Title_CG/MouseUsual/img", 0, 250, 250, null, false);
+	Request("Title_CG/MouseUsual/img", Smoothing);
+		CreateTexture("Title_CG/MouseOver/img", 1000, 416, 362, "cg/sys/title/CGL-002.png");
+		SetVertex("Title_CG/MouseOver/img", 0, 0);
+		Zoom("Title_CG/MouseOver/img", 0, 250, 250, null, false);
+	Request("Title_CG/MouseOver/img", Smoothing);
+		CreateTexture("Title_CG/MouseClick/img", 1000, 416, 362, "cg/sys/title/CGL-003.png");
+		SetVertex("Title_CG/MouseClick/img", 0, 0);
+		Zoom("Title_CG/MouseClick/img", 0, 250, 250, null, false);
+	Request("Title_CG/MouseClick/img", Smoothing);
+	}
+
+	// CONFIG
+	CreateChoice("Title_Config");
+	CreateTexture("Title_Config/MouseUsual/hit", 0, 416, 398, "cg/sys/title/config-000.png");
+	CreateTexture("Title_Config/MouseUsual/img", 1000, 416, 398, "cg/sys/title/config-001.png");
+	SetVertex("Title_Config/MouseUsual/img", 0, 0);
+	Zoom("Title_Config/MouseUsual/img", 0, 250, 250, null, false);
+	Request("Title_Config/MouseUsual/img", Smoothing);
+	CreateTexture("Title_Config/MouseOver/img", 1000, 416, 398, "cg/sys/title/config-002.png");
+	SetVertex("Title_Config/MouseOver/img", 0, 0);
+	Zoom("Title_Config/MouseOver/img", 0, 250, 250, null, false);
+	Request("Title_Config/MouseOver/img", Smoothing);
+	CreateTexture("Title_Config/MouseClick/img", 1000, 416, 398, "cg/sys/title/config-003.png");
+	SetVertex("Title_Config/MouseClick/img", 0, 0);
+	Zoom("Title_Config/MouseClick/img", 0, 250, 250, null, false);
+	Request("Title_Config/MouseClick/img", Smoothing);
+
+	// LINER NOTES
+	if(#ENDING_OF_XMAS&&#ENDING_OF_TOBECONTINUED)
+	{
+		CreateChoice("Title_Liner");
+		CreateTexture("Title_Liner/MouseUsual/hit", 0, 416, 434, "cg/sys/title/Liner-000.png");
+		CreateTexture("Title_Liner/MouseUsual/img", 1000, 416, 434, "cg/sys/title/Liner-001.png");
+		SetVertex("Title_Liner/MouseUsual/img", 0, 0);
+		Zoom("Title_Liner/MouseUsual/img", 0, 250, 250, null, false);
+	Request("Title_Liner/MouseUsual/img", Smoothing);
+		CreateTexture("Title_Liner/MouseOver/img", 1000, 416, 434, "cg/sys/title/Liner-002.png");
+		SetVertex("Title_Liner/MouseOver/img", 0, 0);
+		Zoom("Title_Liner/MouseOver/img", 0, 250, 250, null, false);
+	Request("Title_Liner/MouseOver/img", Smoothing);
+		CreateTexture("Title_Liner/MouseClick/img", 1000, 416, 434, "cg/sys/title/Liner-003.png");
+		SetVertex("Title_Liner/MouseClick/img", 0, 0);
+		Zoom("Title_Liner/MouseClick/img", 0, 250, 250, null, false);
+	Request("Title_Liner/MouseClick/img", Smoothing);
+	}
+
+	// EXIT
+	CreateChoice("Title_Exit");
+	CreateTexture("Title_Exit/MouseUsual/hit", 0, 416, 470, "cg/sys/title/exit-000.png");
+	CreateTexture("Title_Exit/MouseUsual/img", 1000, 416, 470, "cg/sys/title/exit-001.png");
+	SetVertex("Title_Exit/MouseUsual/img", 0, 0);
+	Zoom("Title_Exit/MouseUsual/img", 0, 250, 250, null, false);
+	Request("Title_Exit/MouseUsual/img", Smoothing);
+	CreateTexture("Title_Exit/MouseOver/img", 1000, 416, 470, "cg/sys/title/exit-002.png");
+	SetVertex("Title_Exit/MouseOver/img", 0, 0);
+	Zoom("Title_Exit/MouseOver/img", 0, 250, 250, null, false);
+	Request("Title_Exit/MouseOver/img", Smoothing);
+	CreateTexture("Title_Exit/MouseClick/img", 1000, 416, 470, "cg/sys/title/exit-003.png");
+	SetVertex("Title_Exit/MouseClick/img", 0, 0);
+	Zoom("Title_Exit/MouseClick/img", 0, 250, 250, null, false);
+	Request("Title_Exit/MouseClick/img", Smoothing);
+
+	//■ボタン配置（Claude 11-02：回想・サウンドを「つづきから」の下に。多い時はロゴに掛からないよう278から詰める）
+	if(#ENDING_OF_XMAS&&#ENDING_OF_TOBECONTINUED)
+	{
+		Move("Title_Start/*/*", 0, 416, 278, null, false);
+		Move("Title_LOAD/*/*", 0, 416, 306, null, false);
+		Move("Title_Scenario/*/*", 0, 416, 334, null, false);
+		Move("Title_Sound/*/*", 0, 416, 362, null, false);
+		Move("Title_CG/*/*", 0, 416, 390, null, false);
+		Move("Title_Config/*/*", 0, 416, 418, null, false);
+		Move("Title_Liner/*/*", 0, 416, 446, null, false);
+		Move("Title_Exit/*/*", 0, 416, 474, null, false);
+	}
+	else if(#ENDING_OF_XMAS||#ENDING_OF_TOBECONTINUED)
+	{
+		Move("Title_Start/*/*", 0, 416, 278, null, false);
+		Move("Title_LOAD/*/*", 0, 416, 310, null, false);
+		Move("Title_Scenario/*/*", 0, 416, 342, null, false);
+		Move("Title_Sound/*/*", 0, 416, 374, null, false);
+		Move("Title_CG/*/*", 0, 416, 406, null, false);
+		Move("Title_Config/*/*", 0, 416, 438, null, false);
+		Move("Title_Exit/*/*", 0, 416, 470, null, false);
+	}
+	else
+	{
+		Move("Title_Start/*/*", 0, 416, 290, null, false);
+		Move("Title_LOAD/*/*", 0, 416, 326, null, false);
+		Move("Title_Scenario/*/*", 0, 416, 362, null, false);
+		Move("Title_Sound/*/*", 0, 416, 398, null, false);
+		Move("Title_Config/*/*", 0, 416, 434, null, false);
+		Move("Title_Exit/*/*", 0, 416, 470, null, false);
+	}
+
+	Fade("タイトル*",0,0,null,false);
+	Fade("Title*/*/*",0,0,null,true);
+
+	//★ロック設置
+	LockVideo(false);
+
+
+	//ろーでぃんぐ解除
+	Fade("@Roading", 200, 0, null, true);
+}
+//============================================================================//
+
+
+
+//=============================================================================//
+..//■タイトル動作■
+//=============================================================================//
+function TitleFade()
+{
+	CreateBGM("lx001a","lxbgm06");
+//	Request("lx001a", Lock);
+
+	SoundPlay("@lx001a",4000,1000,true);
+
+	CreateMovieEXadd("TITLE_絵Snow", 999, Center, Middle, true, true, "dx/mvsnow01.ngs");
+	Request("TITLE_絵Snow", Smoothing);
+	Zoom("TITLE_絵Snow", 0, 2000, 2000, null, false);
+
+	if($Logo)
+	{
+		Fade("TITLE_絵Snow", 1000, 1000, null, false);
+		Fade("タイトルロゴ",500,1000,null,false);
+		Fade("タイトル背景",500,1000,null,false);
+		Fade("タイトル_枠",500,1000,null,false);
+		Fade("タイトル版権",500,1000,null,false);
+		Fade("Title*/MouseUsual/*",500,1000,null,true);
+	}
+	else
+	{
+		CreateColor("タイトルカラー4", 100, 0, 0, 1024, 576, "BLACK");
+		CreateTextureEX("絵背景", 100, Center, -1000, "cg/bg/l/bg001004_3_けやき坂通り_l.jpg");
+		Request("絵背景", Smoothing);
+		Move("絵背景", 0, @0, -300, null, false);
+
+		Fade("タイトルカラー4",1000,0,null,false);
+		Fade("TITLE_絵Snow", 1000, 1000, null, false);
+		Fade("絵背景", 1000, 1000, null, false);
+
+		Move("絵背景", 20000, @0, @-300, null, false);
+
+		Wait(2000);
+
+		Fade("タイトルロゴ_影",3000,1000,null,true);
+		Fade("タイトルロゴ",1000,1000,null,false);
+		Fade("タイトル背景",1000,1000,null,true);
+
+		Zoom("タイトル_枠",0,1000,1200,null,false);
+		Fade("タイトル_枠",1000,1000,null,false);
+		Zoom("タイトル_枠",700,1000,1000,null,false);
+
+		Fade("タイトル版権", 800, 1000, null, true);
+
+		Fade("Title_Start/MouseUsual/*",300,1000,null,false);
+		Wait(100);
+		Fade("Title_LOAD/MouseUsual/*",300,1000,null,false);
+		Wait(100);
+		Fade("Title_Scenario/MouseUsual/*",300,1000,null,false);
+		Wait(100);
+		Fade("Title_Sound/MouseUsual/*",300,1000,null,false);
+		Wait(100);
+		if(#ENDING_OF_XMAS||#ENDING_OF_TOBECONTINUED)
+		{
+			Fade("Title_CG/MouseUsual/*",300,1000,null,false);
+			Wait(100);
+		}
+		Fade("Title_Config/MouseUsual/*",300,1000,null,false);
+		Wait(100);
+		if(#ENDING_OF_XMAS&&#ENDING_OF_TOBECONTINUED)
+		{
+			Fade("Title_Liner/MouseUsual/*",300,1000,null,false);
+			Wait(100);
+		}
+		Fade("Title_Exit/MouseUsual/*",300,1000,null,true);
+//		Fade("Title*/MouseUsual/*", 1000, 1000, null, true);
+	}
+
+	//▲セットフォーカス
+	TitleFocus();
+
+	Request("タイトルフルスクプロセス", Stop);
+	WaitAction("タイトルフルスクプロセス", null);
+}
+//============================================================================//
+
+//=============================================================================//
+..//■セットネクストフォーカス■
+//=============================================================================//
+function TitleFocus(){
+	SetNextFocus("Title_Start/MouseUsual/hit", "Title_LOAD/MouseUsual/hit",DOWN);
+	SetNextFocus("Title_Start/MouseUsual/hit", "Title_LOAD/MouseUsual/hit",RIGHT);
+	SetNextFocus("Title_Start/MouseUsual/hit", "Title_Exit/MouseUsual/hit",UP);
+	SetNextFocus("Title_Start/MouseUsual/hit", "Title_Exit/MouseUsual/hit",LEFT);
+	
+	if(#ENDING_OF_XMAS||#ENDING_OF_TOBECONTINUED)
+	{
+		SetNextFocus("Title_LOAD/MouseUsual/hit", "Title_CG/MouseUsual/hit",DOWN);
+		SetNextFocus("Title_LOAD/MouseUsual/hit", "Title_CG/MouseUsual/hit",RIGHT);
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_CG/MouseUsual/hit",UP);
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_CG/MouseUsual/hit",LEFT);
+		SetNextFocus("Title_CG/MouseUsual/hit", "Title_LOAD/MouseUsual/hit",UP);
+		SetNextFocus("Title_CG/MouseUsual/hit", "Title_LOAD/MouseUsual/hit",LEFT);
+		SetNextFocus("Title_CG/MouseUsual/hit", "Title_Config/MouseUsual/hit",DOWN);
+		SetNextFocus("Title_CG/MouseUsual/hit", "Title_Config/MouseUsual/hit",RIGHT);
+	}
+	else
+	{
+		SetNextFocus("Title_LOAD/MouseUsual/hit", "Title_Config/MouseUsual/hit",DOWN);
+		SetNextFocus("Title_LOAD/MouseUsual/hit", "Title_Config/MouseUsual/hit",RIGHT);
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_LOAD/MouseUsual/hit",UP);
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_LOAD/MouseUsual/hit",LEFT);
+	}
+	SetNextFocus("Title_LOAD/MouseUsual/hit", "Title_Start/MouseUsual/hit",UP);
+	SetNextFocus("Title_LOAD/MouseUsual/hit", "Title_Start/MouseUsual/hit",LEFT);
+	if(#ENDING_OF_XMAS&&#ENDING_OF_TOBECONTINUED)
+	{
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_Liner/MouseUsual/hit",DOWN);
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_Liner/MouseUsual/hit",RIGHT);
+		SetNextFocus("Title_Liner/MouseUsual/hit", "Title_Config/MouseUsual/hit",UP);
+		SetNextFocus("Title_Liner/MouseUsual/hit", "Title_Config/MouseUsual/hit",LEFT);
+		SetNextFocus("Title_Liner/MouseUsual/hit", "Title_Exit/MouseUsual/hit",DOWN);
+		SetNextFocus("Title_Liner/MouseUsual/hit", "Title_Exit/MouseUsual/hit",RIGHT);
+		SetNextFocus("Title_Exit/MouseUsual/hit", "Title_Liner/MouseUsual/hit",UP);
+		SetNextFocus("Title_Exit/MouseUsual/hit", "Title_Liner/MouseUsual/hit",LEFT);
+	}
+	else
+	{
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_Exit/MouseUsual/hit",DOWN);
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_Exit/MouseUsual/hit",RIGHT);
+		SetNextFocus("Title_Exit/MouseUsual/hit", "Title_Config/MouseUsual/hit",UP);
+		SetNextFocus("Title_Exit/MouseUsual/hit", "Title_Config/MouseUsual/hit",LEFT);
+	}
+	SetNextFocus("Title_Exit/MouseUsual/hit", "Title_Start/MouseUsual/hit",DOWN);
+	SetNextFocus("Title_Exit/MouseUsual/hit", "Title_Start/MouseUsual/hit",RIGHT);
+	TitleFocusKr();
+}
+function TitleFocusKr(){
+	SetNextFocus("Title_LOAD/MouseUsual/hit", "Title_Scenario/MouseUsual/hit",DOWN);
+	SetNextFocus("Title_LOAD/MouseUsual/hit", "Title_Scenario/MouseUsual/hit",RIGHT);
+	SetNextFocus("Title_Scenario/MouseUsual/hit", "Title_LOAD/MouseUsual/hit",UP);
+	SetNextFocus("Title_Scenario/MouseUsual/hit", "Title_LOAD/MouseUsual/hit",LEFT);
+	SetNextFocus("Title_Scenario/MouseUsual/hit", "Title_Sound/MouseUsual/hit",DOWN);
+	SetNextFocus("Title_Scenario/MouseUsual/hit", "Title_Sound/MouseUsual/hit",RIGHT);
+	SetNextFocus("Title_Sound/MouseUsual/hit", "Title_Scenario/MouseUsual/hit",UP);
+	SetNextFocus("Title_Sound/MouseUsual/hit", "Title_Scenario/MouseUsual/hit",LEFT);
+	if(#ENDING_OF_XMAS||#ENDING_OF_TOBECONTINUED){
+		SetNextFocus("Title_Sound/MouseUsual/hit", "Title_CG/MouseUsual/hit",DOWN);
+		SetNextFocus("Title_Sound/MouseUsual/hit", "Title_CG/MouseUsual/hit",RIGHT);
+		SetNextFocus("Title_CG/MouseUsual/hit", "Title_Sound/MouseUsual/hit",UP);
+		SetNextFocus("Title_CG/MouseUsual/hit", "Title_Sound/MouseUsual/hit",LEFT);
+	}else{
+		SetNextFocus("Title_Sound/MouseUsual/hit", "Title_Config/MouseUsual/hit",DOWN);
+		SetNextFocus("Title_Sound/MouseUsual/hit", "Title_Config/MouseUsual/hit",RIGHT);
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_Sound/MouseUsual/hit",UP);
+		SetNextFocus("Title_Config/MouseUsual/hit", "Title_Sound/MouseUsual/hit",LEFT);
+	}
+}
+//=============================================================================//
+..//■セレクト■
+//=============================================================================//
+function TitleSelect()
+{
+	CreateColor("tbk",1100,center,middle,1024,576,BLACK);
+	Fade("tbk",0,0,null,false);
+	while(!$TitleSelect)
+	{
+		select
+		{
+			if($TitleMovieCount){break;}
+
+			case Title_Liner{
+				CreateSE("決定サウンド",$TitleClickSE);
+				SoundPlay("決定サウンド",0,1000,false);
+
+				Wait(100);
+
+				#SYSTEM_window_full = false;
+				System("OPEN:http://www.nitroplus.co.jp/secret/gclostxmas_staffcomments2012/");
+			}
+
+			case Title_Start{
+				TitleMovieIn();
+				$TitleSelect = 1;
+			}
+
+			case Title_Scenario{
+				CreateSE("決定サウンド",$TitleClickSE);
+				SoundPlay("決定サウンド",0,650,false);
+				$TitleSelect=3;
+			}
+
+			case Title_Sound{
+				CreateSE("決定サウンド",$TitleClickSE);
+				SoundPlay("決定サウンド",0,650,false);
+				$TitleSelect=4;
+			}
+
+			case Title_LOAD{
+//				if(#SaveFirst){
+					TitleMovieIn();
+					CreateSE("決定サウンド",$TitleClickSE);
+					SoundPlay("決定サウンド",0,650,false);
+					$Title_Load=true;
+//				}
+			}
+
+			case タイトル特別{
+				TitleMovieIn();
+				CreateSE("決定サウンド",$TitleClickSE3);
+				SoundPlay("決定サウンド",0,650,false);
+				$TitleSelect=2;
+			}
+
+			case Title_CG{
+				TitleMovieIn();
+				CreateSE("決定サウンド",$TitleClickSE);
+				SoundPlay("決定サウンド",0,650,false);
+				$Title_Extra01=true;
+			}
+
+			case Title_Config{
+				TitleMovieIn();
+				CreateSE("決定サウンド",$TitleClickSE);
+				SoundPlay("決定サウンド",0,850,false);
+				$Title_Config=true;
+			}
+
+			case Title_Exit
+			{
+				CreateSE("決定サウンド",$TitleClickSE);
+				SoundPlay("決定サウンド",0,1000,false);
+
+				Wait(100);
+
+				TitleMovieIn();
+
+				$Title_Exit=true;
+				call_chapter nss/sys_close.nss;
+				$Title_Exit=false;
+
+				TitleMovieOut();
+			}
+
+			//★キーダウン系
+			if($SYSTEM_keydown_f){
+				if(!#SYSTEM_window_full_lock){
+					#SYSTEM_window_full=!#SYSTEM_window_full;
+					#SYSTEM_window_full_lock=false;
+					Wait(300);
+					$SYSTEM_keydown_f=false;
+				}
+			}
+		}
+
+		if($TitleSelect== 1){
+			CreateSE("決定サウンド",$TitleClickSE2);
+			Request("決定サウンド", Lock);
+			SoundPlay("決定サウンド",0,850,false);
+
+			Request("*/MouseUsual/hit",UnLock);
+			Delete("*/MouseUsual/hit");
+			SetVolume("@*", 5000, 0, NULL);
+			Fade("タイトルカラー", 5000, 1000, null, true);
+
+			$GameName="lx0010.nss";
+		}else if($Title_Load){
+			Fade("tbk",150,1000,null,true);
+			call_chapter nss/sys_load.nss;
+			CreateMovieEXadd("TITLE_絵Snow", 999, Center, Middle, true, true, "dx/mvsnow01.ngs");
+			Request("TITLE_絵Snow", Smoothing);
+			Zoom("TITLE_絵Snow", 0, 2000, 2000, null, false);
+			Fade("TITLE_絵Snow", 1000, 1000, null, false);
+			Fade("tbk",150,0,null,true);
+			$Title_Load=false;
+			TitleMovieOut();
+		}else if($Title_Extra01){
+			Fade("tbk",150,1000,null,true);
+			call_chapter nss/extra_cglib.nss;
+			CreateMovieEXadd("TITLE_絵Snow", 999, Center, Middle, true, true, "dx/mvsnow01.ngs");
+			Request("TITLE_絵Snow", Smoothing);
+			Zoom("TITLE_絵Snow", 0, 2000, 2000, null, false);
+			Fade("TITLE_絵Snow", 1000, 1000, null, false);
+			Fade("tbk",150,0,null,true);
+			$Title_Extra01=false;
+			TitleMovieOut();
+		}else if($Title_Extra02){
+			call_chapter nss/extra_soundlib.nss;
+			$Title_Extra02=false;
+			TitleMovieOut();
+		}else if($Title_Config){
+			Fade("tbk",150,1000,null,true);
+			call_chapter nss/sys_config.nss;
+			CreateMovieEXadd("TITLE_絵Snow", 999, Center, Middle, true, true, "dx/mvsnow01.ngs");
+			Request("TITLE_絵Snow", Smoothing);
+			Zoom("TITLE_絵Snow", 0, 2000, 2000, null, false);
+			Fade("TITLE_絵Snow", 1000, 1000, null, false);
+			Fade("tbk",150,0,null,true);
+			$Title_Config=false;
+			TitleMovieOut();
+		}
+	}
+
+
+}//============================================================================//
+
+
+
+//============================================================================//
+//サウンドデバッグ用
+//============================================================================//
+function DebugSound()
+{
+	WaitKey();
+
+	$テストナット="@m13";
+
+	SoundPlay($テストナット,0,1000,true);
+	//SetStream($テストナット, 300000);
+
+/*
+	$Temp=DurationTime($テストナット);
+	//RemainTime("サウンド１");
+	CreateText("テキスト１", 200, 50, 50, 700, 500, $Temp);
+	WaitKey();
+*/
+
+	CreateProcess("プロセス１", 150, 0, 0, "DebugSound2");
+	WaitKey();
+	Request("プロセス１", Start);
+	WaitKey();
+
+//	SoundPlay("@CH02",0,1000,true);
+//	SoundPlay("@CH03",0,1000,true);
+//	SoundPlay("@CH04",0,1000,true);
+//	SoundPlay("@CH05",0,1000,true);
+//	SoundPlay("@CH07",0,1000,true);
+//	SoundPlay("@CH08",0,1000,true);
+//	SoundPlay("@CH11",0,1000,true);
+//	SoundPlay("@CH12",0,1000,true);
+//	SoundPlay("@CH14",0,1000,true);
+//	SoundPlay("@CH15",0,1000,true);
+//	SoundPlay("@CH20",0,1000,true);
+//	SoundPlay("@CH22",0,1000,true);
+//	SoundPlay("@CH23",0,1000,true);
+//	SoundPlay("@CH24",0,1000,true);
+//	SoundPlay("@CH25",0,1000,true);
+}
+
+function DebugSound2()
+{
+	while(1){
+		$テスト数値=PassageTime($テストナット);
+		CreateText("テキスト１", 200, 50, 50, 700, 500, $テスト数値);
+		Request("テキスト１", PushText);
+		WaitAction("テキスト１", null);
+		Wait(1);
+	}
+}
+

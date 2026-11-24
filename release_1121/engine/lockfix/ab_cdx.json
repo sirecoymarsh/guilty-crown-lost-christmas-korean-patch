@@ -1,0 +1,78 @@
+[
+ {
+  "run": "lk_cdx_1off_091838",
+  "frames": 520,
+  "fps": 17.9,
+  "gaps_over_0_6": 6,
+  "gap_sum": 7.1,
+  "gaps": [
+   [
+    50.1,
+    2.02
+   ],
+   [
+    52.3,
+    1.01
+   ],
+   [
+    55.1,
+    1.02
+   ],
+   [
+    68.1,
+    1.02
+   ],
+   [
+    73.2,
+    1.02
+   ],
+   [
+    75.2,
+    1.02
+   ]
+  ],
+  "max_gap": 2.02,
+  "locks": {
+   "engine-waited": 7
+  },
+  "clicks": [
+   [
+    "40:440:392",
+    40.9
+   ],
+   [
+    "46:200:71",
+    46.9
+   ]
+  ],
+  "exited_early": null,
+  "dialogs": [],
+  "mode": "off"
+ },
+ {
+  "run": "lk_cdx_2on_092010",
+  "frames": 601,
+  "fps": 20.7,
+  "gaps_over_0_6": 0,
+  "gap_sum": 0,
+  "gaps": [],
+  "max_gap": 0.38,
+  "locks": {
+   "delete-waited": 3,
+   "stepped-aside": 12
+  },
+  "clicks": [
+   [
+    "40:440:392",
+    41.1
+   ],
+   [
+    "46:200:71",
+    46.9
+   ]
+  ],
+  "exited_early": null,
+  "dialogs": [],
+  "mode": "on"
+ }
+]

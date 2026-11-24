@@ -1,0 +1,3243 @@
+{
+  "source": "user game sound.npa",
+  "audio_sha256": "8aaf33f7e20f3d5c32ed442dff45d59232e62c55322a321291709f04c2118878",
+  "model": "P:\\AI\\Codex\\projects\\drakoi-korean\\vocal-subtitles\\tools\\faster-whisper-large-v3",
+  "language": "en",
+  "task": "transcribe",
+  "duration": 228.573375,
+  "segments": [
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 15.219999999999997,
+      "end": 19.62,
+      "text": " You have a king of the power, yeah you got it",
+      "tokens": [
+        50365,
+        509,
+        362,
+        257,
+        4867,
+        295,
+        264,
+        1347,
+        11,
+        1338,
+        291,
+        658,
+        309,
+        51354
+      ],
+      "avg_logprob": -0.21951218930686392,
+      "compression_ratio": 1.3333333333333333,
+      "no_speech_prob": 0.276611328125,
+      "words": [
+        {
+          "start": 15.219999999999997,
+          "end": 15.94,
+          "word": " You",
+          "probability": 0.9423828125
+        },
+        {
+          "start": 15.94,
+          "end": 16.32,
+          "word": " have",
+          "probability": 0.73388671875
+        },
+        {
+          "start": 16.32,
+          "end": 16.5,
+          "word": " a",
+          "probability": 0.75732421875
+        },
+        {
+          "start": 16.5,
+          "end": 16.82,
+          "word": " king",
+          "probability": 0.97998046875
+        },
+        {
+          "start": 16.82,
+          "end": 17.08,
+          "word": " of",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 17.08,
+          "end": 17.24,
+          "word": " the",
+          "probability": 0.8505859375
+        },
+        {
+          "start": 17.24,
+          "end": 17.72,
+          "word": " power,",
+          "probability": 0.98974609375
+        },
+        {
+          "start": 18.16,
+          "end": 18.52,
+          "word": " yeah",
+          "probability": 0.98974609375
+        },
+        {
+          "start": 18.52,
+          "end": 19.02,
+          "word": " you",
+          "probability": 0.5146484375
+        },
+        {
+          "start": 19.02,
+          "end": 19.36,
+          "word": " got",
+          "probability": 0.994140625
+        },
+        {
+          "start": 19.36,
+          "end": 19.62,
+          "word": " it",
+          "probability": 0.99951171875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 19.62,
+      "end": 23.76,
+      "text": " Somebody might be a flower, yeah you got it",
+      "tokens": [
+        51354,
+        13463,
+        1062,
+        312,
+        257,
+        8617,
+        11,
+        1338,
+        291,
+        658,
+        309,
+        51569
+      ],
+      "avg_logprob": -0.21951218930686392,
+      "compression_ratio": 1.3333333333333333,
+      "no_speech_prob": 0.276611328125,
+      "words": [
+        {
+          "start": 19.62,
+          "end": 20.22,
+          "word": " Somebody",
+          "probability": 0.92578125
+        },
+        {
+          "start": 20.22,
+          "end": 20.8,
+          "word": " might",
+          "probability": 0.97998046875
+        },
+        {
+          "start": 20.8,
+          "end": 21.18,
+          "word": " be",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 21.18,
+          "end": 21.28,
+          "word": " a",
+          "probability": 0.94873046875
+        },
+        {
+          "start": 21.28,
+          "end": 21.68,
+          "word": " flower,",
+          "probability": 0.98095703125
+        },
+        {
+          "start": 22.26,
+          "end": 22.62,
+          "word": " yeah",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 22.62,
+          "end": 23.12,
+          "word": " you",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 23.12,
+          "end": 23.4,
+          "word": " got",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 23.4,
+          "end": 23.76,
+          "word": " it",
+          "probability": 1.0
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 23.76,
+      "end": 27.84,
+      "text": " It's time to get ready, oh you have really",
+      "tokens": [
+        51569,
+        467,
+        311,
+        565,
+        281,
+        483,
+        1919,
+        11,
+        1954,
+        291,
+        362,
+        534,
+        51768
+      ],
+      "avg_logprob": -0.21951218930686392,
+      "compression_ratio": 1.3333333333333333,
+      "no_speech_prob": 0.276611328125,
+      "words": [
+        {
+          "start": 23.76,
+          "end": 24.68,
+          "word": " It's",
+          "probability": 0.998291015625
+        },
+        {
+          "start": 24.68,
+          "end": 24.96,
+          "word": " time",
+          "probability": 1.0
+        },
+        {
+          "start": 24.96,
+          "end": 25.18,
+          "word": " to",
+          "probability": 1.0
+        },
+        {
+          "start": 25.18,
+          "end": 25.46,
+          "word": " get",
+          "probability": 1.0
+        },
+        {
+          "start": 25.46,
+          "end": 26.0,
+          "word": " ready,",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 26.34,
+          "end": 26.72,
+          "word": " oh",
+          "probability": 0.92333984375
+        },
+        {
+          "start": 26.72,
+          "end": 27.2,
+          "word": " you",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 27.2,
+          "end": 27.5,
+          "word": " have",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 27.5,
+          "end": 27.84,
+          "word": " really",
+          "probability": 0.8671875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 4,
+      "seek": 2784,
+      "start": 27.84,
+      "end": 31.18,
+      "text": " Time to share, take your chance",
+      "tokens": [
+        50365,
+        6161,
+        281,
+        2073,
+        11,
+        747,
+        428,
+        2931,
+        50550
+      ],
+      "avg_logprob": -0.16856971574135315,
+      "compression_ratio": 1.4887640449438202,
+      "no_speech_prob": 0.61474609375,
+      "words": [
+        {
+          "start": 27.84,
+          "end": 28.46,
+          "word": " Time",
+          "probability": 0.444091796875
+        },
+        {
+          "start": 28.46,
+          "end": 28.7,
+          "word": " to",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 28.7,
+          "end": 29.1,
+          "word": " share,",
+          "probability": 0.9921875
+        },
+        {
+          "start": 29.4,
+          "end": 30.2,
+          "word": " take",
+          "probability": 0.97314453125
+        },
+        {
+          "start": 30.2,
+          "end": 30.52,
+          "word": " your",
+          "probability": 0.98291015625
+        },
+        {
+          "start": 30.52,
+          "end": 31.18,
+          "word": " chance",
+          "probability": 0.98876953125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 5,
+      "seek": 2784,
+      "start": 31.18,
+      "end": 35.84,
+      "text": " It could be to halt the problem, change your body",
+      "tokens": [
+        50550,
+        467,
+        727,
+        312,
+        281,
+        12479,
+        264,
+        1154,
+        11,
+        1319,
+        428,
+        1772,
+        50773
+      ],
+      "avg_logprob": -0.16856971574135315,
+      "compression_ratio": 1.4887640449438202,
+      "no_speech_prob": 0.61474609375,
+      "words": [
+        {
+          "start": 31.18,
+          "end": 32.34,
+          "word": " It",
+          "probability": 0.759765625
+        },
+        {
+          "start": 32.34,
+          "end": 32.48,
+          "word": " could",
+          "probability": 0.9951171875
+        },
+        {
+          "start": 32.48,
+          "end": 32.82,
+          "word": " be",
+          "probability": 0.87451171875
+        },
+        {
+          "start": 32.82,
+          "end": 32.9,
+          "word": " to",
+          "probability": 0.6982421875
+        },
+        {
+          "start": 32.9,
+          "end": 33.3,
+          "word": " halt",
+          "probability": 0.4267578125
+        },
+        {
+          "start": 33.3,
+          "end": 33.54,
+          "word": " the",
+          "probability": 0.9853515625
+        },
+        {
+          "start": 33.54,
+          "end": 34.28,
+          "word": " problem,",
+          "probability": 0.95947265625
+        },
+        {
+          "start": 34.44,
+          "end": 34.82,
+          "word": " change",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 34.82,
+          "end": 35.36,
+          "word": " your",
+          "probability": 0.990234375
+        },
+        {
+          "start": 35.36,
+          "end": 35.84,
+          "word": " body",
+          "probability": 0.9375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 6,
+      "seek": 2784,
+      "start": 35.84,
+      "end": 39.8,
+      "text": " But I need you to be stronger than anyone",
+      "tokens": [
+        50773,
+        583,
+        286,
+        643,
+        291,
+        281,
+        312,
+        7249,
+        813,
+        2878,
+        50973
+      ],
+      "avg_logprob": -0.16856971574135315,
+      "compression_ratio": 1.4887640449438202,
+      "no_speech_prob": 0.61474609375,
+      "words": [
+        {
+          "start": 35.84,
+          "end": 36.38,
+          "word": " But",
+          "probability": 0.56298828125
+        },
+        {
+          "start": 36.38,
+          "end": 36.52,
+          "word": " I",
+          "probability": 0.955078125
+        },
+        {
+          "start": 36.52,
+          "end": 36.84,
+          "word": " need",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 36.84,
+          "end": 37.16,
+          "word": " you",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 37.16,
+          "end": 37.28,
+          "word": " to",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 37.28,
+          "end": 37.54,
+          "word": " be",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 37.54,
+          "end": 38.16,
+          "word": " stronger",
+          "probability": 0.99609375
+        },
+        {
+          "start": 38.16,
+          "end": 38.9,
+          "word": " than",
+          "probability": 0.98388671875
+        },
+        {
+          "start": 38.9,
+          "end": 39.8,
+          "word": " anyone",
+          "probability": 0.99755859375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 7,
+      "seek": 2784,
+      "start": 39.8,
+      "end": 42.54,
+      "text": " It's time for now to speed up",
+      "tokens": [
+        50973,
+        467,
+        311,
+        565,
+        337,
+        586,
+        281,
+        3073,
+        493,
+        51108
+      ],
+      "avg_logprob": -0.16856971574135315,
+      "compression_ratio": 1.4887640449438202,
+      "no_speech_prob": 0.61474609375,
+      "words": [
+        {
+          "start": 39.8,
+          "end": 40.98,
+          "word": " It's",
+          "probability": 0.9853515625
+        },
+        {
+          "start": 40.98,
+          "end": 41.26,
+          "word": " time",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 41.26,
+          "end": 41.42,
+          "word": " for",
+          "probability": 0.8935546875
+        },
+        {
+          "start": 41.42,
+          "end": 41.72,
+          "word": " now",
+          "probability": 0.95654296875
+        },
+        {
+          "start": 41.72,
+          "end": 41.96,
+          "word": " to",
+          "probability": 0.96435546875
+        },
+        {
+          "start": 41.96,
+          "end": 42.18,
+          "word": " speed",
+          "probability": 0.98876953125
+        },
+        {
+          "start": 42.18,
+          "end": 42.54,
+          "word": " up",
+          "probability": 0.99853515625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 8,
+      "seek": 2784,
+      "start": 42.54,
+      "end": 45.48,
+      "text": " All you have to do is make some friends",
+      "tokens": [
+        51108,
+        1057,
+        291,
+        362,
+        281,
+        360,
+        307,
+        652,
+        512,
+        1855,
+        51266
+      ],
+      "avg_logprob": -0.16856971574135315,
+      "compression_ratio": 1.4887640449438202,
+      "no_speech_prob": 0.61474609375,
+      "words": [
+        {
+          "start": 42.54,
+          "end": 43.04,
+          "word": " All",
+          "probability": 0.85888671875
+        },
+        {
+          "start": 43.04,
+          "end": 43.44,
+          "word": " you",
+          "probability": 0.998046875
+        },
+        {
+          "start": 43.44,
+          "end": 43.8,
+          "word": " have",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 43.8,
+          "end": 43.92,
+          "word": " to",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 43.92,
+          "end": 44.26,
+          "word": " do",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 44.26,
+          "end": 44.52,
+          "word": " is",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 44.52,
+          "end": 44.84,
+          "word": " make",
+          "probability": 0.96728515625
+        },
+        {
+          "start": 44.84,
+          "end": 44.96,
+          "word": " some",
+          "probability": 1.0
+        },
+        {
+          "start": 44.96,
+          "end": 45.48,
+          "word": " friends",
+          "probability": 0.62646484375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 9,
+      "seek": 2784,
+      "start": 48.94,
+      "end": 52.32,
+      "text": " We might be just like a bird in a cage",
+      "tokens": [
+        51266,
+        492,
+        1062,
+        312,
+        445,
+        411,
+        257,
+        5255,
+        294,
+        257,
+        17302,
+        51603
+      ],
+      "avg_logprob": -0.16856971574135315,
+      "compression_ratio": 1.4887640449438202,
+      "no_speech_prob": 0.61474609375,
+      "words": [
+        {
+          "start": 48.94,
+          "end": 49.58,
+          "word": " We",
+          "probability": 0.98876953125
+        },
+        {
+          "start": 49.58,
+          "end": 49.86,
+          "word": " might",
+          "probability": 0.998046875
+        },
+        {
+          "start": 49.86,
+          "end": 50.1,
+          "word": " be",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 50.1,
+          "end": 50.32,
+          "word": " just",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 50.32,
+          "end": 50.7,
+          "word": " like",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 50.7,
+          "end": 50.92,
+          "word": " a",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 50.92,
+          "end": 51.14,
+          "word": " bird",
+          "probability": 0.9736328125
+        },
+        {
+          "start": 51.14,
+          "end": 51.66,
+          "word": " in",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 51.66,
+          "end": 51.84,
+          "word": " a",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 51.84,
+          "end": 52.32,
+          "word": " cage",
+          "probability": 1.0
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 10,
+      "seek": 2784,
+      "start": 53.04,
+      "end": 55.52,
+      "text": " How could I reach to your heart?",
+      "tokens": [
+        51603,
+        1012,
+        727,
+        286,
+        2524,
+        281,
+        428,
+        1917,
+        30,
+        51754
+      ],
+      "avg_logprob": -0.16856971574135315,
+      "compression_ratio": 1.4887640449438202,
+      "no_speech_prob": 0.61474609375,
+      "words": [
+        {
+          "start": 53.04,
+          "end": 53.68,
+          "word": " How",
+          "probability": 0.9951171875
+        },
+        {
+          "start": 53.68,
+          "end": 53.88,
+          "word": " could",
+          "probability": 0.98779296875
+        },
+        {
+          "start": 53.88,
+          "end": 54.18,
+          "word": " I",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 54.18,
+          "end": 54.44,
+          "word": " reach",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 54.44,
+          "end": 54.64,
+          "word": " to",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 54.64,
+          "end": 54.92,
+          "word": " your",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 54.92,
+          "end": 55.52,
+          "word": " heart?",
+          "probability": 0.99951171875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 11,
+      "seek": 5552,
+      "start": 55.52,
+      "end": 60.32,
+      "text": " Coming soon, how can you dance like a crowd in a tent",
+      "tokens": [
+        50365,
+        12473,
+        2321,
+        11,
+        577,
+        393,
+        291,
+        4489,
+        411,
+        257,
+        6919,
+        294,
+        257,
+        7054,
+        50615
+      ],
+      "avg_logprob": -0.2301136419515718,
+      "compression_ratio": 1.617801047120419,
+      "no_speech_prob": 0.57080078125,
+      "words": [
+        {
+          "start": 55.52,
+          "end": 56.92,
+          "word": " Coming",
+          "probability": 0.78759765625
+        },
+        {
+          "start": 56.92,
+          "end": 57.22,
+          "word": " soon,",
+          "probability": 0.9365234375
+        },
+        {
+          "start": 57.3,
+          "end": 57.68,
+          "word": " how",
+          "probability": 0.962890625
+        },
+        {
+          "start": 57.68,
+          "end": 57.98,
+          "word": " can",
+          "probability": 0.99658203125
+        },
+        {
+          "start": 57.98,
+          "end": 58.26,
+          "word": " you",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 58.26,
+          "end": 58.56,
+          "word": " dance",
+          "probability": 0.994140625
+        },
+        {
+          "start": 58.56,
+          "end": 58.8,
+          "word": " like",
+          "probability": 0.9658203125
+        },
+        {
+          "start": 58.8,
+          "end": 58.98,
+          "word": " a",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 58.98,
+          "end": 59.44,
+          "word": " crowd",
+          "probability": 0.71826171875
+        },
+        {
+          "start": 59.44,
+          "end": 59.8,
+          "word": " in",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 59.8,
+          "end": 59.98,
+          "word": " a",
+          "probability": 0.9853515625
+        },
+        {
+          "start": 59.98,
+          "end": 60.32,
+          "word": " tent",
+          "probability": 0.8662109375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 12,
+      "seek": 5552,
+      "start": 60.32,
+      "end": 67.42,
+      "text": " You can't change yourself until you find a second strength",
+      "tokens": [
+        50615,
+        509,
+        393,
+        380,
+        1319,
+        1803,
+        1826,
+        291,
+        915,
+        257,
+        1150,
+        3800,
+        50978
+      ],
+      "avg_logprob": -0.2301136419515718,
+      "compression_ratio": 1.617801047120419,
+      "no_speech_prob": 0.57080078125,
+      "words": [
+        {
+          "start": 60.32,
+          "end": 61.02,
+          "word": " You",
+          "probability": 0.2125244140625
+        },
+        {
+          "start": 61.02,
+          "end": 61.32,
+          "word": " can't",
+          "probability": 0.848388671875
+        },
+        {
+          "start": 61.32,
+          "end": 61.7,
+          "word": " change",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 61.7,
+          "end": 62.26,
+          "word": " yourself",
+          "probability": 0.99169921875
+        },
+        {
+          "start": 62.26,
+          "end": 63.2,
+          "word": " until",
+          "probability": 0.90234375
+        },
+        {
+          "start": 63.2,
+          "end": 64.0,
+          "word": " you",
+          "probability": 0.869140625
+        },
+        {
+          "start": 64.0,
+          "end": 64.58,
+          "word": " find",
+          "probability": 0.98828125
+        },
+        {
+          "start": 64.58,
+          "end": 64.88,
+          "word": " a",
+          "probability": 0.66943359375
+        },
+        {
+          "start": 64.88,
+          "end": 65.72,
+          "word": " second",
+          "probability": 0.2822265625
+        },
+        {
+          "start": 65.72,
+          "end": 67.42,
+          "word": " strength",
+          "probability": 0.488525390625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 13,
+      "seek": 5552,
+      "start": 68.25999999999999,
+      "end": 72.56,
+      "text": " Here we go, come with me then you'll open your mind",
+      "tokens": [
+        50978,
+        1692,
+        321,
+        352,
+        11,
+        808,
+        365,
+        385,
+        550,
+        291,
+        603,
+        1269,
+        428,
+        1575,
+        51230
+      ],
+      "avg_logprob": -0.2301136419515718,
+      "compression_ratio": 1.617801047120419,
+      "no_speech_prob": 0.57080078125,
+      "words": [
+        {
+          "start": 68.25999999999999,
+          "end": 68.96,
+          "word": " Here",
+          "probability": 0.9228515625
+        },
+        {
+          "start": 68.96,
+          "end": 69.18,
+          "word": " we",
+          "probability": 0.99609375
+        },
+        {
+          "start": 69.18,
+          "end": 69.56,
+          "word": " go,",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 69.64,
+          "end": 69.96,
+          "word": " come",
+          "probability": 0.9912109375
+        },
+        {
+          "start": 69.96,
+          "end": 70.22,
+          "word": " with",
+          "probability": 0.9970703125
+        },
+        {
+          "start": 70.22,
+          "end": 70.5,
+          "word": " me",
+          "probability": 0.998046875
+        },
+        {
+          "start": 70.5,
+          "end": 70.96,
+          "word": " then",
+          "probability": 0.56591796875
+        },
+        {
+          "start": 70.96,
+          "end": 71.26,
+          "word": " you'll",
+          "probability": 0.6016845703125
+        },
+        {
+          "start": 71.26,
+          "end": 71.82,
+          "word": " open",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 71.82,
+          "end": 72.18,
+          "word": " your",
+          "probability": 0.9951171875
+        },
+        {
+          "start": 72.18,
+          "end": 72.56,
+          "word": " mind",
+          "probability": 0.9990234375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 14,
+      "seek": 5552,
+      "start": 72.56,
+      "end": 76.74,
+      "text": " Here we go, move me on, move me on, move me on",
+      "tokens": [
+        51230,
+        1692,
+        321,
+        352,
+        11,
+        1286,
+        385,
+        322,
+        11,
+        1286,
+        385,
+        322,
+        11,
+        1286,
+        385,
+        322,
+        51434
+      ],
+      "avg_logprob": -0.2301136419515718,
+      "compression_ratio": 1.617801047120419,
+      "no_speech_prob": 0.57080078125,
+      "words": [
+        {
+          "start": 72.56,
+          "end": 72.96,
+          "word": " Here",
+          "probability": 0.98291015625
+        },
+        {
+          "start": 72.96,
+          "end": 73.18,
+          "word": " we",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 73.18,
+          "end": 73.68,
+          "word": " go,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 73.68,
+          "end": 74.0,
+          "word": " move",
+          "probability": 0.5537109375
+        },
+        {
+          "start": 74.0,
+          "end": 74.36,
+          "word": " me",
+          "probability": 0.38525390625
+        },
+        {
+          "start": 74.36,
+          "end": 74.64,
+          "word": " on,",
+          "probability": 0.994140625
+        },
+        {
+          "start": 74.7,
+          "end": 74.96,
+          "word": " move",
+          "probability": 0.6015625
+        },
+        {
+          "start": 74.96,
+          "end": 75.36,
+          "word": " me",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 75.36,
+          "end": 75.7,
+          "word": " on,",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 75.72,
+          "end": 75.98,
+          "word": " move",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 75.98,
+          "end": 76.38,
+          "word": " me",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 76.38,
+          "end": 76.74,
+          "word": " on",
+          "probability": 0.99951171875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 15,
+      "seek": 5552,
+      "start": 76.74,
+      "end": 79.62,
+      "text": " Then we know, we'll never see each other again",
+      "tokens": [
+        51434,
+        1396,
+        321,
+        458,
+        11,
+        321,
+        603,
+        1128,
+        536,
+        1184,
+        661,
+        797,
+        51589
+      ],
+      "avg_logprob": -0.2301136419515718,
+      "compression_ratio": 1.617801047120419,
+      "no_speech_prob": 0.57080078125,
+      "words": [
+        {
+          "start": 76.74,
+          "end": 77.04,
+          "word": " Then",
+          "probability": 0.92138671875
+        },
+        {
+          "start": 77.04,
+          "end": 77.26,
+          "word": " we",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 77.26,
+          "end": 77.7,
+          "word": " know,",
+          "probability": 0.4580078125
+        },
+        {
+          "start": 77.74,
+          "end": 78.12,
+          "word": " we'll",
+          "probability": 0.84375
+        },
+        {
+          "start": 78.12,
+          "end": 78.46,
+          "word": " never",
+          "probability": 0.93115234375
+        },
+        {
+          "start": 78.46,
+          "end": 78.74,
+          "word": " see",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 78.74,
+          "end": 78.92,
+          "word": " each",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 78.92,
+          "end": 79.26,
+          "word": " other",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 79.26,
+          "end": 79.62,
+          "word": " again",
+          "probability": 0.9970703125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 16,
+      "seek": 5552,
+      "start": 79.62,
+      "end": 84.54,
+      "text": " Just look so fine, all of your friends with hearts",
+      "tokens": [
+        51589,
+        1449,
+        574,
+        370,
+        2489,
+        11,
+        439,
+        295,
+        428,
+        1855,
+        365,
+        8852,
+        51843
+      ],
+      "avg_logprob": -0.2301136419515718,
+      "compression_ratio": 1.617801047120419,
+      "no_speech_prob": 0.57080078125,
+      "words": [
+        {
+          "start": 79.62,
+          "end": 80.08,
+          "word": " Just",
+          "probability": 0.8134765625
+        },
+        {
+          "start": 80.08,
+          "end": 80.66,
+          "word": " look",
+          "probability": 0.6572265625
+        },
+        {
+          "start": 80.66,
+          "end": 81.0,
+          "word": " so",
+          "probability": 0.9970703125
+        },
+        {
+          "start": 81.0,
+          "end": 81.78,
+          "word": " fine,",
+          "probability": 0.57080078125
+        },
+        {
+          "start": 82.32,
+          "end": 82.8,
+          "word": " all",
+          "probability": 0.93408203125
+        },
+        {
+          "start": 82.8,
+          "end": 83.18,
+          "word": " of",
+          "probability": 0.95703125
+        },
+        {
+          "start": 83.18,
+          "end": 83.34,
+          "word": " your",
+          "probability": 0.6962890625
+        },
+        {
+          "start": 83.34,
+          "end": 83.82,
+          "word": " friends",
+          "probability": 0.986328125
+        },
+        {
+          "start": 83.82,
+          "end": 84.06,
+          "word": " with",
+          "probability": 0.4755859375
+        },
+        {
+          "start": 84.06,
+          "end": 84.54,
+          "word": " hearts",
+          "probability": 0.75341796875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 17,
+      "seek": 8454,
+      "start": 92.56,
+      "end": 96.92,
+      "text": " You have a king of the right hand, yeah, you got it",
+      "tokens": [
+        50365,
+        509,
+        362,
+        257,
+        4867,
+        295,
+        264,
+        558,
+        1011,
+        11,
+        1338,
+        11,
+        291,
+        658,
+        309,
+        50994
+      ],
+      "avg_logprob": -0.15599384659626445,
+      "compression_ratio": 1.4744525547445255,
+      "no_speech_prob": 0.6220703125,
+      "words": [
+        {
+          "start": 92.56,
+          "end": 93.24,
+          "word": " You",
+          "probability": 0.853515625
+        },
+        {
+          "start": 93.24,
+          "end": 93.64,
+          "word": " have",
+          "probability": 0.98681640625
+        },
+        {
+          "start": 93.64,
+          "end": 93.8,
+          "word": " a",
+          "probability": 0.953125
+        },
+        {
+          "start": 93.8,
+          "end": 94.08,
+          "word": " king",
+          "probability": 0.9345703125
+        },
+        {
+          "start": 94.08,
+          "end": 94.5,
+          "word": " of",
+          "probability": 0.78271484375
+        },
+        {
+          "start": 94.5,
+          "end": 94.54,
+          "word": " the",
+          "probability": 0.6435546875
+        },
+        {
+          "start": 94.54,
+          "end": 94.94,
+          "word": " right",
+          "probability": 0.96533203125
+        },
+        {
+          "start": 94.94,
+          "end": 95.4,
+          "word": " hand,",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 95.5,
+          "end": 95.86,
+          "word": " yeah,",
+          "probability": 0.95458984375
+        },
+        {
+          "start": 95.98,
+          "end": 96.32,
+          "word": " you",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 96.32,
+          "end": 96.64,
+          "word": " got",
+          "probability": 0.9873046875
+        },
+        {
+          "start": 96.64,
+          "end": 96.92,
+          "word": " it",
+          "probability": 0.998046875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 18,
+      "seek": 8454,
+      "start": 96.92,
+      "end": 101.06,
+      "text": " Somebody might be your flower, yeah, you got it",
+      "tokens": [
+        50994,
+        13463,
+        1062,
+        312,
+        428,
+        8617,
+        11,
+        1338,
+        11,
+        291,
+        658,
+        309,
+        51202
+      ],
+      "avg_logprob": -0.15599384659626445,
+      "compression_ratio": 1.4744525547445255,
+      "no_speech_prob": 0.6220703125,
+      "words": [
+        {
+          "start": 96.92,
+          "end": 97.52,
+          "word": " Somebody",
+          "probability": 0.87255859375
+        },
+        {
+          "start": 97.52,
+          "end": 98.12,
+          "word": " might",
+          "probability": 0.998046875
+        },
+        {
+          "start": 98.12,
+          "end": 98.48,
+          "word": " be",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 98.48,
+          "end": 98.62,
+          "word": " your",
+          "probability": 0.69677734375
+        },
+        {
+          "start": 98.62,
+          "end": 99.18,
+          "word": " flower,",
+          "probability": 0.9912109375
+        },
+        {
+          "start": 99.52,
+          "end": 99.88,
+          "word": " yeah,",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 100.06,
+          "end": 100.38,
+          "word": " you",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 100.38,
+          "end": 100.72,
+          "word": " got",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 100.72,
+          "end": 101.06,
+          "word": " it",
+          "probability": 1.0
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 19,
+      "seek": 8454,
+      "start": 101.06,
+      "end": 106.6,
+      "text": " It's time to get ready, all you have to do is make some friends",
+      "tokens": [
+        51202,
+        467,
+        311,
+        565,
+        281,
+        483,
+        1919,
+        11,
+        439,
+        291,
+        362,
+        281,
+        360,
+        307,
+        652,
+        512,
+        1855,
+        51484
+      ],
+      "avg_logprob": -0.15599384659626445,
+      "compression_ratio": 1.4744525547445255,
+      "no_speech_prob": 0.6220703125,
+      "words": [
+        {
+          "start": 101.06,
+          "end": 102.0,
+          "word": " It's",
+          "probability": 0.998291015625
+        },
+        {
+          "start": 102.0,
+          "end": 102.28,
+          "word": " time",
+          "probability": 1.0
+        },
+        {
+          "start": 102.28,
+          "end": 102.48,
+          "word": " to",
+          "probability": 1.0
+        },
+        {
+          "start": 102.48,
+          "end": 102.76,
+          "word": " get",
+          "probability": 1.0
+        },
+        {
+          "start": 102.76,
+          "end": 103.22,
+          "word": " ready,",
+          "probability": 0.98486328125
+        },
+        {
+          "start": 103.62,
+          "end": 104.06,
+          "word": " all",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 104.06,
+          "end": 104.44,
+          "word": " you",
+          "probability": 1.0
+        },
+        {
+          "start": 104.44,
+          "end": 104.84,
+          "word": " have",
+          "probability": 1.0
+        },
+        {
+          "start": 104.84,
+          "end": 104.94,
+          "word": " to",
+          "probability": 1.0
+        },
+        {
+          "start": 104.94,
+          "end": 105.3,
+          "word": " do",
+          "probability": 1.0
+        },
+        {
+          "start": 105.3,
+          "end": 105.54,
+          "word": " is",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 105.54,
+          "end": 105.82,
+          "word": " make",
+          "probability": 0.99365234375
+        },
+        {
+          "start": 105.82,
+          "end": 106.02,
+          "word": " some",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 106.02,
+          "end": 106.6,
+          "word": " friends",
+          "probability": 0.623046875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 20,
+      "seek": 8454,
+      "start": 109.94,
+      "end": 113.4,
+      "text": " We might be just like a bird in a cage",
+      "tokens": [
+        51484,
+        492,
+        1062,
+        312,
+        445,
+        411,
+        257,
+        5255,
+        294,
+        257,
+        17302,
+        51821
+      ],
+      "avg_logprob": -0.15599384659626445,
+      "compression_ratio": 1.4744525547445255,
+      "no_speech_prob": 0.6220703125,
+      "words": [
+        {
+          "start": 109.94,
+          "end": 110.62,
+          "word": " We",
+          "probability": 0.994140625
+        },
+        {
+          "start": 110.62,
+          "end": 110.88,
+          "word": " might",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 110.88,
+          "end": 111.14,
+          "word": " be",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 111.14,
+          "end": 111.34,
+          "word": " just",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 111.34,
+          "end": 111.66,
+          "word": " like",
+          "probability": 0.98828125
+        },
+        {
+          "start": 111.66,
+          "end": 111.76,
+          "word": " a",
+          "probability": 0.9892578125
+        },
+        {
+          "start": 111.76,
+          "end": 112.16,
+          "word": " bird",
+          "probability": 0.994140625
+        },
+        {
+          "start": 112.16,
+          "end": 112.7,
+          "word": " in",
+          "probability": 1.0
+        },
+        {
+          "start": 112.7,
+          "end": 112.86,
+          "word": " a",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 112.86,
+          "end": 113.4,
+          "word": " cage",
+          "probability": 1.0
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 21,
+      "seek": 11340,
+      "start": 113.4,
+      "end": 116.44,
+      "text": " How could I reach to your heart?",
+      "tokens": [
+        50365,
+        1012,
+        727,
+        286,
+        2524,
+        281,
+        428,
+        1917,
+        30,
+        50515
+      ],
+      "avg_logprob": -0.25505513610208735,
+      "compression_ratio": 1.5733333333333333,
+      "no_speech_prob": 0.75439453125,
+      "words": [
+        {
+          "start": 113.4,
+          "end": 114.66,
+          "word": " How",
+          "probability": 0.408935546875
+        },
+        {
+          "start": 114.66,
+          "end": 114.92,
+          "word": " could",
+          "probability": 0.91455078125
+        },
+        {
+          "start": 114.92,
+          "end": 115.2,
+          "word": " I",
+          "probability": 0.98046875
+        },
+        {
+          "start": 115.2,
+          "end": 115.46,
+          "word": " reach",
+          "probability": 0.99169921875
+        },
+        {
+          "start": 115.46,
+          "end": 115.64,
+          "word": " to",
+          "probability": 0.91796875
+        },
+        {
+          "start": 115.64,
+          "end": 115.92,
+          "word": " your",
+          "probability": 0.9921875
+        },
+        {
+          "start": 115.92,
+          "end": 116.44,
+          "word": " heart?",
+          "probability": 0.99609375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 22,
+      "seek": 11340,
+      "start": 117.22,
+      "end": 121.36,
+      "text": " Coming soon, how can you dance like a crowd in a tent?",
+      "tokens": [
+        50515,
+        12473,
+        2321,
+        11,
+        577,
+        393,
+        291,
+        4489,
+        411,
+        257,
+        6919,
+        294,
+        257,
+        7054,
+        30,
+        50765
+      ],
+      "avg_logprob": -0.25505513610208735,
+      "compression_ratio": 1.5733333333333333,
+      "no_speech_prob": 0.75439453125,
+      "words": [
+        {
+          "start": 117.22,
+          "end": 117.9,
+          "word": " Coming",
+          "probability": 0.71923828125
+        },
+        {
+          "start": 117.9,
+          "end": 118.22,
+          "word": " soon,",
+          "probability": 0.8623046875
+        },
+        {
+          "start": 118.42,
+          "end": 118.74,
+          "word": " how",
+          "probability": 0.916015625
+        },
+        {
+          "start": 118.74,
+          "end": 118.98,
+          "word": " can",
+          "probability": 0.990234375
+        },
+        {
+          "start": 118.98,
+          "end": 119.28,
+          "word": " you",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 119.28,
+          "end": 119.58,
+          "word": " dance",
+          "probability": 0.9912109375
+        },
+        {
+          "start": 119.58,
+          "end": 119.84,
+          "word": " like",
+          "probability": 0.9638671875
+        },
+        {
+          "start": 119.84,
+          "end": 120.02,
+          "word": " a",
+          "probability": 0.9814453125
+        },
+        {
+          "start": 120.02,
+          "end": 120.42,
+          "word": " crowd",
+          "probability": 0.349853515625
+        },
+        {
+          "start": 120.42,
+          "end": 120.84,
+          "word": " in",
+          "probability": 0.98779296875
+        },
+        {
+          "start": 120.84,
+          "end": 121.02,
+          "word": " a",
+          "probability": 0.9716796875
+        },
+        {
+          "start": 121.02,
+          "end": 121.36,
+          "word": " tent?",
+          "probability": 0.97265625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 23,
+      "seek": 11340,
+      "start": 121.68,
+      "end": 128.52,
+      "text": " You can change yourself until you find the seventh friend",
+      "tokens": [
+        50765,
+        509,
+        393,
+        1319,
+        1803,
+        1826,
+        291,
+        915,
+        264,
+        17875,
+        1277,
+        51115
+      ],
+      "avg_logprob": -0.25505513610208735,
+      "compression_ratio": 1.5733333333333333,
+      "no_speech_prob": 0.75439453125,
+      "words": [
+        {
+          "start": 121.68,
+          "end": 122.02,
+          "word": " You",
+          "probability": 0.9921875
+        },
+        {
+          "start": 122.02,
+          "end": 122.22,
+          "word": " can",
+          "probability": 0.994140625
+        },
+        {
+          "start": 122.22,
+          "end": 122.76,
+          "word": " change",
+          "probability": 0.66650390625
+        },
+        {
+          "start": 122.76,
+          "end": 123.3,
+          "word": " yourself",
+          "probability": 0.984375
+        },
+        {
+          "start": 123.3,
+          "end": 124.14,
+          "word": " until",
+          "probability": 0.8935546875
+        },
+        {
+          "start": 124.14,
+          "end": 125.04,
+          "word": " you",
+          "probability": 0.84375
+        },
+        {
+          "start": 125.04,
+          "end": 125.46,
+          "word": " find",
+          "probability": 0.87451171875
+        },
+        {
+          "start": 125.46,
+          "end": 125.92,
+          "word": " the",
+          "probability": 0.63330078125
+        },
+        {
+          "start": 125.92,
+          "end": 126.68,
+          "word": " seventh",
+          "probability": 0.69873046875
+        },
+        {
+          "start": 126.68,
+          "end": 128.52,
+          "word": " friend",
+          "probability": 0.11407470703125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 24,
+      "seek": 11340,
+      "start": 129.29999999999998,
+      "end": 133.66,
+      "text": " Here we go, come with me and roll on your mind",
+      "tokens": [
+        51115,
+        1692,
+        321,
+        352,
+        11,
+        808,
+        365,
+        385,
+        293,
+        3373,
+        322,
+        428,
+        1575,
+        51365
+      ],
+      "avg_logprob": -0.25505513610208735,
+      "compression_ratio": 1.5733333333333333,
+      "no_speech_prob": 0.75439453125,
+      "words": [
+        {
+          "start": 129.29999999999998,
+          "end": 129.98,
+          "word": " Here",
+          "probability": 0.75537109375
+        },
+        {
+          "start": 129.98,
+          "end": 130.18,
+          "word": " we",
+          "probability": 0.9951171875
+        },
+        {
+          "start": 130.18,
+          "end": 130.58,
+          "word": " go,",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 130.66,
+          "end": 131.0,
+          "word": " come",
+          "probability": 0.94091796875
+        },
+        {
+          "start": 131.0,
+          "end": 131.2,
+          "word": " with",
+          "probability": 0.97412109375
+        },
+        {
+          "start": 131.2,
+          "end": 131.44,
+          "word": " me",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 131.44,
+          "end": 132.0,
+          "word": " and",
+          "probability": 0.5888671875
+        },
+        {
+          "start": 132.0,
+          "end": 132.58,
+          "word": " roll",
+          "probability": 0.91552734375
+        },
+        {
+          "start": 132.58,
+          "end": 132.92,
+          "word": " on",
+          "probability": 0.369140625
+        },
+        {
+          "start": 132.92,
+          "end": 133.24,
+          "word": " your",
+          "probability": 0.99560546875
+        },
+        {
+          "start": 133.24,
+          "end": 133.66,
+          "word": " mind",
+          "probability": 0.9990234375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 25,
+      "seek": 11340,
+      "start": 133.66,
+      "end": 137.82,
+      "text": " Here we go, moving on, moving on, moving on",
+      "tokens": [
+        51365,
+        1692,
+        321,
+        352,
+        11,
+        2684,
+        322,
+        11,
+        2684,
+        322,
+        11,
+        2684,
+        322,
+        51565
+      ],
+      "avg_logprob": -0.25505513610208735,
+      "compression_ratio": 1.5733333333333333,
+      "no_speech_prob": 0.75439453125,
+      "words": [
+        {
+          "start": 133.66,
+          "end": 134.02,
+          "word": " Here",
+          "probability": 0.98486328125
+        },
+        {
+          "start": 134.02,
+          "end": 134.2,
+          "word": " we",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 134.2,
+          "end": 134.68,
+          "word": " go,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 134.7,
+          "end": 135.1,
+          "word": " moving",
+          "probability": 0.587890625
+        },
+        {
+          "start": 135.1,
+          "end": 135.66,
+          "word": " on,",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 135.72,
+          "end": 136.12,
+          "word": " moving",
+          "probability": 0.966796875
+        },
+        {
+          "start": 136.12,
+          "end": 136.78,
+          "word": " on,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 136.78,
+          "end": 137.16,
+          "word": " moving",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 137.16,
+          "end": 137.82,
+          "word": " on",
+          "probability": 1.0
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 26,
+      "seek": 13782,
+      "start": 137.82,
+      "end": 140.68,
+      "text": " And we know we'd ever see each other again",
+      "tokens": [
+        50365,
+        400,
+        321,
+        458,
+        321,
+        1116,
+        1562,
+        536,
+        1184,
+        661,
+        797,
+        50525
+      ],
+      "avg_logprob": -0.4398585018121971,
+      "compression_ratio": 1.3089430894308942,
+      "no_speech_prob": 0.364501953125,
+      "words": [
+        {
+          "start": 137.82,
+          "end": 138.12,
+          "word": " And",
+          "probability": 0.44775390625
+        },
+        {
+          "start": 138.12,
+          "end": 138.34,
+          "word": " we",
+          "probability": 0.921875
+        },
+        {
+          "start": 138.34,
+          "end": 138.64,
+          "word": " know",
+          "probability": 0.9189453125
+        },
+        {
+          "start": 138.64,
+          "end": 139.16,
+          "word": " we'd",
+          "probability": 0.53564453125
+        },
+        {
+          "start": 139.16,
+          "end": 139.52,
+          "word": " ever",
+          "probability": 0.347412109375
+        },
+        {
+          "start": 139.52,
+          "end": 139.8,
+          "word": " see",
+          "probability": 0.974609375
+        },
+        {
+          "start": 139.8,
+          "end": 139.96,
+          "word": " each",
+          "probability": 0.978515625
+        },
+        {
+          "start": 139.96,
+          "end": 140.3,
+          "word": " other",
+          "probability": 0.9951171875
+        },
+        {
+          "start": 140.3,
+          "end": 140.68,
+          "word": " again",
+          "probability": 0.98046875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 27,
+      "seek": 13782,
+      "start": 140.68,
+      "end": 142.86,
+      "text": " Just blue so fine",
+      "tokens": [
+        50525,
+        1449,
+        3344,
+        370,
+        2489,
+        50639
+      ],
+      "avg_logprob": -0.4398585018121971,
+      "compression_ratio": 1.3089430894308942,
+      "no_speech_prob": 0.364501953125,
+      "words": [
+        {
+          "start": 140.68,
+          "end": 141.32,
+          "word": " Just",
+          "probability": 0.80517578125
+        },
+        {
+          "start": 141.32,
+          "end": 141.7,
+          "word": " blue",
+          "probability": 0.2998046875
+        },
+        {
+          "start": 141.7,
+          "end": 142.0,
+          "word": " so",
+          "probability": 0.6328125
+        },
+        {
+          "start": 142.0,
+          "end": 142.86,
+          "word": " fine",
+          "probability": 0.7265625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 28,
+      "seek": 13782,
+      "start": 142.86,
+      "end": 145.58,
+      "text": " All of the friends we've had",
+      "tokens": [
+        50639,
+        1057,
+        295,
+        264,
+        1855,
+        321,
+        600,
+        632,
+        50772
+      ],
+      "avg_logprob": -0.4398585018121971,
+      "compression_ratio": 1.3089430894308942,
+      "no_speech_prob": 0.364501953125,
+      "words": [
+        {
+          "start": 142.86,
+          "end": 143.88,
+          "word": " All",
+          "probability": 0.4306640625
+        },
+        {
+          "start": 143.88,
+          "end": 144.22,
+          "word": " of",
+          "probability": 0.8955078125
+        },
+        {
+          "start": 144.22,
+          "end": 144.3,
+          "word": " the",
+          "probability": 0.434326171875
+        },
+        {
+          "start": 144.3,
+          "end": 144.84,
+          "word": " friends",
+          "probability": 0.90869140625
+        },
+        {
+          "start": 144.84,
+          "end": 145.2,
+          "word": " we've",
+          "probability": 0.5015869140625
+        },
+        {
+          "start": 145.2,
+          "end": 145.58,
+          "word": " had",
+          "probability": 0.289306640625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 29,
+      "seek": 13782,
+      "start": 147.44,
+      "end": 150.64,
+      "text": " Yeah, I've never been satisfied",
+      "tokens": [
+        50772,
+        865,
+        11,
+        286,
+        600,
+        1128,
+        668,
+        11239,
+        51047
+      ],
+      "avg_logprob": -0.4398585018121971,
+      "compression_ratio": 1.3089430894308942,
+      "no_speech_prob": 0.364501953125,
+      "words": [
+        {
+          "start": 147.44,
+          "end": 148.2,
+          "word": " Yeah,",
+          "probability": 0.8623046875
+        },
+        {
+          "start": 148.4,
+          "end": 148.78,
+          "word": " I've",
+          "probability": 0.91259765625
+        },
+        {
+          "start": 148.78,
+          "end": 149.16,
+          "word": " never",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 149.16,
+          "end": 149.44,
+          "word": " been",
+          "probability": 0.5888671875
+        },
+        {
+          "start": 149.44,
+          "end": 150.64,
+          "word": " satisfied",
+          "probability": 0.990234375
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 30,
+      "seek": 13782,
+      "start": 151.56,
+      "end": 152.32,
+      "text": " No",
+      "tokens": [
+        51047,
+        883,
+        51112
+      ],
+      "avg_logprob": -0.4398585018121971,
+      "compression_ratio": 1.3089430894308942,
+      "no_speech_prob": 0.364501953125,
+      "words": [
+        {
+          "start": 151.56,
+          "end": 152.32,
+          "word": " No",
+          "probability": 0.40625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 31,
+      "seek": 13782,
+      "start": 155.54000000000002,
+      "end": 159.04,
+      "text": " Yeah, it's gonna be getting worse",
+      "tokens": [
+        51112,
+        865,
+        11,
+        309,
+        311,
+        799,
+        312,
+        1242,
+        5324,
+        51469
+      ],
+      "avg_logprob": -0.4398585018121971,
+      "compression_ratio": 1.3089430894308942,
+      "no_speech_prob": 0.364501953125,
+      "words": [
+        {
+          "start": 155.54000000000002,
+          "end": 156.3,
+          "word": " Yeah,",
+          "probability": 0.8798828125
+        },
+        {
+          "start": 156.5,
+          "end": 157.04,
+          "word": " it's",
+          "probability": 0.961669921875
+        },
+        {
+          "start": 157.04,
+          "end": 157.28,
+          "word": " gonna",
+          "probability": 0.9912109375
+        },
+        {
+          "start": 157.28,
+          "end": 157.56,
+          "word": " be",
+          "probability": 0.99609375
+        },
+        {
+          "start": 157.56,
+          "end": 158.14,
+          "word": " getting",
+          "probability": 0.978515625
+        },
+        {
+          "start": 158.14,
+          "end": 159.04,
+          "word": " worse",
+          "probability": 0.99658203125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 32,
+      "seek": 13782,
+      "start": 159.9,
+      "end": 160.66,
+      "text": " No",
+      "tokens": [
+        51469,
+        883,
+        51522
+      ],
+      "avg_logprob": -0.4398585018121971,
+      "compression_ratio": 1.3089430894308942,
+      "no_speech_prob": 0.364501953125,
+      "words": [
+        {
+          "start": 159.9,
+          "end": 160.66,
+          "word": " No",
+          "probability": 0.95556640625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 33,
+      "seek": 16782,
+      "start": 169.83999999999997,
+      "end": 174.08,
+      "text": " Here we go, we're shaking the ground and you open yourself",
+      "tokens": [
+        50365,
+        1692,
+        321,
+        352,
+        11,
+        321,
+        434,
+        15415,
+        264,
+        2727,
+        293,
+        291,
+        1269,
+        1803,
+        50690
+      ],
+      "avg_logprob": -0.23676470097373514,
+      "compression_ratio": 1.869281045751634,
+      "no_speech_prob": 0.67431640625,
+      "words": [
+        {
+          "start": 169.83999999999997,
+          "end": 170.64,
+          "word": " Here",
+          "probability": 0.56591796875
+        },
+        {
+          "start": 170.64,
+          "end": 170.84,
+          "word": " we",
+          "probability": 0.955078125
+        },
+        {
+          "start": 170.84,
+          "end": 171.24,
+          "word": " go,",
+          "probability": 0.9931640625
+        },
+        {
+          "start": 171.24,
+          "end": 171.42,
+          "word": " we're",
+          "probability": 0.7685546875
+        },
+        {
+          "start": 171.42,
+          "end": 171.74,
+          "word": " shaking",
+          "probability": 0.947265625
+        },
+        {
+          "start": 171.74,
+          "end": 172.1,
+          "word": " the",
+          "probability": 0.98779296875
+        },
+        {
+          "start": 172.1,
+          "end": 172.36,
+          "word": " ground",
+          "probability": 0.91943359375
+        },
+        {
+          "start": 172.36,
+          "end": 172.68,
+          "word": " and",
+          "probability": 0.370849609375
+        },
+        {
+          "start": 172.68,
+          "end": 172.92,
+          "word": " you",
+          "probability": 0.313720703125
+        },
+        {
+          "start": 172.92,
+          "end": 173.48,
+          "word": " open",
+          "probability": 0.57958984375
+        },
+        {
+          "start": 173.48,
+          "end": 174.08,
+          "word": " yourself",
+          "probability": 0.8623046875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 34,
+      "seek": 16782,
+      "start": 174.08,
+      "end": 178.46,
+      "text": " Here we go, moving on, moving on, moving on",
+      "tokens": [
+        50690,
+        1692,
+        321,
+        352,
+        11,
+        2684,
+        322,
+        11,
+        2684,
+        322,
+        11,
+        2684,
+        322,
+        50900
+      ],
+      "avg_logprob": -0.23676470097373514,
+      "compression_ratio": 1.869281045751634,
+      "no_speech_prob": 0.67431640625,
+      "words": [
+        {
+          "start": 174.08,
+          "end": 174.66,
+          "word": " Here",
+          "probability": 0.8017578125
+        },
+        {
+          "start": 174.66,
+          "end": 174.92,
+          "word": " we",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 174.92,
+          "end": 175.34,
+          "word": " go,",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 175.36,
+          "end": 175.8,
+          "word": " moving",
+          "probability": 0.8681640625
+        },
+        {
+          "start": 175.8,
+          "end": 176.3,
+          "word": " on,",
+          "probability": 0.99755859375
+        },
+        {
+          "start": 176.4,
+          "end": 176.88,
+          "word": " moving",
+          "probability": 0.86279296875
+        },
+        {
+          "start": 176.88,
+          "end": 177.44,
+          "word": " on,",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 177.44,
+          "end": 177.9,
+          "word": " moving",
+          "probability": 0.998046875
+        },
+        {
+          "start": 177.9,
+          "end": 178.46,
+          "word": " on",
+          "probability": 0.99951171875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 35,
+      "seek": 16782,
+      "start": 178.46,
+      "end": 181.38,
+      "text": " And we know we'll never see each other again",
+      "tokens": [
+        50900,
+        400,
+        321,
+        458,
+        321,
+        603,
+        1128,
+        536,
+        1184,
+        661,
+        797,
+        51057
+      ],
+      "avg_logprob": -0.23676470097373514,
+      "compression_ratio": 1.869281045751634,
+      "no_speech_prob": 0.67431640625,
+      "words": [
+        {
+          "start": 178.46,
+          "end": 178.58,
+          "word": " And",
+          "probability": 0.2205810546875
+        },
+        {
+          "start": 178.58,
+          "end": 178.94,
+          "word": " we",
+          "probability": 0.97021484375
+        },
+        {
+          "start": 178.94,
+          "end": 179.38,
+          "word": " know",
+          "probability": 0.994140625
+        },
+        {
+          "start": 179.38,
+          "end": 179.8,
+          "word": " we'll",
+          "probability": 0.75634765625
+        },
+        {
+          "start": 179.8,
+          "end": 180.14,
+          "word": " never",
+          "probability": 0.998046875
+        },
+        {
+          "start": 180.14,
+          "end": 180.42,
+          "word": " see",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 180.42,
+          "end": 180.6,
+          "word": " each",
+          "probability": 0.998046875
+        },
+        {
+          "start": 180.6,
+          "end": 180.98,
+          "word": " other",
+          "probability": 0.99853515625
+        },
+        {
+          "start": 180.98,
+          "end": 181.38,
+          "word": " again",
+          "probability": 0.99951171875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 36,
+      "seek": 16782,
+      "start": 181.38,
+      "end": 186.12,
+      "text": " Just look so far, all of your friends face up",
+      "tokens": [
+        51057,
+        1449,
+        574,
+        370,
+        1400,
+        11,
+        439,
+        295,
+        428,
+        1855,
+        1851,
+        493,
+        51300
+      ],
+      "avg_logprob": -0.23676470097373514,
+      "compression_ratio": 1.869281045751634,
+      "no_speech_prob": 0.67431640625,
+      "words": [
+        {
+          "start": 181.38,
+          "end": 181.76,
+          "word": " Just",
+          "probability": 0.7138671875
+        },
+        {
+          "start": 181.76,
+          "end": 182.42,
+          "word": " look",
+          "probability": 0.974609375
+        },
+        {
+          "start": 182.42,
+          "end": 182.74,
+          "word": " so",
+          "probability": 0.9970703125
+        },
+        {
+          "start": 182.74,
+          "end": 183.36,
+          "word": " far,",
+          "probability": 0.625
+        },
+        {
+          "start": 183.82,
+          "end": 184.74,
+          "word": " all",
+          "probability": 0.935546875
+        },
+        {
+          "start": 184.74,
+          "end": 184.96,
+          "word": " of",
+          "probability": 0.9912109375
+        },
+        {
+          "start": 184.96,
+          "end": 185.14,
+          "word": " your",
+          "probability": 0.990234375
+        },
+        {
+          "start": 185.14,
+          "end": 185.56,
+          "word": " friends",
+          "probability": 0.98828125
+        },
+        {
+          "start": 185.56,
+          "end": 185.84,
+          "word": " face",
+          "probability": 0.50146484375
+        },
+        {
+          "start": 185.84,
+          "end": 186.12,
+          "word": " up",
+          "probability": 0.33251953125
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 37,
+      "seek": 16782,
+      "start": 186.12,
+      "end": 190.62,
+      "text": " Here we go, come with me and we'll open our mind",
+      "tokens": [
+        51300,
+        1692,
+        321,
+        352,
+        11,
+        808,
+        365,
+        385,
+        293,
+        321,
+        603,
+        1269,
+        527,
+        1575,
+        51509
+      ],
+      "avg_logprob": -0.23676470097373514,
+      "compression_ratio": 1.869281045751634,
+      "no_speech_prob": 0.67431640625,
+      "words": [
+        {
+          "start": 186.12,
+          "end": 186.92,
+          "word": " Here",
+          "probability": 0.9697265625
+        },
+        {
+          "start": 186.92,
+          "end": 187.12,
+          "word": " we",
+          "probability": 1.0
+        },
+        {
+          "start": 187.12,
+          "end": 187.54,
+          "word": " go,",
+          "probability": 1.0
+        },
+        {
+          "start": 187.56,
+          "end": 188.0,
+          "word": " come",
+          "probability": 0.419677734375
+        },
+        {
+          "start": 188.0,
+          "end": 188.16,
+          "word": " with",
+          "probability": 0.9541015625
+        },
+        {
+          "start": 188.16,
+          "end": 188.4,
+          "word": " me",
+          "probability": 0.98876953125
+        },
+        {
+          "start": 188.4,
+          "end": 188.86,
+          "word": " and",
+          "probability": 0.392578125
+        },
+        {
+          "start": 188.86,
+          "end": 189.28,
+          "word": " we'll",
+          "probability": 0.737060546875
+        },
+        {
+          "start": 189.28,
+          "end": 189.8,
+          "word": " open",
+          "probability": 0.7861328125
+        },
+        {
+          "start": 189.8,
+          "end": 190.2,
+          "word": " our",
+          "probability": 0.397216796875
+        },
+        {
+          "start": 190.2,
+          "end": 190.62,
+          "word": " mind",
+          "probability": 0.6728515625
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 38,
+      "seek": 16782,
+      "start": 190.62,
+      "end": 194.74,
+      "text": " Here we go, moving on, moving on, moving on",
+      "tokens": [
+        51509,
+        1692,
+        321,
+        352,
+        11,
+        2684,
+        322,
+        11,
+        2684,
+        322,
+        11,
+        2684,
+        322,
+        51714
+      ],
+      "avg_logprob": -0.23676470097373514,
+      "compression_ratio": 1.869281045751634,
+      "no_speech_prob": 0.67431640625,
+      "words": [
+        {
+          "start": 190.62,
+          "end": 190.98,
+          "word": " Here",
+          "probability": 0.96533203125
+        },
+        {
+          "start": 190.98,
+          "end": 191.18,
+          "word": " we",
+          "probability": 1.0
+        },
+        {
+          "start": 191.18,
+          "end": 191.66,
+          "word": " go,",
+          "probability": 1.0
+        },
+        {
+          "start": 191.68,
+          "end": 192.08,
+          "word": " moving",
+          "probability": 0.9970703125
+        },
+        {
+          "start": 192.08,
+          "end": 192.66,
+          "word": " on,",
+          "probability": 1.0
+        },
+        {
+          "start": 192.66,
+          "end": 193.08,
+          "word": " moving",
+          "probability": 0.9990234375
+        },
+        {
+          "start": 193.08,
+          "end": 193.68,
+          "word": " on,",
+          "probability": 1.0
+        },
+        {
+          "start": 193.7,
+          "end": 194.1,
+          "word": " moving",
+          "probability": 0.99951171875
+        },
+        {
+          "start": 194.1,
+          "end": 194.74,
+          "word": " on",
+          "probability": 1.0
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 39,
+      "seek": 19474,
+      "start": 194.74,
+      "end": 197.58,
+      "text": " And we know we'll never see each other again",
+      "tokens": [
+        50365,
+        400,
+        321,
+        458,
+        321,
+        603,
+        1128,
+        536,
+        1184,
+        661,
+        797,
+        50528
+      ],
+      "avg_logprob": -0.3695023037769176,
+      "compression_ratio": 1.0952380952380953,
+      "no_speech_prob": 0.208251953125,
+      "words": [
+        {
+          "start": 194.74,
+          "end": 195.04,
+          "word": " And",
+          "probability": 0.583984375
+        },
+        {
+          "start": 195.04,
+          "end": 195.22,
+          "word": " we",
+          "probability": 0.986328125
+        },
+        {
+          "start": 195.22,
+          "end": 195.56,
+          "word": " know",
+          "probability": 0.9853515625
+        },
+        {
+          "start": 195.56,
+          "end": 196.1,
+          "word": " we'll",
+          "probability": 0.7294921875
+        },
+        {
+          "start": 196.1,
+          "end": 196.46,
+          "word": " never",
+          "probability": 0.990234375
+        },
+        {
+          "start": 196.46,
+          "end": 196.72,
+          "word": " see",
+          "probability": 0.99267578125
+        },
+        {
+          "start": 196.72,
+          "end": 196.88,
+          "word": " each",
+          "probability": 0.96728515625
+        },
+        {
+          "start": 196.88,
+          "end": 197.26,
+          "word": " other",
+          "probability": 0.99462890625
+        },
+        {
+          "start": 197.26,
+          "end": 197.58,
+          "word": " again",
+          "probability": 0.9951171875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 40,
+      "seek": 19474,
+      "start": 197.58,
+      "end": 199.7,
+      "text": " Just look so far",
+      "tokens": [
+        50528,
+        1449,
+        574,
+        370,
+        1400,
+        50649
+      ],
+      "avg_logprob": -0.3695023037769176,
+      "compression_ratio": 1.0952380952380953,
+      "no_speech_prob": 0.208251953125,
+      "words": [
+        {
+          "start": 197.58,
+          "end": 198.28,
+          "word": " Just",
+          "probability": 0.88232421875
+        },
+        {
+          "start": 198.28,
+          "end": 198.68,
+          "word": " look",
+          "probability": 0.953125
+        },
+        {
+          "start": 198.68,
+          "end": 199.12,
+          "word": " so",
+          "probability": 0.99365234375
+        },
+        {
+          "start": 199.12,
+          "end": 199.7,
+          "word": " far",
+          "probability": 0.54296875
+        }
+      ],
+      "temperature": 0.0
+    },
+    {
+      "id": 41,
+      "seek": 19474,
+      "start": 200.42000000000002,
+      "end": 202.68,
+      "text": " All of your friends with words",
+      "tokens": [
+        50649,
+        1057,
+        295,
+        428,
+        1855,
+        365,
+        2283,
+        50776
+      ],
+      "avg_logprob": -0.3695023037769176,
+      "compression_ratio": 1.0952380952380953,
+      "no_speech_prob": 0.208251953125,
+      "words": [
+        {
+          "start": 200.42000000000002,
+          "end": 200.9,
+          "word": " All",
+          "probability": 0.01482391357421875
+        },
+        {
+          "start": 200.9,
+          "end": 201.18,
+          "word": " of",
+          "probability": 0.9375
+        },
+        {
+          "start": 201.18,
+          "end": 201.32,
+          "word": " your",
+          "probability": 0.78515625
+        },
+        {
+          "start": 201.32,
+          "end": 201.76,
+          "word": " friends",
+          "probability": 0.92626953125
+        },
+        {
+          "start": 201.76,
+          "end": 202.1,
+          "word": " with",
+          "probability": 0.37255859375
+        },
+        {
+          "start": 202.1,
+          "end": 202.68,
+          "word": " words",
+          "probability": 0.27685546875
+        }
+      ],
+      "temperature": 0.0
+    }
+  ],
+  "seconds": 11.60683012008667
+}

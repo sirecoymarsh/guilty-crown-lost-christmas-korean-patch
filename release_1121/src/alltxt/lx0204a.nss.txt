@@ -1,0 +1,510 @@
+//<continuation number="160">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0204a.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0302オートインセクト破壊=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0205.nss";
+
+}
+
+
+scene lx0204a.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//―――――――――――――――――――――――――――――――――――――――
+//←←解放する
+
+	PrintBG("上背景", 30000);
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg003001_1_研究室.jpg");
+
+	St("C",740, @0,@70,"stスクルージ_通常_angry4");
+	FadeSt("C",0,true);
+
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+
+	Move("@StNameC/C*", 300, @0, @-20, Dxl1, false);
+	FadeDelete("上背景", 300, null, true);
+
+	Wait(300);
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00010a01">
+｡ｸﾁﾁｴﾙ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	DeleteSt("C", 200,true);
+
+//男から離れるスクルージ
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/04a00020e33">
+「……사&, 살았다」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(1000);
+
+
+	CreateTextureEX("ev01", 100, Center, Middle, "cg/bg/l/bg003001_1_研究室_l.jpg");
+
+	CreateSE("SE01","se日常_建物_機械駆動音");
+	MusicStart("SE01",2000,800,0,700,null,true);
+
+
+	Fade("ev01", 500, 1000, null, false);
+	Move("ev01", 1500, @-200, @0, Dxl2, true);
+	Wait(500);
+
+/*
+
+	CreatePlainSP("絵板写", 5000);
+
+//	CreateMovieEX("絵動画", 500, 0, 0, true, true, "dx/mv0003集中線02_白.ngs");
+	CreateWindowEX("絵窓", 0, 0, 1024, 576, false);
+	CreateColorEX("絵窓/絵色黒", 5000, "000000");
+	CreateTextureSP("絵演背景", 100, Center, Middle, "cg/bg/bg003001_1_研究室.jpg");
+	CreateTextureSP("絵演立絵", 1005, -400, -160, "cg/st/x/stスクルージ_通常_normal_x01cut01.png");
+	CreateTextureEX("絵演立絵弐", 1005, -400, -160, "cg/st/x/stスクルージ_通常_angry1_x01.png");
+
+//	SetVertex("絵動画", 0, 0);
+	SetVertex("絵演立絵*", 0, 0);
+	SetShade("絵演背景", MEDIUM);
+
+	Request("絵演*", Smoothing);
+
+//	Zoom("絵動画", 0, 4000, 4000, null, true);
+	Zoom("絵演背景", 0, 3000, 3000, null, true);
+	Zoom("絵演立*", 0, 2000, 2000, null, true);
+
+
+	Fade("絵窓/絵色黒", 0, 1000, null, true);
+	DrawTransition("絵窓/絵色黒", 700, 0, 300, 100, Dxl1, "cg/data/slide_05_00_0.png", false);
+	Move("絵演立絵*", 500, @-60, @0, Dxl1, false);
+	Move("絵演背景", 500, @-30, @0, Dxl1, false);
+	FadeDelete("絵板写", 500, null, true);
+*/
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0025]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00030a01">
+｡ｸ｡ｦ｡ｦ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+//スクルージ違和感に気づく。
+
+
+//	Fade("絵動画", 200, 600, Dxl2, false);
+	Zoom("絵演立絵*", 300, 6000, 6000, Axl3, false);
+	Fade("絵演立絵弐", 200, 1000, Dxl3, false);
+	FadeDelete("絵窓/絵色黒", 300, Dxl3, false);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00040a01">
+｡ｸ｡ｪ｡ｪﾀｿ!
+｡｡ﾄｳｷﾑ! ｾｵ蟾ﾁ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0035]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/04a00050a02">
+「어? 꺄악!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//キャロルの頭を伏せさせる。
+
+
+
+	Delete("絵演立*");
+
+	CreateColorEXadd("絵色白", 5000, "WHITE");
+
+	CreateSE("SE01","se人体_動作_掴む01");
+	CreateSE("SE02","se人体_動作_衣擦れ02");
+	MusicStart("SE01",0,700,0,1000,null,false);
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+
+	Move("ev01", 200, @0, @-200, Axl1, flase);
+	Fade("絵色白", 150, 1000, Dxl3, true);
+	Delete("ev01");
+//ＳＥ：サイレンサーの銃声
+	CreateSE("SE01","se戦闘_銃器_オートインセクト発砲01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	CreateTextureSP("bg01", 100, Center, Middle, "cg/bg/x/bg003001_1_研究室_x01床.jpg");
+	CreateTextureSP("st01", 100, 400, 0, "cg/st/x/st研究員2_通常吐血_normal_x02.png");
+	Zoom("st*", 0, 2000, 2000, null, true);
+	Rotate("st*", 0, @0, @0, 0, null,true);
+
+	Request("st*", Smoothing);
+
+	FadeDelete("絵色白", 100, null, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/04a00060e33">
+｡ｸｾ釭ｦ｡ｦ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//額を撃ち抜かれる研究者。
+
+
+
+	TextBoxDelete(0);
+
+	CreateTextureEX("ef01", 5100, 500, -500, "cg/ef/ef_blood01_02.png");
+	CreateTextureEXmul("ef02", 5100, 500, -650, "cg/ef/ef_blood01_01.png");
+	CreateColorEX("co01", 5100, "990000");
+
+	CreateSE("SE02","se人体_衝撃_弾ける");
+	CreateSE("SE03","se人体_血飛沫03");
+	MusicStart("SE02",0,1000,0,1000,null,false);
+
+	Shake("st01", 500, 2, 1, 0, 0, 1000, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Zoom("ef01", 200, 2000, 2000, Dxl3, 100);
+	Fade("ef02", 0, 1000, null, true);
+	Zoom("ef02", 100, 3000, 3000, Dxl3, true);
+	Fade("co01", 0, 1000, null, true);
+
+	MusicStart("SE03",0,1000,0,1000,null,false);
+
+	Delete("ef*");
+	Delete("st*");
+	Delete("bg*");
+	CreateTextureSPmul("ef01", 5000, center, middle, "cg/ef/x/ef_bloodshower01.png");
+	Zoom("ef01", 0, 3000, 3000, null, true);
+
+	CreateSE("SE05","se人体_衝撃_転倒01");
+
+	FadeDelete("co01", 500, Axl1, false);
+
+	FadeDelete("ef01", 1500, Axl3, false);
+	Move("ef01", 1500, @0, @600, Axl3, false);
+	Zoom("ef01", 1500, 5000, 5000, Dxl1, true);
+
+
+
+	MusicStart("SE05",0,1000,0,1000,null,false);
+
+	Wait(200);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+――저 녀석이 총에 맞았어!? 어디서 쏜 거지!
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//おがみ：演出濃すぎたので調整
+
+	Wait(200);
+
+	CreateTextureEX("bg01", 100, -420, 0, "cg/bg/l/bg003001_1_研究室_l.jpg");
+
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Fade("bg01", 300, 1000, null, false);
+	Move("bg01", 500, -20, -70, Dxl2, true);
+
+	Wait(200);
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00070a01">
+｡ｸ｡ｦ｡ｦ! ｰﾅｱ箋ﾄ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//飛びかかるスクルージ。
+//天井等、手が届きづらい位置だがスクルージには関係ないみたいな。
+
+	CreatePlainSP("pl01", 5000);
+	CreateColorEX("co01", 5000, "FFFFFF");
+	CreateColorEX("co02", 1000, "000000");
+	CreateTextureEX("ev01", 1000, Center, Middle, "cg/ef/x/ef_hand09.png");
+
+	SetBlur("pl01", true, 2, 500, 50, false);
+
+	CreateSE("SE02","se戦闘_動作_突進04");
+	CreateSE("SE03","se戦闘_攻撃_振る05");
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	Zoom("pl01", 300, 2000, 2000, Axl2, 200);
+
+	FadeDelete("pl01", 100, Axl3, false);
+
+	MusicStart("SE03",0,700,0,1200,null,false);
+
+	Zoom("ev01", 300, 2000, 2000, Dxl1, false);
+	Move("ev01", 300, 1000, 200, Axl3, false);
+	Fade("co02", 0, 1000, null, true);
+	Fade("ev01", 0, 1000, null, true);
+	Wait(300);
+	Fade("co01", 0, 1000, null, true);
+
+	Delete("ev*");
+	Delete("bg*");
+	Delete("co02");
+
+
+
+//ＳＥ：機械が破壊される音
+
+
+	CreateSE("SE04","se戦闘_金属_破壊02");
+	CreateSE("SE05","se戦闘_金属_破壊01");
+	MusicStart("SE04",0,700,0,1000,null,false);
+
+	Wait(300);
+
+	CreatePlainSP("pl01", 200);
+
+	Shake("pl01", 1200, 1, 0, 0, 0, 1000, null, false);
+
+	FadeDelete("co01", 1500, Axl2, 1000);
+
+	MusicStart("SE05",0,700,0,1200,null,false);
+
+	Wait(1500);
+
+	CreateSE("SE01","se日常_機械_電子ショート");
+	MusicStart("SE01",1500,500,0,1000,null,true);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00080a01">
+「……뭐지&, 이건?」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Wait(300);
+
+	CreateTextureSP("絵画像", 100, Center, Middle, "cg/ev/ev0302オートインセクト破壊.jpg");
+
+
+
+	FadeDelete("pl01", 1000, null, true);
+
+	Wait(1000);
+
+
+	SetVolumeEX("SE*", 2000, 0, null);
+
+
+//スクルージに破壊されたオートインセクト
+
+
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/04a00090a02">
+「오토 인섹트네」
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00100a01">
+「엔드레이브와는 다른 건가?」
+
+{	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/04a00110a02">
+｡ｸﾀﾌﾂﾊﾀｺ ｱﾗｳﾉ ﾇﾁｷﾎｱﾗｷ･ﾀｸｷﾎ ｿﾌｴﾏｱ釭ｹ
+
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/04a00120a02">
+｡ｸｿｪｽﾃ ｴﾙｾﾆﾆｮﾀﾇ ﾁﾀﾌｷﾁｳｪ?
+｡｡ｹ霓ﾅﾀﾚｿ｡ｰﾔｴﾂ ﾁﾗﾀｽﾀｻ｡ｪ! ｡ｦ｡ｦｰｰﾀｺ ｴﾀｳｦ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	FadeDelete("絵画像", 1000, null, true);
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00130a01">
+「누가 시켰든 상관없어」
+
+{	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/04a00140a02">
+｡ｸｱﾗｷ｡ｼｭ? ﾀﾌﾁｦ ｾ鋐ｻｰﾔ ﾇﾒ ｰﾅｾﾟ?｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00150a01">
+｡ｸﾁ､ﾇﾘﾁｮ ﾀﾖﾁｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	CreatePlainSP("絵板写", 5000);
+
+	CreateTextureSP("絵演背景", 500, 0, -480, "cg/bg/l/bg003001_1_研究室_l.jpg");
+	CreateTextureEX("絵演立絵", 1000, 160, -448, "cg/st/x/stスクルージ_通常_normal_x01.png");
+	CreateTextureEX("絵演立絵弐", 1001, 160, -48, "cg/st/x/stスクルージ_通常_angry4_x01.png");
+	Move("絵演立絵", 300, @0, @200, Dxl1, false);
+
+	CreateSE("SE01","se人体_動作_衣擦れ02");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+
+	FadeDelete("絵板写", 500, null, true);
+
+	Move("絵演立絵", 300, @0, -548, Dxl1, false);
+	Fade("絵演立絵", 300, 1000, Dxl1, true);
+
+	Wait(300);
+
+	Move("絵演立絵", 2000, @0, -48, AxlDxl, false);
+	Move("絵演背景", 2000, @0, -200, AxlDxl, true);
+	Fade("絵演立絵弐", 200, 1000, Dxl1, true);
+
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04a00160a01">
+「다음 사냥감은―― 오우마 쿠로스다」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1500, 1000, null, true);
+
+	Delete("絵演*");
+
+	Wait(2000);
+
+	ClearFadeAll(2000, true);
+
+	Wait(1000);
+
+
+//→→LX0205
+
+}

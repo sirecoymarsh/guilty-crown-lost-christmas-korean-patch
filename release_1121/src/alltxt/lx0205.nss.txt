@@ -1,0 +1,1290 @@
+//<continuation number="340">
+
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0205.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0307キャロルオンザベッド=true;
+	#bg003005_5_ホテル部屋=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0206.nss";//仮
+
+}
+
+
+scene lx0205.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+
+
+
+//LX0101冒頭と意図的に演出を似せる感じで。
+
+//スクルージの意識
+//スクルージの激しい心音。荒い息づかい。
+
+//ＳＥ：不快な音。ヴゥーンとかギィィンとか。耳鳴り、頭痛、二日酔いのイメージ。
+//ＳＥ：激しい心音
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0500010a01">
+//「ハァ……ハァ……ハァ……ハァ……」
+//（荒い息づかい。うなされている感じ。息苦しい。熱い。辛い）
+//（テキストは表示せず。バックグラウンドで流す）
+
+	PrintBG("pr01", 30000);
+
+
+	CreateVOICEEX("vo01","LX02/0500010a01","スクルージ");
+	MusicStart("vo01",1000,1000,0,1000,null,true);
+
+	CreateSE("SE_noize","seヴォイド蝗04L");
+	CreateSE("SE_kyoumei","se特殊_雰囲気_集中01_L");
+	CreateSE("SE_heart","se人体_心臓_鼓動01L");
+
+
+
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+	CreateColorEXadd("white01", 20000, "FFFFFF");
+	CreateColorEX("black02", 20000, "000000");
+	CreateTextureEX("ef01", 20000, Center, 200, "cg/ef/ef_noize02.jpg");
+	Zoom("ef01", 0, 1100, 4000, null, true);
+
+	CreateTextureEX("ef02", 5000, Center, Middle, "cg/ef/ef_noize02.jpg");
+	CreateTextureEXsub("ef03", 5000, Center, Middle, "cg/ef/ef_noize01.jpg");
+	DrawEffectSkip("ef03", 1000, "Ripple", 0, 300, null);
+	Zoom("ef*", 0, 2000, 2000, null, true);
+	Rotate("ef02", 0, @0, @0, 90, null,true);
+	Rotate("ef03", 0, @0, @0, 0, null,true);
+	Request("ef03", Smoothing);
+	//画面にノイズが走る＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+	CreateColorSP("black01", 5000, "000000");
+	CreateTextureEXmul("eye", 15000, Center, Middle, "cg/data/zzex_eye_01_00_0.png");
+	Fade("eye", 0, 1000, null, true);
+
+	FadeDelete("pr01", 0, null, true);
+
+
+
+
+	Wait(1000);
+
+
+
+	CreateTextureEX("ef02", 5000, Center, Middle, "cg/ef/ef_noize02.jpg");
+	CreateTextureEXsub("ef03", 5000, Center, Middle, "cg/ef/ef_noize01.jpg");
+	DrawEffectSkip("ef03", 1000, "Ripple", 0, 300, null);
+	Zoom("ef*", 0, 2000, 2000, null, true);
+	Rotate("ef02", 0, @0, @0, 90, null,true);
+	Rotate("ef03", 0, @0, @0, 0, null,true);
+	Request("ef03", Smoothing);
+
+	CreateEffectDropEX("drop01", 5350, 0, 0, 1024, 576, 256, 80, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble03_x05.png");
+	Rotate("drop01", 0, @0, @0, 5, null,true);
+	Request("drop01", SubRender);
+	Zoom("drop01", 0, 1500, 2500, null, true);
+
+	CreateEffectDropEX("drop02", 5450, 0, 0, 1024, 576, 156, 120, 4, 5, 5, 5, "cg/ef/x/ef_voidrubble02_x03.png");
+	Rotate("drop02", 0, @0, @0, -185, null,true);
+	Request("drop02", SubRender);
+	Zoom("drop02", 0, 1500, 2500, null, true);
+
+	Fade("drop*", 0, 1000, null, true);
+
+	Shake("ef02", 5000000, 0, 1, 0, 1, 1000, null, false);
+	Shake("ef03", 5000000, 0, 5, 0, 1, 1000, null, false);
+
+
+
+
+	//音のテンポなど
+	MusicStart("SE_kyoumei",0,1,0,500,null,true);
+	Wait(500);
+	SetVolumeEX("SE_kyoumei", 0, 500, null);
+	MusicStart("SE_noize",0,1000,0,1000,null,true);
+	MusicStart("SE_heart",0,1,0,500,null,true);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+	Wait(150);
+	SetVolumeEX("SE_kyoumei", 0, 1, null);
+	SetVolumeEX("SE_noize", 0, 1, null);
+
+	Fade("ef02", 0, 0, Axl1, false);
+	Fade("ef03", 0, 0, Axl1, true);
+
+	Wait(3000);
+
+	SetVolumeEX("SE_kyoumei", 0, 500, null);
+	SetVolumeEX("SE_noize", 0, 1000, null);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+	Wait(100);
+	SetVolumeEX("SE_kyoumei", 0, 1, null);
+	SetVolumeEX("SE_noize", 0, 1, null);
+	Fade("ef02", 0, 0, Axl1, false);
+	Fade("ef03", 0, 0, Axl1, true);
+
+	Wait(4400);
+
+	SetVolumeEX("SE_noize", 0, 1000, null);
+	SetVolumeEX("SE_kyoumei", 0, 500, null);
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+
+	Wait(1000);
+
+	SetVolumeEX("SE_noize", 4000, 400, null);
+
+	Wait(2000);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+ｸﾓｸｮｰ｡ ﾁｶﾇﾏｰﾔ ｾﾆﾇﾁｴﾙ&.
+ｸｶﾄ｡ ｸﾓｸｴｼﾓｿ｡ｼｭ ｹｫｼﾑ ｳｯｹ弡ｹｰ｡ ｳｯｾﾆｴﾙｴﾏｴﾂ ｰﾍﾃｳｷｳ&.
+
+탁해진 의식&. 흐트러진 사고&.
+모든 것이 산산이 흩어져 형체를 이루지 못한다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//ＳＥ：激しい心音
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0500020a01">
+//「グッ……がぁ……！　ハァ……ハァ……ハァ……」
+//（荒い息づかい。ときおり苦しむ。息が詰まる。痛みが走る）
+//（テキストは表示せず。バックグラウンドで流す）
+
+
+	TextBoxDelete(0);
+
+	SetVolumeEX("vo01", 500, 0, null);
+
+	CreateVOICEEX("vo02","LX02/0500020a01","スクルージ");
+	MusicStart("vo02",1000,1000,0,1000,null,true);
+
+	CreateSE("SE01L","se擬音_効果_ノイズ01L");
+	MusicStart("SE01L",0,1,0,500,null,true);
+
+	Shake("ef02", 5000000, 0, 1, 0, 1, 1000, null, false);
+	Shake("ef03", 5000000, 0, 5, 0, 1, 1000, null, false);
+	Wait(30);
+
+	SetVolumeEX("SE01L", 0, 1000, null);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 0, 1, null);
+	Move("ef01", 400, @0, -200, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("white01", 0, 0, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 0, 1000, null);
+	Fade("ef01", 0, 800, null, true);
+	Wait(30);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 100, 0, null);
+	Fade("black02", 0, 1000, null, true);
+	Fade("ef01", 300, 0, null, false);
+
+
+	Fade("drop*", 0, 1000, null, true);
+
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+
+	Delete("white01");
+
+
+	Fade("black02", 500, 0, null, true);
+
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+때때로 덮쳐 오는 아픔&. 괴로움&. 그 정체만은 어째서인지 또렷이 알 수 있었다&.
+
+ｻﾇｰｨ&.
+내 안의 무언가가 좀먹혀 간다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+｡ｦ｡ｦｾﾆｴﾏ&, ｾﾆｴﾏｴﾙ&.<K>
+난 이미 텅 비어 있을 터다&.
+
+기억이 없는 내겐 과거가 없다&.
+그리고 어쩌면 미래조차도&.
+
+좀먹힐 것 따위&, 진작에 없는 것이다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+그렇다면 이 아픔은――
+없는 것이 아파오는 이 감각은&, <RUBY TEXT="팬텀 페인">환지통</RUBY>이라 불러야 할 것이다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//ＳＥ：激しい心音
+
+//【スクルージ】
+//<voice name="スクルージ" class="スクルージ" src="voice/LX02/0500030a01">
+//「くっ……ううっ……ぐうっ……ッ」
+//（荒い息づかい。痛みをこらえる。楽になりたい。悲しい）
+//（テキストは表示せず。バックグラウンドで流す）
+
+
+	TextBoxDelete(0);
+
+	SetVolumeEX("vo02", 500, 0, null);
+
+	CreateVOICEEX("vo01","LX02/0500030a01","スクルージ");
+	MusicStart("vo01",1000,1000,0,1000,null,true);
+
+	CreateSE("SE01L","se擬音_効果_ノイズ01L");
+	MusicStart("SE01L",0,1,0,500,null,true);
+
+	Shake("ef02", 5000000, 0, 1, 0, 1, 1000, null, false);
+	Shake("ef03", 5000000, 0, 5, 0, 1, 1000, null, false);
+	Wait(30);
+
+	SetVolumeEX("SE01L", 0, 1000, null);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 0, 1, null);
+	Move("ef01", 400, @0, -200, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("white01", 0, 0, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 0, 1000, null);
+	Fade("ef01", 0, 800, null, true);
+	Wait(30);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 100, 0, null);
+	Fade("black02", 0, 1000, null, true);
+	Fade("ef01", 300, 0, null, false);
+
+
+	Fade("drop*", 0, 1000, null, true);
+
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+
+	Delete("white01");
+
+	Fade("black02", 500, 0, null, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+그날&, 그곳에서 눈을 뜬 이래 편히 잠든 적이 없다&. 밤마다 이 고통이 나를 괴롭힌다&.
+
+없는 것이 아파 오는데 무슨 수로 맞서겠나&. 난 그저 떨면서 고통이 가시길 기다릴 뿐이다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+
+	CreateSE("SE01L","se擬音_効果_ノイズ01L");
+	MusicStart("SE01L",0,1,0,500,null,true);
+
+	Shake("ef02", 5000000, 0, 1, 0, 1, 1000, null, false);
+	Shake("ef03", 5000000, 0, 5, 0, 1, 1000, null, false);
+	Wait(30);
+
+	SetVolumeEX("SE01L", 0, 1000, null);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 0, 1, null);
+	Move("ef01", 400, @0, -200, null, false);
+	Fade("ef01", 0, 1000, null, true);
+	Fade("white01", 0, 0, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 0, 1000, null);
+	Fade("ef01", 0, 800, null, true);
+	Wait(30);
+	Fade("white01", 0, 100, null, true);
+	Wait(30);
+	SetVolumeEX("SE01L", 100, 0, null);
+	Fade("black02", 0, 1000, null, true);
+	Fade("ef01", 300, 0, null, false);
+
+
+	Fade("drop*", 0, 1000, null, true);
+
+	Fade("ef02", 0, 1000, null, false);
+	Fade("ef03", 0, 500, null, true);
+
+	Delete("white01");
+
+	Fade("black02", 500, 0, null, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+두통은 이제 견디기 힘들다&.
+ｳｯｹ弡ｹｵ鯊ﾌ ｿｺｰﾅｸｰｴﾙ&.
+머리가 깨질 것 같다&.
+
+아아&, 누군가 내 숨통을 끊어 줘&.
+난 그저 편해지고 싶을 뿐이다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	Wait(2000);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+
+	SetVolumeEX("SE*", 200, 0, null);
+	SetVolumeEX("vo*", 200, 0, null);
+	Fade("絵色黒", 200, 1000, null, true);
+
+	Wait(1000);
+
+//{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0070]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500040a02">
+｡ｸｽｺﾅｩｷ鄰ｹ
+
+//（優しく）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Delete("ef*");
+	Delete("drop*");
+	Delete("black*");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0080]
+몸을 찢는 듯한 격통이 사라진다&.
+그리고 다시&, 그 부드러운 통증이 찾아온다&.
+
+아아&, 요람 같은 통증에&, 몸을 내맡겨 버리고 싶다&.
+분명 나를 상냥하게 목 졸라 죽여줄 테니까&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0090]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500050a02">
+｡ｸﾀﾏｾ鋧ｪ&, ｽｺﾅｩｷ鄰ｹ
+
+//（優しく叱咤するように）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	//おがみ：EV来たので差し替え
+	/*
+	CreateTextureSP("絵背景", 100, Center, 0, "cg/bg/bg003005_5_ホテル部屋.jpg");
+	CreateTextureSP("絵立絵", 700, 340, -100, "cg/bu/buキャロル_通常_normal.png");
+	CreateTextureEX("絵立絵弐", 705, 340, -100, "cg/bu/buキャロル_通常_smile1.png");
+	CreateTextureEX("絵立絵参", 706, 340, -100, "cg/bu/buキャロル_通常_cry3.png");
+
+	SetShade("絵背景", MEDIUM);
+	Request("絵背景", Smoothing);
+	Request("絵立絵*", Smoothing);
+	SetVertex("絵背景", center, 0);
+	SetVertex("絵立絵*", center, 100);
+	Zoom("絵背景", 0, 5000, 5000, null, true);
+	Zoom("絵立絵*", 0, 2000, 2000, null, true);
+
+	*/
+
+	CreateTextureSP("ev01", 100, 223, 23, "cg/ev/l/ev0307キャロルオンザベッド_l.jpg");
+	CreateTextureEX("ev02", 100, center, middle, "cg/ev/ev0307キャロルオンザベッド.jpg");
+	Request("ev01", Smoothing);
+	Request("ev02", Smoothing);
+	Zoom("ev01", 0, 2000, 2000, null, true);
+	Zoom("ev02", 0, 1200, 1200, null, true);
+
+	CreatePlainSP("絵霞", 3000);
+	SetShade("絵霞", HEAVY);
+	Zoom("絵霞", 0, 1100, 1100, null, true);
+
+	Zoom("絵霞", 1500, 1000, 1000, Dxl1, false);
+	FadeDelete("絵色黒", 500, null, true);
+	Fade("絵霞", 1000, 0, Axl1, true);
+
+
+	FadeDelete("eye", 1000, Axl1, false);
+	Fade("絵霞", 1000, 1000, Axl1, true);
+
+	FadeDelete("絵霞", 1000, Axl1, true);
+
+	Wait(1500);
+
+	Move("ev01", 1000, @-80, @-30, Axl1, false);
+	Zoom("ev01", 1000, 1800, 1800, Axl1, 500);
+	Fade("ev02", 500, 1000, null, false);
+	Zoom("ev02", 1000, 1000, 1000, Dxl1, true);
+
+	Wait(1000);
+
+	SoundPlay("@lx016",0,600,true);
+
+
+////////////////////////////////////////
+//◆◆モーテル
+
+//？？：場所ペンディング。隠れ家的な場所か、ビジネスホテルか。
+
+//スクルージは寝ていたのでコートを着ていないことに注意。
+//？？：スクルージの立ち絵無しで進行か。
+
+//目を覚ますスクルージ。
+//スクルージの顔を、のぞき込んでいるキャロル。
+//くっつきそうなほどの距離。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0100]
+｡ｦ｡ｦｽﾃｼｱﾀﾌ&, ｸｶﾁﾖﾃﾆｴﾙ&.
+
+맞닿을 듯이 가까운 곳에&, 캐롤의 얼굴이 있다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	Fade("絵立絵弐", 200, 1000, null, true);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0110]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500060a02">
+「좋은 아침&, 스크루지&.
+　키스해 줄까?」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500070a01">
+｡ｸﾁﾁﾀｺ ｾﾆﾄｧ&, ﾄｳｷﾑ&. ｻ鄒酩ﾏﾁｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	Fade("絵立絵参", 200, 1000, null, true);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0120]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500080a02">
+「심술쟁이」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	Wait(500);
+
+	CreatePlainSP("絵板写", 5000);
+
+	CreateTextureSP("絵背景上", 1000, -810, -80, "cg/bg/l/bg003005_5_ホテル部屋_l.jpg");
+	CreateTextureEX("絵背景上2", 1000, center, middle, "cg/bg/bg003005_5_ホテル部屋.jpg");
+
+	Delete("ev*");
+
+	CreateSE("SE01","se人体_動作_抱く02");
+	CreateSE("SE02","se人体_動作_衣擦れ03");
+
+	Wait(100);
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+	FadeDelete("絵板写", 500, null, false);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+	Move("絵背景上", 1000, @0, @70, AxlDxl, true);
+
+
+	Wait(1000);
+
+	Fade("絵背景上2", 800, 1000, null, true);
+	Delete("絵背景上");
+
+	Wait(200);
+
+//身を起こすスクルージ。
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0130]
+위에서 짓누르고 있던 캐롤을 밀어내고&, 몸을 일으킨다&.
+
+시간은…… 아마 저녁 무렵인가&. 아침 인사 할 시간은 한참 지났군&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0140]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500090a02">
+｡ｸｱｦﾂ悊ﾆ?
+｡｡ﾀ皺眩｡ ｽﾅﾀｽﾇﾏｴ･?｡ｹ
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500100a01">
+｡ｸｴﾃ ﾀﾖｴﾂ ﾀﾏﾀﾌﾀﾝｾﾆ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0150]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500110a02">
+「늘 있는 일이니까 걱정하는 거잖아」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500120a01">
+｡ｸ｡ｦ｡ｦｱｦﾂ嶸ﾙ&. ｸ｡ ﾀﾌｻｺ ｾ釭ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0160]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500130a02">
+「마음에는 이상이 있어 보이는데?」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500140a01">
+｡ｸﾄｫｿ鋻ｽｸｵﾀﾌｶｵ ﾇﾘ ﾁﾖｰﾚｴﾙｴﾂ ｰﾇｰ｡?｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0170]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500150a02">
+「일단 전부&, 어린 시절의 트라우마라고 해 두면 돼」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500160a01">
+「그래&. 하나도 기억 안 난다」
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500170a02">
+「너는 정말 기억력이 나쁜 아이로구나&.
+　어린 시절의 트라우마일까?」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500180a01">
+｡ｸｾ鋕ｰ ｽﾃﾀﾀｺ ｱﾗｷｸｴﾙ ﾄ｡ｰ悅ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	CreateTextureSP("絵演背景", 100, 0, Middle, "cg/bg/l/bg003005_5_ホテル部屋_l.jpg");
+
+	CreateSE("SE01","se人体_動作_衣擦れ05");
+	MusicStart("SE01",0,500,0,1000,null,false);
+
+	Wait(500);
+
+	//St("C",740, @0,@0,"buキャロル_通常_normal");
+	//Move("@StNameC/C*", 0, @0, @-50, Dxl1, true);
+	//FadeSt("C",0,true);
+
+	Wait(500);
+
+	//Move("@StNameC/C*", 400, @0, @50, Dxl1, false);
+	//Move("絵背景上2", 500, @0, @30, Dxl1, false);
+	Move("絵演背景", 400, @0, @20, Dxl1, false);
+	FadeDelete("絵背景上2", 400, null, true);
+
+	Wait(200);
+
+//？？：何らかの軽いアクションを入れたい。
+//立ち上がる、着替える、ペットボトルを飲む等々。
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0180]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500190a01">
+「내 과거라면 차라리 네가 더 잘 알겠지」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0190]
+적어도 그 시설에 있던 시절의 나를 알고 있는 셈이다&.
+내겐 그 기억조차 없다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	//St("C",740, @0,@0,"buキャロル_通常_smile1");
+	//FadeSt("C",200,true);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0200]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500200a02">
+「응&. 뭐&, 지금이랑 똑같이 뚱한 남자애였어」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500210a01">
+｡ｸ｡ｦ｡ｦ｡ｦ｡ｦ｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1000, 1000, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0210]
+캐롤은 연구 시설에 있던 시절의 일은 그다지 이야기하지 않는다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0215]
+캐롤이 말해 준 건 자기도 나와 같은 실험체라는 것&. 그리고 내 오른손과 짝을 이루는 능력을 품고 있다는 것&. 그 애 몸에서 나온 그 무기 말이다&.
+
+ｱﾗ ﾁ､ｵｵｴﾙ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreatePlainSP("絵板写", 6000);
+
+	CreateTextureSP("絵過去", 5000, Center, Middle, "cg/bg/bg002001_5_研究所解剖室.jpg");
+	//CreateColorSPover("絵過去色", 2000, "6B4A2B");
+	SetTone("絵過去", Monochrome);
+
+	//DeleteSt("C", 0,true);
+
+	FadeDelete("絵板写", 700, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0220]
+나와 캐롤이 그곳에서 어떻게 지냈는지…… 그런 이야기는 입에 올리려 하지 않는다&.
+
+……그다지 유쾌한 추억이 아니라는 건 틀림없겠지&. 그래도 내게는 몇 안 되는 기억의 단서다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0230]
+다소 억지를 써서라도 캐물어야 할지도 모른다&.
+하지만 좀처럼 그럴 마음은 들지 않았다&.
+
+캐롤은 내게 유일한 동료다&. 섣불리 상처를 입히거나 기분을 상하게 하고 싶지 않다―― 물론 그런 이유도 있다&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 700, 1000, null, true);
+	Delete("絵過去*");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0240]
+하지만 그보다도…… 실은 내가 겁을 내는 게 아닐까? 거기서 무슨 일이 있었는지 기억해 내는 게&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0250]
+캐롤 말마따나…… 정말 실험으로 생긴 트라우마 때문에 기억을 잃은 건 아닐까?
+
+나는 무의식중에 그 공포를 피하고 있는 것은 아닐까?
+
+ｱﾗｷｱ ｻｰ｢ﾀﾌ ﾀﾚｲﾙｸｸ ｵ邏ﾙ&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateTextureSP("絵演背景", 100, 0, Middle, "cg/bg/bg003005_5_ホテル部屋.jpg");
+
+	SetVolumeEX("@lx*", 3000, 0, null);
+
+	FadeDelete("絵色黒", 1500, null, true);
+
+	Wait(500);
+
+	//St("C",740, @0,@0,"stキャロル_通常_cry3");
+	//FadeSt("C",300,true);
+
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0260]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500220a02">
+「어라&. 또 뚱해져서는」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500230a01">
+「……고민거리가 많아서 말이지&.
+　섬세하거든&, 난」
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	//St("C",740, @0,@0,"stキャロル_通常_smile2");
+	//FadeSt("C",200,true);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0270]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500240a02">
+｡ｸ｡ｦ｡ｦｼｶｼｼﾇﾏｴﾙ&, ﾀﾌｰﾅﾁｹ
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500250a01">
+｡ｸｹｹｾﾟ&. ｺﾒｸｸ ﾀﾖｳﾄ｡ｹ
+
+//（軽口を叩く感じで）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	//St("C",740, @0,@0,"stキャロル_通常_normal");
+	//FadeSt("C",200,true);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0280]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500260a02">
+「……무서워?」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500270a01">
+｡ｸ｡ｪ｡ｪ｡ｪ｡ｪ｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0290]
+여전히 묘하게 예리하다&. 캐롤은 언제나 이렇다&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//	TextBoxDelete(0);
+
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0295]
+내 마음을 모조리 꿰뚫어 보는 듯한 눈동자&. 마치 내 반쪽처럼&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	/*
+	CreatePlainSP("絵板写", 5000);
+
+	CreateTextureSP("絵背景", 100, 0, Middle, "cg/bg/m/bg003005_5_ホテル部屋_m.jpg");
+	St("C",740, @0,@0,"stキャロル_通常_normal");
+	FadeSt("C",200,true);
+
+	Delete("絵演*");
+
+	FadeDelete("絵板写", 500, null, true);
+	*/
+
+
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0300]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500280a01">
+｡ｸｱﾗｷｲﾁｵ ｸ｣ﾁｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0310]
+부정해 봐야 소용없으니 솔직하게 대답한다&. 사실은 내가 두려워하는지조차 아직 모르겠지만&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	//St("C",740, @0,@0,"stキャロル_通常_smile2");
+	//FadeSt("C",200,true);
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0320]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500290a02">
+｡ｸｱﾗｷｸｱｸｳｪ｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	DeleteSt("C", 200,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0330]
+ｱﾗｷｱ ｳｪｸｦ ﾄｳｷﾑﾀｺ ｳ鋕ｮﾁｵ ｾﾊｰ悅ｪ｡ｪ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+
+//	TextBoxDelete(0);
+
+//	St("C",740, @0,@0,"buキャロル_通常_normal");
+//	FadeSt("C",300,true);
+
+	CreatePlainSP("絵板写", 5000);
+
+//	DeleteSt("C", 0,true);
+
+
+
+	CreateTextureSP("絵演背景", 100, 1079, -207, "cg/bg/bg003005_5_ホテル部屋.jpg");
+	//CreateTextureSP("絵演立絵", 700, Center, Middle, "cg/bu/buキャロル_通常_smile2.png");
+
+	SetShade("絵演背景", MEDIUM);
+	//SetVertex("絵演立絵", center, 100);
+
+	Request("絵演背景", Smoothing);
+	//Request("絵演立絵", Smoothing);
+
+	Zoom("絵演背景", 0, 4000, 4000, null, true);
+	//Zoom("絵立絵", 0, 2000, 2000, null, true);
+
+	CreateSE("SE01","se人体_動作_衣擦れ07");
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	FadeDelete("絵板写", 500, null, true);
+
+
+
+//近寄ってくるキャロル。
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0340]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500300a01">
+「……어&, 어이」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	//CreateColorEXadd("絵色白", 5000, "WHITE");
+	//Zoom("絵背景",1500, 1500, 1500, Axl3, false);
+	//Zoom("@StNameC/C*",1500, 2000, 2000, Axl3, false);
+	//Fade("絵色白", 1000, 1000, Axl1, true);
+
+	CreatePlainSP("絵板写", 5000);
+
+
+	CreateSE("SE01","se人体_動作_抱く01");
+	MusicStart("SE01",0,1000,0,1000,null,false);
+
+	FadeDelete("絵板写", 1000, null, true);
+
+
+	Wait(500);
+
+
+//抱きしめられるスクルージ。
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0350]
+살며시 끌어안는다&. 어린 새를 감싸는 어미 새의 날개처럼&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+{	Fw("fwキャロル_通常帽子無し_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0360]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500310a02">
+「착하지&, 착해」
+
+{	Fw("fwスクルージ_通常フード無し_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500320a01">
+「……뭐 하는 짓인지&, 정말」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+
+	Wait(500);
+
+	CreateColorEX("black01", 10000, "000000");
+	Fade("black01", 1500, 1000, null, true);
+
+	DeleteSt("C", 0,true);
+
+	CreateTextureEX("絵背景上", 1000, Center, Middle, "cg/bg/bg003005_5_ホテル部屋.jpg");
+	CreateTextureSP("絵演背景", 100, Center, Middle, "cg/bg/m/bg003005_5_ホテル部屋_m.jpg");
+	CreateTextureSP("絵演立絵", 700, 500, 100, "cg/st/x/stスクルージ_通常_normal_x01.png");
+
+	Request("絵演*", Smoothing);
+
+	Zoom("絵演立絵", 0, 2000, 2000, null, true);
+	Rotate("絵演立絵", 0, @0, @0, @-5, null,true);
+
+	SetShade("絵演背景", HEAVY);
+
+	Wait(1000);
+
+
+
+
+////////////////////////////////////////
+//（時間経過）
+
+
+	CreateSE("SE01","se人体_動作_衣擦れ04");
+	MusicStart("SE01",0,800,0,1000,null,false);
+
+	Wait(500);
+
+	FadeDelete("black01", 500, null, false);
+	Move("絵演背景", 700, @0, @-30, Dxl1, false);
+	Move("絵演立絵", 700, @0, @-100, Dxl1, false);
+	Wait(1000);
+	Fade("絵背景上", 300, 1000, null, true);
+
+
+	St("C",1740, @0,@0,"stスクルージ_通常_angry4");
+	FadeSt("C",200,true);
+
+
+
+
+//立ち上がるスクルージ。コートを羽織る。
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0370]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/0500330a01">
+｡ｸｽｽｽｽ ｳｪｰ｣ｴﾙ&. ﾃ､ｺﾘｶｹ
+
+{	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/0500340a02">
+｡ｸ<RUBY TEXT="｡､｡､｡､">ｼｱｻｴﾔ</RUBY> ｸｸｳｪｷｯ ｰ｡ｴﾂ ｰﾅｳﾗ｡ｹ
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	DeleteSt("C", 200,true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0380]
+우물쭈물 고민해 봤자 앞으로 나아갈 수 없다&. 지금은 할 수 있는 일을 할 뿐이다…… 설령 어떤 수를 쓰더라도&.
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0390]
+――오우마 쿠로스&.
+
+어떤 인물인지는 모른다&. 다아트와 얼마나 관련이 있는지도&.
+
+할 일은 지금까지와 다르지 않다&.
+모든 것을 남김없이 털어놓게 만들 뿐이다&.
+
+그리고 상황에 따라서는――
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+/*
+	CreatePlainSP("絵板写", 5000);
+
+	CreateWindowEX("絵窓", 0, 0, 1024, 576, false);
+	CreateTextureSP("絵窓/絵主人公", 3000, Center, 160, "cg/bu/buスクルージ_通常_normal.png");
+	CreateTextureSP("絵窓/絵背景", 2000, Center, Middle, "cg/bg/bg003005_5_ホテル部屋.jpg");
+
+	SetShade("絵窓/絵背景", MEDIUM);
+	Request("絵窓/絵*", Smoothing);
+	Zoom("絵窓/絵主人公", 0, 2000, 2000, null, true);
+	Zoom("絵窓/絵背景", 0, 3000, 3000, null, true);
+
+	Move("絵窓/絵主人公", 0, @-50, @0, null, true);
+	Move("絵窓/絵背景", 0, @-30, @0, null, true);
+
+
+	DrawTransition("絵窓/絵主人公*", 0, 0, 500, 100, null, "cg/data/slide_05_00_1.png", true);
+	DrawTransition("絵窓/絵背景", 0, 0, 500, 100, null, "cg/data/slide_05_00_1.png", true);
+
+	Move("絵窓/絵主人公", 500, @50, @0, Dxl1, false);
+	Move("絵窓/絵背景", 500, @30, @0, Dxl1, false);
+	FadeDelete("絵板写", 500, null, true);
+
+	Wait(300);
+*/
+
+	CreateColorEX("絵色黒", 8000, "000000");
+
+	CreateSE("SE01","se日常_建物_ホテルドア開く");
+
+	Fade("絵色黒", 1500, 1000, null, 500);
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Wait(1500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0400]
+ｼﾓﾁﾋﾇﾏｰﾔ ｸｸｵ魏ﾚｴﾙ&.
+ｱﾗ ﾀﾚｽﾅﾀﾇ ｸ釥ｸｷﾎ&.
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateSE("SE01","se日常_建物_ホテルドア閉じる");
+	MusicStart("SE01",0,900,0,1000,null,false);
+
+
+
+	Wait(3500);
+
+//→→LX0206
+
+}

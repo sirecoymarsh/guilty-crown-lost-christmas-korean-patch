@@ -1,0 +1,327 @@
+[
+ {
+  "file": "lxbgm01",
+  "name": "βios",
+  "scenes": [
+   "lx0010.nss",
+   "lx0106.nss",
+   "lx0301.nss",
+   "lx0605b.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0010.nss",
+   "lx0106.nss",
+   "lx0301.nss",
+   "lx9999.nss"
+  ]
+ },
+ {
+  "file": "lxbgm03",
+  "name": "Ω",
+  "scenes": [
+   "lx0010.nss",
+   "lx0106.nss",
+   "lx0301.nss",
+   "lx0502_10.nss",
+   "lx0503.nss",
+   "lx0504.nss",
+   "lx0505_00.nss",
+   "lx0505_10.nss",
+   "lx0509.nss",
+   "lx0510.nss",
+   "lx0510_01.nss",
+   "lx0510_02.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0010.nss",
+   "lx0106.nss",
+   "lx0301.nss",
+   "lx0502_10.nss",
+   "lx0503.nss",
+   "lx0504.nss",
+   "lx0505_00.nss",
+   "lx0505_10.nss",
+   "lx0509.nss",
+   "lx0510.nss",
+   "lx0510_00sl.nss",
+   "lx0510_01.nss",
+   "lx0510_02.nss"
+  ]
+ },
+ {
+  "file": "lxbgm04",
+  "name": "Ready to Go",
+  "scenes": [
+   "lx0104a.nss",
+   "lx0202.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0104a.nss",
+   "lx0202.nss"
+  ]
+ },
+ {
+  "file": "lxbgm05",
+  "name": "friends",
+  "scenes": [
+   "lx0402a_01.nss",
+   "lx0402a_02.nss",
+   "lx0402b_01.nss",
+   "lx0402b_02.nss",
+   "lx0500.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0402a_01.nss",
+   "lx0402a_02.nss",
+   "lx0402b_01.nss",
+   "lx0402b_02.nss",
+   "lx0500.nss"
+  ]
+ },
+ {
+  "file": "lxbgm06",
+  "name": "VOiD",
+  "scenes": [
+   "lx0101.nss",
+   "lx0102.nss",
+   "lx0107.nss",
+   "lx0206.nss",
+   "lx0301.nss",
+   "lx0500.nss",
+   "lx0603.nss"
+  ],
+  "always": true,
+  "from": [
+   "lx0101.nss",
+   "lx0102.nss",
+   "lx0107.nss",
+   "lx0206.nss",
+   "lx0301.nss",
+   "lx0500.nss",
+   "lx0603.nss"
+  ]
+ },
+ {
+  "file": "lxbgm07",
+  "name": "gエ19",
+  "scenes": [
+   "lx0103.nss",
+   "lx0104a.nss",
+   "lx0104b.nss",
+   "lx0302.nss",
+   "lx0303.nss",
+   "lx0506.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0103.nss",
+   "lx0104a.nss",
+   "lx0104b.nss",
+   "lx0302.nss",
+   "lx0303.nss",
+   "lx0506.nss"
+  ]
+ },
+ {
+  "file": "lxbgm08",
+  "name": "θεοι",
+  "scenes": [
+   "lx0102.nss",
+   "lx0304.nss",
+   "lx0508.nss",
+   "lx0602.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0102.nss",
+   "lx0304.nss",
+   "lx0508.nss",
+   "lx0602.nss"
+  ]
+ },
+ {
+  "file": "lxbgm10",
+  "name": "Βασιλευζ",
+  "scenes": [
+   "lx0303.nss",
+   "lx0304.nss",
+   "lx0506.nss",
+   "lx0601.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0303.nss",
+   "lx0304.nss",
+   "lx0506.nss",
+   "lx0601.nss"
+  ]
+ },
+ {
+  "file": "lxbgm11",
+  "name": "π",
+  "scenes": [
+   "lx0401.nss",
+   "lx0500.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0401.nss",
+   "lx0500.nss"
+  ]
+ },
+ {
+  "file": "lxbgm12",
+  "name": "Release My Soul",
+  "scenes": [
+   "lx0605a.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0605a.nss"
+  ]
+ },
+ {
+  "file": "lxbgm13",
+  "name": "κrOnё",
+  "scenes": [
+   "lx0102.nss",
+   "lx0108.nss",
+   "lx0108_01.nss",
+   "lx0108_02.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0102.nss",
+   "lx0108.nss",
+   "lx0108_00sl.nss",
+   "lx0108_01.nss",
+   "lx0108_02.nss"
+  ]
+ },
+ {
+  "file": "lxbgm14",
+  "name": "Hill Of Sorrow",
+  "scenes": [
+   "lx0101.nss",
+   "lx0301.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0101.nss",
+   "lx0301.nss"
+  ]
+ },
+ {
+  "file": "lxbgm15",
+  "name": "Αποκσλυψιζ",
+  "scenes": [
+   "lx0106.nss",
+   "lx0301.nss",
+   "lx0303.nss",
+   "lx0403.nss",
+   "lx0506.nss",
+   "lx0507.nss",
+   "lx0507_10.nss",
+   "lx0510_10.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0106.nss",
+   "lx0301.nss",
+   "lx0303.nss",
+   "lx0403.nss",
+   "lx0506.nss",
+   "lx0507.nss",
+   "lx0507_10.nss",
+   "lx0510_10.nss"
+  ]
+ },
+ {
+  "file": "lxbgm16",
+  "name": "Home ~in this corner~",
+  "scenes": [
+   "lx0205.nss",
+   "lx0603.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0205.nss",
+   "lx0603.nss"
+  ]
+ },
+ {
+  "file": "lxbgm17",
+  "name": "Genesi§",
+  "scenes": [
+   "lx0401.nss",
+   "lx0402a_01.nss",
+   "lx0402a_02.nss",
+   "lx0402b_01.nss",
+   "lx0402b_02.nss",
+   "lx0511_10.nss",
+   "lx0602_10.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0401.nss",
+   "lx0402a_01.nss",
+   "lx0402a_02.nss",
+   "lx0402b_01.nss",
+   "lx0402b_02.nss",
+   "lx0511_10.nss",
+   "lx0602_10.nss"
+  ]
+ },
+ {
+  "file": "lxbgm18",
+  "name": "βιοζ-δ",
+  "scenes": [
+   "lx0603.nss",
+   "lx0604_11.nss",
+   "lx0604_20.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0604_10bgm.nss",
+   "lx0604_12.nss",
+   "lx0604_20.nss"
+  ]
+ },
+ {
+  "file": "lxbgm19",
+  "name": "Rё∀L",
+  "scenes": [
+   "lx0605b.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0605b.nss"
+  ]
+ },
+ {
+  "file": "lxsong01",
+  "name": "ISOLATION",
+  "scenes": [
+   "lx0605a.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0605a.nss"
+  ]
+ },
+ {
+  "file": "lxsong02",
+  "name": "Where am I ?",
+  "scenes": [
+   "lx0605b.nss"
+  ],
+  "always": false,
+  "from": [
+   "lx0605b.nss"
+  ]
+ }
+]

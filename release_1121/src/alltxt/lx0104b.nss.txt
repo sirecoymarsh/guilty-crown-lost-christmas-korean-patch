@@ -1,0 +1,363 @@
+//<continuation number="100">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0104b.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0105.nss";
+
+}
+
+
+scene lx0104b.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+//―――――――――――――――――――――――――――――――――――――――
+
+
+
+
+
+//←←やられる前にやれ　からの分岐
+//◆◆研究施設／ゲート
+	PrintBG("上背景", 30000);
+
+	//おがみ：曲借入
+//	SoundPlay("@lx007",0,700,true);
+
+	CreateCamera("Ｃ", 0, 0, 1000);
+	SetAlias("Ｃ","Ｃ");
+
+
+	CreateWindowEX("絵窓", 0, 0, 1024, 576, false);
+	//CreateColorSP("絵窓/絵色黒", 5000, "000000");
+
+	CreateTextureSP("Ｃ/絵背景", 10, -970, -350, "cg/bg/l/bg002004_5_ゲート前_l.jpg");
+	CreateTextureEX("Ｃ/絵主人公", 201, Center, 60, "cg/st/stスクルージ_通常_angry4.png");
+	CreateTextureEX("Ｃ/絵主人公弐", 201, Center, 60, "cg/st/stスクルージ_通常_normal.png");
+	CreateTextureEX("Ｃ/絵主人公参", 201, Center, 60, "cg/st/stスクルージ_通常_smile3.png");
+	CreateTextureEX("Ｃ/絵主人公影", 201, Center, 60, "cg/st/x/stスクルージ_通常_normal_x02.png");
+
+	CreateTextureEX("Ｃ/絵立絵", 101, 585, 195, "cg/st/stキャロル_通常_smile4.png");
+	CreateTextureEX("Ｃ/絵立絵弐", 101, 585, 195, "cg/st/stキャロル_通常_smile2.png");
+	CreateTextureEX("Ｃ/絵立絵参", 101, 585, 195, "cg/st/stキャロル_通常_smile1.png");
+	CreateTextureEX("Ｃ/絵立絵四", 101, 400, 150, "cg/bu/buキャロル_通常_smile1.png");
+	CreateTextureEX("Ｃ/絵立絵五", 101, 400, 150, "cg/bu/buキャロル_通常_smile4.png");
+
+	//DrawTransition("絵窓/絵色黒", 0, 0, 470, 100, null, "cg/data/slide_05_00_0.png", true);
+
+	Request("Ｃ/絵*", Smoothing);
+	Zoom("Ｃ/絵主人*", 0, 1100, 1100, null, true);
+	Zoom("Ｃ/絵立絵*", 0, 1100, 1100, null, true);
+	Zoom("Ｃ/絵背景", 0, 1300, 1300, null, true);
+
+	Move("Ｃ/絵主人公", 0, @0, @20, null, true);
+
+	CreateSE("SE01","se人体_足音_着地02");
+	MusicStart("SE01",0,600,0,500,null,false);
+
+
+	FadeDelete("上背景", 500, null, true);
+
+	Move("Ｃ/絵主人公", 300, @0, @-20, null, false);
+	Fade("Ｃ/絵主人公", 300, 1000, Axl3, true);
+
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/04b00010a01">
+｡ｸﾁﾗﾀﾏｱ釭ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+//	TextBoxDelete(0);
+
+	MoveCamera("Ｃ", 800, @100, @0, 1000, Dxl1, false);
+	Fade("Ｃ/絵立絵", 300, 1000, Axl1, false);
+
+
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0015]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/04b00020a02">
+「어머&, 대담해라」
+
+{	Fade("Ｃ/絵主人公弐", 200, 1000, null, true);
+	Delete("Ｃ/絵主人公");
+	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/04b00030a01">
+「피해서 지나갈 순 없잖아? 그렇다면 답은 하나다」
+
+{	Fade("Ｃ/絵立絵弐", 200, 1000, null, true);
+	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/04b00040a02">
+「위험한 남자는 멋지다니까&, 스크루지&. 양심을 엄마 배 속에다 놓고 나온 걸까?」
+
+{	Fade("Ｃ/絵主人公参", 200, 1000, null, true);
+	Delete("Ｃ/絵主人公弐");
+	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX01/04b00050a01">
+「기억 안 나&. 아무것도」
+
+{	Fade("Ｃ/絵立絵参", 200, 1000, null, true);
+	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/04b00060a02">
+「그럼 어쩔 수 없지&. 정상을 참작하겠습니다」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateSE("SE01","se人体_動作_衣擦れ01");
+	MusicStart("SE01",0,700,0,700,null,false);
+
+	Zoom("Ｃ/絵主人公影", 600, 1200, 1200, Axl1, false);
+	Fade("Ｃ/絵主人公影", 300, 1000, Dxl1, false);
+	Move("Ｃ/絵主人公*", 600, @-20, @0, Dxl1, false);
+	Wait(300);
+	Delete("Ｃ/絵主人公参");
+	FadeDelete("Ｃ/絵主人公影", 300, Axl3, true);
+
+	Wait(200);
+
+	//定義---------------------
+	CreatePlainSP("pl01", 5000);
+
+	//FadeDelete("絵窓/絵色黒", 800, null, false);
+
+	MoveCamera("Ｃ", 0, @100, @65, 1000, null, true);
+	Fade("Ｃ/絵立絵*", 0, 0, null, true);
+	Fade("Ｃ/絵立絵四", 0, 1000, null, true);
+
+	FadeDelete("pl01", 500, null, true);
+
+	Wait(300);
+
+	Fade("Ｃ/絵立絵四", 200, 0, Axl3, false);
+	Fade("Ｃ/絵立絵五", 200, 1000, Dxl1, true);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0017]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/04b00070a02">
+｡ｸｱﾗｷｳ&, ｹﾌｽｺﾅﾍ ｻ鄲ﾌﾄﾚ ﾅｳｷｯ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 500, 1000, Dxl1, true);
+
+	Delete("Ｃ/絵*");
+	Delete("絵窓*");
+
+	//定義---------------------
+	CreateTextureSP("絵背景", 100, Center, Middle, "cg/bg/bg002004_5_ゲート前.jpg");
+	CreateTextureSP("絵立絵", 1000, 75, -35, "cg/st/stダァト兵_構え2_normal.png");
+	CreateTextureSP("絵立絵弐", 1005, 885, 0, "cg/st/stダァト兵_待機_normal.png");
+	CreateTextureSP("絵立絵参", 1010, 340, 0, "cg/st/x/stダァト兵_構え_normal_x01.png");
+
+	SetShade("絵背景", HEAVY);
+	SetShade("絵立絵", LIGHT);
+	SetShade("絵立絵弐", LIGHT);
+
+	Request("絵立絵弐", Smoothing);
+
+	Zoom("絵立絵弐", 0, 1300, 1300, null, true);
+	Zoom("絵背景", 0, 2500, 2500, null, true);
+
+	Move("絵立絵", 0, @560, @0, null, true);
+	Move("絵立絵弐", 0, @150, @0, null, true);
+	Move("絵立絵参", 0, @250, @0, null, true);
+	Move("絵背景", 0, @100, @0, null, true);
+
+	CreateSE("SE01","se戦闘_銃機_構える01複数");
+	CreateSE("SE02","se人体_足音_兵士集合01");
+
+
+	//動作---------------------
+	MusicStart("SE02",0,1000,0,1100,null,false);
+	Wait(500);
+	Move("絵背景", 350, @-100, @0, Dxl1, false);
+	Move("絵立絵", 350, @-560, @0, Dxl2, false);
+	Move("絵立絵弐", 400, @-150, @0, Dxl2, 50);
+	Move("絵立絵参", 400, @-250, @0, Dxl2, 100);
+	DrawDelete("絵色黒", 300, 100, Dxl2, "slide_01_03_0", true);
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+
+////////////////////////////////////////
+//キャロルの台詞を引っ張りつつ、シーン切り替え。
+//警備兵達の前に堂々と姿を現すスクルージ
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【警備兵Ｄ】
+<voice name="ｰ貅ｴ D" class="警備兵Ｄ" src="voice/LX01/04b00080e19">
+｡ｸ｡ｦ｡ｦ! ｿﾔｴﾙ!｡ｹ
+
+//【警備兵Ｅ】
+<voice name="ｰ貅ｴ E" class="警備兵Ｅ" src="voice/LX01/04b00090e20">
+「처분해라!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+	//定義---------------------
+	CreatePlainSP("絵板写", 5000);
+
+	Delete("絵立*");
+	Delete("絵背景*");
+
+	MoveCamera("Ｃ", 0, 0, 0, 1000, Dxl1, true);
+
+	CreateColorEX("絵色黒", 8000, "000000");
+	CreateTextureSP("Ｃ/絵背景", 10, -400, -350, "cg/bg/bg002004_5_ゲート前.jpg");
+	CreateTextureSP("Ｃ/絵主人公", 200, Center, -500, "cg/st/x/stスクルージ_通常_normal_x01.png");
+	CreateTextureEX("Ｃ/絵主人公弐", 200, -200, 0, "cg/ev/x/ev9001スクルージジャンプ汎用_x01.png");
+	CreateTextureEX("絵鮮血", 8100, -200, 500, "cg/ef/ef_blood02.png");
+
+	CreateMovieEX("絵動画", 7000, Center, Middle, true, true, "dx/mv0003集中線01_白.ngs");
+
+	Request("Ｃ/絵*", Smoothing);
+	Request("絵動画", Smoothing);
+
+	SetShade("Ｃ/絵背景", HEAVY);
+	SetVertex("絵鮮血", right, bottom);
+
+	Rotate("Ｃ/絵主人公弐", 0, @0, @180, @-30, null,true);
+
+	Zoom("Ｃ/絵背景", 0, 3000, 3000, null, true);
+	Zoom("Ｃ/絵主人公弐", 0, 1500, 1500, null, true);
+	Zoom("絵動画", 0, 4000, 4000, null, true);
+	Rotate("絵鮮血", 0, @0, @0, @30, null,true);
+
+
+	//動作---------------------
+	Zoom("絵板写", 700, 2000, 2000, Axl2, false);
+	FadeDelete("絵板写", 700, null, false);
+
+	MoveCamera("Ｃ", 2000, @0, @-500, 1000, AxlDxl, true);
+
+	Wait(500);
+
+
+//警備兵に取り囲まれるスクルージ。だが動じず。
+{	Fw("fwキャロル_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX01/04b00100a02">
+「<RUBY TEXT="렛츠 로큰롤">엉망진창으로 만들어 버려</RUBY>!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	//定義---------------------
+	CreateSE("SE01","se戦闘_動作_突進03");
+	CreateSE("SE02","se戦闘_攻撃_振る04");
+	CreateSE("SE03","se人体_血飛沫02");
+	CreateSE("SE04","se人体_血飛沫03");
+	CreateSE("SE05","se人体_血飛沫04");
+
+
+
+
+	//動作---------------------
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	MoveCamera("Ｃ", 500, @300, @200, 9000, Axl1, false);
+	Move("Ｃ/絵主人公", 300, @50, @50, Dxl3, false);
+	Fade("絵動画", 200, 300, Axl3, false);
+	Fade("Ｃ/絵主人公", 150, 0, Dxl1, false);
+	Move("Ｃ/絵主人公弐", 400, @100, @100, Axl3, false);
+	Fade("Ｃ/絵主人公弐", 150, 1000, Dxl1, true);
+	Wait(50);
+	Move("Ｃ/絵主人公弐", 150, @500, @500, Dxl3, false);
+	Wait(50);
+	MusicStart("SE02",0,700,0,1000,null,false);
+	Fade("絵色黒", 0, 1000, null, true);
+	DrawTransition("絵色黒", 100, 0, 1000, 100, Dxl2, "cg/data/zoom_01_00_0.png", true);
+
+	MusicStart("SE03",0,700,0,1000,null,false);
+	MusicStart("SE05",0,700,0,1000,null,false);
+	Zoom("絵鮮血", 200, 1500, 1800, Dxl1, false);
+	Fade("絵鮮血", 200, 1000, Axl2, true);
+	Zoom("絵鮮血", 2000, 1600, 1900, null, false);
+	Wait(1000);
+	MusicStart("SE04",0,700,0,1000,null,false);
+	Zoom("絵鮮血", 1000, 3000, 5000, Dxl3, false);
+	FadeDelete("絵鮮血", 400, null, true);
+
+	SetVolumeEX("@lx*", 3000, 0, null);
+	SetVolume_Loop("@lx007a",3000,0,null);
+
+	Wait(3000);
+
+
+//（キャロルの立ち絵は出さない）
+
+//キャロルの台詞と同時に駆け出すスクルージ。
+//飛び散る鮮血。フェードアウト
+
+//→→LX0105
+}

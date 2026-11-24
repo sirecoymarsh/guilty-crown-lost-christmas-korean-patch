@@ -1,0 +1,119 @@
+{
+ "run": "lk_mc_cdx_092202",
+ "clicks": [
+  {
+   "click": "46:200:71",
+   "sent": 46.9,
+   "first": "s8",
+   "react_ms": 45,
+   "s8_s9": 157,
+   "s3_s4": 47,
+   "s4_s7": 78,
+   "ready_ms": 342
+  },
+  {
+   "click": "52:200:159",
+   "sent": 53.1,
+   "first": "s8",
+   "react_ms": 17,
+   "s8_s9": 907,
+   "s3_s4": 46,
+   "s4_s7": 94,
+   "ready_ms": 1064
+  },
+  {
+   "click": "58:200:115",
+   "sent": 59.0,
+   "first": "s8",
+   "react_ms": 8,
+   "s8_s9": 375,
+   "s3_s4": 47,
+   "s4_s7": 94,
+   "ready_ms": 524
+  },
+  {
+   "click": "64:200:203",
+   "sent": 65.1,
+   "first": "s8",
+   "react_ms": 64,
+   "s8_s9": 625,
+   "s3_s4": 47,
+   "s4_s7": 78,
+   "ready_ms": 830
+  },
+  {
+   "click": "70:512:559",
+   "sent": 71.0,
+   "first": "s3",
+   "react_ms": 55,
+   "s3_s4": 140,
+   "s4_s7": 94,
+   "ready_ms": 289
+  },
+  {
+   "click": "76:700:115",
+   "sent": 76.9,
+   "first": "s8",
+   "react_ms": 30,
+   "s8_s9": 234,
+   "s3_s4": 47,
+   "s4_s7": 94,
+   "ready_ms": 405
+  },
+  {
+   "click": "82:200:247",
+   "sent": 83.0,
+   "first": "s8",
+   "react_ms": 86,
+   "s8_s9": 453,
+   "s3_s4": 47,
+   "s4_s7": 78,
+   "ready_ms": 680
+  },
+  {
+   "click": "88:700:379",
+   "sent": 88.9,
+   "first": "s8",
+   "react_ms": 61,
+   "s8_s9": 609,
+   "s3_s4": 63,
+   "s4_s7": 94,
+   "ready_ms": 827
+  },
+  {
+   "click": "94:700:423",
+   "sent": 95.1,
+   "first": "s8",
+   "react_ms": 64,
+   "s8_s9": 578,
+   "s3_s4": 47,
+   "s4_s7": 78,
+   "ready_ms": 767
+  },
+  {
+   "click": "100:200:291",
+   "sent": 101.0,
+   "first": "s8",
+   "react_ms": 24,
+   "s8_s9": 359,
+   "s3_s4": 47,
+   "s4_s7": 94,
+   "ready_ms": 524
+  },
+  {
+   "click": "106:512:559",
+   "sent": 107.1,
+   "first": "s3",
+   "react_ms": 80,
+   "s3_s4": 47,
+   "s4_s7": 78,
+   "ready_ms": 205
+  }
+ ],
+ "locks": {
+  "stepped-aside": 2
+ },
+ "frame_gaps": [],
+ "exited_early": null,
+ "dialogs": []
+}

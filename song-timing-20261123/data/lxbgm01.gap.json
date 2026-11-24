@@ -1,0 +1,214 @@
+[
+  {
+    "id": 1,
+    "seek": 0,
+    "start": 136.92,
+    "end": 144.7,
+    "text": " Wenn dich alles heilt, du weißt, dass meine Gott zu dir ist.",
+    "tokens": [
+      50365,
+      7899,
+      10390,
+      7874,
+      415,
+      2352,
+      11,
+      1581,
+      321,
+      11539,
+      11,
+      2658,
+      10946,
+      19133,
+      2164,
+      4746,
+      1418,
+      13,
+      50865
+    ],
+    "avg_logprob": -0.6266025549326187,
+    "compression_ratio": 1.7571428571428571,
+    "no_speech_prob": 0.1083984375,
+    "words": [
+      {
+        "start": 1.919999999999999,
+        "end": 2.96,
+        "word": " Wenn",
+        "probability": 0.0789794921875
+      },
+      {
+        "start": 2.96,
+        "end": 3.68,
+        "word": " dich",
+        "probability": 0.393798828125
+      },
+      {
+        "start": 3.68,
+        "end": 4.4,
+        "word": " alles",
+        "probability": 0.1971435546875
+      },
+      {
+        "start": 4.4,
+        "end": 5.8,
+        "word": " heilt,",
+        "probability": 0.66259765625
+      },
+      {
+        "start": 5.92,
+        "end": 6.12,
+        "word": " du",
+        "probability": 0.77880859375
+      },
+      {
+        "start": 6.12,
+        "end": 6.64,
+        "word": " weißt,",
+        "probability": 0.44305419921875
+      },
+      {
+        "start": 6.64,
+        "end": 6.84,
+        "word": " dass",
+        "probability": 0.38330078125
+      },
+      {
+        "start": 6.84,
+        "end": 7.26,
+        "word": " meine",
+        "probability": 0.6083984375
+      },
+      {
+        "start": 7.26,
+        "end": 7.9,
+        "word": " Gott",
+        "probability": 0.16162109375
+      },
+      {
+        "start": 7.9,
+        "end": 8.38,
+        "word": " zu",
+        "probability": 0.2200927734375
+      },
+      {
+        "start": 8.38,
+        "end": 8.66,
+        "word": " dir",
+        "probability": 0.41552734375
+      },
+      {
+        "start": 8.66,
+        "end": 9.7,
+        "word": " ist.",
+        "probability": 0.55126953125
+      }
+    ],
+    "temperature": 0.0
+  },
+  {
+    "id": 2,
+    "seek": 0,
+    "start": 147.08,
+    "end": 155.1,
+    "text": " Wenn dich alles heilt, du weißt, dass meine Gott zu dir ist.",
+    "tokens": [
+      50865,
+      7899,
+      10390,
+      7874,
+      415,
+      2352,
+      11,
+      1581,
+      321,
+      11539,
+      11,
+      2658,
+      10946,
+      19133,
+      2164,
+      4746,
+      1418,
+      13,
+      51515
+    ],
+    "avg_logprob": -0.6266025549326187,
+    "compression_ratio": 1.7571428571428571,
+    "no_speech_prob": 0.1083984375,
+    "words": [
+      {
+        "start": 12.08,
+        "end": 13.12,
+        "word": " Wenn",
+        "probability": 0.9814453125
+      },
+      {
+        "start": 13.12,
+        "end": 13.64,
+        "word": " dich",
+        "probability": 0.99951171875
+      },
+      {
+        "start": 13.64,
+        "end": 14.58,
+        "word": " alles",
+        "probability": 1.0
+      },
+      {
+        "start": 14.58,
+        "end": 15.86,
+        "word": " heilt,",
+        "probability": 0.99658203125
+      },
+      {
+        "start": 15.86,
+        "end": 16.0,
+        "word": " du",
+        "probability": 0.97265625
+      },
+      {
+        "start": 16.0,
+        "end": 16.64,
+        "word": " weißt,",
+        "probability": 0.635986328125
+      },
+      {
+        "start": 16.66,
+        "end": 16.84,
+        "word": " dass",
+        "probability": 0.9931640625
+      },
+      {
+        "start": 16.84,
+        "end": 17.08,
+        "word": " meine",
+        "probability": 0.99365234375
+      },
+      {
+        "start": 17.08,
+        "end": 17.88,
+        "word": " Gott",
+        "probability": 0.9990234375
+      },
+      {
+        "start": 17.88,
+        "end": 18.14,
+        "word": " zu",
+        "probability": 0.398681640625
+      },
+      {
+        "start": 18.14,
+        "end": 18.48,
+        "word": " dir",
+        "probability": 0.98095703125
+      },
+      {
+        "start": 18.48,
+        "end": 20.1,
+        "word": " ist.",
+        "probability": 0.998046875
+      }
+    ],
+    "temperature": 0.0
+  }
+]

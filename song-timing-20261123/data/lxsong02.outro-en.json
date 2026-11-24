@@ -1,0 +1,115 @@
+[
+  {
+    "id": 1,
+    "seek": 0,
+    "start": 207.92,
+    "end": 210.88,
+    "text": " Let's count our power and bliss",
+    "tokens": [
+      50365,
+      961,
+      311,
+      1207,
+      527,
+      1347,
+      293,
+      31522,
+      50713
+    ],
+    "avg_logprob": -0.796006957689921,
+    "compression_ratio": 0.9032258064516129,
+    "no_speech_prob": 0.5537109375,
+    "words": [
+      {
+        "start": 3.920000000000001,
+        "end": 4.88,
+        "word": " Let's",
+        "probability": 0.3284912109375
+      },
+      {
+        "start": 4.88,
+        "end": 5.04,
+        "word": " count",
+        "probability": 0.11572265625
+      },
+      {
+        "start": 5.04,
+        "end": 5.4,
+        "word": " our",
+        "probability": 0.7177734375
+      },
+      {
+        "start": 5.4,
+        "end": 5.86,
+        "word": " power",
+        "probability": 0.403076171875
+      },
+      {
+        "start": 5.86,
+        "end": 6.34,
+        "word": " and",
+        "probability": 0.427978515625
+      },
+      {
+        "start": 6.34,
+        "end": 6.88,
+        "word": " bliss",
+        "probability": 0.5322265625
+      }
+    ],
+    "temperature": 0.0
+  },
+  {
+    "id": 2,
+    "seek": 0,
+    "start": 210.88,
+    "end": 214.28,
+    "text": " And move like a dynamite",
+    "tokens": [
+      50713,
+      400,
+      1286,
+      411,
+      257,
+      5999,
+      642,
+      50905
+    ],
+    "avg_logprob": -0.796006957689921,
+    "compression_ratio": 0.9032258064516129,
+    "no_speech_prob": 0.5537109375,
+    "words": [
+      {
+        "start": 6.88,
+        "end": 7.4,
+        "word": " And",
+        "probability": 0.1929931640625
+      },
+      {
+        "start": 7.4,
+        "end": 7.94,
+        "word": " move",
+        "probability": 0.5712890625
+      },
+      {
+        "start": 7.94,
+        "end": 8.32,
+        "word": " like",
+        "probability": 0.9931640625
+      },
+      {
+        "start": 8.32,
+        "end": 8.4,
+        "word": " a",
+        "probability": 0.9326171875
+      },
+      {
+        "start": 8.4,
+        "end": 10.28,
+        "word": " dynamite",
+        "probability": 0.53955078125
+      }
+    ],
+    "temperature": 0.0
+  }
+]

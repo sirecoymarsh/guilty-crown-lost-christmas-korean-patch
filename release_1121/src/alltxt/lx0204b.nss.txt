@@ -1,0 +1,419 @@
+//<continuation number="90">
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0204b.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#ev0303オートインセクト監視=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0205.nss";
+
+}
+
+
+scene lx0204b.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+//―――――――――――――――――――――――――――――――――――――――
+//←←断罪する
+
+	PrintBG("上背景", 30000);
+	CreateTextureSP("bg01", 100, 240, 220, "cg/bg/l/bg003001_1_研究室_l.jpg");
+	CreateTextureSP("st01", 100, 180, 10, "cg/bu/buスクルージ_通常_smile1.png");
+	Request("bg01", Smoothing);
+	Request("st01", Smoothing);
+	Zoom("bg01", 0, 1600, 1600, null, true);
+	Zoom("st01", 0, 1500, 1500, null, true);
+	SetShade("bg01", SEMIHEAVY);
+
+	FadeDelete("上背景", 500, null, false);
+	Move("st01", 1000, @0, @100, Dxl1, false);
+	Move("bg01", 1000, @0, @50, Dxl1, true);
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04b00010a01">
+「고맙다&. 참고가 됐어」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+
+
+	Fw("fwスクルージ_通常_normal");
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010a]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04b00020a01">
+｡ｸﾀﾌｰﾇ ｱﾗ ｴ莵ﾊｴﾙ&. ｹﾞｾﾆ ｵﾖ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateTextureEX("ef01", 100, -350, 0, "cg/ef/x/ef_hand05.png");
+	Request("ef01", Smoothing);
+	Rotate("ef01", 0, @0, @0, -20, null,true);
+	Zoom("ef01", 0, 1200, 1200, null, true);
+
+	CreateColorEXadd("co01", 5000, "FFFFFF");
+
+	CreateSE("SE01","se人体_動作_跳躍02");
+	CreateSE("SE02","se人体_動作_掴む01");
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	Move("st01", 200, @120, @100, Axl2, false);
+	Fade("st01", 150, 0, null, false);
+
+	Fade("ef01", 50, 1000, null, false);
+	Move("ef01", 200, @120, @200, Axl2, false);
+	Zoom("ef01", 200, 3000, 3000, Axl1, false);
+	Zoom("bg01", 200, 1600, 1600, Axl1, false);
+	Zoom("st01", 200, 1700, 1700, Axl1, false);
+	Fade("co01", 200, 1000, Axl1, true);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	Wait(500);
+
+	Delete("st01");
+	Delete("ef01");
+
+//右手で研究者Ｃを鷲づかみにするスクルージ。
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/04b00030e33">
+｡ｸｾﾆ｡ｦ｡ｦ ｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾇ!｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+//キャンサー化する研究者Ｃ
+
+	CreateTextureSP("絵背景", 100, -1800, 320, "cg/bg/l/bg003001_1_研究室_l.jpg");
+	Request("絵背景", Smoothing);
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+	SetShade("絵背景", SEMIHEAVY);
+
+	CreateTextureSP("絵背景上", 200, Center, 150, "cg/ev/x/ev0104キャンサー化_手a_x01.png");
+	Request("絵背景上", Smoothing);
+	Rotate("絵背景上", 0, @0, 180, -30, null,true);
+	Zoom("絵背景上", 0, 1400, 1400, null, true);
+
+	//CreateTextureSP("絵演立絵", 1000, Center, Middle, "cg/st/x/st研究員2_通常_normal_x03.png");
+	//結晶生成-----------------------------------------------------
+	CreateTextureEX("絵結壱", 5009, 165, 165, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEX("絵結弐", 5010, 550, 180, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("絵結参", 5008, -30, 150, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("絵結四", 5007, 675, 160, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEX("絵結五", 5006, 190, 360, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("絵結壱明", 5009, 165, 165, "cg/ef/x/ef_voidrubble01_x01.png");
+	CreateTextureEXadd("絵結弐明", 5010, 550, 180, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("絵結参明", 5008, -30, 150, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("絵結四明", 5007, 675, 160, "cg/ef/x/ef_voidrubble03_x03.png");
+	CreateTextureEXadd("絵結五明", 5006, 190, 360, "cg/ef/x/ef_voidrubble01_x01.png");
+	Rotate("絵結弐*", 0, @0, @0, 50, null,true);
+	Request("絵結*", Smoothing);
+	Zoom("絵結*", 0, 1200, 1200, null, true);
+
+
+
+
+	CreateSE("SE_vef03","seヴォイド結晶化01a");
+
+
+	//動作----------------------------------------------------------
+	$k_time=200;
+	$k_delete_time=200;
+
+
+
+	MusicStart("SE_vef03",0,1000,0,1300,null,false);
+
+	Shake("絵結五*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("絵結五*", 100, 1000, null, false);
+	Move("絵結五*", $k_time, @0, @-15, Dxl1, false);
+	Zoom("絵結五*", $k_time, 2000, 2000, Dxl1, false);
+	FadeDelete("絵結五明", $k_delete_time, null, false);
+
+
+	Shake("絵結四*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("絵結四*", 100, 1000, null, false);
+	Move("絵結四*", $k_time, @0, @-15, Dxl1, false);
+	Zoom("絵結四*", $k_time, 2000, 2000, Dxl1, true);
+	FadeDelete("絵結四明", $k_delete_time, null, false);
+
+	Shake("絵結参*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("絵結参*", 100, 1000, null, false);
+	Move("絵結参*", $k_time, @0, @-15, Dxl1, false);
+	Zoom("絵結参*", $k_time, 2000, 2000, Dxl1, false);
+	FadeDelete("絵結参明", $k_delete_time, null, false);
+
+	Shake("絵結弐*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("絵結弐*", 100, 1000, null, false);
+	Move("絵結弐*", $k_time, @0, @-15, Dxl1, false);
+	Zoom("絵結弐*", $k_time, 2000, 2000, Dxl1, false);
+	FadeDelete("絵結弐明", $k_delete_time, null, false);
+
+
+	Shake("絵結*", 500, 5, 2, 0, 0, 1000, null, false);
+	Fade("絵結*", 100, 1000, null, false);
+	Move("絵結*", $k_time, @0, @-15, Dxl1, false);
+	Zoom("絵結*", $k_time, 2000, 2000, Dxl1, false);
+	FadeDelete("絵結壱明", $k_delete_time, null, false);
+
+	Wait(300);
+
+	CreatePlainSP("pl01", 15000);
+
+	Wait(500);
+
+	Delete("co01");
+	Delete("絵結*");
+
+
+	FadeDelete("pl01", 1000, Axl1, false);
+
+	Shake("絵背景上", 2000, 2, 0, 0, 0, 1000, null, false);
+
+	Move("絵背景", 2000, @-10, @40, Dxl1, false);
+	Move("絵背景上", 2000, @-20, @80, Dxl1, true);
+
+	Wait(500);
+
+	Delete("絵結*");
+	Delete("絵演立*");
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【研究者Ｃ】
+<voice name="ｿｬｱｸﾀﾚ C" class="研究者Ｃ" src="voice/LX02/04b00040e33">
+｡ｸｾﾆ｡ｦ｡ｦ ｾﾆｾﾆ｡ｦ｡ｦ ｾ錂ｰ｡ｦ｡ｦ ｼｭ｡ｦ｡ｦ｡ｹ
+
+{	Fw("fwスクルージ_通常_normal");}
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04b00050a01">
+「내가 너희들을 용서할 줄 알았나?
+｡｡ｼﾓ ﾆ桒ﾑ ｳ狆ｮﾀﾌｱｺ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+
+//研究者Ｃ完全にキャンサー化。
+//倒れて砕け散る。
+
+
+	CreateColorEXadd("co01", 5000, "FFFFFF");
+
+	CreateTextureEXadd("絵演欠片明", 1005, 430, 390, "cg/ef/ef_結晶割れ06.png");
+	CreateTextureEXadd("絵演欠片弐明", 1005, 0, 240, "cg/ef/ef_結晶割れ05.png");
+	CreateTextureEX("絵演欠片", 1000, 330, 350, "cg/ef/ef_結晶割れ06.png");
+	CreateTextureEX("絵演欠片弐", 1000, 0, 400, "cg/ef/ef_結晶割れ05.png");
+
+	CreateTextureEXadd("絵粒", 1100, center, middle, "cg/ef/x/ef_light_x04.png");
+	Zoom("絵粒", 0, 4000, 4000, null, true);
+	Rotate("絵粒", 0, @0, @0, 30, null,true);
+
+	CreateSE("SE01","seヴォイド汎用02");
+	CreateSE("SE02","seヴォイド崩壊03");
+
+	MusicStart("SE01",0,400,0,500,null,false);
+
+	Shake("絵背景上", 1000, 1, 3, 0, 0, 1000, null, false);
+	Rotate("絵背景上", 1000, @0, @0, @10, Axl1,false);
+	Move("絵背景上", 1000, @-60, @620, Axl2, true);
+
+	Fade("絵演*", 0, 1000, null, false);
+	Fade("絵粒", 0, 1000, null, false);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+
+	Shake("絵演*", 1000, 3, 0, 0, 0, 1000, null, false);
+	Zoom("絵演欠片明", 1000, 1800, 1800, Dxl1, false);
+	Zoom("絵演欠片弐明", 1000, 2500, 2500, Dxl1, false);
+	Zoom("絵演欠片", 1000, 1800, 1800, Dxl1, false);
+	Zoom("絵演欠片弐", 1000, 2500, 2500, Dxl1, false);
+
+	Move("絵演*", 800, @100, @800, Axl3, false);
+
+	Zoom("絵粒", 1500, 6000, 6000, Dxl2, false);
+	Move("絵粒", 1500, @0, @600, Axl3, 1200);
+
+
+	Fade("co01", 250, 1000, null, true);
+
+	Delete("絵*");
+	Delete("bg*");
+
+	CreateTextureSP("絵背景", 100, -1024, middle, "cg/bg/l/bg003001_1_研究室_l.jpg");
+	Request("絵背景", Smoothing);
+
+	FadeDelete("co01", 1000, Axl1, true);
+
+	Wait(500);
+
+	Fw("fwキャロル_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/04b00060a02">
+「아~아&, 죽어 버렸네」
+
+{	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX02/04b00070a02">
+｡ｸｱﾗｷ｡ｼｭ?
+｡｡ﾀﾌﾁｦ ｾ鋐ｻｰﾔ ﾇﾒ ｰﾅｾﾟ?｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04b00080a01">
+｡ｸﾁ､ﾇﾘﾁｮ ﾀﾖﾁｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreatePlainSP("絵板写", 5000);
+
+	CreateTextureSP("絵演背景", 500, 0, -480, "cg/bg/l/bg003001_1_研究室_l.jpg");
+	Request("絵演背景", Smoothing);
+	Zoom("絵演背景", 0, 1500, 1500, null, true);
+
+	CreateTextureEX("絵演立絵", 1000, Center, Middle, "cg/st/x/stスクルージ_通常_normal_x01.png");
+	CreateTextureEX("絵演立絵弐", 1001, 160, -48, "cg/st/x/stスクルージ_通常_angry4_x01.png");
+
+	CreateSE("SE01","se人体_動作_衣擦れ02");
+
+
+	MusicStart("SE01",0,700,0,1000,null,false);
+
+	FadeDelete("絵板写", 500, null, false);
+	Move("絵演立絵", 300, @0, @200, Dxl1, true);
+
+	Move("絵演立絵", 500, @0, @-100, Dxl1, false);
+	Fade("絵演立絵", 500, 1000, Dxl1, true);
+
+	Wait(200);
+
+	Move("絵演立絵", 2000, @0, @500, AxlDxl, false);
+	Move("絵演背景", 2000, @0, @280, AxlDxl, true);
+	Fade("絵演立絵弐", 200, 1000, Dxl1, true);
+
+
+
+{	Fw("fwスクルージ_通常_normal");}
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX02/04b00090a01">
+「다음 사냥감은―― 오우마 쿠로스다」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	Wait(500);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 1500, 1000, null, true);
+
+	Delete("絵演*");
+
+	CreateTextureSP("絵画像", 100, Center, 50, "cg/ev/ev0303オートインセクト監視.jpg");
+	Fade("絵画像", 0, 1000, null, true);
+	Zoom("絵画像", 0, 1200, 1200, null, true);
+
+	CreateSE("SE01","se日常_PC_作動音01L");
+	MusicStart("SE01",2000,700,0,1000,null,true);
+
+
+	Wait(1000);
+
+	Move("絵画像", 6000, @0, @-100, null, false);
+
+	Fade("絵色黒", 1500, 0, null, true);
+
+	Wait(2000);
+
+	Fade("絵色黒", 1500, 1000, null, true);
+
+	SetVolumeEX("SE*", 2000, 0, null);
+
+	Wait(3000);
+
+////////////////////////////////////////
+
+//一部始終を監視していたオートインセクト。
+//カメラがチュイーンみたいなノリ。
+
+
+//→→LX0205
+
+}

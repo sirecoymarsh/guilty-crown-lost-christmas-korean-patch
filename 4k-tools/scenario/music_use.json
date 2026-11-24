@@ -1,0 +1,186 @@
+{
+ "lxbgm06": {
+  "first_scene": null,
+  "files": [
+   "0_boot.nss",
+   "function.nss"
+  ],
+  "n": 2
+ },
+ "lxbgm01": {
+  "first_scene": "lx0303.nss",
+  "files": [
+   "lx0303.nss",
+   "function.nss"
+  ],
+  "n": 3
+ },
+ "lxbgm02": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 2
+ },
+ "lxbgm03": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm04": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm05": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm07": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm08": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm09": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm10": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm11": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm12": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm13": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm14": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm15": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm16": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm17": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm18": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxbgm19": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxsong01": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "lxsong02": {
+  "first_scene": null,
+  "files": [
+   "function.nss"
+  ],
+  "n": 1
+ },
+ "xsong02_live": {
+  "first_scene": null,
+  "files": [
+   "function_lc_oga.nss"
+  ],
+  "n": 1
+ },
+ "xsong02_inst": {
+  "first_scene": null,
+  "files": [
+   "function_lc_oga.nss"
+  ],
+  "n": 2
+ },
+ "xsong03": {
+  "first_scene": null,
+  "files": [
+   "function_lc_oga.nss"
+  ],
+  "n": 2
+ },
+ "xsong03_inst": {
+  "first_scene": null,
+  "files": [
+   "function_lc_oga.nss"
+  ],
+  "n": 2
+ },
+ "xsong02": {
+  "first_scene": null,
+  "files": [
+   "function_lc_oga.nss"
+  ],
+  "n": 1
+ }
+}

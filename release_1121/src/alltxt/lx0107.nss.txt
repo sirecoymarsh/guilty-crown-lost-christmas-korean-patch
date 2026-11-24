@@ -1,0 +1,321 @@
+//<continuation number="120">
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0107.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#CGの名前=true;
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0108.nss";
+
+}
+
+
+scene lx0107.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+//―――――――――――――――――――――――――――――――――――――――
+
+	PrintBG("上背景", 30000);
+
+
+	CreateTextureSP("絵背景", 100, Center, 0, "cg/bg/bg002003_5_通路2.jpg");
+	SetVertex("絵背景", center, 0);
+	SetShade("絵背景", HEAVY);
+	Zoom("絵背景", 0, 2000, 2000, null, true);
+
+	FadeDelete("上背景", 2000, null, true);
+
+	//おがみ：曲借入
+	SoundPlay("@lx006",0,600,true);
+
+	CreateTextureEX("絵st01", 500, 299, -512, "cg/st/x/stユウ_通常_normal_x04.png");
+	CreateTextureEX("絵st02", 500, 299, -512, "cg/st/x/stユウ_通常_smile1_x04.png");
+	CreateTextureEX("絵st03", 500, 299, -512, "cg/st/x/stユウ_通常_smile2_x04.png");
+
+	Fade("絵st01", 500, 1000, null, true);
+
+//	St("C",740, @0,@-200,"buユウ_通常_normal");
+//	Rotate("@StNameC/C*", 0, @0, @0, 180, null,true);
+//	Move("@StNameC/C*", 600, @0, @50, Dxl1, false);
+//	FadeSt("C",500,true);
+
+	Wait(300);
+
+
+//◆◆研究施設／天井
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0700010b06">
+｡ｸ｡ｦ｡ｦｿｵﾈ･ﾀﾇ ｹｰﾁ抦ｭｿ｡ ｼｺｰﾟｱｺｿ茖ｹ
+
+{	Fade("絵st02", 300, 1000, null, true);
+	Fade("絵st01", 0, 0, null, true);}
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0700020b06">
+「스크루지&.
+｡｡ｶ貉ﾛﾀﾇ ｼｮﾀﾏﾁｵ ｸ｣ｰﾚｱｺｿ茖ｹ
+
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0700030b06">
+「이번 이브는 조숙하다&.
+　능력의 완성이 앞당겨진다면 그보다 더 좋을 건 없지」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete(0);
+
+	Fade("絵st03", 300, 1000, null, true);
+	Fade("絵st02", 0, 0, null, true);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0700040b06">
+｡ｸｱﾗｷｳ ｰ｡ﾂ･ ｿﾕｿ｡ｰﾔ ｴﾑ ｽﾃｷﾃﾀｻ｡ｪ｡ｪ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	Fade("絵色黒", 500, 1000, null, true);
+
+	Delete("絵st01");
+	Delete("絵st02");
+	Delete("絵st03");
+
+	CreateTextureSP("bg01", 1500, Center, Middle, "cg/bg/bg002007_5_パスト部屋.jpg");
+
+	CreateCameraEX("Ｃ", 0, 0, 1000);
+	CreateTextureSP("Ｃ/絵霞", 10, Center, Middle, "cg/bg/l/bg002007_5_パスト部屋_l.jpg");
+	CreateTextureSP("Ｃ/絵背景", 10, Center, Middle, "cg/bg/l/bg002007_5_パスト部屋_l.jpg");
+	CreateTextureSP("Ｃ/絵背景上", 10, Center, Middle, "cg/bg/l/bg002007_5_パスト部屋_l.jpg");
+
+	CreateTextureEX("Ｃ/絵現在", 700, 100, -90, "cg/st/x/stプレゼント_通常_smile1_x02.png");
+	CreateTextureEXmul("Ｃ/絵現在影", 700, 100, -90, "cg/st/x/stプレゼント_通常_smile1_x03.png");
+
+	Request("Ｃ/絵*", Smoothing);
+	SetShade("Ｃ/絵霞", MEDIUM);
+
+	Zoom("Ｃ/絵霞", 0, 1700, 1700, null, true);
+	Zoom("Ｃ/絵背景*", 0, 1700, 1700, null, true);
+
+	Fade("Ｃ/絵背景上", 0, 400, null, true);
+
+
+	Move("Ｃ/絵霞", 0, @0, @70, null, true);
+
+
+	FadeDelete("絵色黒", 1000, null, true);
+
+	Wait(1000);
+
+	FadeDelete("bg01", 1000, null, false);
+
+	Move("Ｃ/絵背景*", 1000, @0, @70, Dxl1, true);
+	Wait(500);
+
+////////////////////////////////////////
+//◆◆パストコクピット
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0030]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX01/0700050a04">
+《인형…… 부서져 버렸어》
+
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX01/0700060a04">
+《아직 더 놀고 싶은데……》
+
+//（泣き出す）
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX01/0700070a04">
+《우에……》
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	//MoveFFP1("@Ｃ/絵背景上",300);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0040]
+//【パスト】
+<voice name="ﾆﾐｽｺﾆｮ" class="パスト" src="voice/LX01/0700080a04">
+《우에에에&, 우에에에엥!
+｡｡ﾀｸｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾆｾﾓ!｡ｷ
+
+//（ガン泣き）
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+	Wait(16);
+
+////////////////////////////////////////
+//◆◆研究施設／プレゼントの部屋
+
+	CreateTextureEX("bg01", 2000, -1800, 200, "cg/bg/l/bg002007_5_パスト部屋_l.jpg");
+	Request("bg01", Smoothing);
+	Zoom("bg01", 0, 2500, 2500, null, true);
+	CreateTextureEX("ca01", 2100, -410, -520, "cg/ev/x/ev0405プレゼント登場_シルエット.png");
+	Request("ca01", Smoothing);
+	Zoom("ca01", 0, 1500, 1500, null, true);
+
+
+	Move("Ｃ/絵背景*", 1500, @0, @70, AxlDxl, false);
+	Move("bg01", 10000, @10, @50, null, false);
+	Move("ca01", 10000, @20, @100, null, false);
+	Fade("bg01", 1000, 1000, null, false);
+	Fade("ca01", 1000, 1000, null, true);
+
+	Wait(1000);
+	Delete("Ｃ/*");
+	Delete("Ｃ");
+
+//おがみ：演出変更
+/*
+	FadeDelete("Ｃ/絵背景", 1300, Axl2, false);
+	FadeDelete("Ｃ/絵背景上", 800, null, false);
+	Move("ca01", 1500, @0, @-60, Dxl1, false);
+
+
+
+	MoveCamera("@Ｃ", 0, @0, @0, 500, AxlDxl, true);
+	Move("Ｃ/絵現在影", 0, @60, @0, Axl2, false);
+	Fade("Ｃ/絵現在影", 0, 950, Axl2, true);
+	Move("Ｃ/絵現在", 0, @60, @0, null, true);
+	Fade("Ｃ/絵現在", 0, 1000, null, true);
+	//MoveFFP1stop();
+*/
+
+//プレゼントの覚醒。正体はわからず。
+
+//？？：今まで封印されていた感じが欲しい。
+//？？：いっそ拘束具とか？
+
+//シーンを切り替えるのではなく、シームレスに場面変換。
+//パストの泣き声を引っ張りつつ。
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0050]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX01/0700090a03">
+「착하지&, 착해&.
+　그만 울렴&, 꼬마 아가씨」
+
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX01/0700100a03">
+「괜찮아&, 또 놀 수 있을 거야&. 이번엔 예쁘게 단장도 하고&, 새 장난감도 준비해서 말이지」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+	Wait(16);
+
+	CreateTextureSP("bg02", 1900, -1800, 200, "cg/bg/l/bg002007_5_パスト部屋_l.jpg");
+	Request("bg02", Smoothing);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+	CreateTextureSP("ca02", 1900, -410, -350, "cg/ev/x/ev0405プレゼント登場_シルエット.png");
+
+	Move("bg02", 1500, @20, @75, AxlDxl, false);
+	Move("ca02", 1500, @50, -250, AxlDxl, false);
+	FadeDelete("bg01", 500, null, false);
+	FadeDelete("ca01", 500, null, false);
+
+	//Fade("Ｃ/絵現在影", 1300, 800, Axl3, false);
+	//MoveCamera("@Ｃ", 1300, @-100, @-200, 1500, AxlDxl, true);
+	Wait(1500);
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0055]
+//【プレゼント】
+<voice name="ﾇﾁｷｹﾁｨﾆｮ" class="プレゼント" src="voice/LX01/0700110a03">
+「아아…… 기대되는걸&.
+　곧 만나러 갈게&, 스크루지」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+
+	CreateColorEX("絵色黒", 5000, "000000");
+	//MoveCamera("@Ｃ", 5000, @-100, @-200, 3000, AxlDxl, false);
+	Fade("絵色黒", 1000, 1000, null, true);
+	Delete("ca*");
+	Delete("bg*");
+	Delete("Ｃ/絵*");
+	Delete("Ｃ*");
+
+	CreateTextureEX("絵st03", 500, 299, -512, "cg/st/x/stユウ_通常_smile1_x04.png");
+	Fade("絵st03",0,1000,null,true);
+
+	FadeDelete("絵色黒", 800, null, true);
+
+
+////////////////////////////////////////
+//◆◆研究施設／天井
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0060]
+//【ユウ】
+<voice name="유우" class="깇긂" src="voice/LX01/0700120b06">
+「말하자면 저는 스크루지를 이끄는 제이컵 말리――쯤 될까요」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+	TextBoxDelete(0);
+	Wait(500);
+
+	SetVolumeEX("@lx*", 2000, 0, null);
+	ClearFadeAll(2000, true);
+
+	Wait(1000);
+
+//→→LX_0108
+
+}

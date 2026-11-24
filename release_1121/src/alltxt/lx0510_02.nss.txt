@@ -1,0 +1,143 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0510_02.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0510_10.nss";
+
+}
+
+
+scene lx0510_02.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+	PrintGO("上背景", 30000);
+
+	Delete("@bg*");
+	Delete("@ev*");
+	Delete("@ef*");
+	Delete("@mv*");
+	Delete("@dr*");
+
+	CreateTextureSP("bg01", 100, Center, InBottom, "cg/bg/bg005006_3_六本木ヒルズ前.jpg");
+
+	FadeDelete("上背景", 300, null, true);
+
+//おがみ：BGM借入（前ファイルから引き継ぎ）
+	SoundPlay("@lx003",0,800,true);
+
+//←←壊れるくらいにメチャクチャにする
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/1000250a01">
+｡ｸﾁｶｱﾝ ｰﾅﾄ･ｰﾔ ｳｪｰ･ ｰﾅｴﾙ｡ｹ
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	TextBoxDelete();
+	Wait(16);
+
+	CreateTextureEX("bg02", 100, center, 0, "cg/bg/bg005002_3_路地裏ビル倒壊.jpg");
+	SetShade("bg02", SEMIHEAVY);
+	Zoom("bg02", 0, 1500, 1500, null, true);
+
+	CreateTextureEX("ev01", 100, center, -600, "cg/ev/x/ev0111キャロル飛び降り_x01_ogami.png");
+
+	Fade("bg02", 1000, 1000, null, false);
+	Fade("ev01", 1000, 1000, null, false);
+
+	Move("bg02", 1000, @0, 60, AxlDxl, false);
+	Move("ev01", 1000, @0, -496, AxlDxl, true);
+
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0015]
+{	Fw("fwキャロル_通常_normal");}
+//【キャロル】
+<voice name="ﾄｳｷﾑ" class="キャロル" src="voice/LX05/1000260a02">
+「좋아&. 나를 빼앗아 줘&. 부숴 줘――!」
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+//	TextBoxDelete();
+
+	Fw("fwスクルージ_通常_normal");
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【スクルージ】
+<voice name="스크루지" class="긚긏깑�[긙" src="voice/LX05/1000270a01">
+「그래…… 널 엉망진창으로 만들어 주마!」
+
+
+//→→ヴォイド乱舞
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+	TextBoxDelete();
+
+	CreateColorEXadd("co01", 5000, "FFFFFF");
+	Fade("co01", 500, 1000, null, true);
+
+	Delete("bg*");
+	Delete("ev*");
+	Delete("ef*");
+
+
+//	ClearFadeAll(1000, true);
+
+}

@@ -1,0 +1,6 @@
+[Claude 자동 전달 - 사용자 결정]
+사용자 결정(원문): 「승인 19건 칸의 current_target_reference(옛 한국어 문장 전체)는 빼고 유지할 낱말만 남기라고 코덱스 키트 세션에 전해 줘.」
+
+대상: 제미나이 키트 배치의 units[].required_user_span 칸(19단위). current_target_reference 에 그 줄의 옛 한국어 문장 전체(영문 기준 번역)가 들어 있어, 제미나이가 일본어 대신 그 문장을 베낄 수 있습니다. 유지할 낱말(required_literal)만 남겨 주세요. 간결본 v2·v1 키트 양쪽, 그리고 validate_result.py 가 그 칸을 읽는다면 검사 쪽도 맞춰 주세요.
+
+Claude 확인: 같은 성격의 칸이 하나 더 있습니다 — required_user_span.later_resolution.previous_approved_target(3단위, 옛 문장 전체). 사용자 지시의 취지(옛 문장 전체는 빼기)에 해당하니 같이 빼 주세요. 앞서 보낸 풀기 10건·느슨 2건 결정과 함께 적용하면 됩니다. 답장 불필요.

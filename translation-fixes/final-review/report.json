@@ -1,0 +1,570 @@
+{
+ "nss_sha256": "7712efdc450aa561f7c911ed214e98c5ba7754e1ddbc780bc73bffae08c77bd3",
+ "scripts": 133,
+ "cp949_decode_fail": [
+  [
+   "0_boot.nss",
+   "'cp949' codec can't decode byte 0x89 in position 272: illegal multibyte sequence"
+  ],
+  [
+   "0_boot_開始スクリプト.nss",
+   "'cp949' codec can't decode byte 0x81 in position 363: illegal multibyte sequence"
+  ],
+  [
+   "extra_cglib.nss",
+   "'cp949' codec can't decode byte 0x83 in position 277: illegal multibyte sequence"
+  ],
+  [
+   "function.nss",
+   "'cp949' codec can't decode byte 0x83 in position 525: illegal multibyte sequence"
+  ],
+  [
+   "function_dialog.nss",
+   "'cp949' codec can't decode byte 0x81 in position 12: illegal multibyte sequence"
+  ],
+  [
+   "function_dm.nss",
+   "'cp949' codec can't decode byte 0x83 in position 107: illegal multibyte sequence"
+  ],
+  [
+   "function_lc_akk.nss",
+   "'cp949' codec can't decode byte 0x95 in position 588: illegal multibyte sequence"
+  ],
+  [
+   "function_lc_ara.nss",
+   "'cp949' codec can't decode byte 0x81 in position 6: illegal multibyte sequence"
+  ],
+  [
+   "function_lc_chiyo.nss",
+   "'cp949' codec can't decode byte 0x95 in position 121: illegal multibyte sequence"
+  ],
+  [
+   "function_lc_oga.nss",
+   "'cp949' codec can't decode byte 0x83 in position 7: illegal multibyte sequence"
+  ],
+  [
+   "function_lc_shima.nss",
+   "'cp949' codec can't decode byte 0x81 in position 31: illegal multibyte sequence"
+  ],
+  [
+   "function_lc_toho.nss",
+   "'cp949' codec can't decode byte 0x83 in position 204: illegal multibyte sequence"
+  ],
+  [
+   "function_lx.nss",
+   "'cp949' codec can't decode byte 0x83 in position 107: illegal multibyte sequence"
+  ],
+  [
+   "function_move.nss",
+   "'cp949' codec can't decode byte 0x95 in position 105: illegal multibyte sequence"
+  ],
+  [
+   "function_process.nss",
+   "'cp949' codec can't decode byte 0x81 in position 120: illegal multibyte sequence"
+  ],
+  [
+   "function_select.nss",
+   "'cp949' codec can't decode byte 0x81 in position 97: illegal multibyte sequence"
+  ],
+  [
+   "function_stand.nss",
+   "'cp949' codec can't decode byte 0x83 in position 12: illegal multibyte sequence"
+  ],
+  [
+   "lx0010.nss",
+   "'cp949' codec can't decode byte 0x81 in position 579: illegal multibyte sequence"
+  ],
+  [
+   "lx0101.nss",
+   "'cp949' codec can't decode byte 0x96 in position 583: illegal multibyte sequence"
+  ],
+  [
+   "lx0101_00sl.nss",
+   "'cp949' codec can't decode byte 0x81 in position 572: illegal multibyte sequence"
+  ],
+  [
+   "lx0101_01.nss",
+   "'cp949' codec can't decode byte 0x81 in position 570: illegal multibyte sequence"
+  ],
+  [
+   "lx0101_02.nss",
+   "'cp949' codec can't decode byte 0x81 in position 570: illegal multibyte sequence"
+  ],
+  [
+   "lx0102.nss",
+   "'cp949' codec can't decode byte 0x81 in position 658: illegal multibyte sequence"
+  ],
+  [
+   "lx0103.nss",
+   "'cp949' codec can't decode byte 0x81 in position 524: illegal multibyte sequence"
+  ],
+  [
+   "lx0104a.nss",
+   "'cp949' codec can't decode byte 0x81 in position 537: illegal multibyte sequence"
+  ],
+  [
+   "lx0104a_00sl.nss",
+   "'cp949' codec can't decode byte 0x81 in position 509: illegal multibyte sequence"
+  ],
+  [
+   "lx0104a_01.nss",
+   "'cp949' codec can't decode byte 0x81 in position 507: illegal multibyte sequence"
+  ],
+  [
+   "lx0104a_02.nss",
+   "'cp949' codec can't decode byte 0x81 in position 507: illegal multibyte sequence"
+  ],
+  [
+   "lx0104b.nss",
+   "'cp949' codec can't decode byte 0x81 in position 537: illegal multibyte sequence"
+  ],
+  [
+   "lx0105.nss",
+   "'cp949' codec can't decode byte 0x81 in position 547: illegal multibyte sequence"
+  ],
+  [
+   "lx0106.nss",
+   "'cp949' codec can't decode byte 0x81 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0107.nss",
+   "'cp949' codec can't decode byte 0x81 in position 534: illegal multibyte sequence"
+  ],
+  [
+   "lx0108.nss",
+   "'cp949' codec can't decode byte 0x81 in position 545: illegal multibyte sequence"
+  ],
+  [
+   "lx0108_00sl.nss",
+   "'cp949' codec can't decode byte 0x81 in position 510: illegal multibyte sequence"
+  ],
+  [
+   "lx0108_01.nss",
+   "'cp949' codec can't decode byte 0x81 in position 517: illegal multibyte sequence"
+  ],
+  [
+   "lx0108_02.nss",
+   "'cp949' codec can't decode byte 0x81 in position 519: illegal multibyte sequence"
+  ],
+  [
+   "lx0109.nss",
+   "'cp949' codec can't decode byte 0x81 in position 575: illegal multibyte sequence"
+  ],
+  [
+   "lx0201.nss",
+   "'cp949' codec can't decode byte 0x81 in position 577: illegal multibyte sequence"
+  ],
+  [
+   "lx0202.nss",
+   "'cp949' codec can't decode byte 0x81 in position 545: illegal multibyte sequence"
+  ],
+  [
+   "lx0203a.nss",
+   "'cp949' codec can't decode byte 0x81 in position 537: illegal multibyte sequence"
+  ],
+  [
+   "lx0203b.nss",
+   "'cp949' codec can't decode byte 0x81 in position 537: illegal multibyte sequence"
+  ],
+  [
+   "lx0203_00sl.nss",
+   "'cp949' codec can't decode byte 0x81 in position 508: illegal multibyte sequence"
+  ],
+  [
+   "lx0204a.nss",
+   "'cp949' codec can't decode byte 0x81 in position 520: illegal multibyte sequence"
+  ],
+  [
+   "lx0204b.nss",
+   "'cp949' codec can't decode byte 0x81 in position 517: illegal multibyte sequence"
+  ],
+  [
+   "lx0204_00sl.nss",
+   "'cp949' codec can't decode byte 0x81 in position 508: illegal multibyte sequence"
+  ],
+  [
+   "lx0205.nss",
+   "'cp949' codec can't decode byte 0x81 in position 587: illegal multibyte sequence"
+  ],
+  [
+   "lx0206.nss",
+   "'cp949' codec can't decode byte 0x83 in position 543: illegal multibyte sequence"
+  ],
+  [
+   "lx0207.nss",
+   "'cp949' codec can't decode byte 0x81 in position 536: illegal multibyte sequence"
+  ],
+  [
+   "lx0300.nss",
+   "'cp949' codec can't decode byte 0x81 in position 605: illegal multibyte sequence"
+  ],
+  [
+   "lx0301.nss",
+   "'cp949' codec can't decode byte 0x81 in position 492: illegal multibyte sequence"
+  ],
+  [
+   "lx0302.nss",
+   "'cp949' codec can't decode byte 0x81 in position 507: illegal multibyte sequence"
+  ],
+  [
+   "lx0302_00sl.nss",
+   "'cp949' codec can't decode byte 0x81 in position 570: illegal multibyte sequence"
+  ],
+  [
+   "lx0302_01.nss",
+   "'cp949' codec can't decode byte 0x96 in position 498: illegal multibyte sequence"
+  ],
+  [
+   "lx0302_02.nss",
+   "'cp949' codec can't decode byte 0x96 in position 498: illegal multibyte sequence"
+  ],
+  [
+   "lx0303.nss",
+   "'cp949' codec can't decode byte 0x83 in position 516: illegal multibyte sequence"
+  ],
+  [
+   "lx0304.nss",
+   "'cp949' codec can't decode byte 0x81 in position 494: illegal multibyte sequence"
+  ],
+  [
+   "lx0401.nss",
+   "'cp949' codec can't decode byte 0x81 in position 524: illegal multibyte sequence"
+  ],
+  [
+   "lx0401_00sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0402a_00.nss",
+   "'cp949' codec can't decode byte 0x83 in position 522: illegal multibyte sequence"
+  ],
+  [
+   "lx0402a_01.nss",
+   "'cp949' codec can't decode byte 0x83 in position 534: illegal multibyte sequence"
+  ],
+  [
+   "lx0402a_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 526: illegal multibyte sequence"
+  ],
+  [
+   "lx0402a_10.nss",
+   "'cp949' codec can't decode byte 0x83 in position 522: illegal multibyte sequence"
+  ],
+  [
+   "lx0402b_00.nss",
+   "'cp949' codec can't decode byte 0x83 in position 522: illegal multibyte sequence"
+  ],
+  [
+   "lx0402b_01.nss",
+   "'cp949' codec can't decode byte 0x83 in position 522: illegal multibyte sequence"
+  ],
+  [
+   "lx0402b_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 522: illegal multibyte sequence"
+  ],
+  [
+   "lx0402b_10.nss",
+   "'cp949' codec can't decode byte 0x83 in position 522: illegal multibyte sequence"
+  ],
+  [
+   "lx0403.nss",
+   "'cp949' codec can't decode byte 0x81 in position 520: illegal multibyte sequence"
+  ],
+  [
+   "lx0500.nss",
+   "'cp949' codec can't decode byte 0x81 in position 604: illegal multibyte sequence"
+  ],
+  [
+   "lx0501.nss",
+   "'cp949' codec can't decode byte 0x83 in position 539: illegal multibyte sequence"
+  ],
+  [
+   "lx0501_00sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0501_01.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0501_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0502.nss",
+   "'cp949' codec can't decode byte 0x83 in position 518: illegal multibyte sequence"
+  ],
+  [
+   "lx0502_00sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0502_01.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0502_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0502_10.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0503.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0504.nss",
+   "'cp949' codec can't decode byte 0x81 in position 705: illegal multibyte sequence"
+  ],
+  [
+   "lx0505_00.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0505_01.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0505_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0505_10.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0506.nss",
+   "'cp949' codec can't decode byte 0x81 in position 520: illegal multibyte sequence"
+  ],
+  [
+   "lx0507.nss",
+   "'cp949' codec can't decode byte 0x83 in position 518: illegal multibyte sequence"
+  ],
+  [
+   "lx0507_00sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0507_01.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0507_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0507_10.nss",
+   "'cp949' codec can't decode byte 0x8e in position 531: illegal multibyte sequence"
+  ],
+  [
+   "lx0508.nss",
+   "'cp949' codec can't decode byte 0x83 in position 518: illegal multibyte sequence"
+  ],
+  [
+   "lx0509.nss",
+   "'cp949' codec can't decode byte 0x81 in position 577: illegal multibyte sequence"
+  ],
+  [
+   "lx0510.nss",
+   "'cp949' codec can't decode byte 0x81 in position 534: illegal multibyte sequence"
+  ],
+  [
+   "lx0510_00sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0510_01.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0510_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0510_10.nss",
+   "'cp949' codec can't decode byte 0x81 in position 565: illegal multibyte sequence"
+  ],
+  [
+   "lx0511_00.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0511_01.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0511_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0511_10.nss",
+   "'cp949' codec can't decode byte 0x81 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0600.nss",
+   "'cp949' codec can't decode byte 0x96 in position 565: illegal multibyte sequence"
+  ],
+  [
+   "lx0601.nss",
+   "'cp949' codec can't decode byte 0x83 in position 518: illegal multibyte sequence"
+  ],
+  [
+   "lx0602.nss",
+   "'cp949' codec can't decode byte 0x83 in position 548: illegal multibyte sequence"
+  ],
+  [
+   "lx0602_00sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0602_02.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0602_10.nss",
+   "'cp949' codec can't decode byte 0x81 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0603.nss",
+   "'cp949' codec can't decode byte 0x81 in position 528: illegal multibyte sequence"
+  ],
+  [
+   "lx0604_00sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0604_10bgm.nss",
+   "'cp949' codec can't decode byte 0x83 in position 524: illegal multibyte sequence"
+  ],
+  [
+   "lx0604_10sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0604_11.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0604_12.nss",
+   "'cp949' codec can't decode byte 0x83 in position 521: illegal multibyte sequence"
+  ],
+  [
+   "lx0604_20.nss",
+   "'cp949' codec can't decode byte 0x81 in position 531: illegal multibyte sequence"
+  ],
+  [
+   "lx0604_20sl.nss",
+   "'cp949' codec can't decode byte 0x83 in position 523: illegal multibyte sequence"
+  ],
+  [
+   "lx0605a.nss",
+   "'cp949' codec can't decode byte 0x81 in position 529: illegal multibyte sequence"
+  ],
+  [
+   "lx0605a_90ed.nss",
+   "'cp949' codec can't decode byte 0x83 in position 524: illegal multibyte sequence"
+  ],
+  [
+   "lx0605b.nss",
+   "'cp949' codec can't decode byte 0x81 in position 685: illegal multibyte sequence"
+  ],
+  [
+   "lx0605b_90ed.nss",
+   "'cp949' codec can't decode byte 0x83 in position 524: illegal multibyte sequence"
+  ],
+  [
+   "lx9999.nss",
+   "'cp949' codec can't decode byte 0x81 in position 539: illegal multibyte sequence"
+  ],
+  [
+   "sys_auto.nss",
+   "'cp949' codec can't decode byte 0x81 in position 113: illegal multibyte sequence"
+  ],
+  [
+   "sys_backlog.nss",
+   "'cp949' codec can't decode byte 0x83 in position 364: illegal multibyte sequence"
+  ],
+  [
+   "sys_backselect.nss",
+   "'cp949' codec can't decode byte 0x8b in position 518: illegal multibyte sequence"
+  ],
+  [
+   "sys_close.nss",
+   "'cp949' codec can't decode byte 0x83 in position 362: illegal multibyte sequence"
+  ],
+  [
+   "sys_config.nss",
+   "'cp949' codec can't decode byte 0x83 in position 531: illegal multibyte sequence"
+  ],
+  [
+   "sys_load.nss",
+   "'cp949' codec can't decode byte 0x81 in position 128: illegal multibyte sequence"
+  ],
+  [
+   "sys_menu.nss",
+   "'cp949' codec can't decode byte 0x81 in position 112: illegal multibyte sequence"
+  ],
+  [
+   "sys_quickload.nss",
+   "'cp949' codec can't decode byte 0x81 in position 151: illegal multibyte sequence"
+  ],
+  [
+   "sys_quicksave.nss",
+   "'cp949' codec can't decode byte 0x81 in position 144: illegal multibyte sequence"
+  ],
+  [
+   "sys_reset.nss",
+   "'cp949' codec can't decode byte 0x83 in position 322: illegal multibyte sequence"
+  ],
+  [
+   "sys_save.nss",
+   "'cp949' codec can't decode byte 0x81 in position 128: illegal multibyte sequence"
+  ],
+  [
+   "sys_screen.nss",
+   "'cp949' codec can't decode byte 0x81 in position 109: illegal multibyte sequence"
+  ]
+ ],
+ "unescaped_halfwidth_punct": {},
+ "kana_in_dialogue": [],
+ "ledger_units": 2422,
+ "ledger_missing_in_nss": [],
+ "ruby_particle_mismatch": [],
+ "carol_dangsin": [],
+ "ousama_not_imgeumnim": [],
+ "dialogue_geu_geunyeo": [
+  [
+   "lx0301.nss::text0380::p001",
+   "「자네는 그녀에게서 보이드를 꺼냈다고 말했지만…… 여기엔 몇 가지 모순점이 있다네」"
+  ],
+  [
+   "lx0304.nss::text0475::p001",
+   "「그녀가 과거의 크리스마스 정령이야」"
+  ],
+  [
+   "lx0304.nss::text0483::p002",
+   "「특히 그녀는 신경계를 강화받았으니까――」"
+  ],
+  [
+   "lx0601.nss::text0040::p001",
+   "「의인은 한 사람도 없도다. 그들의 영혼에는 화가 있을진저.\n　스스로 그 악의 응보를 받았음이라――」"
+  ]
+ ],
+ "daath_saja": [
+  "「다아트의 사자가 아니었나?」"
+ ],
+ "term_counts": {
+  "패스트": 0,
+  "파스트": 18,
+  "프레젠트": 38,
+  "제이컵": 2,
+  "제이콥": 0,
+  "옛 투 컴": 3,
+  "임금님": 7,
+  "스크루지": 82,
+  "전신전령": 0,
+  "그녀": 31
+ }
+}

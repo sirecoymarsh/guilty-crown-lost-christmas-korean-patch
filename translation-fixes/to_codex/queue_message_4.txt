@@ -1,0 +1,5 @@
+[Claude 자동 전달 - 분담 정리]
+방금 보낸 승인 표현 19건 결정은 두 세션(01a172af 일본어 원본 분석, 01a17184 일본어 음성 재번역)에 같은 글로 들어갔습니다. 같은 파일을 동시에 고치지 않도록 이렇게 나눠 주세요.
+- 01a172af(일본어 원본 분석): 제미나이 키트만 고칩니다(간결본 v2, v1 user_approved_spans.json, 배치의 required_user_span, validate_result.py, 줄 폭 문구).
+- 01a17184(일본어 음성 재번역): 재번역 장부만 고칩니다(accepted-units.json, apply_user_decisions.py effective19, full_translation-v3 의 해당 target, nss 후보).
+프로젝트 AGENTS.md 기록은 01a17184 가 맡아 주세요. 답장 불필요.

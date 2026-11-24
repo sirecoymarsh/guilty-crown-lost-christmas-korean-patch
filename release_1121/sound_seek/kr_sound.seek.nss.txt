@@ -1,0 +1,761 @@
+// Claude 11-02: 사운드 모드(사용자 「UI에 맞게 사운드 모드도 만들어서 OST 다시 듣게 해줘」). 원작에는 음악 감상이 없다
+// (0_boot 의 extra_soundlib 부르기는 켜는 단추도 대본 파일도 없는 흔적). 회상과 같은 원작 CG 감상 화면 틀을 빌린다.
+// 곡 = 원작 InitBGM 표(애니메이션 사운드트랙 이름) + 결말 노래 둘. 그 곡을 트는 이야기 장면을 하나라도 읽었으면 열린다(회상과 같은 Conquest).
+// 줄·선택은 모두 gen_viewer.py 가 상수로 풀어 쓴다(이 엔진은 함수 인자·첨자 변수가 잘 어긋난다 - n2system 대본 함정).
+#include "nss/function.nss"
+#include "nss/function_move.nss"
+#include "nss/function_select.nss"
+
+chapter main
+{
+	$SYSTEM_menu_lock = true;
+	$SYSTEM_backlog_lock = true;
+	$KU_NOW=-1;
+	KrLyStopFor("@*");SetVolume("@*", 500, 0, NULL);
+	Wait(500);
+	KuCalc();
+	$KU_RUN=true;
+	while($KU_RUN){
+		KuList();
+	}
+	$KUH_ON=false;$KUS_ON=false;
+	CreateColor("kz_black",31000,0,0,1024,576,BLACK);
+	Fade("kz_black",0,0,null,true);
+	Fade("kz_black",300,1000,null,true);
+	KrLyStopFor("@kubgm");SetVolume("@kubgm", 800, 0, NULL);
+	Wait(800);
+	Delete("@kubgm");
+	Delete("*");
+}
+
+function KuCover()
+{
+	Delete("ku_cover");
+	CreateTexture("ku_cover",30000,0,0,SCREEN);
+}
+
+function KuSounds()
+{
+	CreateSound("ku_se_ok",SE,"sound/se/SE_긘긚긡��_긄긌긚긣깋_뙂믦.ogg");
+	CreateSound("ku_se_end",SE,"sound/se/SE_긘긚긡��_긄긌긚긣깋_뢎뿹.ogg");
+	SetAlias("ku_se_ok","ku_se_ok");
+	SetAlias("ku_se_end","ku_se_end");
+}
+
+function KuText($ut_nm,$ut_p,$ut_x,$ut_y,$ut_w,$ut_h,$ut_t)
+{
+	CreateText($ut_nm,$ut_p,$ut_x,$ut_y,$ut_w,$ut_h,$ut_t);
+	Request($ut_nm,NoLog);
+	Request($ut_nm,PushText);
+}
+
+function KuClear()
+{
+	Delete("ku_l*");
+	Delete("ku_r*");
+	Delete("KU_*");
+}
+
+//■ 곡 바꾸기: 앞 곡을 줄여 지우고 새로 튼다(같은 이름 하나만 쓴다)
+function KuFade()
+{
+	$KUS_ON=false;
+	if($KU_NOW>0){KrLyStopFor("@kubgm");SetVolume("@kubgm", 300, 0, NULL);Wait(300);}
+	Delete("@kubgm");
+}
+
+//■ 목록: 두 줄 기둥(왼쪽 1~10, 오른쪽 11~), 아래 줄 = 사운드 · 멈춤 · 닫기
+function KuList()
+{
+	$KUH_ON=false;$KUS_ON=false;
+	$kxW=0;while($KUH_RUN){Wait(4);$kxW=$kxW+1;if($kxW>=100){$KUH_RUN=false;}}
+	KuCover();
+	KuClear();
+	KuSounds();
+	// 바탕 = 원작 환경 설정 화면의 줄 꼴(갈래 칸·이름 칸·번호 칸, 아래 눈금), 틀 = 원작 감상 화면의 위아래 은빛 띠
+	CreateTexture("ku_lbg",2001,0,0,"nss/kr_snd_bg.png");
+	SetVertex("ku_lbg",0,0);
+	Zoom("ku_lbg",0,250,250,null,false);
+	Request("ku_lbg",Smoothing);
+	CreateTexture("ku_lbar",2015,0,0,"nss/kr_bars.png");
+	SetVertex("ku_lbar",0,0);
+	Zoom("ku_lbar",0,250,250,null,false);
+	Request("ku_lbar",Smoothing);
+	CreateChoice("KU_EXIT");
+	CreateTexture("KU_EXIT/MouseUsual/hit",0,924,542,"cg/sys/extra/cglib/hit02.png");
+	CreateTexture("KU_EXIT/MouseUsual/img",2020,924,542,"cg/sys/extra/cglib/exit-001.png");
+	SetVertex("KU_EXIT/MouseUsual/img",0,0);
+	Zoom("KU_EXIT/MouseUsual/img",0,250,250,null,false);
+	Request("KU_EXIT/MouseUsual/img",Smoothing);
+	CreateTexture("KU_EXIT/MouseOver/img",2021,924,542,"cg/sys/extra/cglib/exit-002.png");
+	SetVertex("KU_EXIT/MouseOver/img",0,0);
+	Zoom("KU_EXIT/MouseOver/img",0,250,250,null,false);
+	Request("KU_EXIT/MouseOver/img",Smoothing);
+	CreateTexture("KU_EXIT/MouseClick/img",2021,924,542,"cg/sys/extra/cglib/exit-003.png");
+	SetVertex("KU_EXIT/MouseClick/img",0,0);
+	Zoom("KU_EXIT/MouseClick/img",0,250,250,null,false);
+	Request("KU_EXIT/MouseClick/img",Smoothing);
+	CreateChoice("KU_STOP");
+	CreateColor("KU_STOP/MouseUsual/hit",2020,452,544,120,30,0x000000);
+	Request("KU_STOP/MouseUsual/hit",Erase);
+	CreateColor("KU_STOP/MouseOver/img",2021,452,544,120,30,0xF2F2F2);
+	CreateColor("KU_STOP/MouseClick/img",2021,452,544,120,30,0x58B6A4);
+	SetFont("Noto Sans KR", 15, 7A7A7A, E6E6E6, 600, RIGHTDOWN);
+	KuText("ku_lstop",2022,480,546,100,34,"■  멈춤");
+	CreateChoice("KU_TRN");
+	CreateColor("KU_TRN/MouseUsual/hit",2020,600,544,160,30,0x000000);
+	Request("KU_TRN/MouseUsual/hit",Erase);
+	CreateColor("KU_TRN/MouseOver/img",2021,600,544,160,30,0xF2F2F2);
+	CreateColor("KU_TRN/MouseClick/img",2021,600,544,160,30,0x58B6A4);
+	SetFont("Noto Sans KR", 15, 7A7A7A, E6E6E6, 600, RIGHTDOWN);
+	if(#KR_SNDTR){KuText("ku_ltrn",2022,614,546,140,34,"제목 해석 · 켬");}else{KuText("ku_ltrn",2022,614,546,140,34,"제목 해석 · 끔");}
+	SetFont("Noto Sans KR", 15, 8A8A8A, E6E6E6, 500, RIGHTDOWN);
+	// 「사운드」 글은 KuHintTick 이 만든다(11-24)
+	if($KU_OK1){
+		if($KU_NOW!=1){
+		CreateChoice("ku_r01");
+		CreateColor("ku_r01/MouseUsual/hit",2010,26,58,476,26,0x000000);
+		Request("ku_r01/MouseUsual/hit",Erase);
+		CreateColor("ku_r01/MouseOver/img",2011,108,59,304,24,0x262626);
+		CreateColor("ku_r01/MouseClick/img",2011,108,59,304,24,0x2A6F63);
+		}
+		if($KU_NOW==1){CreateColor("ku_ln01",2010,108,59,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp01",2012,388,60,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt01",2012,120,59,264,26,"생명 (비오스)");}else{KuText("ku_lt01",2012,120,59,264,26,"βios");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt01",2012,120,59,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK2){
+		if($KU_NOW!=2){
+		CreateChoice("ku_r02");
+		CreateColor("ku_r02/MouseUsual/hit",2010,26,102,476,26,0x000000);
+		Request("ku_r02/MouseUsual/hit",Erase);
+		CreateColor("ku_r02/MouseOver/img",2011,108,103,304,24,0x262626);
+		CreateColor("ku_r02/MouseClick/img",2011,108,103,304,24,0x2A6F63);
+		}
+		if($KU_NOW==2){CreateColor("ku_ln02",2010,108,103,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp02",2012,388,104,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt02",2012,120,103,264,26,"종말 (오메가)");}else{KuText("ku_lt02",2012,120,103,264,26,"Ω");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt02",2012,120,103,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK3){
+		if($KU_NOW!=3){
+		CreateChoice("ku_r03");
+		CreateColor("ku_r03/MouseUsual/hit",2010,26,146,476,26,0x000000);
+		Request("ku_r03/MouseUsual/hit",Erase);
+		CreateColor("ku_r03/MouseOver/img",2011,108,147,304,24,0x262626);
+		CreateColor("ku_r03/MouseClick/img",2011,108,147,304,24,0x2A6F63);
+		}
+		if($KU_NOW==3){CreateColor("ku_ln03",2010,108,147,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp03",2012,388,148,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt03",2012,120,147,264,26,"출격 완료");}else{KuText("ku_lt03",2012,120,147,264,26,"Ready to Go");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt03",2012,120,147,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK4){
+		if($KU_NOW!=4){
+		CreateChoice("ku_r04");
+		CreateColor("ku_r04/MouseUsual/hit",2010,26,190,476,26,0x000000);
+		Request("ku_r04/MouseUsual/hit",Erase);
+		CreateColor("ku_r04/MouseOver/img",2011,108,191,304,24,0x262626);
+		CreateColor("ku_r04/MouseClick/img",2011,108,191,304,24,0x2A6F63);
+		}
+		if($KU_NOW==4){CreateColor("ku_ln04",2010,108,191,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp04",2012,388,192,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt04",2012,120,191,264,26,"동료들 (장의사)");}else{KuText("ku_lt04",2012,120,191,264,26,"friends");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt04",2012,120,191,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK5){
+		if($KU_NOW!=5){
+		CreateChoice("ku_r05");
+		CreateColor("ku_r05/MouseUsual/hit",2010,26,234,476,26,0x000000);
+		Request("ku_r05/MouseUsual/hit",Erase);
+		CreateColor("ku_r05/MouseOver/img",2011,108,235,304,24,0x262626);
+		CreateColor("ku_r05/MouseClick/img",2011,108,235,304,24,0x2A6F63);
+		}
+		if($KU_NOW==5){CreateColor("ku_ln05",2010,108,235,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp05",2012,388,236,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt05",2012,120,235,264,26,"공허 (보이드)");}else{KuText("ku_lt05",2012,120,235,264,26,"VOiD");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt05",2012,120,235,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK6){
+		if($KU_NOW!=6){
+		CreateChoice("ku_r06");
+		CreateColor("ku_r06/MouseUsual/hit",2010,26,278,476,26,0x000000);
+		Request("ku_r06/MouseUsual/hit",Erase);
+		CreateColor("ku_r06/MouseOver/img",2011,108,279,304,24,0x262626);
+		CreateColor("ku_r06/MouseClick/img",2011,108,279,304,24,0x2A6F63);
+		}
+		if($KU_NOW==6){CreateColor("ku_ln06",2010,108,279,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp06",2012,388,280,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt06",2012,120,279,264,26,"GHQ (암호 표기)");}else{KuText("ku_lt06",2012,120,279,264,26,"gエ19");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt06",2012,120,279,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK7){
+		if($KU_NOW!=7){
+		CreateChoice("ku_r07");
+		CreateColor("ku_r07/MouseUsual/hit",2010,26,322,476,26,0x000000);
+		Request("ku_r07/MouseUsual/hit",Erase);
+		CreateColor("ku_r07/MouseOver/img",2011,108,323,304,24,0x262626);
+		CreateColor("ku_r07/MouseClick/img",2011,108,323,304,24,0x2A6F63);
+		}
+		if($KU_NOW==7){CreateColor("ku_ln07",2010,108,323,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp07",2012,388,324,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt07",2012,120,323,264,26,"신들 (테오이)");}else{KuText("ku_lt07",2012,120,323,264,26,"θεοι");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt07",2012,120,323,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK8){
+		if($KU_NOW!=8){
+		CreateChoice("ku_r08");
+		CreateColor("ku_r08/MouseUsual/hit",2010,26,366,476,26,0x000000);
+		Request("ku_r08/MouseUsual/hit",Erase);
+		CreateColor("ku_r08/MouseOver/img",2011,108,367,304,24,0x262626);
+		CreateColor("ku_r08/MouseClick/img",2011,108,367,304,24,0x2A6F63);
+		}
+		if($KU_NOW==8){CreateColor("ku_ln08",2010,108,367,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp08",2012,388,368,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt08",2012,120,367,264,26,"왕·군주 (바실레우스)");}else{KuText("ku_lt08",2012,120,367,264,26,"Βασιλευζ");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt08",2012,120,367,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK9){
+		if($KU_NOW!=9){
+		CreateChoice("ku_r09");
+		CreateColor("ku_r09/MouseUsual/hit",2010,26,410,476,26,0x000000);
+		Request("ku_r09/MouseUsual/hit",Erase);
+		CreateColor("ku_r09/MouseOver/img",2011,108,411,304,24,0x262626);
+		CreateColor("ku_r09/MouseClick/img",2011,108,411,304,24,0x2A6F63);
+		}
+		if($KU_NOW==9){CreateColor("ku_ln09",2010,108,411,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp09",2012,388,412,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt09",2012,120,411,264,26,"원주율 (끝없는 굴레)");}else{KuText("ku_lt09",2012,120,411,264,26,"π");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt09",2012,120,411,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK10){
+		if($KU_NOW!=10){
+		CreateChoice("ku_r10");
+		CreateColor("ku_r10/MouseUsual/hit",2010,26,454,476,26,0x000000);
+		Request("ku_r10/MouseUsual/hit",Erase);
+		CreateColor("ku_r10/MouseOver/img",2011,108,455,304,24,0x262626);
+		CreateColor("ku_r10/MouseClick/img",2011,108,455,304,24,0x2A6F63);
+		}
+		if($KU_NOW==10){CreateColor("ku_ln10",2010,108,455,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp10",2012,388,456,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt10",2012,120,455,264,26,"영혼의 해방");}else{KuText("ku_lt10",2012,120,455,264,26,"Release My Soul");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt10",2012,120,455,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK11){
+		if($KU_NOW!=11){
+		CreateChoice("ku_r11");
+		CreateColor("ku_r11/MouseUsual/hit",2010,524,58,476,26,0x000000);
+		Request("ku_r11/MouseUsual/hit",Erase);
+		CreateColor("ku_r11/MouseOver/img",2011,606,59,304,24,0x262626);
+		CreateColor("ku_r11/MouseClick/img",2011,606,59,304,24,0x2A6F63);
+		}
+		if($KU_NOW==11){CreateColor("ku_ln11",2010,606,59,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp11",2012,886,60,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt11",2012,618,59,264,26,"왕관 (크로네)");}else{KuText("ku_lt11",2012,618,59,264,26,"κrOnё");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt11",2012,618,59,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK12){
+		if($KU_NOW!=12){
+		CreateChoice("ku_r12");
+		CreateColor("ku_r12/MouseUsual/hit",2010,524,102,476,26,0x000000);
+		Request("ku_r12/MouseUsual/hit",Erase);
+		CreateColor("ku_r12/MouseOver/img",2011,606,103,304,24,0x262626);
+		CreateColor("ku_r12/MouseClick/img",2011,606,103,304,24,0x2A6F63);
+		}
+		if($KU_NOW==12){CreateColor("ku_ln12",2010,606,103,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp12",2012,886,104,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt12",2012,618,103,264,26,"슬픔의 언덕");}else{KuText("ku_lt12",2012,618,103,264,26,"Hill Of Sorrow");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt12",2012,618,103,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK13){
+		if($KU_NOW!=13){
+		CreateChoice("ku_r13");
+		CreateColor("ku_r13/MouseUsual/hit",2010,524,146,476,26,0x000000);
+		Request("ku_r13/MouseUsual/hit",Erase);
+		CreateColor("ku_r13/MouseOver/img",2011,606,147,304,24,0x262626);
+		CreateColor("ku_r13/MouseClick/img",2011,606,147,304,24,0x2A6F63);
+		}
+		if($KU_NOW==13){CreateColor("ku_ln13",2010,606,147,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp13",2012,886,148,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt13",2012,618,147,264,26,"묵시록 (아포칼립스)");}else{KuText("ku_lt13",2012,618,147,264,26,"Αποκσλυψιζ");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt13",2012,618,147,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK14){
+		if($KU_NOW!=14){
+		CreateChoice("ku_r14");
+		CreateColor("ku_r14/MouseUsual/hit",2010,524,190,476,26,0x000000);
+		Request("ku_r14/MouseUsual/hit",Erase);
+		CreateColor("ku_r14/MouseOver/img",2011,606,191,304,24,0x262626);
+		CreateColor("ku_r14/MouseClick/img",2011,606,191,304,24,0x2A6F63);
+		}
+		if($KU_NOW==14){CreateColor("ku_ln14",2010,606,191,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp14",2012,886,192,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt14",2012,618,191,264,26,"안식처 ~이 모퉁이에서~");}else{KuText("ku_lt14",2012,618,191,264,26,"Home ~in this corner~");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt14",2012,618,191,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK15){
+		if($KU_NOW!=15){
+		CreateChoice("ku_r15");
+		CreateColor("ku_r15/MouseUsual/hit",2010,524,234,476,26,0x000000);
+		Request("ku_r15/MouseUsual/hit",Erase);
+		CreateColor("ku_r15/MouseOver/img",2011,606,235,304,24,0x262626);
+		CreateColor("ku_r15/MouseClick/img",2011,606,235,304,24,0x2A6F63);
+		}
+		if($KU_NOW==15){CreateColor("ku_ln15",2010,606,235,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp15",2012,886,236,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt15",2012,618,235,264,26,"규약된 창세");}else{KuText("ku_lt15",2012,618,235,264,26,"Genesi§");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt15",2012,618,235,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK16){
+		if($KU_NOW!=16){
+		CreateChoice("ku_r16");
+		CreateColor("ku_r16/MouseUsual/hit",2010,524,278,476,26,0x000000);
+		Request("ku_r16/MouseUsual/hit",Erase);
+		CreateColor("ku_r16/MouseOver/img",2011,606,279,304,24,0x262626);
+		CreateColor("ku_r16/MouseClick/img",2011,606,279,304,24,0x2A6F63);
+		}
+		if($KU_NOW==16){CreateColor("ku_ln16",2010,606,279,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp16",2012,886,280,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt16",2012,618,279,264,26,"생명의 변주");}else{KuText("ku_lt16",2012,618,279,264,26,"βιοζ-δ");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt16",2012,618,279,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK17){
+		if($KU_NOW!=17){
+		CreateChoice("ku_r17");
+		CreateColor("ku_r17/MouseUsual/hit",2010,524,322,476,26,0x000000);
+		Request("ku_r17/MouseUsual/hit",Erase);
+		CreateColor("ku_r17/MouseOver/img",2011,606,323,304,24,0x262626);
+		CreateColor("ku_r17/MouseClick/img",2011,606,323,304,24,0x2A6F63);
+		}
+		if($KU_NOW==17){CreateColor("ku_ln17",2010,606,323,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp17",2012,886,324,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt17",2012,618,323,264,26,"모두의 현실");}else{KuText("ku_lt17",2012,618,323,264,26,"Rё∀L");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt17",2012,618,323,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK18){
+		if($KU_NOW!=18){
+		CreateChoice("ku_r18");
+		CreateColor("ku_r18/MouseUsual/hit",2010,524,366,476,26,0x000000);
+		Request("ku_r18/MouseUsual/hit",Erase);
+		CreateColor("ku_r18/MouseOver/img",2011,606,367,304,24,0x262626);
+		CreateColor("ku_r18/MouseClick/img",2011,606,367,304,24,0x2A6F63);
+		}
+		if($KU_NOW==18){CreateColor("ku_ln18",2010,606,367,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp18",2012,886,368,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt18",2012,618,367,264,26,"고립·격리");}else{KuText("ku_lt18",2012,618,367,264,26,"ISOLATION");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt18",2012,618,367,264,26,"아직 듣지 않은 곡");
+	}
+	if($KU_OK19){
+		if($KU_NOW!=19){
+		CreateChoice("ku_r19");
+		CreateColor("ku_r19/MouseUsual/hit",2010,524,410,476,26,0x000000);
+		Request("ku_r19/MouseUsual/hit",Erase);
+		CreateColor("ku_r19/MouseOver/img",2011,606,411,304,24,0x262626);
+		CreateColor("ku_r19/MouseClick/img",2011,606,411,304,24,0x2A6F63);
+		}
+		if($KU_NOW==19){CreateColor("ku_ln19",2010,606,411,304,24,0x163A36);SetFont("Noto Sans KR", 14, 8BE9D7, 000000, 600, RIGHTDOWN);KuText("ku_lp19",2012,886,412,24,24,"▶");}
+		SetFont("Noto Sans KR", 16, DADADA, 000000, 600, RIGHTDOWN);
+		if(#KR_SNDTR){KuText("ku_lt19",2012,618,411,264,26,"나는 어디에?");}else{KuText("ku_lt19",2012,618,411,264,26,"Where am I ?");}
+	}else{
+		SetFont("Noto Sans KR", 16, 4A4A4A, 000000, 500, RIGHTDOWN);
+		KuText("ku_lt19",2012,618,411,264,26,"아직 듣지 않은 곡");
+	}
+	KuSeekRow();
+	KuHintRow();
+	Fade("*/MouseOver/*",0,0,null,false);
+	Fade("*/MouseClick/*",0,0,null,false);
+	Fade("ku_cover",200,0,null,false);
+	$SYSTEM_r_button_down=false;
+	$SYSTEM_l_button_down=false;
+	$KU_LOOP=true;
+	while($KU_LOOP){
+		select{
+			if($SYSTEM_r_button_down){$SYSTEM_r_button_down=false;if($KU_NOW>0){Request("@ku_se_ok",Play);KrLyStopFor("@kubgm");SetVolume("@kubgm", 500, 0, NULL);$KU_NOW=-1;$KU_LOOP=false;}else{$KU_LOOP=false;$KU_RUN=false;}break;}
+			case ku_r01{Request("@ku_se_ok",Play);if($KU_NOW!=1){KuFade();CreateBGM("kubgm","lxbgm01");SoundPlay("@kubgm",300,1000,true);$KU_NOW=1;}$KU_LOOP=false;}
+			case ku_r02{Request("@ku_se_ok",Play);if($KU_NOW!=2){KuFade();CreateBGM("kubgm","lxbgm03");SoundPlay("@kubgm",300,1000,true);$KU_NOW=2;}$KU_LOOP=false;}
+			case ku_r03{Request("@ku_se_ok",Play);if($KU_NOW!=3){KuFade();CreateBGM("kubgm","lxbgm04");SoundPlay("@kubgm",300,1000,true);$KU_NOW=3;}$KU_LOOP=false;}
+			case ku_r04{Request("@ku_se_ok",Play);if($KU_NOW!=4){KuFade();CreateBGM("kubgm","lxbgm05");SoundPlay("@kubgm",300,1000,true);$KU_NOW=4;}$KU_LOOP=false;}
+			case ku_r05{Request("@ku_se_ok",Play);if($KU_NOW!=5){KuFade();CreateBGM("kubgm","lxbgm06");SoundPlay("@kubgm",300,1000,true);$KU_NOW=5;}$KU_LOOP=false;}
+			case ku_r06{Request("@ku_se_ok",Play);if($KU_NOW!=6){KuFade();CreateBGM("kubgm","lxbgm07");SoundPlay("@kubgm",300,1000,true);$KU_NOW=6;}$KU_LOOP=false;}
+			case ku_r07{Request("@ku_se_ok",Play);if($KU_NOW!=7){KuFade();CreateBGM("kubgm","lxbgm08");SoundPlay("@kubgm",300,1000,true);$KU_NOW=7;}$KU_LOOP=false;}
+			case ku_r08{Request("@ku_se_ok",Play);if($KU_NOW!=8){KuFade();CreateBGM("kubgm","lxbgm10");SoundPlay("@kubgm",300,1000,true);$KU_NOW=8;}$KU_LOOP=false;}
+			case ku_r09{Request("@ku_se_ok",Play);if($KU_NOW!=9){KuFade();CreateBGM("kubgm","lxbgm11");SoundPlay("@kubgm",300,1000,true);$KU_NOW=9;}$KU_LOOP=false;}
+			case ku_r10{Request("@ku_se_ok",Play);if($KU_NOW!=10){KuFade();CreateBGM("kubgm","lxbgm12");SoundPlay("@kubgm",300,1000,true);$KU_NOW=10;}$KU_LOOP=false;}
+			case ku_r11{Request("@ku_se_ok",Play);if($KU_NOW!=11){KuFade();CreateBGM("kubgm","lxbgm13");SoundPlay("@kubgm",300,1000,true);$KU_NOW=11;}$KU_LOOP=false;}
+			case ku_r12{Request("@ku_se_ok",Play);if($KU_NOW!=12){KuFade();CreateBGM("kubgm","lxbgm14");SoundPlay("@kubgm",300,1000,true);$KU_NOW=12;}$KU_LOOP=false;}
+			case ku_r13{Request("@ku_se_ok",Play);if($KU_NOW!=13){KuFade();CreateBGM("kubgm","lxbgm15");SoundPlay("@kubgm",300,1000,true);$KU_NOW=13;}$KU_LOOP=false;}
+			case ku_r14{Request("@ku_se_ok",Play);if($KU_NOW!=14){KuFade();CreateBGM("kubgm","lxbgm16");SoundPlay("@kubgm",300,1000,true);$KU_NOW=14;}$KU_LOOP=false;}
+			case ku_r15{Request("@ku_se_ok",Play);if($KU_NOW!=15){KuFade();CreateBGM("kubgm","lxbgm17");SoundPlay("@kubgm",300,1000,true);$KU_NOW=15;}$KU_LOOP=false;}
+			case ku_r16{Request("@ku_se_ok",Play);if($KU_NOW!=16){KuFade();CreateBGM("kubgm","lxbgm18");SoundPlay("@kubgm",300,1000,true);$KU_NOW=16;}$KU_LOOP=false;}
+			case ku_r17{Request("@ku_se_ok",Play);if($KU_NOW!=17){KuFade();CreateBGM("kubgm","lxbgm19");SoundPlay("@kubgm",300,1000,true);$KU_NOW=17;}$KU_LOOP=false;}
+			case ku_r18{Request("@ku_se_ok",Play);if($KU_NOW!=18){KuFade();CreateBGM("kubgm","lxsong01");SoundPlay("@kubgm",300,1000,true);$KU_NOW=18;}$KU_LOOP=false;}
+			case ku_r19{Request("@ku_se_ok",Play);if($KU_NOW!=19){KuFade();CreateBGM("kubgm","lxsong02");SoundPlay("@kubgm",300,1000,true);$KU_NOW=19;}$KU_LOOP=false;}
+			case KU_STOP{Request("@ku_se_ok",Play);KrLyStopFor("@kubgm");SetVolume("@kubgm", 500, 0, NULL);$KU_NOW=-1;$KU_LOOP=false;}
+			case KU_TRN{Request("@ku_se_ok",Play);if(#KR_SNDTR){#KR_SNDTR=false;}else{#KR_SNDTR=true;}$KU_LOOP=false;}
+			case KU_EXIT{Request("@ku_se_end",Play);$KU_LOOP=false;$KU_RUN=false;}
+		}
+	}
+}
+
+//★ 재생 위치 막대(Claude 11-24, 사용자 「진행 바를 마지막 칸에 위치시키는게 아니라 해당 음악 목록 그 바에 놓는게 좋을거 같아」):
+// 재생 중인 곡 줄의 긴 칸(304x24)이 곧 진행 막대 - 지난 만큼 밝은 청록과 머리 선, 시각은 줄 바로 아래 오른쪽 작게.
+// 커서를 올리면 그 자리 시각, 누르면 그 자리로(SetStream). 재생 중인 줄은 단추로 만들지 않는다(같은 곡을 다시 누르면
+// 원래도 아무 일 없었다) → 그 줄을 누르면 위치만 옮긴다. 줄 자리: 왼쪽 x108·y=59+44(n-1), 오른쪽 x606·y=59+44(n-11).
+// 식은 한 줄에 연산 하나(엔진에 곱셈 우선이 없는 듯).
+function KuSeekRow()
+{
+	$KUS_W=-1;$KUS_KEY=-1;$KUS_ON=false;$KUS_STALE=false;$KUS_DK=-1;$KUS_LB=0;$KUS_FA=0;$KUS_TA=0;$KUS_DA=0;
+	if($KU_NOW>0){
+		$KUS_ON=true;
+		if($KU_NOW<=10){$KUS_X0=108;$KUS_Y=$KU_NOW-1;}else{$KUS_X0=606;$KUS_Y=$KU_NOW-11;}
+		$KUS_Y=$KUS_Y*44;$KUS_Y=$KUS_Y+59;
+		$KUS_X1=$KUS_X0+304;$KUS_Y1=$KUS_Y+24;$KUS_TX=$KUS_X0+206;$KUS_TY=$KUS_Y+24;
+		// 11-24 막대 갱신(KuSeekTick)은 곡 제목 풀이 프로세스(KuHintLoop)가 같이 돌린다 - 프로세스 둘이 함께 그림을 만들면
+		// 곡이 나오는 동안 화면이 1~2초씩 멈췄다(사용자 「사운드 모드 반응이 굉장히 느린데?」, 숨긴 시험 28초에 10~11번 → 하나로 합쳐 1번).
+	}
+}
+
+// 나눗셈은 소수가 된다(11-24 시험: 3492/1000/60*60 이 다시 3.492 → 나머지 0) → 몫마다 Integer() 로 자른다. 값은 변수에 담아 넘긴다.
+// 다시 그리는 그림은 이름 둘을 번갈아 쓴다(같은 이름을 한 프레임에 지우고 만들면 새것이 사라질 때가 있었다).
+function KuSeekTick()
+{
+	$kxDur=-1;$kxPos=-1;$kxCX=-1;$kxCY=-1;
+	$kxDur=DurationTime("@kubgm");
+	$kxPos=PassageTime("@kubgm");
+	if($kxDur>0){
+		CursorPosition($kxCX,$kxCY);
+		$kxIn=false;
+		if($kxCX>=$KUS_X0&&$kxCX<$KUS_X1&&$kxCY>=$KUS_Y&&$kxCY<$KUS_Y1){$kxIn=true;}
+		$kxHT=-1;
+		if($kxIn){$kxOff=$kxCX-$KUS_X0;$kxMul=$kxOff*$kxDur;$kxHQ=$kxMul/304;$kxHT=Integer($kxHQ);}
+		// 누름 표시는 막대 위에서 누른 것만 쓰고 지운다. 다른 곳에서 누른 표시는 건드리지 않는다(곡 줄·멈춤·닫기 단추가 쓴다 -
+		// 전에는 매 프레임 지워서 곡이 나오는 동안 다른 단추가 안 눌렸다, 숨긴 시험 sk3). 막대 밖에서 본 표시는 낡은 것으로 적어 두었다가
+		// 막대에 들어오면 옮기지 않고 지운다(빈 곳을 누른 뒤 막대에 올리기만 해도 옮겨지던 일을 막음).
+		if($SYSTEM_l_button_down){
+			if($kxIn){
+				$SYSTEM_l_button_down=false;
+				if($KUS_STALE){$KUS_STALE=false;}else{SetStream("@kubgm",$kxHT);$kxPos=$kxHT;}
+			}else{$KUS_STALE=true;}
+		}else{$KUS_STALE=false;}
+		if($kxPos>$kxDur){$kxPos=$kxDur;}
+		$kxPW=$kxPos*304;$kxWQ=$kxPW/$kxDur;$kxWid=Integer($kxWQ);
+		if($kxWid!=$KUS_W){
+			$KUS_W=$kxWid;$kxHX=$KUS_X0+$kxWid;
+			if($KUS_FA==0){
+				if($kxWid>0){CreateColor("ku_lskfB",2011,$KUS_X0,$KUS_Y,$kxWid,24,0x245F56);}
+				CreateColor("ku_lskhB",2012,$kxHX,$KUS_Y,2,24,0x8BE9D7);
+				Delete("ku_lskfA");Delete("ku_lskhA");$KUS_FA=1;
+			}else{
+				if($kxWid>0){CreateColor("ku_lskfA",2011,$KUS_X0,$KUS_Y,$kxWid,24,0x245F56);}
+				CreateColor("ku_lskhA",2012,$kxHX,$KUS_Y,2,24,0x8BE9D7);
+				Delete("ku_lskfB");Delete("ku_lskhB");$KUS_FA=0;
+			}
+		}
+		$kxSQ=$kxPos/1000;$kxSec=Integer($kxSQ);$kxKey=$kxSec;
+		if($kxIn){$kxSQ=$kxHT/1000;$kxSec=Integer($kxSQ);$kxKey=$kxSec+100000;}
+		if($kxKey!=$KUS_KEY){
+			$KUS_KEY=$kxKey;
+			$kxMQ=$kxSec/60;$kxMin=Integer($kxMQ);$kxM60=$kxMin*60;$kxRem=$kxSec-$kxM60;
+			$kxTQ=$kxDur/1000;$kxTot=Integer($kxTQ);$kxTMQ=$kxTot/60;$kxTMin=Integer($kxTMQ);$kxT60=$kxTMin*60;$kxTRem=$kxTot-$kxT60;
+			if($kxIn){
+				$kxTxt=String("→ %d:%02d",$kxMin,$kxRem);
+				SetFont("Noto Sans KR", 13, 8BE9D7, 000000, 600, RIGHTDOWN);
+			}else{
+				$kxTxt=String("%d:%02d / %d:%02d",$kxMin,$kxRem,$kxTMin,$kxTRem);
+				SetFont("Noto Sans KR", 13, B8B8B8, 000000, 500, RIGHTDOWN);
+			}
+			if($KUS_TA==0){KuText("ku_lsktB",2013,$KUS_TX,$KUS_TY,100,20,$kxTxt);Delete("ku_lsktA");$KUS_TA=1;}
+			else{KuText("ku_lsktA",2013,$KUS_TX,$KUS_TY,100,20,$kxTxt);Delete("ku_lsktB");$KUS_TA=0;}
+		}
+		if($KUS_DBG){
+			if($SYSTEM_l_button_down){$KUS_LB=$KUS_LB+1;}
+			$kxDQ=$kxPos/500;$kxDK=Integer($kxDQ);
+			if($kxDK!=$KUS_DK){
+				$KUS_DK=$kxDK;
+				$kxDbg=String("p%d d%d w%d s%d m%d r%d tm%d tr%d in%d lb%d",$kxPos,$kxDur,$kxWid,$kxSec,$kxMin,$kxRem,$kxTMin,$kxTRem,$kxIn,$KUS_LB);
+				SetFont("Noto Sans KR", 14, FFFF80, 000000, 500, RIGHTDOWN);
+				if($KUS_DA==0){KuText("ku_lskdB",2013,530,486,480,26,$kxDbg);Delete("ku_lskdA");$KUS_DA=1;}
+				else{KuText("ku_lskdA",2013,530,486,480,26,$kxDbg);Delete("ku_lskdB");$KUS_DA=0;}
+			}
+		}
+	}
+}
+
+//★ 곡 제목 풀이(Claude 11-24, 사용자 「원작에서 저게 무슨 의미가 있는지 해석을 하단 하얀 바에 플로팅으로 띄워줘」):
+// 열린 곡 줄에 커서를 올리면 아래 흰 띠 왼쪽(「사운드」 자리)에 제목 뜻이 떠오른다. 줄 자리: 왼쪽 x26~502·오른쪽 x524~1000,
+// y=58+44k 높이 26. select 안이 아니라 따로 도는 프로세스(곡 단추 누름을 막지 않게).
+// 11-24 사용자 「사운드 모드 반응이 굉장히 느린데?」 - 커서를 옮길 때마다 글이나 그림을 새로 만들면 곡이 나오는 동안 1~2초씩 멈췄다
+// (프로세스 둘이 같이 만들 때 가장 심함). 그래서 막대 갱신도 이 프로세스가 같이 돌리고, 풀이 그림(kr_hint_*.png)은 목록을 그릴 때
+// 이 프로세스가 한 번 다 만들어 숨겨 두었다가 커서를 옮기면 보이기·숨기기만 한다(본 대본이 만든 그림은 프로세스에서 못 건드려
+// 「사운드」 그림도 여기서 만든다).
+function KuHintRow()
+{
+	$KUH_R=-1;$KUH_SH=0;$KUH_ON=true;
+	$KUH_G5=false;if(#KS_ALLOPEN){$KUH_G5=true;}
+	if(!$KUH_G5){$kc_r=Conquest("nss/lx0206.nss","lx0206.nss",null);if($kc_r){$KUH_G5=true;}}
+	$KUH_G14=false;if(#KS_ALLOPEN){$KUH_G14=true;}
+	if(!$KUH_G14){$kc_r=Conquest("nss/lx0603.nss","lx0603.nss",null);if($kc_r){$KUH_G14=true;}}
+	KuHintMake();
+	if($KUH_PA==1){$KUH_PA=0;$khPN="ku_lhprocB";}else{$KUH_PA=1;$khPN="ku_lhprocA";}
+	CreateProcess($khPN,150,0,0,"KuHintLoop");
+	Request($khPN,Start);
+}
+
+// $KUH_RUN: 고리가 도는 동안 true. 다시 그리기(KuList)는 $KUH_ON 을 끄고 이것이 꺼질 때까지 기다린 뒤 지운다
+// - 돌고 있는 프로세스를 Delete 로 지우면 엔진이 그 스레드를 100+1500+1500ms 기다리다 끊어 3.1초 멈췄다(다른 세션 「사운드 모드 성능」 11-24).
+function KuHintLoop()
+{
+	$KUH_RUN=true;
+	while($KUH_ON){
+		KuHintTick();
+		if($KUS_ON){KuSeekTick();}
+		Wait(16);
+	}
+	$KUH_RUN=false;
+}
+
+function KuHintTick()
+{
+	$khX=-1;$khY=-1;
+	CursorPosition($khX,$khY);
+	$khR=0;
+	if($khY>=58&&$khY<498){
+		$khD=$khY-58;$khQ=$khD/44;$khK=Integer($khQ);$khM=$khK*44;$khO=$khD-$khM;
+		if($khO<26){
+			if($khX>=26&&$khX<502){$khR=$khK+1;}
+			if($khX>=524&&$khX<1000){$khR=$khK+11;}
+		}
+	}
+	if($khR>19){$khR=0;}
+	if($khR!=$KUH_R){
+		$KUH_R=$khR;
+		$khN=0;
+		if($khR==1){if($KU_OK1){$khN=1;}}
+		if($khR==2){if($KU_OK2){$khN=2;}}
+		if($khR==3){if($KU_OK3){$khN=3;}}
+		if($khR==4){if($KU_OK4){$khN=4;}}
+		if($khR==5){if($KU_OK5){$khN=5;}}
+		if($khR==6){if($KU_OK6){$khN=6;}}
+		if($khR==7){if($KU_OK7){$khN=7;}}
+		if($khR==8){if($KU_OK8){$khN=8;}}
+		if($khR==9){if($KU_OK9){$khN=9;}}
+		if($khR==10){if($KU_OK10){$khN=10;}}
+		if($khR==11){if($KU_OK11){$khN=11;}}
+		if($khR==12){if($KU_OK12){$khN=12;}}
+		if($khR==13){if($KU_OK13){$khN=13;}}
+		if($khR==14){if($KU_OK14){$khN=14;}}
+		if($khR==15){if($KU_OK15){$khN=15;}}
+		if($khR==16){if($KU_OK16){$khN=16;}}
+		if($khR==17){if($KU_OK17){$khN=17;}}
+		if($khR==18){if($KU_OK18){$khN=18;}}
+		if($khR==19){if($KU_OK19){$khN=19;}}
+		if($khN!=$KUH_SH){
+			KuHintShow();
+			KuHintHide();
+			$KUH_SH=$khN;
+		}
+	}
+}
+
+// 목록을 그릴 때 한 번: 「사운드」와 열린 곡의 풀이 그림을 모두 만들어 둔다(풀이는 숨김)
+function KuHintMake()
+{
+	CreateTexture("ku_lh00",2022,18,546,"nss/kr_hint_00.png");SetAlias("ku_lh00","ku_lh00");SetVertex("ku_lh00",0,0);Zoom("ku_lh00",0,250,250,null,false);Request("ku_lh00",Smoothing);
+	if($KU_OK1){CreateTexture("ku_lh01",2022,18,546,"nss/kr_hint_01.png");SetAlias("ku_lh01","ku_lh01");SetVertex("ku_lh01",0,0);Zoom("ku_lh01",0,250,250,null,false);Request("ku_lh01",Smoothing);Fade("ku_lh01",0,0,null,false);}
+	if($KU_OK2){CreateTexture("ku_lh02",2022,18,546,"nss/kr_hint_02.png");SetAlias("ku_lh02","ku_lh02");SetVertex("ku_lh02",0,0);Zoom("ku_lh02",0,250,250,null,false);Request("ku_lh02",Smoothing);Fade("ku_lh02",0,0,null,false);}
+	if($KU_OK3){CreateTexture("ku_lh03",2022,18,546,"nss/kr_hint_03.png");SetAlias("ku_lh03","ku_lh03");SetVertex("ku_lh03",0,0);Zoom("ku_lh03",0,250,250,null,false);Request("ku_lh03",Smoothing);Fade("ku_lh03",0,0,null,false);}
+	if($KU_OK4){CreateTexture("ku_lh04",2022,18,546,"nss/kr_hint_04.png");SetAlias("ku_lh04","ku_lh04");SetVertex("ku_lh04",0,0);Zoom("ku_lh04",0,250,250,null,false);Request("ku_lh04",Smoothing);Fade("ku_lh04",0,0,null,false);}
+	if($KU_OK5){$khF="nss/kr_hint_05.png";if($KUH_G5){$khF="nss/kr_hint_05g.png";}CreateTexture("ku_lh05",2022,18,546,$khF);SetAlias("ku_lh05","ku_lh05");SetVertex("ku_lh05",0,0);Zoom("ku_lh05",0,250,250,null,false);Request("ku_lh05",Smoothing);Fade("ku_lh05",0,0,null,false);}
+	if($KU_OK6){CreateTexture("ku_lh06",2022,18,546,"nss/kr_hint_06.png");SetAlias("ku_lh06","ku_lh06");SetVertex("ku_lh06",0,0);Zoom("ku_lh06",0,250,250,null,false);Request("ku_lh06",Smoothing);Fade("ku_lh06",0,0,null,false);}
+	if($KU_OK7){CreateTexture("ku_lh07",2022,18,546,"nss/kr_hint_07.png");SetAlias("ku_lh07","ku_lh07");SetVertex("ku_lh07",0,0);Zoom("ku_lh07",0,250,250,null,false);Request("ku_lh07",Smoothing);Fade("ku_lh07",0,0,null,false);}
+	if($KU_OK8){CreateTexture("ku_lh08",2022,18,546,"nss/kr_hint_08.png");SetAlias("ku_lh08","ku_lh08");SetVertex("ku_lh08",0,0);Zoom("ku_lh08",0,250,250,null,false);Request("ku_lh08",Smoothing);Fade("ku_lh08",0,0,null,false);}
+	if($KU_OK9){CreateTexture("ku_lh09",2022,18,546,"nss/kr_hint_09.png");SetAlias("ku_lh09","ku_lh09");SetVertex("ku_lh09",0,0);Zoom("ku_lh09",0,250,250,null,false);Request("ku_lh09",Smoothing);Fade("ku_lh09",0,0,null,false);}
+	if($KU_OK10){CreateTexture("ku_lh10",2022,18,546,"nss/kr_hint_10.png");SetAlias("ku_lh10","ku_lh10");SetVertex("ku_lh10",0,0);Zoom("ku_lh10",0,250,250,null,false);Request("ku_lh10",Smoothing);Fade("ku_lh10",0,0,null,false);}
+	if($KU_OK11){CreateTexture("ku_lh11",2022,18,546,"nss/kr_hint_11.png");SetAlias("ku_lh11","ku_lh11");SetVertex("ku_lh11",0,0);Zoom("ku_lh11",0,250,250,null,false);Request("ku_lh11",Smoothing);Fade("ku_lh11",0,0,null,false);}
+	if($KU_OK12){CreateTexture("ku_lh12",2022,18,546,"nss/kr_hint_12.png");SetAlias("ku_lh12","ku_lh12");SetVertex("ku_lh12",0,0);Zoom("ku_lh12",0,250,250,null,false);Request("ku_lh12",Smoothing);Fade("ku_lh12",0,0,null,false);}
+	if($KU_OK13){CreateTexture("ku_lh13",2022,18,546,"nss/kr_hint_13.png");SetAlias("ku_lh13","ku_lh13");SetVertex("ku_lh13",0,0);Zoom("ku_lh13",0,250,250,null,false);Request("ku_lh13",Smoothing);Fade("ku_lh13",0,0,null,false);}
+	if($KU_OK14){$khF="nss/kr_hint_14.png";if($KUH_G14){$khF="nss/kr_hint_14g.png";}CreateTexture("ku_lh14",2022,18,546,$khF);SetAlias("ku_lh14","ku_lh14");SetVertex("ku_lh14",0,0);Zoom("ku_lh14",0,250,250,null,false);Request("ku_lh14",Smoothing);Fade("ku_lh14",0,0,null,false);}
+	if($KU_OK15){CreateTexture("ku_lh15",2022,18,546,"nss/kr_hint_15.png");SetAlias("ku_lh15","ku_lh15");SetVertex("ku_lh15",0,0);Zoom("ku_lh15",0,250,250,null,false);Request("ku_lh15",Smoothing);Fade("ku_lh15",0,0,null,false);}
+	if($KU_OK16){CreateTexture("ku_lh16",2022,18,546,"nss/kr_hint_16.png");SetAlias("ku_lh16","ku_lh16");SetVertex("ku_lh16",0,0);Zoom("ku_lh16",0,250,250,null,false);Request("ku_lh16",Smoothing);Fade("ku_lh16",0,0,null,false);}
+	if($KU_OK17){CreateTexture("ku_lh17",2022,18,546,"nss/kr_hint_17.png");SetAlias("ku_lh17","ku_lh17");SetVertex("ku_lh17",0,0);Zoom("ku_lh17",0,250,250,null,false);Request("ku_lh17",Smoothing);Fade("ku_lh17",0,0,null,false);}
+	if($KU_OK18){CreateTexture("ku_lh18",2022,18,546,"nss/kr_hint_18.png");SetAlias("ku_lh18","ku_lh18");SetVertex("ku_lh18",0,0);Zoom("ku_lh18",0,250,250,null,false);Request("ku_lh18",Smoothing);Fade("ku_lh18",0,0,null,false);}
+	if($KU_OK19){CreateTexture("ku_lh19",2022,18,546,"nss/kr_hint_19.png");SetAlias("ku_lh19","ku_lh19");SetVertex("ku_lh19",0,0);Zoom("ku_lh19",0,250,250,null,false);Request("ku_lh19",Smoothing);Fade("ku_lh19",0,0,null,false);}
+}
+
+// 새로 보일 그림($khN)을 먼저 보이고, 앞 그림($KUH_SH)을 숨긴다(빈 띠가 한 번도 안 찍히게)
+function KuHintShow()
+{
+	if($khN==0){Fade("@ku_lh00",0,1000,null,false);}
+	if($khN==1){Fade("@ku_lh01",0,1000,null,false);}
+	if($khN==2){Fade("@ku_lh02",0,1000,null,false);}
+	if($khN==3){Fade("@ku_lh03",0,1000,null,false);}
+	if($khN==4){Fade("@ku_lh04",0,1000,null,false);}
+	if($khN==5){Fade("@ku_lh05",0,1000,null,false);}
+	if($khN==6){Fade("@ku_lh06",0,1000,null,false);}
+	if($khN==7){Fade("@ku_lh07",0,1000,null,false);}
+	if($khN==8){Fade("@ku_lh08",0,1000,null,false);}
+	if($khN==9){Fade("@ku_lh09",0,1000,null,false);}
+	if($khN==10){Fade("@ku_lh10",0,1000,null,false);}
+	if($khN==11){Fade("@ku_lh11",0,1000,null,false);}
+	if($khN==12){Fade("@ku_lh12",0,1000,null,false);}
+	if($khN==13){Fade("@ku_lh13",0,1000,null,false);}
+	if($khN==14){Fade("@ku_lh14",0,1000,null,false);}
+	if($khN==15){Fade("@ku_lh15",0,1000,null,false);}
+	if($khN==16){Fade("@ku_lh16",0,1000,null,false);}
+	if($khN==17){Fade("@ku_lh17",0,1000,null,false);}
+	if($khN==18){Fade("@ku_lh18",0,1000,null,false);}
+	if($khN==19){Fade("@ku_lh19",0,1000,null,false);}
+}
+
+function KuHintHide()
+{
+	if($KUH_SH==0){Fade("@ku_lh00",0,0,null,false);}
+	if($KUH_SH==1){Fade("@ku_lh01",0,0,null,false);}
+	if($KUH_SH==2){Fade("@ku_lh02",0,0,null,false);}
+	if($KUH_SH==3){Fade("@ku_lh03",0,0,null,false);}
+	if($KUH_SH==4){Fade("@ku_lh04",0,0,null,false);}
+	if($KUH_SH==5){Fade("@ku_lh05",0,0,null,false);}
+	if($KUH_SH==6){Fade("@ku_lh06",0,0,null,false);}
+	if($KUH_SH==7){Fade("@ku_lh07",0,0,null,false);}
+	if($KUH_SH==8){Fade("@ku_lh08",0,0,null,false);}
+	if($KUH_SH==9){Fade("@ku_lh09",0,0,null,false);}
+	if($KUH_SH==10){Fade("@ku_lh10",0,0,null,false);}
+	if($KUH_SH==11){Fade("@ku_lh11",0,0,null,false);}
+	if($KUH_SH==12){Fade("@ku_lh12",0,0,null,false);}
+	if($KUH_SH==13){Fade("@ku_lh13",0,0,null,false);}
+	if($KUH_SH==14){Fade("@ku_lh14",0,0,null,false);}
+	if($KUH_SH==15){Fade("@ku_lh15",0,0,null,false);}
+	if($KUH_SH==16){Fade("@ku_lh16",0,0,null,false);}
+	if($KUH_SH==17){Fade("@ku_lh17",0,0,null,false);}
+	if($KUH_SH==18){Fade("@ku_lh18",0,0,null,false);}
+	if($KUH_SH==19){Fade("@ku_lh19",0,0,null,false);}
+}
+
+function KuCalc()
+{
+	$kc_r=false;
+	$KU_OK1=false;if(#KS_ALLOPEN){$KU_OK1=true;}
+	if(!$KU_OK1){$kc_r=Conquest("nss/lx0010.nss","lx0010.nss",null);if($kc_r){$KU_OK1=true;}}
+	if(!$KU_OK1){$kc_r=Conquest("nss/lx0106.nss","lx0106.nss",null);if($kc_r){$KU_OK1=true;}}
+	if(!$KU_OK1){$kc_r=Conquest("nss/lx0301.nss","lx0301.nss",null);if($kc_r){$KU_OK1=true;}}
+	if(!$KU_OK1){$kc_r=Conquest("nss/lx0605b.nss","lx0605b.nss",null);if($kc_r){$KU_OK1=true;}}
+	$KU_OK2=false;if(#KS_ALLOPEN){$KU_OK2=true;}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0010.nss","lx0010.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0106.nss","lx0106.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0301.nss","lx0301.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0502_10.nss","lx0502_10.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0503.nss","lx0503.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0504.nss","lx0504.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0505_00.nss","lx0505_00.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0505_10.nss","lx0505_10.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0509.nss","lx0509.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0510.nss","lx0510.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0510_01.nss","lx0510_01.nss",null);if($kc_r){$KU_OK2=true;}}
+	if(!$KU_OK2){$kc_r=Conquest("nss/lx0510_02.nss","lx0510_02.nss",null);if($kc_r){$KU_OK2=true;}}
+	$KU_OK3=false;if(#KS_ALLOPEN){$KU_OK3=true;}
+	if(!$KU_OK3){$kc_r=Conquest("nss/lx0104a.nss","lx0104a.nss",null);if($kc_r){$KU_OK3=true;}}
+	if(!$KU_OK3){$kc_r=Conquest("nss/lx0202.nss","lx0202.nss",null);if($kc_r){$KU_OK3=true;}}
+	$KU_OK4=false;if(#KS_ALLOPEN){$KU_OK4=true;}
+	if(!$KU_OK4){$kc_r=Conquest("nss/lx0402a_01.nss","lx0402a_01.nss",null);if($kc_r){$KU_OK4=true;}}
+	if(!$KU_OK4){$kc_r=Conquest("nss/lx0402a_02.nss","lx0402a_02.nss",null);if($kc_r){$KU_OK4=true;}}
+	if(!$KU_OK4){$kc_r=Conquest("nss/lx0402b_01.nss","lx0402b_01.nss",null);if($kc_r){$KU_OK4=true;}}
+	if(!$KU_OK4){$kc_r=Conquest("nss/lx0402b_02.nss","lx0402b_02.nss",null);if($kc_r){$KU_OK4=true;}}
+	if(!$KU_OK4){$kc_r=Conquest("nss/lx0500.nss","lx0500.nss",null);if($kc_r){$KU_OK4=true;}}
+	$KU_OK5=true;
+	$KU_OK6=false;if(#KS_ALLOPEN){$KU_OK6=true;}
+	if(!$KU_OK6){$kc_r=Conquest("nss/lx0103.nss","lx0103.nss",null);if($kc_r){$KU_OK6=true;}}
+	if(!$KU_OK6){$kc_r=Conquest("nss/lx0104a.nss","lx0104a.nss",null);if($kc_r){$KU_OK6=true;}}
+	if(!$KU_OK6){$kc_r=Conquest("nss/lx0104b.nss","lx0104b.nss",null);if($kc_r){$KU_OK6=true;}}
+	if(!$KU_OK6){$kc_r=Conquest("nss/lx0302.nss","lx0302.nss",null);if($kc_r){$KU_OK6=true;}}
+	if(!$KU_OK6){$kc_r=Conquest("nss/lx0303.nss","lx0303.nss",null);if($kc_r){$KU_OK6=true;}}
+	if(!$KU_OK6){$kc_r=Conquest("nss/lx0506.nss","lx0506.nss",null);if($kc_r){$KU_OK6=true;}}
+	$KU_OK7=false;if(#KS_ALLOPEN){$KU_OK7=true;}
+	if(!$KU_OK7){$kc_r=Conquest("nss/lx0102.nss","lx0102.nss",null);if($kc_r){$KU_OK7=true;}}
+	if(!$KU_OK7){$kc_r=Conquest("nss/lx0304.nss","lx0304.nss",null);if($kc_r){$KU_OK7=true;}}
+	if(!$KU_OK7){$kc_r=Conquest("nss/lx0508.nss","lx0508.nss",null);if($kc_r){$KU_OK7=true;}}
+	if(!$KU_OK7){$kc_r=Conquest("nss/lx0602.nss","lx0602.nss",null);if($kc_r){$KU_OK7=true;}}
+	$KU_OK8=false;if(#KS_ALLOPEN){$KU_OK8=true;}
+	if(!$KU_OK8){$kc_r=Conquest("nss/lx0303.nss","lx0303.nss",null);if($kc_r){$KU_OK8=true;}}
+	if(!$KU_OK8){$kc_r=Conquest("nss/lx0304.nss","lx0304.nss",null);if($kc_r){$KU_OK8=true;}}
+	if(!$KU_OK8){$kc_r=Conquest("nss/lx0506.nss","lx0506.nss",null);if($kc_r){$KU_OK8=true;}}
+	if(!$KU_OK8){$kc_r=Conquest("nss/lx0601.nss","lx0601.nss",null);if($kc_r){$KU_OK8=true;}}
+	$KU_OK9=false;if(#KS_ALLOPEN){$KU_OK9=true;}
+	if(!$KU_OK9){$kc_r=Conquest("nss/lx0401.nss","lx0401.nss",null);if($kc_r){$KU_OK9=true;}}
+	if(!$KU_OK9){$kc_r=Conquest("nss/lx0500.nss","lx0500.nss",null);if($kc_r){$KU_OK9=true;}}
+	$KU_OK10=false;if(#KS_ALLOPEN){$KU_OK10=true;}
+	if(!$KU_OK10){$kc_r=Conquest("nss/lx0605a.nss","lx0605a.nss",null);if($kc_r){$KU_OK10=true;}}
+	$KU_OK11=false;if(#KS_ALLOPEN){$KU_OK11=true;}
+	if(!$KU_OK11){$kc_r=Conquest("nss/lx0102.nss","lx0102.nss",null);if($kc_r){$KU_OK11=true;}}
+	if(!$KU_OK11){$kc_r=Conquest("nss/lx0108.nss","lx0108.nss",null);if($kc_r){$KU_OK11=true;}}
+	if(!$KU_OK11){$kc_r=Conquest("nss/lx0108_01.nss","lx0108_01.nss",null);if($kc_r){$KU_OK11=true;}}
+	if(!$KU_OK11){$kc_r=Conquest("nss/lx0108_02.nss","lx0108_02.nss",null);if($kc_r){$KU_OK11=true;}}
+	$KU_OK12=false;if(#KS_ALLOPEN){$KU_OK12=true;}
+	if(!$KU_OK12){$kc_r=Conquest("nss/lx0101.nss","lx0101.nss",null);if($kc_r){$KU_OK12=true;}}
+	if(!$KU_OK12){$kc_r=Conquest("nss/lx0301.nss","lx0301.nss",null);if($kc_r){$KU_OK12=true;}}
+	$KU_OK13=false;if(#KS_ALLOPEN){$KU_OK13=true;}
+	if(!$KU_OK13){$kc_r=Conquest("nss/lx0106.nss","lx0106.nss",null);if($kc_r){$KU_OK13=true;}}
+	if(!$KU_OK13){$kc_r=Conquest("nss/lx0301.nss","lx0301.nss",null);if($kc_r){$KU_OK13=true;}}
+	if(!$KU_OK13){$kc_r=Conquest("nss/lx0303.nss","lx0303.nss",null);if($kc_r){$KU_OK13=true;}}
+	if(!$KU_OK13){$kc_r=Conquest("nss/lx0403.nss","lx0403.nss",null);if($kc_r){$KU_OK13=true;}}
+	if(!$KU_OK13){$kc_r=Conquest("nss/lx0506.nss","lx0506.nss",null);if($kc_r){$KU_OK13=true;}}
+	if(!$KU_OK13){$kc_r=Conquest("nss/lx0507.nss","lx0507.nss",null);if($kc_r){$KU_OK13=true;}}
+	if(!$KU_OK13){$kc_r=Conquest("nss/lx0507_10.nss","lx0507_10.nss",null);if($kc_r){$KU_OK13=true;}}
+	if(!$KU_OK13){$kc_r=Conquest("nss/lx0510_10.nss","lx0510_10.nss",null);if($kc_r){$KU_OK13=true;}}
+	$KU_OK14=false;if(#KS_ALLOPEN){$KU_OK14=true;}
+	if(!$KU_OK14){$kc_r=Conquest("nss/lx0205.nss","lx0205.nss",null);if($kc_r){$KU_OK14=true;}}
+	if(!$KU_OK14){$kc_r=Conquest("nss/lx0603.nss","lx0603.nss",null);if($kc_r){$KU_OK14=true;}}
+	$KU_OK15=false;if(#KS_ALLOPEN){$KU_OK15=true;}
+	if(!$KU_OK15){$kc_r=Conquest("nss/lx0401.nss","lx0401.nss",null);if($kc_r){$KU_OK15=true;}}
+	if(!$KU_OK15){$kc_r=Conquest("nss/lx0402a_01.nss","lx0402a_01.nss",null);if($kc_r){$KU_OK15=true;}}
+	if(!$KU_OK15){$kc_r=Conquest("nss/lx0402a_02.nss","lx0402a_02.nss",null);if($kc_r){$KU_OK15=true;}}
+	if(!$KU_OK15){$kc_r=Conquest("nss/lx0402b_01.nss","lx0402b_01.nss",null);if($kc_r){$KU_OK15=true;}}
+	if(!$KU_OK15){$kc_r=Conquest("nss/lx0402b_02.nss","lx0402b_02.nss",null);if($kc_r){$KU_OK15=true;}}
+	if(!$KU_OK15){$kc_r=Conquest("nss/lx0511_10.nss","lx0511_10.nss",null);if($kc_r){$KU_OK15=true;}}
+	if(!$KU_OK15){$kc_r=Conquest("nss/lx0602_10.nss","lx0602_10.nss",null);if($kc_r){$KU_OK15=true;}}
+	$KU_OK16=false;if(#KS_ALLOPEN){$KU_OK16=true;}
+	if(!$KU_OK16){$kc_r=Conquest("nss/lx0603.nss","lx0603.nss",null);if($kc_r){$KU_OK16=true;}}
+	if(!$KU_OK16){$kc_r=Conquest("nss/lx0604_11.nss","lx0604_11.nss",null);if($kc_r){$KU_OK16=true;}}
+	if(!$KU_OK16){$kc_r=Conquest("nss/lx0604_20.nss","lx0604_20.nss",null);if($kc_r){$KU_OK16=true;}}
+	$KU_OK17=false;if(#KS_ALLOPEN){$KU_OK17=true;}
+	if(!$KU_OK17){$kc_r=Conquest("nss/lx0605b.nss","lx0605b.nss",null);if($kc_r){$KU_OK17=true;}}
+	$KU_OK18=false;if(#KS_ALLOPEN){$KU_OK18=true;}
+	if(!$KU_OK18){$kc_r=Conquest("nss/lx0605a.nss","lx0605a.nss",null);if($kc_r){$KU_OK18=true;}}
+	$KU_OK19=false;if(#KS_ALLOPEN){$KU_OK19=true;}
+	if(!$KU_OK19){$kc_r=Conquest("nss/lx0605b.nss","lx0605b.nss",null);if($kc_r){$KU_OK19=true;}}
+}

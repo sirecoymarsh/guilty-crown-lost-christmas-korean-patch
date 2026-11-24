@@ -1,0 +1,242 @@
+//<continuation number="">
+
+
+chapter main
+{
+
+	if($GameStart != 1)
+	{
+		$GameName = ModuleFileName();
+		$GameContiune = 1;
+		Reset();
+	}
+
+}
+
+
+scene lx0502_02.nss_MAIN
+{
+//■超速設定
+	if(($SYSTEM_skip && #SYSTEM_skip_express && $AllRead) || ($SYSTEM_skip && #SYSTEM_skip_express && #SYSTEM_skip_absolute)){
+		SkipOut();
+	}else{
+		$MainGameName="@->"+$GameName;
+		GameMainSet();
+		call_scene $MainGameName;
+		GameMainSet2();
+	}
+
+//■選択肢スクリプト及びフラグ設定
+	//▼イベントＣＧ
+	#イベントファイル名=true;
+
+	//▼演出上の処理対応
+
+	//▼ルートフラグ、選択肢、次のGameName
+	$PreGameName = $GameName;
+	$GameName = "lx0502_10.nss";
+
+}
+
+
+scene lx0502_02.nss
+{
+
+	//■シーンの頭に必ず記述
+	$スクリプトバージョン = " $Revision:  $";
+	$構成名 = ModuleFileName();
+	$構文名 = $SYSTEM_present_process;
+	SystemInit();
+
+
+//―――――――――――――――――――――――――――――――――――――――
+
+
+
+	PrintBG("上背景", 25000);
+
+	CreateSE("SE90L","se背景_ガヤ_建物炎上_L");
+	MusicStart("SE90L",3000,500,0,1000,null,true);
+
+	CreateTextureSP("bg01", 100, 0, -200, "cg/bg/bg001012_3_六本木街並み2崩壊.jpg");
+	Rotate("bg01", 0, @0, 180, @0, null,true);
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	SetShade("bg01", HEAVY);
+	CreateTextureSP("bg02", 100, -205, 141, "cg/bg/x/bg005001_3_路地裏.jpg_x11_ogami.png");
+	Request("bg02", Smoothing);
+	Zoom("bg02", 0, 2000, 2000, null, true);
+
+	Move("bg01", 0, 50, @0, null, true);
+	Move("bg02", 0, -49, @0, null, true);
+
+	FadeDelete("上背景", 500, null, true);
+
+
+
+//←←かまっている暇はない
+
+//？？：地の文
+//ゴミをくずかごに捨てるかどうか、しばし迷ったが、俺は、先へ急ぐことにした。
+//時間は巻き戻らない。
+//やつらが、そこに倒れた母親と娘に撃ち込んだ銃弾は、たとえ聖夜の奇跡をもっても永遠に戻らない。
+//それならば、前に進むしかないだろう。
+
+//だが――
+
+	DeleteFw();
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0010]
+//★★★
+쓰레기를 쓰레기통에 버릴지 말지 잠깐 망설였다&.<K> 하지만 결국 갈 길을 서두르기로 했다&.
+
+시간은 되감기지 않는다&. 놈들이 어머니와 아이에게 쏜 총탄은 성야의 기적이 일어난다 해도 영영 되돌릴 수 없다&.
+
+그렇다면&, 앞으로 나아갈 수밖에 없겠지&.
+
+ﾇﾏﾁｸ｡ｦ｡ｦ
+
+//☆☆☆
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	TextBoxDelete();
+
+	CreateTextureEX("bg11", 4000, Center, Middle, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	SetShade("bg11", SEMIHEAVY);
+	Zoom("bg11", 0, 2000, 2000, null, true);
+	CreateTextureEX("st01", 4000, 70, -100, "cg/bu/buダァト兵_構え3_normal.png");
+	Zoom("st01", 0, 1100, 1100, null, true);
+
+	CreateSE("SE01","se人体_足音_一歩_91");
+	CreateSE("SE02","se戦闘_銃器_構える02");
+
+
+	MusicStart("SE01",0,700,0,700,null,false);
+	Fade("bg11", 200, 1000, null, true);
+
+	MusicStart("SE02",0,700,0,1000,null,false);
+	Move("st01", 200, 117, -140, Dxl1, false);
+	Fade("st01", 200, 1000, null, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0020]
+//【ダァトＡ】
+<voice name="다아트 병사 A" class="�_�@긣빜�`" src="voice/LX00/1000050e01">
+｡ｸ｡ｪ｡ｪ!｡ｹ
+
+//※（収録不要。使い回し）
+
+//★★★
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+	CreatePlainSP("pl01", 10000);
+
+	Delete("bg11");
+	Delete("st01");
+
+	FadeDelete("pl01", 300, null, true);
+
+
+//――――――――――――――――――――――――――――――――――――――
+<PRE @box0>
+[text0025a]
+뭐&, 들켰다면 어쩔 수 없지&.
+
+가끔은 볼런티어도 나쁘지 않아&.
+거리 미화에 힘써 보기로 할까&.
+
+//☆☆☆
+
+
+</PRE>
+	SetText();
+	TypeBegin(0);//―――――――――――――――――――――――――――
+
+
+
+	TextBoxDelete();
+
+	CreateColorEX("co01", 10000, "000000");
+
+	CreateSE("SE21","se人体_動作_衣擦れ01");
+	MusicStart("SE21",0,500,0,1000,null,false);
+
+	Zoom("bg01", 500, 2300, 2300, Axl1, false);
+	Zoom("bg02", 500, 4000, 4000, Axl1, false);
+	Move("bg02", 500, @-600, @50, Axl1, 200);
+	Fade("co01", 300, 1000, null, true);
+
+	Delete("bg*");
+
+	//定義-----------------------
+	CreateTextureEX("bg01", 2000, Center, Middle, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	CreateTextureEX("ca01", 2100, Center, -200, "cg/st/x/stスクルージ_通常_normal_x01.png");
+	CreateTextureEXmul("ca02", 2000, Center, -200, "cg/st/x/stスクルージ_通常_normal_x02.jpg");
+	Zoom("bg01", 0, 2000, 2000, null, true);
+	Zoom("ca*", 0, 900, 900, null, true);
+	SetShade("bg01", LIGHT);
+
+	CreateSE("SE01","se人体_足音_着地02");
+
+	//動作-----------------------
+	FadeDelete("co01", 1000, null, false);
+	MoveCamera("Ｃ", 2000, @0, @0, 1000, AxlDxl, false);
+	Zoom("bg01", 2000, 2200, 2200, AxlDxl, false);
+	Zoom("ca*", 2000, 1000, 1000, AxlDxl, false);
+	Fade("bg01", 500, 1000, null, false);
+	Fade("ca02", 1000, 1000, Axl2, false);
+	Fade("ca01", 2000, 1000, Axl3, false);
+
+	Wait(1800);
+
+	SetVolumeEX("SE90L", 1000, 0, null);
+	SetVolumeEX("SE11L", 500, 0, null);
+	SetVolumeEX("SE12L", 500, 0, null);
+	SetVolumeEX("SE13L", 500, 0, null);
+
+	Fade("ca02", 200, 0, null, false);
+
+	Wait(600);
+	MusicStart("SE01",0,500,0,1000,null,false);
+
+	Move("smoke01", 2000, @0, @200, AxlDxl, false);
+	Move("bg01", 2000, @0, @100, AxlDxl, false);
+	Move("ca01", 2000, @0, @150, AxlDxl, true);
+
+	Wait(500);
+
+	CreateTextureEX("bg01b", 2100, Center, Middle, "cg/bg/bg001011_3_六本木街並み1崩壊.jpg");
+	Request("bg01b", Smoothing);
+
+	St("C",2110, @0,@50,"stスクルージ_通常_normal");
+
+	Fade("bg01b", 300, 1000, null, false);
+	Wait(500);
+	FadeSt("C",500,false);
+
+	Wait(1000);
+
+	Fade("ca01", 0, 0, null, false);
+	Fade("bg01", 0, 0, null, false);
+
+
+
+//まぁそういうことなら仕方がない。
+//ゴミはくずかごに片づけるとしよう。
+
+
+//→→スクルージ無双
+
+
+//	ClearFadeAll(1000, true);
+
+}
